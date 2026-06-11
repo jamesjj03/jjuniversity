@@ -1,0 +1,40 @@
+{
+  "id": "motion",
+  "title": "Motion",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "matter_and_energy"
+  ],
+  "summary": "Motion is a foundational idea for describing physical things, forces, and transformations.",
+  "prerequisites": [
+    "matter",
+    "energy",
+    "measurement"
+  ],
+  "unlocks": [],
+  "related": [
+    "energy",
+    "force",
+    "matter",
+    "measurement",
+    "momentum"
+  ],
+  "aliases": [],
+  "tags": [
+    "energy",
+    "foundation",
+    "matter",
+    "matter_and_energy",
+    "measurement"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

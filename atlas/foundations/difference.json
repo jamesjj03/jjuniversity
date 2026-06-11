@@ -1,0 +1,30 @@
+{
+  "id": "difference",
+  "title": "Difference",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "core_primitives"
+  ],
+  "summary": "Difference is a foundational connector for describing what exists, changes, relates, or becomes understandable.",
+  "prerequisites": [],
+  "unlocks": [],
+  "related": [
+    "identity",
+    "quantity"
+  ],
+  "aliases": [],
+  "tags": [
+    "core_primitives",
+    "foundation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

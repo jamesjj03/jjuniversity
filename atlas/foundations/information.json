@@ -1,0 +1,77 @@
+{
+  "id": "information",
+  "title": "Information",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "core_primitives"
+  ],
+  "summary": "Information is a foundational connector for describing what exists, changes, relates, or becomes understandable.",
+  "prerequisites": [],
+  "unlocks": [
+    "agency",
+    "argument",
+    "attention",
+    "audience",
+    "behavior",
+    "cell",
+    "channel",
+    "code",
+    "cognition",
+    "consciousness",
+    "context_of_communication",
+    "convention",
+    "development",
+    "dialogue",
+    "discourse",
+    "emotion",
+    "environment",
+    "evolution",
+    "gene",
+    "grammar",
+    "heredity",
+    "homeostasis",
+    "intelligence",
+    "interpretation",
+    "literacy",
+    "meaning",
+    "medium",
+    "memory",
+    "message",
+    "metabolism",
+    "metaphor",
+    "organism",
+    "perception",
+    "persuasion",
+    "pragmatics",
+    "reproduction",
+    "response",
+    "selection",
+    "semantics",
+    "sign",
+    "speech",
+    "stimulus",
+    "syntax",
+    "translation",
+    "variation",
+    "writing"
+  ],
+  "related": [
+    "matter",
+    "time"
+  ],
+  "aliases": [],
+  "tags": [
+    "core_primitives",
+    "foundation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

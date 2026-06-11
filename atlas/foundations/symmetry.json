@@ -1,0 +1,40 @@
+{
+  "id": "symmetry",
+  "title": "Symmetry",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "matter_and_energy"
+  ],
+  "summary": "Symmetry is a foundational idea for describing physical things, forces, and transformations.",
+  "prerequisites": [
+    "matter",
+    "energy",
+    "measurement"
+  ],
+  "unlocks": [],
+  "related": [
+    "conservation",
+    "energy",
+    "entropy",
+    "matter",
+    "measurement"
+  ],
+  "aliases": [],
+  "tags": [
+    "energy",
+    "foundation",
+    "matter",
+    "matter_and_energy",
+    "measurement"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

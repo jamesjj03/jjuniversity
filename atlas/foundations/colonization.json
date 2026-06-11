@@ -1,0 +1,40 @@
+{
+  "id": "colonization",
+  "title": "Colonization",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "history_and_time"
+  ],
+  "summary": "Colonization is a foundational idea for locating change, continuity, and human action in time.",
+  "prerequisites": [
+    "time",
+    "cause",
+    "evidence"
+  ],
+  "unlocks": [],
+  "related": [
+    "cause",
+    "evidence",
+    "industrialization",
+    "modernization",
+    "time"
+  ],
+  "aliases": [],
+  "tags": [
+    "cause",
+    "evidence",
+    "foundation",
+    "history_and_time",
+    "time"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

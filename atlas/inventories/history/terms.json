@@ -1,0 +1,5972 @@
+{
+  "domain": "history",
+  "title": "History",
+  "generatedAt": "2026-06-02T21:23:04.002Z",
+  "target": 350,
+  "sources": [
+    {
+      "name": "Wikipedia Outline of History",
+      "url": "https://en.wikipedia.org/wiki/Outline_of_history",
+      "status": "ok",
+      "count": 749
+    },
+    {
+      "name": "Wikipedia Glossary of History",
+      "url": "https://en.wikipedia.org/wiki/Glossary_of_history",
+      "status": "ok",
+      "count": 597
+    }
+  ],
+  "terms": [
+    {
+      "id": "ab_urbe_condita",
+      "title": "ab urbe condita",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "abkhazia",
+      "title": "Abkhazia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "absolute_monarchy",
+      "title": "Absolute monarchy",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "absolute monarchy"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "abstract",
+      "title": "abstract",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "academic_discipline",
+      "title": "Academic discipline",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "access_rights",
+      "title": "access rights",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "accrual_method",
+      "title": "accrual method",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "accrual_periodicity",
+      "title": "accrual periodicity",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "accrual_policy",
+      "title": "accrual policy",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "administrative_history",
+      "title": "administrative history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aeon",
+      "title": "aeon",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "afghanistan",
+      "title": "Afghanistan",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "africa",
+      "title": "Africa",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "age",
+      "title": "age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "age_of_discovery",
+      "title": "Age of Discovery",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "age_of_enlightenment",
+      "title": "Age of Enlightenment",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "age_of_exploration",
+      "title": "Age of Exploration",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "age_of_reason",
+      "title": "Age of Reason",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "age_of_sail",
+      "title": "Age of Sail",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "agent_provocateur",
+      "title": "agent provocateur",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "agriculture",
+      "title": "agriculture",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ahoms",
+      "title": "Ahoms",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "albania",
+      "title": "Albania",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "algeria",
+      "title": "Algeria",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "alltagsgeschichte",
+      "title": "Alltagsgeschichte",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "alternate_modernity",
+      "title": "alternate modernity",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history",
+        "modern_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "amalfi",
+      "title": "Amalfi",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "american_samoa",
+      "title": "American Samoa",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anachronism",
+      "title": "anachronism",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anatomically_modern_humans",
+      "title": "anatomically modern humans",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history",
+        "modern_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient",
+      "title": "Ancient",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_age",
+      "title": "Ancient Age",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_china",
+      "title": "Ancient China",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_egypt",
+      "title": "Ancient Egypt",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_greece",
+      "title": "Ancient Greece",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [
+        "ancient Greece"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_greek",
+      "title": "Ancient Greek",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_hellenistic_civilizations",
+      "title": "ancient Hellenistic civilizations",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_history",
+      "title": "Ancient History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "Ancient history"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_near_east",
+      "title": "ancient Near East",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_rome",
+      "title": "Ancient Rome",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancillary_sciences_of_history",
+      "title": "ancillary sciences of history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "angara",
+      "title": "Angara",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "angaraland",
+      "title": "Angaraland",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "angarida",
+      "title": "Angarida",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anglo_saxon_england",
+      "title": "Anglo-Saxon England",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "angola",
+      "title": "Angola",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anguilla",
+      "title": "Anguilla",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "annales_dhistoire_economique_et_sociale",
+      "title": "Annales d'histoire économique et sociale",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "annales_school",
+      "title": "Annales school",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "annals",
+      "title": "Annals",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "annals"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anno_domini",
+      "title": "anno Domini",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "antarctica",
+      "title": "Antarctica",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anthropology",
+      "title": "anthropology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "antigua_and_barbuda",
+      "title": "Antigua and Barbuda",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "antiquarian",
+      "title": "antiquarian",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "antiquarianism",
+      "title": "antiquarianism",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "antiquary",
+      "title": "antiquary",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "antiquities",
+      "title": "antiquities",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "antiquity",
+      "title": "Antiquity",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "antiquity"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aragon",
+      "title": "Aragon",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archaeological",
+      "title": "archaeological",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archaeology",
+      "title": "Archaeology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "archaeology"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archeology",
+      "title": "Archeology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "architectural_history",
+      "title": "architectural history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archival_bond",
+      "title": "archival bond",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archival_research",
+      "title": "archival research",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archival_science",
+      "title": "archival science",
+      "domain": "history",
+      "subdomains": [
+        "history_of_science"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archive",
+      "title": "archive",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archives",
+      "title": "archives",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "archontology",
+      "title": "archontology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "argentina",
+      "title": "Argentina",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aristocracy",
+      "title": "aristocracy",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "armenia",
+      "title": "Armenia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "armiger",
+      "title": "armiger",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "armory",
+      "title": "armory",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "arrested_decay",
+      "title": "arrested decay",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "art",
+      "title": "art",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "art_history",
+      "title": "Art history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "art history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "art_of_europe",
+      "title": "Art of Europe",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "artefact",
+      "title": "artefact",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "artefacts",
+      "title": "artefacts",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "artifact",
+      "title": "artifact",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "artifacts",
+      "title": "artifacts",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aruba",
+      "title": "Aruba",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ascension_island",
+      "title": "Ascension Island",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "assam",
+      "title": "Assam",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "atlatl",
+      "title": "atlatl",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "atomic_age",
+      "title": "Atomic Age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "audience",
+      "title": "audience",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "augustus",
+      "title": "Augustus",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "australia",
+      "title": "Australia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "austria",
+      "title": "Austria",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "authorized_biography",
+      "title": "authorized biography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "autobiography",
+      "title": "autobiography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "auxiliary_sciences_of_history",
+      "title": "Auxiliary sciences of history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "auxiliary sciences of history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "avalonia",
+      "title": "Avalonia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aviation_history",
+      "title": "Aviation history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "axial_age",
+      "title": "Axial Age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "azerbaijan",
+      "title": "Azerbaijan",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "babylonia",
+      "title": "Babylonia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bahamas",
+      "title": "Bahamas",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bahrain",
+      "title": "Bahrain",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "baltica",
+      "title": "Baltica",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bangladesh",
+      "title": "Bangladesh",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "banknotes",
+      "title": "banknotes",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "barbados",
+      "title": "Barbados",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "barbarian",
+      "title": "barbarian",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "baroque",
+      "title": "Baroque",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bbc_history",
+      "title": "BBC History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "beads",
+      "title": "beads",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "beard",
+      "title": "Beard",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bedding",
+      "title": "bedding",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bede",
+      "title": "Bede",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "before_christ",
+      "title": "Before Christ",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "before_the_common_era",
+      "title": "Before the Common Era",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "behavioral_modernity",
+      "title": "behavioral modernity",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history",
+        "modern_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "belarus",
+      "title": "Belarus",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "belgium",
+      "title": "Belgium",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "belize",
+      "title": "Belize",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "benin",
+      "title": "Benin",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bering_land_bridge",
+      "title": "Bering Land Bridge",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "beringia",
+      "title": "Beringia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bermuda",
+      "title": "Bermuda",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bhutan",
+      "title": "Bhutan",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bibliography",
+      "title": "bibliography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bibliography_of_european_history",
+      "title": "Bibliography of European history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "big_history",
+      "title": "Big History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "big_lie",
+      "title": "big lie",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "biographies",
+      "title": "biographies",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "biography",
+      "title": "biography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "biology",
+      "title": "biology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "black_death",
+      "title": "Black Death",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "black_legend",
+      "title": "black legend",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "blitzkrieg",
+      "title": "Blitzkrieg",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "block_books",
+      "title": "block books",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bolivia",
+      "title": "Bolivia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bolsheviks",
+      "title": "Bolsheviks",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bonaire",
+      "title": "Bonaire",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bone_tools",
+      "title": "bone tools",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "book_review",
+      "title": "book review",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bosnia_and_herzegovina",
+      "title": "Bosnia and Herzegovina",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "botswana",
+      "title": "Botswana",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bottom_up_approach",
+      "title": "bottom-up approach",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bourgeoisie",
+      "title": "bourgeoisie",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bow",
+      "title": "bow",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "braudel",
+      "title": "Braudel",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "brazil",
+      "title": "Brazil",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "british_empire",
+      "title": "British Empire",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "british_indian_ocean_territory",
+      "title": "British Indian Ocean Territory",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "british_virgin_islands",
+      "title": "British Virgin Islands",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bronze",
+      "title": "bronze",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bronze_age",
+      "title": "Bronze Age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bronze_age_europe",
+      "title": "Bronze Age Europe",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "brunei",
+      "title": "Brunei",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bulgaria",
+      "title": "Bulgaria",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "buranji",
+      "title": "Buranji",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "burial",
+      "title": "burial",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "burkina_faso",
+      "title": "Burkina Faso",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "burundi",
+      "title": "Burundi",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "business_history",
+      "title": "Business history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "byzantine",
+      "title": "Byzantine",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "byzantine_empire",
+      "title": "Byzantine Empire",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "byzantine_sphere",
+      "title": "Byzantine sphere",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "c_ca",
+      "title": "c. , ca.",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "caesar",
+      "title": "Caesar",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "calendar",
+      "title": "calendar",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "calendar_era",
+      "title": "calendar era",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "calendar_eras",
+      "title": "calendar eras",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "caligula",
+      "title": "Caligula",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cambodia",
+      "title": "Cambodia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cameroon",
+      "title": "Cameroon",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "canada",
+      "title": "Canada",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "canary_islands",
+      "title": "Canary Islands",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "canoes",
+      "title": "canoes",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "caparisons",
+      "title": "caparisons",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cape_verde",
+      "title": "Cape Verde",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "capitalist",
+      "title": "capitalist",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cardinal_number",
+      "title": "cardinal number",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cartulary",
+      "title": "cartulary",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "catalonia",
+      "title": "Catalonia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cathaysian",
+      "title": "Cathaysian",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cathaysian_terranes",
+      "title": "Cathaysian Terranes",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cayman_islands",
+      "title": "Cayman Islands",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cca",
+      "title": "cca.",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "celtic",
+      "title": "Celtic",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "central_african_republic",
+      "title": "Central African Republic",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "central_america",
+      "title": "Central America",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "centuries",
+      "title": "Centuries",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "century",
+      "title": "century",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ceuta",
+      "title": "Ceuta",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chad",
+      "title": "Chad",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chalcolithic",
+      "title": "Chalcolithic (Copper Age)",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chalcolithic_europe",
+      "title": "Chalcolithic Europe",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chancery",
+      "title": "chancery",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "charge",
+      "title": "charge",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "charter",
+      "title": "charter",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chemistry",
+      "title": "chemistry",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chile",
+      "title": "Chile",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "china",
+      "title": "China",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chinese",
+      "title": "Chinese",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chinese_eras",
+      "title": "Chinese Eras",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chirograph",
+      "title": "chirograph",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chorography",
+      "title": "chorography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "christianity_in_late_antiquity",
+      "title": "Christianity in late antiquity",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "christianity_in_the_middle_ages",
+      "title": "Christianity in the Middle Ages",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "christianity_in_the_modern_era",
+      "title": "Christianity in the modern era",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history",
+        "modern_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "christianization",
+      "title": "Christianization",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "christmas_island",
+      "title": "Christmas Island",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chronicle",
+      "title": "Chronicle",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "chronicle"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chronological",
+      "title": "chronological",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chronological_order",
+      "title": "chronological order",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chronologies",
+      "title": "chronologies",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chronology",
+      "title": "Chronology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chronology_of_the_universe",
+      "title": "Chronology of the Universe",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cimmeria",
+      "title": "Cimmeria",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cimmerian_terranes",
+      "title": "Cimmerian Terranes",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "circ",
+      "title": "circ.",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "circa",
+      "title": "circa",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "classical_antiquity",
+      "title": "classical antiquity",
+      "domain": "history",
+      "subdomains": [
+        "classical_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "classics",
+      "title": "Classics",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "classics"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cliometrics",
+      "title": "Cliometrics",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "cliometrics"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "codicology",
+      "title": "Codicology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "codicology"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cold_war",
+      "title": "Cold War",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "common_era",
+      "title": "Common Era",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "contemporary_history",
+      "title": "contemporary history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "copper_age",
+      "title": "Copper Age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cultural_history",
+      "title": "Cultural History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "Cultural history",
+        "cultural history"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "diplomatics",
+      "title": "Diplomatics",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "diplomatics"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "early_middle_ages",
+      "title": "Early Middle Ages",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "early_modern_history",
+      "title": "Early Modern History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "early modern history"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "early_modern_period",
+      "title": "Early modern period",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history",
+        "modern_history"
+      ],
+      "aliases": [
+        "early modern period"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "east_asia",
+      "title": "East Asia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "econometric",
+      "title": "econometric",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "economic_history",
+      "title": "Economic History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "Economic history",
+        "economic history"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "environmental_history",
+      "title": "Environmental history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "environmental history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "epigraphy",
+      "title": "Epigraphy",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "epigraphy"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "era",
+      "title": "Era",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "era"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "europe",
+      "title": "Europe",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "fall_of_the_western_roman_empire",
+      "title": "Fall of the Western Roman Empire",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "fall of the Western Roman Empire"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "feudalism",
+      "title": "Feudalism",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "feudalism"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "froissart",
+      "title": "Froissart",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "future",
+      "title": "Future",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "genealogy",
+      "title": "Genealogy",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "genealogy"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "geoffrey",
+      "title": "Geoffrey",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gibbon",
+      "title": "Gibbon",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "greco_roman_world",
+      "title": "Greco-Roman world",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gregorian_calendar",
+      "title": "Gregorian calendar",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "heraldry",
+      "title": "Heraldry",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "heraldry"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "herodotus",
+      "title": "Herodotus",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "high_middle_ages",
+      "title": "High Middle Ages",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historian",
+      "title": "Historian",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "historian"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historians",
+      "title": "historians",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historical_classification",
+      "title": "Historical classification",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "historical classification"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historical_method",
+      "title": "Historical method",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historical_revisionism",
+      "title": "Historical revisionism",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "historical revisionism"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historical_source",
+      "title": "Historical source",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historical_thinking",
+      "title": "Historical thinking",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "historical thinking"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historiography",
+      "title": "Historiography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "history_of_science",
+      "title": "History of Science",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "History of science",
+        "history of science"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "hobsbawm",
+      "title": "Hobsbawm",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "human_evolution",
+      "title": "Human evolution",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "human evolution"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "human_history",
+      "title": "Human history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "human history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ibn_khaldun",
+      "title": "Ibn Khaldun",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "index",
+      "title": "Index",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "india",
+      "title": "India",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "industrial_age",
+      "title": "Industrial Age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "intellectual_history",
+      "title": "Intellectual History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "Intellectual history"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "interwar_period",
+      "title": "Interwar period",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "interwar period"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "iron_age",
+      "title": "Iron Age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "josephus",
+      "title": "Josephus",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "karamzin",
+      "title": "Karamzin",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "landscape_history",
+      "title": "Landscape history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "landscape history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "late_antiquity",
+      "title": "Late antiquity",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "late_middle_ages",
+      "title": "Late Middle Ages",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "late_modern_history",
+      "title": "late modern history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "late_modern_period",
+      "title": "Late modern period",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history",
+        "modern_history"
+      ],
+      "aliases": [
+        "late modern period"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "local_history",
+      "title": "Local history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "local history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mesolithic",
+      "title": "Mesolithic",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "middle_ages",
+      "title": "Middle Ages",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "middle_east",
+      "title": "Middle East",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "military_history",
+      "title": "Military History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "Military history",
+        "military history"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "modern",
+      "title": "Modern",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history",
+        "modern_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "modern_history",
+      "title": "Modern History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "Modern history"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "modern_period",
+      "title": "Modern period",
+      "domain": "history",
+      "subdomains": [
+        "early_modern_history",
+        "modern_history"
+      ],
+      "aliases": [
+        "modern period"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mommsen",
+      "title": "Mommsen",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mythology",
+      "title": "Mythology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "mythology"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "nationalism",
+      "title": "Nationalism",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "nationalism"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "neolithic",
+      "title": "Neolithic",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "new_zealand",
+      "title": "New Zealand",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "north_america",
+      "title": "North America",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "numismatics",
+      "title": "Numismatics",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "numismatics"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "onomastics",
+      "title": "Onomastics",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "onomastics"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "oral_history",
+      "title": "Oral history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "oral history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "pacific_islands",
+      "title": "Pacific Islands",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "palaeography",
+      "title": "Palaeography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "palaeography"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "paleography",
+      "title": "Paleography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "paleography"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "paleolithic",
+      "title": "Paleolithic",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "past",
+      "title": "Past",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "past"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "periodization",
+      "title": "Periodization",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "periods",
+      "title": "Periods",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "philately",
+      "title": "Philately",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "philately"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "philology",
+      "title": "Philology",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "philology"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "plutarch",
+      "title": "Plutarch",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "political_history",
+      "title": "Political History",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "Political history",
+        "political history"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "post_classical",
+      "title": "Post-classical",
+      "domain": "history",
+      "subdomains": [
+        "classical_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "post_classical_history",
+      "title": "Post-classical history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "prehistoric",
+      "title": "Prehistoric",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "prehistory",
+      "title": "Prehistory",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "medieval_history",
+        "prehistory"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "present",
+      "title": "Present",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "present"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "primary",
+      "title": "primary",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "printing",
+      "title": "Printing",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "printing"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "prosopography",
+      "title": "Prosopography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "prosopography"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "pseudohistory",
+      "title": "Pseudohistory",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "pseudohistory"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "psychohistory",
+      "title": "Psychohistory",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "psychohistory"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "public_history",
+      "title": "Public history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "public history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "radiocarbon_dating",
+      "title": "Radiocarbon dating",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "radiocarbon dating"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ranke",
+      "title": "Ranke",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "recorded_history",
+      "title": "Recorded history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "renaissance",
+      "title": "Renaissance",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "russia",
+      "title": "Russia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "russian_empire",
+      "title": "Russian Empire",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "scientific_revolution",
+      "title": "Scientific Revolution",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "secondary",
+      "title": "secondary",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sigillography",
+      "title": "Sigillography",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "sigillography"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sima",
+      "title": "Sima",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_history",
+      "title": "Social history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "social history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "south_america",
+      "title": "South America",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "south_asia",
+      "title": "South Asia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "southeast_asia",
+      "title": "Southeast Asia",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "space_age",
+      "title": "Space Age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "statistics",
+      "title": "Statistics",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "statistics"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "stone_age",
+      "title": "Stone Age",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "tacitus",
+      "title": "Tacitus",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "taylor",
+      "title": "Taylor",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "tertiary",
+      "title": "tertiary",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "the_caribbean",
+      "title": "The Caribbean",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "thucydides",
+      "title": "Thucydides",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "time",
+      "title": "Time",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "time"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "timeline",
+      "title": "timeline",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "timelines",
+      "title": "Timelines",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "toponymy",
+      "title": "Toponymy",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [
+        "toponymy"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "turner",
+      "title": "Turner",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "universal_history",
+      "title": "Universal history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "universal history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "urban_history",
+      "title": "Urban history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "urban history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "vasari",
+      "title": "Vasari",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "womens_history",
+      "title": "Women's history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "women's history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "world_history",
+      "title": "World history",
+      "domain": "history",
+      "subdomains": [
+        "ancient_history",
+        "classical_history",
+        "early_modern_history",
+        "medieval_history"
+      ],
+      "aliases": [
+        "world history"
+      ],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "world_war_i",
+      "title": "World War I",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "world_war_ii",
+      "title": "World War II",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "xenophon",
+      "title": "Xenophon",
+      "domain": "history",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of History",
+        "Wikipedia Outline of History"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_history",
+        "https://en.wikipedia.org/wiki/Outline_of_history"
+      ],
+      "status": "candidate",
+      "promoted": false
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "proportion",
+  "title": "Proportion",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "quantity_and_form"
+  ],
+  "summary": "Proportion is a foundational idea for reasoning about amount, form, order, and formal relationships.",
+  "prerequisites": [
+    "quantity",
+    "pattern",
+    "structure"
+  ],
+  "unlocks": [],
+  "related": [
+    "pattern",
+    "quantity",
+    "rate",
+    "ratio",
+    "structure"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "pattern",
+    "quantity",
+    "quantity_and_form",
+    "structure"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "perception",
+  "title": "Perception",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "life_and_mind"
+  ],
+  "summary": "Perception is a foundational idea for understanding living systems, minds, and adaptive behavior.",
+  "prerequisites": [
+    "system",
+    "information",
+    "matter"
+  ],
+  "unlocks": [],
+  "related": [
+    "attention",
+    "information",
+    "matter",
+    "response",
+    "system"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "information",
+    "life_and_mind",
+    "matter",
+    "system"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

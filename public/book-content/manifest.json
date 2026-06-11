@@ -1,0 +1,2589 @@
+{
+  "generatedAt": "2026-05-17T15:56:20.951Z",
+  "count": 287,
+  "books": [
+    {
+      "id": "1776",
+      "slug": "1776",
+      "title": "1776",
+      "sourceFile": "1776.epub",
+      "sectionCount": 16,
+      "wordCount": 3133,
+      "path": "book-content/1776.json"
+    },
+    {
+      "id": "Addiction",
+      "slug": "addiction",
+      "title": "ADDICTION",
+      "sourceFile": "Addiction.epub",
+      "sectionCount": 22,
+      "wordCount": 6380,
+      "path": "book-content/Addiction.json"
+    },
+    {
+      "id": "Adolf",
+      "slug": "how-a-man-becomes-a-monster",
+      "title": "How a Man Becomes a Monster",
+      "sourceFile": "Adolf.epub",
+      "sectionCount": 22,
+      "wordCount": 8943,
+      "path": "book-content/Adolf.json"
+    },
+    {
+      "id": "Agency",
+      "slug": "agency",
+      "title": "AGENCY",
+      "sourceFile": "Agency.epub",
+      "sectionCount": 17,
+      "wordCount": 4849,
+      "path": "book-content/Agency.json"
+    },
+    {
+      "id": "AI",
+      "slug": "speaking-in-code",
+      "title": "Speaking in Code",
+      "sourceFile": "AI.epub",
+      "sectionCount": 26,
+      "wordCount": 9492,
+      "path": "book-content/AI.json"
+    },
+    {
+      "id": "AITakeover",
+      "slug": "the-ai-takeover-already-happened",
+      "title": "The AI Takeover Already Happened",
+      "sourceFile": "AITakeover.epub",
+      "sectionCount": 17,
+      "wordCount": 3477,
+      "path": "book-content/AITakeover.json"
+    },
+    {
+      "id": "Alcohol",
+      "slug": "alcohol",
+      "title": "Alcohol",
+      "sourceFile": "Alcohol.epub",
+      "sectionCount": 20,
+      "wordCount": 7768,
+      "path": "book-content/Alcohol.json"
+    },
+    {
+      "id": "Alexander",
+      "slug": "alexander",
+      "title": "ALEXANDER",
+      "sourceFile": "Alexander.epub",
+      "sectionCount": 19,
+      "wordCount": 4447,
+      "path": "book-content/Alexander.json"
+    },
+    {
+      "id": "Aliens",
+      "slug": "we-are-not-alone-and-never-were",
+      "title": "We Are Not Alone (And Never Were)",
+      "sourceFile": "Aliens.epub",
+      "sectionCount": 24,
+      "wordCount": 6155,
+      "path": "book-content/Aliens.json"
+    },
+    {
+      "id": "Alta",
+      "slug": "alta-pest-control",
+      "title": "Alta Pest Control",
+      "sourceFile": "Alta.epub",
+      "sectionCount": 27,
+      "wordCount": 17544,
+      "path": "book-content/Alta.json"
+    },
+    {
+      "id": "Amish",
+      "slug": "plain-truth",
+      "title": "Plain Truth",
+      "sourceFile": "Amish.epub",
+      "sectionCount": 16,
+      "wordCount": 3657,
+      "path": "book-content/Amish.json"
+    },
+    {
+      "id": "Anatomy",
+      "slug": "anatomy-101",
+      "title": "Anatomy 101",
+      "sourceFile": "Anatomy.epub",
+      "sectionCount": 18,
+      "wordCount": 7152,
+      "path": "book-content/Anatomy.json"
+    },
+    {
+      "id": "Antarctica",
+      "slug": "white-silence",
+      "title": "White Silence",
+      "sourceFile": "Antarctica.epub",
+      "sectionCount": 18,
+      "wordCount": 6829,
+      "path": "book-content/Antarctica.json"
+    },
+    {
+      "id": "Antisem",
+      "slug": "antisemitism",
+      "title": "ANTISEMITISM",
+      "sourceFile": "Antisem.epub",
+      "sectionCount": 20,
+      "wordCount": 5747,
+      "path": "book-content/Antisem.json"
+    },
+    {
+      "id": "Aquinas",
+      "slug": "thomas-aquinas",
+      "title": "THOMAS AQUINAS",
+      "sourceFile": "Aquinas.epub",
+      "sectionCount": 19,
+      "wordCount": 6572,
+      "path": "book-content/Aquinas.json"
+    },
+    {
+      "id": "Aristotle",
+      "slug": "aristotle",
+      "title": "ARISTOTLE",
+      "sourceFile": "Aristotle.epub",
+      "sectionCount": 18,
+      "wordCount": 5160,
+      "path": "book-content/Aristotle.json"
+    },
+    {
+      "id": "Astral",
+      "slug": "unbound",
+      "title": "Unbound",
+      "sourceFile": "Astral.epub",
+      "sectionCount": 16,
+      "wordCount": 4687,
+      "path": "book-content/Astral.json"
+    },
+    {
+      "id": "Bahai",
+      "slug": "the-ninth-prophet",
+      "title": "The Ninth Prophet",
+      "sourceFile": "Bahai.epub",
+      "sectionCount": 13,
+      "wordCount": 3664,
+      "path": "book-content/Bahai.json"
+    },
+    {
+      "id": "Banned",
+      "slug": "banned",
+      "title": "BANNED",
+      "sourceFile": "Banned.epub",
+      "sectionCount": 25,
+      "wordCount": 9934,
+      "path": "book-content/Banned.json"
+    },
+    {
+      "id": "Believe",
+      "slug": "what-people-actually-believe",
+      "title": "What People Actually Believe",
+      "sourceFile": "Believe.epub",
+      "sectionCount": 24,
+      "wordCount": 6921,
+      "path": "book-content/Believe.json"
+    },
+    {
+      "id": "Believers",
+      "slug": "believers",
+      "title": "Believers",
+      "sourceFile": "Believers.epub",
+      "sectionCount": 23,
+      "wordCount": 4283,
+      "path": "book-content/Believers.json"
+    },
+    {
+      "id": "Bezos",
+      "slug": "bezos",
+      "title": "Bezos",
+      "sourceFile": "Bezos.epub",
+      "sectionCount": 17,
+      "wordCount": 3534,
+      "path": "book-content/Bezos.json"
+    },
+    {
+      "id": "Bible",
+      "slug": "what-the-bible-actually-says",
+      "title": "What the Bible Actually Says",
+      "sourceFile": "Bible.epub",
+      "sectionCount": 19,
+      "wordCount": 7616,
+      "path": "book-content/Bible.json"
+    },
+    {
+      "id": "Biochemical",
+      "slug": "biochemical-romance",
+      "title": "Biochemical Romance",
+      "sourceFile": "Biochemical.epub",
+      "sectionCount": 21,
+      "wordCount": 8395,
+      "path": "book-content/Biochemical.json"
+    },
+    {
+      "id": "Biology",
+      "slug": "biology-101",
+      "title": "Biology 101",
+      "sourceFile": "Biology.epub",
+      "sectionCount": 18,
+      "wordCount": 5994,
+      "path": "book-content/Biology.json"
+    },
+    {
+      "id": "BlueCollar",
+      "slug": "this-will-make-a-blue-collar-worker-cry",
+      "title": "This Will Make a Blue-Collar Worker Cry",
+      "sourceFile": "BlueCollar.epub",
+      "sectionCount": 19,
+      "wordCount": 4532,
+      "path": "book-content/BlueCollar.json"
+    },
+    {
+      "id": "Bluster",
+      "slug": "bluster-the-bloon-and-the-pebble-that-stayed",
+      "title": "Bluster the Bloon and the Pebble That Stayed",
+      "sourceFile": "Bluster.epub",
+      "sectionCount": 21,
+      "wordCount": 3556,
+      "path": "book-content/Bluster.json"
+    },
+    {
+      "id": "BOM",
+      "slug": "what-the-book-of-mormon-actually-says",
+      "title": "What the Book of Mormon Actually Says",
+      "sourceFile": "BOM.epub",
+      "sectionCount": 20,
+      "wordCount": 5262,
+      "path": "book-content/BOM.json"
+    },
+    {
+      "id": "Borders",
+      "slug": "the-borders-book",
+      "title": "The Borders Book",
+      "sourceFile": "Borders.epub",
+      "sectionCount": 45,
+      "wordCount": 15048,
+      "path": "book-content/Borders.json"
+    },
+    {
+      "id": "Branches",
+      "slug": "branches",
+      "title": "Branches",
+      "sourceFile": "Branches.epub",
+      "sectionCount": 24,
+      "wordCount": 11934,
+      "path": "book-content/Branches.json"
+    },
+    {
+      "id": "Buddha",
+      "slug": "the-buddha-book",
+      "title": "The Buddha Book",
+      "sourceFile": "Buddha.epub",
+      "sectionCount": 16,
+      "wordCount": 3404,
+      "path": "book-content/Buddha.json"
+    },
+    {
+      "id": "Buddhism",
+      "slug": "buddhism",
+      "title": "BUDDHISM",
+      "sourceFile": "Buddhism.epub",
+      "sectionCount": 20,
+      "wordCount": 5132,
+      "path": "book-content/Buddhism.json"
+    },
+    {
+      "id": "Bure",
+      "slug": "bureaucracy",
+      "title": "BUREAUCRACY",
+      "sourceFile": "Bure.epub",
+      "sectionCount": 21,
+      "wordCount": 9487,
+      "path": "book-content/Bure.json"
+    },
+    {
+      "id": "Burgers",
+      "slug": "built-from-burgers",
+      "title": "BUILT FROM BURGERS",
+      "sourceFile": "Burgers.epub",
+      "sectionCount": 20,
+      "wordCount": 7522,
+      "path": "book-content/Burgers.json"
+    },
+    {
+      "id": "Burr",
+      "slug": "burr",
+      "title": "Burr",
+      "sourceFile": "Burr.epub",
+      "sectionCount": 18,
+      "wordCount": 4063,
+      "path": "book-content/Burr.json"
+    },
+    {
+      "id": "Burton",
+      "slug": "burton",
+      "title": "Burton",
+      "sourceFile": "Burton.epub",
+      "sectionCount": 20,
+      "wordCount": 7417,
+      "path": "book-content/Burton.json"
+    },
+    {
+      "id": "Caesar",
+      "slug": "caesar",
+      "title": "CAESAR",
+      "sourceFile": "Caesar.epub",
+      "sectionCount": 17,
+      "wordCount": 5555,
+      "path": "book-content/Caesar.json"
+    },
+    {
+      "id": "Caffeine",
+      "slug": "caffeine",
+      "title": "CAFFEINE",
+      "sourceFile": "Caffeine.epub",
+      "sectionCount": 24,
+      "wordCount": 7766,
+      "path": "book-content/Caffeine.json"
+    },
+    {
+      "id": "Calculus",
+      "slug": "calculus-101",
+      "title": "Calculus 101",
+      "sourceFile": "Calculus.epub",
+      "sectionCount": 23,
+      "wordCount": 7884,
+      "path": "book-content/Calculus.json"
+    },
+    {
+      "id": "Campus",
+      "slug": "campus-inc",
+      "title": "Campus, Inc.",
+      "sourceFile": "Campus.epub",
+      "sectionCount": 16,
+      "wordCount": 5581,
+      "path": "book-content/Campus.json"
+    },
+    {
+      "id": "Cancer",
+      "slug": "cancer",
+      "title": "CANCER",
+      "sourceFile": "Cancer.epub",
+      "sectionCount": 21,
+      "wordCount": 8279,
+      "path": "book-content/Cancer.json"
+    },
+    {
+      "id": "Chakras",
+      "slug": "chakras",
+      "title": "Chakras",
+      "sourceFile": "Chakras.epub",
+      "sectionCount": 16,
+      "wordCount": 3901,
+      "path": "book-content/Chakras.json"
+    },
+    {
+      "id": "Charlemagne",
+      "slug": "charlemagne",
+      "title": "Charlemagne",
+      "sourceFile": "Charlemagne.epub",
+      "sectionCount": 16,
+      "wordCount": 4769,
+      "path": "book-content/Charlemagne.json"
+    },
+    {
+      "id": "Chemistry",
+      "slug": "chemistry-101",
+      "title": "Chemistry 101",
+      "sourceFile": "Chemistry.epub",
+      "sectionCount": 20,
+      "wordCount": 5640,
+      "path": "book-content/Chemistry.json"
+    },
+    {
+      "id": "Christianity",
+      "slug": "christianity",
+      "title": "Christianity",
+      "sourceFile": "Christianity.epub",
+      "sectionCount": 20,
+      "wordCount": 6258,
+      "path": "book-content/Christianity.json"
+    },
+    {
+      "id": "Churchill",
+      "slug": "churchill",
+      "title": "CHURCHILL",
+      "sourceFile": "Churchill.epub",
+      "sectionCount": 28,
+      "wordCount": 9097,
+      "path": "book-content/Churchill.json"
+    },
+    {
+      "id": "CIA",
+      "slug": "the-cia",
+      "title": "The CIA",
+      "sourceFile": "CIA.epub",
+      "sectionCount": 22,
+      "wordCount": 6687,
+      "path": "book-content/CIA.json"
+    },
+    {
+      "id": "CN",
+      "slug": "saturday-morning-forever",
+      "title": "Saturday Morning Forever",
+      "sourceFile": "CN.epub",
+      "sectionCount": 27,
+      "wordCount": 7001,
+      "path": "book-content/CN.json"
+    },
+    {
+      "id": "Color",
+      "slug": "color",
+      "title": "COLOR",
+      "sourceFile": "Color.epub",
+      "sectionCount": 24,
+      "wordCount": 7389,
+      "path": "book-content/Color.json"
+    },
+    {
+      "id": "Columbus",
+      "slug": "columbus",
+      "title": "COLUMBUS",
+      "sourceFile": "Columbus.epub",
+      "sectionCount": 21,
+      "wordCount": 5540,
+      "path": "book-content/Columbus.json"
+    },
+    {
+      "id": "Communism",
+      "slug": "communism",
+      "title": "COMMUNISM",
+      "sourceFile": "Communism.epub",
+      "sectionCount": 21,
+      "wordCount": 8449,
+      "path": "book-content/Communism.json"
+    },
+    {
+      "id": "Condition",
+      "slug": "the-human-condition",
+      "title": "The Human Condition",
+      "sourceFile": "Condition.epub",
+      "sectionCount": 22,
+      "wordCount": 8600,
+      "path": "book-content/Condition.json"
+    },
+    {
+      "id": "Confucius",
+      "slug": "confucius",
+      "title": "Confucius",
+      "sourceFile": "Confucius.epub",
+      "sectionCount": 16,
+      "wordCount": 5178,
+      "path": "book-content/Confucius.json"
+    },
+    {
+      "id": "Congo",
+      "slug": "rubber-and-blood",
+      "title": "Rubber and Blood",
+      "sourceFile": "Congo.epub",
+      "sectionCount": 16,
+      "wordCount": 4883,
+      "path": "book-content/Congo.json"
+    },
+    {
+      "id": "Control",
+      "slug": "control-freaks",
+      "title": "Control Freaks",
+      "sourceFile": "Control.epub",
+      "sectionCount": 19,
+      "wordCount": 5182,
+      "path": "book-content/Control.json"
+    },
+    {
+      "id": "Corps",
+      "slug": "the-man-made-of-paper",
+      "title": "THE MAN MADE OF PAPER",
+      "sourceFile": "Corps.epub",
+      "sectionCount": 19,
+      "wordCount": 6532,
+      "path": "book-content/Corps.json"
+    },
+    {
+      "id": "Coups",
+      "slug": "regime-machine",
+      "title": "Regime Machine",
+      "sourceFile": "Coups.epub",
+      "sectionCount": 19,
+      "wordCount": 6216,
+      "path": "book-content/Coups.json"
+    },
+    {
+      "id": "Credit",
+      "slug": "credit",
+      "title": "CREDIT",
+      "sourceFile": "Credit.epub",
+      "sectionCount": 19,
+      "wordCount": 5130,
+      "path": "book-content/Credit.json"
+    },
+    {
+      "id": "Crusades",
+      "slug": "deus-vult",
+      "title": "Deus Vult",
+      "sourceFile": "Crusades.epub",
+      "sectionCount": 19,
+      "wordCount": 6212,
+      "path": "book-content/Crusades.json"
+    },
+    {
+      "id": "Crust",
+      "slug": "in-crust-we-trust",
+      "title": "In Crust We Trust",
+      "sourceFile": "Crust.epub",
+      "sectionCount": 22,
+      "wordCount": 6301,
+      "path": "book-content/Crust.json"
+    },
+    {
+      "id": "Cuba",
+      "slug": "cuba",
+      "title": "CUBA",
+      "sourceFile": "Cuba.epub",
+      "sectionCount": 18,
+      "wordCount": 5579,
+      "path": "book-content/Cuba.json"
+    },
+    {
+      "id": "Cult",
+      "slug": "the-cult-playbook",
+      "title": "The Cult Playbook",
+      "sourceFile": "Cult.epub",
+      "sectionCount": 22,
+      "wordCount": 6410,
+      "path": "book-content/Cult.json"
+    },
+    {
+      "id": "cyrus",
+      "slug": "cyrus-exe",
+      "title": "cyrus.exe",
+      "sourceFile": "cyrus.epub",
+      "sectionCount": 18,
+      "wordCount": 2700,
+      "path": "book-content/cyrus.json"
+    },
+    {
+      "id": "D2D",
+      "slug": "commissioned",
+      "title": "Commissioned",
+      "sourceFile": "D2D.epub",
+      "sectionCount": 16,
+      "wordCount": 6003,
+      "path": "book-content/D2D.json"
+    },
+    {
+      "id": "Darwin",
+      "slug": "darwin",
+      "title": "DARWIN",
+      "sourceFile": "Darwin.epub",
+      "sectionCount": 23,
+      "wordCount": 6956,
+      "path": "book-content/Darwin.json"
+    },
+    {
+      "id": "Dayton",
+      "slug": "dayton",
+      "title": "DAYTON",
+      "sourceFile": "Dayton.epub",
+      "sectionCount": 33,
+      "wordCount": 11110,
+      "path": "book-content/Dayton.json"
+    },
+    {
+      "id": "Descartes",
+      "slug": "descartes",
+      "title": "Descartes",
+      "sourceFile": "Descartes.epub",
+      "sectionCount": 23,
+      "wordCount": 6786,
+      "path": "book-content/Descartes.json"
+    },
+    {
+      "id": "Dianetics",
+      "slug": "what-dianetics-actually-says",
+      "title": "What Dianetics Actually Says",
+      "sourceFile": "Dianetics.epub",
+      "sectionCount": 22,
+      "wordCount": 7919,
+      "path": "book-content/Dianetics.json"
+    },
+    {
+      "id": "DietPop",
+      "slug": "the-sweet-lie",
+      "title": "The Sweet Lie",
+      "sourceFile": "DietPop.epub",
+      "sectionCount": 17,
+      "wordCount": 4674,
+      "path": "book-content/DietPop.json"
+    },
+    {
+      "id": "Disney",
+      "slug": "disney",
+      "title": "Disney",
+      "sourceFile": "Disney.epub",
+      "sectionCount": 22,
+      "wordCount": 6989,
+      "path": "book-content/Disney.json"
+    },
+    {
+      "id": "Dollar",
+      "slug": "in-green-we-trust",
+      "title": "In Green We Trust",
+      "sourceFile": "Dollar.epub",
+      "sectionCount": 21,
+      "wordCount": 7028,
+      "path": "book-content/Dollar.json"
+    },
+    {
+      "id": "Dopamine",
+      "slug": "the-dopamine-goblin",
+      "title": "The Dopamine Goblin",
+      "sourceFile": "Dopamine.epub",
+      "sectionCount": 27,
+      "wordCount": 10061,
+      "path": "book-content/Dopamine.json"
+    },
+    {
+      "id": "Doubt",
+      "slug": "the-gospel-of-doubt",
+      "title": "The Gospel of Doubt",
+      "sourceFile": "Doubt.epub",
+      "sectionCount": 22,
+      "wordCount": 7078,
+      "path": "book-content/Doubt.json"
+    },
+    {
+      "id": "Drugs",
+      "slug": "the-drug-book",
+      "title": "The Drug Book",
+      "sourceFile": "Drugs.epub",
+      "sectionCount": 29,
+      "wordCount": 9585,
+      "path": "book-content/Drugs.json"
+    },
+    {
+      "id": "Echoes",
+      "slug": "echos-of-power",
+      "title": "Echos of Power",
+      "sourceFile": "Echoes.epub",
+      "sectionCount": 43,
+      "wordCount": 13245,
+      "path": "book-content/Echoes.json"
+    },
+    {
+      "id": "Economics",
+      "slug": "economics-101",
+      "title": "Economics 101",
+      "sourceFile": "Economics.epub",
+      "sectionCount": 18,
+      "wordCount": 5379,
+      "path": "book-content/Economics.json"
+    },
+    {
+      "id": "Edison",
+      "slug": "edison",
+      "title": "EDISON",
+      "sourceFile": "Edison.epub",
+      "sectionCount": 16,
+      "wordCount": 4446,
+      "path": "book-content/Edison.json"
+    },
+    {
+      "id": "Egypt",
+      "slug": "egypt",
+      "title": "EGYPT",
+      "sourceFile": "Egypt.epub",
+      "sectionCount": 29,
+      "wordCount": 10351,
+      "path": "book-content/Egypt.json"
+    },
+    {
+      "id": "Einstein",
+      "slug": "einstein",
+      "title": "Einstein",
+      "sourceFile": "Einstein.epub",
+      "sectionCount": 16,
+      "wordCount": 5447,
+      "path": "book-content/Einstein.json"
+    },
+    {
+      "id": "Elections",
+      "slug": "the-ballot-breakdown",
+      "title": "The Ballot Breakdown",
+      "sourceFile": "Elections.epub",
+      "sectionCount": 21,
+      "wordCount": 7631,
+      "path": "book-content/Elections.json"
+    },
+    {
+      "id": "Electricity",
+      "slug": "electricity-101",
+      "title": "Electricity 101",
+      "sourceFile": "Electricity.epub",
+      "sectionCount": 27,
+      "wordCount": 9086,
+      "path": "book-content/Electricity.json"
+    },
+    {
+      "id": "Ethics",
+      "slug": "ethics-101",
+      "title": "Ethics 101",
+      "sourceFile": "Ethics.epub",
+      "sectionCount": 19,
+      "wordCount": 5122,
+      "path": "book-content/Ethics.json"
+    },
+    {
+      "id": "Evil",
+      "slug": "if-i-were-evil",
+      "title": "If I Were Evil",
+      "sourceFile": "Evil.epub",
+      "sectionCount": 29,
+      "wordCount": 8157,
+      "path": "book-content/Evil.json"
+    },
+    {
+      "id": "Fantasy",
+      "slug": "the-fantasy-machine",
+      "title": "THE FANTASY MACHINE",
+      "sourceFile": "Fantasy.epub",
+      "sectionCount": 21,
+      "wordCount": 6064,
+      "path": "book-content/Fantasy.json"
+    },
+    {
+      "id": "FBI",
+      "slug": "the-fbi",
+      "title": "The FBI",
+      "sourceFile": "FBI.epub",
+      "sectionCount": 19,
+      "wordCount": 5972,
+      "path": "book-content/FBI.json"
+    },
+    {
+      "id": "FDR",
+      "slug": "fdr",
+      "title": "FDR",
+      "sourceFile": "FDR.epub",
+      "sectionCount": 23,
+      "wordCount": 8181,
+      "path": "book-content/FDR.json"
+    },
+    {
+      "id": "Fields",
+      "slug": "quantum-fields",
+      "title": "Quantum Fields",
+      "sourceFile": "Fields.epub",
+      "sectionCount": 26,
+      "wordCount": 9264,
+      "path": "book-content/Fields.json"
+    },
+    {
+      "id": "Foodie",
+      "slug": "this-will-make-a-foodie-cry",
+      "title": "This Will Make a Foodie Cry",
+      "sourceFile": "Foodie.epub",
+      "sectionCount": 24,
+      "wordCount": 6838,
+      "path": "book-content/Foodie.json"
+    },
+    {
+      "id": "Ford",
+      "slug": "ford",
+      "title": "FORD",
+      "sourceFile": "Ford.epub",
+      "sectionCount": 16,
+      "wordCount": 3837,
+      "path": "book-content/Ford.json"
+    },
+    {
+      "id": "Foreskin",
+      "slug": "foresaken",
+      "title": "Foresaken",
+      "sourceFile": "Foreskin.epub",
+      "sectionCount": 15,
+      "wordCount": 4457,
+      "path": "book-content/Foreskin.json"
+    },
+    {
+      "id": "Franklin",
+      "slug": "franklin",
+      "title": "FRANKLIN",
+      "sourceFile": "Franklin.epub",
+      "sectionCount": 21,
+      "wordCount": 5883,
+      "path": "book-content/Franklin.json"
+    },
+    {
+      "id": "Freud",
+      "slug": "everythings-a-sign",
+      "title": "Everything’s a Sign",
+      "sourceFile": "Freud.epub",
+      "sectionCount": 22,
+      "wordCount": 7915,
+      "path": "book-content/Freud.json"
+    },
+    {
+      "id": "Galileo",
+      "slug": "galileo",
+      "title": "GALILEO",
+      "sourceFile": "Galileo.epub",
+      "sectionCount": 22,
+      "wordCount": 6351,
+      "path": "book-content/Galileo.json"
+    },
+    {
+      "id": "Games",
+      "slug": "insert-coin",
+      "title": "Insert Coin",
+      "sourceFile": "Games.epub",
+      "sectionCount": 16,
+      "wordCount": 5084,
+      "path": "book-content/Games.json"
+    },
+    {
+      "id": "Gates",
+      "slug": "gates",
+      "title": "Gates",
+      "sourceFile": "Gates.epub",
+      "sectionCount": 17,
+      "wordCount": 3931,
+      "path": "book-content/Gates.json"
+    },
+    {
+      "id": "Genghis",
+      "slug": "genghis",
+      "title": "GENGHIS",
+      "sourceFile": "Genghis.epub",
+      "sectionCount": 19,
+      "wordCount": 7509,
+      "path": "book-content/Genghis.json"
+    },
+    {
+      "id": "George",
+      "slug": "george",
+      "title": "George",
+      "sourceFile": "George.epub",
+      "sectionCount": 14,
+      "wordCount": 4078,
+      "path": "book-content/George.json"
+    },
+    {
+      "id": "Georgism",
+      "slug": "georgism",
+      "title": "GEORGISM",
+      "sourceFile": "Georgism.epub",
+      "sectionCount": 22,
+      "wordCount": 7023,
+      "path": "book-content/Georgism.json"
+    },
+    {
+      "id": "Germany",
+      "slug": "germany",
+      "title": "GERMANY",
+      "sourceFile": "Germany.epub",
+      "sectionCount": 22,
+      "wordCount": 10350,
+      "path": "book-content/Germany.json"
+    },
+    {
+      "id": "Gig",
+      "slug": "the-gig-economy",
+      "title": "THE GIG ECONOMY",
+      "sourceFile": "Gig.epub",
+      "sectionCount": 23,
+      "wordCount": 7932,
+      "path": "book-content/Gig.json"
+    },
+    {
+      "id": "Gita",
+      "slug": "what-the-bhagavad-gita-actually-says",
+      "title": "What the Bhagavad Gita Actually Says",
+      "sourceFile": "Gita.epub",
+      "sectionCount": 23,
+      "wordCount": 3496,
+      "path": "book-content/Gita.json"
+    },
+    {
+      "id": "Gods",
+      "slug": "from-gods-to-god",
+      "title": "From Gods to God",
+      "sourceFile": "Gods.epub",
+      "sectionCount": 18,
+      "wordCount": 4795,
+      "path": "book-content/Gods.json"
+    },
+    {
+      "id": "Goo",
+      "slug": "from-goo-to-you",
+      "title": "From Goo to You",
+      "sourceFile": "Goo.epub",
+      "sectionCount": 18,
+      "wordCount": 5333,
+      "path": "book-content/Goo.json"
+    },
+    {
+      "id": "Google",
+      "slug": "page-and-brin",
+      "title": "Page and Brin",
+      "sourceFile": "Google.epub",
+      "sectionCount": 18,
+      "wordCount": 4549,
+      "path": "book-content/Google.json"
+    },
+    {
+      "id": "Government",
+      "slug": "government-101",
+      "title": "Government 101",
+      "sourceFile": "Government.epub",
+      "sectionCount": 19,
+      "wordCount": 5458,
+      "path": "book-content/Government.json"
+    },
+    {
+      "id": "Guru",
+      "slug": "what-the-guru-granth-sahib-actually-says",
+      "title": "What the Guru Granth Sahib Actually Says",
+      "sourceFile": "Guru.epub",
+      "sectionCount": 18,
+      "wordCount": 5394,
+      "path": "book-content/Guru.json"
+    },
+    {
+      "id": "Haile",
+      "slug": "the-lion-of-judah",
+      "title": "The Lion of Judah",
+      "sourceFile": "Haile.epub",
+      "sectionCount": 19,
+      "wordCount": 6771,
+      "path": "book-content/Haile.json"
+    },
+    {
+      "id": "Halloween",
+      "slug": "trick-or-treat",
+      "title": "Trick or Treat",
+      "sourceFile": "Halloween.epub",
+      "sectionCount": 22,
+      "wordCount": 7574,
+      "path": "book-content/Halloween.json"
+    },
+    {
+      "id": "ham",
+      "slug": "hammurabi-exe",
+      "title": "hammurabi.exe",
+      "sourceFile": "ham.epub",
+      "sectionCount": 18,
+      "wordCount": 3003,
+      "path": "book-content/ham.json"
+    },
+    {
+      "id": "Hardest",
+      "slug": "the-hardest-stuff-simplified",
+      "title": "The Hardest Stuff, Simplified",
+      "sourceFile": "Hardest.epub",
+      "sectionCount": 21,
+      "wordCount": 7225,
+      "path": "book-content/Hardest.json"
+    },
+    {
+      "id": "Harriet",
+      "slug": "harriet",
+      "title": "HARRIET",
+      "sourceFile": "Harriet.epub",
+      "sectionCount": 18,
+      "wordCount": 3685,
+      "path": "book-content/Harriet.json"
+    },
+    {
+      "id": "Hawking",
+      "slug": "hawking",
+      "title": "HAWKING",
+      "sourceFile": "Hawking.epub",
+      "sectionCount": 19,
+      "wordCount": 6157,
+      "path": "book-content/Hawking.json"
+    },
+    {
+      "id": "Heads",
+      "slug": "heads-will-roll",
+      "title": "Heads Will Roll",
+      "sourceFile": "Heads.epub",
+      "sectionCount": 28,
+      "wordCount": 7469,
+      "path": "book-content/Heads.json"
+    },
+    {
+      "id": "Heroes",
+      "slug": "heroes-and-villains",
+      "title": "Heroes and Villains",
+      "sourceFile": "Heroes.epub",
+      "sectionCount": 108,
+      "wordCount": 34689,
+      "path": "book-content/Heroes.json"
+    },
+    {
+      "id": "Hiddenhand",
+      "slug": "the-hidden-hand",
+      "title": "The Hidden Hand",
+      "sourceFile": "Hiddenhand.epub",
+      "sectionCount": 20,
+      "wordCount": 9237,
+      "path": "book-content/Hiddenhand.json"
+    },
+    {
+      "id": "History",
+      "slug": "history-101",
+      "title": "History 101",
+      "sourceFile": "History.epub",
+      "sectionCount": 19,
+      "wordCount": 4517,
+      "path": "book-content/History.json"
+    },
+    {
+      "id": "hochi",
+      "slug": "hochi-exe",
+      "title": "hochi.exe",
+      "sourceFile": "hochi.epub",
+      "sectionCount": 18,
+      "wordCount": 5597,
+      "path": "book-content/hochi.json"
+    },
+    {
+      "id": "Holidays",
+      "slug": "the-holiday-business",
+      "title": "The Holiday Business",
+      "sourceFile": "Holidays.epub",
+      "sectionCount": 22,
+      "wordCount": 6195,
+      "path": "book-content/Holidays.json"
+    },
+    {
+      "id": "HowBible",
+      "slug": "how-the-bible-became-the-bible",
+      "title": "How the Bible Became the Bible",
+      "sourceFile": "HowBible.epub",
+      "sectionCount": 20,
+      "wordCount": 5474,
+      "path": "book-content/HowBible.json"
+    },
+    {
+      "id": "HR",
+      "slug": "the-high-road",
+      "title": "The High Road",
+      "sourceFile": "HR.epub",
+      "sectionCount": 35,
+      "wordCount": 20220,
+      "path": "book-content/HR.json"
+    },
+    {
+      "id": "Humans",
+      "slug": "humanity-exe",
+      "title": "humanity.exe",
+      "sourceFile": "Humans.epub",
+      "sectionCount": 87,
+      "wordCount": 32091,
+      "path": "book-content/Humans.json"
+    },
+    {
+      "id": "IDK",
+      "slug": "idk-what-happened",
+      "title": "Idk What Happened",
+      "sourceFile": "IDK.epub",
+      "sectionCount": 39,
+      "wordCount": 10848,
+      "path": "book-content/IDK.json"
+    },
+    {
+      "id": "IDWT",
+      "slug": "i-didnt-write-this",
+      "title": "I Didn't Write This",
+      "sourceFile": "IDWT.epub",
+      "sectionCount": 27,
+      "wordCount": 4287,
+      "path": "book-content/IDWT.json"
+    },
+    {
+      "id": "Imagination",
+      "slug": "imagination",
+      "title": "IMAGINATION",
+      "sourceFile": "Imagination.epub",
+      "sectionCount": 18,
+      "wordCount": 4142,
+      "path": "book-content/Imagination.json"
+    },
+    {
+      "id": "Inquis",
+      "slug": "faith-on-trial",
+      "title": "Faith on Trial",
+      "sourceFile": "Inquis.epub",
+      "sectionCount": 21,
+      "wordCount": 7620,
+      "path": "book-content/Inquis.json"
+    },
+    {
+      "id": "InsideAsylum",
+      "slug": "life-inside-the-asylum",
+      "title": "Life Inside the Asylum",
+      "sourceFile": "InsideAsylum.epub",
+      "sectionCount": 18,
+      "wordCount": 3889,
+      "path": "book-content/InsideAsylum.json"
+    },
+    {
+      "id": "InsideChina",
+      "slug": "life-inside-china",
+      "title": "Life Inside China",
+      "sourceFile": "InsideChina.epub",
+      "sectionCount": 18,
+      "wordCount": 4048,
+      "path": "book-content/InsideChina.json"
+    },
+    {
+      "id": "Insurance",
+      "slug": "the-fine-print",
+      "title": "The Fine Print",
+      "sourceFile": "Insurance.epub",
+      "sectionCount": 17,
+      "wordCount": 4470,
+      "path": "book-content/Insurance.json"
+    },
+    {
+      "id": "Intelligence",
+      "slug": "intelligence",
+      "title": "Intelligence",
+      "sourceFile": "Intelligence.epub",
+      "sectionCount": 20,
+      "wordCount": 6040,
+      "path": "book-content/Intelligence.json"
+    },
+    {
+      "id": "Isaac",
+      "slug": "heavens-codebreaker",
+      "title": "Heaven’s Codebreaker",
+      "sourceFile": "Isaac.epub",
+      "sectionCount": 19,
+      "wordCount": 4803,
+      "path": "book-content/Isaac.json"
+    },
+    {
+      "id": "Islam",
+      "slug": "islam",
+      "title": "Islam",
+      "sourceFile": "Islam.epub",
+      "sectionCount": 20,
+      "wordCount": 7254,
+      "path": "book-content/Islam.json"
+    },
+    {
+      "id": "Jackass",
+      "slug": "skulls-and-shopping-carts",
+      "title": "Skulls and Shopping Carts",
+      "sourceFile": "Jackass.epub",
+      "sectionCount": 19,
+      "wordCount": 5203,
+      "path": "book-content/Jackass.json"
+    },
+    {
+      "id": "Jackson",
+      "slug": "andrew-jackson",
+      "title": "Andrew Jackson",
+      "sourceFile": "Jackson.epub",
+      "sectionCount": 19,
+      "wordCount": 5498,
+      "path": "book-content/Jackson.json"
+    },
+    {
+      "id": "Japan",
+      "slug": "the-rising-sun",
+      "title": "The Rising Sun",
+      "sourceFile": "Japan.epub",
+      "sectionCount": 16,
+      "wordCount": 3950,
+      "path": "book-content/Japan.json"
+    },
+    {
+      "id": "Jeff",
+      "slug": "the-financier",
+      "title": "The Financier",
+      "sourceFile": "Jeff.epub",
+      "sectionCount": 17,
+      "wordCount": 5798,
+      "path": "book-content/Jeff.json"
+    },
+    {
+      "id": "Jefferson",
+      "slug": "jefferson",
+      "title": "JEFFERSON",
+      "sourceFile": "Jefferson.epub",
+      "sectionCount": 21,
+      "wordCount": 5774,
+      "path": "book-content/Jefferson.json"
+    },
+    {
+      "id": "Jesse",
+      "slug": "jesse-helms",
+      "title": "JESSE HELMS",
+      "sourceFile": "Jesse.epub",
+      "sectionCount": 20,
+      "wordCount": 6031,
+      "path": "book-content/Jesse.json"
+    },
+    {
+      "id": "Jesus",
+      "slug": "jesus-was-really-really-nice",
+      "title": "Jesus Was Really, Really Nice",
+      "sourceFile": "Jesus.epub",
+      "sectionCount": 26,
+      "wordCount": 1996,
+      "path": "book-content/Jesus.json"
+    },
+    {
+      "id": "Jewish",
+      "slug": "the-first-chosen-people",
+      "title": "The First Chosen People",
+      "sourceFile": "Jewish.epub",
+      "sectionCount": 19,
+      "wordCount": 6267,
+      "path": "book-content/Jewish.json"
+    },
+    {
+      "id": "JFK",
+      "slug": "jfk",
+      "title": "JFK",
+      "sourceFile": "JFK.epub",
+      "sectionCount": 24,
+      "wordCount": 6670,
+      "path": "book-content/JFK.json"
+    },
+    {
+      "id": "Joan",
+      "slug": "joan-of-arc",
+      "title": "Joan of Arc",
+      "sourceFile": "Joan.epub",
+      "sectionCount": 19,
+      "wordCount": 3798,
+      "path": "book-content/Joan.json"
+    },
+    {
+      "id": "Jobs",
+      "slug": "jobs",
+      "title": "Jobs",
+      "sourceFile": "Jobs.epub",
+      "sectionCount": 23,
+      "wordCount": 5820,
+      "path": "book-content/Jobs.json"
+    },
+    {
+      "id": "jung",
+      "slug": "dreamwalker",
+      "title": "Dreamwalker",
+      "sourceFile": "jung.epub",
+      "sectionCount": 17,
+      "wordCount": 3803,
+      "path": "book-content/jung.json"
+    },
+    {
+      "id": "Jungle",
+      "slug": "four-years-in-the-jungle",
+      "title": "Four Years in the Jungle",
+      "sourceFile": "Jungle.epub",
+      "sectionCount": 30,
+      "wordCount": 12355,
+      "path": "book-content/Jungle.json"
+    },
+    {
+      "id": "JW",
+      "slug": "knock-knock",
+      "title": "Knock, Knock",
+      "sourceFile": "JW.epub",
+      "sectionCount": 17,
+      "wordCount": 6345,
+      "path": "book-content/JW.json"
+    },
+    {
+      "id": "Kabbalah",
+      "slug": "kabbalah",
+      "title": "KABBALAH",
+      "sourceFile": "Kabbalah.epub",
+      "sectionCount": 19,
+      "wordCount": 7078,
+      "path": "book-content/Kabbalah.json"
+    },
+    {
+      "id": "Kaiser",
+      "slug": "the-last-kaiser",
+      "title": "The Last Kaiser",
+      "sourceFile": "Kaiser.epub",
+      "sectionCount": 15,
+      "wordCount": 5034,
+      "path": "book-content/Kaiser.json"
+    },
+    {
+      "id": "Kal",
+      "slug": "the-kid-with-the-kaleidoscope-brain",
+      "title": "The Kid with the Kaleidoscope Brain",
+      "sourceFile": "Kal.epub",
+      "sectionCount": 19,
+      "wordCount": 1961,
+      "path": "book-content/Kal.json"
+    },
+    {
+      "id": "Kanye",
+      "slug": "kanye",
+      "title": "KANYE",
+      "sourceFile": "Kanye.epub",
+      "sectionCount": 17,
+      "wordCount": 4330,
+      "path": "book-content/Kanye.json"
+    },
+    {
+      "id": "KFC",
+      "slug": "kfc",
+      "title": "KFC",
+      "sourceFile": "KFC.epub",
+      "sectionCount": 19,
+      "wordCount": 6004,
+      "path": "book-content/KFC.json"
+    },
+    {
+      "id": "Kim",
+      "slug": "kim-jong-un",
+      "title": "KIM JONG UN",
+      "sourceFile": "Kim.epub",
+      "sectionCount": 19,
+      "wordCount": 5433,
+      "path": "book-content/Kim.json"
+    },
+    {
+      "id": "King",
+      "slug": "king-uncut",
+      "title": "King, Uncut",
+      "sourceFile": "King.epub",
+      "sectionCount": 14,
+      "wordCount": 3106,
+      "path": "book-content/King.json"
+    },
+    {
+      "id": "Kojiki",
+      "slug": "what-the-kojiki-actually-says",
+      "title": "What the Kojiki Actually Says",
+      "sourceFile": "Kojiki.epub",
+      "sectionCount": 21,
+      "wordCount": 5170,
+      "path": "book-content/Kojiki.json"
+    },
+    {
+      "id": "Lee",
+      "slug": "lee",
+      "title": "LEE",
+      "sourceFile": "Lee.epub",
+      "sectionCount": 21,
+      "wordCount": 7603,
+      "path": "book-content/Lee.json"
+    },
+    {
+      "id": "Lenin",
+      "slug": "lenin",
+      "title": "LENIN",
+      "sourceFile": "Lenin.epub",
+      "sectionCount": 19,
+      "wordCount": 4819,
+      "path": "book-content/Lenin.json"
+    },
+    {
+      "id": "Lennon",
+      "slug": "lennon",
+      "title": "LENNON",
+      "sourceFile": "Lennon.epub",
+      "sectionCount": 21,
+      "wordCount": 6153,
+      "path": "book-content/Lennon.json"
+    },
+    {
+      "id": "Leonardo",
+      "slug": "leonardo",
+      "title": "LEONARDO",
+      "sourceFile": "Leonardo.epub",
+      "sectionCount": 24,
+      "wordCount": 5185,
+      "path": "book-content/Leonardo.json"
+    },
+    {
+      "id": "Liberated",
+      "slug": "liberated-legends",
+      "title": "Liberated Legends",
+      "sourceFile": "Liberated.epub",
+      "sectionCount": 25,
+      "wordCount": 6330,
+      "path": "book-content/Liberated.json"
+    },
+    {
+      "id": "Lincoln",
+      "slug": "lincoln",
+      "title": "LINCOLN",
+      "sourceFile": "Lincoln.epub",
+      "sectionCount": 20,
+      "wordCount": 4550,
+      "path": "book-content/Lincoln.json"
+    },
+    {
+      "id": "Lobbied",
+      "slug": "lobbied",
+      "title": "LOBBIED",
+      "sourceFile": "Lobbied.epub",
+      "sectionCount": 18,
+      "wordCount": 7391,
+      "path": "book-content/Lobbied.json"
+    },
+    {
+      "id": "Looped",
+      "slug": "looped",
+      "title": "Looped",
+      "sourceFile": "Looped.epub",
+      "sectionCount": 20,
+      "wordCount": 4454,
+      "path": "book-content/Looped.json"
+    },
+    {
+      "id": "Love",
+      "slug": "love",
+      "title": "LOVE",
+      "sourceFile": "Love.epub",
+      "sectionCount": 18,
+      "wordCount": 4248,
+      "path": "book-content/Love.json"
+    },
+    {
+      "id": "LR",
+      "slug": "love-remembered",
+      "title": "Love, Remembered",
+      "sourceFile": "LR.epub",
+      "sectionCount": 58,
+      "wordCount": 19369,
+      "path": "book-content/LR.json"
+    },
+    {
+      "id": "LRon",
+      "slug": "l-ron-hubbard",
+      "title": "L. Ron Hubbard",
+      "sourceFile": "LRon.epub",
+      "sectionCount": 23,
+      "wordCount": 7298,
+      "path": "book-content/LRon.json"
+    },
+    {
+      "id": "Lunchtime",
+      "slug": "lunchtime",
+      "title": "Lunchtime",
+      "sourceFile": "Lunchtime.epub",
+      "sectionCount": 25,
+      "wordCount": 7054,
+      "path": "book-content/Lunchtime.json"
+    },
+    {
+      "id": "Luther",
+      "slug": "martin-luther",
+      "title": "MARTIN LUTHER",
+      "sourceFile": "Luther.epub",
+      "sectionCount": 22,
+      "wordCount": 5202,
+      "path": "book-content/Luther.json"
+    },
+    {
+      "id": "Malcolm",
+      "slug": "malcolm-x",
+      "title": "MALCOLM X",
+      "sourceFile": "Malcolm.epub",
+      "sectionCount": 26,
+      "wordCount": 7753,
+      "path": "book-content/Malcolm.json"
+    },
+    {
+      "id": "Mansu",
+      "slug": "mansa-musa",
+      "title": "MANSA MUSA",
+      "sourceFile": "Mansu.epub",
+      "sectionCount": 17,
+      "wordCount": 4036,
+      "path": "book-content/Mansu.json"
+    },
+    {
+      "id": "Mao",
+      "slug": "mao-exe",
+      "title": "mao.exe",
+      "sourceFile": "Mao.epub",
+      "sectionCount": 19,
+      "wordCount": 5528,
+      "path": "book-content/Mao.json"
+    },
+    {
+      "id": "Marx",
+      "slug": "marx-exe",
+      "title": "marx.exe",
+      "sourceFile": "Marx.epub",
+      "sectionCount": 16,
+      "wordCount": 4683,
+      "path": "book-content/Marx.json"
+    },
+    {
+      "id": "Materialism",
+      "slug": "oops-all-atoms",
+      "title": "Oops, All Atoms",
+      "sourceFile": "Materialism.epub",
+      "sectionCount": 22,
+      "wordCount": 5539,
+      "path": "book-content/Materialism.json"
+    },
+    {
+      "id": "Math",
+      "slug": "math-101",
+      "title": "Math 101",
+      "sourceFile": "Math.epub",
+      "sectionCount": 19,
+      "wordCount": 5635,
+      "path": "book-content/Math.json"
+    },
+    {
+      "id": "Messiah",
+      "slug": "messiah",
+      "title": "MESSIAH",
+      "sourceFile": "Messiah.epub",
+      "sectionCount": 21,
+      "wordCount": 3170,
+      "path": "book-content/Messiah.json"
+    },
+    {
+      "id": "Mike",
+      "slug": "michael",
+      "title": "MICHAEL",
+      "sourceFile": "Mike.epub",
+      "sectionCount": 16,
+      "wordCount": 3947,
+      "path": "book-content/Mike.json"
+    },
+    {
+      "id": "Money",
+      "slug": "what-is-money",
+      "title": "What Is Money?",
+      "sourceFile": "Money.epub",
+      "sectionCount": 21,
+      "wordCount": 5727,
+      "path": "book-content/Money.json"
+    },
+    {
+      "id": "mormon",
+      "slug": "the-prophet-paradox",
+      "title": "The Prophet Paradox",
+      "sourceFile": "mormon.epub",
+      "sectionCount": 20,
+      "wordCount": 6588,
+      "path": "book-content/mormon.json"
+    },
+    {
+      "id": "Mossad",
+      "slug": "mossad",
+      "title": "Mossad",
+      "sourceFile": "Mossad.epub",
+      "sectionCount": 19,
+      "wordCount": 5810,
+      "path": "book-content/Mossad.json"
+    },
+    {
+      "id": "Mozart",
+      "slug": "mozart",
+      "title": "MOZART",
+      "sourceFile": "Mozart.epub",
+      "sectionCount": 22,
+      "wordCount": 5329,
+      "path": "book-content/Mozart.json"
+    },
+    {
+      "id": "Muhammad",
+      "slug": "muhammad",
+      "title": "Muhammad",
+      "sourceFile": "Muhammad.epub",
+      "sectionCount": 17,
+      "wordCount": 6263,
+      "path": "book-content/Muhammad.json"
+    },
+    {
+      "id": "Musk",
+      "slug": "musk",
+      "title": "Musk",
+      "sourceFile": "Musk.epub",
+      "sectionCount": 24,
+      "wordCount": 5894,
+      "path": "book-content/Musk.json"
+    },
+    {
+      "id": "Mussolini",
+      "slug": "bella-ciao",
+      "title": "Bella Ciao",
+      "sourceFile": "Mussolini.epub",
+      "sectionCount": 18,
+      "wordCount": 5826,
+      "path": "book-content/Mussolini.json"
+    },
+    {
+      "id": "Myths",
+      "slug": "they-dont-want-you-to-know",
+      "title": "They Don’t Want You to Know",
+      "sourceFile": "Myths.epub",
+      "sectionCount": 33,
+      "wordCount": 15774,
+      "path": "book-content/Myths.json"
+    },
+    {
+      "id": "NagHam",
+      "slug": "the-lost-gospels",
+      "title": "The Lost Gospels",
+      "sourceFile": "NagHam.epub",
+      "sectionCount": 17,
+      "wordCount": 4526,
+      "path": "book-content/NagHam.json"
+    },
+    {
+      "id": "Napoleon",
+      "slug": "sieze-the-crown",
+      "title": "Sieze the Crown",
+      "sourceFile": "Napoleon.epub",
+      "sectionCount": 25,
+      "wordCount": 8093,
+      "path": "book-content/Napoleon.json"
+    },
+    {
+      "id": "nebu",
+      "slug": "nebu-exe",
+      "title": "nebu.exe",
+      "sourceFile": "nebu.epub",
+      "sectionCount": 17,
+      "wordCount": 2126,
+      "path": "book-content/nebu.json"
+    },
+    {
+      "id": "Nero",
+      "slug": "what-an-artist-dies-in-me",
+      "title": "What an Artist Dies in Me",
+      "sourceFile": "Nero.epub",
+      "sectionCount": 21,
+      "wordCount": 6055,
+      "path": "book-content/Nero.json"
+    },
+    {
+      "id": "Nestle",
+      "slug": "nestle",
+      "title": "NESTLÉ",
+      "sourceFile": "Nestle.epub",
+      "sectionCount": 24,
+      "wordCount": 7990,
+      "path": "book-content/Nestle.json"
+    },
+    {
+      "id": "Nicotine",
+      "slug": "nicotine",
+      "title": "Nicotine",
+      "sourceFile": "Nicotine.epub",
+      "sectionCount": 19,
+      "wordCount": 5424,
+      "path": "book-content/Nicotine.json"
+    },
+    {
+      "id": "NicTrap",
+      "slug": "the-nicotine-trap",
+      "title": "The Nicotine Trap",
+      "sourceFile": "NicTrap.epub",
+      "sectionCount": 16,
+      "wordCount": 3695,
+      "path": "book-content/NicTrap.json"
+    },
+    {
+      "id": "Niet",
+      "slug": "nietzsche",
+      "title": "Nietzsche",
+      "sourceFile": "Niet.epub",
+      "sectionCount": 18,
+      "wordCount": 4501,
+      "path": "book-content/Niet.json"
+    },
+    {
+      "id": "Nike",
+      "slug": "nike",
+      "title": "NIKE",
+      "sourceFile": "Nike.epub",
+      "sectionCount": 23,
+      "wordCount": 6335,
+      "path": "book-content/Nike.json"
+    },
+    {
+      "id": "Nintendo",
+      "slug": "nintendo",
+      "title": "Nintendo",
+      "sourceFile": "Nintendo.epub",
+      "sectionCount": 19,
+      "wordCount": 4003,
+      "path": "book-content/Nintendo.json"
+    },
+    {
+      "id": "Nixon",
+      "slug": "nixon",
+      "title": "NIXON",
+      "sourceFile": "Nixon.epub",
+      "sectionCount": 19,
+      "wordCount": 6320,
+      "path": "book-content/Nixon.json"
+    },
+    {
+      "id": "NorthKorea",
+      "slug": "the-kingdom-of-smoke",
+      "title": "The Kingdom of Smoke",
+      "sourceFile": "NorthKorea.epub",
+      "sectionCount": 16,
+      "wordCount": 5242,
+      "path": "book-content/NorthKorea.json"
+    },
+    {
+      "id": "NSA",
+      "slug": "the-nsa",
+      "title": "The NSA",
+      "sourceFile": "NSA.epub",
+      "sectionCount": 20,
+      "wordCount": 5546,
+      "path": "book-content/NSA.json"
+    },
+    {
+      "id": "Nuclear",
+      "slug": "the-atom-unleashed",
+      "title": "The Atom Unleashed",
+      "sourceFile": "Nuclear.epub",
+      "sectionCount": 15,
+      "wordCount": 4075,
+      "path": "book-content/Nuclear.json"
+    },
+    {
+      "id": "Obama",
+      "slug": "obama",
+      "title": "OBAMA",
+      "sourceFile": "Obama.epub",
+      "sectionCount": 26,
+      "wordCount": 9324,
+      "path": "book-content/Obama.json"
+    },
+    {
+      "id": "Odds",
+      "slug": "what-are-the-odds",
+      "title": "What Are the Odds?",
+      "sourceFile": "Odds.epub",
+      "sectionCount": 19,
+      "wordCount": 5314,
+      "path": "book-content/Odds.json"
+    },
+    {
+      "id": "Off",
+      "slug": "off-the-books",
+      "title": "Off the Books",
+      "sourceFile": "Off.epub",
+      "sectionCount": 23,
+      "wordCount": 8266,
+      "path": "book-content/Off.json"
+    },
+    {
+      "id": "Orwell",
+      "slug": "orwell",
+      "title": "ORWELL",
+      "sourceFile": "Orwell.epub",
+      "sectionCount": 14,
+      "wordCount": 4033,
+      "path": "book-content/Orwell.json"
+    },
+    {
+      "id": "Pantheon",
+      "slug": "pantheon-i",
+      "title": "Pantheon I",
+      "sourceFile": "Pantheon.epub",
+      "sectionCount": 47,
+      "wordCount": 21293,
+      "path": "book-content/Pantheon.json"
+    },
+    {
+      "id": "Pantheon2",
+      "slug": "pantheon-ii",
+      "title": "Pantheon II",
+      "sourceFile": "Pantheon2.epub",
+      "sectionCount": 26,
+      "wordCount": 10688,
+      "path": "book-content/Pantheon2.json"
+    },
+    {
+      "id": "Philosophy",
+      "slug": "philosophy-101",
+      "title": "Philosophy 101",
+      "sourceFile": "Philosophy.epub",
+      "sectionCount": 19,
+      "wordCount": 6711,
+      "path": "book-content/Philosophy.json"
+    },
+    {
+      "id": "Physics",
+      "slug": "physics-101",
+      "title": "Physics 101",
+      "sourceFile": "Physics.epub",
+      "sectionCount": 19,
+      "wordCount": 4523,
+      "path": "book-content/Physics.json"
+    },
+    {
+      "id": "Pip",
+      "slug": "pip-the-pebble-and-the-mountain-of-change",
+      "title": "Pip the Pebble and the Mountain of Change",
+      "sourceFile": "Pip.epub",
+      "sectionCount": 17,
+      "wordCount": 2891,
+      "path": "book-content/Pip.json"
+    },
+    {
+      "id": "Pixar",
+      "slug": "no-capes-just-feelings",
+      "title": "No Capes, Just Feelings",
+      "sourceFile": "Pixar.epub",
+      "sectionCount": 20,
+      "wordCount": 3826,
+      "path": "book-content/Pixar.json"
+    },
+    {
+      "id": "Planck",
+      "slug": "planck",
+      "title": "PLANCK",
+      "sourceFile": "Planck.epub",
+      "sectionCount": 19,
+      "wordCount": 4733,
+      "path": "book-content/Planck.json"
+    },
+    {
+      "id": "Plastic",
+      "slug": "foreverland",
+      "title": "Foreverland",
+      "sourceFile": "Plastic.epub",
+      "sectionCount": 18,
+      "wordCount": 4846,
+      "path": "book-content/Plastic.json"
+    },
+    {
+      "id": "Plato",
+      "slug": "plato",
+      "title": "PLATO",
+      "sourceFile": "Plato.epub",
+      "sectionCount": 22,
+      "wordCount": 6855,
+      "path": "book-content/Plato.json"
+    },
+    {
+      "id": "Poker",
+      "slug": "poker",
+      "title": "POKER",
+      "sourceFile": "Poker.epub",
+      "sectionCount": 24,
+      "wordCount": 7862,
+      "path": "book-content/Poker.json"
+    },
+    {
+      "id": "Pregnancy",
+      "slug": "youre-what",
+      "title": "You're What?",
+      "sourceFile": "Pregnancy.epub",
+      "sectionCount": 17,
+      "wordCount": 5204,
+      "path": "book-content/Pregnancy.json"
+    },
+    {
+      "id": "Presidents",
+      "slug": "presidents",
+      "title": "Presidents",
+      "sourceFile": "Presidents.epub",
+      "sectionCount": 52,
+      "wordCount": 17980,
+      "path": "book-content/Presidents.json"
+    },
+    {
+      "id": "Psychology",
+      "slug": "psychology-101",
+      "title": "Psychology 101",
+      "sourceFile": "Psychology.epub",
+      "sectionCount": 19,
+      "wordCount": 6006,
+      "path": "book-content/Psychology.json"
+    },
+    {
+      "id": "Purdue",
+      "slug": "purdue",
+      "title": "PURDUE",
+      "sourceFile": "Purdue.epub",
+      "sectionCount": 23,
+      "wordCount": 6084,
+      "path": "book-content/Purdue.json"
+    },
+    {
+      "id": "Putin",
+      "slug": "putin",
+      "title": "PUTIN",
+      "sourceFile": "Putin.epub",
+      "sectionCount": 25,
+      "wordCount": 7644,
+      "path": "book-content/Putin.json"
+    },
+    {
+      "id": "Pyramid",
+      "slug": "the-pyramid",
+      "title": "The Pyramid",
+      "sourceFile": "Pyramid.epub",
+      "sectionCount": 49,
+      "wordCount": 24236,
+      "path": "book-content/Pyramid.json"
+    },
+    {
+      "id": "Quantum",
+      "slug": "quantum-101",
+      "title": "Quantum 101",
+      "sourceFile": "Quantum.epub",
+      "sectionCount": 28,
+      "wordCount": 8445,
+      "path": "book-content/Quantum.json"
+    },
+    {
+      "id": "Quran",
+      "slug": "what-the-quran-actually-says",
+      "title": "What the Quran Actually Says",
+      "sourceFile": "Quran.epub",
+      "sectionCount": 17,
+      "wordCount": 4752,
+      "path": "book-content/Quran.json"
+    },
+    {
+      "id": "Race",
+      "slug": "black-and-white",
+      "title": "Black and White",
+      "sourceFile": "Race.epub",
+      "sectionCount": 20,
+      "wordCount": 4330,
+      "path": "book-content/Race.json"
+    },
+    {
+      "id": "Ramses",
+      "slug": "ramses",
+      "title": "RAMSES",
+      "sourceFile": "Ramses.epub",
+      "sectionCount": 24,
+      "wordCount": 5449,
+      "path": "book-content/Ramses.json"
+    },
+    {
+      "id": "Rasputin",
+      "slug": "bulletproof-and-bathless",
+      "title": "Bulletproof and Bathless",
+      "sourceFile": "Rasputin.epub",
+      "sectionCount": 18,
+      "wordCount": 5099,
+      "path": "book-content/Rasputin.json"
+    },
+    {
+      "id": "Reagan",
+      "slug": "reagan",
+      "title": "REAGAN",
+      "sourceFile": "Reagan.epub",
+      "sectionCount": 23,
+      "wordCount": 5066,
+      "path": "book-content/Reagan.json"
+    },
+    {
+      "id": "Reincarnation",
+      "slug": "reincarnation",
+      "title": "Reincarnation",
+      "sourceFile": "Reincarnation.epub",
+      "sectionCount": 18,
+      "wordCount": 4190,
+      "path": "book-content/Reincarnation.json"
+    },
+    {
+      "id": "Religion",
+      "slug": "religion-101",
+      "title": "Religion 101",
+      "sourceFile": "Religion.epub",
+      "sectionCount": 18,
+      "wordCount": 5113,
+      "path": "book-content/Religion.json"
+    },
+    {
+      "id": "Revolution",
+      "slug": "revolution",
+      "title": "Revolution",
+      "sourceFile": "Revolution.epub",
+      "sectionCount": 23,
+      "wordCount": 6331,
+      "path": "book-content/Revolution.json"
+    },
+    {
+      "id": "Rewrite",
+      "slug": "the-great-american-rewrite",
+      "title": "The Great American Rewrite",
+      "sourceFile": "Rewrite.epub",
+      "sectionCount": 19,
+      "wordCount": 5311,
+      "path": "book-content/Rewrite.json"
+    },
+    {
+      "id": "Rock",
+      "slug": "this-is-a-rock",
+      "title": "This Is a Rock",
+      "sourceFile": "Rock.epub",
+      "sectionCount": 18,
+      "wordCount": 6745,
+      "path": "book-content/Rock.json"
+    },
+    {
+      "id": "Rome",
+      "slug": "imperium-romanum",
+      "title": "Imperium Romanum",
+      "sourceFile": "Rome.epub",
+      "sectionCount": 32,
+      "wordCount": 7219,
+      "path": "book-content/Rome.json"
+    },
+    {
+      "id": "RVB",
+      "slug": "red-vs-blue",
+      "title": "Red vs. Blue",
+      "sourceFile": "RVB.epub",
+      "sectionCount": 23,
+      "wordCount": 9637,
+      "path": "book-content/RVB.json"
+    },
+    {
+      "id": "SacredGeo",
+      "slug": "sacred-geometry",
+      "title": "Sacred Geometry",
+      "sourceFile": "SacredGeo.epub",
+      "sectionCount": 18,
+      "wordCount": 4451,
+      "path": "book-content/SacredGeo.json"
+    },
+    {
+      "id": "sargon",
+      "slug": "sargon-exe",
+      "title": "sargon.exe",
+      "sourceFile": "sargon.epub",
+      "sectionCount": 16,
+      "wordCount": 2415,
+      "path": "book-content/sargon.json"
+    },
+    {
+      "id": "Saudi",
+      "slug": "the-mirage",
+      "title": "The Mirage",
+      "sourceFile": "Saudi.epub",
+      "sectionCount": 20,
+      "wordCount": 4581,
+      "path": "book-content/Saudi.json"
+    },
+    {
+      "id": "Schooled",
+      "slug": "schooled",
+      "title": "Schooled",
+      "sourceFile": "Schooled.epub",
+      "sectionCount": 19,
+      "wordCount": 6336,
+      "path": "book-content/Schooled.json"
+    },
+    {
+      "id": "Science",
+      "slug": "science-101",
+      "title": "Science 101",
+      "sourceFile": "Science.epub",
+      "sectionCount": 18,
+      "wordCount": 5517,
+      "path": "book-content/Science.json"
+    },
+    {
+      "id": "Scientology",
+      "slug": "the-church-that-sued-the-world",
+      "title": "THE CHURCH THAT SUED THE WORLD",
+      "sourceFile": "Scientology.epub",
+      "sectionCount": 13,
+      "wordCount": 3557,
+      "path": "book-content/Scientology.json"
+    },
+    {
+      "id": "SciSim",
+      "slug": "science-simplified",
+      "title": "Science Simplified",
+      "sourceFile": "SciSim.epub",
+      "sectionCount": 16,
+      "wordCount": 3625,
+      "path": "book-content/SciSim.json"
+    },
+    {
+      "id": "Shake",
+      "slug": "shakespeare",
+      "title": "Shakespeare",
+      "sourceFile": "Shake.epub",
+      "sectionCount": 21,
+      "wordCount": 7046,
+      "path": "book-content/Shake.json"
+    },
+    {
+      "id": "Sikhism",
+      "slug": "steel-and-spirit",
+      "title": "Steel and Spirit",
+      "sourceFile": "Sikhism.epub",
+      "sectionCount": 14,
+      "wordCount": 4129,
+      "path": "book-content/Sikhism.json"
+    },
+    {
+      "id": "Sleep",
+      "slug": "sleep-like-you-mean-it",
+      "title": "Sleep Like You Mean It",
+      "sourceFile": "Sleep.epub",
+      "sectionCount": 18,
+      "wordCount": 3899,
+      "path": "book-content/Sleep.json"
+    },
+    {
+      "id": "Soaps",
+      "slug": "previously-on",
+      "title": "Previously On",
+      "sourceFile": "Soaps.epub",
+      "sectionCount": 21,
+      "wordCount": 6919,
+      "path": "book-content/Soaps.json"
+    },
+    {
+      "id": "Socrates",
+      "slug": "socrates",
+      "title": "Socrates",
+      "sourceFile": "Socrates.epub",
+      "sectionCount": 20,
+      "wordCount": 6490,
+      "path": "book-content/Socrates.json"
+    },
+    {
+      "id": "Soros",
+      "slug": "soros",
+      "title": "SOROS",
+      "sourceFile": "Soros.epub",
+      "sectionCount": 21,
+      "wordCount": 6064,
+      "path": "book-content/Soros.json"
+    },
+    {
+      "id": "Stalin",
+      "slug": "stalin",
+      "title": "STALIN",
+      "sourceFile": "Stalin.epub",
+      "sectionCount": 27,
+      "wordCount": 8108,
+      "path": "book-content/Stalin.json"
+    },
+    {
+      "id": "Steam",
+      "slug": "the-valve-that-never-closes",
+      "title": "The Valve That Never Closes",
+      "sourceFile": "Steam.epub",
+      "sectionCount": 17,
+      "wordCount": 4318,
+      "path": "book-content/Steam.json"
+    },
+    {
+      "id": "Stoney",
+      "slug": "what-would-stoney-do",
+      "title": "What Would Stoney Do?",
+      "sourceFile": "Stoney.epub",
+      "sectionCount": 24,
+      "wordCount": 5916,
+      "path": "book-content/Stoney.json"
+    },
+    {
+      "id": "Tacos",
+      "slug": "everything-i-touch-turns-to-tacos",
+      "title": "Everything I Touch Turns to Tacos",
+      "sourceFile": "Tacos.epub",
+      "sectionCount": 17,
+      "wordCount": 2768,
+      "path": "book-content/Tacos.json"
+    },
+    {
+      "id": "Talmud",
+      "slug": "what-the-talmud-actually-says",
+      "title": "What the Talmud Actually Says",
+      "sourceFile": "Talmud.epub",
+      "sectionCount": 18,
+      "wordCount": 3766,
+      "path": "book-content/Talmud.json"
+    },
+    {
+      "id": "Tamerlane",
+      "slug": "tamerlane",
+      "title": "TAMERLANE",
+      "sourceFile": "Tamerlane.epub",
+      "sectionCount": 23,
+      "wordCount": 5636,
+      "path": "book-content/Tamerlane.json"
+    },
+    {
+      "id": "Tao",
+      "slug": "what-the-tao-te-ching-actually-says",
+      "title": "What the Tao Te Ching Actually Says",
+      "sourceFile": "Tao.epub",
+      "sectionCount": 18,
+      "wordCount": 6273,
+      "path": "book-content/Tao.json"
+    },
+    {
+      "id": "Taylor",
+      "slug": "taylor-swift",
+      "title": "TAYLOR SWIFT",
+      "sourceFile": "Taylor.epub",
+      "sectionCount": 21,
+      "wordCount": 5806,
+      "path": "book-content/Taylor.json"
+    },
+    {
+      "id": "Teddy",
+      "slug": "the-rough-rider",
+      "title": "The Rough Rider",
+      "sourceFile": "Teddy.epub",
+      "sectionCount": 16,
+      "wordCount": 4030,
+      "path": "book-content/Teddy.json"
+    },
+    {
+      "id": "Tesla",
+      "slug": "tesla",
+      "title": "Tesla",
+      "sourceFile": "Tesla.epub",
+      "sectionCount": 20,
+      "wordCount": 5829,
+      "path": "book-content/Tesla.json"
+    },
+    {
+      "id": "TFT",
+      "slug": "trust-fall-theory",
+      "title": "Trust Fall Theory",
+      "sourceFile": "TFT.epub",
+      "sectionCount": 17,
+      "wordCount": 2994,
+      "path": "book-content/TFT.json"
+    },
+    {
+      "id": "Thanksgiving",
+      "slug": "thanks-but-no-thanks",
+      "title": "Thanks, But No Thanks",
+      "sourceFile": "Thanksgiving.epub",
+      "sectionCount": 20,
+      "wordCount": 5813,
+      "path": "book-content/Thanksgiving.json"
+    },
+    {
+      "id": "TheBoys",
+      "slug": "da-vinci-and-the-boys",
+      "title": "Da Vinci and the Boys",
+      "sourceFile": "TheBoys.epub",
+      "sectionCount": 13,
+      "wordCount": 4364,
+      "path": "book-content/TheBoys.json"
+    },
+    {
+      "id": "Thiel",
+      "slug": "thiel",
+      "title": "Thiel",
+      "sourceFile": "Thiel.epub",
+      "sectionCount": 16,
+      "wordCount": 4972,
+      "path": "book-content/Thiel.json"
+    },
+    {
+      "id": "Thinkers",
+      "slug": "the-thinkers",
+      "title": "The Thinkers",
+      "sourceFile": "Thinkers.epub",
+      "sectionCount": 36,
+      "wordCount": 11507,
+      "path": "book-content/Thinkers.json"
+    },
+    {
+      "id": "Tiktok",
+      "slug": "tiktok",
+      "title": "TikTok",
+      "sourceFile": "Tiktok.epub",
+      "sectionCount": 16,
+      "wordCount": 3395,
+      "path": "book-content/Tiktok.json"
+    },
+    {
+      "id": "Time",
+      "slug": "out-of-time",
+      "title": "Out of Time",
+      "sourceFile": "Time.epub",
+      "sectionCount": 20,
+      "wordCount": 7278,
+      "path": "book-content/Time.json"
+    },
+    {
+      "id": "TMK",
+      "slug": "mushroom-man",
+      "title": "Mushroom Man",
+      "sourceFile": "TMK.epub",
+      "sectionCount": 17,
+      "wordCount": 3803,
+      "path": "book-content/TMK.json"
+    },
+    {
+      "id": "TMTS",
+      "slug": "too-much-too-soon",
+      "title": "Too Much, Too Soon",
+      "sourceFile": "TMTS.epub",
+      "sectionCount": 18,
+      "wordCount": 1721,
+      "path": "book-content/TMTS.json"
+    },
+    {
+      "id": "TND",
+      "slug": "a-totally-normal-day",
+      "title": "A Totally Normal Day",
+      "sourceFile": "TND.epub",
+      "sectionCount": 25,
+      "wordCount": 5586,
+      "path": "book-content/TND.json"
+    },
+    {
+      "id": "TNS",
+      "slug": "a-totally-normal-story",
+      "title": "A Totally Normal Story",
+      "sourceFile": "TNS.epub",
+      "sectionCount": 19,
+      "wordCount": 10405,
+      "path": "book-content/TNS.json"
+    },
+    {
+      "id": "Tom",
+      "slug": "goat",
+      "title": "GOAT",
+      "sourceFile": "Tom.epub",
+      "sectionCount": 21,
+      "wordCount": 6005,
+      "path": "book-content/Tom.json"
+    },
+    {
+      "id": "Tommy",
+      "slug": "tommy-and-the-genie-in-the-lamp-lamp",
+      "title": "Tommy and the Genie in the Lamp Lamp",
+      "sourceFile": "Tommy.epub",
+      "sectionCount": 14,
+      "wordCount": 3207,
+      "path": "book-content/Tommy.json"
+    },
+    {
+      "id": "Tribes",
+      "slug": "the-twelve-tribes",
+      "title": "The Twelve Tribes",
+      "sourceFile": "Tribes.epub",
+      "sectionCount": 19,
+      "wordCount": 5660,
+      "path": "book-content/Tribes.json"
+    },
+    {
+      "id": "tsar",
+      "slug": "tsar-exe",
+      "title": "tsar.exe",
+      "sourceFile": "tsar.epub",
+      "sectionCount": 20,
+      "wordCount": 5060,
+      "path": "book-content/tsar.json"
+    },
+    {
+      "id": "Tyrants",
+      "slug": "tyrants",
+      "title": "Tyrants",
+      "sourceFile": "Tyrants.epub",
+      "sectionCount": 19,
+      "wordCount": 3971,
+      "path": "book-content/Tyrants.json"
+    },
+    {
+      "id": "Unsinkable",
+      "slug": "unsinkable",
+      "title": "Unsinkable",
+      "sourceFile": "Unsinkable.epub",
+      "sectionCount": 27,
+      "wordCount": 6896,
+      "path": "book-content/Unsinkable.json"
+    },
+    {
+      "id": "Van",
+      "slug": "van-gogh",
+      "title": "Van Gogh",
+      "sourceFile": "Van.epub",
+      "sectionCount": 15,
+      "wordCount": 4175,
+      "path": "book-content/Van.json"
+    },
+    {
+      "id": "Veil",
+      "slug": "the-veil",
+      "title": "The Veil",
+      "sourceFile": "Veil.epub",
+      "sectionCount": 23,
+      "wordCount": 5610,
+      "path": "book-content/Veil.json"
+    },
+    {
+      "id": "Vibes",
+      "slug": "vibe-check",
+      "title": "Vibe Check",
+      "sourceFile": "Vibes.epub",
+      "sectionCount": 21,
+      "wordCount": 5058,
+      "path": "book-content/Vibes.json"
+    },
+    {
+      "id": "Vic",
+      "slug": "victoria",
+      "title": "Victoria",
+      "sourceFile": "Vic.epub",
+      "sectionCount": 22,
+      "wordCount": 7050,
+      "path": "book-content/Vic.json"
+    },
+    {
+      "id": "Voltaire",
+      "slug": "voltaire",
+      "title": "VOLTAIRE",
+      "sourceFile": "Voltaire.epub",
+      "sectionCount": 20,
+      "wordCount": 4178,
+      "path": "book-content/Voltaire.json"
+    },
+    {
+      "id": "Warming",
+      "slug": "the-world-is-on-fire",
+      "title": "The World Is on Fire",
+      "sourceFile": "Warming.epub",
+      "sectionCount": 20,
+      "wordCount": 6072,
+      "path": "book-content/Warming.json"
+    },
+    {
+      "id": "Warrens",
+      "slug": "the-warrens-ghost-files",
+      "title": "The Warren’s Ghost Files",
+      "sourceFile": "Warrens.epub",
+      "sectionCount": 19,
+      "wordCount": 6637,
+      "path": "book-content/Warrens.json"
+    },
+    {
+      "id": "Watchtower",
+      "slug": "what-the-watchtower-actually-says",
+      "title": "What the Watchtower Actually Says",
+      "sourceFile": "Watchtower.epub",
+      "sectionCount": 17,
+      "wordCount": 2732,
+      "path": "book-content/Watchtower.json"
+    },
+    {
+      "id": "Watts",
+      "slug": "everything-is-fine-actually",
+      "title": "Everything Is Fine, Actually",
+      "sourceFile": "Watts.epub",
+      "sectionCount": 17,
+      "wordCount": 5126,
+      "path": "book-content/Watts.json"
+    },
+    {
+      "id": "Web",
+      "slug": "the-web-we-live-in",
+      "title": "The Web We Live In",
+      "sourceFile": "Web.epub",
+      "sectionCount": 28,
+      "wordCount": 9615,
+      "path": "book-content/Web.json"
+    },
+    {
+      "id": "Weed",
+      "slug": "high-society",
+      "title": "High Society",
+      "sourceFile": "Weed.epub",
+      "sectionCount": 21,
+      "wordCount": 6965,
+      "path": "book-content/Weed.json"
+    },
+    {
+      "id": "Witches",
+      "slug": "the-witch-trials",
+      "title": "The Witch Trials",
+      "sourceFile": "Witches.epub",
+      "sectionCount": 16,
+      "wordCount": 3845,
+      "path": "book-content/Witches.json"
+    },
+    {
+      "id": "Woke",
+      "slug": "the-ones-who-woke-up",
+      "title": "The Ones Who Woke Up",
+      "sourceFile": "Woke.epub",
+      "sectionCount": 19,
+      "wordCount": 5452,
+      "path": "book-content/Woke.json"
+    },
+    {
+      "id": "Wu",
+      "slug": "wu-zetian",
+      "title": "WU ZETIAN",
+      "sourceFile": "Wu.epub",
+      "sectionCount": 26,
+      "wordCount": 8132,
+      "path": "book-content/Wu.json"
+    },
+    {
+      "id": "WW1",
+      "slug": "the-great-war",
+      "title": "The Great War",
+      "sourceFile": "WW1.epub",
+      "sectionCount": 19,
+      "wordCount": 5058,
+      "path": "book-content/WW1.json"
+    },
+    {
+      "id": "Xmas",
+      "slug": "the-most-wonderful-time",
+      "title": "The Most Wonderful Time",
+      "sourceFile": "Xmas.epub",
+      "sectionCount": 19,
+      "wordCount": 8265,
+      "path": "book-content/Xmas.json"
+    },
+    {
+      "id": "Zoro",
+      "slug": "before-heaven-and-hell",
+      "title": "Before Heaven and Hell",
+      "sourceFile": "Zoro.epub",
+      "sectionCount": 16,
+      "wordCount": 4172,
+      "path": "book-content/Zoro.json"
+    },
+    {
+      "id": "Zuck",
+      "slug": "zuckerberg",
+      "title": "Zuckerberg",
+      "sourceFile": "Zuck.epub",
+      "sectionCount": 16,
+      "wordCount": 4319,
+      "path": "book-content/Zuck.json"
+    }
+  ]
+}

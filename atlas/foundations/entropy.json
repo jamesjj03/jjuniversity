@@ -1,0 +1,42 @@
+{
+  "id": "entropy",
+  "title": "Entropy",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "matter_and_energy"
+  ],
+  "summary": "Entropy is a foundational idea for describing physical things, forces, and transformations.",
+  "prerequisites": [
+    "matter",
+    "energy",
+    "measurement"
+  ],
+  "unlocks": [],
+  "related": [
+    "energy",
+    "matter",
+    "measurement",
+    "pressure",
+    "symmetry"
+  ],
+  "aliases": [
+    "thermodynamic entropy"
+  ],
+  "tags": [
+    "energy",
+    "foundation",
+    "matter",
+    "matter_and_energy",
+    "measurement"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

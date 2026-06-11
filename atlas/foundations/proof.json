@@ -1,0 +1,40 @@
+{
+  "id": "proof",
+  "title": "Proof",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "models_and_reasoning"
+  ],
+  "summary": "Proof is a foundational idea for forming, testing, or communicating an understanding of something.",
+  "prerequisites": [
+    "knowledge",
+    "model",
+    "language"
+  ],
+  "unlocks": [],
+  "related": [
+    "computation",
+    "knowledge",
+    "language",
+    "model",
+    "paradox"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "knowledge",
+    "language",
+    "model",
+    "models_and_reasoning"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

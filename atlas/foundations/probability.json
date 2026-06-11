@@ -1,0 +1,40 @@
+{
+  "id": "probability",
+  "title": "Probability",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "models_and_reasoning"
+  ],
+  "summary": "Probability is a foundational idea for forming, testing, or communicating an understanding of something.",
+  "prerequisites": [
+    "knowledge",
+    "model",
+    "language"
+  ],
+  "unlocks": [],
+  "related": [
+    "correlation",
+    "knowledge",
+    "language",
+    "model",
+    "uncertainty"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "knowledge",
+    "language",
+    "model",
+    "models_and_reasoning"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

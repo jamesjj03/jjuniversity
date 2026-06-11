@@ -1,0 +1,40 @@
+{
+  "id": "rights",
+  "title": "Rights",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "values_and_action"
+  ],
+  "summary": "Rights is a foundational idea for deciding what matters and what should be done.",
+  "prerequisites": [
+    "value",
+    "power",
+    "knowledge"
+  ],
+  "unlocks": [],
+  "related": [
+    "duty",
+    "knowledge",
+    "power",
+    "responsibility",
+    "value"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "knowledge",
+    "power",
+    "value",
+    "values_and_action"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

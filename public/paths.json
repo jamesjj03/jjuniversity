@@ -1,0 +1,346 @@
+{
+  "generated": "2026-05-11T00:18:51.507845Z",
+  "generatedAt": "2026-05-11T00:18:51.507845Z",
+  "counts": {
+    "books": 312,
+    "series": 0,
+    "paths": 64,
+    "tagPaths": 65,
+    "recommendedSections": 7
+  },
+  "series": [],
+  "paths": [
+    {
+      "id": "101-the-core-courses",
+      "title": "101: How We Figured It Out",
+      "kind": "path",
+      "type": "path",
+      "level": "intermediate",
+      "description": "The clean introductory spine of JJ University: history, science, math, philosophy, religion, economics, government, psychology, and the hard subjects made readable.",
+      "tags": [],
+      "bookCount": 16,
+      "books": [
+        {
+          "id": "anatomy",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "biology",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "calculus",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "chemistry",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "economics",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "electricity",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "ethics",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "government",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "history",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "math",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "philosophy",
+          "order": 11,
+          "note": ""
+        },
+        {
+          "id": "physics",
+          "order": 12,
+          "note": ""
+        },
+        {
+          "id": "psychology",
+          "order": 13,
+          "note": ""
+        },
+        {
+          "id": "quantum",
+          "order": 14,
+          "note": ""
+        },
+        {
+          "id": "religion",
+          "order": 15,
+          "note": ""
+        },
+        {
+          "id": "science",
+          "order": 16,
+          "note": ""
+        },
+        {
+          "id": "sociology",
+          "order": 17,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "what-the-book-actually-says",
+      "title": "What the Scripture Actually Says",
+      "kind": "path",
+      "type": "path",
+      "level": "intermediate",
+      "description": "Direct guides through major scriptures and influential texts, focused on what the texts actually communicate rather than vague cultural assumptions.",
+      "tags": [],
+      "bookCount": 9,
+      "books": [
+        {
+          "id": "bible",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "bom",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "dianetics",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "gita",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "guru",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "kojiki",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "quran",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "talmud",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "tao",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "watchtower",
+          "order": 10,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "exe-power-as-code",
+      "title": ".exe: Power as Code",
+      "kind": "path",
+      "type": "path",
+      "level": "intermediate",
+      "description": "Rulers, empires, and ideologies treated like executable programs that keep running through history.",
+      "tags": [],
+      "bookCount": 9,
+      "books": [
+        {
+          "id": "cyrus",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "ham",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "hochi",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "humans",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "mao",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "marx",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "nebu",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "sargon",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "tsar",
+          "order": 9,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "commanders-in-chief",
+      "title": "Commanders-in-Chief",
+      "kind": "path",
+      "type": "path",
+      "level": "intermediate",
+      "description": "The American presidency as biography, myth, power, and political system.",
+      "tags": [],
+      "bookCount": 13,
+      "books": [
+        {
+          "id": "fdr",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "george",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "gwb",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "jefferson",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "jfk",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "lincoln",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "nixon",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "obama",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "presidents",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "reagan",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "teddy",
+          "order": 11,
+          "note": ""
+        },
+        {
+          "id": "jackson",
+          "order": 12,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "calendar-chronicles",
+      "title": "Calendar Chronicles",
+      "kind": "path",
+      "type": "path",
+      "level": "intermediate",
+      "description": "The cultural history of holidays, rituals, seasonal myths, and the stories people repeat every year.",
+      "tags": [],
+      "bookCount": 3,
+      "books": [
+        {
+          "id": "halloween",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "xmas",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "thanksgiving",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "time",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "holidays",
+          "order": 5,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    }
+  ],
+  "tagPaths": [],
+  "recommendedReading": []
+}

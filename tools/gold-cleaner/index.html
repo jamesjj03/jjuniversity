@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JJU Gold Cleaner</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="page goldApp">
+      <header class="topbar">
+        <div>
+          <p class="kicker">JJ University</p>
+          <h1>Gold Cleaner</h1>
+        </div>
+        <div class="statusRail">
+          <span id="providerStatus">Checking AI keys...</span>
+          <button id="refreshBtn">Refresh</button>
+        </div>
+      </header>
+
+      <section class="toolbar">
+        <label>
+          <span>Find book</span>
+          <input id="searchInput" placeholder="Search title or id..." />
+        </label>
+        <label>
+          <span>Status</span>
+          <select id="statusFilter">
+            <option value="all">All</option>
+            <option value="rough">Rough only</option>
+            <option value="gold">Gold samples</option>
+            <option value="heavy">Heavy pass</option>
+            <option value="medium">Medium pass</option>
+            <option value="light">Light pass</option>
+          </select>
+        </label>
+        <label>
+          <span>Provider</span>
+          <select id="providerSelect">
+            <option value="anthropic">Anthropic</option>
+            <option value="openai">OpenAI</option>
+          </select>
+        </label>
+        <label>
+          <span>Model</span>
+          <input id="modelInput" placeholder="Default model" />
+        </label>
+        <label>
+          <span>API token</span>
+          <input id="apiTokenInput" type="password" placeholder="Paste token locally..." autocomplete="off" />
+        </label>
+        <button id="saveTokenBtn">Save Token</button>
+        <label class="checkLabel">
+          <span>Resume</span>
+          <input id="skipSavedInput" type="checkbox" checked />
+          Skip saved sections
+        </label>
+        <label>
+          <span>Run scope</span>
+          <select id="scopeSelect">
+            <option value="chapter">This chapter</option>
+            <option value="book">This book</option>
+            <option value="selected">Selected books</option>
+            <option value="nonGold">All non-Golds</option>
+            <option value="over10">More than 10 em dashes</option>
+            <option value="worst5">Worst 5</option>
+            <option value="worst10">Worst 10</option>
+            <option value="all">All books</option>
+          </select>
+        </label>
+        <button id="runScopeBtn">Run Scope</button>
+      </section>
+
+      <section class="queueSummary">
+        <div id="queueEstimate">Estimating queue...</div>
+        <div id="draftSummary">Checking saved drafts...</div>
+      </section>
+
+      <section class="shell">
+        <aside class="bookPanel">
+          <div class="panelHeader">
+            <div>
+              <p class="kicker">Queue</p>
+              <h2>Rough books</h2>
+            </div>
+            <small id="auditSource"></small>
+          </div>
+          <div class="selectionBar">
+            <button id="selectVisibleBtn">Select Visible</button>
+            <button id="clearSelectedBtn">Clear</button>
+            <small id="selectedCount">0 selected</small>
+          </div>
+          <div id="bookList" class="bookList"></div>
+        </aside>
+
+        <section class="workbench">
+          <div class="bookHeader">
+            <div>
+              <p class="kicker" id="bookKicker">No book selected</p>
+              <h2 id="bookTitle">Pick a book from the queue.</h2>
+            </div>
+            <div class="bookStats" id="bookStats"></div>
+          </div>
+
+          <div class="chapterBar">
+            <label>
+              <span>Chapter / chunk</span>
+              <select id="sectionSelect"></select>
+            </label>
+            <button id="cleanBtn">Clean With AI</button>
+            <button id="testBtn">Run Test</button>
+            <button id="runBookBtn">Run Book</button>
+            <button id="runAllBtn">Run Full Sweep</button>
+            <button id="stopBtn">Stop</button>
+            <button id="acceptBtn">Accept</button>
+            <button id="rejectBtn">Reject</button>
+            <button id="saveBtn">Save Draft</button>
+            <button id="exportBtn">Export Fixed JSON</button>
+            <button id="applyLiveBtn">Update Live JSON</button>
+          </div>
+
+          <section class="editorGrid">
+            <article class="pane">
+              <div class="paneTop">
+                <div>
+                  <p class="kicker">Original</p>
+                  <h3>Reader Preview</h3>
+                </div>
+                <small id="originalMeta"></small>
+              </div>
+              <div id="originalPreview" class="readerDocLike"></div>
+              <textarea id="originalText" class="sourceArea hidden" spellcheck="false"></textarea>
+            </article>
+            <article class="pane">
+              <div class="paneTop">
+                <div>
+                  <p class="kicker">Draft</p>
+                  <h3>Gold Cleaned</h3>
+                </div>
+                <small id="cleanMeta">AI output lands here.</small>
+              </div>
+              <div class="formatToolbar">
+                <button id="blockPBtn" type="button">P</button>
+                <button id="blockH2Btn" type="button">H2</button>
+                <button id="blockH3Btn" type="button">H3</button>
+                <button id="italicBtn" type="button">I</button>
+                <button id="quoteBtn" type="button">Quote</button>
+                <button id="sourceToggleBtn" type="button">HTML</button>
+              </div>
+              <div id="cleanEditor" class="readerDocLike editableDoc" contenteditable="true"></div>
+              <textarea id="cleanText" class="sourceArea hidden" spellcheck="false"></textarea>
+            </article>
+          </section>
+        </section>
+
+        <aside class="guidePanel">
+          <div class="panelHeader">
+            <div>
+              <p class="kicker">Rules</p>
+              <h2>Style guide</h2>
+            </div>
+            <button id="saveGuideBtn">Save</button>
+          </div>
+          <textarea id="styleGuide"></textarea>
+          <div class="notice" id="notice">Ready.</div>
+        </aside>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

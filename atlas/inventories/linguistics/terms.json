@@ -1,0 +1,5400 @@
+{
+  "domain": "linguistics",
+  "title": "Linguistics",
+  "generatedAt": "2026-06-02T21:23:04.007Z",
+  "target": 350,
+  "sources": [
+    {
+      "name": "Wikipedia Glossary of Linguistics",
+      "url": "https://en.wikipedia.org/wiki/Glossary_of_linguistics",
+      "status": "failed:404",
+      "count": 0
+    },
+    {
+      "name": "Wikipedia Outline of Linguistics",
+      "url": "https://en.wikipedia.org/wiki/Outline_of_linguistics",
+      "status": "ok",
+      "count": 561
+    }
+  ],
+  "terms": [
+    {
+      "id": "abkhazia",
+      "title": "Abkhazia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "academic_discipline",
+      "title": "academic discipline",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "acoustics",
+      "title": "acoustics",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "acquisition",
+      "title": "Acquisition",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "acronym",
+      "title": "Acronym",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "adverb",
+      "title": "adverb",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "afghanistan",
+      "title": "Afghanistan",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aland",
+      "title": "Åland",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "albania",
+      "title": "Albania",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "algeria",
+      "title": "Algeria",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "allophone",
+      "title": "allophone",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "alphabets",
+      "title": "Alphabets",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "american_samoa",
+      "title": "American Samoa",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "american_structuralists",
+      "title": "American structuralists",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ancient_egyptian",
+      "title": "Ancient Egyptian",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "andorra",
+      "title": "Andorra",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "angola",
+      "title": "Angola",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anguilla",
+      "title": "Anguilla",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anthropological",
+      "title": "Anthropological",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anthropological_linguistics",
+      "title": "Anthropological linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "antigua_and_barbuda",
+      "title": "Antigua and Barbuda",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "applied",
+      "title": "Applied",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "applied_linguistics",
+      "title": "Applied linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "arabic",
+      "title": "Arabic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aramaic",
+      "title": "Aramaic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "argentina",
+      "title": "Argentina",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "armenia",
+      "title": "Armenia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "armenian",
+      "title": "Armenian",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aruba",
+      "title": "Aruba",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ascension_island",
+      "title": "Ascension Island",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aspect",
+      "title": "aspect",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "august_schleicher",
+      "title": "August Schleicher",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "australia",
+      "title": "Australia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "austria",
+      "title": "Austria",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "autonomy_of_syntax",
+      "title": "Autonomy of syntax",
+      "domain": "linguistics",
+      "subdomains": [
+        "syntax"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "axiomatization",
+      "title": "axiomatization",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "azerbaijan",
+      "title": "Azerbaijan",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bahamas",
+      "title": "Bahamas",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bahrain",
+      "title": "Bahrain",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bangladesh",
+      "title": "Bangladesh",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "barbados",
+      "title": "Barbados",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "barbara_partee",
+      "title": "Barbara Partee",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "behaviorism",
+      "title": "Behaviorism",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "belarus",
+      "title": "Belarus",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "belgium",
+      "title": "Belgium",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "belize",
+      "title": "Belize",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "benin",
+      "title": "Benin",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "benjamin_lee_whorf",
+      "title": "Benjamin Lee Whorf",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bermuda",
+      "title": "Bermuda",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bhutan",
+      "title": "Bhutan",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "biolinguistics",
+      "title": "Biolinguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bolivia",
+      "title": "Bolivia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bonaire",
+      "title": "Bonaire",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bosnia_and_herzegovina",
+      "title": "Bosnia and Herzegovina",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "botswana",
+      "title": "Botswana",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "braille",
+      "title": "Braille",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "brazil",
+      "title": "Brazil",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "british_indian_ocean_territory",
+      "title": "British Indian Ocean Territory",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "british_virgin_islands",
+      "title": "British Virgin Islands",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "brunei",
+      "title": "Brunei",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bulgaria",
+      "title": "Bulgaria",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "burkina_faso",
+      "title": "Burkina Faso",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "burundi",
+      "title": "Burundi",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cambodia",
+      "title": "Cambodia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cameroon",
+      "title": "Cameroon",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "canada",
+      "title": "Canada",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "canary_islands",
+      "title": "Canary Islands",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cape_verde",
+      "title": "Cape Verde",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "case",
+      "title": "case",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cayman_islands",
+      "title": "Cayman Islands",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "central_african_republic",
+      "title": "Central African Republic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ceuta",
+      "title": "Ceuta",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chad",
+      "title": "Chad",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chile",
+      "title": "Chile",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "china",
+      "title": "China",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chinese",
+      "title": "Chinese",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "chomsky",
+      "title": "Chomsky",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "christmas_island",
+      "title": "Christmas Island",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "citizendium",
+      "title": "Citizendium",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "clause",
+      "title": "clause",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "clinical_linguistics",
+      "title": "Clinical linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cocos_islands",
+      "title": "Cocos (Keeling) Islands",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cognition",
+      "title": "cognition",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cognitive",
+      "title": "Cognitive",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cognitive_linguistics",
+      "title": "Cognitive linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cognitive_revolution",
+      "title": "cognitive revolution",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "colombia",
+      "title": "Colombia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "common_to_all_languages",
+      "title": "common to all languages",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "communicative_acts",
+      "title": "communicative acts",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "comoros",
+      "title": "Comoros",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "comparative_linguistics",
+      "title": "Comparative linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "compose",
+      "title": "compose",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "compositionality",
+      "title": "Compositionality",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "compound",
+      "title": "compound",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "computational",
+      "title": "Computational",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "computational_linguistics",
+      "title": "Computational linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "conceptualists",
+      "title": "conceptualists",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "conservative_and_innovative_language",
+      "title": "Conservative and innovative language",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "constituency",
+      "title": "Constituency",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "constructed_language",
+      "title": "Constructed language",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "construction_grammar",
+      "title": "Construction grammar",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "contrastive_linguistics",
+      "title": "Contrastive linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "conversation_analysis",
+      "title": "Conversation analysis",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cook_islands",
+      "title": "Cook Islands",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "coptic",
+      "title": "Coptic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "corpus_linguistics",
+      "title": "Corpus linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "costa_rica",
+      "title": "Costa Rica",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "croatia",
+      "title": "Croatia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "crystal_david",
+      "title": "Crystal, David",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cuba",
+      "title": "Cuba",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "curacao",
+      "title": "Curaçao",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cyprus",
+      "title": "Cyprus",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cyrillic",
+      "title": "Cyrillic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "czech_republic",
+      "title": "Czech Republic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "danish_functional_linguistics",
+      "title": "Danish functional linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "declension",
+      "title": "declension",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "deep_learning",
+      "title": "Deep learning",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "definitions_by_language",
+      "title": "Definitions by language",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "deixis",
+      "title": "deixis",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "democratic_republic_of_the_congo",
+      "title": "Democratic Republic of the Congo",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "denmark",
+      "title": "Denmark",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "dependencies",
+      "title": "Dependencies",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "dependency",
+      "title": "Dependency",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "derivation",
+      "title": "derivation",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "descriptive_linguistics",
+      "title": "Descriptive linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "descriptivism",
+      "title": "Descriptivism",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "determinism",
+      "title": "Determinism",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "developmental_linguistics",
+      "title": "Developmental linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "diachronic",
+      "title": "Diachronic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "dialectology",
+      "title": "Dialectology",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "disciplinary_classification",
+      "title": "disciplinary classification",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "discourse",
+      "title": "Discourse",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "discourse_analysis",
+      "title": "Discourse analysis",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "distance",
+      "title": "Distance",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "distributionalism",
+      "title": "Distributionalism",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "djibouti",
+      "title": "Djibouti",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "documentation",
+      "title": "Documentation",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "dominica",
+      "title": "Dominica",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "dominican_republic",
+      "title": "Dominican Republic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "easter_island",
+      "title": "Easter Island",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ecuador",
+      "title": "Ecuador",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "edward_sapir",
+      "title": "Edward Sapir",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "egypt",
+      "title": "Egypt",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "el_salvador",
+      "title": "El Salvador",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "england",
+      "title": "England",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "english_ipa",
+      "title": "English IPA",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "english_sampa",
+      "title": "English SAMPA",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "english_words_without_rhymes",
+      "title": "English words without rhymes",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "entailment",
+      "title": "entailment",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "equatorial_guinea",
+      "title": "Equatorial Guinea",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "eritrea",
+      "title": "Eritrea",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "estonia",
+      "title": "Estonia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "eswatini",
+      "title": "Eswatini",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ethiopia",
+      "title": "Ethiopia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ethnography_of_communication",
+      "title": "Ethnography of communication",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ethnomethodology",
+      "title": "Ethnomethodology",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "etymology",
+      "title": "Etymology",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "european_union",
+      "title": "European Union",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "falkland_islands",
+      "title": "Falkland Islands",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "faroe_islands",
+      "title": "Faroe Islands",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "federated_states_of_micronesia",
+      "title": "Federated States of Micronesia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ferdinand_de_saussure",
+      "title": "Ferdinand de Saussure",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "field_of_science",
+      "title": "field of science",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "fiji",
+      "title": "Fiji",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "finland",
+      "title": "Finland",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "foot",
+      "title": "foot",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "forensic",
+      "title": "Forensic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "forensic_linguistics",
+      "title": "Forensic linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "formal",
+      "title": "formal",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "formal_sciences",
+      "title": "formal sciences",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "formal_semantics",
+      "title": "Formal semantics",
+      "domain": "linguistics",
+      "subdomains": [
+        "semantics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "formalism",
+      "title": "Formalism (linguistics)",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "formalist",
+      "title": "Formalist",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "france",
+      "title": "France",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "franz_bopp",
+      "title": "Franz Bopp",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "french_guiana",
+      "title": "French Guiana",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "french_polynesia",
+      "title": "French Polynesia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "functional",
+      "title": "Functional",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "functional_discourse_grammar",
+      "title": "Functional discourse grammar",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "functional_linguistics",
+      "title": "Functional linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "functionalism",
+      "title": "Functionalism",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gabon",
+      "title": "Gabon",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "general",
+      "title": "general",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "generative",
+      "title": "Generative",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "generative_grammar",
+      "title": "Generative grammar",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "generative_linguistics",
+      "title": "Generative linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "geneva_school",
+      "title": "Geneva School",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "george_lakoff",
+      "title": "George Lakoff",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "georgia",
+      "title": "Georgia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "georgian",
+      "title": "Georgian",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "germany",
+      "title": "Germany",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ghana",
+      "title": "Ghana",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gibraltar",
+      "title": "Gibraltar",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "glossematics",
+      "title": "Glossematics",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gothic",
+      "title": "Gothic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "grammar",
+      "title": "Grammar",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "grammatical_function",
+      "title": "grammatical function",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "grammatical_gender",
+      "title": "grammatical gender",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "grammatical_number",
+      "title": "grammatical number",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "grammatical_voice",
+      "title": "grammatical voice",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "grammaticalization",
+      "title": "Grammaticalization",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "grammatically",
+      "title": "grammatically",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "graphemics",
+      "title": "Graphemics",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "graphetics",
+      "title": "Graphetics",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "greece",
+      "title": "Greece",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "greenland",
+      "title": "Greenland",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "grenada",
+      "title": "Grenada",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "guadeloupe",
+      "title": "Guadeloupe",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "guam",
+      "title": "Guam",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "guatemala",
+      "title": "Guatemala",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "guernsey",
+      "title": "Guernsey",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "guinea",
+      "title": "Guinea",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "guinea_bissau",
+      "title": "Guinea-Bissau",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "guyana",
+      "title": "Guyana",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "haiti",
+      "title": "Haiti",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "hawaii",
+      "title": "Hawaii",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "hebrew",
+      "title": "Hebrew",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "hiragana",
+      "title": "Hiragana",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historical_linguistics",
+      "title": "Historical Linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [
+        "Historical linguistics"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "history_of_linguistics",
+      "title": "History of linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "honduras",
+      "title": "Honduras",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "hong_kong",
+      "title": "Hong Kong",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "humanities",
+      "title": "humanities",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "hungary",
+      "title": "Hungary",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "icao_spelling",
+      "title": "ICAO spelling",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "iceland",
+      "title": "Iceland",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "iconicity",
+      "title": "Iconicity",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ideograms",
+      "title": "Ideograms",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "implicature",
+      "title": "implicature",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "index",
+      "title": "Index",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "india",
+      "title": "India",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "indonesia",
+      "title": "Indonesia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "inflection",
+      "title": "inflection",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "interactional_linguistics",
+      "title": "Interactional linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "interlinguistics",
+      "title": "Interlinguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "internet_linguistics",
+      "title": "Internet linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "interpreting",
+      "title": "interpreting",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ipa",
+      "title": "IPA",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "iran",
+      "title": "Iran",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "iraq",
+      "title": "Iraq",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ireland",
+      "title": "Ireland",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "isle_of_man",
+      "title": "Isle of Man",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "iso_639",
+      "title": "ISO 639",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "israel",
+      "title": "Israel",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "italy",
+      "title": "Italy",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ivory_coast",
+      "title": "Ivory Coast",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "j_l_austin",
+      "title": "J.L. Austin",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "jamaica",
+      "title": "Jamaica",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "japan",
+      "title": "Japan",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "japanese",
+      "title": "Japanese",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "jean_berko_gleason",
+      "title": "Jean Berko Gleason",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "jersey",
+      "title": "Jersey",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "jordan",
+      "title": "Jordan",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "joseph_greenberg",
+      "title": "Joseph Greenberg",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kannada",
+      "title": "Kannada",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "katakana",
+      "title": "Katakana",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kazakhstan",
+      "title": "Kazakhstan",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kazan_school",
+      "title": "Kazan School",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kenneth_l_pike",
+      "title": "Kenneth L. Pike",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kenya",
+      "title": "Kenya",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kiribati",
+      "title": "Kiribati",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "korean",
+      "title": "Korean",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kosovo",
+      "title": "Kosovo",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kuwait",
+      "title": "Kuwait",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "kyrgyzstan",
+      "title": "Kyrgyzstan",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language",
+      "title": "language",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_acquisition",
+      "title": "Language acquisition",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_assessment",
+      "title": "Language assessment",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_development",
+      "title": "Language development",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_documentation",
+      "title": "Language documentation",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_education",
+      "title": "Language education",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_families",
+      "title": "Language Families",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map"
+      ],
+      "sourceUrls": [],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_families_and_languages",
+      "title": "Language families and languages",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_for_specific_purposes",
+      "title": "Language for specific purposes",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_geography",
+      "title": "Language geography",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language_revitalization",
+      "title": "Language revitalization",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "languages",
+      "title": "Languages",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "languages_of_africa",
+      "title": "Languages of Africa",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "languages_of_asia",
+      "title": "Languages of Asia",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "languages_of_europe",
+      "title": "Languages of Europe",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "languages_of_north_america",
+      "title": "Languages of North America",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "languages_of_oceania",
+      "title": "Languages of Oceania",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "languages_of_south_america",
+      "title": "Languages of South America",
+      "domain": "linguistics",
+      "subdomains": [
+        "language_families"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "laos",
+      "title": "Laos",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "latvia",
+      "title": "Latvia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lebanon",
+      "title": "Lebanon",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lemma",
+      "title": "lemma",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "leonard_bloomfield",
+      "title": "Leonard Bloomfield",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lesotho",
+      "title": "Lesotho",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lexeme",
+      "title": "lexeme",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lexical_semantics",
+      "title": "lexical semantics",
+      "domain": "linguistics",
+      "subdomains": [
+        "semantics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lexico_semantic",
+      "title": "lexico-semantic",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lexicography",
+      "title": "Lexicography",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lexicology",
+      "title": "Lexicology",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lexicon",
+      "title": "lexicon",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lgbtq_linguistics",
+      "title": "LGBTQ linguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "liberia",
+      "title": "Liberia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "libya",
+      "title": "Libya",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "liechtenstein",
+      "title": "Liechtenstein",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "linguist",
+      "title": "linguist",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "linguistic_anthropology",
+      "title": "Linguistic anthropology",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "linguistic_typology",
+      "title": "Linguistic typology",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "linguistics_nomenclature",
+      "title": "Linguistics § Nomenclature",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "linguistics_wars",
+      "title": "Linguistics wars",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lithuania",
+      "title": "Lithuania",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "louis_hjelmslev",
+      "title": "Louis Hjelmslev",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lucien_tesniere",
+      "title": "Lucien Tesnière",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "luxembourg",
+      "title": "Luxembourg",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "m_a_k_halliday",
+      "title": "M.A.K. Halliday",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "macau",
+      "title": "Macau",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "madagascar",
+      "title": "Madagascar",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "madeira",
+      "title": "Madeira",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "malawi",
+      "title": "Malawi",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "malaysia",
+      "title": "Malaysia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "maldives",
+      "title": "Maldives",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mali",
+      "title": "Mali",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "malta",
+      "title": "Malta",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "marshall_islands",
+      "title": "Marshall Islands",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "martinique",
+      "title": "Martinique",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mathematical",
+      "title": "Mathematical",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mathematically_undefined",
+      "title": "mathematically undefined",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mauritania",
+      "title": "Mauritania",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mauritius",
+      "title": "Mauritius",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mayotte",
+      "title": "Mayotte",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "meaning",
+      "title": "meaning",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "meanings",
+      "title": "meanings",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "melilla",
+      "title": "Melilla",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "methodologically",
+      "title": "methodologically",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mexico",
+      "title": "Mexico",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "modality",
+      "title": "modality",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "modified_syntactically",
+      "title": "modified syntactically",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "moldova",
+      "title": "Moldova",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "monaco",
+      "title": "Monaco",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mongolia",
+      "title": "Mongolia",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "montenegro",
+      "title": "Montenegro",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "montserrat",
+      "title": "Montserrat",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mood",
+      "title": "mood",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mora",
+      "title": "mora",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "morocco",
+      "title": "Morocco",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "morpheme",
+      "title": "morpheme",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "morphological",
+      "title": "morphological",
+      "domain": "linguistics",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "morphology",
+      "title": "Morphology",
+      "domain": "linguistics",
+      "subdomains": [
+        "morphology"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "phonetics",
+      "title": "Phonetics",
+      "domain": "linguistics",
+      "subdomains": [
+        "phonetics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "phonology",
+      "title": "Phonology",
+      "domain": "linguistics",
+      "subdomains": [
+        "phonology"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "pragmatics",
+      "title": "Pragmatics",
+      "domain": "linguistics",
+      "subdomains": [
+        "pragmatics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "psycholinguistics",
+      "title": "Psycholinguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics",
+        "psycholinguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "semantics",
+      "title": "Semantics",
+      "domain": "linguistics",
+      "subdomains": [
+        "semantics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociolinguistics",
+      "title": "Sociolinguistics",
+      "domain": "linguistics",
+      "subdomains": [
+        "historical_linguistics",
+        "sociolinguistics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "syntax",
+      "title": "Syntax",
+      "domain": "linguistics",
+      "subdomains": [
+        "syntax"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "writing_systems",
+      "title": "Writing Systems",
+      "domain": "linguistics",
+      "subdomains": [
+        "writing_systems"
+      ],
+      "aliases": [
+        "Writing systems"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Linguistics"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_linguistics"
+      ],
+      "status": "candidate",
+      "promoted": false
+    }
+  ]
+}

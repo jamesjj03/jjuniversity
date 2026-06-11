@@ -1,0 +1,76 @@
+{
+  "id": "evidence",
+  "title": "Evidence",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "core_primitives"
+  ],
+  "summary": "Evidence is a foundational connector for describing what exists, changes, relates, or becomes understandable.",
+  "prerequisites": [],
+  "unlocks": [
+    "accuracy",
+    "archive",
+    "artifact",
+    "authority",
+    "bias",
+    "chronology",
+    "citation",
+    "civilization",
+    "colonization",
+    "context",
+    "continuity",
+    "data",
+    "diffusion",
+    "empire",
+    "error",
+    "event",
+    "experiment",
+    "expertise",
+    "falsifiability",
+    "globalization",
+    "hypothesis",
+    "industrialization",
+    "inference_to_best_explanation",
+    "migration",
+    "modernization",
+    "observation",
+    "origin",
+    "peer_review",
+    "period",
+    "population",
+    "precision",
+    "primary_source",
+    "reliability",
+    "replication",
+    "revolution",
+    "sample",
+    "secondary_source",
+    "skepticism",
+    "source",
+    "test",
+    "trend",
+    "urbanization",
+    "validity"
+  ],
+  "related": [
+    "measurement",
+    "model"
+  ],
+  "aliases": [
+    "supporting evidence"
+  ],
+  "tags": [
+    "core_primitives",
+    "foundation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "field",
+  "title": "Field",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "matter_and_energy"
+  ],
+  "summary": "Field is a foundational idea for describing physical things, forces, and transformations.",
+  "prerequisites": [
+    "matter",
+    "energy",
+    "measurement"
+  ],
+  "unlocks": [],
+  "related": [
+    "charge",
+    "energy",
+    "matter",
+    "measurement",
+    "wave"
+  ],
+  "aliases": [
+    "physical field"
+  ],
+  "tags": [
+    "energy",
+    "foundation",
+    "matter",
+    "matter_and_energy",
+    "measurement"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "duty",
+  "title": "Duty",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "values_and_action"
+  ],
+  "summary": "Duty is a foundational idea for deciding what matters and what should be done.",
+  "prerequisites": [
+    "value",
+    "power",
+    "knowledge"
+  ],
+  "unlocks": [],
+  "related": [
+    "harm",
+    "knowledge",
+    "power",
+    "rights",
+    "value"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "knowledge",
+    "power",
+    "value",
+    "values_and_action"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "abstraction",
+  "title": "Abstraction",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "models_and_reasoning"
+  ],
+  "summary": "Abstraction is a foundational idea for forming, testing, or communicating an understanding of something.",
+  "prerequisites": [
+    "knowledge",
+    "model",
+    "language"
+  ],
+  "unlocks": [],
+  "related": [
+    "knowledge",
+    "language",
+    "model",
+    "paradox",
+    "representation"
+  ],
+  "aliases": [
+    "abstract thinking"
+  ],
+  "tags": [
+    "foundation",
+    "knowledge",
+    "language",
+    "model",
+    "models_and_reasoning"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "continuity",
+  "title": "Continuity",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "history_and_time"
+  ],
+  "summary": "Continuity is a foundational idea for locating change, continuity, and human action in time.",
+  "prerequisites": [
+    "time",
+    "cause",
+    "evidence"
+  ],
+  "unlocks": [],
+  "related": [
+    "cause",
+    "evidence",
+    "origin",
+    "revolution",
+    "time"
+  ],
+  "aliases": [],
+  "tags": [
+    "cause",
+    "evidence",
+    "foundation",
+    "history_and_time",
+    "time"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

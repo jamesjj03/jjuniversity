@@ -1,0 +1,54 @@
+{
+  "id": "cause",
+  "title": "Cause",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "core_primitives"
+  ],
+  "summary": "Cause is a foundational connector for describing what exists, changes, relates, or becomes understandable.",
+  "prerequisites": [],
+  "unlocks": [
+    "archive",
+    "artifact",
+    "chronology",
+    "civilization",
+    "colonization",
+    "context",
+    "continuity",
+    "diffusion",
+    "empire",
+    "event",
+    "globalization",
+    "industrialization",
+    "migration",
+    "modernization",
+    "origin",
+    "period",
+    "primary_source",
+    "revolution",
+    "secondary_source",
+    "trend",
+    "urbanization"
+  ],
+  "related": [
+    "pattern",
+    "space"
+  ],
+  "aliases": [
+    "causality"
+  ],
+  "tags": [
+    "core_primitives",
+    "foundation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

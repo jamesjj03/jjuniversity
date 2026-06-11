@@ -1,0 +1,40 @@
+{
+  "id": "network",
+  "title": "Network",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "systems_and_change"
+  ],
+  "summary": "Network is a foundational idea for tracking how parts of a system affect one another over time.",
+  "prerequisites": [
+    "system",
+    "change",
+    "relation"
+  ],
+  "unlocks": [],
+  "related": [
+    "change",
+    "complexity",
+    "flow",
+    "relation",
+    "system"
+  ],
+  "aliases": [],
+  "tags": [
+    "change",
+    "foundation",
+    "relation",
+    "system",
+    "systems_and_change"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

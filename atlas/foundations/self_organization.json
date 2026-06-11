@@ -1,0 +1,42 @@
+{
+  "id": "self_organization",
+  "title": "Self Organization",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "systems_and_change"
+  ],
+  "summary": "Self Organization is a foundational idea for tracking how parts of a system affect one another over time.",
+  "prerequisites": [
+    "system",
+    "change",
+    "relation"
+  ],
+  "unlocks": [],
+  "related": [
+    "change",
+    "input",
+    "relation",
+    "resilience",
+    "system"
+  ],
+  "aliases": [
+    "self-organization"
+  ],
+  "tags": [
+    "change",
+    "foundation",
+    "relation",
+    "system",
+    "systems_and_change"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

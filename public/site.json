@@ -1,0 +1,39 @@
+{
+  "homeCards": [
+    {
+      "id": "science",
+      "displayTitle": "Science 101",
+      "why": "A clean entry point for how humans figured things out."
+    },
+    {
+      "id": "humans",
+      "displayTitle": "humanity.exe",
+      "why": "People, systems, and the operating code underneath us."
+    },
+    {
+      "id": "caesar",
+      "displayTitle": "Caesar",
+      "why": "Power, ambition, collapse, and one of history's most useful warnings."
+    },
+    {
+      "id": "bible",
+      "displayTitle": "What the Bible Actually Says",
+      "why": "A direct route into Scripture and the roots of Western imagination."
+    },
+    {
+      "id": "edison",
+      "displayTitle": "Edison",
+      "why": "Invention, myth, business, genius, and the machine age waking up."
+    }
+  ],
+  "library": {
+    "featuredPathIds": [],
+    "newestIds": []
+  },
+  "atlas": {
+    "visible": false
+  },
+  "social": {
+    "instagramUrl": "https://www.instagram.com/jj_james.johnson/"
+  }
+}

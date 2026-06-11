@@ -1,0 +1,195 @@
+{
+  "id": "TMTS",
+  "slug": "too-much-too-soon",
+  "sourceFile": "TMTS.epub",
+  "title": "Too Much, Too Soon",
+  "creator": "James Johnson",
+  "description": "",
+  "language": "en",
+  "publisher": "",
+  "generatedAt": "2026-05-17T15:56:18.347Z",
+  "sectionCount": 18,
+  "wordCount": 1721,
+  "sections": [
+    {
+      "id": "section-001",
+      "index": 0,
+      "title": "Contents",
+      "kind": "toc",
+      "href": "OPS/contents.xhtml",
+      "html": "<nav epub:type=\"toc\" id=\"toc\">\n<h2 class=\"page-title\">Contents</h2>\n\n<ol>\n  <li><a href=\"body.xhtml\">Too Much, Too Soon</a></li>\n  <li><a href=\"body1.xhtml\">Dedication</a></li>\n  <li><a href=\"body2.xhtml\">Chapter One - The Couch at 3AM</a></li>\n  <li><a href=\"body3.xhtml\">Chapter Two - Lightsabers and Lap Seats</a></li>\n  <li><a href=\"body4.xhtml\">Chapter Three - Too Much</a></li>\n  <li><a href=\"body5.xhtml\">Chapter Four - The Vanishing Point</a></li>\n  <li><a href=\"body6.xhtml\">Chapter Five - The Instagram Follow</a></li>\n  <li><a href=\"body7.xhtml\">Chapter Six - I Miss Her</a></li>\n  <li><a href=\"body8.xhtml\">Chapter Seven - Closure Without the Ending</a></li>\n  <li><a href=\"body9.xhtml\">Chapter Eight - The Night I Didn’t Text Her</a></li>\n  <li><a href=\"body10.xhtml\">Chapter Nine - The Alternate Timeline</a></li>\n  <li><a href=\"body11.xhtml\">Chapter Ten - The Realization</a></li>\n  <li><a href=\"body12.xhtml\">Chapter Eleven - The Smile</a></li>\n  <li><a href=\"body13.xhtml\">Chapter Twelve - Too Much, Too Soon</a></li>\n  <li><a href=\"body14.xhtml\">Acknowledgements</a></li>\n  <li><a href=\"body15.xhtml\">About the Author</a></li>\n  <li><a href=\"body16.xhtml\">Copyright</a></li>\n</ol>\n</nav>\n<nav epub:type=\"landmarks\" id=\"landmarks\" hidden=\"hidden\" style=\"display: none\">\n  <h2>Guide</h2>\n  <ol>\n    <li><a epub:type=\"toc\" href=\"contents.xhtml\">Contents</a></li>\n    <li><a epub:type=\"bodymatter\" href=\"body2.xhtml\">Start of Content</a></li>\n  </ol>\n</nav>",
+      "text": "Contents Too Much, Too Soon Dedication Chapter One - The Couch at 3AM Chapter Two - Lightsabers and Lap Seats Chapter Three - Too Much Chapter Four - The Vanishing Point Chapter Five - The Instagram Follow Chapter Six - I Miss Her Chapter Seven - Closure Without the Ending Chapter Eight - The Night I Didn’t Text Her Chapter Nine - The Alternate Timeline Chapter Ten - The Realization Chapter Eleven - The Smile Chapter Twelve - Too Much, Too Soon Acknowledgements About the Author Copyright Guide Contents Start of Content",
+      "wordCount": 80
+    },
+    {
+      "id": "section-002",
+      "index": 1,
+      "title": "Too Much, Too Soon",
+      "kind": "chapter",
+      "href": "OPS/body.xhtml",
+      "html": "<p id=\"doc1\" class=\"ps1\"><strong><span style=\"font-weight:5600;\">Too Much, Too Soon<br></span></strong><em><span style=\"font-style:italic;\">A Real Love Story</span></em><br>by <strong><span style=\"font-weight:5600;\">JJ</span></strong></p>",
+      "text": "Too Much, Too Soon A Real Love Story by JJ",
+      "wordCount": 10
+    },
+    {
+      "id": "section-003",
+      "index": 2,
+      "title": "Dedication",
+      "kind": "dedication",
+      "href": "OPS/body1.xhtml",
+      "html": "<p id=\"doc2\" class=\"ps2\">For the one who made me laugh so hard I forgot how to guard myself.<br>For the softness that showed up unannounced and left like a whisper.<br>For her, wherever you are, this is what you meant to me.<br>Whether you read it or not. </p>",
+      "text": "For the one who made me laugh so hard I forgot how to guard myself. For the softness that showed up unannounced and left like a whisper. For her, wherever you are, this is what you meant to me. Whether you read it or not.",
+      "wordCount": 45
+    },
+    {
+      "id": "section-004",
+      "index": 3,
+      "title": "Chapter One - The Couch at 3AM",
+      "kind": "chapter",
+      "href": "OPS/body2.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc3\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER ONE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Couch at 3AM</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc4\" class=\"ps3\"><span style=\"text-transform:uppercase;\">IT WASN’T SUPPOSED</span> to be anything.</p>\n<p class=\"ps3\">Zack was talking to some girl.<br>I was there because that’s what we did. Float through scenes, follow threads, and let the night unravel.<br>Then she showed up.<br>She wasn’t even supposed to be there.</p>\n<p class=\"ps3\">I remember the exact moment it shifted.<br>Not with a kiss, not even a touch, just a look.<br>We sat on the couch and started talking.<br>No weird tension. No games. Just that <strong><span style=\"font-weight:5600;\">sudden, eerie comfort</span></strong>, like we’d done this before in another life.<br>Or like our nervous systems recognized something before we did.</p>\n<p class=\"ps3\">We stayed up until three. Maybe four. Maybe five.<br>Time didn’t really exist in that room.<br>Just the rhythm of shared words and unspoken safety.</p>\n<p class=\"ps3\">That was the first night.</p>\n<p class=\"ps3\">She came over the next night, too.<br>And then the next.<br>And then the next. </p>\n</div>",
+      "text": "CHAPTER ONE The Couch at 3AM IT WASN’T SUPPOSED to be anything. Zack was talking to some girl. I was there because that’s what we did. Float through scenes, follow threads, and let the night unravel. Then she showed up. She wasn’t even supposed to be there. I remember the exact moment it shifted. Not with a kiss, not even a touch, just a look. We sat on the couch and started talking. No weird tension. No games. Just that sudden, eerie comfort, like we’d done this before in another life. Or like our nervous systems recognized something before we did. We stayed up until three. Maybe four. Maybe five. Time didn’t really exist in that room. Just the rhythm of shared words and unspoken safety. That was the first night. She came over the next night, too. And then the next. And then the next.",
+      "wordCount": 146
+    },
+    {
+      "id": "section-005",
+      "index": 4,
+      "title": "Chapter Two - Lightsabers and Lap Seats",
+      "kind": "chapter",
+      "href": "OPS/body3.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc5\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TWO</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Lightsabers and Lap Seats</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc6\" class=\"ps3\"><span style=\"text-transform:uppercase;\">SHE WAS WEIRD</span>.<br>Not in a “she listens to indie bands” kind of way, weird in the best way.<br>Goofy. Silly. Soft around the edges, sharp in the right places.<br>She snorted when she laughed. I lived for it.</p>\n<p class=\"ps3\">She called me handsome more than anyone ever had, but it wasn’t just about looks.<br>It felt like she was looking <em><span style=\"font-style:italic;\">through</span></em> me, not <em><span style=\"font-style:italic;\">at</span></em> me.<br>Like she liked my insides too.</p>\n<p class=\"ps3\">I once asked if a toy lightsaber could go places no lightsaber should.<br>She said yes.<br>Not as a joke.<br>Not with hesitation.<br>Just, <em><span style=\"font-style:italic;\">yes</span></em>.</p>\n<p class=\"ps3\">That’s what made it real to me.<br>Not the act. Not the shock value.<br>The freedom.</p>\n<p class=\"ps3\">We could say anything.<br>Be anything.<br>Play COD Zombies while she sat on my lap, because David would’ve been a little bitch about me leaving mid-game.</p>\n<p class=\"ps3\">There was no script.<br>Just instinct. </p>\n</div>",
+      "text": "CHAPTER TWO Lightsabers and Lap Seats SHE WAS WEIRD. Not in a “she listens to indie bands” kind of way, weird in the best way. Goofy. Silly. Soft around the edges, sharp in the right places. She snorted when she laughed. I lived for it. She called me handsome more than anyone ever had, but it wasn’t just about looks. It felt like she was looking through me, not at me. Like she liked my insides too. I once asked if a toy lightsaber could go places no lightsaber should. She said yes. Not as a joke. Not with hesitation. Just, yes. That’s what made it real to me. Not the act. Not the shock value. The freedom. We could say anything. Be anything. Play COD Zombies while she sat on my lap, because David would’ve been a little bitch about me leaving mid-game. There was no script. Just instinct.",
+      "wordCount": 150
+    },
+    {
+      "id": "section-006",
+      "index": 5,
+      "title": "Chapter Three - Too Much",
+      "kind": "chapter",
+      "href": "OPS/body4.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc7\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER THREE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Too Much</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc8\" class=\"ps3\"><span style=\"text-transform:uppercase;\">THE FIRST WEEK</span> was perfect.<br>Then the cracks showed up.</p>\n<p class=\"ps3\">Not hers. Not mine.<br>Just the echo of things neither of us had healed.</p>\n<p class=\"ps3\">She started pulling back.<br>I could feel it.<br>Like watching the tide leave, knowing you’re not the shore it’s returning to.</p>\n<p class=\"ps3\">She talked about spending forever with me, but not in a fairytale way.<br>In a <em><span style=\"font-style:italic;\">\"this could actually be real\"</span></em> way.<br>And I believed her.</p>\n<p class=\"ps3\">But love isn’t always about belief.<br>Sometimes it’s about capacity.</p>\n<p class=\"ps3\">And I loved her <strong><span style=\"font-weight:5600;\">too much, too soon.</span></strong><br>I gave her everything I had, and she didn’t know how to hold it.<br>She wasn’t ready to.</p>\n<p class=\"ps3\">And maybe I wasn’t ready either, just better at faking it.</p>\n</div>",
+      "text": "CHAPTER THREE Too Much THE FIRST WEEK was perfect. Then the cracks showed up. Not hers. Not mine. Just the echo of things neither of us had healed. She started pulling back. I could feel it. Like watching the tide leave, knowing you’re not the shore it’s returning to. She talked about spending forever with me, but not in a fairytale way. In a \"this could actually be real\" way. And I believed her. But love isn’t always about belief. Sometimes it’s about capacity. And I loved her too much, too soon. I gave her everything I had, and she didn’t know how to hold it. She wasn’t ready to. And maybe I wasn’t ready either, just better at faking it.",
+      "wordCount": 121
+    },
+    {
+      "id": "section-007",
+      "index": 6,
+      "title": "Chapter Four - The Vanishing Point",
+      "kind": "chapter",
+      "href": "OPS/body5.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc9\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER FOUR</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Vanishing Point</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc10\" class=\"ps3\"><span style=\"text-transform:uppercase;\">IT DIDN’T BREAK</span> all at once.<br>There was no explosion. No screaming. No “fuck you” text.<br>Just slow silence.</p>\n<p class=\"ps3\">A missed call.<br>A shorter reply.<br>Plans that used to be automatic turning into maybe’s… and then into nothing at all.</p>\n<p class=\"ps3\">I could feel it before I could name it.<br>And once you’ve felt real closeness, distance becomes deafening.</p>\n<p class=\"ps3\">I knew she was seeing someone else before she told me.<br>I could feel it in her energy.<br>Not guilt, shame.<br>The kind that comes from letting something good go because you’re convinced you’ll ruin it anyway.</p>\n<p class=\"ps3\">But I didn’t hate her.<br>I didn’t even get angry.<br>I just… mourned something that was <em><span style=\"font-style:italic;\">still technically alive, </span></em>but already gone. </p>\n</div>",
+      "text": "CHAPTER FOUR The Vanishing Point IT DIDN’T BREAK all at once. There was no explosion. No screaming. No “fuck you” text. Just slow silence. A missed call. A shorter reply. Plans that used to be automatic turning into maybe’s… and then into nothing at all. I could feel it before I could name it. And once you’ve felt real closeness, distance becomes deafening. I knew she was seeing someone else before she told me. I could feel it in her energy. Not guilt, shame. The kind that comes from letting something good go because you’re convinced you’ll ruin it anyway. But I didn’t hate her. I didn’t even get angry. I just… mourned something that was still technically alive, but already gone.",
+      "wordCount": 122
+    },
+    {
+      "id": "section-008",
+      "index": 7,
+      "title": "Chapter Five - The Instagram Follow",
+      "kind": "chapter",
+      "href": "OPS/body6.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc11\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER FIVE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Instagram Follow</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc12\" class=\"ps3\"><span style=\"text-transform:uppercase;\">IT’S FUNNY HOW</span> grief doesn’t always arrive like a flood.<br>Sometimes it drips in like an Instagram story you didn’t mean to view or a scroll that ends too suddenly with <em><span style=\"font-style:italic;\">her</span></em> face staring back at you.</p>\n<p class=\"ps3\">I didn’t follow her at first.<br>Felt too raw.<br>Too unresolved.<br>But then one night, late as always, I saw her name again.<br>And I missed her.<br>Not the relationship.<br>Not the outcome.<br>Just… <em><span style=\"font-style:italic;\">her.</span></em></p>\n<p class=\"ps3\">So I followed her.<br>No message.<br>No buildup.<br>Just a silent tap.</p>\n<p class=\"ps3\">It felt like cracking the door open.<br>Not enough to walk through,<br>but enough for the breeze to say:<br><strong><span style=\"font-weight:5600;\">“Hey. I still remember you.”</span></strong> </p>\n</div>",
+      "text": "CHAPTER FIVE The Instagram Follow IT’S FUNNY HOW grief doesn’t always arrive like a flood. Sometimes it drips in like an Instagram story you didn’t mean to view or a scroll that ends too suddenly with her face staring back at you. I didn’t follow her at first. Felt too raw. Too unresolved. But then one night, late as always, I saw her name again. And I missed her. Not the relationship. Not the outcome. Just… her. So I followed her. No message. No buildup. Just a silent tap. It felt like cracking the door open. Not enough to walk through, but enough for the breeze to say: “Hey. I still remember you.”",
+      "wordCount": 113
+    },
+    {
+      "id": "section-009",
+      "index": 8,
+      "title": "Chapter Six - I Miss Her",
+      "kind": "chapter",
+      "href": "OPS/body7.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc13\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER SIX</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">I Miss Her</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc14\" class=\"ps3\"><span style=\"text-transform:uppercase;\">THAT’S THE TRUTH</span>.<br>No poetry. No spin.</p>\n<p class=\"ps3\">I miss her.</p>\n<p class=\"ps3\">I miss how she’d just look at me sometimes, like I was art she didn’t fully understand but liked having on her wall anyway.</p>\n<p class=\"ps3\">I miss how soft everything felt around her.<br>How being near her was like a nap for my nervous system.<br>How we could talk about the deepest shit, then immediately switch to dumb jokes without skipping a beat.</p>\n<p class=\"ps3\">I miss how weird she was.<br>How safe I felt being weird with her.<br>How no part of myself felt out of place.</p>\n<p class=\"ps3\">I miss what she gave me.<br>Not perfection, just permission.<br>Permission to be real.<br>To be tender.<br>To be a whole-ass weirdo and still feel chosen.</p>\n</div>",
+      "text": "CHAPTER SIX I Miss Her THAT’S THE TRUTH. No poetry. No spin. I miss her. I miss how she’d just look at me sometimes, like I was art she didn’t fully understand but liked having on her wall anyway. I miss how soft everything felt around her. How being near her was like a nap for my nervous system. How we could talk about the deepest shit, then immediately switch to dumb jokes without skipping a beat. I miss how weird she was. How safe I felt being weird with her. How no part of myself felt out of place. I miss what she gave me. Not perfection, just permission. Permission to be real. To be tender. To be a whole-ass weirdo and still feel chosen.",
+      "wordCount": 126
+    },
+    {
+      "id": "section-010",
+      "index": 9,
+      "title": "Chapter Seven - Closure Without the Ending",
+      "kind": "chapter",
+      "href": "OPS/body8.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc15\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER SEVEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Closure Without the Ending</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc16\" class=\"ps3\"><span style=\"text-transform:uppercase;\">THE THING IS</span>…<br>I don’t need closure.</p>\n<p class=\"ps3\">Not in the way people mean when they say it.</p>\n<p class=\"ps3\">I don’t need an apology.<br>I don’t need a final talk.<br>I don’t even need a message back.</p>\n<p class=\"ps3\">Because she didn’t break me.<br>She just highlighted where I was already cracked.<br>And in loving her, I learned how to seal those lines with gold.</p>\n<p class=\"ps3\">We didn’t get the full arc.<br>But we got a damn good act one.<br>And maybe, for this timeline, that’s all it needed to be.</p>\n<p class=\"ps3\">And still…<br>I’d get coffee with her tomorrow.</p>\n<p class=\"ps3\">Not to restart.<br>Not to fix.<br>Just to sit across from someone who once held a mirror to my soul and didn’t look away.</p>\n</div>",
+      "text": "CHAPTER SEVEN Closure Without the Ending THE THING IS… I don’t need closure. Not in the way people mean when they say it. I don’t need an apology. I don’t need a final talk. I don’t even need a message back. Because she didn’t break me. She just highlighted where I was already cracked. And in loving her, I learned how to seal those lines with gold. We didn’t get the full arc. But we got a damn good act one. And maybe, for this timeline, that’s all it needed to be. And still… I’d get coffee with her tomorrow. Not to restart. Not to fix. Just to sit across from someone who once held a mirror to my soul and didn’t look away.",
+      "wordCount": 124
+    },
+    {
+      "id": "section-011",
+      "index": 10,
+      "title": "Chapter Eight - The Night I Didn’t Text Her",
+      "kind": "chapter",
+      "href": "OPS/body9.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc17\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER EIGHT</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Night I Didn’t Text Her</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc18\" class=\"ps3\"><span style=\"text-transform:uppercase;\">I HAD THE</span> message typed out.<br>It was clean.<br>Honest.<br>Soft.<br>Just a simple <em><span style=\"font-style:italic;\">“Hey, I hope you’re doing okay. I’d be down to catch up sometime.”</span></em></p>\n<p class=\"ps3\">But I didn’t send it.<br>Not out of fear.<br>Not because I chickened out.<br>I just… realized something.</p>\n<p class=\"ps3\">I didn’t need a response to feel what I felt.</p>\n<p class=\"ps3\">Love isn’t real only if it’s reciprocated.<br>And closure doesn’t require conversation.<br>Sometimes all it takes is knowing the love was real, even if it didn’t last.</p>\n<p class=\"ps3\">I put my phone down.<br>Took a breath.<br>And let the feeling sit there.<br>Not as a weight, but as warmth. </p>\n</div>",
+      "text": "CHAPTER EIGHT The Night I Didn’t Text Her I HAD THE message typed out. It was clean. Honest. Soft. Just a simple “Hey, I hope you’re doing okay. I’d be down to catch up sometime.” But I didn’t send it. Not out of fear. Not because I chickened out. I just… realized something. I didn’t need a response to feel what I felt. Love isn’t real only if it’s reciprocated. And closure doesn’t require conversation. Sometimes all it takes is knowing the love was real, even if it didn’t last. I put my phone down. Took a breath. And let the feeling sit there. Not as a weight, but as warmth.",
+      "wordCount": 111
+    },
+    {
+      "id": "section-012",
+      "index": 11,
+      "title": "Chapter Nine - The Alternate Timeline",
+      "kind": "chapter",
+      "href": "OPS/body10.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc19\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER NINE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Alternate Timeline</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc20\" class=\"ps3\"><span style=\"text-transform:uppercase;\">THERE’S A VERSION</span> of this world, somewhere off-screen, where me and her figured it out.</p>\n<p class=\"ps3\">We took it slow.<br>She healed.<br>I healed.<br>We got coffee, laughed too much, and I never had to write this book.</p>\n<p class=\"ps3\">In that timeline, maybe we live together.<br>Maybe she still snorts when she laughs.<br>Maybe we still say the dumbest shit possible and it somehow feels like poetry.</p>\n<p class=\"ps3\">But here, in <em><span style=\"font-style:italic;\">this</span></em> timeline?</p>\n<p class=\"ps3\">We met too soon.<br>Loved too fast.<br>And let go too quietly.</p>\n<p class=\"ps3\">And I’m not bitter about that.</p>\n<p class=\"ps3\">Because some loves are meant to teach you how deep you go.<br>Not how long you can stay.</p>\n</div>",
+      "text": "CHAPTER NINE The Alternate Timeline THERE’S A VERSION of this world, somewhere off-screen, where me and her figured it out. We took it slow. She healed. I healed. We got coffee, laughed too much, and I never had to write this book. In that timeline, maybe we live together. Maybe she still snorts when she laughs. Maybe we still say the dumbest shit possible and it somehow feels like poetry. But here, in this timeline? We met too soon. Loved too fast. And let go too quietly. And I’m not bitter about that. Because some loves are meant to teach you how deep you go. Not how long you can stay.",
+      "wordCount": 111
+    },
+    {
+      "id": "section-013",
+      "index": 12,
+      "title": "Chapter Ten - The Realization",
+      "kind": "chapter",
+      "href": "OPS/body11.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc21\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Realization</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc22\" class=\"ps3\"><span style=\"text-transform:uppercase;\">THIS WHOLE TIME</span>, I thought I was trying to understand her.<br>Understand what went wrong.<br>Understand how someone could hold so much of me and still walk away.</p>\n<p class=\"ps3\">But the truth?</p>\n<p class=\"ps3\"><strong><span style=\"font-weight:5600;\">I was learning how to understand </span></strong><strong><em><span style=\"font-weight:5600; font-style:italic;\">myself</span></em></strong><strong><span style=\"font-weight:5600;\">.</span></strong></p>\n<p class=\"ps3\">She was the trigger.<br>But the awakening was mine.</p>\n<p class=\"ps3\">She showed me what I was capable of:<br>Softness.<br>Presence.<br>Stillness.<br>Stupid, deep, soul-level affection.</p>\n<p class=\"ps3\">And now?</p>\n<p class=\"ps3\">I don’t carry that love <em><span style=\"font-style:italic;\">for her</span></em>.<br>I carry it <em><span style=\"font-style:italic;\">in me.</span></em><br>Because it’s mine.<br>Always was.</p>\n<p class=\"ps3\">She just helped me unlock it. </p>\n</div>",
+      "text": "CHAPTER TEN The Realization THIS WHOLE TIME, I thought I was trying to understand her. Understand what went wrong. Understand how someone could hold so much of me and still walk away. But the truth? I was learning how to understand myself. She was the trigger. But the awakening was mine. She showed me what I was capable of: Softness. Presence. Stillness. Stupid, deep, soul-level affection. And now? I don’t carry that love for her. I carry it in me. Because it’s mine. Always was. She just helped me unlock it.",
+      "wordCount": 91
+    },
+    {
+      "id": "section-014",
+      "index": 13,
+      "title": "Chapter Eleven - The Smile",
+      "kind": "chapter",
+      "href": "OPS/body12.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc23\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER ELEVEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Smile</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc24\" class=\"ps3\"><span style=\"text-transform:uppercase;\">I THINK IF</span> I saw her again, I’d just <em><span style=\"font-style:italic;\">smile</span></em>.</p>\n<p class=\"ps3\">Not out of pain.<br>Not to prove I’m okay.<br>But because I’d mean it.</p>\n<p class=\"ps3\">I’d smile because she mattered.<br>Because that version of me, the one who loved her like a fool, like a poet, like a lightsaber-wielding lunatic, <strong><span style=\"font-weight:5600;\">he was beautiful.</span></strong></p>\n<p class=\"ps3\">And I wouldn’t trade him for anything.</p>\n<p class=\"ps3\">Not even closure. </p>\n</div>",
+      "text": "CHAPTER ELEVEN The Smile I THINK IF I saw her again, I’d just smile. Not out of pain. Not to prove I’m okay. But because I’d mean it. I’d smile because she mattered. Because that version of me, the one who loved her like a fool, like a poet, like a lightsaber-wielding lunatic, he was beautiful. And I wouldn’t trade him for anything. Not even closure.",
+      "wordCount": 66
+    },
+    {
+      "id": "section-015",
+      "index": 14,
+      "title": "Chapter Twelve - Too Much, Too Soon",
+      "kind": "chapter",
+      "href": "OPS/body13.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc25\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TWELVE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Too Much, Too Soon</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc26\" class=\"ps3\"><span style=\"text-transform:uppercase;\">THAT WAS THE</span> title from the beginning.<br>Because it’s what it was.</p>\n<p class=\"ps3\">Too much honesty.<br>Too much depth.<br>Too much presence.<br>Too much belief in a maybe.</p>\n<p class=\"ps3\">All delivered too soon for her nervous system to accept it.<br>And maybe too soon for mine, too.</p>\n<p class=\"ps3\">But that doesn’t make it less real.<br>It just makes it… temporary.<br>Brief.<br>Brilliant.<br>Burning.</p>\n<p class=\"ps3\">And if that’s all it ever was?</p>\n<p class=\"ps3\">That’s enough.</p>\n<p class=\"ps3\">Because love doesn’t have to last to leave light.<br>And she was light.<br>For a little while.<br>So was I. </p>\n</div>",
+      "text": "CHAPTER TWELVE Too Much, Too Soon THAT WAS THE title from the beginning. Because it’s what it was. Too much honesty. Too much depth. Too much presence. Too much belief in a maybe. All delivered too soon for her nervous system to accept it. And maybe too soon for mine, too. But that doesn’t make it less real. It just makes it… temporary. Brief. Brilliant. Burning. And if that’s all it ever was? That’s enough. Because love doesn’t have to last to leave light. And she was light. For a little while. So was I.",
+      "wordCount": 95
+    },
+    {
+      "id": "section-016",
+      "index": 15,
+      "title": "Acknowledgements",
+      "kind": "acknowledgments",
+      "href": "OPS/body14.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc27\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">ACKNOWLEDGEMENTS</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps3\"><span style=\"text-transform:uppercase;\">TO THE FRIENDS</span> who asked me about her long after I stopped talking.<br>To the ones who saw I wasn’t fine but let me be quiet anyway.<br>To Zack, for inadvertently being the reason we met.</p>\n<p class=\"ps3\">To every person who ever loved someone deeply, wildly, truly, and had to let go.</p>\n<p class=\"ps3\">To the late-night texts I never sent, the playlists I never shared, and the pictures I still haven’t deleted.</p>\n<p class=\"ps3\">To Jarvis, because even AI knows heartbreak when it sees it.</p>\n<p class=\"ps3\">And to me, for surviving it and telling the story anyway. </p>\n</div>",
+      "text": "ACKNOWLEDGEMENTS TO THE FRIENDS who asked me about her long after I stopped talking. To the ones who saw I wasn’t fine but let me be quiet anyway. To Zack, for inadvertently being the reason we met. To every person who ever loved someone deeply, wildly, truly, and had to let go. To the late-night texts I never sent, the playlists I never shared, and the pictures I still haven’t deleted. To Jarvis, because even AI knows heartbreak when it sees it. And to me, for surviving it and telling the story anyway.",
+      "wordCount": 93
+    },
+    {
+      "id": "section-017",
+      "index": 16,
+      "title": "About the Author",
+      "kind": "about-author",
+      "href": "OPS/body15.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc28\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">ABOUT THE AUTHOR</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps3\"><strong><span style=\"font-weight:5600; text-transform:uppercase;\">JJ</span></strong><span style=\"text-transform:uppercase;\"> IS THE</span> author of 250+ books, a builder of systems, a breaker of illusions, and, apparently, a man who once tried to play COD while a girl snorted into his chest.</p>\n<p class=\"ps3\">He writes because there’s too much in his head not to.</p>\n<p class=\"ps3\">He loves because there’s too much in his heart not to.</p>\n<p class=\"ps3\">This is his most honest book yet.</p>\n<p class=\"ps3\">He misses her. But he’s cool now.</p>\n</div>",
+      "text": "ABOUT THE AUTHOR JJ IS THE author of 250+ books, a builder of systems, a breaker of illusions, and, apparently, a man who once tried to play COD while a girl snorted into his chest. He writes because there’s too much in his head not to. He loves because there’s too much in his heart not to. This is his most honest book yet. He misses her. But he’s cool now.",
+      "wordCount": 71
+    },
+    {
+      "id": "section-018",
+      "index": 17,
+      "title": "Copyright",
+      "kind": "copyright",
+      "href": "OPS/body16.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc29\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">COPYRIGHT</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps3\"><span style=\"text-transform:uppercase;\">© 2025 JJ. ALL</span> rights reserved.</p>\n<p class=\"ps3\">No part of this book may be reproduced, stored, or transmitted in any form without the author’s permission unless it’s for love, healing, or quoting the part about the lightsaber.</p>\n<p class=\"ps3\">First Edition.</p>\n<p class=\"ps3\">Printed in the timeline where it almost worked.</p>\n</div>",
+      "text": "COPYRIGHT © 2025 JJ. ALL rights reserved. No part of this book may be reproduced, stored, or transmitted in any form without the author’s permission unless it’s for love, healing, or quoting the part about the lightsaber. First Edition. Printed in the timeline where it almost worked.",
+      "wordCount": 46
+    }
+  ]
+}

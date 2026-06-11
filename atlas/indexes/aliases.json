@@ -1,0 +1,74 @@
+{
+  "abstract_thinking": [
+    "abstraction"
+  ],
+  "causality": [
+    "cause"
+  ],
+  "electric_charge": [
+    "charge"
+  ],
+  "communicative_context": [
+    "context_of_communication"
+  ],
+  "thermodynamic_entropy": [
+    "entropy"
+  ],
+  "balance": [
+    "equilibrium"
+  ],
+  "supporting_evidence": [
+    "evidence"
+  ],
+  "biological_evolution": [
+    "evolution"
+  ],
+  "feedback_loop": [
+    "feedback"
+  ],
+  "physical_field": [
+    "field"
+  ],
+  "governmentality": [
+    "governance"
+  ],
+  "ibe": [
+    "inference_to_best_explanation"
+  ],
+  "system_input": [
+    "input"
+  ],
+  "social_institution": [
+    "institution"
+  ],
+  "measure": [
+    "measurement"
+  ],
+  "remembering": [
+    "memory"
+  ],
+  "mental_model": [
+    "model"
+  ],
+  "system_output": [
+    "output"
+  ],
+  "peer_review": [
+    "peer_review"
+  ],
+  "relationship": [
+    "relation"
+  ],
+  "self_organization": [
+    "self_organization"
+  ],
+  "condition": [
+    "state"
+  ],
+  "trade_off": [
+    "tradeoff"
+  ],
+  "well_being": [
+    "wellbeing"
+  ]
+}

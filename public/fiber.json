@@ -1,0 +1,227 @@
+{
+  "theme": {
+    "accent": "#1aa260",
+    "accent2": "#f4f7f2",
+    "frontier": "#d9272e",
+    "ink": "#07120f",
+    "font": "Segoe UI Variable Text, Segoe UI, Inter, Avenir Next, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+  },
+  "sections": {
+    "hero": true,
+    "quote": true,
+    "explanation": true,
+    "process": true,
+    "signup": true,
+    "speedTest": true,
+    "comparisonImages": false,
+    "faq": true,
+    "contact": true
+  },
+  "hero": {
+    "kicker": "JJ University",
+    "headline": "Hey, I'm JJ",
+    "body": "I'm a local fiber rep helping people compare their current internet bill with Kinetic and Frontier fiber.",
+    "jjuNote": "Also, yes. This little thing lives inside JJ University, my book site.",
+    "photoUrl": "/fiber/jj.JPG",
+    "photoAlt": "JJ, local fiber rep",
+    "cardNote": ""
+  },
+  "contact": {
+    "phoneLabel": "937-397-7710",
+    "phoneHref": "19373977710",
+    "email": "jamesjj0381@gmail.com",
+    "textBody": "Hey JJ, can you help me compare my current internet with fiber?"
+  },
+  "quote": {
+    "eyebrow": "Fiber quote builder",
+    "title": "Compare your bill in 30 seconds.",
+    "currentBillDefault": 100,
+    "currentBillPresets": [
+      80,
+      100,
+      120
+    ],
+    "defaultProviderId": "frontier",
+    "primaryPlanId": "fiber-1g",
+    "plans": [
+      {
+        "id": "fiber-300",
+        "name": "Fiber 300",
+        "speed": "300 Mbps",
+        "price": 34.99,
+        "badge": "Starter",
+        "details": "Good internet everyday for browsing, streaming, email, and smaller homes."
+      },
+      {
+        "id": "fiber-1g",
+        "name": "Fiber 1 Gig",
+        "speed": "1 Gig",
+        "price": 39.99,
+        "badge": "Best value",
+        "details": "The usual best fit for streaming, gaming, work, and homes with multiple devices."
+      },
+      {
+        "id": "fiber-2g",
+        "name": "Fiber 2 Gig",
+        "speed": "2 Gig",
+        "price": 59.99,
+        "badge": "Ultra fast",
+        "details": "Built for heavier households with a lot of devices running at once."
+      },
+      {
+        "id": "fiber-2g-max",
+        "name": "Fiber 2 Gig Max",
+        "speed": "2 Gig Max",
+        "price": 79.99,
+        "badge": "Whole-home setup",
+        "details": "Includes two extenders and an upgraded Wi-Fi setup."
+      }
+    ],
+    "modem": {
+      "enabled": true,
+      "selectedByDefault": true,
+      "name": "Standard modem rental",
+      "price": 10.99,
+      "description": "Defaulted on so the quote reflects the real monthly."
+    },
+    "youtubeTv": {
+      "enabled": true,
+      "selectedByDefault": false,
+      "name": "YouTube TV",
+      "price": 82.99,
+      "description": "Live TV without the cable box.",
+      "channels": [
+        "ABC",
+        "CBS",
+        "NBC",
+        "FOX",
+        "ESPN",
+        "NFL",
+        "TNT",
+        "TBS",
+        "FX",
+        "CNN",
+        "HGTV",
+        "Food"
+      ]
+    },
+    "mastercard": {
+      "enabled": true,
+      "selectedByDefault": true,
+      "name": "$100 Mastercard",
+      "amount": 100,
+      "description": "Received after 90 days. Tap this to use the promo on months four and five."
+    },
+    "disclaimer": "Estimate only. Final details will still need to be confirmed."
+  },
+  "explanation": {
+    "title": "Why Fiber Feels Different",
+    "bullets": [
+      "Your uploads get stronger for photos, files, camera feeds, and work calls.",
+      "Your connection is usually more reliable than older coax/cable lines.",
+      "Your phones, TVs, tablets, consoles, and laptops can all breathe more.",
+      "Your gaming, video calls, and streaming should feel smoother.",
+      "Your speed is less likely to sag during busy neighborhood hours."
+    ]
+  },
+  "process": {
+    "title": "How your switch usually works",
+    "steps": [
+      "You pick an install day.",
+      "A technician installs your fiber line.",
+      "You try it out for the first month.",
+      "You keep it if you like it.",
+      "You cancel the old service after fiber works.",
+      "You text JJ if anything gets confusing."
+    ]
+  },
+  "signup": {
+    "title": "What I need if you want to sign up",
+    "body": "Nothing weird. You give me the basics, then we do the verification steps and pick an install date before finalizing the order. ",
+    "requiredInfo": [
+      "First name",
+      "Last name",
+      "Phone number",
+      "Email",
+      "Date of birth"
+    ],
+    "verificationNote": "At sign up, I send a code to both your phone and email for verification. You can set up autopay through the link you receive or later in the app."
+  },
+  "speedTest": {
+    "title": "Want to check the current speed first?",
+    "body": "Run a speed test from where you normally use Wi-Fi.",
+    "links": [
+      {
+        "label": "Ookla Speedtest",
+        "url": "https://www.speedtest.net/",
+        "note": "Good quick screenshot for download, upload, and ping."
+      },
+      {
+        "label": "Fast.com",
+        "url": "https://fast.com/",
+        "note": "Simple streaming-focused check."
+      }
+    ]
+  },
+  "comparisonImages": {
+    "title": "Coax vs fiber examples",
+    "body": "Optional visual proof area for screenshots or diagrams. Keep hidden until the images are ready.",
+    "cards": [
+      {
+        "title": "Cable speed test",
+        "imageUrl": "",
+        "body": "Upload a current cable/coax speed-test screenshot."
+      },
+      {
+        "title": "Fiber speed test",
+        "imageUrl": "",
+        "body": "Upload a fiber speed-test screenshot or install result."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Normal questions before switching",
+    "items": [
+      {
+        "question": "Do I need to cancel Spectrum/Xfinity first?",
+        "answer": "Not at all. The cleanest move is to get fiber installed, make sure it works in you, then cancel the old service after that."
+      },
+      {
+        "question": "What happens to my TV or phone bundle?",
+        "answer": "We should look at the bundle before changing anything. Some people keep TV separate, some move to YouTube TV, and some only switch internet."
+      },
+      {
+        "question": "Is there a contract?",
+        "answer": "It's unlikely to have a contract, especially if you're coming from Spectrum, but we can confirm the current terms first."
+      },
+      {
+        "question": "Do I pay anything today?",
+        "answer": "There's no money due at sign-up. Your first bill doesn't come until at least 30 days after installation, depending on your plan."
+      },
+      {
+        "question": "What if I don't like it?",
+        "answer": "Try it for the first month, test your normal Wi-Fi spots, and keep the old service until you know fiber works for your home."
+      },
+      {
+        "question": "How long does installation take?",
+        "answer": "Most installs are handled in ~1-3 hours, but timing depends on the home, the fiber drop, and technician availability."
+      },
+      {
+        "question": "Can I talk it over with my spouse first?",
+        "answer": "Of course. Check out your current bill or run a speed test, compare the numbers, and come back to it when you're both ready."
+      },
+      {
+        "question": "What info is needed to sign up?",
+        "answer": "First name, last name, phone number, email, and date of birth. Phone and email both need verification codes during sign up."
+      },
+      {
+        "question": "Can I text JJ later?",
+        "answer": "Absolutely. Text your current bill, a speed test, or any questions you have and JJ can help you compare it without standing at the door."
+      },
+      {
+        "question": "What's the difference between fiber and cable?",
+        "answer": "Fiber uses a newer direct fiber line with stronger upload speeds and less shared-neighborhood slowdown than traditional coax cable."
+      }
+    ]
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "domains": [
+    {
+      "id": "foundations",
+      "title": "Foundations",
+      "subdomains": [
+        { "id": "core_primitives", "title": "Core Primitives" },
+        { "id": "systems_and_change", "title": "Systems and Change" },
+        { "id": "models_and_reasoning", "title": "Models and Reasoning" },
+        { "id": "evidence_and_measurement", "title": "Evidence and Measurement" },
+        { "id": "matter_and_energy", "title": "Matter and Energy" },
+        { "id": "life_and_mind", "title": "Life and Mind" },
+        { "id": "society_and_culture", "title": "Society and Culture" },
+        { "id": "history_and_time", "title": "History and Time" },
+        { "id": "values_and_action", "title": "Values and Action" },
+        { "id": "communication_and_meaning", "title": "Communication and Meaning" },
+        { "id": "quantity_and_form", "title": "Quantity and Form" }
+      ]
+    },
+    {
+      "id": "mathematics",
+      "title": "Mathematics",
+      "subdomains": [
+        { "id": "arithmetic", "title": "Arithmetic" },
+        { "id": "algebra", "title": "Algebra" },
+        { "id": "geometry", "title": "Geometry" },
+        { "id": "trigonometry", "title": "Trigonometry" },
+        { "id": "calculus", "title": "Calculus" },
+        { "id": "linear_algebra", "title": "Linear Algebra" },
+        { "id": "statistics", "title": "Statistics" },
+        { "id": "probability", "title": "Probability" },
+        { "id": "logic", "title": "Logic" },
+        { "id": "set_theory", "title": "Set Theory" },
+        { "id": "number_theory", "title": "Number Theory" },
+        { "id": "topology", "title": "Topology" },
+        { "id": "differential_equations", "title": "Differential Equations" },
+        { "id": "discrete_mathematics", "title": "Discrete Mathematics" },
+        { "id": "graph_theory", "title": "Graph Theory" }
+      ]
+    },
+    {
+      "id": "physics",
+      "title": "Physics",
+      "subdomains": [
+        { "id": "mechanics", "title": "Mechanics" },
+        { "id": "thermodynamics", "title": "Thermodynamics" },
+        { "id": "electromagnetism", "title": "Electromagnetism" },
+        { "id": "optics", "title": "Optics" },
+        { "id": "relativity", "title": "Relativity" },
+        { "id": "quantum_mechanics", "title": "Quantum Mechanics" },
+        { "id": "quantum_field_theory", "title": "Quantum Field Theory" },
+        { "id": "particle_physics", "title": "Particle Physics" },
+        { "id": "nuclear_physics", "title": "Nuclear Physics" },
+        { "id": "condensed_matter", "title": "Condensed Matter" },
+        { "id": "cosmology", "title": "Cosmology" },
+        { "id": "astrophysics", "title": "Astrophysics" }
+      ]
+    },
+    {
+      "id": "chemistry",
+      "title": "Chemistry",
+      "subdomains": [
+        { "id": "atomic_structure", "title": "Atomic Structure" },
+        { "id": "periodic_table", "title": "Periodic Table" },
+        { "id": "bonding", "title": "Bonding" },
+        { "id": "stoichiometry", "title": "Stoichiometry" },
+        { "id": "chemical_reactions", "title": "Chemical Reactions" },
+        { "id": "thermochemistry", "title": "Thermochemistry" },
+        { "id": "physical_chemistry", "title": "Physical Chemistry" },
+        { "id": "organic_chemistry", "title": "Organic Chemistry" },
+        { "id": "inorganic_chemistry", "title": "Inorganic Chemistry" },
+        { "id": "electrochemistry", "title": "Electrochemistry" },
+        { "id": "analytical_chemistry", "title": "Analytical Chemistry" },
+        { "id": "biochemistry", "title": "Biochemistry" },
+        { "id": "materials_chemistry", "title": "Materials Chemistry" }
+      ]
+    },
+    {
+      "id": "biology",
+      "title": "Biology",
+      "subdomains": [
+        { "id": "cell_biology", "title": "Cell Biology" },
+        { "id": "molecular_biology", "title": "Molecular Biology" },
+        { "id": "genetics", "title": "Genetics" },
+        { "id": "evolution", "title": "Evolution" },
+        { "id": "ecology", "title": "Ecology" },
+        { "id": "physiology", "title": "Physiology" },
+        { "id": "anatomy", "title": "Anatomy" },
+        { "id": "neuroscience", "title": "Neuroscience" },
+        { "id": "microbiology", "title": "Microbiology" },
+        { "id": "immunology", "title": "Immunology" },
+        { "id": "botany", "title": "Botany" },
+        { "id": "zoology", "title": "Zoology" },
+        { "id": "developmental_biology", "title": "Developmental Biology" }
+      ]
+    },
+    {
+      "id": "psychology",
+      "title": "Psychology",
+      "subdomains": [
+        { "id": "cognition", "title": "Cognition" },
+        { "id": "attention", "title": "Attention" },
+        { "id": "perception", "title": "Perception" },
+        { "id": "memory", "title": "Memory" },
+        { "id": "learning", "title": "Learning" },
+        { "id": "emotion", "title": "Emotion" },
+        { "id": "motivation", "title": "Motivation" },
+        { "id": "personality", "title": "Personality" },
+        { "id": "development", "title": "Development" },
+        { "id": "social_psychology", "title": "Social Psychology" },
+        { "id": "clinical_psychology", "title": "Clinical Psychology" },
+        { "id": "consciousness", "title": "Consciousness" },
+        { "id": "behavioral_psychology", "title": "Behavioral Psychology" },
+        { "id": "neuroscience", "title": "Neuroscience" }
+      ]
+    },
+    {
+      "id": "sociology",
+      "title": "Sociology",
+      "subdomains": [
+        { "id": "culture", "title": "Culture" },
+        { "id": "socialization", "title": "Socialization" },
+        { "id": "institutions", "title": "Institutions" },
+        { "id": "family", "title": "Family" },
+        { "id": "religion", "title": "Religion" },
+        { "id": "education", "title": "Education" },
+        { "id": "class", "title": "Class" },
+        { "id": "race_and_ethnicity", "title": "Race and Ethnicity" },
+        { "id": "gender", "title": "Gender" },
+        { "id": "crime_and_deviance", "title": "Crime and Deviance" },
+        { "id": "organizations", "title": "Organizations" },
+        { "id": "demographics", "title": "Demographics" },
+        { "id": "urbanization", "title": "Urbanization" },
+        { "id": "social_change", "title": "Social Change" },
+        { "id": "social_movements", "title": "Social Movements" }
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "subdomains": [
+        { "id": "prehistory", "title": "Prehistory" },
+        { "id": "ancient_history", "title": "Ancient History" },
+        { "id": "classical_history", "title": "Classical History" },
+        { "id": "medieval_history", "title": "Medieval History" },
+        { "id": "early_modern_history", "title": "Early Modern History" },
+        { "id": "modern_history", "title": "Modern History" },
+        { "id": "military_history", "title": "Military History" },
+        { "id": "economic_history", "title": "Economic History" },
+        { "id": "religious_history", "title": "Religious History" },
+        { "id": "intellectual_history", "title": "Intellectual History" },
+        { "id": "history_of_science", "title": "History of Science" },
+        { "id": "political_history", "title": "Political History" },
+        { "id": "cultural_history", "title": "Cultural History" },
+        { "id": "global_history", "title": "Global History" }
+      ]
+    },
+    {
+      "id": "economics",
+      "title": "Economics",
+      "subdomains": [
+        { "id": "microeconomics", "title": "Microeconomics" },
+        { "id": "macroeconomics", "title": "Macroeconomics" },
+        { "id": "money_and_banking", "title": "Money and Banking" },
+        { "id": "trade", "title": "Trade" },
+        { "id": "labor_economics", "title": "Labor Economics" },
+        { "id": "behavioral_economics", "title": "Behavioral Economics" },
+        { "id": "development_economics", "title": "Development Economics" },
+        { "id": "public_economics", "title": "Public Economics" },
+        { "id": "economic_history", "title": "Economic History" },
+        { "id": "political_economy", "title": "Political Economy" },
+        { "id": "finance", "title": "Finance" }
+      ]
+    },
+    {
+      "id": "philosophy",
+      "title": "Philosophy",
+      "subdomains": [
+        { "id": "metaphysics", "title": "Metaphysics" },
+        { "id": "epistemology", "title": "Epistemology" },
+        { "id": "ethics", "title": "Ethics" },
+        { "id": "logic", "title": "Logic" },
+        { "id": "philosophy_of_mind", "title": "Philosophy of Mind" },
+        { "id": "philosophy_of_science", "title": "Philosophy of Science" },
+        { "id": "political_philosophy", "title": "Political Philosophy" },
+        { "id": "aesthetics", "title": "Aesthetics" },
+        { "id": "philosophy_of_religion", "title": "Philosophy of Religion" },
+        { "id": "existentialism", "title": "Existentialism" },
+        { "id": "phenomenology", "title": "Phenomenology" }
+      ]
+    },
+    {
+      "id": "religion",
+      "title": "Religion",
+      "subdomains": [
+        { "id": "comparative_religion", "title": "Comparative Religion" },
+        { "id": "mythology", "title": "Mythology" },
+        { "id": "christianity", "title": "Christianity" },
+        { "id": "islam", "title": "Islam" },
+        { "id": "judaism", "title": "Judaism" },
+        { "id": "hinduism", "title": "Hinduism" },
+        { "id": "buddhism", "title": "Buddhism" },
+        { "id": "sikhism", "title": "Sikhism" },
+        { "id": "taoism", "title": "Taoism" },
+        { "id": "confucianism", "title": "Confucianism" },
+        { "id": "indigenous_religions", "title": "Indigenous Religions" },
+        { "id": "new_religious_movements", "title": "New Religious Movements" },
+        { "id": "scripture", "title": "Scripture" },
+        { "id": "ritual", "title": "Ritual" },
+        { "id": "theology", "title": "Theology" }
+      ]
+    },
+    {
+      "id": "political_science",
+      "title": "Political Science",
+      "subdomains": [
+        { "id": "government", "title": "Government" },
+        { "id": "state", "title": "State" },
+        { "id": "democracy", "title": "Democracy" },
+        { "id": "authoritarianism", "title": "Authoritarianism" },
+        { "id": "political_theory", "title": "Political Theory" },
+        { "id": "elections", "title": "Elections" },
+        { "id": "public_policy", "title": "Public Policy" },
+        { "id": "law", "title": "Law" },
+        { "id": "international_relations", "title": "International Relations" },
+        { "id": "geopolitics", "title": "Geopolitics" },
+        { "id": "political_economy", "title": "Political Economy" },
+        { "id": "war", "title": "War" },
+        { "id": "diplomacy", "title": "Diplomacy" }
+      ]
+    },
+    {
+      "id": "computer_science",
+      "title": "Computer Science",
+      "subdomains": [
+        { "id": "programming", "title": "Programming" },
+        { "id": "algorithms", "title": "Algorithms" },
+        { "id": "data_structures", "title": "Data Structures" },
+        { "id": "computer_architecture", "title": "Computer Architecture" },
+        { "id": "operating_systems", "title": "Operating Systems" },
+        { "id": "networking", "title": "Networking" },
+        { "id": "databases", "title": "Databases" },
+        { "id": "cybersecurity", "title": "Cybersecurity" },
+        { "id": "artificial_intelligence", "title": "Artificial Intelligence" },
+        { "id": "machine_learning", "title": "Machine Learning" },
+        { "id": "software_engineering", "title": "Software Engineering" },
+        { "id": "web_development", "title": "Web Development" },
+        { "id": "compilers", "title": "Compilers" },
+        { "id": "distributed_systems", "title": "Distributed Systems" }
+      ]
+    },
+    {
+      "id": "linguistics",
+      "title": "Linguistics",
+      "subdomains": [
+        { "id": "phonetics", "title": "Phonetics" },
+        { "id": "phonology", "title": "Phonology" },
+        { "id": "morphology", "title": "Morphology" },
+        { "id": "syntax", "title": "Syntax" },
+        { "id": "semantics", "title": "Semantics" },
+        { "id": "pragmatics", "title": "Pragmatics" },
+        { "id": "historical_linguistics", "title": "Historical Linguistics" },
+        { "id": "sociolinguistics", "title": "Sociolinguistics" },
+        { "id": "psycholinguistics", "title": "Psycholinguistics" },
+        { "id": "language_families", "title": "Language Families" },
+        { "id": "writing_systems", "title": "Writing Systems" }
+      ]
+    },
+    {
+      "id": "earth_science",
+      "title": "Earth Science",
+      "subdomains": [
+        { "id": "geology", "title": "Geology" },
+        { "id": "meteorology", "title": "Meteorology" },
+        { "id": "oceanography", "title": "Oceanography" },
+        { "id": "climate_science", "title": "Climate Science" },
+        { "id": "hydrology", "title": "Hydrology" },
+        { "id": "plate_tectonics", "title": "Plate Tectonics" },
+        { "id": "mineralogy", "title": "Mineralogy" },
+        { "id": "paleontology", "title": "Paleontology" },
+        { "id": "geography", "title": "Geography" },
+        { "id": "environmental_science", "title": "Environmental Science" }
+      ]
+    },
+    {
+      "id": "medicine",
+      "title": "Medicine",
+      "subdomains": [
+        { "id": "anatomy", "title": "Anatomy" },
+        { "id": "physiology", "title": "Physiology" },
+        { "id": "pathology", "title": "Pathology" },
+        { "id": "pharmacology", "title": "Pharmacology" },
+        { "id": "immunology", "title": "Immunology" },
+        { "id": "neurology", "title": "Neurology" },
+        { "id": "cardiology", "title": "Cardiology" },
+        { "id": "oncology", "title": "Oncology" },
+        { "id": "psychiatry", "title": "Psychiatry" },
+        { "id": "public_health", "title": "Public Health" },
+        { "id": "nutrition", "title": "Nutrition" },
+        { "id": "epidemiology", "title": "Epidemiology" }
+      ]
+    },
+    {
+      "id": "engineering",
+      "title": "Engineering",
+      "subdomains": [
+        { "id": "mechanical_engineering", "title": "Mechanical Engineering" },
+        { "id": "electrical_engineering", "title": "Electrical Engineering" },
+        { "id": "civil_engineering", "title": "Civil Engineering" },
+        { "id": "chemical_engineering", "title": "Chemical Engineering" },
+        { "id": "aerospace_engineering", "title": "Aerospace Engineering" },
+        { "id": "industrial_engineering", "title": "Industrial Engineering" },
+        { "id": "software_engineering", "title": "Software Engineering" },
+        { "id": "systems_engineering", "title": "Systems Engineering" },
+        { "id": "materials_engineering", "title": "Materials Engineering" }
+      ]
+    },
+    {
+      "id": "arts",
+      "title": "Arts",
+      "subdomains": [
+        { "id": "literature", "title": "Literature" },
+        { "id": "music", "title": "Music" },
+        { "id": "visual_art", "title": "Visual Art" },
+        { "id": "architecture", "title": "Architecture" },
+        { "id": "film", "title": "Film" },
+        { "id": "theater", "title": "Theater" },
+        { "id": "design", "title": "Design" },
+        { "id": "photography", "title": "Photography" },
+        { "id": "art_history", "title": "Art History" },
+        { "id": "media_studies", "title": "Media Studies" }
+      ]
+    }
+  ]
+}

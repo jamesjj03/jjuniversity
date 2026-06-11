@@ -1,0 +1,40 @@
+{
+  "id": "radiation",
+  "title": "Radiation",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "matter_and_energy"
+  ],
+  "summary": "Radiation is a foundational idea for describing physical things, forces, and transformations.",
+  "prerequisites": [
+    "matter",
+    "energy",
+    "measurement"
+  ],
+  "unlocks": [],
+  "related": [
+    "energy",
+    "frequency",
+    "gradient",
+    "matter",
+    "measurement"
+  ],
+  "aliases": [],
+  "tags": [
+    "energy",
+    "foundation",
+    "matter",
+    "matter_and_energy",
+    "measurement"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

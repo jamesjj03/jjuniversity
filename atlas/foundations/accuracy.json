@@ -1,0 +1,40 @@
+{
+  "id": "accuracy",
+  "title": "Accuracy",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "evidence_and_measurement"
+  ],
+  "summary": "Accuracy is a foundational idea for judging how well a claim or model is supported by reality.",
+  "prerequisites": [
+    "evidence",
+    "measurement",
+    "knowledge"
+  ],
+  "unlocks": [],
+  "related": [
+    "evidence",
+    "hypothesis",
+    "knowledge",
+    "measurement",
+    "precision"
+  ],
+  "aliases": [],
+  "tags": [
+    "evidence",
+    "evidence_and_measurement",
+    "foundation",
+    "knowledge",
+    "measurement"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

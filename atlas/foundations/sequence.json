@@ -1,0 +1,40 @@
+{
+  "id": "sequence",
+  "title": "Sequence",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "quantity_and_form"
+  ],
+  "summary": "Sequence is a foundational idea for reasoning about amount, form, order, and formal relationships.",
+  "prerequisites": [
+    "quantity",
+    "pattern",
+    "structure"
+  ],
+  "unlocks": [],
+  "related": [
+    "logic",
+    "optimization",
+    "pattern",
+    "quantity",
+    "structure"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "pattern",
+    "quantity",
+    "quantity_and_form",
+    "structure"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

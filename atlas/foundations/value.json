@@ -1,0 +1,76 @@
+{
+  "id": "value",
+  "title": "Value",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "core_primitives"
+  ],
+  "summary": "Value is a foundational connector for describing what exists, changes, relates, or becomes understandable.",
+  "prerequisites": [],
+  "unlocks": [
+    "autonomy",
+    "benefit",
+    "choice",
+    "community",
+    "conflict",
+    "consent",
+    "cooperation",
+    "culture",
+    "decision",
+    "dignity",
+    "duty",
+    "economy",
+    "equality",
+    "ethics",
+    "exchange",
+    "fairness",
+    "freedom",
+    "governance",
+    "group",
+    "harm",
+    "ideology",
+    "incentive",
+    "institution",
+    "justice",
+    "labor",
+    "law",
+    "legitimacy",
+    "morality",
+    "narrative",
+    "norm",
+    "obligation",
+    "preference",
+    "property",
+    "responsibility",
+    "rights",
+    "risk",
+    "ritual",
+    "role",
+    "society",
+    "status",
+    "symbol",
+    "technology",
+    "tradeoff",
+    "trust",
+    "wellbeing"
+  ],
+  "related": [
+    "language",
+    "power"
+  ],
+  "aliases": [],
+  "tags": [
+    "core_primitives",
+    "foundation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

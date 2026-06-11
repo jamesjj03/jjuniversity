@@ -1,0 +1,275 @@
+{
+  "id": "Jesus",
+  "slug": "jesus-was-really-really-nice",
+  "sourceFile": "Jesus.epub",
+  "title": "Jesus Was Really, Really Nice",
+  "creator": "James Johnson",
+  "description": "",
+  "language": "en",
+  "publisher": "",
+  "generatedAt": "2026-05-17T15:56:08.920Z",
+  "sectionCount": 26,
+  "wordCount": 1996,
+  "sections": [
+    {
+      "id": "section-001",
+      "index": 0,
+      "title": "Contents",
+      "kind": "toc",
+      "href": "OPS/contents.xhtml",
+      "html": "<nav epub:type=\"toc\" id=\"toc\">\n<h2 class=\"page-title\">Contents</h2>\n\n<ol>\n  <li><a href=\"body.xhtml\">Jesus Was Really, Really, Nice</a></li>\n  <li><a href=\"body1.xhtml\">Dedication</a></li>\n  <li><a href=\"body2.xhtml\">Chapter One - Smiling Jesus</a></li>\n  <li><a href=\"body3.xhtml\">Chapter Two - The Time He Shared His Lunch</a></li>\n  <li><a href=\"body4.xhtml\">Chapter Three - People Got Mad</a></li>\n  <li><a href=\"body5.xhtml\">Chapter Four - Jesus and the Weird Kids</a></li>\n  <li><a href=\"body6.xhtml\">Chapter Five - He Sat With Everyone</a></li>\n  <li><a href=\"body7.xhtml\">Chapter Six - No Gold Stars</a></li>\n  <li><a href=\"body8.xhtml\">Chapter Seven - Rules Are Fine, Love Is Better</a></li>\n  <li><a href=\"body9.xhtml\">Chapter Eight - The Guy Who Yelled Got a Hug</a></li>\n  <li><a href=\"body10.xhtml\">Chapter Nine - Jesus Walked Everywhere</a></li>\n  <li><a href=\"body11.xhtml\">Chapter Ten - He Wasn’t in a Rush</a></li>\n  <li><a href=\"body12.xhtml\">Chapter Eleven - Big Powers, Small Moments</a></li>\n  <li><a href=\"body13.xhtml\">Chapter Twelve - Happy Jesus Forgives Fast</a></li>\n  <li><a href=\"body14.xhtml\">Chapter Thirteen - He Didn’t Kick Anyone Out</a></li>\n  <li><a href=\"body15.xhtml\">Chapter Fourteen - Sometimes He Needed Quiet, Too</a></li>\n  <li><a href=\"body16.xhtml\">Chapter Fifteen - Jesus Would’ve Played Tag</a></li>\n  <li><a href=\"body17.xhtml\">Chapter Sixteen - He Cried Too</a></li>\n  <li><a href=\"body18.xhtml\">Chapter Seventeen - He Laughed, A Lot</a></li>\n  <li><a href=\"body19.xhtml\">Chapter Eighteen - The Miracle Was Kindness</a></li>\n  <li><a href=\"body20.xhtml\">Chapter Nineteen - What Would Happy Jesus Do?</a></li>\n  <li><a href=\"body21.xhtml\">Chapter Twenty - The End (But Not Really)</a></li>\n  <li><a href=\"body22.xhtml\">Acknowledgements</a></li>\n  <li><a href=\"body23.xhtml\">About the Author</a></li>\n  <li><a href=\"body24.xhtml\">Copyright</a></li>\n</ol>\n</nav>\n<nav epub:type=\"landmarks\" id=\"landmarks\" hidden=\"hidden\" style=\"display: none\">\n  <h2>Guide</h2>\n  <ol>\n    <li><a epub:type=\"toc\" href=\"contents.xhtml\">Contents</a></li>\n    <li><a epub:type=\"bodymatter\" href=\"body2.xhtml\">Start of Content</a></li>\n  </ol>\n</nav>",
+      "text": "Contents Jesus Was Really, Really, Nice Dedication Chapter One - Smiling Jesus Chapter Two - The Time He Shared His Lunch Chapter Three - People Got Mad Chapter Four - Jesus and the Weird Kids Chapter Five - He Sat With Everyone Chapter Six - No Gold Stars Chapter Seven - Rules Are Fine, Love Is Better Chapter Eight - The Guy Who Yelled Got a Hug Chapter Nine - Jesus Walked Everywhere Chapter Ten - He Wasn’t in a Rush Chapter Eleven - Big Powers, Small Moments Chapter Twelve - Happy Jesus Forgives Fast Chapter Thirteen - He Didn’t Kick Anyone Out Chapter Fourteen - Sometimes He Needed Quiet, Too Chapter Fifteen - Jesus Would’ve Played Tag Chapter Sixteen - He Cried Too Chapter Seventeen - He Laughed, A Lot Chapter Eighteen - The Miracle Was Kindness Chapter Nineteen - What Would Happy Jesus Do? Chapter Twenty - The End (But Not Really) Acknowledgements About the Author Copyright Guide Contents Start of Content",
+      "wordCount": 144
+    },
+    {
+      "id": "section-002",
+      "index": 1,
+      "title": "Jesus Was Really, Really, Nice",
+      "kind": "chapter",
+      "href": "OPS/body.xhtml",
+      "html": "<p id=\"doc1\" class=\"ps1\"><strong><span style=\"font-weight:5600;\">Jesus Was Really, Really Nice</span></strong><br><em><span style=\"font-style:italic;\">A Gentle Book About Big Love</span></em><br>by JJ </p>",
+      "text": "Jesus Was Really, Really Nice A Gentle Book About Big Love by JJ",
+      "wordCount": 13
+    },
+    {
+      "id": "section-003",
+      "index": 2,
+      "title": "Dedication",
+      "kind": "dedication",
+      "href": "OPS/body1.xhtml",
+      "html": "<p id=\"doc2\" class=\"ps1\">For every kid who thought they had to be perfect to be loved.<br>You already are.<br>– JJ </p>",
+      "text": "For every kid who thought they had to be perfect to be loved. You already are. – JJ",
+      "wordCount": 17
+    },
+    {
+      "id": "section-004",
+      "index": 3,
+      "title": "Chapter One - Smiling Jesus",
+      "kind": "chapter",
+      "href": "OPS/body2.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc3\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER ONE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Smiling Jesus</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc4\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS SMILED A</span> lot.<br>Not because everything was easy.<br>But because he loved people.</p>\n<p class=\"ps2\">He smiled when someone shared their snack.<br>He smiled when kids danced in the dirt.<br>He probably even smiled when someone made a funny face during prayer.</p>\n<p class=\"ps2\">He didn’t smile to look polite.<br>He smiled because he meant it.</p>\n<p class=\"ps2\">Happy Jesus smiled like the world was still good —<br>Because deep down,<br>He believed it was. </p>\n</div>",
+      "text": "CHAPTER ONE Smiling Jesus JESUS SMILED A lot. Not because everything was easy. But because he loved people. He smiled when someone shared their snack. He smiled when kids danced in the dirt. He probably even smiled when someone made a funny face during prayer. He didn’t smile to look polite. He smiled because he meant it. Happy Jesus smiled like the world was still good — Because deep down, He believed it was.",
+      "wordCount": 73
+    },
+    {
+      "id": "section-005",
+      "index": 4,
+      "title": "Chapter Two - The Time He Shared His Lunch",
+      "kind": "chapter",
+      "href": "OPS/body3.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc5\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TWO</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Time He Shared His Lunch</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc6\" class=\"ps2\"><span style=\"text-transform:uppercase;\">ONE TIME, A</span> little boy brought Jesus his lunch.<br>It was just a few fish and some bread.<br>Not enough to feed a crowd. Not even close.</p>\n<p class=\"ps2\">But Jesus didn’t laugh.<br>He didn’t say, <em><span style=\"font-style:italic;\">“That’s not enough.”</span></em><br>He said, <em><span style=\"font-style:italic;\">“Perfect.”</span></em></p>\n<p class=\"ps2\">He broke the bread, blessed it, and passed it around.<br>And somehow…<br><strong><em><span style=\"font-weight:5600; font-style:italic;\">Everyone ate.</span></em></strong></p>\n<p class=\"ps2\">Thousands of people.<br>Full hearts. Full bellies.<br>All from one small lunch someone was willing to share.</p>\n<p class=\"ps2\">Jesus didn’t need a feast.<br>He just needed <strong><span style=\"font-weight:5600;\">someone willing to give what they had.</span></strong></p>\n</div>",
+      "text": "CHAPTER TWO The Time He Shared His Lunch ONE TIME, A little boy brought Jesus his lunch. It was just a few fish and some bread. Not enough to feed a crowd. Not even close. But Jesus didn’t laugh. He didn’t say, “That’s not enough.” He said, “Perfect.” He broke the bread, blessed it, and passed it around. And somehow… Everyone ate. Thousands of people. Full hearts. Full bellies. All from one small lunch someone was willing to share. Jesus didn’t need a feast. He just needed someone willing to give what they had.",
+      "wordCount": 94
+    },
+    {
+      "id": "section-006",
+      "index": 5,
+      "title": "Chapter Three - People Got Mad",
+      "kind": "chapter",
+      "href": "OPS/body4.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc7\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER THREE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">People Got Mad</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc8\" class=\"ps2\"><span style=\"text-transform:uppercase;\">SOME PEOPLE DIDN’T</span> like Jesus.<br>Not because he was mean.<br>But because he was <em><span style=\"font-style:italic;\">too kind.</span></em></p>\n<p class=\"ps2\">He let everyone sit with him —<br>Poor people, sick people, people who messed up.<br>People who didn’t follow the rules.</p>\n<p class=\"ps2\">That made the rule-makers angry.<br>They said he was being <em><span style=\"font-style:italic;\">too soft.</span></em><br><em><span style=\"font-style:italic;\">Too free.</span></em><br><em><span style=\"font-style:italic;\">Too forgiving.</span></em></p>\n<p class=\"ps2\">But Jesus didn’t flinch.<br>He didn’t argue.<br>He just kept being love anyway.</p>\n<p class=\"ps2\">And sometimes, love makes people mad.<br>But he never stopped loving.</p>\n<p class=\"ps2\">Not even once. </p>\n</div>",
+      "text": "CHAPTER THREE People Got Mad SOME PEOPLE DIDN’T like Jesus. Not because he was mean. But because he was too kind. He let everyone sit with him — Poor people, sick people, people who messed up. People who didn’t follow the rules. That made the rule-makers angry. They said he was being too soft. Too free. Too forgiving. But Jesus didn’t flinch. He didn’t argue. He just kept being love anyway. And sometimes, love makes people mad. But he never stopped loving. Not even once.",
+      "wordCount": 84
+    },
+    {
+      "id": "section-007",
+      "index": 6,
+      "title": "Chapter Four - Jesus and the Weird Kids",
+      "kind": "chapter",
+      "href": "OPS/body5.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc9\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER FOUR</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Jesus and the Weird Kids</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc10\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS LIKED THE</span> weird kids.<br>The quiet ones.<br>The loud ones.<br>The ones who drew pictures during serious talks.</p>\n<p class=\"ps2\">He liked the kids who asked too many questions.<br>The ones who made up silly songs.<br>The ones who didn’t always sit still.</p>\n<p class=\"ps2\">He saw their sparkle.<br>He saw their heart.<br>He saw their <em><span style=\"font-style:italic;\">realness.</span></em></p>\n<p class=\"ps2\">And while other people said, <em><span style=\"font-style:italic;\">“Be normal,”</span></em><br>Jesus said,</p>\n<p class=\"ps3\">“Come sit by me.”</p>\n<p class=\"ps2\">Because Jesus didn’t want perfect kids.<br>He wanted the ones <em><span style=\"font-style:italic;\">being themselves.</span></em> </p>\n</div>",
+      "text": "CHAPTER FOUR Jesus and the Weird Kids JESUS LIKED THE weird kids. The quiet ones. The loud ones. The ones who drew pictures during serious talks. He liked the kids who asked too many questions. The ones who made up silly songs. The ones who didn’t always sit still. He saw their sparkle. He saw their heart. He saw their realness. And while other people said, “Be normal,” Jesus said, “Come sit by me.” Because Jesus didn’t want perfect kids. He wanted the ones being themselves.",
+      "wordCount": 86
+    },
+    {
+      "id": "section-008",
+      "index": 7,
+      "title": "Chapter Five - He Sat With Everyone",
+      "kind": "chapter",
+      "href": "OPS/body6.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc11\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER FIVE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">He Sat With Everyone</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc12\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS DIDN’T HAVE</span> a favorites list.<br>He didn’t make charts.<br>He didn’t care who had the best clothes or the cleanest hands.</p>\n<p class=\"ps2\">He sat with people who were rich.<br>He sat with people who were poor.<br>He sat with people who were loud, tired, silly, serious, sick, scared, quiet, forgotten.</p>\n<p class=\"ps2\">If there was space on the ground,<br>He’d sit there too.</p>\n<p class=\"ps2\">He didn’t ask, <em><span style=\"font-style:italic;\">“Are you good enough?”</span></em><br>He just made sure <em><span style=\"font-style:italic;\">you knew you belonged.</span></em></p>\n<p class=\"ps2\">Everyone had a place near Jesus.<br>Even you. </p>\n</div>",
+      "text": "CHAPTER FIVE He Sat With Everyone JESUS DIDN’T HAVE a favorites list. He didn’t make charts. He didn’t care who had the best clothes or the cleanest hands. He sat with people who were rich. He sat with people who were poor. He sat with people who were loud, tired, silly, serious, sick, scared, quiet, forgotten. If there was space on the ground, He’d sit there too. He didn’t ask, “Are you good enough?” He just made sure you knew you belonged. Everyone had a place near Jesus. Even you.",
+      "wordCount": 90
+    },
+    {
+      "id": "section-009",
+      "index": 8,
+      "title": "Chapter Six - No Gold Stars",
+      "kind": "chapter",
+      "href": "OPS/body7.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc13\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER SIX</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">No Gold Stars</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc14\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS DIDN’T HAND</span> out gold stars.<br>He wasn’t keeping score.<br>He didn’t say, <em><span style=\"font-style:italic;\">“Be the best or else.”</span></em></p>\n<p class=\"ps2\">He cared more about hearts than charts.</p>\n<p class=\"ps2\">Some people prayed fancy.<br>Some gave big gifts.<br>Some talked loud about how holy they were.</p>\n<p class=\"ps2\">Jesus nodded.<br>Then he sat beside the quiet kid in the back<br>who gave someone a hug when no one was looking.</p>\n<p class=\"ps2\">He didn’t say, <em><span style=\"font-style:italic;\">“You’re better.”</span></em><br>He said, <em><span style=\"font-style:italic;\">“That… was love.”</span></em></p>\n<p class=\"ps2\">No gold star could ever mean more than that.</p>\n</div>",
+      "text": "CHAPTER SIX No Gold Stars JESUS DIDN’T HAND out gold stars. He wasn’t keeping score. He didn’t say, “Be the best or else.” He cared more about hearts than charts. Some people prayed fancy. Some gave big gifts. Some talked loud about how holy they were. Jesus nodded. Then he sat beside the quiet kid in the back who gave someone a hug when no one was looking. He didn’t say, “You’re better.” He said, “That… was love.” No gold star could ever mean more than that.",
+      "wordCount": 87
+    },
+    {
+      "id": "section-010",
+      "index": 9,
+      "title": "Chapter Seven - Rules Are Fine, Love Is Better",
+      "kind": "chapter",
+      "href": "OPS/body8.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc15\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER SEVEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Rules Are Fine, Love Is Better</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc16\" class=\"ps2\"><span style=\"text-transform:uppercase;\">RULES ARE FINE</span>.<br>They help us stay safe.<br>They help us take turns.<br>They help us know what to do next.</p>\n<p class=\"ps2\">Jesus didn’t hate rules.<br>He just didn’t <em><span style=\"font-style:italic;\">worship</span></em> them.</p>\n<p class=\"ps2\">Some people followed every single rule —<br>but forgot to be kind.</p>\n<p class=\"ps2\">And Jesus?<br>He picked kindness every time.</p>\n<p class=\"ps2\">He said love was the <strong><span style=\"font-weight:5600;\">biggest rule.</span></strong><br>The one that wrapped around all the others<br>like a big soft blanket.</p>\n<p class=\"ps2\">If it isn’t loving,<br>Jesus probably wouldn’t call it a rule at all. </p>\n</div>",
+      "text": "CHAPTER SEVEN Rules Are Fine, Love Is Better RULES ARE FINE. They help us stay safe. They help us take turns. They help us know what to do next. Jesus didn’t hate rules. He just didn’t worship them. Some people followed every single rule — but forgot to be kind. And Jesus? He picked kindness every time. He said love was the biggest rule. The one that wrapped around all the others like a big soft blanket. If it isn’t loving, Jesus probably wouldn’t call it a rule at all.",
+      "wordCount": 89
+    },
+    {
+      "id": "section-011",
+      "index": 10,
+      "title": "Chapter Eight - The Guy Who Yelled Got a Hug",
+      "kind": "chapter",
+      "href": "OPS/body9.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc17\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER EIGHT</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Guy Who Yelled Got a Hug</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc18\" class=\"ps2\"><span style=\"text-transform:uppercase;\">ONE DAY, A</span> man yelled at Jesus.<br>He said mean things.<br>Loud things.<br>Scary things.</p>\n<p class=\"ps2\">Everyone waited to see what Jesus would do.<br>Would he yell back?<br>Would he make the man go away?</p>\n<p class=\"ps2\">But Jesus didn’t yell.<br>He didn’t shame.<br>He didn’t punish.</p>\n<p class=\"ps2\">He looked at the man,<br><em><span style=\"font-style:italic;\">really looked.</span></em></p>\n<p class=\"ps2\">Then he hugged him.</p>\n<p class=\"ps2\">Because sometimes, when someone yells…<br>what they really need<br>is to feel safe enough to stop.</p>\n</div>",
+      "text": "CHAPTER EIGHT The Guy Who Yelled Got a Hug ONE DAY, A man yelled at Jesus. He said mean things. Loud things. Scary things. Everyone waited to see what Jesus would do. Would he yell back? Would he make the man go away? But Jesus didn’t yell. He didn’t shame. He didn’t punish. He looked at the man, really looked. Then he hugged him. Because sometimes, when someone yells… what they really need is to feel safe enough to stop.",
+      "wordCount": 80
+    },
+    {
+      "id": "section-012",
+      "index": 11,
+      "title": "Chapter Nine - Jesus Walked Everywhere",
+      "kind": "chapter",
+      "href": "OPS/body10.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc19\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER NINE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Jesus Walked Everywhere</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc20\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS COULD’VE FLOWN</span>.<br>He could’ve teleported.<br>He could’ve ridden a glowing horse with rocket sandals.</p>\n<p class=\"ps2\">But he didn’t.</p>\n<p class=\"ps2\">He walked.<br>Everywhere.</p>\n<p class=\"ps2\">It took longer.<br>It made his feet dirty.<br>Sometimes he got tired.</p>\n<p class=\"ps2\">But walking let him meet people.<br>Talk to them.<br>Listen to their stories.</p>\n<p class=\"ps2\">Jesus didn’t rush past life.<br>He <em><span style=\"font-style:italic;\">walked with it.</span></em><br>One step at a time. </p>\n</div>",
+      "text": "CHAPTER NINE Jesus Walked Everywhere JESUS COULD’VE FLOWN. He could’ve teleported. He could’ve ridden a glowing horse with rocket sandals. But he didn’t. He walked. Everywhere. It took longer. It made his feet dirty. Sometimes he got tired. But walking let him meet people. Talk to them. Listen to their stories. Jesus didn’t rush past life. He walked with it. One step at a time.",
+      "wordCount": 65
+    },
+    {
+      "id": "section-013",
+      "index": 12,
+      "title": "Chapter Ten - He Wasn’t in a Rush",
+      "kind": "chapter",
+      "href": "OPS/body11.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc21\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">He Wasn’t in a Rush</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc22\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS NEVER HURRIED</span>.</p>\n<p class=\"ps2\">He didn’t tap his foot.<br>He didn’t say, <em><span style=\"font-style:italic;\">“Come on, come on.”</span></em><br>He didn’t roll his eyes when someone took a little longer.</p>\n<p class=\"ps2\">He moved slow enough to notice the hurting.<br>He paused when someone needed a breath.<br>He stayed longer when someone felt alone.</p>\n<p class=\"ps2\">While everyone else chased the next big thing,<br>Jesus stayed right here.</p>\n<p class=\"ps2\">Right now.<br>With whoever needed him most.</p>\n<p class=\"ps2\">Because love doesn’t rush.<br>It waits. </p>\n</div>",
+      "text": "CHAPTER TEN He Wasn’t in a Rush JESUS NEVER HURRIED. He didn’t tap his foot. He didn’t say, “Come on, come on.” He didn’t roll his eyes when someone took a little longer. He moved slow enough to notice the hurting. He paused when someone needed a breath. He stayed longer when someone felt alone. While everyone else chased the next big thing, Jesus stayed right here. Right now. With whoever needed him most. Because love doesn’t rush. It waits.",
+      "wordCount": 80
+    },
+    {
+      "id": "section-014",
+      "index": 13,
+      "title": "Chapter Eleven - Big Powers, Small Moments",
+      "kind": "chapter",
+      "href": "OPS/body12.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc23\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER ELEVEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Big Powers, Small Moments</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc24\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS HAD BIG</span> powers.<br>Like, <em><span style=\"font-style:italic;\">really</span></em> big.</p>\n<p class=\"ps2\">He could calm storms.<br>Heal pain.<br>Feed a crowd with a lunchbox.</p>\n<p class=\"ps2\">But most of the time?<br>He just sat with someone who was sad.<br>Listened to someone who was scared.<br>Laughed at a really bad joke.</p>\n<p class=\"ps2\">He didn’t need thunder and lightning.<br>He just needed <em><span style=\"font-style:italic;\">love.</span></em></p>\n<p class=\"ps2\">Because the biggest power Jesus had…<br>was showing up when it mattered most.</p>\n</div>",
+      "text": "CHAPTER ELEVEN Big Powers, Small Moments JESUS HAD BIG powers. Like, really big. He could calm storms. Heal pain. Feed a crowd with a lunchbox. But most of the time? He just sat with someone who was sad. Listened to someone who was scared. Laughed at a really bad joke. He didn’t need thunder and lightning. He just needed love. Because the biggest power Jesus had… was showing up when it mattered most.",
+      "wordCount": 73
+    },
+    {
+      "id": "section-015",
+      "index": 14,
+      "title": "Chapter Twelve - Happy Jesus Forgives Fast",
+      "kind": "chapter",
+      "href": "OPS/body13.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc25\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TWELVE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Happy Jesus Forgives Fast</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc26\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS DIDN’T STAY</span> mad.<br>Even when someone hurt him.<br>Even when they lied, or yelled, or ran away.</p>\n<p class=\"ps2\">He felt it, sure.<br>But then he let it go.</p>\n<p class=\"ps2\">Not because he forgot —<br>but because he <em><span style=\"font-style:italic;\">loved more</span></em> than he hurt.</p>\n<p class=\"ps2\">He forgave before people even said sorry.<br>He forgave while they were still being mean.</p>\n<p class=\"ps2\">Happy Jesus didn’t wait for perfect.<br>He forgave fast,<br>so love could come back sooner. </p>\n</div>",
+      "text": "CHAPTER TWELVE Happy Jesus Forgives Fast JESUS DIDN’T STAY mad. Even when someone hurt him. Even when they lied, or yelled, or ran away. He felt it, sure. But then he let it go. Not because he forgot — but because he loved more than he hurt. He forgave before people even said sorry. He forgave while they were still being mean. Happy Jesus didn’t wait for perfect. He forgave fast, so love could come back sooner.",
+      "wordCount": 76
+    },
+    {
+      "id": "section-016",
+      "index": 15,
+      "title": "Chapter Thirteen - He Didn’t Kick Anyone Out",
+      "kind": "chapter",
+      "href": "OPS/body14.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc27\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER THIRTEEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">He Didn’t Kick Anyone Out</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc28\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS DIDN’T LOCK</span> the doors.<br>He didn’t say, <em><span style=\"font-style:italic;\">“You’re too late.”</span></em><br>He didn’t ask for a checklist before letting someone sit with him.</p>\n<p class=\"ps2\">People messed up.<br>He still made room.<br>People doubted him.<br>He still offered bread.<br>People walked away.<br>He still waved when they passed by again.</p>\n<p class=\"ps2\">Happy Jesus didn’t guard the gate.<br>He <em><span style=\"font-style:italic;\">opened it.</span></em></p>\n<p class=\"ps2\">Because love doesn’t lock people out.<br>It says, <em><span style=\"font-style:italic;\">“You still belong.”</span></em> </p>\n</div>",
+      "text": "CHAPTER THIRTEEN He Didn’t Kick Anyone Out JESUS DIDN’T LOCK the doors. He didn’t say, “You’re too late.” He didn’t ask for a checklist before letting someone sit with him. People messed up. He still made room. People doubted him. He still offered bread. People walked away. He still waved when they passed by again. Happy Jesus didn’t guard the gate. He opened it. Because love doesn’t lock people out. It says, “You still belong.”",
+      "wordCount": 75
+    },
+    {
+      "id": "section-017",
+      "index": 16,
+      "title": "Chapter Fourteen - Sometimes He Needed Quiet, Too",
+      "kind": "chapter",
+      "href": "OPS/body15.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc29\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER FOURTEEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Sometimes He Needed Quiet, Too</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc30\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS LOVED PEOPLE</span>.<br>But sometimes, he got tired.</p>\n<p class=\"ps2\">So he went up a hill.<br>Or sat by the water.<br>Or found a quiet place to pray.</p>\n<p class=\"ps2\">He didn’t disappear forever.<br>He just needed space to feel his own heart again.</p>\n<p class=\"ps2\">Happy Jesus wasn’t a superhero.<br>He was a human, too.<br>And humans need quiet to stay soft.</p>\n<p class=\"ps2\">If Jesus needed breaks,<br>You’re allowed to take them too. </p>\n</div>",
+      "text": "CHAPTER FOURTEEN Sometimes He Needed Quiet, Too JESUS LOVED PEOPLE. But sometimes, he got tired. So he went up a hill. Or sat by the water. Or found a quiet place to pray. He didn’t disappear forever. He just needed space to feel his own heart again. Happy Jesus wasn’t a superhero. He was a human, too. And humans need quiet to stay soft. If Jesus needed breaks, You’re allowed to take them too.",
+      "wordCount": 74
+    },
+    {
+      "id": "section-018",
+      "index": 17,
+      "title": "Chapter Fifteen - Jesus Would’ve Played Tag",
+      "kind": "chapter",
+      "href": "OPS/body16.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc31\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER FIFTEEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Jesus Would’ve Played Tag</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc32\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS DIDN’T JUST</span> preach.<br>He played.</p>\n<p class=\"ps2\">He would’ve run in the grass.<br>He would’ve laughed when you almost tagged him.<br>He might’ve even let you win.</p>\n<p class=\"ps2\">He liked joy.<br>He liked friends.<br>He liked moments that made hearts feel free.</p>\n<p class=\"ps2\">If someone fell down,<br>He’d help them up —<br>then ask if they wanted another turn.</p>\n<p class=\"ps2\">Happy Jesus wasn’t above fun.<br>He was <em><span style=\"font-style:italic;\">right in the middle of it.</span></em></p>\n</div>",
+      "text": "CHAPTER FIFTEEN Jesus Would’ve Played Tag JESUS DIDN’T JUST preach. He played. He would’ve run in the grass. He would’ve laughed when you almost tagged him. He might’ve even let you win. He liked joy. He liked friends. He liked moments that made hearts feel free. If someone fell down, He’d help them up — then ask if they wanted another turn. Happy Jesus wasn’t above fun. He was right in the middle of it.",
+      "wordCount": 74
+    },
+    {
+      "id": "section-019",
+      "index": 18,
+      "title": "Chapter Sixteen - He Cried Too",
+      "kind": "chapter",
+      "href": "OPS/body17.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc33\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER SIXTEEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">He Cried Too</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc34\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS CRIED.</span></p>\n<p class=\"ps2\"><span style=\"text-transform:uppercase;\">NOT</span> just little sniffles.<br>Real tears.</p>\n<p class=\"ps2\">He cried when his friend died.<br>He cried when people hurt.<br>He cried when no one understood him.</p>\n<p class=\"ps2\">Even with all his power,<br>Even with all his love,<br>He still <em><span style=\"font-style:italic;\">felt it all.</span></em></p>\n<p class=\"ps2\">Happy Jesus wasn’t afraid to feel sad.<br>He let the tears come —<br>and he never told anyone else to hide theirs.</p>\n<p class=\"ps2\">Because being soft…<br>was part of being strong.</p>\n</div>",
+      "text": "CHAPTER SIXTEEN He Cried Too JESUS CRIED. NOT just little sniffles. Real tears. He cried when his friend died. He cried when people hurt. He cried when no one understood him. Even with all his power, Even with all his love, He still felt it all. Happy Jesus wasn’t afraid to feel sad. He let the tears come — and he never told anyone else to hide theirs. Because being soft… was part of being strong.",
+      "wordCount": 75
+    },
+    {
+      "id": "section-020",
+      "index": 19,
+      "title": "Chapter Seventeen - He Laughed, A Lot",
+      "kind": "chapter",
+      "href": "OPS/body18.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc35\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER SEVENTEEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">He Laughed, A Lot</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc36\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS LAUGHED.<br></span><em><span style=\"font-style:italic; text-transform:uppercase;\">LIKE</span></em><em><span style=\"font-style:italic;\">, a lot.</span></em></p>\n<p class=\"ps2\">He laughed at silly stories.<br>He laughed when kids made up wild games.<br>He laughed when someone tripped —<br>and then helped them up, still giggling.</p>\n<p class=\"ps2\">He wasn’t stiff.<br>He wasn’t serious all the time.</p>\n<p class=\"ps2\">He told jokes.<br>He smiled with his whole face.<br>He loved joy so much,<br>people followed him just to <em><span style=\"font-style:italic;\">feel it.</span></em></p>\n<p class=\"ps2\">Happy Jesus wasn’t just holy.<br>He was <em><span style=\"font-style:italic;\">happy.</span></em></p>\n<p class=\"ps2\">And that joy?<br>It’s still echoing. </p>\n</div>",
+      "text": "CHAPTER SEVENTEEN He Laughed, A Lot JESUS LAUGHED. LIKE, a lot. He laughed at silly stories. He laughed when kids made up wild games. He laughed when someone tripped — and then helped them up, still giggling. He wasn’t stiff. He wasn’t serious all the time. He told jokes. He smiled with his whole face. He loved joy so much, people followed him just to feel it. Happy Jesus wasn’t just holy. He was happy. And that joy? It’s still echoing.",
+      "wordCount": 80
+    },
+    {
+      "id": "section-021",
+      "index": 20,
+      "title": "Chapter Eighteen - The Miracle Was Kindness",
+      "kind": "chapter",
+      "href": "OPS/body19.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc37\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER EIGHTEEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Miracle Was Kindness</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc38\" class=\"ps2\"><span style=\"text-transform:uppercase;\">JESUS DID BIG</span> things.<br>Walked on water.<br>Healed the sick.<br>Fed thousands.</p>\n<p class=\"ps2\">But the real miracle?<br>It wasn’t the magic.<br>It was the <em><span style=\"font-style:italic;\">kindness.</span></em></p>\n<p class=\"ps2\">The way he looked at people.<br>The way he listened.<br>The way he stayed soft in a world that wanted him hard.</p>\n<p class=\"ps2\">That’s what changed things.<br>Not lightning from the sky —<br>but love from the heart.</p>\n<p class=\"ps2\">Happy Jesus didn’t need a stage.<br>He just needed a moment…<br>to show someone they mattered.</p>\n</div>",
+      "text": "CHAPTER EIGHTEEN The Miracle Was Kindness JESUS DID BIG things. Walked on water. Healed the sick. Fed thousands. But the real miracle? It wasn’t the magic. It was the kindness. The way he looked at people. The way he listened. The way he stayed soft in a world that wanted him hard. That’s what changed things. Not lightning from the sky — but love from the heart. Happy Jesus didn’t need a stage. He just needed a moment… to show someone they mattered.",
+      "wordCount": 82
+    },
+    {
+      "id": "section-022",
+      "index": 21,
+      "title": "Chapter Nineteen - What Would Happy Jesus Do?",
+      "kind": "chapter",
+      "href": "OPS/body20.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc39\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER NINETEEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">What Would Happy Jesus Do?</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc40\" class=\"ps2\"><span style=\"text-transform:uppercase;\">WOULD HE YELL</span>?<br>Would he brag?<br>Would he walk away?</p>\n<p class=\"ps2\">Nope.</p>\n<p class=\"ps2\">Happy Jesus would sit beside the kid with no friends.<br>He’d share his snacks.<br>He’d listen before speaking.<br>He’d laugh at your weird joke — even if it wasn’t funny.</p>\n<p class=\"ps2\">He’d remind you that trying again is brave.<br>That saying sorry is strong.<br>That love is <em><span style=\"font-style:italic;\">always</span></em> worth it.</p>\n<p class=\"ps2\">So the next time you wonder what to do…<br>Just ask:</p>\n<p class=\"ps3\"><em><span style=\"font-style:italic;\">“What would Happy Jesus do?”</span></em></p>\n<p class=\"ps2\">Then do that.<br>Even if it’s small.<br>Even if it’s hard.</p>\n<p class=\"ps2\">That’s how you change the world<br><strong><em><span style=\"font-weight:5600; font-style:italic;\">without shouting.</span></em></strong> </p>\n</div>",
+      "text": "CHAPTER NINETEEN What Would Happy Jesus Do? WOULD HE YELL? Would he brag? Would he walk away? Nope. Happy Jesus would sit beside the kid with no friends. He’d share his snacks. He’d listen before speaking. He’d laugh at your weird joke — even if it wasn’t funny. He’d remind you that trying again is brave. That saying sorry is strong. That love is always worth it. So the next time you wonder what to do… Just ask: “What would Happy Jesus do?” Then do that. Even if it’s small. Even if it’s hard. That’s how you change the world without shouting.",
+      "wordCount": 101
+    },
+    {
+      "id": "section-023",
+      "index": 22,
+      "title": "Chapter Twenty - The End (But Not Really)",
+      "kind": "chapter",
+      "href": "OPS/body21.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc41\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TWENTY</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The End (But Not Really)</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc42\" class=\"ps2\"><span style=\"text-transform:uppercase;\">THIS MIGHT BE</span> the last page.<br>But it’s not the end.</p>\n<p class=\"ps2\">Because Jesus didn’t stop smiling when the story was over.<br>And kindness didn’t stop mattering when the book closed.</p>\n<p class=\"ps2\">Now it’s your turn.<br>To sit with someone.<br>To listen.<br>To forgive fast.<br>To be real.<br>To laugh loud.<br>To walk slow.<br>To love big.</p>\n<p class=\"ps2\">Happy Jesus is still here.<br>Every time you choose love when it’s easier not to.</p>\n<p class=\"ps2\">So yeah—this is the end.</p>\n<p class=\"ps2\"><strong><em><span style=\"font-weight:5600; font-style:italic;\">But not really.</span></em></strong> </p>\n</div>",
+      "text": "CHAPTER TWENTY The End (But Not Really) THIS MIGHT BE the last page. But it’s not the end. Because Jesus didn’t stop smiling when the story was over. And kindness didn’t stop mattering when the book closed. Now it’s your turn. To sit with someone. To listen. To forgive fast. To be real. To laugh loud. To walk slow. To love big. Happy Jesus is still here. Every time you choose love when it’s easier not to. So yeah—this is the end. But not really.",
+      "wordCount": 86
+    },
+    {
+      "id": "section-024",
+      "index": 23,
+      "title": "Acknowledgements",
+      "kind": "acknowledgments",
+      "href": "OPS/body22.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc43\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">ACKNOWLEDGEMENTS</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps2\"><span style=\"text-transform:uppercase;\">TO THE SOURCE</span>, for the light.<br>To every reader, young or old, who still believes in gentleness.<br>And to my dog Stoney — you remind me what unconditional love actually looks like. </p>\n</div>",
+      "text": "ACKNOWLEDGEMENTS TO THE SOURCE, for the light. To every reader, young or old, who still believes in gentleness. And to my dog Stoney — you remind me what unconditional love actually looks like.",
+      "wordCount": 32
+    },
+    {
+      "id": "section-025",
+      "index": 24,
+      "title": "About the Author",
+      "kind": "about-author",
+      "href": "OPS/body23.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc44\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">ABOUT THE AUTHOR</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps2\"><span style=\"text-transform:uppercase;\">JJ IS A</span> storyteller, sidewalk philosopher, and believer in second chances.<br>He writes books to make people cry, laugh, and think — sometimes all at once.<br>This is his 20-something-th book, but it might be his nicest.<br>He also believes Jesus would’ve laughed at fart jokes.</p>\n<p class=\"ps2\">More at his Instagram: jj_james.johnson</p>\n</div>",
+      "text": "ABOUT THE AUTHOR JJ IS A storyteller, sidewalk philosopher, and believer in second chances. He writes books to make people cry, laugh, and think — sometimes all at once. This is his 20-something-th book, but it might be his nicest. He also believes Jesus would’ve laughed at fart jokes. More at his Instagram: jj_james.johnson",
+      "wordCount": 55
+    },
+    {
+      "id": "section-026",
+      "index": 25,
+      "title": "Copyright",
+      "kind": "copyright",
+      "href": "OPS/body24.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc45\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">COPYRIGHT</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps2\"><span style=\"text-transform:uppercase;\">© 2025 JJ<br>ALL</span> rights reserved.</p>\n<p class=\"ps2\">No part of this book may be copied, reproduced, or distributed in any form without written permission from the author, except in the case of brief quotations used in reviews or scholarly works.</p>\n<p class=\"ps2\">This book is a work of creative nonfiction and artistic interpretation. While inspired by biblical themes and figures, it is not affiliated with or endorsed by any religious institution.</p>\n<p class=\"ps2\">This book is not intended to replace religious instruction, doctrine, or scriptural authority.<br>It is a creative interpretation of love, compassion, and the teachings attributed to Jesus of Nazareth, written to encourage kindness, empathy, and curiosity in young readers (and maybe adults too). </p>\n</div>",
+      "text": "COPYRIGHT © 2025 JJ ALL rights reserved. No part of this book may be copied, reproduced, or distributed in any form without written permission from the author, except in the case of brief quotations used in reviews or scholarly works. This book is a work of creative nonfiction and artistic interpretation. While inspired by biblical themes and figures, it is not affiliated with or endorsed by any religious institution. This book is not intended to replace religious instruction, doctrine, or scriptural authority. It is a creative interpretation of love, compassion, and the teachings attributed to Jesus of Nazareth, written to encourage kindness, empathy, and curiosity in young readers (and maybe adults too).",
+      "wordCount": 111
+    }
+  ]
+}

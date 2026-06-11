@@ -1,0 +1,40 @@
+{
+  "id": "logic",
+  "title": "Logic",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "quantity_and_form"
+  ],
+  "summary": "Logic is a foundational idea for reasoning about amount, form, order, and formal relationships.",
+  "prerequisites": [
+    "quantity",
+    "pattern",
+    "structure"
+  ],
+  "unlocks": [],
+  "related": [
+    "pattern",
+    "quantity",
+    "sequence",
+    "structure",
+    "topology"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "pattern",
+    "quantity",
+    "quantity_and_form",
+    "structure"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

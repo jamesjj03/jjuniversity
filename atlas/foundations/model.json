@@ -1,0 +1,56 @@
+{
+  "id": "model",
+  "title": "Model",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "core_primitives"
+  ],
+  "summary": "Model is a foundational connector for describing what exists, changes, relates, or becomes understandable.",
+  "prerequisites": [],
+  "unlocks": [
+    "abduction",
+    "abstraction",
+    "algorithm",
+    "analogy",
+    "assumption",
+    "category",
+    "causation",
+    "classification",
+    "computation",
+    "correlation",
+    "deduction",
+    "definition",
+    "explanation",
+    "function",
+    "induction",
+    "inference",
+    "paradox",
+    "prediction",
+    "probability",
+    "proof",
+    "representation",
+    "uncertainty",
+    "variable"
+  ],
+  "related": [
+    "evidence",
+    "knowledge"
+  ],
+  "aliases": [
+    "mental model"
+  ],
+  "tags": [
+    "core_primitives",
+    "foundation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

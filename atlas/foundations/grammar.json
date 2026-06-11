@@ -1,0 +1,40 @@
+{
+  "id": "grammar",
+  "title": "Grammar",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "communication_and_meaning"
+  ],
+  "summary": "Grammar is a foundational idea for making, carrying, interpreting, or contesting meaning.",
+  "prerequisites": [
+    "language",
+    "information",
+    "relation"
+  ],
+  "unlocks": [],
+  "related": [
+    "discourse",
+    "information",
+    "language",
+    "pragmatics",
+    "relation"
+  ],
+  "aliases": [],
+  "tags": [
+    "communication_and_meaning",
+    "foundation",
+    "information",
+    "language",
+    "relation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

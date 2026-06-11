@@ -1,0 +1,46 @@
+{
+  "name": "jju-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "gold-cleaner": "node tools/gold-cleaner/server.mjs",
+    "enrich-books": "node scripts/enrich-books.mjs",
+    "sync-books": "node scripts/enrich-books.mjs",
+    "atlas:seed": "node atlas/scripts/seed_foundations.js",
+    "atlas:validate": "node atlas/scripts/validate_nodes.js",
+    "atlas:index": "node atlas/scripts/build_indexes.js",
+    "atlas:detect-duplicates": "node atlas/scripts/detect_duplicates.js",
+    "atlas:detect-broken-links": "node atlas/scripts/detect_broken_links.js",
+    "atlas:detect-cycles": "node atlas/scripts/detect_cycles.js",
+    "atlas:check": "npm run atlas:validate && npm run atlas:detect-duplicates && npm run atlas:detect-broken-links && npm run atlas:detect-cycles",
+    "atlas:inventory:build": "node atlas/scripts/build_inventory.js",
+    "atlas:inventory:normalize": "node atlas/scripts/normalize_inventory.js",
+    "atlas:inventory:validate": "node atlas/scripts/validate_inventory.js",
+    "atlas:inventory:duplicates": "node atlas/scripts/detect_inventory_duplicates.js",
+    "atlas:inventory:promote": "node atlas/scripts/promote_inventory_nodes.js",
+    "atlas:inventory": "npm run atlas:inventory:build && npm run atlas:inventory:normalize && npm run atlas:inventory:validate && npm run atlas:inventory:duplicates"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.106.2",
+    "@vercel/analytics": "^2.0.1",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

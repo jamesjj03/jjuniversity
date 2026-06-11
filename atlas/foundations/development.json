@@ -1,0 +1,40 @@
+{
+  "id": "development",
+  "title": "Development",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "life_and_mind"
+  ],
+  "summary": "Development is a foundational idea for understanding living systems, minds, and adaptive behavior.",
+  "prerequisites": [
+    "system",
+    "information",
+    "matter"
+  ],
+  "unlocks": [],
+  "related": [
+    "cognition",
+    "information",
+    "matter",
+    "organism",
+    "system"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "information",
+    "life_and_mind",
+    "matter",
+    "system"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

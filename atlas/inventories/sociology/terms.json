@@ -1,0 +1,5497 @@
+{
+  "domain": "sociology",
+  "title": "Sociology",
+  "generatedAt": "2026-06-02T21:23:04.061Z",
+  "target": 350,
+  "sources": [
+    {
+      "name": "Wikipedia Glossary of Sociology",
+      "url": "https://en.wikipedia.org/wiki/Glossary_of_sociology",
+      "status": "failed:404",
+      "count": 0
+    },
+    {
+      "name": "Wikipedia Outline of Sociology",
+      "url": "https://en.wikipedia.org/wiki/Outline_of_sociology",
+      "status": "ok",
+      "count": 406
+    },
+    {
+      "name": "OpenStax Introduction to Sociology Glossary",
+      "url": "https://openstax.org/books/introduction-sociology-3e/pages/glossary",
+      "status": "failed:404",
+      "count": 0
+    }
+  ],
+  "terms": [
+    {
+      "id": "academic_discipline",
+      "title": "Academic discipline",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "addams",
+      "title": "Addams",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "adorno",
+      "title": "Adorno",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aging",
+      "title": "Aging",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "agnotology",
+      "title": "Agnotology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "alienation",
+      "title": "Alienation",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "american_sociological_association",
+      "title": "American Sociological Association",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "analytical_sociology",
+      "title": "Analytical sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anthropology",
+      "title": "Anthropology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "anthrozoology",
+      "title": "Anthrozoology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "architecture",
+      "title": "Architecture",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "area_studies",
+      "title": "Area studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "aron",
+      "title": "Aron",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "art",
+      "title": "Art",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "astrosociology",
+      "title": "Astrosociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "atlanta_sociological_laboratory",
+      "title": "Atlanta Sociological Laboratory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "attitude",
+      "title": "Attitude",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "baudrillard",
+      "title": "Baudrillard",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bauman",
+      "title": "Bauman",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "behavioral_economics",
+      "title": "Behavioral economics",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "beliefs",
+      "title": "Beliefs",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bell",
+      "title": "Bell",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bibliography",
+      "title": "Bibliography",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bibliography_of_sociology",
+      "title": "Bibliography of sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "body",
+      "title": "Body",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bonald",
+      "title": "Bonald",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bosanski",
+      "title": "Bosanski",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bourdieu",
+      "title": "Bourdieu",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "bureaucracy",
+      "title": "Bureaucracy",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "categories",
+      "title": "Categories",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "civil_inattention",
+      "title": "Civil inattention",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "civil_rights",
+      "title": "Civil rights",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "class",
+      "title": "Class",
+      "domain": "sociology",
+      "subdomains": [
+        "class"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map"
+      ],
+      "sourceUrls": [],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "collective_behavior",
+      "title": "Collective behavior",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "college_of_sociology",
+      "title": "College of Sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "commodity_fetishism",
+      "title": "Commodity fetishism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "communication_studies",
+      "title": "Communication studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "community",
+      "title": "Community",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "community_informatics",
+      "title": "Community informatics",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "comparative",
+      "title": "Comparative",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "comparative_sociology",
+      "title": "Comparative sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "computational",
+      "title": "Computational",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "computational_sociology",
+      "title": "Computational sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "comte",
+      "title": "Comte",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "conflict_theories",
+      "title": "Conflict theories",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "conflict_theory",
+      "title": "Conflict theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "consciousness",
+      "title": "Consciousness",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "consumerism",
+      "title": "consumerism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "consumption",
+      "title": "Consumption",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "content_analysis",
+      "title": "Content analysis",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "contexts",
+      "title": "Contexts",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "conversation_analysis",
+      "title": "Conversation analysis",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "crime",
+      "title": "Crime",
+      "domain": "sociology",
+      "subdomains": [
+        "crime_and_deviance"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "crime_and_deviance",
+      "title": "Crime and Deviance",
+      "domain": "sociology",
+      "subdomains": [
+        "crime_and_deviance"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map"
+      ],
+      "sourceUrls": [],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "criminology",
+      "title": "Criminology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "critical_management_studies",
+      "title": "Critical management studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "critical_realism",
+      "title": "Critical realism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "critical_theory",
+      "title": "Critical theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cultural_anthropology",
+      "title": "Cultural anthropology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cultural_capital",
+      "title": "Cultural capital",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "cultural_studies",
+      "title": "Cultural studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "culture",
+      "title": "Culture",
+      "domain": "sociology",
+      "subdomains": [
+        "culture"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "data",
+      "title": "Data",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "death",
+      "title": "Death",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "definitions",
+      "title": "Definitions",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "demographics",
+      "title": "Demographics",
+      "domain": "sociology",
+      "subdomains": [
+        "demographics"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map"
+      ],
+      "sourceUrls": [],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "demography",
+      "title": "Demography",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "department_of_sociology_and_social_work",
+      "title": "Department of Sociology and Social Work",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "department_of_sociology_at_the_university_of_chicago",
+      "title": "Department of Sociology at the University of Chicago",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "development_studies",
+      "title": "Development studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "development_theory",
+      "title": "Development theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "deviance",
+      "title": "Deviance",
+      "domain": "sociology",
+      "subdomains": [
+        "crime_and_deviance"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "disability_studies",
+      "title": "Disability studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "disaster",
+      "title": "Disaster",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "discourse_analysis",
+      "title": "Discourse analysis",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "discrimination",
+      "title": "Discrimination",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "division_of_labour",
+      "title": "Division of labour",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "dramaturgy",
+      "title": "Dramaturgy (sociology)",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "du_bois",
+      "title": "Du Bois",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "durkheim",
+      "title": "Durkheim",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "economic",
+      "title": "Economic",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "economic_sociology",
+      "title": "Economic sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "economics",
+      "title": "economics",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "education",
+      "title": "Education",
+      "domain": "sociology",
+      "subdomains": [
+        "education"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "elias",
+      "title": "Elias",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "emotion",
+      "title": "Emotion",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "emotions",
+      "title": "emotions",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "empirical_sociology",
+      "title": "Empirical sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "engaged_theory",
+      "title": "Engaged theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "environment",
+      "title": "environment",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "environmental",
+      "title": "Environmental",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "environmental_sociology",
+      "title": "Environmental sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "environmental_studies",
+      "title": "Environmental studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "equality",
+      "title": "Equality",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "equity",
+      "title": "Equity",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ethnographic",
+      "title": "Ethnographic",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ethnomethodology",
+      "title": "Ethnomethodology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "exploitation",
+      "title": "Exploitation",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "family",
+      "title": "Family",
+      "domain": "sociology",
+      "subdomains": [
+        "family"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "feminist",
+      "title": "Feminist",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "feminist_sociology",
+      "title": "Feminist sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "feminist_theory",
+      "title": "Feminist theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "field_of_science",
+      "title": "Field of science",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "figurational_sociology",
+      "title": "Figurational sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "fiscal",
+      "title": "Fiscal",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "food",
+      "title": "Food",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "food_studies",
+      "title": "Food studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "foucault",
+      "title": "Foucault",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "freedom",
+      "title": "Freedom",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "fromm",
+      "title": "Fromm",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "futures_studies",
+      "title": "Futures studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gehlen",
+      "title": "Gehlen",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gemeinschaft_and_gesellschaft",
+      "title": "Gemeinschaft and gesellschaft",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gender",
+      "title": "Gender",
+      "domain": "sociology",
+      "subdomains": [
+        "gender"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gender_studies",
+      "title": "Gender studies",
+      "domain": "sociology",
+      "subdomains": [
+        "gender"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "generations",
+      "title": "Generations",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "geodemography",
+      "title": "Geodemography",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "gerontology",
+      "title": "Gerontology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "giddens",
+      "title": "Giddens",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "global_studies",
+      "title": "Global studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "globalization",
+      "title": "Globalization",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "goffman",
+      "title": "Goffman",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "group",
+      "title": "Group",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "habermas",
+      "title": "Habermas",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "health",
+      "title": "Health",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historical",
+      "title": "Historical",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "historical_sociology",
+      "title": "Historical sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "history_of_science",
+      "title": "History of science",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "history_of_sociology",
+      "title": "History of sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "history_of_the_social_sciences",
+      "title": "History of the social sciences",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "human_behavior",
+      "title": "Human behavior",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "human_ecology",
+      "title": "Human ecology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "human_environmental_impact",
+      "title": "Human environmental impact",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "humanistic_sociology",
+      "title": "Humanistic sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ideal_type",
+      "title": "Ideal type",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "identity",
+      "title": "Identity",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "ideology",
+      "title": "Ideology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "immigration",
+      "title": "Immigration",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "index",
+      "title": "Index",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "industrial",
+      "title": "Industrial",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "industrial_society",
+      "title": "Industrial society",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "industrial_sociology",
+      "title": "Industrial sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "industrialization",
+      "title": "Industrialization",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "inequality",
+      "title": "Inequality",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "institution",
+      "title": "Institution",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "institutions",
+      "title": "Institutions",
+      "domain": "sociology",
+      "subdomains": [
+        "institutions"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map"
+      ],
+      "sourceUrls": [],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "international_sociological_association",
+      "title": "International Sociological Association",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "internet",
+      "title": "Internet",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "internet_studies",
+      "title": "Internet studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "interpersonal_relationship",
+      "title": "Interpersonal relationship",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "intersectionality",
+      "title": "Intersectionality",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "interview",
+      "title": "Interview",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "jealousy",
+      "title": "Jealousy",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "jealousy_sociology",
+      "title": "Jealousy sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "jewry",
+      "title": "Jewry",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "journals",
+      "title": "Journals",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "justice",
+      "title": "Justice",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "knowledge",
+      "title": "Knowledge",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "language",
+      "title": "Language",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "law",
+      "title": "Law",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "le_bon",
+      "title": "Le Bon",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "leisure",
+      "title": "Leisure",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "leisure_studies",
+      "title": "Leisure studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lifestyle",
+      "title": "Lifestyle",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "lists",
+      "title": "Lists",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "literature",
+      "title": "Literature",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "logical_positivism",
+      "title": "Logical positivism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "luhmann",
+      "title": "Luhmann",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "macrosociology",
+      "title": "Macrosociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "major_theorists",
+      "title": "Major theorists",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "manas_journal",
+      "title": "MANAS Journal",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mannheim",
+      "title": "Mannheim",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "martineau",
+      "title": "Martineau",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "marx",
+      "title": "Marx",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "marxism",
+      "title": "Marxism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "marxist",
+      "title": "Marxist",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "marxist_sociology",
+      "title": "Marxist sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mass_media",
+      "title": "Mass media",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mathematic",
+      "title": "Mathematic",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mathematical",
+      "title": "Mathematical",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mathematical_sociology",
+      "title": "Mathematical sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mead",
+      "title": "Mead",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "media",
+      "title": "Media",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "medical",
+      "title": "Medical",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "medical_sociology",
+      "title": "Medical sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "medicine",
+      "title": "medicine",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "merton",
+      "title": "Merton",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mesosociology",
+      "title": "Mesosociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "methods",
+      "title": "Methods",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "microsociology",
+      "title": "Microsociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "military",
+      "title": "Military",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "military_sociology",
+      "title": "Military sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "mills",
+      "title": "Mills",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "modernity",
+      "title": "Modernity",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "music",
+      "title": "Music",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "nature_versus_nurture",
+      "title": "Nature versus nurture",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "network_analysis",
+      "title": "Network analysis",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "new_school_for_social_research",
+      "title": "New School for Social Research",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "nisbet",
+      "title": "Nisbet",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "organization",
+      "title": "Organization",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "organizational_behavior",
+      "title": "Organizational behavior",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "organizational_studies",
+      "title": "Organizational studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "organizational_theory",
+      "title": "Organizational theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "organizations",
+      "title": "Organizations",
+      "domain": "sociology",
+      "subdomains": [
+        "organizations"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "paradigm_shift",
+      "title": "Paradigm shift",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "pareto",
+      "title": "Pareto",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "parsons",
+      "title": "Parsons",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "peace_war_and_social_conflict",
+      "title": "Peace, war, and social conflict",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "peer",
+      "title": "Peer",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "people",
+      "title": "People",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "perspectives",
+      "title": "Perspectives",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "phenomenology",
+      "title": "Phenomenology (sociology)",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "philosophy",
+      "title": "Philosophy",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "polemic",
+      "title": "Polemic",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "policy_sociology",
+      "title": "Policy sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "political",
+      "title": "Political",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "political_ecology",
+      "title": "Political ecology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "political_economy",
+      "title": "Political economy",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "political_science",
+      "title": "Political science",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "political_sociology",
+      "title": "Political sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "popular_culture",
+      "title": "Popular culture",
+      "domain": "sociology",
+      "subdomains": [
+        "culture"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "popularity",
+      "title": "Popularity",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "positivism",
+      "title": "Positivism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "postcolonialism",
+      "title": "Postcolonialism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "postmodernism",
+      "title": "Postmodernism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "postmodernity",
+      "title": "Postmodernity",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "postpositivism",
+      "title": "Postpositivism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "poststructuralism",
+      "title": "Poststructuralism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "poverty",
+      "title": "Poverty",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "power",
+      "title": "Power",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "power_knowledge",
+      "title": "Power-knowledge",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "psychoanalytic_sociology",
+      "title": "Psychoanalytic sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "public",
+      "title": "Public",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "public_sociology",
+      "title": "Public sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "punishment",
+      "title": "Punishment",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "pure_sociology",
+      "title": "Pure sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "qualitative",
+      "title": "Qualitative",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "quantitative",
+      "title": "Quantitative",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "queer_theory",
+      "title": "Queer theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "quotations",
+      "title": "Quotations",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "race_and_ethnicity",
+      "title": "Race and Ethnicity",
+      "domain": "sociology",
+      "subdomains": [
+        "race_and_ethnicity"
+      ],
+      "aliases": [
+        "Race and ethnicity"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "racism",
+      "title": "Racism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "rational_choice_theory",
+      "title": "Rational choice theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "rationalisation",
+      "title": "Rationalisation",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "real_utopian_sociology",
+      "title": "Real utopian sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "reflexivity",
+      "title": "Reflexivity",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "relational_sociology",
+      "title": "Relational sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "religion",
+      "title": "Religion",
+      "domain": "sociology",
+      "subdomains": [
+        "religion"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "resources",
+      "title": "Resources",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "rural",
+      "title": "Rural",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "rural_sociology",
+      "title": "Rural sociology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "salmagundi",
+      "title": "Salmagundi",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "schoeck",
+      "title": "Schoeck",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "science",
+      "title": "Science",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "science_studies",
+      "title": "Science studies",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "science_technology_and_society",
+      "title": "Science, technology and society",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "secularisation",
+      "title": "Secularisation",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sexism",
+      "title": "Sexism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sieyes",
+      "title": "Sieyès",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "simmel",
+      "title": "Simmel",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "small_groups",
+      "title": "small groups",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_action",
+      "title": "Social action",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_anthropology",
+      "title": "Social anthropology",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_architecture",
+      "title": "Social architecture",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_capital",
+      "title": "Social capital",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_change",
+      "title": "Social Change",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [
+        "Social change"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_class",
+      "title": "Social class",
+      "domain": "sociology",
+      "subdomains": [
+        "class",
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_cohesion",
+      "title": "Social cohesion",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_complexity",
+      "title": "Social complexity",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_conflict",
+      "title": "Social conflict",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_conflict_theory",
+      "title": "Social conflict theory",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_construction",
+      "title": "Social construction",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_construction_of_technology",
+      "title": "Social construction of technology",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_constructionism",
+      "title": "Social constructionism",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_control",
+      "title": "Social control",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_criticism",
+      "title": "Social criticism",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_cycle_theory",
+      "title": "Social cycle theory",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_darwinism",
+      "title": "Social Darwinism",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_engineering",
+      "title": "Social engineering",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_environment",
+      "title": "Social environment",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_epistemology",
+      "title": "Social epistemology",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_equality",
+      "title": "Social equality",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_equity",
+      "title": "Social equity",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_evolutionism",
+      "title": "Social evolutionism",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_exchange_theory",
+      "title": "Social exchange theory",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_experiment",
+      "title": "Social experiment",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_geography",
+      "title": "Social geography",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_group",
+      "title": "Social group",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_history",
+      "title": "Social history",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_inequality",
+      "title": "Social inequality",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_informatics",
+      "title": "Social informatics",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_justice",
+      "title": "Social justice",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_media",
+      "title": "Social media",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_mobility",
+      "title": "Social mobility",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_movement",
+      "title": "Social movement",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_movements",
+      "title": "Social Movements",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [
+        "Social movements"
+      ],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_network",
+      "title": "Social network",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_norm",
+      "title": "Social norm",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_order",
+      "title": "Social order",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_organisation",
+      "title": "Social organisation",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_philosophy",
+      "title": "Social philosophy",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_power",
+      "title": "Social power",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_problems",
+      "title": "Social problems",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_psychology",
+      "title": "Social psychology",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_research",
+      "title": "Social research",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_science",
+      "title": "Social science",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_solidarity",
+      "title": "Social solidarity",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_status",
+      "title": "Social status",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_stratification",
+      "title": "Social stratification",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_structure",
+      "title": "Social structure",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_studies_of_finance",
+      "title": "Social studies of finance",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_system",
+      "title": "Social system",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "social_theory",
+      "title": "Social theory",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "socialization",
+      "title": "Socialization",
+      "domain": "sociology",
+      "subdomains": [
+        "social_change",
+        "social_movements",
+        "socialization"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Atlas domain map",
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "society",
+      "title": "Society",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociobiology",
+      "title": "Sociobiology",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociocultural_evolution",
+      "title": "Sociocultural evolution",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociocybernetics",
+      "title": "Sociocybernetics",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "socioeconomics",
+      "title": "Socioeconomics",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociography",
+      "title": "Sociography",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociolinguistics",
+      "title": "Sociolinguistics",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociological_associations",
+      "title": "Sociological associations",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociological_theory",
+      "title": "Sociological theory",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_books",
+      "title": "Sociology books",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_in_china",
+      "title": "Sociology in China",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_in_japan",
+      "title": "Sociology in Japan",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_in_poland",
+      "title": "Sociology in Poland",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_in_russia",
+      "title": "Sociology in Russia",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_in_turkey",
+      "title": "Sociology in Turkey",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_journals",
+      "title": "Sociology journals",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_aging",
+      "title": "Sociology of aging",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_architecture",
+      "title": "Sociology of architecture",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_art",
+      "title": "Sociology of art",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_autism",
+      "title": "Sociology of autism",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_culture",
+      "title": "Sociology of culture",
+      "domain": "sociology",
+      "subdomains": [
+        "culture"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_death",
+      "title": "Sociology of death",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_deviance",
+      "title": "Sociology of deviance",
+      "domain": "sociology",
+      "subdomains": [
+        "crime_and_deviance"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_disaster",
+      "title": "Sociology of disaster",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_education",
+      "title": "Sociology of education",
+      "domain": "sociology",
+      "subdomains": [
+        "education"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_emotions",
+      "title": "Sociology of emotions",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_food",
+      "title": "Sociology of food",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_gender",
+      "title": "Sociology of gender",
+      "domain": "sociology",
+      "subdomains": [
+        "gender"
+      ],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_generations",
+      "title": "Sociology of generations",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_health_and_illness",
+      "title": "Sociology of health and illness",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_human_consciousness",
+      "title": "Sociology of human consciousness",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_immigration",
+      "title": "Sociology of immigration",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_jewry",
+      "title": "Sociology of Jewry",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_knowledge",
+      "title": "Sociology of knowledge",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_language",
+      "title": "Sociology of language",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
+      "id": "sociology_of_law",
+      "title": "Sociology of law",
+      "domain": "sociology",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Outline of Sociology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Outline_of_sociology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "semantics",
+  "title": "Semantics",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "communication_and_meaning"
+  ],
+  "summary": "Semantics is a foundational idea for making, carrying, interpreting, or contesting meaning.",
+  "prerequisites": [
+    "language",
+    "information",
+    "relation"
+  ],
+  "unlocks": [],
+  "related": [
+    "information",
+    "language",
+    "pragmatics",
+    "relation",
+    "syntax"
+  ],
+  "aliases": [],
+  "tags": [
+    "communication_and_meaning",
+    "foundation",
+    "information",
+    "language",
+    "relation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

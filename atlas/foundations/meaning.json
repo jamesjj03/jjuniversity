@@ -1,0 +1,40 @@
+{
+  "id": "meaning",
+  "title": "Meaning",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "communication_and_meaning"
+  ],
+  "summary": "Meaning is a foundational idea for making, carrying, interpreting, or contesting meaning.",
+  "prerequisites": [
+    "language",
+    "information",
+    "relation"
+  ],
+  "unlocks": [],
+  "related": [
+    "information",
+    "language",
+    "relation",
+    "sign",
+    "syntax"
+  ],
+  "aliases": [],
+  "tags": [
+    "communication_and_meaning",
+    "foundation",
+    "information",
+    "language",
+    "relation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

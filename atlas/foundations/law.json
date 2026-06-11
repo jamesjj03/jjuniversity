@@ -1,0 +1,40 @@
+{
+  "id": "law",
+  "title": "Law",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "society_and_culture"
+  ],
+  "summary": "Law is a foundational idea for understanding social life, shared meaning, and organized action.",
+  "prerequisites": [
+    "language",
+    "value",
+    "power"
+  ],
+  "unlocks": [],
+  "related": [
+    "governance",
+    "language",
+    "power",
+    "property",
+    "value"
+  ],
+  "aliases": [],
+  "tags": [
+    "foundation",
+    "language",
+    "power",
+    "society_and_culture",
+    "value"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

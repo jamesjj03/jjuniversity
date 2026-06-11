@@ -1,0 +1,42 @@
+{
+  "id": "context_of_communication",
+  "title": "Context Of Communication",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "communication_and_meaning"
+  ],
+  "summary": "Context Of Communication is a foundational idea for making, carrying, interpreting, or contesting meaning.",
+  "prerequisites": [
+    "language",
+    "information",
+    "relation"
+  ],
+  "unlocks": [],
+  "related": [
+    "audience",
+    "code",
+    "information",
+    "language",
+    "relation"
+  ],
+  "aliases": [
+    "communicative context"
+  ],
+  "tags": [
+    "communication_and_meaning",
+    "foundation",
+    "information",
+    "language",
+    "relation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

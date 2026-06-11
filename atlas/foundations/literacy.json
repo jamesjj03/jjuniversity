@@ -1,0 +1,40 @@
+{
+  "id": "literacy",
+  "title": "Literacy",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "communication_and_meaning"
+  ],
+  "summary": "Literacy is a foundational idea for making, carrying, interpreting, or contesting meaning.",
+  "prerequisites": [
+    "language",
+    "information",
+    "relation"
+  ],
+  "unlocks": [],
+  "related": [
+    "convention",
+    "information",
+    "language",
+    "relation",
+    "writing"
+  ],
+  "aliases": [],
+  "tags": [
+    "communication_and_meaning",
+    "foundation",
+    "information",
+    "language",
+    "relation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

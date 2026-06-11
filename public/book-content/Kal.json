@@ -1,0 +1,205 @@
+{
+  "id": "Kal",
+  "slug": "the-kid-with-the-kaleidoscope-brain",
+  "sourceFile": "Kal.epub",
+  "title": "The Kid with the Kaleidoscope Brain",
+  "creator": "James Johnson",
+  "description": "",
+  "language": "en",
+  "publisher": "",
+  "generatedAt": "2026-05-17T15:56:09.703Z",
+  "sectionCount": 19,
+  "wordCount": 1961,
+  "sections": [
+    {
+      "id": "section-001",
+      "index": 0,
+      "title": "Contents",
+      "kind": "toc",
+      "href": "OPS/contents.xhtml",
+      "html": "<nav epub:type=\"toc\" id=\"toc\">\n<h2 class=\"page-title\">Contents</h2>\n\n<ol>\n  <li><a href=\"body.xhtml\">The Kid with the Kaleidoscope Brain</a></li>\n  <li><a href=\"body1.xhtml\">Dedication</a></li>\n  <li><a href=\"body2.xhtml\">Chapter One - The Birthday Party</a></li>\n  <li><a href=\"body3.xhtml\">Chapter Two - Milo Sees the Sky Differently</a></li>\n  <li><a href=\"body4.xhtml\">Chapter Three - Flapping is Flying</a></li>\n  <li><a href=\"body5.xhtml\">Chapter Four - Too Much Noise</a></li>\n  <li><a href=\"body6.xhtml\">Chapter Five - The Teacher Who Waited</a></li>\n  <li><a href=\"body7.xhtml\">Chapter Six - Patterns in the Carpet</a></li>\n  <li><a href=\"body8.xhtml\">Chapter Seven - Why Hugs Are Hard</a></li>\n  <li><a href=\"body9.xhtml\">Chapter Eight - The Friend Who Stayed</a></li>\n  <li><a href=\"body10.xhtml\">Chapter Nine - The Day the Colors Froze</a></li>\n  <li><a href=\"body11.xhtml\">Chapter Ten - The Word Puzzle</a></li>\n  <li><a href=\"body12.xhtml\">Chapter Eleven - Kaleidoscope. Not Broken.</a></li>\n  <li><a href=\"body13.xhtml\">Chapter Twelve - He Was Always Magic</a></li>\n  <li><a href=\"body14.xhtml\">Epilogue</a></li>\n  <li><a href=\"body15.xhtml\">Acknowledgements</a></li>\n  <li><a href=\"body16.xhtml\">About the Author</a></li>\n  <li><a href=\"body17.xhtml\">Copyright</a></li>\n</ol>\n</nav>\n<nav epub:type=\"landmarks\" id=\"landmarks\" hidden=\"hidden\" style=\"display: none\">\n  <h2>Guide</h2>\n  <ol>\n    <li><a epub:type=\"toc\" href=\"contents.xhtml\">Contents</a></li>\n    <li><a epub:type=\"bodymatter\" href=\"body2.xhtml\">Start of Content</a></li>\n  </ol>\n</nav>",
+      "text": "Contents The Kid with the Kaleidoscope Brain Dedication Chapter One - The Birthday Party Chapter Two - Milo Sees the Sky Differently Chapter Three - Flapping is Flying Chapter Four - Too Much Noise Chapter Five - The Teacher Who Waited Chapter Six - Patterns in the Carpet Chapter Seven - Why Hugs Are Hard Chapter Eight - The Friend Who Stayed Chapter Nine - The Day the Colors Froze Chapter Ten - The Word Puzzle Chapter Eleven - Kaleidoscope. Not Broken. Chapter Twelve - He Was Always Magic Epilogue Acknowledgements About the Author Copyright Guide Contents Start of Content",
+      "wordCount": 88
+    },
+    {
+      "id": "section-002",
+      "index": 1,
+      "title": "The Kid with the Kaleidoscope Brain",
+      "kind": "chapter",
+      "href": "OPS/body.xhtml",
+      "html": "<p id=\"doc1\" class=\"ps1\"><strong><span style=\"font-weight:5600;\">The Kid with the Kaleidoscope Brain</span></strong><br>by JJ </p>",
+      "text": "The Kid with the Kaleidoscope Brain by JJ",
+      "wordCount": 8
+    },
+    {
+      "id": "section-003",
+      "index": 2,
+      "title": "Dedication",
+      "kind": "dedication",
+      "href": "OPS/body1.xhtml",
+      "html": "<p id=\"doc2\" class=\"ps2\">For the kids who feel too much,<br>see too much,<br>or don’t know how to say it yet—<br>your mind is a galaxy, and you are not alone.<br>And for Cammi, who reminded me why stories like this matter. </p>",
+      "text": "For the kids who feel too much, see too much, or don’t know how to say it yet— your mind is a galaxy, and you are not alone. And for Cammi, who reminded me why stories like this matter.",
+      "wordCount": 39
+    },
+    {
+      "id": "section-004",
+      "index": 3,
+      "title": "Chapter One - The Birthday Party",
+      "kind": "chapter",
+      "href": "OPS/body2.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc3\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER ONE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Birthday Party</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc4\" class=\"ps3\"><span style=\"text-transform:uppercase;\">MILO STOOD AT</span> the edge of the backyard, his fingers tight around the string of a balloon.</p>\n<p class=\"ps3\">The party was loud. Too loud.</p>\n<p class=\"ps3\">Kids ran across the grass like fireworks—screaming, laughing, bursting with sugar. A speaker thumped music in the corner. The cake smelled like frosting and food coloring and someone’s shampoo.</p>\n<p class=\"ps3\">Milo's brain spun. The sounds got jumbled. The colors got too big.</p>\n<p class=\"ps3\">Someone shouted his name.</p>\n<p class=\"ps3\">He didn’t move.</p>\n<p class=\"ps3\">“Milo! Come on! We’re gonna play tag!”</p>\n<p class=\"ps3\">But tag meant running. And yelling. And people touching him when he wasn’t ready. That was too many things all at once.</p>\n<p class=\"ps3\">So Milo let go of the balloon. It floated up—soft and slow and quiet.</p>\n<p class=\"ps3\">He watched it until it was just a dot in the sky. His breathing slowed. The colors got smaller.</p>\n<p class=\"ps3\">“Are you okay?” a voice asked.</p>\n<p class=\"ps3\">It was Emma, the birthday girl. Her tiara was crooked. She wasn’t yelling.</p>\n<p class=\"ps3\">Milo nodded.</p>\n<p class=\"ps3\">“Do you wanna come inside?” she asked. “It’s quiet in there. We can look at my rock collection.”</p>\n<p class=\"ps3\">Milo looked back at the crowd, then at Emma.</p>\n<p class=\"ps3\">“Okay,” he said.</p>\n<p class=\"ps3\">And just like that, the party felt okay again. </p>\n</div>",
+      "text": "CHAPTER ONE The Birthday Party MILO STOOD AT the edge of the backyard, his fingers tight around the string of a balloon. The party was loud. Too loud. Kids ran across the grass like fireworks—screaming, laughing, bursting with sugar. A speaker thumped music in the corner. The cake smelled like frosting and food coloring and someone’s shampoo. Milo's brain spun. The sounds got jumbled. The colors got too big. Someone shouted his name. He didn’t move. “Milo! Come on! We’re gonna play tag!” But tag meant running. And yelling. And people touching him when he wasn’t ready. That was too many things all at once. So Milo let go of the balloon. It floated up—soft and slow and quiet. He watched it until it was just a dot in the sky. His breathing slowed. The colors got smaller. “Are you okay?” a voice asked. It was Emma, the birthday girl. Her tiara was crooked. She wasn’t yelling. Milo nodded. “Do you wanna come inside?” she asked. “It’s quiet in there. We can look at my rock collection.” Milo looked back at the crowd, then at Emma. “Okay,” he said. And just like that, the party felt okay again.",
+      "wordCount": 200
+    },
+    {
+      "id": "section-005",
+      "index": 4,
+      "title": "Chapter Two - Milo Sees the Sky Differently",
+      "kind": "chapter",
+      "href": "OPS/body3.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc5\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TWO</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Milo Sees the Sky Differently</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc6\" class=\"ps3\"><span style=\"text-transform:uppercase;\">EMMA SHOWED MILO</span> her rock collection—shiny ones, bumpy ones, a tiny one shaped like a heart.</p>\n<p class=\"ps3\">But after a while, Milo drifted to the window.</p>\n<p class=\"ps3\">Outside, the sky was doing something strange.</p>\n<p class=\"ps3\">Most people saw blue. Just plain blue. But Milo?</p>\n<p class=\"ps3\">Milo saw <em><span style=\"font-style:italic;\">layers.</span></em></p>\n<p class=\"ps3\">He saw how the clouds moved like slow, sleepy whales. He saw how the blue wasn’t really one color—it was hundreds, dancing quietly between white and gray and purple and maybe even green.</p>\n<p class=\"ps3\">Sometimes he saw <em><span style=\"font-style:italic;\">patterns</span></em> in the sky—like ripples or lines that no one else noticed.</p>\n<p class=\"ps3\">Sometimes, when people were talking and his brain got full, he’d look at the sky and the world would settle.</p>\n<p class=\"ps3\">It wasn’t just a sky.</p>\n<p class=\"ps3\">It was a kaleidoscope. A map. A soft place to land.</p>\n<p class=\"ps3\">“Whatcha lookin’ at?” Emma asked.</p>\n<p class=\"ps3\">“The clouds are breathing today,” Milo said.</p>\n<p class=\"ps3\">Emma tilted her head. “I don’t see it.”</p>\n<p class=\"ps3\">“That’s okay,” Milo said, smiling a little. “I do.” </p>\n</div>",
+      "text": "CHAPTER TWO Milo Sees the Sky Differently EMMA SHOWED MILO her rock collection—shiny ones, bumpy ones, a tiny one shaped like a heart. But after a while, Milo drifted to the window. Outside, the sky was doing something strange. Most people saw blue. Just plain blue. But Milo? Milo saw layers. He saw how the clouds moved like slow, sleepy whales. He saw how the blue wasn’t really one color—it was hundreds, dancing quietly between white and gray and purple and maybe even green. Sometimes he saw patterns in the sky—like ripples or lines that no one else noticed. Sometimes, when people were talking and his brain got full, he’d look at the sky and the world would settle. It wasn’t just a sky. It was a kaleidoscope. A map. A soft place to land. “Whatcha lookin’ at?” Emma asked. “The clouds are breathing today,” Milo said. Emma tilted her head. “I don’t see it.” “That’s okay,” Milo said, smiling a little. “I do.”",
+      "wordCount": 167
+    },
+    {
+      "id": "section-006",
+      "index": 5,
+      "title": "Chapter Three - Flapping is Flying",
+      "kind": "chapter",
+      "href": "OPS/body4.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc7\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER THREE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Flapping is Flying</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc8\" class=\"ps3\"><span style=\"text-transform:uppercase;\">WHEN MILO GOT</span> excited, he flapped his hands.</p>\n<p class=\"ps3\">He didn’t even think about it. His fingers just danced like they had music of their own.</p>\n<p class=\"ps3\">Some kids pointed. Some adults whispered. But Milo didn’t notice—not at first.</p>\n<p class=\"ps3\">To Milo, flapping felt like flying.</p>\n<p class=\"ps3\">It was energy escaping through his fingertips. It was lightning and joy and <em><span style=\"font-style:italic;\">YES</span></em> all at once.</p>\n<p class=\"ps3\">At the zoo, when the lion roared, Milo flapped.<br>At school, when he got the answer right, Milo flapped.<br>At the beach, when the waves crashed just right, Milo flapped.</p>\n<p class=\"ps3\">One day, a boy laughed. “Why do you do that?”</p>\n<p class=\"ps3\">Milo froze.</p>\n<p class=\"ps3\">He looked down at his hands. “I don’t know,” he said.</p>\n<p class=\"ps3\">But later, when he was home, his mom asked what was wrong.</p>\n<p class=\"ps3\">“Is flapping bad?” Milo whispered.</p>\n<p class=\"ps3\">His mom knelt beside him. “Not at all,” she said. “You know what birds do when they feel something big?”</p>\n<p class=\"ps3\">Milo shook his head.</p>\n<p class=\"ps3\">“They flap.”</p>\n<p class=\"ps3\">Milo smiled, wide and warm.</p>\n<p class=\"ps3\">He flapped his hands again, soft and proud.</p>\n<p class=\"ps3\">Because <em><span style=\"font-style:italic;\">his</span></em> flapping?<br>Was <em><span style=\"font-style:italic;\">his</span></em> flying.</p>\n</div>",
+      "text": "CHAPTER THREE Flapping is Flying WHEN MILO GOT excited, he flapped his hands. He didn’t even think about it. His fingers just danced like they had music of their own. Some kids pointed. Some adults whispered. But Milo didn’t notice—not at first. To Milo, flapping felt like flying. It was energy escaping through his fingertips. It was lightning and joy and YES all at once. At the zoo, when the lion roared, Milo flapped. At school, when he got the answer right, Milo flapped. At the beach, when the waves crashed just right, Milo flapped. One day, a boy laughed. “Why do you do that?” Milo froze. He looked down at his hands. “I don’t know,” he said. But later, when he was home, his mom asked what was wrong. “Is flapping bad?” Milo whispered. His mom knelt beside him. “Not at all,” she said. “You know what birds do when they feel something big?” Milo shook his head. “They flap.” Milo smiled, wide and warm. He flapped his hands again, soft and proud. Because his flapping? Was his flying.",
+      "wordCount": 181
+    },
+    {
+      "id": "section-007",
+      "index": 6,
+      "title": "Chapter Four - Too Much Noise",
+      "kind": "chapter",
+      "href": "OPS/body5.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc9\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER FOUR</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Too Much Noise</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc10\" class=\"ps3\"><span style=\"text-transform:uppercase;\">SOMETIMES THE WORLD</span> got too loud for Milo.</p>\n<p class=\"ps3\">It wasn’t just shouting or sirens.<br>It was pencils scratching.<br>Clocks ticking.<br>Lights humming.<br>Feet tapping.</p>\n<p class=\"ps3\">Each sound layered on top of the next until Milo’s head felt full, like a balloon ready to pop.</p>\n<p class=\"ps3\">People said, “It’s not that loud,” but to Milo, it was.<br>And that was enough.</p>\n<p class=\"ps3\">He covered his ears.<br>He hid under his hood.<br>Sometimes he cried, even when he didn’t want to.</p>\n<p class=\"ps3\">His mom noticed.</p>\n<p class=\"ps3\">She gave him quiet headphones and a soft space to breathe.<br>She spoke gently.<br>She listened.</p>\n<p class=\"ps3\">And slowly, the noise faded.</p>\n<p class=\"ps3\">It wasn’t that the world stopped being loud.<br>It was that Milo was allowed to pause.</p>\n<p class=\"ps3\">That’s what helped most of all.</p>\n</div>",
+      "text": "CHAPTER FOUR Too Much Noise SOMETIMES THE WORLD got too loud for Milo. It wasn’t just shouting or sirens. It was pencils scratching. Clocks ticking. Lights humming. Feet tapping. Each sound layered on top of the next until Milo’s head felt full, like a balloon ready to pop. People said, “It’s not that loud,” but to Milo, it was. And that was enough. He covered his ears. He hid under his hood. Sometimes he cried, even when he didn’t want to. His mom noticed. She gave him quiet headphones and a soft space to breathe. She spoke gently. She listened. And slowly, the noise faded. It wasn’t that the world stopped being loud. It was that Milo was allowed to pause. That’s what helped most of all.",
+      "wordCount": 127
+    },
+    {
+      "id": "section-008",
+      "index": 7,
+      "title": "Chapter Five - The Teacher Who Waited",
+      "kind": "chapter",
+      "href": "OPS/body6.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc11\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER FIVE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Teacher Who Waited</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc12\" class=\"ps3\"><span style=\"text-transform:uppercase;\">MILO DIDN’T ALWAYS</span> have the words when the teacher asked questions.</p>\n<p class=\"ps3\">Sometimes he knew the answer—but it was still swimming around in his brain, not ready to come out.</p>\n<p class=\"ps3\">Other times, he just needed a minute.</p>\n<p class=\"ps3\">But the classroom moved fast.<br>Hands shot up.<br>Voices raced ahead.</p>\n<p class=\"ps3\">One day, Milo kept his hand down.<br>He looked at the floor.</p>\n<p class=\"ps3\">And then… something happened.</p>\n<p class=\"ps3\">The teacher didn’t call on someone else.<br>She waited.</p>\n<p class=\"ps3\">She waited one second.<br>Then two.<br>Then three.</p>\n<p class=\"ps3\">Milo looked up.</p>\n<p class=\"ps3\">“It’s okay,” she said. “I’ve got time.”</p>\n<p class=\"ps3\">So Milo spoke.<br>And the answer came.</p>\n<p class=\"ps3\">From that day on, Milo knew something important:</p>\n<p class=\"ps3\">Sometimes, all someone needs is a little extra space.<br>And someone willing to hold it. </p>\n</div>",
+      "text": "CHAPTER FIVE The Teacher Who Waited MILO DIDN’T ALWAYS have the words when the teacher asked questions. Sometimes he knew the answer—but it was still swimming around in his brain, not ready to come out. Other times, he just needed a minute. But the classroom moved fast. Hands shot up. Voices raced ahead. One day, Milo kept his hand down. He looked at the floor. And then… something happened. The teacher didn’t call on someone else. She waited. She waited one second. Then two. Then three. Milo looked up. “It’s okay,” she said. “I’ve got time.” So Milo spoke. And the answer came. From that day on, Milo knew something important: Sometimes, all someone needs is a little extra space. And someone willing to hold it.",
+      "wordCount": 127
+    },
+    {
+      "id": "section-009",
+      "index": 8,
+      "title": "Chapter Six - Patterns in the Carpet",
+      "kind": "chapter",
+      "href": "OPS/body7.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc13\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER SIX</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Patterns in the Carpet</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc14\" class=\"ps3\"><span style=\"text-transform:uppercase;\">WHEN THE ROOM</span> got too loud,<br>too bright,<br>too fast,<br>Milo looked down.</p>\n<p class=\"ps3\">The carpet was always there.</p>\n<p class=\"ps3\">It had little squares.<br>Wiggly lines.<br>Dots that danced if you stared just right.</p>\n<p class=\"ps3\">While everyone else looked ahead,<br>Milo looked down—and saw a world.</p>\n<p class=\"ps3\">A dragon made from swirls.<br>A river winding through zigzags.<br>A spaceship hidden in the stitches.</p>\n<p class=\"ps3\">People said, “Pay attention!”<br>But Milo <em><span style=\"font-style:italic;\">was</span></em> paying attention.<br>Just not to the same thing.</p>\n<p class=\"ps3\">The carpet didn’t mind.<br>It just kept whispering stories,<br>one loop at a time. </p>\n</div>",
+      "text": "CHAPTER SIX Patterns in the Carpet WHEN THE ROOM got too loud, too bright, too fast, Milo looked down. The carpet was always there. It had little squares. Wiggly lines. Dots that danced if you stared just right. While everyone else looked ahead, Milo looked down—and saw a world. A dragon made from swirls. A river winding through zigzags. A spaceship hidden in the stitches. People said, “Pay attention!” But Milo was paying attention. Just not to the same thing. The carpet didn’t mind. It just kept whispering stories, one loop at a time.",
+      "wordCount": 95
+    },
+    {
+      "id": "section-010",
+      "index": 9,
+      "title": "Chapter Seven - Why Hugs Are Hard",
+      "kind": "chapter",
+      "href": "OPS/body8.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc15\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER SEVEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Why Hugs Are Hard</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc16\" class=\"ps3\"><span style=\"text-transform:uppercase;\">MILO LIKED PEOPLE</span>.<br>Milo loved love.<br>But hugs? Hugs were… tricky.</p>\n<p class=\"ps3\">Sometimes they came too fast.<br>Sometimes they squeezed too tight.<br>Sometimes they felt like thunder in his skin.</p>\n<p class=\"ps3\">It wasn’t that he didn’t care.<br>It wasn’t that he didn’t want to be close.<br>It just felt like a lot—<br>all at once—<br>everywhere.</p>\n<p class=\"ps3\">So Milo found his way.</p>\n<p class=\"ps3\">A fist bump.<br>A high five.<br>A quiet sit, shoulder to shoulder.</p>\n<p class=\"ps3\">Love doesn’t have to be loud.<br>It just has to be real.<br>And Milo’s love was as real as it gets.</p>\n</div>",
+      "text": "CHAPTER SEVEN Why Hugs Are Hard MILO LIKED PEOPLE. Milo loved love. But hugs? Hugs were… tricky. Sometimes they came too fast. Sometimes they squeezed too tight. Sometimes they felt like thunder in his skin. It wasn’t that he didn’t care. It wasn’t that he didn’t want to be close. It just felt like a lot— all at once— everywhere. So Milo found his way. A fist bump. A high five. A quiet sit, shoulder to shoulder. Love doesn’t have to be loud. It just has to be real. And Milo’s love was as real as it gets.",
+      "wordCount": 98
+    },
+    {
+      "id": "section-011",
+      "index": 10,
+      "title": "Chapter Eight - The Friend Who Stayed",
+      "kind": "chapter",
+      "href": "OPS/body9.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc17\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER EIGHT</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Friend Who Stayed</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc18\" class=\"ps3\"><span style=\"text-transform:uppercase;\">SOME KIDS DIDN’T</span> get Milo.<br>They didn’t understand why he flapped,<br>why he spun,<br>why he needed space.</p>\n<p class=\"ps3\">They laughed sometimes.<br>Or left.<br>Or both.</p>\n<p class=\"ps3\">But not Jamie.</p>\n<p class=\"ps3\">Jamie stayed.</p>\n<p class=\"ps3\">Jamie asked questions.<br>Jamie waited when Milo needed quiet.<br>Jamie noticed when Milo’s eyes were too full of light,<br>and gently turned the lamp away.</p>\n<p class=\"ps3\">Jamie didn’t try to fix Milo.<br>Jamie just liked him.</p>\n<p class=\"ps3\">Sometimes, all it takes is one person<br>to sit next to your storm<br>without trying to stop the rain.</p>\n<p class=\"ps3\">Jamie did that.<br>Jamie stayed.</p>\n</div>",
+      "text": "CHAPTER EIGHT The Friend Who Stayed SOME KIDS DIDN’T get Milo. They didn’t understand why he flapped, why he spun, why he needed space. They laughed sometimes. Or left. Or both. But not Jamie. Jamie stayed. Jamie asked questions. Jamie waited when Milo needed quiet. Jamie noticed when Milo’s eyes were too full of light, and gently turned the lamp away. Jamie didn’t try to fix Milo. Jamie just liked him. Sometimes, all it takes is one person to sit next to your storm without trying to stop the rain. Jamie did that. Jamie stayed.",
+      "wordCount": 95
+    },
+    {
+      "id": "section-012",
+      "index": 11,
+      "title": "Chapter Nine - The Day the Colors Froze",
+      "kind": "chapter",
+      "href": "OPS/body10.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc19\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER NINE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Day the Colors Froze</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc20\" class=\"ps3\"><span style=\"text-transform:uppercase;\">SOME DAYS, THE</span> colors didn’t move.<br>They didn’t swirl or shift or shimmer.<br>They just… stopped.</p>\n<p class=\"ps3\">Milo stared at the sky,<br>waiting for the kaleidoscope to turn.<br>But everything felt still.<br>Gray.<br>Heavy.</p>\n<p class=\"ps3\">He didn’t flap.<br>He didn’t speak.<br>He barely blinked.</p>\n<p class=\"ps3\">It wasn’t that he was sad.<br>It wasn’t that he was mad.<br>It was just that everything was… stuck.</p>\n<p class=\"ps3\">His mom sat with him on the floor.<br>Didn’t ask questions.<br>Didn’t make noise.<br>She just handed him his softest blanket<br>and let him be still.</p>\n<p class=\"ps3\">Even when the colors freeze,<br>Milo is still Milo.<br>And sometimes, stillness is a kind of healing. </p>\n</div>",
+      "text": "CHAPTER NINE The Day the Colors Froze SOME DAYS, THE colors didn’t move. They didn’t swirl or shift or shimmer. They just… stopped. Milo stared at the sky, waiting for the kaleidoscope to turn. But everything felt still. Gray. Heavy. He didn’t flap. He didn’t speak. He barely blinked. It wasn’t that he was sad. It wasn’t that he was mad. It was just that everything was… stuck. His mom sat with him on the floor. Didn’t ask questions. Didn’t make noise. She just handed him his softest blanket and let him be still. Even when the colors freeze, Milo is still Milo. And sometimes, stillness is a kind of healing.",
+      "wordCount": 111
+    },
+    {
+      "id": "section-013",
+      "index": 12,
+      "title": "Chapter Ten - The Word Puzzle",
+      "kind": "chapter",
+      "href": "OPS/body11.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc21\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">The Word Puzzle</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc22\" class=\"ps3\"><span style=\"text-transform:uppercase;\">MILO HAD SO</span> many thoughts.<br>Bright ones. Loud ones.<br>Fast and tangled like a kite in the wind.<br>But turning those thoughts into words?<br>That was the hard part.</p>\n<p class=\"ps3\">He knew what he wanted to say.<br>He always knew.<br>But the words came out jumbled.<br>Too loud.<br>Too soft.<br>Or sometimes… not at all.</p>\n<p class=\"ps3\">It wasn’t that he didn’t understand.<br>It wasn’t that he didn’t care.<br>It was just a puzzle.</p>\n<p class=\"ps3\">Some people solved words with their mouths.<br>Milo solved them with his eyes,<br>his hands,<br>his heart.</p>\n<p class=\"ps3\">And the people who took the time—<br>the ones who looked past the silence—<br>they saw just how brilliant the puzzle really was. </p>\n</div>",
+      "text": "CHAPTER TEN The Word Puzzle MILO HAD SO many thoughts. Bright ones. Loud ones. Fast and tangled like a kite in the wind. But turning those thoughts into words? That was the hard part. He knew what he wanted to say. He always knew. But the words came out jumbled. Too loud. Too soft. Or sometimes… not at all. It wasn’t that he didn’t understand. It wasn’t that he didn’t care. It was just a puzzle. Some people solved words with their mouths. Milo solved them with his eyes, his hands, his heart. And the people who took the time— the ones who looked past the silence— they saw just how brilliant the puzzle really was.",
+      "wordCount": 116
+    },
+    {
+      "id": "section-014",
+      "index": 13,
+      "title": "Chapter Eleven - Kaleidoscope. Not Broken.",
+      "kind": "chapter",
+      "href": "OPS/body12.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc23\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER ELEVEN</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">Kaleidoscope. Not Broken.</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc24\" class=\"ps3\"><span style=\"text-transform:uppercase;\">SOME PEOPLE SAID</span> Milo was different.<br>Some said he was difficult.<br>Some even said he was broken.<br>But Milo knew something they didn’t.</p>\n<p class=\"ps3\">Inside his brain<br>was a kaleidoscope.</p>\n<p class=\"ps3\">Not broken glass,<br>but shifting patterns.<br>Not chaos,<br>but color.</p>\n<p class=\"ps3\">When he closed his eyes, he saw spirals of sound,<br>textures of thought,<br>and shapes that danced with feeling.</p>\n<p class=\"ps3\">It was a world only he could see.<br>But it wasn’t a mistake.<br>It wasn’t a flaw.</p>\n<p class=\"ps3\">It was art.<br>It was magic.<br>It was Milo.</p>\n<p class=\"ps3\">A brain like a kaleidoscope.<br>Always turning.<br>Always changing.<br>Always beautiful.</p>\n<p class=\"ps3\">Not broken.<br>Just built differently.</p>\n</div>",
+      "text": "CHAPTER ELEVEN Kaleidoscope. Not Broken. SOME PEOPLE SAID Milo was different. Some said he was difficult. Some even said he was broken. But Milo knew something they didn’t. Inside his brain was a kaleidoscope. Not broken glass, but shifting patterns. Not chaos, but color. When he closed his eyes, he saw spirals of sound, textures of thought, and shapes that danced with feeling. It was a world only he could see. But it wasn’t a mistake. It wasn’t a flaw. It was art. It was magic. It was Milo. A brain like a kaleidoscope. Always turning. Always changing. Always beautiful. Not broken. Just built differently.",
+      "wordCount": 105
+    },
+    {
+      "id": "section-015",
+      "index": 14,
+      "title": "Chapter Twelve - He Was Always Magic",
+      "kind": "chapter",
+      "href": "OPS/body13.xhtml",
+      "html": "<div class=\"chapter-title\">\n<h2 id=\"doc25\" class=\"chapter-title-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">CHAPTER TWELVE</span></h2>\n<h3 class=\"subtitle\"><em><span style=\"font-style:italic;\">He Was Always Magic</span></em></h3>\n<p class=\"separator\"><br></p>\n<p id=\"doc26\" class=\"ps3\"><span style=\"text-transform:uppercase;\">LONG BEFORE MILO</span> knew the word for it—<br>before doctors gave him papers<br>or teachers gave him plans—<br>he was already magic.</p>\n<p class=\"ps3\">He saw things no one else saw.<br>Felt storms before they came.<br>He could hear patterns in music<br>and taste colors in dreams.</p>\n<p class=\"ps3\">Grown-ups thought it was pretend.<br>They called it imagination.<br>But Milo knew the truth.<br>He wasn’t pretending.</p>\n<p class=\"ps3\">He was perceiving.<br>He was translating.<br>He was decoding the world in his own brilliant way.</p>\n<p class=\"ps3\">And the people who loved him?<br>They saw it, too.<br>The way he lit up when the moon rose.<br>The way he calmed animals with a glance.<br>The way his drawings made you feel something<br>you didn’t have words for.</p>\n<p class=\"ps3\">They didn’t have to understand everything.<br>They just had to remember—</p>\n<p class=\"ps3\">Milo didn’t become magic.<br>He was always magic. </p>\n</div>",
+      "text": "CHAPTER TWELVE He Was Always Magic LONG BEFORE MILO knew the word for it— before doctors gave him papers or teachers gave him plans— he was already magic. He saw things no one else saw. Felt storms before they came. He could hear patterns in music and taste colors in dreams. Grown-ups thought it was pretend. They called it imagination. But Milo knew the truth. He wasn’t pretending. He was perceiving. He was translating. He was decoding the world in his own brilliant way. And the people who loved him? They saw it, too. The way he lit up when the moon rose. The way he calmed animals with a glance. The way his drawings made you feel something you didn’t have words for. They didn’t have to understand everything. They just had to remember— Milo didn’t become magic. He was always magic.",
+      "wordCount": 143
+    },
+    {
+      "id": "section-016",
+      "index": 15,
+      "title": "Epilogue",
+      "kind": "chapter",
+      "href": "OPS/body14.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc27\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">EPILOGUE</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps3\"><span style=\"text-transform:uppercase;\">SOME BRAINS ARE</span> like flashlights—<br>steady, bright, pointing in one direction.<br>Others are like kaleidoscopes—<br>turning, shifting, brilliant in their complexity.</p>\n<p class=\"ps3\">Milo’s brain is a kaleidoscope.<br>Not broken.<br>Not wrong.<br>Just different.</p>\n<p class=\"ps3\">And difference makes the world<br>more colorful,<br>more curious,<br>more kind.</p>\n<p class=\"ps3\">So if you’ve ever felt<br>too much,<br>or not enough,<br>or completely out of rhythm—<br>remember this:</p>\n<p class=\"ps3\">You don’t have to match the pattern<br>to be part of the masterpiece.</p>\n<p class=\"ps3\">You are part of it<br>just by being here.<br>Just by being you.</p>\n<p class=\"ps3\">And maybe,<br>just maybe,<br>your mind holds a little magic, too. </p>\n</div>",
+      "text": "EPILOGUE SOME BRAINS ARE like flashlights— steady, bright, pointing in one direction. Others are like kaleidoscopes— turning, shifting, brilliant in their complexity. Milo’s brain is a kaleidoscope. Not broken. Not wrong. Just different. And difference makes the world more colorful, more curious, more kind. So if you’ve ever felt too much, or not enough, or completely out of rhythm— remember this: You don’t have to match the pattern to be part of the masterpiece. You are part of it just by being here. Just by being you. And maybe, just maybe, your mind holds a little magic, too.",
+      "wordCount": 98
+    },
+    {
+      "id": "section-017",
+      "index": 16,
+      "title": "Acknowledgements",
+      "kind": "acknowledgments",
+      "href": "OPS/body15.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc28\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">ACKNOWLEDGEMENTS</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps3\"><span style=\"text-transform:uppercase;\">THANK YOU TO</span> the parents who stay patient, the teachers who wait a little longer, and the siblings who stand by.<br>And to the neurodivergent kids everywhere—your perspective makes the world more colorful. This book exists because of you. </p>\n</div>",
+      "text": "ACKNOWLEDGEMENTS THANK YOU TO the parents who stay patient, the teachers who wait a little longer, and the siblings who stand by. And to the neurodivergent kids everywhere—your perspective makes the world more colorful. This book exists because of you.",
+      "wordCount": 41
+    },
+    {
+      "id": "section-018",
+      "index": 17,
+      "title": "About the Author",
+      "kind": "about-author",
+      "href": "OPS/body16.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc29\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">ABOUT THE AUTHOR</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps3\"><span style=\"text-transform:uppercase;\">JJ WRITES BOOKS</span> for the thinkers, the feelers, the overthinkers, and the underdogs. With a background in observation and a heart rooted in empathy, he tells stories that find the kids (and grownups) who need them most.<br>This one’s for you. </p>\n</div>",
+      "text": "ABOUT THE AUTHOR JJ WRITES BOOKS for the thinkers, the feelers, the overthinkers, and the underdogs. With a background in observation and a heart rooted in empathy, he tells stories that find the kids (and grownups) who need them most. This one’s for you.",
+      "wordCount": 44
+    },
+    {
+      "id": "section-019",
+      "index": 18,
+      "title": "Copyright",
+      "kind": "copyright",
+      "href": "OPS/body17.xhtml",
+      "html": "<div class=\"titled-section\">\n<h2 id=\"doc30\" class=\"titled-section-page-padding\"><br></h2>\n<h2 class=\"bordered-title\"><span style=\"text-transform:uppercase;\">COPYRIGHT</span></h2>\n<p class=\"br\"><br></p>\n<p class=\"ps3\"><span style=\"text-transform:uppercase;\">© 2025 JJ<br>ALL</span> rights reserved.<br>No part of this publication may be reproduced, stored, or transmitted in any form or by any means—electronic, mechanical, photocopying, recording, or otherwise—without prior written permission from the author.</p>\n<p class=\"ps3\">This is a work of fiction inspired by the lived experiences of neurodivergent individuals. It is not intended to diagnose, treat, or serve as a substitute for professional support. Every child is different—this is just one story, told with care.</p>\n</div>",
+      "text": "COPYRIGHT © 2025 JJ ALL rights reserved. No part of this publication may be reproduced, stored, or transmitted in any form or by any means—electronic, mechanical, photocopying, recording, or otherwise—without prior written permission from the author. This is a work of fiction inspired by the lived experiences of neurodivergent individuals. It is not intended to diagnose, treat, or serve as a substitute for professional support. Every child is different—this is just one story, told with care.",
+      "wordCount": 78
+    }
+  ]
+}

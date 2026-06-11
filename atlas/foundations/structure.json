@@ -1,0 +1,53 @@
+{
+  "id": "structure",
+  "title": "Structure",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "core_primitives"
+  ],
+  "summary": "Structure is a foundational connector for describing what exists, changes, relates, or becomes understandable.",
+  "prerequisites": [],
+  "unlocks": [
+    "algebra",
+    "calculus",
+    "derivative",
+    "distribution",
+    "geometry",
+    "graph",
+    "integral",
+    "limit",
+    "logic",
+    "mapping",
+    "matrix",
+    "number",
+    "operation",
+    "optimization",
+    "proportion",
+    "randomness",
+    "rate",
+    "ratio",
+    "sequence",
+    "set",
+    "topology",
+    "vector"
+  ],
+  "related": [
+    "feedback",
+    "system"
+  ],
+  "aliases": [],
+  "tags": [
+    "core_primitives",
+    "foundation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}

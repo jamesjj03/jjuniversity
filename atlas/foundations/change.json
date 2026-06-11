@@ -1,0 +1,54 @@
+{
+  "id": "change",
+  "title": "Change",
+  "type": "foundation",
+  "domains": [
+    "foundations"
+  ],
+  "subdomains": [
+    "core_primitives"
+  ],
+  "summary": "Change is a foundational connector for describing what exists, changes, relates, or becomes understandable.",
+  "prerequisites": [],
+  "unlocks": [
+    "adaptation",
+    "complexity",
+    "constraint",
+    "control",
+    "cycle",
+    "emergence",
+    "equilibrium",
+    "flow",
+    "input",
+    "instability",
+    "interaction",
+    "network",
+    "noise",
+    "output",
+    "process",
+    "recursion",
+    "regulation",
+    "resilience",
+    "scale",
+    "self_organization",
+    "signal",
+    "stability",
+    "threshold"
+  ],
+  "related": [
+    "language",
+    "relation"
+  ],
+  "aliases": [],
+  "tags": [
+    "core_primitives",
+    "foundation"
+  ],
+  "sources": {
+    "wikipedia": "",
+    "britannica": "",
+    "openstax": "",
+    "stanford_encyclopedia": ""
+  },
+  "status": "stub"
+}
