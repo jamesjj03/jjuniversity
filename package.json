@@ -10,6 +10,10 @@
     "gold-cleaner": "node tools/gold-cleaner/server.mjs",
     "enrich-books": "node scripts/enrich-books.mjs",
     "sync-books": "node scripts/enrich-books.mjs",
+    "supabase:seed": "node scripts/export-supabase-seed.mjs",
+    "print:paperback": "node scripts/generate-paperback.mjs",
+    "print:set-assets": "node scripts/set-print-product-assets.mjs",
+    "print:upload": "node scripts/upload-paperbacks-to-supabase.mjs",
     "atlas:seed": "node atlas/scripts/seed_foundations.js",
     "atlas:validate": "node atlas/scripts/validate_nodes.js",
     "atlas:index": "node atlas/scripts/build_indexes.js",
@@ -31,7 +35,8 @@
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "stripe": "^22.2.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

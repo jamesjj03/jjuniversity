@@ -11,6 +11,12 @@ type SiteConfig = {
   atlas?: {
     visible?: unknown;
   };
+  fiber?: {
+    visible?: unknown;
+  };
+  social?: {
+    instagramUrl?: unknown;
+  };
 };
 
 const DEFAULT_SITE = {
@@ -27,6 +33,12 @@ const DEFAULT_SITE = {
   },
   atlas: {
     visible: false,
+  },
+  fiber: {
+    visible: false,
+  },
+  social: {
+    instagramUrl: "https://www.instagram.com/jj_james.johnson/",
   },
 };
 
@@ -51,6 +63,14 @@ function cleanConfig(value: SiteConfig | null | undefined) {
     },
     atlas: {
       visible: Boolean(value?.atlas?.visible),
+    },
+    fiber: {
+      visible: Boolean(value?.fiber?.visible),
+    },
+    social: {
+      instagramUrl: typeof value?.social?.instagramUrl === "string"
+        ? value.social.instagramUrl.trim()
+        : DEFAULT_SITE.social.instagramUrl,
     },
   };
 }

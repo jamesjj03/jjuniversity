@@ -458,7 +458,7 @@ export default function ReaderClient() {
       }
 
       const [item, bookList] = await Promise.all([
-        fetch(`/book-content/${encodeURIComponent(id)}.json`, { cache: "no-store" }).then(async response => {
+        fetch(`/api/book/${encodeURIComponent(id)}`, { cache: "no-store" }).then(async response => {
           const data = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(data.error || "Book content unavailable.");
           return data as BookContent;

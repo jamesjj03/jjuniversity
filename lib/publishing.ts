@@ -1,0 +1,447 @@
+import { readBookContent, type BookContentSection } from "@/lib/bookContent";
+import { PRIMARY_CATEGORIES } from "@/lib/taxonomy";
+import rawBooks from "@/public/books.json";
+import rawManifest from "@/public/book-content/manifest.json";
+import rawPaths from "@/public/paths.json";
+import rawPrintProducts from "@/public/print-products.json";
+
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://jjuniversity.com").replace(/\/$/, "");
+
+type RawBook = {
+  id?: string;
+  slug?: string;
+  title?: string;
+  subtitle?: string;
+  creator?: string;
+  author?: string;
+  series?: string;
+  tags?: string[];
+  description?: string;
+  status?: string;
+  coverFile?: string;
+  bookFile?: string;
+  wordCount?: number;
+  readingMinutes?: number;
+  readingLabel?: string;
+  chapterCount?: number | null;
+  similar?: string[];
+  visibility?: string;
+  archive?: boolean;
+  archiveCategory?: string;
+  category?: string;
+  hiddenShelves?: string[];
+};
+
+type ManifestBook = {
+  id?: string;
+  slug?: string;
+  title?: string;
+  sourceFile?: string;
+  sectionCount?: number;
+  wordCount?: number;
+  path?: string;
+};
+
+export type PublishedBook = {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  creator: string;
+  series: string;
+  tags: string[];
+  description: string;
+  status: string;
+  coverFile: string;
+  bookFile: string;
+  wordCount: number;
+  readingMinutes: number;
+  readingLabel: string;
+  chapterCount: number;
+  similar: string[];
+  visibility: string;
+  archiveCategory: string;
+  primaryCategory: string;
+  slugAliases: string[];
+};
+
+export type PublishedSeries = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  level: string;
+  tags: string[];
+  bookIds: string[];
+};
+
+export type PrintProduct = {
+  slug: string;
+  sku: string;
+  kind: "collection" | "bundle";
+  title: string;
+  kicker: string;
+  subtitle: string;
+  description: string;
+  priceHint: string;
+  targetPriceCents: number | null;
+  status: "coming-soon";
+  printStatus: "draft" | "files-generated" | "lulu-validated" | "proof-ordered" | "proof-approved" | "live";
+  salesStatus: "not-for-sale" | "notify" | "checkout-live";
+  stripePriceId?: string;
+  luluProjectId?: string;
+  podPackageId?: string;
+  publicInteriorUrl?: string;
+  publicCoverUrl?: string;
+  actualInteriorPages: number | null;
+  generatedAt: string;
+  componentProductSlugs: string[];
+  format: {
+    trimSize: string;
+    binding: string;
+    interiorColor: string;
+    paperType: string;
+    coverFinish: string;
+  };
+  coverTheme: {
+    background: string;
+    accent: string;
+    secondary: string;
+    mood: string;
+  };
+  includedLine: string;
+  bookIds: string[];
+};
+
+export type PrintProductPageCount = {
+  pages: number;
+  actual: boolean;
+};
+
+type ReadingPath = {
+  id?: string;
+  title?: string;
+  description?: string;
+  level?: string;
+  tags?: string[];
+  books?: Array<{ id?: string }>;
+  deleted?: boolean;
+};
+
+const manifestBooks = (rawManifest as { books?: ManifestBook[] }).books || [];
+const books = (rawBooks as RawBook[]).map(normalizeBook).filter(book => book.id);
+export const PRINT_PRODUCTS: PrintProduct[] = (rawPrintProducts as PrintProduct[]).map(product => ({
+  ...product,
+  sku: String(product.sku || product.slug).trim(),
+  kind: product.kind === "bundle" ? "bundle" : "collection",
+  status: "coming-soon",
+  printStatus: product.printStatus || "draft",
+  salesStatus: product.salesStatus || "not-for-sale",
+  stripePriceId: product.stripePriceId || "",
+  luluProjectId: product.luluProjectId || "",
+  podPackageId: product.podPackageId || "",
+  publicInteriorUrl: product.publicInteriorUrl || "",
+  publicCoverUrl: product.publicCoverUrl || "",
+  targetPriceCents: Number.isFinite(Number(product.targetPriceCents)) ? Number(product.targetPriceCents) : null,
+  actualInteriorPages: Number.isFinite(Number(product.actualInteriorPages)) ? Number(product.actualInteriorPages) : null,
+  generatedAt: product.generatedAt || "",
+  componentProductSlugs: Array.isArray(product.componentProductSlugs) ? product.componentProductSlugs.map(slugify) : [],
+  format: {
+    trimSize: product.format?.trimSize || "6x9",
+    binding: product.format?.binding || "perfect-bound paperback",
+    interiorColor: product.format?.interiorColor || "black-and-white",
+    paperType: product.format?.paperType || "cream",
+    coverFinish: product.format?.coverFinish || "matte",
+  },
+  coverTheme: {
+    background: product.coverTheme?.background || "#111111",
+    accent: product.coverTheme?.accent || "#d7a640",
+    secondary: product.coverTheme?.secondary || "#7c6df0",
+    mood: product.coverTheme?.mood || "JJ University print edition",
+  },
+  includedLine: product.includedLine || "",
+  bookIds: Array.isArray(product.bookIds) ? product.bookIds.map(bookId => String(bookId).toLowerCase()) : [],
+}));
+
+export function slugify(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[\u0027\u2018\u2019\u02bc]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export function absoluteUrl(path: string) {
+  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+export function bookUrl(book: PublishedBook) {
+  return `/books/${book.slug}`;
+}
+
+export function coverUrl(book: PublishedBook) {
+  if (!book.coverFile) return "/branding/jju-logo.png";
+  if (/^https?:\/\//i.test(book.coverFile)) return book.coverFile;
+  return `/covers/${book.coverFile.includes(".") ? book.coverFile : `${book.coverFile}.jpg`}`;
+}
+
+export function getPublicBooks() {
+  return books.filter(book => isPublicBook(book));
+}
+
+export function getAllTags() {
+  const tags = new Set<string>();
+  getPublicBooks().forEach(book => book.tags.forEach(tag => tags.add(tag)));
+  return [...tags].sort();
+}
+
+export function getCategories() {
+  return PRIMARY_CATEGORIES.map(category => ({
+    ...category,
+    slug: slugify(category.name),
+    books: getPublicBooks().filter(book => book.primaryCategory === category.name || book.tags.some(tag => category.tags.includes(tag))),
+  })).filter(category => category.books.length);
+}
+
+export function getBooksForTag(tag: string) {
+  return getPublicBooks().filter(book => book.tags.includes(tag));
+}
+
+export function getBookBySlug(slug: string) {
+  const clean = slugify(slug);
+  const publicBooks = getPublicBooks();
+  return publicBooks.find(book => book.slug === clean)
+    || publicBooks.find(book => book.id === clean)
+    || publicBooks.find(book => book.slugAliases.includes(clean));
+}
+
+export function getBookById(id: string) {
+  const clean = String(id || "").trim().toLowerCase();
+  return books.find(book => book.id === clean);
+}
+
+export function getRelatedBooks(book: PublishedBook, limit = 6) {
+  const explicit = book.similar
+    .map(id => getBookById(id))
+    .filter((item): item is PublishedBook => Boolean(item && isPublicBook(item)));
+  const explicitIds = new Set(explicit.map(item => item.id));
+  const tagSet = new Set(book.tags);
+  const inferred = getPublicBooks()
+    .filter(item => item.id !== book.id && !explicitIds.has(item.id))
+    .map(item => ({
+      book: item,
+      score: item.tags.reduce((sum, tag) => sum + (tagSet.has(tag) ? 1 : 0), 0) + (item.primaryCategory === book.primaryCategory ? 1 : 0),
+    }))
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.book.title.localeCompare(b.book.title))
+    .map(item => item.book);
+
+  return [...explicit, ...inferred].slice(0, limit);
+}
+
+export function getAllSeries() {
+  const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
+  const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
+  const seen = new Set<string>();
+  return items
+    .filter(item => !item.deleted && item.id && item.title && Array.isArray(item.books) && item.books.length)
+    .map(item => normalizeSeries(item))
+    .filter(series => {
+      if (seen.has(series.slug)) return false;
+      seen.add(series.slug);
+      return series.bookIds.some(id => Boolean(getBookById(id)));
+    });
+}
+
+export function getSeriesBySlug(seriesSlug: string) {
+  const clean = slugify(seriesSlug);
+  return getAllSeries().find(series => {
+    if (series.slug === clean || series.id === clean) return true;
+    if (clean === "101" && series.id.includes("101")) return true;
+    return false;
+  });
+}
+
+export function getSeriesBooks(series: PublishedSeries) {
+  return series.bookIds
+    .map(id => getBookById(id))
+    .filter((book): book is PublishedBook => Boolean(book && isPublicBook(book)));
+}
+
+export function getPrintProduct(slug: string) {
+  const clean = slugify(slug);
+  return PRINT_PRODUCTS.find(product => product.slug === clean);
+}
+
+export function getPrintProductBooks(product: PrintProduct) {
+  return product.bookIds
+    .map(id => getBookById(id))
+    .filter((book): book is PublishedBook => Boolean(book && isPublicBook(book)));
+}
+
+export function getPrintProductComponents(product: PrintProduct) {
+  return product.componentProductSlugs
+    .map(slug => getPrintProduct(slug))
+    .filter((item): item is PrintProduct => Boolean(item));
+}
+
+export function getPrintProductsForBook(bookId: string) {
+  const clean = String(bookId || "").trim().toLowerCase();
+  return PRINT_PRODUCTS.filter(product => product.kind === "collection" && product.bookIds.includes(clean));
+}
+
+export function estimatePrintPages(selectedBooks: PublishedBook[]) {
+  const words = selectedBooks.reduce((sum, book) => sum + (book.wordCount || 0), 0);
+  const bodyPages = Math.ceil(words / 155);
+  const sectionPages = selectedBooks.length * 2;
+  return Math.max(32, bodyPages + sectionPages + 8);
+}
+
+export function estimatePrintProductPages(product: PrintProduct): number {
+  return getPrintProductPageCount(product).pages;
+}
+
+export function getPrintProductPageCount(product: PrintProduct): PrintProductPageCount {
+  if (product.actualInteriorPages) {
+    return { pages: product.actualInteriorPages, actual: true };
+  }
+
+  if (product.kind === "bundle") {
+    const components = getPrintProductComponents(product);
+    const componentCounts = components.map(component => getPrintProductPageCount(component));
+    if (componentCounts.length && componentCounts.every(count => count.actual)) {
+      return { pages: componentCounts.reduce((sum, count) => sum + count.pages, 0), actual: true };
+    }
+
+    return {
+      pages: components
+        .map(component => estimatePrintPages(getPrintProductBooks(component)))
+        .reduce((sum, pages) => sum + pages, 0),
+      actual: false,
+    };
+  }
+
+  return { pages: estimatePrintPages(getPrintProductBooks(product)), actual: false };
+}
+
+export function printPriceLabel(product: PrintProduct) {
+  if (!product.targetPriceCents) return product.priceHint;
+  return `$${(product.targetPriceCents / 100).toFixed(2)} target + shipping`;
+}
+
+export async function getBookSample(book: PublishedBook) {
+  try {
+    const resolved = await readBookContent(book.id);
+    const sections = resolved.book.sections;
+    const contentSections = sections.filter(isContentSection);
+    const excerptSource = contentSections.find(section => section.text && section.text.length > 300)
+      || sections.find(section => section.text && section.text.length > 300);
+
+    return {
+      toc: contentSections.slice(0, 12).map(section => section.title).filter(Boolean),
+      excerpt: cleanExcerpt(excerptSource?.text || book.description),
+      contentWordCount: resolved.book.wordCount || book.wordCount,
+    };
+  } catch {
+    return {
+      toc: [],
+      excerpt: cleanExcerpt(book.description),
+      contentWordCount: book.wordCount,
+    };
+  }
+}
+
+export function metadataDescription(text: string, fallback = "Read this free JJ University book online.") {
+  const clean = String(text || fallback).replace(/\s+/g, " ").trim();
+  if (clean.length <= 155) return clean;
+  return `${clean.slice(0, 152).replace(/\s+\S*$/, "")}...`;
+}
+
+function normalizeBook(raw: RawBook): PublishedBook {
+  const id = String(raw.id || "").trim().toLowerCase();
+  const manifest = manifestFor(raw, id);
+  const title = String(raw.title || manifest?.title || id || "Untitled").trim();
+  const tags = Array.isArray(raw.tags) ? raw.tags.map(String).filter(Boolean) : [];
+  const primaryCategory = primaryCategoryFor(tags);
+  const slug = slugify(String(raw.slug || title || manifest?.slug || id));
+  const slugAliases = [...new Set([
+    id,
+    slugify(String(manifest?.slug || "")),
+    slugify(String(raw.title || "")),
+  ].filter(alias => alias && alias !== slug))];
+
+  return {
+    id,
+    slug,
+    title,
+    subtitle: String(raw.subtitle || "").trim(),
+    creator: String(raw.creator || raw.author || "James Johnson").trim(),
+    series: String(raw.series || "").trim(),
+    tags,
+    description: String(raw.description || "").trim(),
+    status: String(raw.status || "ready").trim().toLowerCase(),
+    coverFile: String(raw.coverFile || "").trim(),
+    bookFile: String(raw.bookFile || manifest?.sourceFile || "").trim(),
+    wordCount: Number(raw.wordCount || manifest?.wordCount || 0),
+    readingMinutes: Number(raw.readingMinutes || Math.ceil(Number(raw.wordCount || manifest?.wordCount || 0) / 180) || 0),
+    readingLabel: String(raw.readingLabel || "").trim(),
+    chapterCount: Number(raw.chapterCount || manifest?.sectionCount || 0),
+    similar: Array.isArray(raw.similar) ? raw.similar.map(item => String(item).trim().toLowerCase()).filter(Boolean) : [],
+    visibility: raw.archive || String(raw.visibility || "main").toLowerCase() === "archive" ? "archive" : "main",
+    archiveCategory: String(raw.archiveCategory || raw.category || "").trim(),
+    primaryCategory,
+    slugAliases,
+  };
+}
+
+function normalizeSeries(item: ReadingPath): PublishedSeries {
+  const id = slugify(String(item.id || item.title || ""));
+  const title = String(item.title || id).trim();
+  const is101 = id.includes("101") || /\b101\b/.test(title);
+  return {
+    id,
+    slug: is101 ? "101" : id || slugify(title),
+    title: is101 ? "JJ University 101" : title,
+    description: String(item.description || `A JJ University reading sequence around ${title}.`).trim(),
+    level: String(item.level || "starter").trim(),
+    tags: Array.isArray(item.tags) ? item.tags.map(String).filter(Boolean) : [],
+    bookIds: Array.isArray(item.books) ? item.books.map(book => String(book.id || "").trim().toLowerCase()).filter(Boolean) : [],
+  };
+}
+
+function manifestFor(raw: RawBook, id: string) {
+  const bookStem = String(raw.bookFile || "").replace(/\.(epub|json)$/i, "").toLowerCase();
+  return manifestBooks.find(item => {
+    const manifestId = String(item.id || "").toLowerCase();
+    const sourceStem = String(item.sourceFile || "").replace(/\.(epub|json)$/i, "").toLowerCase();
+    return manifestId === id || sourceStem === id || Boolean(bookStem && sourceStem === bookStem);
+  });
+}
+
+function primaryCategoryFor(tags: string[]) {
+  return PRIMARY_CATEGORIES.find(category => tags.some(tag => category.tags.includes(tag)))?.name || "Library";
+}
+
+function isPublicBook(book: PublishedBook) {
+  return book.status !== "hidden" && book.status !== "unavailable";
+}
+
+function isContentSection(section: BookContentSection) {
+  const title = section.title.toLowerCase();
+  const kind = String(section.kind || "").toLowerCase();
+  if (kind === "toc" || kind === "dedication") return false;
+  if (/copyright|acknowledg|about the author|contents/.test(title)) return false;
+  return Boolean(section.text && section.text.length > 120);
+}
+
+function cleanExcerpt(text: string) {
+  const clean = String(text || "")
+    .replace(/\s+/g, " ")
+    .replace(/^contents\b/i, "")
+    .trim();
+  if (clean.length <= 720) return clean;
+  return `${clean.slice(0, 700).replace(/\s+\S*$/, "")}...`;
+}

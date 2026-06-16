@@ -1,0 +1,27 @@
+
+> jju-site@0.1.0 dev
+> next dev --webpack --hostname 127.0.0.1 --port 3000
+
+▲ Next.js 16.2.6 (webpack)
+- Local:         http://127.0.0.1:3000
+- Network:       http://127.0.0.1:3000
+- Environments: .env.local
+✓ Ready in 383ms
+
+○ Compiling /sitemap.xml ...
+ GET /account 200 in 3.9s (next.js: 3.3s, proxy.ts: 200ms, application-code: 367ms)
+ GET /sitemap.xml 200 in 4.1s (next.js: 3.2s, application-code: 842ms)
+ GET /books/1776/prologue 200 in 6.3s (next.js: 2.8s, proxy.ts: 3.3s, generate-params: 700ms, application-code: 155ms)
+ GET /account 200 in 184ms (next.js: 20ms, proxy.ts: 19ms, application-code: 145ms)
+ GET /books/1776/prologue 200 in 62ms (next.js: 9ms, proxy.ts: 6ms, generate-params: 5ms, application-code: 47ms)
+ GET /print/101-volume-2 200 in 1072ms (next.js: 930ms, proxy.ts: 14ms, generate-params: 367ms, application-code: 127ms)
+ GET / 200 in 506ms (next.js: 449ms, proxy.ts: 7ms, application-code: 50ms)
+ GET /library 200 in 293ms (next.js: 259ms, proxy.ts: 4ms, application-code: 30ms)
+ GET /reader?book=history 200 in 447ms (next.js: 413ms, proxy.ts: 5ms, application-code: 29ms)
+ GET /api/book/history 200 in 538ms (next.js: 517ms, proxy.ts: 5ms, application-code: 16ms)
+ GET /library 200 in 83ms (next.js: 29ms, proxy.ts: 6ms, application-code: 48ms)
+ GET /print 200 in 593ms (next.js: 548ms, proxy.ts: 4ms, application-code: 42ms)
+ GET /print 200 in 100ms (next.js: 48ms, proxy.ts: 8ms, application-code: 44ms)
+ GET / 200 in 83ms (next.js: 8ms, proxy.ts: 3ms, application-code: 73ms)
+ GET / 200 in 64ms (next.js: 3ms, proxy.ts: 6ms, application-code: 55ms)
+ GET /print 200 in 63ms (next.js: 1856µs, proxy.ts: 4ms, application-code: 58ms)

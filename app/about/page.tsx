@@ -1,5 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Information Desk",
+  description: "What JJ University is, how the books work, and why the project exists.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
@@ -10,9 +18,8 @@ export default function AboutPage() {
       </section>
 
       <section className="aboutPlain aboutDesk">
-        <article className="aboutStory aboutEssay">
+        <article className="aboutStory aboutEssay aboutEditorial">
           <section className="aboutIntroBlock">
-            <p className="kicker">What This Is</p>
             <h2>The Basic Idea</h2>
             <p>JJ University is a collection of books written over the past year with one goal: to figure out how things actually work.</p>
             <p>I'm not just talking one subject here. I'm talking everything. Science, history, religion, psychology, culture, systems, people, ideas, and anything that helps explain reality in a clear, structured way.</p>
@@ -37,7 +44,6 @@ export default function AboutPage() {
           </section>
 
           <section className="aboutTimelineBlock">
-            <p className="kicker">Who I Am</p>
             <h2>Background</h2>
             <p>My name is JJ. I'm 22, and I'm from Dayton, Ohio.</p>
             <p>I never actually wanted to be an author. For a while, I was just trying to figure out what I was supposed to do.</p>

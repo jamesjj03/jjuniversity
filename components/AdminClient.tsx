@@ -66,6 +66,12 @@ type SiteConfig = {
   atlas: {
     visible: boolean;
   };
+  fiber: {
+    visible: boolean;
+  };
+  social?: {
+    instagramUrl?: string;
+  };
 };
 
 type BookDraft = {
@@ -93,6 +99,9 @@ const DEFAULT_SITE: SiteConfig = {
   atlas: {
     visible: false,
   },
+  fiber: {
+    visible: false,
+  },
 };
 
 const DEFAULT_BOOK_DRAFT: BookDraft = {
@@ -109,13 +118,10 @@ const DEFAULT_BOOK_DRAFT: BookDraft = {
 type AdminView = "add" | "editor" | "tagger" | "paths" | "content" | "atlas" | "site" | "fiber";
 
 const ADMIN_VIEWS: Array<{ id: AdminView; label: string; description: string }> = [
-  { id: "add", label: "New Book", description: "One-click draft setup." },
-  { id: "editor", label: "Editor", description: "Book metadata and placement." },
-  { id: "tagger", label: "Tagger", description: "Shelves, tags, and visibility." },
-  { id: "paths", label: "Paths", description: "Reading path order and books." },
-  { id: "content", label: "Content", description: "Chapter text and review tools." },
+  { id: "editor", label: "Books", description: "Metadata, shelves, tags, and content." },
+  { id: "paths", label: "Series", description: "Series order and book lists." },
   { id: "atlas", label: "Atlas", description: "Knowledge graph and quality queues." },
-  { id: "site", label: "Site", description: "Featured paths and newest order." },
+  { id: "site", label: "Site", description: "Featured series and newest order." },
   { id: "fiber", label: "Fiber", description: "Private quote page settings." },
 ];
 
@@ -185,6 +191,12 @@ function normalizeSiteConfig(data: Partial<SiteConfig> | null | undefined): Site
     atlas: {
       visible: Boolean(data?.atlas?.visible),
     },
+    fiber: {
+      visible: Boolean(data?.fiber?.visible),
+    },
+    social: {
+      instagramUrl: typeof data?.social?.instagramUrl === "string" ? data.social.instagramUrl : "",
+    },
   };
 }
 
@@ -244,7 +256,7 @@ export default function AdminClient() {
   const [selectedPathId, setSelectedPathId] = useState("");
   const [selectedPathIds, setSelectedPathIds] = useState<string[]>([]);
   const [bookPickerOpen, setBookPickerOpen] = useState(false);
-  const [adminView, setAdminView] = useState<AdminView>("add");
+  const [adminView, setAdminView] = useState<AdminView>("editor");
   const [activeTag, setActiveTag] = useState("All");
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeVisibility, setActiveVisibility] = useState("All");
@@ -323,6 +335,7 @@ export default function AdminClient() {
   }, [activeCategory, activeTag, activeVisibility, books, query]);
 
   const allPathItems = useMemo(() => [
+    ...pathsFile.series,
     ...pathsFile.paths,
     ...(pathsFile.tagPaths || []),
     ...(pathsFile.recommendedReading || []),
@@ -342,15 +355,6 @@ export default function AdminClient() {
     untagged: books.filter(book => !book.tags.length).length,
     archive: books.filter(book => book.visibility === "archive").length,
     changed: dirty || pathsDirty || siteDirty || fiberDirty ? "Yes" : "No",
-  };
-  const pathStats = {
-    paths: [
-      ...pathsFile.paths,
-      ...(pathsFile.tagPaths || []),
-      ...(pathsFile.recommendedReading || []),
-    ].filter(item => !item.deleted).length,
-    placements: allPathItems.filter(item => !item.deleted).reduce((sum, item) => sum + item.books.length, 0),
-    changed: pathsDirty ? "Yes" : "No",
   };
 
   const tagGroups = useMemo(() => {
@@ -478,6 +482,17 @@ export default function AdminClient() {
     }));
   }
 
+  function setFiberVisible(visible: boolean) {
+    setSiteDirty(true);
+    setSite(current => ({
+      ...current,
+      fiber: {
+        ...current.fiber,
+        visible,
+      },
+    }));
+  }
+
   function moveFeaturedId(kind: "featuredPathIds" | "newestIds", index: number, offset: number) {
     const ids = site.library[kind];
     const nextIndex = index + offset;
@@ -495,6 +510,7 @@ export default function AdminClient() {
     setPathsFile(current => {
       const next = {
         ...current,
+        series: current.series.map(item => item.id === id ? normalizePath({ ...item, ...patch }, "series") : item),
         paths: current.paths.map(item => item.id === id ? normalizePath({ ...item, ...patch }) : item),
         tagPaths: (current.tagPaths || []).map(item => item.id === id ? normalizePath({ ...item, ...patch }) : item),
         recommendedReading: (current.recommendedReading || []).map(item => item.id === id ? normalizePath({ ...item, ...patch }) : item),
@@ -510,6 +526,7 @@ export default function AdminClient() {
     setPathsFile(current => {
       const next = {
         ...current,
+        series: current.series.filter(item => !idSet.has(item.id)),
         paths: current.paths.filter(item => !idSet.has(item.id)),
         tagPaths: (current.tagPaths || []).filter(item => !idSet.has(item.id)),
         recommendedReading: (current.recommendedReading || []).filter(item => !idSet.has(item.id)),
@@ -557,7 +574,7 @@ export default function AdminClient() {
 
   function movePath(pathId: string, offset: number) {
     setPathsFile(current => {
-      const buckets: Array<keyof Pick<PathsFile, "paths" | "tagPaths" | "recommendedReading">> = ["paths", "tagPaths", "recommendedReading"];
+      const buckets: Array<keyof Pick<PathsFile, "series" | "paths" | "tagPaths" | "recommendedReading">> = ["series", "paths", "tagPaths", "recommendedReading"];
       const bucket = buckets.find(key => (current[key] || []).some(item => item.id === pathId));
       if (!bucket) return current;
       const list = [...(current[bucket] || [])];
@@ -578,7 +595,7 @@ export default function AdminClient() {
   }
 
   function pathBucketPosition(pathId: string) {
-    const buckets: Array<keyof Pick<PathsFile, "paths" | "tagPaths" | "recommendedReading">> = ["paths", "tagPaths", "recommendedReading"];
+    const buckets: Array<keyof Pick<PathsFile, "series" | "paths" | "tagPaths" | "recommendedReading">> = ["series", "paths", "tagPaths", "recommendedReading"];
     for (const bucket of buckets) {
       const list = pathsFile[bucket] || [];
       const index = list.findIndex(item => item.id === pathId);
@@ -671,27 +688,20 @@ export default function AdminClient() {
         <div>
           <p className="kicker">JJU Admin</p>
           <h1>Admin Studio</h1>
+          <div className="adminPulse" aria-label="Admin snapshot">
+            <span><strong>{stats.total}</strong> books</span>
+            <span><strong>{stats.changed}</strong> unsaved</span>
+          </div>
         </div>
         <div className="adminActions">
+          <button className="resetBtn" disabled={busy} onClick={() => chooseAdminView(adminView === "add" ? "editor" : "add")}>
+            {adminView === "add" ? "Back to Books" : "New Book"}
+          </button>
           <button className="formBtn saveEverythingBtn" disabled={busy || (!dirty && !pathsDirty && !siteDirty && !fiberDirty)} onClick={() => saveAll(false)}>
             {busy ? "Saving..." : dirty || pathsDirty || siteDirty || fiberDirty ? "Save Changes" : "Saved"}
           </button>
           <button className="resetBtn" disabled={busy} onClick={() => saveAll(true)}>Export Books</button>
         </div>
-      </section>
-
-      <section className="adminStats">
-        <div><strong>{stats.total}</strong><span>Total</span></div>
-        <div><strong>{stats.untitled}</strong><span>ID titles</span></div>
-        <div><strong>{stats.untagged}</strong><span>Untagged</span></div>
-        <div><strong>{stats.archive}</strong><span>Archive</span></div>
-        <div><strong>{stats.changed}</strong><span>Unsaved</span></div>
-      </section>
-
-      <section className="adminStats pathStats">
-        <div><strong>{pathStats.paths}</strong><span>Paths</span></div>
-        <div><strong>{pathStats.placements}</strong><span>Book spots</span></div>
-        <div><strong>{pathStats.changed}</strong><span>Paths unsaved</span></div>
       </section>
 
       {message && <div className="adminNotice">{message}</div>}
@@ -824,11 +834,26 @@ export default function AdminClient() {
           </label>
         </section>
 
+        <section className="sitePublishPanel">
+          <div>
+            <h3>Fiber page</h3>
+            <p>Keep this private unless you want the fiber quote page visible in public navigation.</p>
+          </div>
+          <label className="adminToggle">
+            <input
+              type="checkbox"
+              checked={site.fiber.visible}
+              onChange={event => setFiberVisible(event.target.checked)}
+            />
+            <span>{site.fiber.visible ? "Published" : "Hidden"}</span>
+          </label>
+        </section>
+
         <div className="featuredEditorGrid">
           <section>
-            <h3>Featured paths</h3>
+            <h3>Featured series</h3>
             <select className="select" value="" onChange={event => addFeaturedId("featuredPathIds", event.target.value)}>
-              <option value="">Add a path...</option>
+              <option value="">Add a series...</option>
               {allPathItems.filter(item => !item.deleted).map(item => (
                 <option value={item.id} key={item.id}>{item.title}</option>
               ))}
@@ -885,8 +910,8 @@ export default function AdminClient() {
       {adminView === "paths" && <section className="adminPanel pathBuilderPanel">
         <div className="pathBuilderTop">
           <div>
-            <p className="kicker">Path Builder</p>
-            <h2>Edit reading paths</h2>
+            <p className="kicker">Series Builder</p>
+            <h2>Edit reading series</h2>
           </div>
           <div className="adminActions">
             <button className="resetBtn" disabled={!selectedPath} onClick={() => setBookPickerOpen(true)}>Add Books</button>
@@ -899,8 +924,8 @@ export default function AdminClient() {
 
         <div className="pathPromptGrid">
           <label>
-            <span>Find a path</span>
-            <input className="input" value={pathQuery} onChange={event => setPathQuery(event.target.value)} placeholder="Search path title or description..." />
+            <span>Find a series</span>
+            <input className="input" value={pathQuery} onChange={event => setPathQuery(event.target.value)} placeholder="Search series title or description..." />
           </label>
         </div>
 
@@ -927,7 +952,7 @@ export default function AdminClient() {
           {selectedPath ? (
             <section className="pathEditor">
               <label>
-                <span>Path title</span>
+                <span>Series title</span>
                 <input className="input" value={selectedPath.title} onChange={event => patchPath(selectedPath.id, { title: event.target.value })} />
               </label>
 
@@ -938,7 +963,7 @@ export default function AdminClient() {
 
               <div className="adminActions pathEditorActions">
                 <button className="resetBtn" onClick={() => setBookPickerOpen(true)}>Add Books</button>
-                <button className="formBtn" onClick={() => patchPath(selectedPath.id, { deleted: !selectedPath.deleted })}>{selectedPath.deleted ? "Make Visible" : "Hide Path"}</button>
+                <button className="formBtn" onClick={() => patchPath(selectedPath.id, { deleted: !selectedPath.deleted })}>{selectedPath.deleted ? "Make Visible" : "Hide Series"}</button>
               </div>
 
               <div className="pathBookRows">
@@ -961,7 +986,7 @@ export default function AdminClient() {
               </div>
             </section>
           ) : (
-            <div className="emptyPathState">No paths yet.</div>
+            <div className="emptyPathState">No series yet.</div>
           )}
         </div>
       </section>}
@@ -971,7 +996,7 @@ export default function AdminClient() {
           <section className="bookPickerModal">
             <div className="bookPickerHeader">
               <div>
-                <p className="kicker">Add to path</p>
+                <p className="kicker">Add to series</p>
                 <h2>{selectedPath.title}</h2>
               </div>
               <button className="resetBtn" onClick={() => setBookPickerOpen(false)}>Close</button>
@@ -1003,7 +1028,7 @@ export default function AdminClient() {
         </div>
       )}
 
-      {["editor", "tagger", "content"].includes(adminView) && <section className="adminWorkbench">
+      {adminView === "editor" && <section className="adminWorkbench">
         <label>
           <span>Find a book</span>
           <input className="input" value={query} onChange={event => setQuery(event.target.value)} placeholder="Search title, tag, description..." />
@@ -1030,7 +1055,7 @@ export default function AdminClient() {
         </label>
       </section>}
 
-      {["editor", "tagger", "content"].includes(adminView) && <section className="adminGrid">
+      {adminView === "editor" && <section className="adminGrid">
         <aside className="adminBookCards">
           {visible.map(book => (
             <button className={book.id === selected?.id ? "active adminBookCard" : "adminBookCard"} key={book.id} onClick={() => setSelectedId(book.id)}>
@@ -1043,9 +1068,8 @@ export default function AdminClient() {
           ))}
         </aside>
 
-        {selected && adminView === "content" && <AdminReaderEditor book={selected} />}
-
-        {selected && adminView !== "content" && (
+        {selected && (
+          <div className="adminBookWorkspace">
           <section className="adminPanel editorPanel">
             <div className="editorTop">
               <img src={coverFor(selected)} data-fallback-src={legacyCoverFor(selected)} alt={selected.title} onError={coverFallback} />
@@ -1053,7 +1077,6 @@ export default function AdminClient() {
                 <p className="kicker">{selected.id}</p>
                 <h2>{selected.title}</h2>
                 <div className="adminActions miniActions">
-                  <button className="formBtn" onClick={() => chooseAdminView("content")}>Open Content Editor</button>
                   <button className={selected.visibility === "archive" ? "resetBtn" : "formBtn archiveMoveBtn"} onClick={() => patchBook(selected.id, { visibility: selected.visibility === "archive" ? "main" : "archive", archive: selected.visibility !== "archive" })}>{selected.visibility === "archive" ? "Restore to Main" : "Move to Archive"}</button>
                 </div>
               </div>
@@ -1095,7 +1118,6 @@ export default function AdminClient() {
               </div>
             </section>
 
-            {adminView === "editor" && <>
               <label>
                 <span>Title</span>
                 <input className="input" value={selected.title} onChange={event => patchBook(selected.id, { title: event.target.value })} />
@@ -1161,9 +1183,7 @@ export default function AdminClient() {
               <datalist id="archiveCategoryOptions">
                 {archiveCategories.map(item => <option key={item} value={item} />)}
               </datalist>
-            </>}
 
-            {adminView === "tagger" && <>
             <section className="categoryVisibilityPanel">
               <h3>Shelf visibility</h3>
               <p>These are the shelves this book appears in from its tags. Turn off any layer where it does not belong.</p>
@@ -1202,8 +1222,9 @@ export default function AdminClient() {
                 </section>
               ))}
             </div>
-            </>}
           </section>
+          <AdminReaderEditor book={selected} />
+          </div>
         )}
       </section>}
     </main>

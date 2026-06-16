@@ -2,7 +2,7 @@
   {
     "id": "1776",
     "title": "1776",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "1776.jpg",
     "bookFile": "1776.epub",
     "tags": [
@@ -43,7 +43,7 @@
   {
     "id": "addiction",
     "title": "ADDICTION",
-    "series": "",
+    "series": "High Society",
     "coverFile": "Addiction.jpg",
     "bookFile": "Addiction.epub",
     "tags": [
@@ -83,7 +83,7 @@
   {
     "id": "adolf",
     "title": "How a Man Becomes a Monster",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "Adolf.jpg",
     "bookFile": "Adolf.epub",
     "tags": [
@@ -127,7 +127,7 @@
   {
     "id": "agency",
     "title": "AGENCY",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Agency.jpg",
     "bookFile": "Agency.epub",
     "tags": [
@@ -202,7 +202,7 @@
   {
     "id": "aitakeover",
     "title": "The AI Takeover Already Happened",
-    "series": "",
+    "series": "The System",
     "coverFile": "AITakeover.jpg",
     "bookFile": "AITakeover.epub",
     "tags": [
@@ -244,7 +244,7 @@
   {
     "id": "alcohol",
     "title": "Alcohol",
-    "series": "",
+    "series": "High Society",
     "coverFile": "Alcohol.jpg",
     "bookFile": "Alcohol.epub",
     "tags": [
@@ -286,7 +286,7 @@
   {
     "id": "alexander",
     "title": "ALEXANDER",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "Alexander.jpg",
     "bookFile": "Alexander.epub",
     "tags": [
@@ -561,7 +561,7 @@
   {
     "id": "aquinas",
     "title": "THOMAS AQUINAS",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Aquinas.jpg",
     "bookFile": "Aquinas.epub",
     "tags": [
@@ -601,7 +601,7 @@
   {
     "id": "aristotle",
     "title": "ARISTOTLE",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Aristotle.jpg",
     "bookFile": "Aristotle.epub",
     "tags": [
@@ -682,7 +682,7 @@
   {
     "id": "audit",
     "title": "The Audit",
-    "series": "",
+    "series": "The System",
     "coverFile": "Audit.jpg",
     "bookFile": "audit.epub",
     "tags": [
@@ -714,7 +714,7 @@
   {
     "id": "august",
     "title": "Augustus",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "August.jpg",
     "bookFile": "august.epub",
     "tags": [
@@ -751,7 +751,7 @@
   {
     "id": "bahai",
     "title": "The Ninth Prophet",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Bahai.jpg",
     "bookFile": "Bahai.epub",
     "tags": [
@@ -793,7 +793,7 @@
   {
     "id": "bang",
     "title": "The Big Bang",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Bang.jpg",
     "bookFile": "bang.epub",
     "tags": [
@@ -864,7 +864,7 @@
   {
     "id": "bees",
     "title": "The Bee Book",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Bees.jpg",
     "bookFile": "bees.epub",
     "tags": [
@@ -899,7 +899,7 @@
   {
     "id": "believe",
     "title": "What People Actually Believe",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Believe.jpg",
     "bookFile": "Believe.epub",
     "tags": [
@@ -942,7 +942,7 @@
   {
     "id": "believers",
     "title": "Believers",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Believers.jpg",
     "bookFile": "Believers.epub",
     "tags": [
@@ -983,7 +983,7 @@
   {
     "id": "bezos",
     "title": "Bezos",
-    "series": "",
+    "series": "The Architects",
     "coverFile": "Bezos.jpg",
     "bookFile": "Bezos.epub",
     "tags": [
@@ -1063,7 +1063,7 @@
   {
     "id": "biochemical",
     "title": "Biochemical Romance",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Biochemical.jpg",
     "bookFile": "Biochemical.epub",
     "tags": [
@@ -1295,7 +1295,7 @@
   {
     "id": "brain",
     "title": "The Brain",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Brain.jpg",
     "bookFile": "brain.epub",
     "tags": [
@@ -1333,7 +1333,7 @@
   {
     "id": "branches",
     "title": "Branches",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Branches.jpg",
     "bookFile": "Branches.epub",
     "tags": [
@@ -1374,7 +1374,7 @@
   {
     "id": "buddha",
     "title": "The Buddha Book",
-    "series": "",
+    "series": "God-struck",
     "coverFile": "Buddha.jpg",
     "bookFile": "Buddha.epub",
     "tags": [
@@ -1414,7 +1414,7 @@
   {
     "id": "buddhism",
     "title": "BUDDHISM",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Buddhism.jpg",
     "bookFile": "Buddhism.epub",
     "tags": [
@@ -1453,7 +1453,7 @@
   {
     "id": "bure",
     "title": "BUREAUCRACY",
-    "series": "",
+    "series": "The System",
     "coverFile": "Bure.jpg",
     "bookFile": "Bure.epub",
     "tags": [
@@ -1492,7 +1492,7 @@
   {
     "id": "burgers",
     "title": "BUILT FROM BURGERS",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Burgers.jpg",
     "bookFile": "Burgers.epub",
     "tags": [
@@ -1570,7 +1570,7 @@
   {
     "id": "burton",
     "title": "Burton",
-    "series": "",
+    "series": "The Creatives",
     "coverFile": "Burton.jpg",
     "bookFile": "Burton.epub",
     "tags": [
@@ -1606,7 +1606,7 @@
   {
     "id": "caesar",
     "title": "CAESAR",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "Caesar.jpg",
     "bookFile": "Caesar.epub",
     "tags": [
@@ -1647,7 +1647,7 @@
   {
     "id": "caffeine",
     "title": "CAFFEINE",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Caffeine.jpg",
     "bookFile": "Caffeine.epub",
     "tags": [
@@ -1727,7 +1727,7 @@
   {
     "id": "campus",
     "title": "Campus, Inc.",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Campus.jpg",
     "bookFile": "Campus.epub",
     "tags": [
@@ -1765,7 +1765,7 @@
   {
     "id": "cancer",
     "title": "CANCER",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Cancer.jpg",
     "bookFile": "Cancer.epub",
     "tags": [
@@ -1805,7 +1805,7 @@
   {
     "id": "casinos",
     "title": "The House",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Casinos.jpg",
     "bookFile": "casinos.epub",
     "tags": [
@@ -1881,7 +1881,7 @@
   {
     "id": "charlemagne",
     "title": "Charlemagne",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "Charlemagne.jpg",
     "bookFile": "Charlemagne.epub",
     "tags": [
@@ -1959,7 +1959,7 @@
   {
     "id": "christianity",
     "title": "Christianity",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Christianity.jpg",
     "bookFile": "Christianity.epub",
     "tags": [
@@ -2043,7 +2043,7 @@
   {
     "id": "cia",
     "title": "The CIA",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "CIA.jpg",
     "bookFile": "CIA.epub",
     "tags": [
@@ -2085,7 +2085,7 @@
   {
     "id": "cn",
     "title": "Saturday Morning Forever",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "CN.jpg",
     "bookFile": "CN.epub",
     "tags": [
@@ -2123,7 +2123,7 @@
   {
     "id": "color",
     "title": "COLOR",
-    "series": "",
+    "series": "The Creatives",
     "coverFile": "Color.jpg",
     "bookFile": "Color.epub",
     "tags": [
@@ -2163,7 +2163,7 @@
   {
     "id": "columbus",
     "title": "COLUMBUS",
-    "series": "",
+    "series": "The Disruptors",
     "coverFile": "Columbus.jpg",
     "bookFile": "Columbus.epub",
     "tags": [
@@ -2249,7 +2249,7 @@
   {
     "id": "condition",
     "title": "The Human Condition",
-    "series": "",
+    "series": "The Big Picture",
     "coverFile": "Condition.jpg",
     "bookFile": "Condition.epub",
     "tags": [
@@ -2289,7 +2289,7 @@
   {
     "id": "confucius",
     "title": "Confucius",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Confucius.jpg",
     "bookFile": "Confucius.epub",
     "tags": [
@@ -2410,7 +2410,7 @@
   {
     "id": "corps",
     "title": "THE MAN MADE OF PAPER",
-    "series": "",
+    "series": "The System",
     "coverFile": "Corps.jpg",
     "bookFile": "Corps.epub",
     "tags": [
@@ -2451,7 +2451,7 @@
   {
     "id": "coups",
     "title": "Regime Machine",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Coups.jpg",
     "bookFile": "Coups.epub",
     "tags": [
@@ -2493,7 +2493,7 @@
   {
     "id": "credit",
     "title": "CREDIT",
-    "series": "",
+    "series": "The System",
     "coverFile": "Credit.jpg",
     "bookFile": "Credit.epub",
     "tags": [
@@ -2650,7 +2650,7 @@
   {
     "id": "cult",
     "title": "The Cult Playbook",
-    "series": "",
+    "series": "The Big Picture",
     "coverFile": "Cult.jpg",
     "bookFile": "Cult.epub",
     "tags": [
@@ -2767,7 +2767,7 @@
   {
     "id": "darwin",
     "title": "DARWIN",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Darwin.jpg",
     "bookFile": "Darwin.epub",
     "tags": [
@@ -2847,7 +2847,7 @@
   {
     "id": "descartes",
     "title": "Descartes",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Descartes.jpg",
     "bookFile": "Descartes.epub",
     "tags": [
@@ -2928,7 +2928,7 @@
   {
     "id": "dietpop",
     "title": "The Sweet Lie",
-    "series": "",
+    "series": "High Society",
     "coverFile": "DietPop.jpg",
     "bookFile": "DietPop.epub",
     "tags": [
@@ -2968,7 +2968,7 @@
   {
     "id": "disney",
     "title": "Disney",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "disney.jpg",
     "bookFile": "Disney.epub",
     "tags": [
@@ -3008,7 +3008,7 @@
   {
     "id": "dollar",
     "title": "In Green We Trust",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Dollar.jpg",
     "bookFile": "Dollar.epub",
     "tags": [
@@ -3047,7 +3047,7 @@
   {
     "id": "dopamine",
     "title": "The Dopamine Goblin",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Dopamine.jpg",
     "bookFile": "Dopamine.epub",
     "tags": [
@@ -3132,7 +3132,7 @@
   {
     "id": "drugs",
     "title": "The Drug Book",
-    "series": "",
+    "series": "High Society",
     "coverFile": "Drugs.jpg",
     "bookFile": "Drugs.epub",
     "tags": [
@@ -3172,6 +3172,7 @@
   {
     "id": "echoes",
     "title": "Echoes of Power",
+    "slug": "echoes-of-power",
     "series": "",
     "coverFile": "Echoes.jpg",
     "bookFile": "Echoes.epub",
@@ -3333,7 +3334,7 @@
   {
     "id": "einstein",
     "title": "Einstein",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Einstein.jpg",
     "bookFile": "Einstein.epub",
     "tags": [
@@ -3373,7 +3374,7 @@
   {
     "id": "elections",
     "title": "The Ballot Breakdown",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Elections.jpg",
     "bookFile": "Elections.epub",
     "tags": [
@@ -3411,7 +3412,7 @@
   {
     "id": "electoral",
     "title": "The Electoral College",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Electoral.jpg",
     "bookFile": "electoral.epub",
     "tags": [
@@ -3567,7 +3568,7 @@
   {
     "id": "fantasy",
     "title": "THE FANTASY MACHINE",
-    "series": "",
+    "series": "The System",
     "coverFile": "Fantasy.jpg",
     "bookFile": "Fantasy.epub",
     "tags": [
@@ -3607,7 +3608,7 @@
   {
     "id": "fbi",
     "title": "The FBI",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "FBI.jpg",
     "bookFile": "FBI.epub",
     "tags": [
@@ -3689,7 +3690,7 @@
   {
     "id": "feynman",
     "title": "Feynman",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Feynman.jpg",
     "bookFile": "feynman.epub",
     "tags": [
@@ -3729,6 +3730,7 @@
   {
     "id": "field",
     "title": "Quantum Fields",
+    "slug": "quantum-fields-field",
     "series": "",
     "coverFile": "Field.jpg",
     "bookFile": "field.epub",
@@ -3803,7 +3805,7 @@
   {
     "id": "ford",
     "title": "FORD",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Ford.jpg",
     "bookFile": "Ford.epub",
     "tags": [
@@ -3846,7 +3848,7 @@
   {
     "id": "foreskin",
     "title": "Foresaken",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Foreskin.jpg",
     "bookFile": "Foreskin.epub",
     "tags": [
@@ -3885,7 +3887,7 @@
   {
     "id": "fortitude",
     "title": "Operation Fortitude",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Fortitude.jpg",
     "bookFile": "fortitude.epub",
     "tags": [
@@ -3917,7 +3919,7 @@
   {
     "id": "franklin",
     "title": "FRANKLIN",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Franklin.jpg",
     "bookFile": "Franklin.epub",
     "tags": [
@@ -3959,7 +3961,7 @@
   {
     "id": "fresco",
     "title": "Fresco",
-    "series": "",
+    "series": "The Creatives",
     "coverFile": "Fresco.jpg",
     "bookFile": "fresco.epub",
     "tags": [
@@ -3993,7 +3995,7 @@
   {
     "id": "freud",
     "title": "Everything’s a Sign",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Freud.jpg",
     "bookFile": "Freud.epub",
     "tags": [
@@ -4033,7 +4035,7 @@
   {
     "id": "galileo",
     "title": "GALILEO",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Galileo.jpg",
     "bookFile": "Galileo.epub",
     "tags": [
@@ -4075,7 +4077,7 @@
   {
     "id": "gandhi",
     "title": "Gandhi",
-    "series": "",
+    "series": "The Disruptors",
     "coverFile": "Gandhi.jpg",
     "bookFile": "gandhi.epub",
     "tags": [
@@ -4119,7 +4121,7 @@
   {
     "id": "gates",
     "title": "Gates",
-    "series": "",
+    "series": "The Architects",
     "coverFile": "Gates.jpg",
     "bookFile": "Gates.epub",
     "tags": [
@@ -4160,7 +4162,7 @@
   {
     "id": "genghis",
     "title": "GENGHIS",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "Genghis.jpg",
     "bookFile": "Genghis.epub",
     "tags": [
@@ -4242,7 +4244,7 @@
   {
     "id": "georgism",
     "title": "GEORGISM",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Georgism.jpg",
     "bookFile": "Georgism.epub",
     "tags": [
@@ -4321,7 +4323,7 @@
   {
     "id": "gig",
     "title": "THE GIG ECONOMY",
-    "series": "",
+    "series": "The System",
     "coverFile": "Gig.jpg",
     "bookFile": "Gig.epub",
     "tags": [
@@ -4403,7 +4405,7 @@
   {
     "id": "gods",
     "title": "From Gods to God",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Gods.jpg",
     "bookFile": "Gods.epub",
     "tags": [
@@ -4449,7 +4451,7 @@
   {
     "id": "goo",
     "title": "From Goo to You",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Goo.jpg",
     "bookFile": "Goo.epub",
     "tags": [
@@ -4487,7 +4489,7 @@
   {
     "id": "google",
     "title": "Page and Brin",
-    "series": "",
+    "series": "The Architects",
     "coverFile": "Google.jpg",
     "bookFile": "Google.epub",
     "tags": [
@@ -4682,7 +4684,7 @@
   {
     "id": "haile",
     "title": "The Lion of Judah",
-    "series": "",
+    "series": "God-struck",
     "coverFile": "Haile.jpg",
     "bookFile": "Haile.epub",
     "tags": [
@@ -4806,7 +4808,7 @@
   {
     "id": "hardest",
     "title": "The Hardest Stuff, Simplified",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Hardest.jpg",
     "bookFile": "Hardest.epub",
     "tags": [
@@ -4844,7 +4846,7 @@
   {
     "id": "harriet",
     "title": "HARRIET",
-    "series": "",
+    "series": "The Disruptors",
     "coverFile": "Harriet.jpg",
     "bookFile": "Harriet.epub",
     "tags": [
@@ -4884,7 +4886,7 @@
   {
     "id": "hat",
     "title": "Behind the Hat",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Hat.jpg",
     "bookFile": "hat.epub",
     "tags": [
@@ -4916,7 +4918,7 @@
   {
     "id": "hawking",
     "title": "HAWKING",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Hawking.jpg",
     "bookFile": "Hawking.epub",
     "tags": [
@@ -5033,7 +5035,7 @@
   {
     "id": "heroes",
     "title": "Heroes and Villains",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Heroes.jpg",
     "bookFile": "Heroes.epub",
     "tags": [
@@ -5229,7 +5231,7 @@
   {
     "id": "houdini",
     "title": "The Lockbreaker",
-    "series": "",
+    "series": "The Creatives",
     "coverFile": "Houdini.jpg",
     "bookFile": "houdini.epub",
     "tags": [
@@ -5267,7 +5269,7 @@
   {
     "id": "howbible",
     "title": "How the Bible Became the Bible",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "HowBible.jpg",
     "bookFile": "HowBible.epub",
     "tags": [
@@ -5579,7 +5581,7 @@
   {
     "id": "imagination",
     "title": "IMAGINATION",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Imagination.jpg",
     "bookFile": "Imagination.epub",
     "tags": [
@@ -5661,7 +5663,7 @@
   {
     "id": "insideasylum",
     "title": "Life Inside the Asylum",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "InsideAsylum.jpg",
     "bookFile": "InsideAsylum.epub",
     "tags": [
@@ -5737,7 +5739,7 @@
   {
     "id": "insurance",
     "title": "The Fine Print",
-    "series": "",
+    "series": "The System",
     "coverFile": "insurance.jpg",
     "bookFile": "Insurance.epub",
     "tags": [
@@ -5776,7 +5778,7 @@
   {
     "id": "intelligence",
     "title": "Intelligence",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Intelligence.jpg",
     "bookFile": "Intelligence.epub",
     "tags": [
@@ -5815,7 +5817,7 @@
   {
     "id": "isaac",
     "title": "Heaven’s Codebreaker",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Isaac.jpg",
     "bookFile": "Isaac.epub",
     "tags": [
@@ -5855,7 +5857,7 @@
   {
     "id": "islam",
     "title": "Islam",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Islam.jpg",
     "bookFile": "Islam.epub",
     "tags": [
@@ -6119,7 +6121,7 @@
   {
     "id": "jesse",
     "title": "JESSE HELMS",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Jesse.jpg",
     "bookFile": "Jesse.epub",
     "tags": [
@@ -6196,7 +6198,7 @@
   {
     "id": "jewish",
     "title": "The First Chosen People",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Jewish.jpg",
     "bookFile": "Jewish.epub",
     "tags": [
@@ -6286,7 +6288,7 @@
   {
     "id": "joan",
     "title": "Joan of Arc",
-    "series": "",
+    "series": "God-struck",
     "coverFile": "Joan.jpg",
     "bookFile": "Joan.epub",
     "tags": [
@@ -6328,7 +6330,7 @@
   {
     "id": "jobs",
     "title": "Jobs",
-    "series": "",
+    "series": "The Architects",
     "coverFile": "Jobs.jpg",
     "bookFile": "Jobs.epub",
     "tags": [
@@ -6368,7 +6370,7 @@
   {
     "id": "jung",
     "title": "Dreamwalker",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "jung.jpg",
     "bookFile": "jung.epub",
     "tags": [
@@ -6522,7 +6524,7 @@
   {
     "id": "kaiser",
     "title": "The Last Kaiser",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "Kaiser.jpg",
     "bookFile": "Kaiser.epub",
     "tags": [
@@ -6566,7 +6568,7 @@
   {
     "id": "kanye",
     "title": "KANYE",
-    "series": "",
+    "series": "The Noisemakers",
     "coverFile": "Kanye.jpg",
     "bookFile": "Kanye.epub",
     "tags": [
@@ -6604,7 +6606,7 @@
   {
     "id": "kfc",
     "title": "KFC",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "KFC.jpg",
     "bookFile": "KFC.epub",
     "tags": [
@@ -6646,7 +6648,7 @@
   {
     "id": "kim",
     "title": "KIM JONG UN",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "Kim.jpg",
     "bookFile": "Kim.epub",
     "tags": [
@@ -6725,7 +6727,7 @@
   {
     "id": "lee",
     "title": "LEE",
-    "series": "",
+    "series": "The Noisemakers",
     "coverFile": "Lee.jpg",
     "bookFile": "Lee.epub",
     "tags": [
@@ -6763,7 +6765,7 @@
   {
     "id": "lenin",
     "title": "LENIN",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "Lenin.jpg",
     "bookFile": "Lenin.epub",
     "tags": [
@@ -6807,7 +6809,7 @@
   {
     "id": "lennon",
     "title": "LENNON",
-    "series": "",
+    "series": "The Noisemakers",
     "coverFile": "Lennon.jpg",
     "bookFile": "Lennon.epub",
     "tags": [
@@ -6847,7 +6849,7 @@
   {
     "id": "leonardo",
     "title": "LEONARDO",
-    "series": "",
+    "series": "The Creatives",
     "coverFile": "Leonardo.jpg",
     "bookFile": "Leonardo.epub",
     "tags": [
@@ -6929,7 +6931,7 @@
   {
     "id": "lobbied",
     "title": "LOBBIED",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Lobbied.jpg",
     "bookFile": "Lobbied.epub",
     "tags": [
@@ -6967,7 +6969,7 @@
   {
     "id": "love",
     "title": "LOVE",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Love.jpg",
     "bookFile": "Love.epub",
     "tags": [
@@ -7071,7 +7073,7 @@
   {
     "id": "lron",
     "title": "L. Ron Hubbard",
-    "series": "",
+    "series": "God-struck",
     "coverFile": "LRon.jpg",
     "bookFile": "LRon.epub",
     "tags": [
@@ -7113,7 +7115,7 @@
   {
     "id": "lunchtime",
     "title": "Lunchtime",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Lunchtime.jpg",
     "bookFile": "Lunchtime.epub",
     "tags": [
@@ -7154,7 +7156,7 @@
   {
     "id": "luther",
     "title": "MARTIN LUTHER",
-    "series": "",
+    "series": "The Disruptors",
     "coverFile": "Luther.jpg",
     "bookFile": "Luther.epub",
     "tags": [
@@ -7196,7 +7198,7 @@
   {
     "id": "machi",
     "title": "Machiavelli",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Machi.jpg",
     "bookFile": "machi.epub",
     "tags": [
@@ -7231,7 +7233,7 @@
   {
     "id": "malcolm",
     "title": "MALCOLM X",
-    "series": "",
+    "series": "The Disruptors",
     "coverFile": "Malcolm.jpg",
     "bookFile": "Malcolm.epub",
     "tags": [
@@ -7269,7 +7271,7 @@
   {
     "id": "mansu",
     "title": "MANSA MUSA",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "Mansu.jpg",
     "bookFile": "Mansu.epub",
     "tags": [
@@ -7355,7 +7357,7 @@
   {
     "id": "marie",
     "title": "Marie Curie",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Marie.jpg",
     "bookFile": "marie.epub",
     "tags": [
@@ -7429,7 +7431,7 @@
   {
     "id": "materialism",
     "title": "OOPS, ALL ATOMS",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Materialism.jpg",
     "bookFile": "Materialism.epub",
     "tags": [
@@ -7510,7 +7512,7 @@
   {
     "id": "messiah",
     "title": "MESSIAH",
-    "series": "",
+    "series": "God-struck",
     "coverFile": "Messiah.jpg",
     "bookFile": "Messiah.epub",
     "tags": [
@@ -7550,7 +7552,7 @@
   {
     "id": "mike",
     "title": "MICHAEL",
-    "series": "",
+    "series": "The Noisemakers",
     "coverFile": "Mike.jpg",
     "bookFile": "Mike.epub",
     "tags": [
@@ -7590,7 +7592,7 @@
   {
     "id": "mkultra",
     "title": "MKUltra",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "MKUltra.jpg",
     "bookFile": "mkultra.epub",
     "tags": [
@@ -7632,7 +7634,7 @@
   {
     "id": "money",
     "title": "What Is Money?",
-    "series": "",
+    "series": "The Big Picture",
     "coverFile": "Money.jpg",
     "bookFile": "Money.epub",
     "tags": [
@@ -7750,7 +7752,7 @@
   {
     "id": "mozart",
     "title": "MOZART",
-    "series": "",
+    "series": "The Noisemakers",
     "coverFile": "Mozart.jpg",
     "bookFile": "Mozart.epub",
     "tags": [
@@ -7788,7 +7790,7 @@
   {
     "id": "muhammad",
     "title": "Muhammad",
-    "series": "",
+    "series": "God-struck",
     "coverFile": "Muhammad.jpg",
     "bookFile": "Muhammad.epub",
     "tags": [
@@ -7830,7 +7832,8 @@
   {
     "id": "music",
     "title": "Vibe Check",
-    "series": "",
+    "slug": "vibe-check-music",
+    "series": "The Noisemakers",
     "coverFile": "Music.jpg",
     "bookFile": "music.epub",
     "tags": [
@@ -7862,7 +7865,7 @@
   {
     "id": "musk",
     "title": "Musk",
-    "series": "",
+    "series": "The Architects",
     "coverFile": "musk.jpg",
     "bookFile": "Musk.epub",
     "tags": [
@@ -7904,7 +7907,7 @@
   {
     "id": "mussolini",
     "title": "Bella Ciao",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "Mussolini.jpg",
     "bookFile": "Mussolini.epub",
     "tags": [
@@ -8029,7 +8032,8 @@
   {
     "id": "napoleon",
     "title": "Seize the Crown",
-    "series": "",
+    "slug": "seize-the-crown",
+    "series": "The Conquerors",
     "coverFile": "Napoleon.jpg",
     "bookFile": "Napoleon.epub",
     "tags": [
@@ -8115,7 +8119,7 @@
   {
     "id": "nero",
     "title": "What an Artist Dies in Me",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "Nero.jpg",
     "bookFile": "Nero.epub",
     "tags": [
@@ -8155,7 +8159,7 @@
   {
     "id": "nestle",
     "title": "NESTLÉ",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Nestle.jpg",
     "bookFile": "Nestle.epub",
     "tags": [
@@ -8199,7 +8203,8 @@
   {
     "id": "nic",
     "title": "Nicotine",
-    "series": "",
+    "slug": "nicotine-nic",
+    "series": "High Society",
     "coverFile": "Nic.jpg",
     "bookFile": "nic.epub",
     "tags": [
@@ -8237,7 +8242,7 @@
   {
     "id": "nictrap",
     "title": "The Nicotine Trap",
-    "series": "",
+    "series": "High Society",
     "coverFile": "NicTrap.jpg",
     "bookFile": "NicTrap.epub",
     "tags": [
@@ -8277,7 +8282,7 @@
   {
     "id": "niet",
     "title": "Nietzsche",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Niet.jpg",
     "bookFile": "Niet.epub",
     "tags": [
@@ -8316,7 +8321,7 @@
   {
     "id": "nike",
     "title": "NIKE",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Nike.jpg",
     "bookFile": "Nike.epub",
     "tags": [
@@ -8357,7 +8362,7 @@
   {
     "id": "nintendo",
     "title": "Nintendo",
-    "series": "",
+    "series": "Business as Usual",
     "coverFile": "Nintendo.jpg",
     "bookFile": "Nintendo.epub",
     "tags": [
@@ -8438,7 +8443,7 @@
   {
     "id": "northkorea",
     "title": "The Kingdom of Smoke",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "NorthKorea.jpg",
     "bookFile": "NorthKorea.epub",
     "tags": [
@@ -8478,7 +8483,7 @@
   {
     "id": "nsa",
     "title": "The NSA",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "NSA.jpg",
     "bookFile": "NSA.epub",
     "tags": [
@@ -8518,7 +8523,7 @@
   {
     "id": "nuclear",
     "title": "The Atom Unleashed",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Nuclear.jpg",
     "bookFile": "Nuclear.epub",
     "tags": [
@@ -8600,7 +8605,8 @@
   {
     "id": "odd",
     "title": "What Are the Odds?",
-    "series": "",
+    "slug": "what-are-the-odds-odd",
+    "series": "Red, White, and Bruised",
     "coverFile": "Odd.jpg",
     "bookFile": "odd.epub",
     "tags": [
@@ -8640,7 +8646,7 @@
   {
     "id": "orwell",
     "title": "ORWELL",
-    "series": "",
+    "series": "The Creatives",
     "coverFile": "Orwell.jpg",
     "bookFile": "Orwell.epub",
     "tags": [
@@ -8680,7 +8686,7 @@
   {
     "id": "pantheon",
     "title": "Pantheon I",
-    "series": "",
+    "series": "The Big Picture",
     "coverFile": "Pantheon.jpg",
     "bookFile": "Pantheon.epub",
     "tags": [
@@ -8720,7 +8726,8 @@
   {
     "id": "pantheon2",
     "title": "Pantheon II: The Lost History Beneath Your Feet",
-    "series": "",
+    "slug": "pantheon-ii-the-lost-history-beneath-your-feet",
+    "series": "The Big Picture",
     "coverFile": "Pantheon2.jpg",
     "bookFile": "Pantheon2.epub",
     "tags": [
@@ -8803,7 +8810,7 @@
   {
     "id": "phone",
     "title": "Phones",
-    "series": "",
+    "series": "The System",
     "coverFile": "Phone.jpg",
     "bookFile": "phone.epub",
     "tags": [
@@ -8908,7 +8915,7 @@
   {
     "id": "planck",
     "title": "PLANCK",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Planck.jpg",
     "bookFile": "Planck.epub",
     "tags": [
@@ -8948,7 +8955,7 @@
   {
     "id": "plants",
     "title": "The Green Kingdom",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Plants.jpg",
     "bookFile": "plants.epub",
     "tags": [
@@ -9022,7 +9029,7 @@
   {
     "id": "plato",
     "title": "PLATO",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Plato.jpg",
     "bookFile": "Plato.epub",
     "tags": [
@@ -9100,7 +9107,7 @@
   {
     "id": "popes",
     "title": "Papal Pandemonium",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Popes.jpg",
     "bookFile": "popes.epub",
     "tags": [
@@ -9140,7 +9147,8 @@
   {
     "id": "prenancy",
     "title": "You're What?",
-    "series": "",
+    "slug": "youre-what-pregnancy-guide",
+    "series": "Under the Hood",
     "coverFile": "Prenancy.jpg",
     "bookFile": "prenancy.epub",
     "tags": [
@@ -9176,6 +9184,7 @@
   {
     "id": "presidents",
     "title": "The Presidents",
+    "slug": "the-presidents",
     "series": "",
     "coverFile": "Presidents.jpg",
     "bookFile": "Presidents.epub",
@@ -9256,7 +9265,7 @@
   {
     "id": "purdue",
     "title": "PURDUE",
-    "series": "",
+    "series": "High Society",
     "coverFile": "Purdue.jpg",
     "bookFile": "Purdue.epub",
     "tags": [
@@ -9297,7 +9306,7 @@
   {
     "id": "putin",
     "title": "PUTIN",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "Putin.jpg",
     "bookFile": "Putin.epub",
     "tags": [
@@ -9339,7 +9348,7 @@
   {
     "id": "pyramid",
     "title": "The Pyramid",
-    "series": "",
+    "series": "The System",
     "coverFile": "Pyramid.jpg",
     "bookFile": "Pyramid.epub",
     "tags": [
@@ -9459,7 +9468,7 @@
   {
     "id": "race",
     "title": "Black and White",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Race.jpg",
     "bookFile": "Race.epub",
     "tags": [
@@ -9500,7 +9509,7 @@
   {
     "id": "ramses",
     "title": "RAMSES",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "Ramses.jpg",
     "bookFile": "Ramses.epub",
     "tags": [
@@ -9625,7 +9634,7 @@
   {
     "id": "reincarnation",
     "title": "Reincarnation",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Reincarnation.jpg",
     "bookFile": "Reincarnation.epub",
     "tags": [
@@ -9665,7 +9674,7 @@
   {
     "id": "relativity",
     "title": "General Relativity",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Relativity.jpg",
     "bookFile": "relativity.epub",
     "tags": [
@@ -9790,7 +9799,7 @@
   {
     "id": "rewrite",
     "title": "The Great American Rewrite",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "Rewrite.jpg",
     "bookFile": "Rewrite.epub",
     "tags": [
@@ -9833,7 +9842,7 @@
   {
     "id": "rock",
     "title": "This Is a Rock",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Rock.jpg",
     "bookFile": "Rock.epub",
     "tags": [
@@ -9870,7 +9879,7 @@
   {
     "id": "rvb",
     "title": "Red vs. Blue",
-    "series": "",
+    "series": "Red, White, and Bruised",
     "coverFile": "RVB.jpg",
     "bookFile": "RVB.epub",
     "tags": [
@@ -10063,7 +10072,7 @@
   {
     "id": "schooled",
     "title": "Schooled",
-    "series": "",
+    "series": "The System",
     "coverFile": "Schooled.jpg",
     "bookFile": "Schooled.epub",
     "tags": [
@@ -10187,7 +10196,7 @@
   {
     "id": "shake",
     "title": "Shakespeare",
-    "series": "",
+    "series": "The Creatives",
     "coverFile": "Shake.jpg",
     "bookFile": "Shake.epub",
     "tags": [
@@ -10227,7 +10236,7 @@
   {
     "id": "sikhism",
     "title": "Steel and Spirit",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Sikhism.jpg",
     "bookFile": "Sikhism.epub",
     "tags": [
@@ -10267,7 +10276,7 @@
   {
     "id": "sitcoms",
     "title": "Chronicles from the Couch",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Sitcoms.jpg",
     "bookFile": "sitcoms.epub",
     "tags": [
@@ -10301,7 +10310,7 @@
   {
     "id": "sleep",
     "title": "Sleep Like You Mean It",
-    "series": "",
+    "series": "Under the Hood",
     "coverFile": "Sleep.jpg",
     "bookFile": "Sleep.epub",
     "tags": [
@@ -10341,7 +10350,7 @@
   {
     "id": "soaps",
     "title": "Previously On",
-    "series": "",
+    "series": "The Social Code",
     "coverFile": "Soaps.jpg",
     "bookFile": "Soaps.epub",
     "tags": [
@@ -10417,7 +10426,7 @@
   {
     "id": "socrates",
     "title": "Socrates",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Socrates.jpg",
     "bookFile": "Socrates.epub",
     "tags": [
@@ -10499,7 +10508,7 @@
   {
     "id": "spinoza",
     "title": "Spinoza",
-    "series": "",
+    "series": "The Philosophers",
     "coverFile": "Spinoza.jpg",
     "bookFile": "spinoza.epub",
     "tags": [],
@@ -10525,7 +10534,7 @@
   {
     "id": "stalin",
     "title": "STALIN",
-    "series": "",
+    "series": "The Tyrants",
     "coverFile": "Stalin.jpg",
     "bookFile": "Stalin.epub",
     "tags": [
@@ -10569,7 +10578,7 @@
   {
     "id": "steam",
     "title": "The Valve That Never Closes",
-    "series": "",
+    "series": "The System",
     "coverFile": "Steam.jpg",
     "bookFile": "Steam.epub",
     "tags": [
@@ -10751,7 +10760,7 @@
   {
     "id": "tamerlane",
     "title": "TAMERLANE",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "Tamerlane.jpg",
     "bookFile": "Tamerlane.epub",
     "tags": [
@@ -10832,7 +10841,7 @@
   {
     "id": "taylor",
     "title": "TAYLOR SWIFT",
-    "series": "",
+    "series": "The Noisemakers",
     "coverFile": "Taylor.jpg",
     "bookFile": "Taylor.epub",
     "tags": [
@@ -10912,7 +10921,7 @@
   {
     "id": "tesla",
     "title": "Tesla",
-    "series": "",
+    "series": "The Code Breakers",
     "coverFile": "Tesla.jpg",
     "bookFile": "Tesla.epub",
     "tags": [
@@ -11028,7 +11037,7 @@
   {
     "id": "theboys",
     "title": "Da Vinci and the Boys",
-    "series": "",
+    "series": "The Creatives",
     "coverFile": "TheBoys.jpg",
     "bookFile": "TheBoys.epub",
     "tags": [
@@ -11071,7 +11080,7 @@
   {
     "id": "thiel",
     "title": "Thiel",
-    "series": "",
+    "series": "The Architects",
     "coverFile": "Thiel.jpg",
     "bookFile": "Thiel.epub",
     "tags": [
@@ -11111,7 +11120,7 @@
   {
     "id": "thinkers",
     "title": "The Thinkers",
-    "series": "",
+    "series": "The Big Picture",
     "coverFile": "Thinkers.jpg",
     "bookFile": "Thinkers.epub",
     "tags": [
@@ -11153,7 +11162,7 @@
   {
     "id": "tiktok",
     "title": "TikTok",
-    "series": "",
+    "series": "The System",
     "coverFile": "tiktok.jpg",
     "bookFile": "Tiktok.epub",
     "tags": [
@@ -11233,7 +11242,7 @@
   {
     "id": "tmk",
     "title": "Mushroom Man",
-    "series": "",
+    "series": "High Society",
     "coverFile": "TMK.jpg",
     "bookFile": "TMK.epub",
     "tags": [
@@ -11333,8 +11342,8 @@
     "hiddenShelves": [],
     "visibility": "archive",
     "archive": true,
-    "archiveCategory": "Children’s Books",
-    "category": "Children’s Books",
+    "archiveCategory": "Experiments",
+    "category": "Experiments",
     "subtitle": "",
     "creator": "",
     "author": ""
@@ -11667,7 +11676,8 @@
   {
     "id": "vangogh",
     "title": "Van Gogh",
-    "series": "",
+    "slug": "van-gogh-vangogh",
+    "series": "The Creatives",
     "coverFile": "VanGogh.jpg",
     "bookFile": "vangogh.epub",
     "tags": [
@@ -11706,7 +11716,7 @@
   {
     "id": "veil",
     "title": "The Veil",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Veil.jpg",
     "bookFile": "Veil.epub",
     "tags": [
@@ -11791,6 +11801,7 @@
   {
     "id": "videogames",
     "title": "Insert Coin",
+    "slug": "insert-coin-video-games",
     "series": "",
     "coverFile": "VideoGames.jpg",
     "bookFile": "videogames.epub",
@@ -11830,7 +11841,7 @@
   {
     "id": "voltaire",
     "title": "VOLTAIRE",
-    "series": "",
+    "series": "The Disruptors",
     "coverFile": "Voltaire.jpg",
     "bookFile": "Voltaire.epub",
     "tags": [
@@ -11949,7 +11960,7 @@
   {
     "id": "watts",
     "title": "Everything Is Fine, Actually",
-    "series": "",
+    "series": "God-struck",
     "coverFile": "Watts.jpg",
     "bookFile": "Watts.epub",
     "tags": [
@@ -11992,7 +12003,7 @@
   {
     "id": "web",
     "title": "The Web We Live In",
-    "series": "",
+    "series": "The System",
     "coverFile": "Web.jpg",
     "bookFile": "Web.epub",
     "tags": [
@@ -12028,7 +12039,7 @@
   {
     "id": "weed",
     "title": "High Society",
-    "series": "",
+    "series": "High Society",
     "coverFile": "Weed.jpg",
     "bookFile": "Weed.epub",
     "tags": [
@@ -12072,7 +12083,7 @@
   {
     "id": "woke",
     "title": "The Ones Who Woke Up",
-    "series": "",
+    "series": "God-struck",
     "coverFile": "Woke.jpg",
     "bookFile": "Woke.epub",
     "tags": [
@@ -12113,7 +12124,7 @@
   {
     "id": "wu",
     "title": "WU ZETIAN",
-    "series": "",
+    "series": "The Conquerors",
     "coverFile": "Wu.jpg",
     "bookFile": "Wu.epub",
     "tags": [
@@ -12234,7 +12245,7 @@
   {
     "id": "zoro",
     "title": "Before Heaven and Hell",
-    "series": "",
+    "series": "World Religions",
     "coverFile": "Zoro.jpg",
     "bookFile": "Zoro.epub",
     "tags": [
@@ -12278,7 +12289,7 @@
   {
     "id": "zuck",
     "title": "Zuckerberg",
-    "series": "",
+    "series": "The Architects",
     "coverFile": "Zuck.jpg",
     "bookFile": "Zuck.epub",
     "tags": [
@@ -12548,7 +12559,7 @@
     "readingMinutes": 16,
     "readingLabel": "16 min read",
     "chapterCount": 8,
-    "series": "",
+    "series": "The Disruptors",
     "hiddenCategories": [],
     "hiddenShelves": [],
     "visibility": "main",
@@ -12638,7 +12649,7 @@
     "readingMinutes": 29,
     "readingLabel": "29 min read",
     "chapterCount": 12,
-    "series": "",
+    "series": "High Society",
     "hiddenCategories": [],
     "hiddenShelves": [],
     "visibility": "main",
@@ -12758,7 +12769,7 @@
     "readingMinutes": 29,
     "readingLabel": "29 min read",
     "chapterCount": 10,
-    "series": "",
+    "series": "Under the Hood",
     "hiddenCategories": [],
     "hiddenShelves": [],
     "visibility": "main",
@@ -12848,7 +12859,7 @@
     "readingMinutes": 22,
     "readingLabel": "22 min read",
     "chapterCount": 9,
-    "series": "",
+    "series": "The Creatives",
     "hiddenCategories": [],
     "hiddenShelves": [],
     "visibility": "main",
@@ -12878,7 +12889,7 @@
     "readingMinutes": 28,
     "readingLabel": "28 min read",
     "chapterCount": 15,
-    "series": "",
+    "series": "The Noisemakers",
     "hiddenCategories": [],
     "hiddenShelves": [],
     "visibility": "main",

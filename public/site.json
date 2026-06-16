@@ -33,6 +33,9 @@
   "atlas": {
     "visible": false
   },
+  "fiber": {
+    "visible": false
+  },
   "social": {
     "instagramUrl": "https://www.instagram.com/jj_james.johnson/"
   }

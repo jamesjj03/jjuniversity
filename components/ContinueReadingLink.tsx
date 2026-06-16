@@ -12,15 +12,6 @@ type ReadingHistoryItem = {
 
 const HISTORY_KEY = "jju.readingHistory";
 
-function readLatest() {
-  try {
-    const items = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]") as ReadingHistoryItem[];
-    return Array.isArray(items) ? items.find(item => item.bookId) || null : null;
-  } catch {
-    return null;
-  }
-}
-
 export default function ContinueReadingLink() {
   const ref = useRef<HTMLDetailsElement | null>(null);
   const lastTapRef = useRef(0);
@@ -50,7 +41,7 @@ export default function ContinueReadingLink() {
     };
   }, []);
 
-  const latest = items[0] || readLatest();
+  const latest = items[0];
   if (!latest?.bookId) return null;
 
   function handleSummaryClick() {

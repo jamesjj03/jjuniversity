@@ -1,4 +1,13 @@
-﻿export default function ContactPage() {
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Contact",
+  description: "Send JJ University corrections, book issues, audiobook questions, and general messages.",
+  path: "/contact",
+});
+
+export default function ContactPage() {
   return (
     <main className="page contactPage">
       <section className="hero">
@@ -22,13 +31,6 @@
               <label>Message<textarea name="message" rows={7} placeholder="What’s up?" required /></label>
               <button className="formBtn" type="submit">Send message</button>
             </form>
-          </section>
-
-          <aside className="contactGuidance" aria-label="Contact guidance">
-            <section className="card goldCard"><h2>Before you send it</h2><p>JJ University is still being built, cleaned, organized, and refined. If you found a typo, broken link, weird formatting issue, factual mistake, missing cover, or a book that refuses to load like it has personal beef with you, that’s useful.</p><p>Send the title, what happened, and where you saw it. The more specific you are, the easier it is to fix.</p></section>
-
-            <section className="card"><h2>Best reasons to reach out</h2><p>Book problems, corrections, audiobook questions, general messages, ideas, reactions, and anything that helps make the archive better.</p></section>
-
             <section className="contactSupportGrid" aria-label="Helpful contact notes">
               <div>
                 <h2>Helpful details</h2>
@@ -39,7 +41,7 @@
                 <p>Be specific. “This line is wrong because...” is way more useful than “this book is cooked.”</p>
               </div>
             </section>
-          </aside>
+          </section>
         </article>
       </section>
     </main>

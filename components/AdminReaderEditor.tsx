@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { normalizeReviewNote, type ReviewBlock, type ReviewNote } from "@/lib/review";
 
 type Book = {
   id: string;
@@ -34,13 +33,6 @@ type Props = {
 
 const SECTION_KINDS = ["chapter", "title", "dedication", "toc", "acknowledgments", "about", "copyright", "backmatter", "default"];
 
-const LOCAL_PATTERNS = [
-  { risk: "high" as const, type: "review" as const, pattern: /\b(always|never|everyone|no one|all historians|scientists agree)\b/i, issue: "Absolute claim. Verify or soften." },
-  { risk: "medium" as const, type: "source" as const, pattern: /\b(first|only|largest|smallest|oldest|youngest|most powerful|worst|best)\b/i, issue: "Superlative claim. Needs a source check." },
-  { risk: "medium" as const, type: "source" as const, pattern: /\b\d{3,4}\b/, issue: "Date or number. Confirm before publishing." },
-  { risk: "low" as const, type: "review" as const, pattern: /\bobviously|clearly|undeniably|without question\b/i, issue: "Tone flag. Consider making it more precise." },
-];
-
 function readerStyle() {
   return `
     .adminReaderDoc {
@@ -67,68 +59,6 @@ function readerStyle() {
   `;
 }
 
-function stripText(html: string) {
-  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-}
-
-function sentenceAround(text: string, index: number) {
-  const start = Math.max(0, text.lastIndexOf(".", index - 1) + 1);
-  const nextDot = text.indexOf(".", index);
-  const end = nextDot === -1 ? Math.min(text.length, index + 180) : nextDot + 1;
-  return text.slice(start, end).trim();
-}
-
-function localReviewNotes(html: string, bookName: string, sectionPath: string): ReviewNote[] {
-  const text = stripText(html);
-  const notes: ReviewNote[] = [];
-
-  LOCAL_PATTERNS.forEach((rule, ruleIndex) => {
-    for (const match of text.matchAll(new RegExp(rule.pattern, "gi"))) {
-      const index = match.index || 0;
-      const line = sentenceAround(text, index);
-      if (!line || notes.some(note => note.line === line)) continue;
-      notes.push(normalizeReviewNote({
-        id: `local-${ruleIndex}-${index}`,
-        bookName,
-        chapterPath: sectionPath,
-        type: rule.type,
-        status: "open",
-        line,
-        issue: rule.issue,
-        risk: rule.risk,
-        needsSource: rule.type === "source",
-      }));
-      if (notes.length >= 18) return;
-    }
-  });
-
-  return notes;
-}
-
-function importNotes(value: string): ReviewNote[] {
-  const parsed = JSON.parse(value) as unknown;
-  const record = parsed && typeof parsed === "object" ? parsed as Record<string, unknown> : {};
-  const items = Array.isArray(parsed)
-    ? parsed
-    : Array.isArray(record.flags)
-      ? record.flags
-      : Array.isArray(record.issues)
-        ? record.issues
-        : Array.isArray(record.notes)
-          ? record.notes
-          : [];
-  return items.map((item, index) => normalizeReviewNote({
-    id: `import-${index}`,
-    ...(item && typeof item === "object" ? item as Record<string, unknown> : {}),
-  })).filter(item => item.line || item.issue);
-}
-
-function noteMatches(note: ReviewNote, filter: string, search: string) {
-  const filterMatch = filter === "all" || note.type === filter || note.status === filter;
-  const haystack = [note.line, note.issue, note.fix, note.source, note.sourceTitle, note.chapterPath].join(" ").toLowerCase();
-  return filterMatch && (!search || haystack.includes(search));
-}
-
 export default function AdminReaderEditor({ book }: Props) {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const injectedHtmlRef = useRef("");
@@ -142,28 +72,11 @@ export default function AdminReaderEditor({ book }: Props) {
   const [contentDescription, setContentDescription] = useState("");
   const [contentFile, setContentFile] = useState("");
   const [editMode, setEditMode] = useState(true);
-  const [factLayerOpen, setFactLayerOpen] = useState(true);
   const [busy, setBusy] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [message, setMessage] = useState("");
-  const [notes, setNotes] = useState<ReviewNote[]>([]);
-  const [blocks, setBlocks] = useState<ReviewBlock[]>([]);
-  const [activeNoteId, setActiveNoteId] = useState("");
-  const [noteFilter, setNoteFilter] = useState("open");
-  const [noteSearch, setNoteSearch] = useState("");
-  const [importText, setImportText] = useState("");
-  const [modelStatus, setModelStatus] = useState("Checking models...");
-  const [hasClaude, setHasClaude] = useState(false);
 
   const section = useMemo(() => sections.find(item => item.id === sectionId) || sections[0], [sectionId, sections]);
-  const currentNotes = useMemo(() => notes.filter(note => !note.chapterPath || note.chapterPath === section?.id), [section, notes]);
-  const visibleNotes = useMemo(() => currentNotes.filter(note => noteMatches(note, noteFilter, noteSearch.toLowerCase().trim())), [currentNotes, noteFilter, noteSearch]);
-  const stats = useMemo(() => notes.reduce((totals, note) => {
-    totals.all += 1;
-    totals[note.type] = (totals[note.type] || 0) + 1;
-    totals[note.status] = (totals[note.status] || 0) + 1;
-    return totals;
-  }, { all: 0, error: 0, source: 0, review: 0, open: 0, resolved: 0, ignored: 0 } as Record<string, number>), [notes]);
 
   useEffect(() => {
     let cancelled = false;
@@ -172,18 +85,6 @@ export default function AdminReaderEditor({ book }: Props) {
       setBusy(true);
       setMessage("Loading JSON content editor...");
     });
-
-    fetch(`/api/admin/review/config`)
-      .then(response => response.json())
-      .then(data => {
-        if (!cancelled) {
-          setHasClaude(Boolean(data.hasApiKey));
-          setModelStatus(data.hasApiKey ? `${data.provider}: ${data.claimModel} -> ${data.factModel}` : "Claude checks need ANTHROPIC_API_KEY in this environment");
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setModelStatus("Review backend unavailable");
-      });
 
     fetch(`/api/admin/content/${encodeURIComponent(book.id)}`)
       .then(async response => {
@@ -201,10 +102,6 @@ export default function AdminReaderEditor({ book }: Props) {
         setContentCreator(data.creator || "");
         setContentDescription(data.description || "");
         setContentFile(data.contentFile || "");
-        const saved = await fetch(`/api/admin/review/${encodeURIComponent(book.id)}`).then(response => response.json()).catch(() => ({ notes: [], blocks: [] }));
-        setNotes(Array.isArray(saved.notes) && saved.notes.length ? saved.notes : localReviewNotes(first?.html || "", data.title || book.title, first?.id || ""));
-        setBlocks(Array.isArray(saved.blocks) ? saved.blocks : []);
-        setActiveNoteId("");
         setDirty(false);
         setMessage(`${nextSections.length} JSON sections ready${data.contentFile ? ` from ${data.contentFile}` : ""}.`);
       })
@@ -233,11 +130,6 @@ export default function AdminReaderEditor({ book }: Props) {
     setHtml(next?.html || "");
     setSectionTitle(next?.title || "");
     setSectionKind(next?.kind || "chapter");
-    setNotes(current => [
-      ...current.filter(note => note.chapterPath !== id),
-      ...localReviewNotes(next?.html || "", contentTitle || book.title, id),
-    ]);
-    setActiveNoteId("");
     setDirty(false);
   }
 
@@ -285,7 +177,6 @@ export default function AdminReaderEditor({ book }: Props) {
     setHtml(nextSection.html);
     setSectionTitle(nextSection.title);
     setSectionKind(nextSection.kind || "chapter");
-    setActiveNoteId("");
     setDirty(true);
     setMessage("New section added. Save JSON when it looks right.");
   }
@@ -302,8 +193,6 @@ export default function AdminReaderEditor({ book }: Props) {
     setHtml(next?.html || "");
     setSectionTitle(next?.title || "");
     setSectionKind(next?.kind || "chapter");
-    setNotes(current => current.filter(note => note.chapterPath !== section.id));
-    setActiveNoteId("");
     setDirty(true);
     setMessage("Section removed locally. Save JSON to commit it.");
   }
@@ -321,124 +210,6 @@ export default function AdminReaderEditor({ book }: Props) {
 
   function setBlock(tag: "p" | "h1" | "h2" | "h3" | "blockquote") {
     runEditorCommand("formatBlock", tag);
-  }
-
-  async function saveReviewData(nextNotes = notes, nextBlocks = blocks) {
-    await fetch(`/api/admin/review/${encodeURIComponent(book.id)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ notes: nextNotes, blocks: nextBlocks }),
-    }).catch(() => undefined);
-  }
-
-  function runLocalCheck() {
-    if (!section) return;
-    const generated = localReviewNotes(currentHtml(), contentTitle || book.title, section.id);
-    const nextNotes = [...notes.filter(note => note.chapterPath !== section.id || !String(note.id).startsWith("local-")), ...generated];
-    setNotes(nextNotes);
-    setActiveNoteId(generated[0]?.id || "");
-    void saveReviewData(nextNotes, blocks);
-    setMessage("Local review flags refreshed.");
-  }
-
-  async function splitClaims() {
-    if (!section) return;
-    setBusy(true);
-    setMessage("Splitting claims...");
-    try {
-      const response = await fetch("/api/admin/review/claims", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bookName: contentTitle || book.title, chapterPath: section.id, text: currentHtml() }),
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Claim splitting failed.");
-      const newNotes = Array.isArray(data.claims) ? data.claims : [];
-      const nextBlocks = [...blocks.filter(block => block.chapterPath !== section.id), ...(Array.isArray(data.blocks) ? data.blocks : [])];
-      const nextNotes = [...notes.filter(note => note.chapterPath !== section.id || !String(note.id).startsWith("local-")), ...newNotes];
-      setBlocks(nextBlocks);
-      setNotes(nextNotes);
-      setActiveNoteId(newNotes[0]?.id || "");
-      setFactLayerOpen(true);
-      void saveReviewData(nextNotes, nextBlocks);
-      setMessage(`Added ${newNotes.length} claim review items.`);
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Claim splitting failed.");
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  async function factCheckClaims() {
-    if (!section) return;
-    const claims = currentNotes.filter(note => ["source", "review"].includes(note.type) && note.status === "open");
-    if (!claims.length) {
-      setMessage("Split claims first, then run fact-check.");
-      return;
-    }
-    setBusy(true);
-    setMessage("Fact-checking section claims...");
-    try {
-      const response = await fetch("/api/admin/review/fact-check", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bookName: contentTitle || book.title, chapterPath: section.id, claims }),
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Fact-checking failed.");
-      const issues = Array.isArray(data.issues) ? data.issues : [];
-      const nextNotes = [...notes, ...issues];
-      setNotes(nextNotes);
-      setActiveNoteId(issues[0]?.id || "");
-      void saveReviewData(nextNotes, blocks);
-      setMessage(`Added ${issues.length} fact-check results.`);
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Fact-checking failed.");
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  function applyImport() {
-    try {
-      const imported = importNotes(importText).map(note => ({ ...note, bookName: note.bookName || contentTitle || book.title, chapterPath: note.chapterPath || section?.id || "" }));
-      const nextNotes = [...notes, ...imported];
-      setNotes(nextNotes);
-      setActiveNoteId(imported[0]?.id || "");
-      void saveReviewData(nextNotes, blocks);
-      setMessage(`Imported ${imported.length} review notes.`);
-    } catch {
-      setMessage("That review JSON did not parse.");
-    }
-  }
-
-  function updateNoteStatus(id: string | undefined, status: ReviewNote["status"]) {
-    if (!id) return;
-    const nextNotes = notes.map(note => note.id === id ? { ...note, status } : note);
-    setNotes(nextNotes);
-    void saveReviewData(nextNotes, blocks);
-  }
-
-  function jumpTo(note: ReviewNote) {
-    const root = editorRef.current;
-    if (!root || !note.line) return;
-    root.focus();
-    (root.ownerDocument.defaultView as Window & { find?: (text: string) => boolean })?.find?.(note.line);
-  }
-
-  function applyReplacement(note: ReviewNote) {
-    if (!note.fix || !note.line || !editorRef.current) return;
-    const next = editorRef.current.innerHTML.replace(note.line, note.fix);
-    if (next === editorRef.current.innerHTML) {
-      setMessage("Could not find that exact line. Try Find, then edit manually.");
-      return;
-    }
-    editorRef.current.innerHTML = next;
-    syncFromEditor();
-    const nextNotes = notes.map(item => item.id === note.id ? { ...item, status: "resolved" as const } : item);
-    setNotes(nextNotes);
-    void saveReviewData(nextNotes, blocks);
-    setMessage("Applied replacement and marked resolved.");
   }
 
   async function saveSection() {
@@ -493,30 +264,16 @@ export default function AdminReaderEditor({ book }: Props) {
         <div>
           <p className="kicker">Content Editor</p>
           <h2>Edit JSON book content</h2>
-          <p>Review, fact-check, and edit the live JSON sections the reader uses.</p>
-          <p className={hasClaude ? "modelStatus ready" : "modelStatus"}>{modelStatus}</p>
+          <p>Edit the live JSON sections the reader uses.</p>
           {contentFile && <p className="modelStatus ready">Source: public/book-content/{contentFile}</p>}
         </div>
         <div className="adminActions">
           <button className="resetBtn" onClick={() => setEditMode(value => !value)}>{editMode ? "Preview" : "Edit"}</button>
-          <button className="resetBtn" onClick={() => setFactLayerOpen(value => !value)}>{factLayerOpen ? "Hide Review" : "Show Review"}</button>
-          <button className="resetBtn" disabled={busy} onClick={runLocalCheck}>Local Check</button>
-          <button className="resetBtn" disabled={busy || !section || !hasClaude} onClick={splitClaims}>Split Claims</button>
-          <button className="resetBtn" disabled={busy || !section || !hasClaude} onClick={factCheckClaims}>Fact Check</button>
           <button className="resetBtn" disabled={busy} onClick={addSection}>Add Section</button>
           <button className="resetBtn" disabled={busy || !section || sections.length <= 1} onClick={deleteSection}>Delete Section</button>
-          <button className="resetBtn" disabled={busy} onClick={() => saveReviewData().then(() => setMessage("Review queue saved."))}>Save Review</button>
           <button className="formBtn" disabled={busy || !section || !dirty} onClick={saveSection}>{busy ? "Saving..." : dirty ? "Save JSON" : "Saved"}</button>
         </div>
       </div>
-
-      <section className="adminReviewStats">
-        <button className={noteFilter === "all" ? "active" : ""} onClick={() => setNoteFilter("all")}><strong>{stats.all}</strong><span>all</span></button>
-        <button className={noteFilter === "error" ? "active" : ""} onClick={() => setNoteFilter("error")}><strong>{stats.error || 0}</strong><span>errors</span></button>
-        <button className={noteFilter === "source" ? "active" : ""} onClick={() => setNoteFilter("source")}><strong>{stats.source || 0}</strong><span>sources</span></button>
-        <button className={noteFilter === "open" ? "active" : ""} onClick={() => setNoteFilter("open")}><strong>{stats.open || 0}</strong><span>open</span></button>
-        <button className={noteFilter === "resolved" ? "active" : ""} onClick={() => setNoteFilter("resolved")}><strong>{stats.resolved || 0}</strong><span>resolved</span></button>
-      </section>
 
       {message && <div className="adminNotice">{message}</div>}
 
@@ -535,7 +292,7 @@ export default function AdminReaderEditor({ book }: Props) {
         </label>
       </section>
 
-      <div className={factLayerOpen ? "adminReaderGrid" : "adminReaderGrid factLayerClosed"}>
+      <div className="adminReaderGrid adminReaderGridClean">
         <aside className="adminReaderSidebar">
           <label>
             <span>Section</span>
@@ -556,52 +313,9 @@ export default function AdminReaderEditor({ book }: Props) {
             </select>
           </label>
 
-          <label>
-            <span>Search notes</span>
-            <input className="input" value={noteSearch} onChange={event => setNoteSearch(event.target.value)} placeholder="Search line, issue, source..." />
-          </label>
-
-          <section>
-            <h3>Review queue</h3>
-            <div className="factFlagList">
-              {visibleNotes.map(note => (
-                <article className={`factFlag ${note.risk || note.confidence || "medium"} ${note.type} ${note.status} ${note.id === activeNoteId ? "active" : ""}`} key={note.id} onClick={() => setActiveNoteId(note.id || "")}>
-                  <strong>{note.type} {note.confidence ? `/${note.confidence}` : ""}</strong>
-                  <p>{note.line || note.issue}</p>
-                  <small>{note.issue}</small>
-                  {note.source && <a href={note.source} target="_blank">{note.sourceTitle || note.source}</a>}
-                  <div className="adminActions miniActions">
-                    <button onClick={() => jumpTo(note)}>Find</button>
-                    {note.fix && <button onClick={() => applyReplacement(note)}>Apply</button>}
-                    <button onClick={() => updateNoteStatus(note.id, "resolved")}>Done</button>
-                    <button onClick={() => updateNoteStatus(note.id, "ignored")}>Ignore</button>
-                  </div>
-                </article>
-              ))}
-              {!visibleNotes.length && <div className="emptyPathState">No review notes match this view.</div>}
-            </div>
-          </section>
-
-          <label>
-            <span>Import prototype JSON</span>
-            <textarea value={importText} onChange={event => setImportText(event.target.value)} placeholder='{"issues":[{"line":"...","issue":"...","fix":"...","source":"..."}]}' />
-          </label>
-          <button className="resetBtn" onClick={applyImport}>Import Notes</button>
         </aside>
 
         <div className="adminReaderSurface">
-          {factLayerOpen && blocks.some(block => block.chapterPath === section?.id) && (
-            <div className="reviewMap">
-              {blocks.filter(block => block.chapterPath === section?.id).map(block => (
-                <button className={`blockCard ${block.kind} ${block.risk}`} key={`${block.chapterPath}-${block.blockId}`} onClick={() => jumpTo({ line: block.text, issue: "", type: "review", status: "open" })}>
-                  <strong>{block.kind}</strong>
-                  <span>{block.risk}{block.needsSource ? " / source" : ""}</span>
-                  <p>{block.text}</p>
-                </button>
-              ))}
-            </div>
-          )}
-
           <div className="adminFormatToolbar" aria-label="Formatting tools">
             <button type="button" onClick={() => runEditorCommand("bold")} disabled={!editMode} title="Bold"><strong>B</strong></button>
             <button type="button" onClick={() => runEditorCommand("italic")} disabled={!editMode} title="Italic"><em>I</em></button>

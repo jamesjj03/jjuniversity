@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseClient";
 
@@ -72,6 +71,16 @@ function isVerified(user: User | null) {
   return Boolean(user?.email_confirmed_at);
 }
 
+function clearLocalReadingMemory() {
+  localStorage.removeItem(READ_KEY);
+  localStorage.removeItem(PROGRESS_KEY);
+  localStorage.removeItem(READ_EVENTS_KEY);
+  localStorage.removeItem(ACTUAL_TIME_KEY);
+  localStorage.removeItem(HISTORY_KEY);
+  window.dispatchEvent(new Event("jju-account"));
+  window.dispatchEvent(new Event("jju-reading-history"));
+}
+
 export default function AccountClient() {
   const supabase = useMemo(() => hasSupabaseConfig() ? createSupabaseBrowserClient() : null, []);
   const [books, setBooks] = useState<Book[]>([]);
@@ -82,12 +91,84 @@ export default function AccountClient() {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [readBooks, setReadBooks] = useState<Set<string>>(new Set());
-  const [progress, setProgress] = useState<Record<string, number>>({});
-  const [events, setEvents] = useState<ReadEvent[]>([]);
+  const [, setProgress] = useState<Record<string, number>>({});
+  const [, setEvents] = useState<ReadEvent[]>([]);
   const [cloudProgress, setCloudProgress] = useState<CloudProgress[]>([]);
   const [cloudCompleted, setCloudCompleted] = useState<CloudCompletedBook[]>([]);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+  const [deleteArmed, setDeleteArmed] = useState(false);
+
+  const syncLocalToCloud = useCallback(async (nextUser: User) => {
+    if (!supabase) return;
+
+    const localRead = readJson<string[]>(READ_KEY, []);
+    const localProgress = readJson<Record<string, number>>(PROGRESS_KEY, {});
+    const localActualSeconds = readJson<Record<string, number>>(ACTUAL_TIME_KEY, {});
+    const now = new Date().toISOString();
+    const progressRows = Object.entries({ ...localProgress, ...localActualSeconds })
+      .map(([bookId]) => {
+        const sectionIndex = Number(localProgress[bookId] || 0);
+        const actualSeconds = Number(localActualSeconds[bookId] || 0);
+        if (!bookId || (!sectionIndex && !actualSeconds)) return null;
+        return {
+          user_id: nextUser.id,
+          book_id: bookId,
+          section_index: sectionIndex,
+          actual_seconds: actualSeconds,
+          last_read_at: now,
+          updated_at: now,
+        };
+      })
+      .filter((row): row is {
+        user_id: string;
+        book_id: string;
+        section_index: number;
+        actual_seconds: number;
+        last_read_at: string;
+        updated_at: string;
+      } => Boolean(row));
+    const completedRows = localRead
+      .filter(Boolean)
+      .map(bookId => ({
+        user_id: nextUser.id,
+        book_id: bookId,
+        completed_at: now,
+      }));
+
+    await Promise.all([
+      progressRows.length
+        ? supabase.from("reading_progress").upsert(progressRows, { onConflict: "user_id,book_id" })
+        : Promise.resolve(),
+      completedRows.length
+        ? supabase.from("completed_books").upsert(completedRows, { onConflict: "user_id,book_id" })
+        : Promise.resolve(),
+    ]);
+  }, [supabase]);
+
+  const loadCloud = useCallback(async (nextUser: User) => {
+    if (!supabase) return;
+    writeLocalAccount({
+      name: String(nextUser.user_metadata?.display_name || nextUser.email || "JJU Reader"),
+      email: nextUser.email || "",
+    });
+    await syncLocalToCloud(nextUser);
+
+    const [progressResult, completedResult] = await Promise.all([
+      supabase.from("reading_progress").select("book_id,section_index,actual_seconds"),
+      supabase.from("completed_books").select("book_id"),
+    ]);
+
+    if (progressResult.error || completedResult.error) {
+      setMessage("Supabase account tables are not set up yet.");
+      return;
+    }
+
+    setDisplayName(String(nextUser.user_metadata?.display_name || ""));
+    setEmail(nextUser.email || "");
+    setCloudProgress(progressResult.data || []);
+    setCloudCompleted(completedResult.data || []);
+  }, [supabase, syncLocalToCloud]);
 
   useEffect(() => {
     fetch("/books.json")
@@ -139,34 +220,9 @@ export default function AccountClient() {
   const bookMap = useMemo(() => new Map(books.map(book => [book.id, book])), [books]);
   const verified = isVerified(user);
   const completedCount = Math.max(readBooks.size, cloudCompleted.length);
-  const localProgressCount = Object.keys(progress).length;
   const localMinutesRead = [...readBooks].reduce((sum, id) => sum + Number(bookMap.get(id)?.readingMinutes || 0), 0);
   const cloudActualMinutes = Math.round(cloudProgress.reduce((sum, item) => sum + Number(item.actual_seconds || 0), 0) / 60);
   const readingMinutes = cloudActualMinutes || localMinutesRead;
-  const cloudSyncState = !supabase ? "Not configured" : user ? verified ? "Ready" : "Verify email" : "Sign in";
-
-  async function loadCloud(nextUser: User) {
-    if (!supabase) return;
-    writeLocalAccount({
-      name: String(nextUser.user_metadata?.display_name || nextUser.email || "JJU Reader"),
-      email: nextUser.email || "",
-    });
-
-    const [progressResult, completedResult] = await Promise.all([
-      supabase.from("reading_progress").select("book_id,section_index,actual_seconds"),
-      supabase.from("completed_books").select("book_id"),
-    ]);
-
-    if (progressResult.error || completedResult.error) {
-      setMessage("Supabase account tables are not set up yet.");
-      return;
-    }
-
-    setDisplayName(String(nextUser.user_metadata?.display_name || ""));
-    setEmail(nextUser.email || "");
-    setCloudProgress(progressResult.data || []);
-    setCloudCompleted(completedResult.data || []);
-  }
 
   async function submitAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -210,6 +266,7 @@ export default function AccountClient() {
   async function saveProfile() {
     if (!supabase || !user) return;
     const nextName = displayName.trim() || "JJU Reader";
+    setDeleteArmed(false);
     setBusy(true);
     const { error } = await supabase.auth.updateUser({ data: { display_name: nextName } });
     setBusy(false);
@@ -248,72 +305,72 @@ export default function AccountClient() {
     }
   }
 
-  async function syncLocalToCloud() {
-    if (!supabase || !user) return;
-    if (!verified) {
-      setMessage("Verify your email before syncing reading memory to the cloud.");
-      return;
-    }
-
-    setBusy(true);
-    const now = new Date().toISOString();
-    const progressRows = Object.entries(progress).map(([bookId, sectionIndex]) => ({
-      user_id: user.id,
-      book_id: bookId,
-      section_index: Math.max(0, Number(sectionIndex) || 0),
-      last_read_at: now,
-      updated_at: now,
-    }));
-    const completedRows = [...readBooks].map(bookId => ({
-      user_id: user.id,
-      book_id: bookId,
-      completed_at: events.find(event => event.bookId === bookId)?.finishedAt || now,
-    }));
-
-    const calls = [];
-    if (progressRows.length) calls.push(supabase.from("reading_progress").upsert(progressRows, { onConflict: "user_id,book_id" }));
-    if (completedRows.length) calls.push(supabase.from("completed_books").upsert(completedRows, { onConflict: "user_id,book_id" }));
-    const results = await Promise.all(calls);
-    const error = results.find(result => result.error)?.error;
-    setBusy(false);
-
-    if (error) setMessage(error.message.includes("does not exist") ? "Supabase account tables are not set up yet." : error.message);
-    else {
-      await loadCloud(user);
-      setMessage("Reading memory synced.");
-    }
-  }
-
   async function signOut() {
     if (!supabase) return;
+    setDeleteArmed(false);
     await supabase.auth.signOut();
     writeLocalAccount(null);
     setUser(null);
     setMessage("Signed out. Local reading progress is still on this device.");
   }
 
-  function clearReadingData() {
-    localStorage.removeItem(READ_KEY);
-    localStorage.removeItem(PROGRESS_KEY);
-    localStorage.removeItem(READ_EVENTS_KEY);
-    localStorage.removeItem(ACTUAL_TIME_KEY);
-    localStorage.removeItem(HISTORY_KEY);
+  async function clearReadingData() {
+    setDeleteArmed(false);
+    setBusy(true);
+    if (supabase && user) {
+      await Promise.all([
+        supabase.from("reading_progress").delete().eq("user_id", user.id),
+        supabase.from("completed_books").delete().eq("user_id", user.id),
+        supabase.from("reading_sessions").delete().eq("user_id", user.id),
+      ]);
+      setCloudProgress([]);
+      setCloudCompleted([]);
+    }
+    clearLocalReadingMemory();
     setReadBooks(new Set());
     setProgress({});
     setEvents([]);
-    window.dispatchEvent(new Event("jju-account"));
-    window.dispatchEvent(new Event("jju-reading-history"));
-    setMessage("Local reading data cleared.");
+    setBusy(false);
+    setMessage(user ? "Reading data cleared on this device and account." : "Local reading data cleared.");
+  }
+
+  async function deleteAccount() {
+    if (!supabase || !user) return;
+    if (!deleteArmed) {
+      setDeleteArmed(true);
+      setMessage("Press Delete Account again to permanently remove this account.");
+      return;
+    }
+
+    setBusy(true);
+    setMessage("");
+    try {
+      const response = await fetch("/api/account/delete", { method: "DELETE" });
+      const payload = await response.json().catch(() => ({})) as { error?: string };
+      if (!response.ok) throw new Error(payload.error || "Could not delete account.");
+
+      await supabase.auth.signOut().catch(() => undefined);
+      writeLocalAccount(null);
+      clearLocalReadingMemory();
+      setReadBooks(new Set());
+      setProgress({});
+      setEvents([]);
+      setCloudProgress([]);
+      setCloudCompleted([]);
+      setUser(null);
+      setDeleteArmed(false);
+      setMessage("Account deleted.");
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Could not delete account.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
     <main className="page accountPage accountPageClean">
       <section className="accountHero accountHeroClean">
         <h1>Account</h1>
-        <div className="accountHeroActions">
-          <Link className="btn primary" href="/library">Open Library</Link>
-          <Link className="btn secondary" href="/settings">Reader Settings</Link>
-        </div>
       </section>
 
       {message && <div className="adminNotice accountNotice">{message}</div>}
@@ -381,16 +438,17 @@ export default function AccountClient() {
                 </label>
                 <button className="resetBtn" disabled={busy || newPassword.length < 6} onClick={updatePassword}>Update Password</button>
               </div>
+
+              <div className="accountDangerZone">
+                <button className="resetBtn dangerBtn" disabled={busy} onClick={deleteAccount}>
+                  {deleteArmed ? "Confirm Delete Account" : "Delete Account"}
+                </button>
+              </div>
             </div>
           )}
         </section>
 
-        <section className="accountModule accountReadingRoomModule">
-          <div className="accountModuleHeader">
-            <h2>Reading Room</h2>
-            <p>Local reading memory from this device.</p>
-          </div>
-
+        <section className="accountLocalStats" aria-label="Local reading data">
           <div className="accountSyncList">
             <div>
               <strong>{completedCount}</strong>
@@ -400,28 +458,9 @@ export default function AccountClient() {
               <strong>{minutesLabel(readingMinutes)}</strong>
               <span>total reading time</span>
             </div>
-            <div>
-              <strong>{localProgressCount}</strong>
-              <span>books opened</span>
-            </div>
-            <div>
-              <strong>{events.length}</strong>
-              <span>finish events</span>
-            </div>
           </div>
 
-          {user && (
-            <button className="formBtn accountWideButton" disabled={!verified || busy} onClick={syncLocalToCloud}>
-              {busy ? "Syncing..." : "Sync This Device"}
-            </button>
-          )}
-
-          <div className="accountRuleCard">
-            <span>{user ? cloudSyncState : "Local only"}</span>
-            <p>{user ? "Cloud sync only writes after email verification." : "No account required. This data stays in your browser."}</p>
-          </div>
-
-          <button className="resetBtn accountWideButton" type="button" onClick={clearReadingData}>Clear Reading Data</button>
+          <button className="resetBtn" disabled={busy} type="button" onClick={clearReadingData}>Clear Reading Data</button>
         </section>
       </section>
     </main>

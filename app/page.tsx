@@ -1,10 +1,18 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import LibraryPreview from "@/components/LibraryPreview";
 import AtlasHomeLink from "@/components/AtlasHomeLink";
+import { jsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
 export default function HomePage() {
+  const jsonLdItems = [organizationJsonLd(), websiteJsonLd()];
+
   return (
     <main className="page homePage">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(jsonLdItems) }}
+      />
+
       <section className="hero">
         <p className="kicker">JJ University</p>
         <h1>JJ University</h1>

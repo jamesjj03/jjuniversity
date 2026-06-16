@@ -5618,6 +5618,2052 @@ html body .segmentedControl button[data-theme-choice="manuscript"] {
   text-shadow:0 1px 0 rgba(255,255,255,.55) !important;
 }
 
+/* True EOF correction lock. Do not move above older override blocks. */
+html body .libraryHero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(56px, 6.8vw, 104px) !important;
+  font-weight:900 !important;
+  line-height:.96 !important;
+  letter-spacing:0 !important;
+}
+
+html body .libraryHero {
+  min-height:0 !important;
+  padding-top:clamp(36px, 6vw, 76px) !important;
+  padding-bottom:clamp(24px, 4vw, 42px) !important;
+}
+
+html body .brandLogo {
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  object-fit:contain !important;
+  border-radius:8px !important;
+}
+
+html body .accountMenuTop {
+  display:grid !important;
+  grid-template-columns:38px 38px minmax(0, 1fr) auto !important;
+  gap:8px !important;
+  align-items:center !important;
+  justify-items:start !important;
+}
+
+html body .accountMenuTop > button {
+  justify-self:end !important;
+  align-self:center !important;
+  grid-column:4 !important;
+  grid-row:1 !important;
+}
+
+html body .menuSettingsButton,
+html body .menuInstagramButton {
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  align-self:center !important;
+  justify-self:start !important;
+}
+
+html body .menuSettingsButton {
+  grid-column:1 !important;
+  grid-row:1 !important;
+}
+
+html body .menuInstagramButton {
+  grid-column:2 !important;
+  grid-row:1 !important;
+}
+
+html body .accountMenuSpacer,
+html body .accountMenuTop > span:not(.accountMenuSpacer) {
+  grid-column:3 !important;
+  grid-row:1 !important;
+}
+
+html body .menuSettingsButton svg,
+html body .menuInstagramButton svg {
+  width:18px !important;
+  height:18px !important;
+  display:block !important;
+  margin:0 !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  padding:24px 34px !important;
+  border-left:1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+  border-right:1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p:not(.kicker),
+html body .aboutPage .aboutDisclaimer p {
+  text-align:left !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactPlain,
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  width:min(760px, calc(100vw - 40px)) !important;
+  max-width:760px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  justify-items:stretch !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:100% !important;
+  max-width:none !important;
+  justify-self:stretch !important;
+  grid-column:1 / -1 !important;
+  grid-row:auto !important;
+  box-sizing:border-box !important;
+}
+
+html body .contactPage .contactFormPanel > h2 {
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  width:100% !important;
+  margin-top:16px !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  grid-column:1 / -1 !important;
+}
+
+html body .contactPage .contactSupportGrid h2 {
+  font-size:16px !important;
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid p {
+  font-size:13px !important;
+  line-height:1.45 !important;
+  text-align:left !important;
+}
+
+@media (max-width:760px) {
+  html body .brandLogo {
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+  }
+
+  html body .contactPage .contactLayout,
+  html body .contactPage .contactPlain,
+  html body .contactPage .contactComposer,
+  html body .contactPage .contactPlain .mainStack.contactComposer {
+    width:min(100%, calc(100vw - 24px)) !important;
+  }
+
+  html body .contactPage .contactSupportGrid {
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Actual EOF lock: these page repairs must beat the older override stack above. */
+html body .printShelfPage,
+html body .printProductPage {
+  width:min(1240px, calc(100vw - 32px)) !important;
+  max-width:1240px !important;
+  margin:0 auto !important;
+  padding:clamp(88px, 9vw, 132px) 0 72px !important;
+}
+
+html body .printShelfHero,
+html body .printProductPage .printDetailHero {
+  margin:0 auto 24px !important;
+}
+
+html body .printShelfHero h1,
+html body .printDetailHero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(54px, 8vw, 104px) !important;
+  line-height:.9 !important;
+  letter-spacing:0 !important;
+}
+
+html body .printShelfGrid {
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:18px !important;
+}
+
+html body .printShelfCard {
+  display:grid !important;
+  grid-template-columns:minmax(260px, .72fr) minmax(0, 1fr) !important;
+  gap:24px !important;
+  align-items:center !important;
+  min-height:280px !important;
+  padding:20px !important;
+  color:var(--text) !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 42%, transparent) !important;
+  border-radius:10px !important;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--panel2) 72%, transparent), color-mix(in srgb, var(--bg) 88%, transparent)), color-mix(in srgb, var(--panel) 92%, black) !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.24) !important;
+  overflow:hidden !important;
+}
+
+html body .printShelfCovers {
+  display:flex !important;
+  align-items:center !important;
+  min-height:230px !important;
+  padding:12px 12px 12px 28px !important;
+  overflow:hidden !important;
+}
+
+html body .printShelfCovers img {
+  width:112px !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 36%, transparent) !important;
+  box-shadow:0 18px 35px rgba(0,0,0,.36) !important;
+  margin-left:-26px !important;
+  background:var(--panel2) !important;
+}
+
+html body .printShelfCovers img:first-child {
+  margin-left:0 !important;
+}
+
+html body .printShelfInfo {
+  display:grid !important;
+  gap:10px !important;
+  align-content:center !important;
+  min-width:0 !important;
+}
+
+html body .printShelfInfo span,
+html body .printDetailCopy .kicker {
+  color:var(--gold) !important;
+  font-size:13px !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+}
+
+html body .printShelfInfo h2 {
+  margin:0 !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(34px, 4.6vw, 62px) !important;
+  line-height:.96 !important;
+}
+
+html body .printShelfInfo p,
+html body .printDetailCopy p,
+html body .printIncludedShelf .sectionHeading p {
+  max-width:720px !important;
+  margin:0 !important;
+  color:var(--muted) !important;
+  font-size:17px !important;
+  line-height:1.5 !important;
+}
+
+html body .printShelfMeta,
+html body .printDetailMeta {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:10px !important;
+  margin-top:8px !important;
+}
+
+html body .printShelfMeta strong,
+html body .printDetailMeta div {
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  min-height:38px !important;
+  padding:8px 12px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 32%, transparent) !important;
+  border-radius:999px !important;
+  background:rgba(0,0,0,.18) !important;
+  color:var(--text) !important;
+  font-size:13px !important;
+}
+
+html body .printShelfNote {
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:16px !important;
+  margin:18px auto 0 !important;
+  padding:16px 18px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, transparent) !important;
+  border-radius:10px !important;
+  color:var(--muted) !important;
+  background:rgba(0,0,0,.12) !important;
+}
+
+html body .printShelfNote p {
+  margin:0 !important;
+}
+
+html body .printShelfNote a {
+  flex:0 0 auto !important;
+  color:var(--gold) !important;
+  font-weight:900 !important;
+  text-decoration:none !important;
+}
+
+html body .printProductPage {
+  display:grid !important;
+  gap:22px !important;
+}
+
+html body .printDetailHero {
+  display:grid !important;
+  grid-template-columns:minmax(0, .95fr) minmax(300px, .7fr) !important;
+  gap:34px !important;
+  align-items:center !important;
+  width:100% !important;
+  padding:28px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 36%, transparent) !important;
+  border-radius:12px !important;
+  background:radial-gradient(circle at 80% 10%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 36%), color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+html body .printDetailCopy {
+  display:grid !important;
+  gap:14px !important;
+}
+
+html body .printDetailCopy h1 {
+  margin:0 !important;
+  color:var(--text) !important;
+}
+
+html body .printDetailStack {
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  gap:10px !important;
+}
+
+html body .printDetailStack img,
+html body .printIncludedCard img {
+  width:100% !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+}
+
+html body .printDetailStack img {
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  box-shadow:0 16px 30px rgba(0,0,0,.32) !important;
+}
+
+html body .printDetailMeta {
+  justify-content:center !important;
+  margin:0 !important;
+}
+
+html body .printDetailMeta div {
+  flex-direction:column !important;
+  min-width:180px !important;
+  min-height:72px !important;
+  border-radius:10px !important;
+}
+
+html body .printDetailMeta span {
+  color:var(--muted) !important;
+  font-size:12px !important;
+  text-transform:uppercase !important;
+  letter-spacing:.08em !important;
+}
+
+html body .printDetailMeta strong {
+  color:var(--text) !important;
+  font-size:19px !important;
+}
+
+html body .printIncludedShelf {
+  display:grid !important;
+  gap:18px !important;
+}
+
+html body .printIncludedShelf .sectionHeading {
+  text-align:center !important;
+  margin:0 auto !important;
+}
+
+html body .printIncludedGrid {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap:18px !important;
+}
+
+html body .printIncludedCard {
+  display:grid !important;
+  gap:12px !important;
+  align-content:start !important;
+  padding:12px !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:10px !important;
+  background:color-mix(in srgb, var(--panel) 90%, transparent) !important;
+}
+
+html body .printIncludedCard strong {
+  display:block !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  text-align:center !important;
+}
+
+html body .printIncludedCard p {
+  color:var(--muted) !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutHero,
+html body .contactPage .hero,
+html body .accountPageClean .accountHeroClean {
+  min-height:auto !important;
+  padding:clamp(86px, 10vw, 132px) 20px 28px !important;
+}
+
+html body .aboutPage .aboutPlain,
+html body .contactPage .contactLayout {
+  padding:0 20px 64px !important;
+}
+
+html body .aboutPage .aboutEssay {
+  width:min(1040px, 100%) !important;
+  max-width:1040px !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:14px !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  margin:0 !important;
+  min-height:0 !important;
+  padding:20px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+html body .aboutPage .aboutEssay section::before,
+html body .aboutPage .aboutDisclaimer::before,
+html body .aboutPage .aboutDisclaimer::after {
+  display:none !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p:not(.kicker),
+html body .aboutPage .aboutDisclaimer p {
+  max-width:none !important;
+  text-align:left !important;
+}
+
+html body .aboutPage .aboutDisclaimer {
+  grid-column:1 / -1 !important;
+  width:min(760px, 100%) !important;
+  justify-self:center !important;
+}
+
+html body .aboutPage .aboutEssay > .btn {
+  grid-column:1 / -1 !important;
+  justify-self:center !important;
+  margin-top:8px !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  width:min(820px, 100%) !important;
+  max-width:820px !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:100% !important;
+  max-width:100% !important;
+  padding:20px !important;
+}
+
+html body .contactPage .formGrid {
+  gap:10px !important;
+}
+
+html body .contactPage textarea {
+  min-height:130px !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  margin-top:12px !important;
+  gap:10px !important;
+}
+
+html body .contactPage .contactSupportGrid > div {
+  min-height:0 !important;
+  padding:12px !important;
+  border-radius:8px !important;
+}
+
+html body .accountPageClean .accountMainClean {
+  margin-top:0 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage .aboutEssay section,
+:root[data-site-theme="manuscript"] body .aboutPage .aboutDisclaimer,
+:root[data-site-theme="manuscript"] body .contactPage .contactFormPanel,
+:root[data-site-theme="manuscript"] body .contactPage .contactSupportGrid > div,
+:root[data-site-theme="manuscript"] body .printShelfCard,
+:root[data-site-theme="manuscript"] body .printShelfNote,
+:root[data-site-theme="manuscript"] body .printDetailHero,
+:root[data-site-theme="manuscript"] body .printIncludedCard {
+  color:#261b0f !important;
+  border-color:rgba(124,83,22,.28) !important;
+  background:rgba(255,248,232,.82) !important;
+  box-shadow:0 18px 54px rgba(92,60,19,.1) !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage h1,
+:root[data-site-theme="manuscript"] body .aboutPage h2,
+:root[data-site-theme="manuscript"] body .contactPage h1,
+:root[data-site-theme="manuscript"] body .contactPage h2,
+:root[data-site-theme="manuscript"] body .accountPageClean h1,
+:root[data-site-theme="manuscript"] body .printShelfInfo h2,
+:root[data-site-theme="manuscript"] body .printDetailCopy h1,
+:root[data-site-theme="manuscript"] body .printIncludedCard strong {
+  color:#211407 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage p,
+:root[data-site-theme="manuscript"] body .contactPage p,
+:root[data-site-theme="manuscript"] body .contactPage label,
+:root[data-site-theme="manuscript"] body .printShelfInfo p,
+:root[data-site-theme="manuscript"] body .printDetailCopy p,
+:root[data-site-theme="manuscript"] body .printIncludedCard p,
+:root[data-site-theme="manuscript"] body .printShelfNote {
+  color:#46331d !important;
+}
+
+:root[data-site-theme="manuscript"] body .printShelfMeta strong,
+:root[data-site-theme="manuscript"] body .printDetailMeta div {
+  background:rgba(124,83,22,.08) !important;
+  color:#211407 !important;
+}
+
+@media (max-width:900px) {
+  html body .printShelfCard,
+  html body .printDetailHero,
+  html body .aboutPage .aboutEssay {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .printShelfCovers {
+    justify-content:center !important;
+    min-height:190px !important;
+    padding:8px !important;
+  }
+
+  html body .printShelfCovers img {
+    width:94px !important;
+    margin-left:-22px !important;
+  }
+
+  html body .printShelfInfo {
+    text-align:center !important;
+  }
+
+  html body .printShelfInfo p {
+    margin:0 auto !important;
+  }
+
+  html body .printShelfMeta,
+  html body .printDetailMeta {
+    justify-content:center !important;
+  }
+}
+
+@media (max-width:640px) {
+  html body .printShelfPage,
+  html body .printProductPage {
+    width:min(100%, calc(100vw - 20px)) !important;
+    padding-top:82px !important;
+  }
+
+  html body .printShelfHero h1,
+  html body .printDetailHero h1 {
+    font-size:clamp(42px, 16vw, 68px) !important;
+  }
+
+  html body .printShelfCard,
+  html body .printDetailHero {
+    padding:14px !important;
+  }
+
+  html body .printShelfCovers img {
+    width:78px !important;
+    margin-left:-28px !important;
+  }
+
+  html body .printDetailStack {
+    grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+    gap:6px !important;
+  }
+
+  html body .printShelfNote,
+  html body .contactPage .contactSupportGrid {
+    display:grid !important;
+    grid-template-columns:1fr !important;
+  }
+
+  html body .aboutPage .aboutHero,
+  html body .contactPage .hero,
+  html body .accountPageClean .accountHeroClean {
+    padding-top:78px !important;
+  }
+}
+
+/* Final page repair pass: print shelf, compact info pages, and Paper contrast. */
+html body .printShelfPage,
+html body .printProductPage {
+  width:min(1240px, calc(100vw - 32px)) !important;
+  margin:0 auto !important;
+  padding:clamp(88px, 9vw, 132px) 0 72px !important;
+}
+
+html body .printShelfHero,
+html body .printProductPage .printDetailHero {
+  margin:0 auto 24px !important;
+}
+
+html body .printShelfHero h1,
+html body .printDetailHero h1 {
+  font-size:clamp(54px, 8vw, 104px) !important;
+  line-height:.9 !important;
+  letter-spacing:0 !important;
+}
+
+html body .printShelfGrid {
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:18px !important;
+  width:100% !important;
+}
+
+html body .printShelfCard {
+  display:grid !important;
+  grid-template-columns:minmax(260px, .72fr) minmax(0, 1fr) !important;
+  gap:24px !important;
+  align-items:center !important;
+  min-height:280px !important;
+  padding:20px !important;
+  color:var(--text) !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 42%, transparent) !important;
+  border-radius:10px !important;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--panel2) 72%, transparent), color-mix(in srgb, var(--bg) 88%, transparent)),
+    color-mix(in srgb, var(--panel) 92%, black) !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.24) !important;
+  overflow:hidden !important;
+}
+
+html body .printShelfCard:hover {
+  transform:translateY(-2px);
+  border-color:color-mix(in srgb, var(--gold) 72%, transparent) !important;
+}
+
+html body .printShelfCovers {
+  display:flex !important;
+  align-items:center !important;
+  min-height:230px !important;
+  padding:12px 12px 12px 28px !important;
+  overflow:hidden !important;
+}
+
+html body .printShelfCovers img {
+  width:112px !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 36%, transparent) !important;
+  box-shadow:0 18px 35px rgba(0,0,0,.36) !important;
+  margin-left:-26px !important;
+  background:var(--panel2) !important;
+}
+
+html body .printShelfCovers img:first-child {
+  margin-left:0 !important;
+}
+
+html body .printShelfInfo {
+  display:grid !important;
+  gap:10px !important;
+  align-content:center !important;
+  text-align:left !important;
+  min-width:0 !important;
+}
+
+html body .printShelfInfo span,
+html body .printDetailCopy .kicker {
+  color:var(--gold) !important;
+  font-size:13px !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+}
+
+html body .printShelfInfo h2 {
+  margin:0 !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(34px, 4.6vw, 62px) !important;
+  line-height:.96 !important;
+  letter-spacing:0 !important;
+}
+
+html body .printShelfInfo p,
+html body .printDetailCopy p,
+html body .printIncludedShelf .sectionHeading p {
+  max-width:720px !important;
+  margin:0 !important;
+  color:var(--muted) !important;
+  font-size:17px !important;
+  line-height:1.5 !important;
+}
+
+html body .printShelfMeta,
+html body .printDetailMeta {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:10px !important;
+  margin-top:8px !important;
+}
+
+html body .printShelfMeta strong,
+html body .printDetailMeta div {
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  min-height:38px !important;
+  padding:8px 12px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 32%, transparent) !important;
+  border-radius:999px !important;
+  background:rgba(0,0,0,.18) !important;
+  color:var(--text) !important;
+  font-size:13px !important;
+}
+
+html body .printShelfNote {
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:16px !important;
+  margin:18px auto 0 !important;
+  padding:16px 18px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, transparent) !important;
+  border-radius:10px !important;
+  color:var(--muted) !important;
+  background:rgba(0,0,0,.12) !important;
+}
+
+html body .printShelfNote p {
+  margin:0 !important;
+}
+
+html body .printShelfNote a {
+  flex:0 0 auto !important;
+  color:var(--gold) !important;
+  font-weight:900 !important;
+  text-decoration:none !important;
+}
+
+html body .printProductPage {
+  display:grid !important;
+  gap:22px !important;
+}
+
+html body .printDetailHero {
+  display:grid !important;
+  grid-template-columns:minmax(0, .95fr) minmax(300px, .7fr) !important;
+  gap:34px !important;
+  align-items:center !important;
+  width:100% !important;
+  padding:28px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 36%, transparent) !important;
+  border-radius:12px !important;
+  background:
+    radial-gradient(circle at 80% 10%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 36%),
+    color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+html body .printDetailCopy {
+  display:grid !important;
+  gap:14px !important;
+}
+
+html body .printDetailCopy h1 {
+  margin:0 !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+}
+
+html body .printDetailStack {
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  gap:10px !important;
+  align-items:center !important;
+}
+
+html body .printDetailStack img {
+  width:100% !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  box-shadow:0 16px 30px rgba(0,0,0,.32) !important;
+}
+
+html body .printDetailMeta {
+  justify-content:center !important;
+  margin:0 !important;
+}
+
+html body .printDetailMeta div {
+  flex-direction:column !important;
+  min-width:180px !important;
+  min-height:72px !important;
+  border-radius:10px !important;
+}
+
+html body .printDetailMeta span {
+  color:var(--muted) !important;
+  font-size:12px !important;
+  text-transform:uppercase !important;
+  letter-spacing:.08em !important;
+}
+
+html body .printDetailMeta strong {
+  color:var(--text) !important;
+  font-size:19px !important;
+}
+
+html body .printIncludedShelf {
+  display:grid !important;
+  gap:18px !important;
+}
+
+html body .printIncludedShelf .sectionHeading {
+  text-align:center !important;
+  margin:0 auto !important;
+}
+
+html body .printIncludedGrid {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap:18px !important;
+}
+
+html body .printIncludedCard {
+  display:grid !important;
+  gap:12px !important;
+  align-content:start !important;
+  padding:12px !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:10px !important;
+  background:color-mix(in srgb, var(--panel) 90%, transparent) !important;
+}
+
+html body .printIncludedCard img {
+  width:100% !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+}
+
+html body .printIncludedCard strong {
+  display:block !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  text-align:center !important;
+}
+
+html body .printIncludedCard p {
+  color:var(--muted) !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutHero,
+html body .contactPage .hero,
+html body .accountPageClean .accountHeroClean {
+  min-height:auto !important;
+  padding:clamp(86px, 10vw, 132px) 20px 28px !important;
+}
+
+html body .aboutPage .aboutPlain,
+html body .contactPage .contactLayout {
+  padding:0 20px 64px !important;
+}
+
+html body .aboutPage .aboutEssay {
+  width:min(1040px, 100%) !important;
+  max-width:1040px !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:14px !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  margin:0 !important;
+  min-height:0 !important;
+  padding:20px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+html body .aboutPage .aboutEssay section::before,
+html body .aboutPage .aboutDisclaimer::before,
+html body .aboutPage .aboutDisclaimer::after {
+  display:none !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p:not(.kicker),
+html body .aboutPage .aboutDisclaimer p {
+  max-width:none !important;
+  text-align:left !important;
+}
+
+html body .aboutPage .aboutDisclaimer {
+  grid-column:1 / -1 !important;
+  width:min(760px, 100%) !important;
+  justify-self:center !important;
+}
+
+html body .aboutPage .aboutEssay > .btn {
+  grid-column:1 / -1 !important;
+  justify-self:center !important;
+  margin-top:8px !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  width:min(820px, 100%) !important;
+  max-width:820px !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:100% !important;
+  max-width:100% !important;
+  padding:20px !important;
+}
+
+html body .contactPage .formGrid {
+  gap:10px !important;
+}
+
+html body .contactPage textarea {
+  min-height:130px !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  margin-top:12px !important;
+  gap:10px !important;
+}
+
+html body .contactPage .contactSupportGrid > div {
+  min-height:0 !important;
+  padding:12px !important;
+  border-radius:8px !important;
+}
+
+html body .accountPageClean .accountMainClean {
+  margin-top:0 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage .aboutEssay section,
+:root[data-site-theme="manuscript"] body .aboutPage .aboutDisclaimer,
+:root[data-site-theme="manuscript"] body .contactPage .contactFormPanel,
+:root[data-site-theme="manuscript"] body .contactPage .contactSupportGrid > div,
+:root[data-site-theme="manuscript"] body .printShelfCard,
+:root[data-site-theme="manuscript"] body .printShelfNote,
+:root[data-site-theme="manuscript"] body .printDetailHero,
+:root[data-site-theme="manuscript"] body .printIncludedCard {
+  color:#261b0f !important;
+  border-color:rgba(124,83,22,.28) !important;
+  background:rgba(255,248,232,.82) !important;
+  box-shadow:0 18px 54px rgba(92,60,19,.1) !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage h1,
+:root[data-site-theme="manuscript"] body .aboutPage h2,
+:root[data-site-theme="manuscript"] body .contactPage h1,
+:root[data-site-theme="manuscript"] body .contactPage h2,
+:root[data-site-theme="manuscript"] body .accountPageClean h1,
+:root[data-site-theme="manuscript"] body .printShelfInfo h2,
+:root[data-site-theme="manuscript"] body .printDetailCopy h1,
+:root[data-site-theme="manuscript"] body .printIncludedCard strong {
+  color:#211407 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage p,
+:root[data-site-theme="manuscript"] body .contactPage p,
+:root[data-site-theme="manuscript"] body .contactPage label,
+:root[data-site-theme="manuscript"] body .printShelfInfo p,
+:root[data-site-theme="manuscript"] body .printDetailCopy p,
+:root[data-site-theme="manuscript"] body .printIncludedCard p,
+:root[data-site-theme="manuscript"] body .printShelfNote {
+  color:#46331d !important;
+}
+
+:root[data-site-theme="manuscript"] body .printShelfMeta strong,
+:root[data-site-theme="manuscript"] body .printDetailMeta div {
+  background:rgba(124,83,22,.08) !important;
+  color:#211407 !important;
+}
+
+@media (max-width:900px) {
+  html body .printShelfCard,
+  html body .printDetailHero,
+  html body .aboutPage .aboutEssay {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .printShelfCard {
+    min-height:0 !important;
+  }
+
+  html body .printShelfCovers {
+    justify-content:center !important;
+    padding:8px !important;
+    min-height:190px !important;
+  }
+
+  html body .printShelfCovers img {
+    width:94px !important;
+    margin-left:-22px !important;
+  }
+
+  html body .printShelfInfo {
+    text-align:center !important;
+  }
+
+  html body .printShelfInfo p {
+    margin:0 auto !important;
+  }
+
+  html body .printShelfMeta,
+  html body .printDetailMeta {
+    justify-content:center !important;
+  }
+}
+
+@media (max-width:640px) {
+  html body .printShelfPage,
+  html body .printProductPage {
+    width:min(100%, calc(100vw - 20px)) !important;
+    padding-top:82px !important;
+  }
+
+  html body .printShelfHero h1,
+  html body .printDetailHero h1 {
+    font-size:clamp(42px, 16vw, 68px) !important;
+  }
+
+  html body .printShelfCard,
+  html body .printDetailHero {
+    padding:14px !important;
+  }
+
+  html body .printShelfCovers img {
+    width:78px !important;
+    margin-left:-28px !important;
+  }
+
+  html body .printDetailStack {
+    grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+    gap:6px !important;
+  }
+
+  html body .printShelfNote,
+  html body .contactPage .contactSupportGrid {
+    grid-template-columns:1fr !important;
+    display:grid !important;
+  }
+
+  html body .printShelfNote a {
+    justify-self:start !important;
+  }
+
+  html body .aboutPage .aboutHero,
+  html body .contactPage .hero,
+  html body .accountPageClean .accountHeroClean {
+    padding-top:78px !important;
+  }
+}
+
+/* Crawlable publishing pages */
+html body .publishingPage {
+  width:min(1180px, calc(100vw - 40px)) !important;
+  max-width:1180px !important;
+  padding-top:clamp(42px, 6vw, 84px) !important;
+}
+
+html body .publishingHero {
+  display:grid;
+  gap:18px;
+  margin:0 auto 28px;
+  padding:clamp(26px, 4vw, 46px);
+  border:1px solid color-mix(in srgb, var(--gold) 34%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--gold) 10%, transparent), transparent 45%),
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, transparent), color-mix(in srgb, var(--bg) 84%, var(--panel)));
+  box-shadow:0 22px 60px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+html body .publishingHero h1 {
+  max-width:980px;
+  margin:0;
+  color:var(--text);
+  font-size:clamp(42px, 7vw, 84px);
+  line-height:.98;
+  letter-spacing:0;
+}
+
+html body .publishingHero p {
+  max-width:780px;
+  margin:0;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.62;
+}
+
+html body .publishingHero .pageTagline {
+  color:var(--text) !important;
+  font-size:clamp(19px, 2.4vw, 28px);
+  line-height:1.28;
+}
+
+html body .bookHero {
+  grid-template-columns:minmax(190px, 280px) minmax(0, 1fr);
+  align-items:center;
+}
+
+html body .bookHeroCover {
+  padding:10px;
+  border:1px solid color-mix(in srgb, var(--gold) 42%, transparent);
+  border-radius:8px;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.18));
+}
+
+html body .bookHeroCover img {
+  display:block;
+  width:100%;
+  aspect-ratio:2 / 3;
+  object-fit:cover;
+  border-radius:5px;
+  box-shadow:0 22px 46px rgba(0,0,0,.36);
+}
+
+html body .bookHeroCopy {
+  display:grid;
+  gap:14px;
+  justify-items:start;
+}
+
+html body .publishingActions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin-top:4px;
+}
+
+html body .printCheckoutControl {
+  display:grid;
+  gap:6px;
+}
+
+html body .printCheckoutControl p {
+  margin:0;
+  max-width:260px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  line-height:1.35;
+}
+
+html body .bookMetaChips,
+html body .publishingTagRow {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+
+html body .bookMetaChips span,
+html body .publishingTagRow a {
+  min-height:32px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:7px 10px;
+  border:1px solid color-mix(in srgb, var(--gold) 28%, var(--border));
+  border-radius:999px;
+  background:color-mix(in srgb, var(--panel2) 76%, transparent);
+  color:var(--text);
+  font-size:12px;
+  font-weight:900;
+  text-decoration:none;
+}
+
+html body .publishingGrid {
+  display:grid;
+  grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr);
+  gap:18px;
+  margin:18px 0;
+}
+
+html body .publishingPanel {
+  margin:18px 0;
+  padding:clamp(20px, 3vw, 30px);
+  border:1px solid color-mix(in srgb, var(--gold) 26%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, transparent), color-mix(in srgb, var(--bg) 92%, var(--panel2))),
+    var(--panel);
+}
+
+html body .publishingPanel h2,
+html body .publishingPanel h3 {
+  margin:0 0 12px;
+  color:var(--text);
+  font-size:clamp(24px, 3vw, 34px);
+  line-height:1.05;
+  letter-spacing:0;
+}
+
+html body .publishingPanel p,
+html body .publishingPanel li {
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.62;
+}
+
+html body .publishingPanel p {
+  margin:0;
+}
+
+html body .tocList {
+  display:grid;
+  gap:8px;
+  margin:0;
+  padding-left:22px;
+}
+
+html body .tocList li::marker {
+  color:var(--gold);
+  font-weight:900;
+}
+
+html body .tocList a {
+  color:var(--text);
+  font-weight:800;
+  text-decoration:none;
+}
+
+html body .tocList a:hover {
+  color:var(--gold);
+}
+
+html body .bookSectionPage {
+  max-width:980px !important;
+}
+
+html body .bookSectionShell {
+  display:grid;
+  gap:22px;
+  margin:0 auto;
+}
+
+html body .bookSectionHeader {
+  display:grid;
+  gap:14px;
+  padding:clamp(24px, 4vw, 42px);
+  border:1px solid color-mix(in srgb, var(--gold) 30%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), transparent 44%),
+    color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+html body .bookSectionHeader h1 {
+  max-width:840px;
+  margin:0;
+  color:var(--text);
+  font-size:clamp(38px, 6vw, 74px);
+  line-height:1;
+  letter-spacing:0;
+}
+
+html body .bookSectionHeader p {
+  margin:0;
+}
+
+html body .bookSectionContent {
+  padding:clamp(24px, 4vw, 46px);
+  border:1px solid color-mix(in srgb, var(--gold) 22%, var(--border));
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 92%, transparent);
+  color:var(--text);
+}
+
+html body .bookSectionContent h1,
+html body .bookSectionContent h2,
+html body .bookSectionContent h3 {
+  margin:1.2em 0 .55em;
+  color:var(--text);
+  font-size:clamp(26px, 4vw, 42px);
+  line-height:1.08;
+  letter-spacing:0;
+}
+
+html body .bookSectionContent h1:first-child,
+html body .bookSectionContent h2:first-child,
+html body .bookSectionContent h3:first-child {
+  margin-top:0;
+}
+
+html body .bookSectionContent p,
+html body .bookSectionContent li {
+  color:var(--text);
+  font-size:clamp(18px, 2vw, 21px);
+  line-height:1.72;
+}
+
+html body .bookSectionContent p {
+  margin:0 0 1.05em;
+}
+
+html body .bookSectionContent p:last-child {
+  margin-bottom:0;
+}
+
+html body .bookSectionNav {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+
+html body .bookSectionNav a {
+  display:flex;
+  min-height:54px;
+  align-items:center;
+  justify-content:center;
+  padding:12px 14px;
+  border:1px solid color-mix(in srgb, var(--gold) 30%, var(--border));
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel2) 80%, transparent);
+  color:var(--text);
+  font-size:14px;
+  font-weight:900;
+  line-height:1.2;
+  text-align:center;
+  text-decoration:none;
+}
+
+html body .publishingBookRail {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(135px, 1fr));
+  gap:14px;
+}
+
+html body .publishingBookRail a {
+  display:grid;
+  gap:8px;
+  align-content:start;
+  text-decoration:none;
+}
+
+html body .publishingBookRail img {
+  width:100%;
+  aspect-ratio:2 / 3;
+  object-fit:cover;
+  border-radius:6px;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, transparent);
+}
+
+html body .publishingBookRail strong,
+html body .publishingBookCard strong,
+html body .printProductCard strong {
+  color:var(--text);
+  line-height:1.08;
+}
+
+html body .publishingBookRail span {
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+html body .publishingBookGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(255px, 1fr));
+  gap:16px;
+  margin:20px 0;
+}
+
+html body .publishingBookCard {
+  position:relative;
+  display:grid;
+  grid-template-columns:86px minmax(0, 1fr);
+  gap:14px;
+  align-items:start;
+  min-height:154px;
+  padding:12px;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, var(--border));
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 90%, transparent);
+  text-decoration:none;
+}
+
+html body .publishingBookCard > span {
+  position:absolute;
+  top:12px;
+  right:12px;
+  color:color-mix(in srgb, var(--gold) 72%, var(--muted));
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+html body .publishingBookCard img {
+  width:86px;
+  aspect-ratio:2 / 3;
+  object-fit:cover;
+  border-radius:5px;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+html body .publishingBookCard div {
+  min-width:0;
+  padding-right:18px;
+}
+
+html body .publishingBookCard p {
+  display:-webkit-box;
+  margin:8px 0 0;
+  overflow:hidden;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+}
+
+html body .curriculumSplit {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:18px;
+}
+
+html body .curriculumSplit > div {
+  padding:18px;
+  border:1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  border-radius:8px;
+  background:rgba(255,255,255,.035);
+}
+
+html body .printProductGrid {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:16px;
+}
+
+html body .printProductCard {
+  min-height:230px;
+  display:grid;
+  align-content:end;
+  gap:12px;
+  padding:24px;
+  border:1px solid color-mix(in srgb, var(--gold) 30%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--gold) 16%, transparent), transparent 46%),
+    color-mix(in srgb, var(--panel) 90%, transparent);
+  text-decoration:none;
+}
+
+html body .printProductCard span,
+html body .printStats span {
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+html body .printProductCard strong {
+  font-size:clamp(24px, 3vw, 36px);
+}
+
+html body .printProductCard p {
+  margin:0;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+html body .printStats {
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:12px;
+}
+
+html body .printStats div {
+  display:grid;
+  gap:8px;
+  padding:16px;
+  border:1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  border-radius:8px;
+  background:rgba(255,255,255,.035);
+}
+
+html body .printStats strong {
+  color:var(--text);
+  font-size:clamp(20px, 2.5vw, 32px);
+  line-height:1.05;
+}
+
+:root[data-site-theme="manuscript"] body .publishingHero,
+:root[data-site-theme="manuscript"] body .publishingPanel,
+:root[data-site-theme="manuscript"] body .publishingBookCard,
+:root[data-site-theme="manuscript"] body .printProductCard {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.48), rgba(255,255,255,.12)),
+    var(--panel) !important;
+}
+
+:root[data-site-theme="manuscript"] body .publishingHero h1,
+:root[data-site-theme="manuscript"] body .publishingHero .pageTagline,
+:root[data-site-theme="manuscript"] body .publishingPanel h2,
+:root[data-site-theme="manuscript"] body .publishingPanel h3,
+:root[data-site-theme="manuscript"] body .publishingBookCard strong,
+:root[data-site-theme="manuscript"] body .printProductCard strong,
+:root[data-site-theme="manuscript"] body .printStats strong {
+  color:var(--text) !important;
+}
+
+@media (max-width:900px) {
+  html body .bookHero,
+  html body .publishingGrid,
+  html body .curriculumSplit,
+  html body .printProductGrid,
+  html body .printStats {
+    grid-template-columns:1fr;
+  }
+
+  html body .bookHeroCover {
+    width:min(240px, 68vw);
+  }
+}
+
+@media (max-width:620px) {
+  html body .publishingPage {
+    width:min(100%, calc(100vw - 24px)) !important;
+    padding-top:30px !important;
+  }
+
+  html body .publishingHero {
+    padding:22px;
+  }
+
+  html body .publishingHero h1 {
+    font-size:clamp(34px, 14vw, 56px);
+  }
+
+  html body .publishingBookCard {
+    grid-template-columns:74px minmax(0, 1fr);
+  }
+
+  html body .publishingBookCard img {
+    width:74px;
+  }
+
+  html body .publishingActions .btn {
+    width:100%;
+    justify-content:center;
+    text-align:center;
+  }
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel,
+html body .contactPage .contactSupportGrid {
+  justify-self:center !important;
+}
+
+/* Final explicit fixes for parsed border/width edge cases. */
+html body .aboutPage .aboutEssay section {
+  border-left:1px solid rgba(199,161,87,.28) !important;
+  border-right:1px solid rgba(199,161,87,.28) !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:calc(100% - 50px) !important;
+  max-width:calc(100% - 50px) !important;
+}
+
+@media (max-width:760px) {
+  html body .contactPage .contactFormPanel,
+  html body .contactPage .card.goldCard.contactFormPanel {
+    width:calc(100% - 32px) !important;
+    max-width:calc(100% - 32px) !important;
+  }
+}
+
+/* Go-live polish: centering, admin simplification, sticky header, and old library mood. */
+:root[data-site-theme="royal"] {
+  --theme-top:#090513;
+  --theme-mid:#14081f;
+  --theme-bottom:#08030d;
+  --theme-glow:#8f5cff;
+  --panel:#1b1026;
+  --panel2:#251532;
+  --line:rgba(177,128,255,.34);
+}
+
+html body .siteHeader {
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000 !important;
+  align-items:center !important;
+}
+
+html body .siteFooter {
+  width:calc(100vw - 56px) !important;
+  max-width:calc(100vw - 56px) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+html body .brandText,
+html body .brand {
+  font-family:Arial, Helvetica, sans-serif !important;
+  font-weight:900 !important;
+}
+
+html body .menuInstagramButton {
+  width:38px !important;
+  height:38px !important;
+  display:inline-grid !important;
+  place-items:center !important;
+  border:1px solid var(--control-border, var(--line)) !important;
+  border-radius:8px !important;
+  background:var(--control-bg, rgba(0,0,0,.34)) !important;
+  color:var(--control-text, var(--text)) !important;
+}
+
+html body .menuInstagramButton svg {
+  width:18px !important;
+  height:18px !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+}
+
+html body .homePage .hero {
+  display:grid !important;
+  justify-items:center !important;
+  text-align:center !important;
+}
+
+html body .homePage .hero .homeStartSection {
+  width:min(1220px, calc(100vw - 40px)) !important;
+  max-width:1220px !important;
+  margin:clamp(34px, 5vw, 58px) auto 0 !important;
+  display:grid !important;
+  justify-items:center !important;
+  text-align:center !important;
+  justify-self:center !important;
+}
+
+html body .homePage .hero .homeStartHeader {
+  width:100% !important;
+  max-width:900px !important;
+  margin:0 auto 20px !important;
+  display:grid !important;
+  justify-items:center !important;
+  text-align:center !important;
+}
+
+html body .homePage .hero .homeStartHeader h2,
+html body .homePage .hero .homeStartHeader p {
+  width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+}
+
+html body .homePage .hero .homeStartGrid {
+  width:100% !important;
+  justify-self:center !important;
+}
+
+html body .libraryHero h1 {
+  font-family:Arial, Helvetica, sans-serif !important;
+  font-weight:950 !important;
+  letter-spacing:0 !important;
+}
+
+html body .libraryHero {
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--theme-glow) 22%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-mid) 58%, transparent), transparent) !important;
+}
+
+html body .aboutPage,
+html body .contactPage,
+html body .accountPage,
+html body .accountPageClean {
+  display:grid !important;
+  justify-items:center !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutPlain,
+html body .contactPage .contactPlain,
+html body .accountPageClean,
+html body .accountPage .accountGrid {
+  justify-self:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+html body .aboutPage .aboutEssay section,
+html body .contactPage .contactComposer,
+html body .contactPage .contactFormPanel,
+html body .contactPage .contactGuidance,
+html body .accountPageClean .accountModule,
+html body .accountPageClean .accountRuleCard {
+  text-align:left !important;
+}
+
+html body .aboutPage .aboutStory > .btn {
+  justify-self:center !important;
+  margin-left:0 !important;
+}
+
+html body .adminPulse {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:8px !important;
+  margin-top:12px !important;
+}
+
+html body .adminPulse span {
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:6px !important;
+  min-height:32px !important;
+  padding:7px 10px !important;
+  border:1px solid color-mix(in srgb, var(--line) 76%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 72%, transparent) !important;
+  color:var(--muted) !important;
+  font-size:12px !important;
+  font-weight:850 !important;
+}
+
+html body .adminPulse strong {
+  color:var(--gold) !important;
+}
+
+html body .adminSectionTabs {
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)) !important;
+}
+
+html body .adminBookWorkspace {
+  display:grid !important;
+  gap:16px !important;
+  min-width:0 !important;
+}
+
+html body .adminReaderPanel .pathBuilderTop .modelStatus:not(.ready),
+html body .adminReviewStats,
+html body .factFlagList,
+html body .reviewMap {
+  display:none !important;
+}
+
+html body .adminReaderGrid.adminReaderGridClean {
+  grid-template-columns:minmax(220px, 300px) minmax(0, 1fr) !important;
+}
+
+html body .adminReaderGrid.adminReaderGridClean .adminReaderSidebar {
+  grid-template-columns:1fr !important;
+  align-content:start !important;
+}
+
+html body .adminReaderSurface {
+  min-width:0 !important;
+}
+
+@media (max-width:900px) {
+  html body .adminReaderGrid.adminReaderGridClean {
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media (max-width:760px) {
+  html body .siteHeader {
+    grid-template-columns:minmax(0, 1fr) auto auto !important;
+    grid-template-areas:"brand social menu" "continue continue continue" !important;
+    gap:8px !important;
+    padding:8px 10px !important;
+    width:100% !important;
+  }
+
+  html body .siteHeader .brand,
+  html body .brandWithMark {
+    grid-area:brand !important;
+    min-width:0 !important;
+    gap:8px !important;
+  }
+
+  html body .brandLogo {
+    width:34px !important;
+    height:34px !important;
+  }
+
+  html body .brandText {
+    font-size:16px !important;
+    max-width:calc(100vw - 160px) !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    white-space:nowrap !important;
+  }
+
+  html body .siteSocialLink {
+    grid-area:social !important;
+    width:38px !important;
+    height:38px !important;
+  }
+
+  html body .accountMenu {
+    grid-area:menu !important;
+  }
+
+  html body .accountMenu > summary {
+    width:38px !important;
+    height:38px !important;
+  }
+
+  html body .continueReadingMenu,
+  html body .continueReadingLink {
+    grid-area:continue !important;
+    width:100% !important;
+    max-width:none !important;
+    justify-self:stretch !important;
+  }
+
+  html body .siteFooter {
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+
+  html body .homePage .hero h1 {
+    font-size:clamp(50px, 15vw, 76px) !important;
+  }
+
+  html body .homePage .hero .homeStartSection {
+    width:min(100%, calc(100vw - 24px)) !important;
+  }
+
+  html body .homeStartGrid {
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* User correction pass: quieter library hero, fixed menu row, cleaner contact/about. */
+html body .libraryHero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(58px, 7vw, 104px) !important;
+  font-weight:900 !important;
+  line-height:.96 !important;
+  letter-spacing:0 !important;
+}
+
+html body .libraryHero {
+  min-height:0 !important;
+  padding-top:clamp(36px, 6vw, 76px) !important;
+  padding-bottom:clamp(24px, 4vw, 42px) !important;
+}
+
+html body .brandLogo {
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  object-fit:contain !important;
+  border-radius:8px !important;
+}
+
+html body .accountMenuTop {
+  display:grid !important;
+  grid-template-columns:38px 38px minmax(0, 1fr) auto !important;
+  gap:8px !important;
+  align-items:center !important;
+  justify-items:start !important;
+}
+
+html body .accountMenuTop > button {
+  justify-self:end !important;
+  align-self:center !important;
+}
+
+html body .menuSettingsButton,
+html body .menuInstagramButton {
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  align-self:center !important;
+  justify-self:start !important;
+}
+
+html body .menuSettingsButton svg,
+html body .menuInstagramButton svg {
+  width:18px !important;
+  height:18px !important;
+  display:block !important;
+  margin:0 !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  padding:24px 34px !important;
+  border-left:1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+  border-right:1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p,
+html body .aboutPage .aboutDisclaimer p {
+  text-align:left !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactPlain,
+html body .contactPage .contactComposer {
+  width:min(760px, calc(100vw - 40px)) !important;
+  max-width:760px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  grid-template-columns:1fr !important;
+  justify-items:stretch !important;
+}
+
+html body .contactPage .contactFormPanel {
+  width:100% !important;
+}
+
+html body .contactPage .contactFormPanel > h2 {
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  margin-top:16px !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+}
+
+html body .contactPage .contactSupportGrid h2 {
+  font-size:16px !important;
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid p {
+  font-size:13px !important;
+  line-height:1.45 !important;
+  text-align:left !important;
+}
+
+@media (max-width:760px) {
+  html body .brandLogo {
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+  }
+
+  html body .contactPage .contactLayout,
+  html body .contactPage .contactPlain,
+  html body .contactPage .contactComposer {
+    width:min(100%, calc(100vw - 24px)) !important;
+  }
+
+  html body .contactPage .contactSupportGrid {
+    grid-template-columns:1fr !important;
+  }
+}
+
 html body .menuThemeGrid button[data-theme-choice].active,
 html body .segmentedControl button[data-theme-choice].active {
   box-shadow:inset 0 0 0 2px color-mix(in srgb, var(--gold) 76%, #fff 12%), 0 0 0 1px rgba(0,0,0,.16) !important;
@@ -17421,4 +19467,652 @@ html body .segmentedControl button[data-theme-choice="manuscript"] {
   background:linear-gradient(135deg, #f3e8d5 0 49%, #a87928 49% 100%) !important;
   color:#20150b !important;
   text-shadow:0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+/* True EOF correction lock. Do not move above older override blocks. */
+html body .libraryHero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(56px, 6.8vw, 104px) !important;
+  font-weight:900 !important;
+  line-height:.96 !important;
+  letter-spacing:0 !important;
+}
+
+html body .libraryHero {
+  min-height:0 !important;
+  padding-top:clamp(36px, 6vw, 76px) !important;
+  padding-bottom:clamp(24px, 4vw, 42px) !important;
+}
+
+html body .brandLogo {
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  object-fit:contain !important;
+  border-radius:8px !important;
+}
+
+html body .accountMenuTop {
+  display:grid !important;
+  grid-template-columns:38px 38px minmax(0, 1fr) auto !important;
+  gap:8px !important;
+  align-items:center !important;
+  justify-items:start !important;
+}
+
+html body .accountMenuTop > button {
+  justify-self:end !important;
+  align-self:center !important;
+  grid-column:4 !important;
+  grid-row:1 !important;
+}
+
+html body .menuSettingsButton,
+html body .menuInstagramButton {
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  align-self:center !important;
+  justify-self:start !important;
+}
+
+html body .menuSettingsButton {
+  grid-column:1 !important;
+  grid-row:1 !important;
+}
+
+html body .menuInstagramButton {
+  grid-column:2 !important;
+  grid-row:1 !important;
+}
+
+html body .accountMenuSpacer,
+html body .accountMenuTop > span:not(.accountMenuSpacer) {
+  grid-column:3 !important;
+  grid-row:1 !important;
+}
+
+html body .menuSettingsButton svg,
+html body .menuInstagramButton svg {
+  width:18px !important;
+  height:18px !important;
+  display:block !important;
+  margin:0 !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  padding:24px 34px !important;
+  border-left:1px solid rgba(199,161,87,.28) !important;
+  border-right:1px solid rgba(199,161,87,.28) !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p:not(.kicker),
+html body .aboutPage .aboutDisclaimer p {
+  text-align:left !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactPlain,
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  width:min(760px, calc(100vw - 40px)) !important;
+  max-width:760px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  justify-items:stretch !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:calc(100% - 50px) !important;
+  max-width:calc(100% - 50px) !important;
+  justify-self:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  grid-column:1 / -1 !important;
+  grid-row:auto !important;
+}
+
+html body .contactPage .contactFormPanel > h2 {
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  width:100% !important;
+  margin-top:16px !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  grid-column:1 / -1 !important;
+}
+
+html body .contactPage .contactSupportGrid h2 {
+  font-size:16px !important;
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid p {
+  font-size:13px !important;
+  line-height:1.45 !important;
+  text-align:left !important;
+}
+
+@media (max-width:760px) {
+  html body .brandLogo {
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+  }
+
+  html body .contactPage .contactLayout,
+  html body .contactPage .contactPlain,
+  html body .contactPage .contactComposer,
+  html body .contactPage .contactPlain .mainStack.contactComposer {
+    width:min(100%, calc(100vw - 24px)) !important;
+  }
+
+  html body .contactPage .contactSupportGrid {
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Absolute last-word repairs for print/about/contact/account. */
+html body .printShelfPage,
+html body .printProductPage {
+  width:min(1240px, calc(100vw - 32px)) !important;
+  max-width:1240px !important;
+  margin:0 auto !important;
+  padding:clamp(88px, 9vw, 132px) 0 72px !important;
+}
+
+html body .printShelfHero,
+html body .printProductPage .printDetailHero {
+  margin:0 auto 24px !important;
+}
+
+html body .printShelfHero h1,
+html body .printDetailHero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(54px, 8vw, 104px) !important;
+  line-height:.9 !important;
+  letter-spacing:0 !important;
+}
+
+html body .printShelfGrid {
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:18px !important;
+}
+
+html body .printShelfCard {
+  display:grid !important;
+  grid-template-columns:minmax(260px, .72fr) minmax(0, 1fr) !important;
+  gap:24px !important;
+  align-items:center !important;
+  min-height:280px !important;
+  padding:20px !important;
+  color:var(--text) !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 42%, transparent) !important;
+  border-radius:10px !important;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--panel2) 72%, transparent), color-mix(in srgb, var(--bg) 88%, transparent)), color-mix(in srgb, var(--panel) 92%, black) !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.24) !important;
+  overflow:hidden !important;
+}
+
+html body .printShelfCovers {
+  display:flex !important;
+  align-items:center !important;
+  min-height:230px !important;
+  padding:12px 12px 12px 28px !important;
+  overflow:hidden !important;
+}
+
+html body .printShelfCovers img {
+  width:112px !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 36%, transparent) !important;
+  box-shadow:0 18px 35px rgba(0,0,0,.36) !important;
+  margin-left:-26px !important;
+  background:var(--panel2) !important;
+}
+
+html body .printShelfCovers img:first-child {
+  margin-left:0 !important;
+}
+
+html body .printShelfInfo {
+  display:grid !important;
+  gap:10px !important;
+  align-content:center !important;
+  min-width:0 !important;
+}
+
+html body .printShelfInfo span,
+html body .printDetailCopy .kicker {
+  color:var(--gold) !important;
+  font-size:13px !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+}
+
+html body .printShelfInfo h2 {
+  margin:0 !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(34px, 4.6vw, 62px) !important;
+  line-height:.96 !important;
+}
+
+html body .printShelfInfo p,
+html body .printDetailCopy p,
+html body .printIncludedShelf .sectionHeading p {
+  max-width:720px !important;
+  margin:0 !important;
+  color:var(--muted) !important;
+  font-size:17px !important;
+  line-height:1.5 !important;
+}
+
+html body .printShelfMeta,
+html body .printDetailMeta {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:10px !important;
+  margin-top:8px !important;
+}
+
+html body .printShelfMeta strong,
+html body .printDetailMeta div {
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  min-height:38px !important;
+  padding:8px 12px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 32%, transparent) !important;
+  border-radius:999px !important;
+  background:rgba(0,0,0,.18) !important;
+  color:var(--text) !important;
+  font-size:13px !important;
+}
+
+html body .printShelfNote {
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:16px !important;
+  margin:18px auto 0 !important;
+  padding:16px 18px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, transparent) !important;
+  border-radius:10px !important;
+  color:var(--muted) !important;
+  background:rgba(0,0,0,.12) !important;
+}
+
+html body .printShelfNote p {
+  margin:0 !important;
+}
+
+html body .printShelfNote a {
+  flex:0 0 auto !important;
+  color:var(--gold) !important;
+  font-weight:900 !important;
+  text-decoration:none !important;
+}
+
+html body .printProductPage {
+  display:grid !important;
+  gap:22px !important;
+}
+
+html body .printDetailHero {
+  display:grid !important;
+  grid-template-columns:minmax(0, .95fr) minmax(300px, .7fr) !important;
+  gap:34px !important;
+  align-items:center !important;
+  width:100% !important;
+  padding:28px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 36%, transparent) !important;
+  border-radius:12px !important;
+  background:radial-gradient(circle at 80% 10%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 36%), color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+html body .printDetailCopy {
+  display:grid !important;
+  gap:14px !important;
+}
+
+html body .printDetailCopy h1 {
+  margin:0 !important;
+  color:var(--text) !important;
+}
+
+html body .printDetailStack {
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  gap:10px !important;
+}
+
+html body .printDetailStack img,
+html body .printIncludedCard img {
+  width:100% !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+}
+
+html body .printDetailStack img {
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  box-shadow:0 16px 30px rgba(0,0,0,.32) !important;
+}
+
+html body .printDetailMeta {
+  justify-content:center !important;
+  margin:0 !important;
+}
+
+html body .printDetailMeta div {
+  flex-direction:column !important;
+  min-width:180px !important;
+  min-height:72px !important;
+  border-radius:10px !important;
+}
+
+html body .printDetailMeta span {
+  color:var(--muted) !important;
+  font-size:12px !important;
+  text-transform:uppercase !important;
+  letter-spacing:.08em !important;
+}
+
+html body .printDetailMeta strong {
+  color:var(--text) !important;
+  font-size:19px !important;
+}
+
+html body .printIncludedShelf {
+  display:grid !important;
+  gap:18px !important;
+}
+
+html body .printIncludedShelf .sectionHeading {
+  text-align:center !important;
+  margin:0 auto !important;
+}
+
+html body .printIncludedGrid {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap:18px !important;
+}
+
+html body .printIncludedCard {
+  display:grid !important;
+  gap:12px !important;
+  align-content:start !important;
+  padding:12px !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:10px !important;
+  background:color-mix(in srgb, var(--panel) 90%, transparent) !important;
+}
+
+html body .printIncludedCard strong {
+  display:block !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  text-align:center !important;
+}
+
+html body .printIncludedCard p {
+  color:var(--muted) !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutHero,
+html body .contactPage .hero,
+html body .accountPageClean .accountHeroClean {
+  min-height:auto !important;
+  padding:clamp(86px, 10vw, 132px) 20px 28px !important;
+}
+
+html body .aboutPage .aboutPlain,
+html body .contactPage .contactLayout {
+  padding:0 20px 64px !important;
+}
+
+html body .aboutPage .aboutEssay {
+  width:min(1040px, 100%) !important;
+  max-width:1040px !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:14px !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  margin:0 !important;
+  min-height:0 !important;
+  padding:20px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+html body .aboutPage .aboutEssay section::before,
+html body .aboutPage .aboutDisclaimer::before,
+html body .aboutPage .aboutDisclaimer::after {
+  display:none !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p:not(.kicker),
+html body .aboutPage .aboutDisclaimer p {
+  max-width:none !important;
+  text-align:left !important;
+}
+
+html body .aboutPage .aboutDisclaimer {
+  grid-column:1 / -1 !important;
+  width:min(760px, 100%) !important;
+  justify-self:center !important;
+}
+
+html body .aboutPage .aboutEssay > .btn {
+  grid-column:1 / -1 !important;
+  justify-self:center !important;
+  margin-top:8px !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  width:min(820px, 100%) !important;
+  max-width:820px !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:100% !important;
+  max-width:100% !important;
+  padding:20px !important;
+}
+
+html body .contactPage .formGrid {
+  gap:10px !important;
+}
+
+html body .contactPage textarea {
+  min-height:130px !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  margin-top:12px !important;
+  gap:10px !important;
+}
+
+html body .contactPage .contactSupportGrid > div {
+  min-height:0 !important;
+  padding:12px !important;
+  border-radius:8px !important;
+}
+
+html body .accountPageClean .accountMainClean {
+  margin-top:0 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage .aboutEssay section,
+:root[data-site-theme="manuscript"] body .aboutPage .aboutDisclaimer,
+:root[data-site-theme="manuscript"] body .contactPage .contactFormPanel,
+:root[data-site-theme="manuscript"] body .contactPage .contactSupportGrid > div,
+:root[data-site-theme="manuscript"] body .printShelfCard,
+:root[data-site-theme="manuscript"] body .printShelfNote,
+:root[data-site-theme="manuscript"] body .printDetailHero,
+:root[data-site-theme="manuscript"] body .printIncludedCard {
+  color:#261b0f !important;
+  border-color:rgba(124,83,22,.28) !important;
+  background:rgba(255,248,232,.82) !important;
+  box-shadow:0 18px 54px rgba(92,60,19,.1) !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage h1,
+:root[data-site-theme="manuscript"] body .aboutPage h2,
+:root[data-site-theme="manuscript"] body .contactPage h1,
+:root[data-site-theme="manuscript"] body .contactPage h2,
+:root[data-site-theme="manuscript"] body .accountPageClean h1,
+:root[data-site-theme="manuscript"] body .printShelfInfo h2,
+:root[data-site-theme="manuscript"] body .printDetailCopy h1,
+:root[data-site-theme="manuscript"] body .printIncludedCard strong {
+  color:#211407 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage p,
+:root[data-site-theme="manuscript"] body .contactPage p,
+:root[data-site-theme="manuscript"] body .contactPage label,
+:root[data-site-theme="manuscript"] body .printShelfInfo p,
+:root[data-site-theme="manuscript"] body .printDetailCopy p,
+:root[data-site-theme="manuscript"] body .printIncludedCard p,
+:root[data-site-theme="manuscript"] body .printShelfNote {
+  color:#46331d !important;
+}
+
+:root[data-site-theme="manuscript"] body .printShelfMeta strong,
+:root[data-site-theme="manuscript"] body .printDetailMeta div {
+  background:rgba(124,83,22,.08) !important;
+  color:#211407 !important;
+}
+
+@media (max-width:900px) {
+  html body .printShelfCard,
+  html body .printDetailHero,
+  html body .aboutPage .aboutEssay {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .printShelfCovers {
+    justify-content:center !important;
+    min-height:190px !important;
+    padding:8px !important;
+  }
+
+  html body .printShelfCovers img {
+    width:94px !important;
+    margin-left:-22px !important;
+  }
+
+  html body .printShelfInfo {
+    text-align:center !important;
+  }
+
+  html body .printShelfInfo p {
+    margin:0 auto !important;
+  }
+
+  html body .printShelfMeta,
+  html body .printDetailMeta {
+    justify-content:center !important;
+  }
+}
+
+@media (max-width:640px) {
+  html body .printShelfPage,
+  html body .printProductPage {
+    width:min(100%, calc(100vw - 20px)) !important;
+    padding-top:82px !important;
+  }
+
+  html body .printShelfHero h1,
+  html body .printDetailHero h1 {
+    font-size:clamp(42px, 16vw, 68px) !important;
+  }
+
+  html body .printShelfCard,
+  html body .printDetailHero {
+    padding:14px !important;
+  }
+
+  html body .printShelfCovers img {
+    width:78px !important;
+    margin-left:-28px !important;
+  }
+
+  html body .printDetailStack {
+    grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+    gap:6px !important;
+  }
+
+  html body .printShelfNote,
+  html body .contactPage .contactSupportGrid {
+    display:grid !important;
+    grid-template-columns:1fr !important;
+  }
+
+  html body .aboutPage .aboutHero,
+  html body .contactPage .hero,
+  html body .accountPageClean .accountHeroClean {
+    padding-top:78px !important;
+  }
+}
+
+/* Mobile heading clamp after visual QA. */
+@media (max-width:640px) {
+  html body .aboutPage .aboutHero h1,
+  html body .contactPage .hero h1,
+  html body .accountPageClean .accountHeroClean h1 {
+    max-width:calc(100vw - 36px) !important;
+    font-size:clamp(44px, 13vw, 58px) !important;
+    line-height:.94 !important;
+    overflow-wrap:normal !important;
+    word-break:normal !important;
+  }
+
+  html body .aboutPage .aboutHero h1 {
+    font-size:clamp(42px, 12.2vw, 54px) !important;
+  }
 }

@@ -1,0 +1,143 @@
+[
+  {
+    "slug": "101-volume-1",
+    "sku": "JJU-101-VOL-1-PB",
+    "kind": "collection",
+    "title": "JJ University 101, Volume I",
+    "kicker": "The Natural World",
+    "subtitle": "Math, science, matter, energy, and life in one physical curriculum.",
+    "description": "The first JJ University 101 paperback volume collects the natural-world foundations: numbers, science, physics, chemistry, electricity, quantum ideas, and biology.",
+    "priceHint": "Target paperback range: $29.99-$39.99 plus shipping.",
+    "targetPriceCents": 3499,
+    "status": "coming-soon",
+    "printStatus": "files-generated",
+    "salesStatus": "not-for-sale",
+    "podPackageId": "",
+    "publicInteriorUrl": "https://nzlmnbppynjmutuukmbt.supabase.co/storage/v1/object/public/paperbacks/101-volume-1/interior.pdf",
+    "publicCoverUrl": "https://nzlmnbppynjmutuukmbt.supabase.co/storage/v1/object/public/paperbacks/101-volume-1/cover-wrap.pdf",
+    "actualInteriorPages": 357,
+    "generatedAt": "2026-06-15",
+    "format": {
+      "trimSize": "6x9",
+      "binding": "perfect-bound paperback",
+      "interiorColor": "black-and-white",
+      "paperType": "cream",
+      "coverFinish": "matte"
+    },
+    "coverTheme": {
+      "background": "#071527",
+      "accent": "#4db7ff",
+      "secondary": "#d7a640",
+      "mood": "blueprint, mathematics, atoms, circuits, cosmic dust"
+    },
+    "includedLine": "Math - Calculus - Science - Physics - Quantum - Chemistry - Electricity - Biology",
+    "bookIds": [
+      "math",
+      "calculus",
+      "science",
+      "physics",
+      "quantum",
+      "chemistry",
+      "electricity",
+      "biology"
+    ]
+  },
+  {
+    "slug": "101-volume-2",
+    "sku": "JJU-101-VOL-2-PB",
+    "kind": "collection",
+    "title": "JJ University 101, Volume II",
+    "kicker": "The Human World",
+    "subtitle": "Body, mind, meaning, civilization, institutions, and money.",
+    "description": "The second JJ University 101 paperback volume collects the human-world foundations: anatomy, psychology, philosophy, ethics, history, religion, government, and economics.",
+    "priceHint": "Target paperback range: $29.99-$39.99 plus shipping.",
+    "targetPriceCents": 3499,
+    "status": "coming-soon",
+    "printStatus": "files-generated",
+    "salesStatus": "not-for-sale",
+    "podPackageId": "",
+    "publicInteriorUrl": "https://nzlmnbppynjmutuukmbt.supabase.co/storage/v1/object/public/paperbacks/101-volume-2/interior.pdf",
+    "publicCoverUrl": "https://nzlmnbppynjmutuukmbt.supabase.co/storage/v1/object/public/paperbacks/101-volume-2/cover-wrap.pdf",
+    "actualInteriorPages": 319,
+    "generatedAt": "2026-06-15",
+    "format": {
+      "trimSize": "6x9",
+      "binding": "perfect-bound paperback",
+      "interiorColor": "black-and-white",
+      "paperType": "cream",
+      "coverFinish": "matte"
+    },
+    "coverTheme": {
+      "background": "#201016",
+      "accent": "#b64b5f",
+      "secondary": "#d7a640",
+      "mood": "civilization, anatomy, cities, law, maps, institutions"
+    },
+    "includedLine": "Anatomy - Psychology - Philosophy - Ethics - History - Religion - Government - Economics",
+    "bookIds": [
+      "anatomy",
+      "psychology",
+      "philosophy",
+      "ethics",
+      "history",
+      "religion",
+      "government",
+      "economics"
+    ]
+  },
+  {
+    "slug": "101-set",
+    "sku": "JJU-101-SET-PB",
+    "kind": "bundle",
+    "title": "JJ University 101 Set",
+    "kicker": "The Core Curriculum",
+    "subtitle": "Both 101 volumes as a two-book physical set.",
+    "description": "The full JJ University 101 curriculum as two paperback volumes: The Natural World and The Human World.",
+    "priceHint": "Target set range: $59.99-$69.99 plus shipping.",
+    "targetPriceCents": 6499,
+    "status": "coming-soon",
+    "printStatus": "files-generated",
+    "salesStatus": "not-for-sale",
+    "podPackageId": "",
+    "publicInteriorUrl": "",
+    "publicCoverUrl": "",
+    "actualInteriorPages": 676,
+    "generatedAt": "2026-06-15",
+    "componentProductSlugs": [
+      "101-volume-1",
+      "101-volume-2"
+    ],
+    "format": {
+      "trimSize": "6x9",
+      "binding": "two perfect-bound paperbacks",
+      "interiorColor": "black-and-white",
+      "paperType": "cream",
+      "coverFinish": "matte"
+    },
+    "coverTheme": {
+      "background": "#120d18",
+      "accent": "#d7a640",
+      "secondary": "#7c6df0",
+      "mood": "two-volume curriculum set"
+    },
+    "includedLine": "Volume I: The Natural World - Volume II: The Human World",
+    "bookIds": [
+      "math",
+      "calculus",
+      "science",
+      "physics",
+      "quantum",
+      "chemistry",
+      "electricity",
+      "biology",
+      "anatomy",
+      "psychology",
+      "philosophy",
+      "ethics",
+      "history",
+      "religion",
+      "government",
+      "economics"
+    ]
+  }
+]

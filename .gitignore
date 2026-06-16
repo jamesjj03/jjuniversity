@@ -42,3 +42,5 @@ next-env.d.ts
 
 # local editorial outputs
 /tools/gold-cleaner/gold-output/
+/generated/
+/tmp/pdfs/

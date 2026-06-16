@@ -193,6 +193,10 @@ function cleanIds(value: unknown) {
   return Array.isArray(value) ? value.map(id => String(id).trim().toLowerCase()).filter(Boolean) : [];
 }
 
+function validPrimaryCategory(value: string) {
+  return value === "All" || PRIMARY_CATEGORIES.some(item => item.name === value);
+}
+
 export default function LibraryClient({ archiveMode = false }: { archiveMode?: boolean } = {}) {
   const restoredScroll = useRef(false);
   const initialState = useMemo(() => readLibraryState(archiveMode ? "archive" : "main"), [archiveMode]);
@@ -319,6 +323,10 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
 
   const selectedSeries = useMemo(() => allSeriesOptions.find(item => item.id === seriesId), [allSeriesOptions, seriesId]);
   const seriesBookIds = useMemo(() => new Set((selectedSeries?.books || []).map(item => item.id)), [selectedSeries]);
+  const effectiveCategory = validPrimaryCategory(category) ? category : "All";
+  const effectiveTag = visibleTags.includes(tag) ? tag : "All";
+  const effectiveSeriesId = seriesId === "All" || selectedSeries ? seriesId : "All";
+  const effectiveArchiveCategory = archiveCategoryOptions.includes(archiveCategory) ? archiveCategory : "All";
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
@@ -336,12 +344,12 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
       ].join(" ").toLowerCase();
 
       if (q && !haystack.includes(q)) return false;
-      if (category !== "All" && !primaries.includes(category)) return false;
-      if (tag !== "All" && (!(book.tags || []).includes(tag) || (book.hiddenShelves || []).includes(tag))) return false;
-      if (!showingArchive && seriesId !== "All" && !seriesBookIds.has(book.id)) return false;
-      if (showingArchive && archiveCategory !== "All") {
+      if (effectiveCategory !== "All" && !primaries.includes(effectiveCategory)) return false;
+      if (effectiveTag !== "All" && (!(book.tags || []).includes(effectiveTag) || (book.hiddenShelves || []).includes(effectiveTag))) return false;
+      if (!showingArchive && effectiveSeriesId !== "All" && selectedSeries && !seriesBookIds.has(book.id)) return false;
+      if (showingArchive && effectiveArchiveCategory !== "All") {
         const bookArchiveCategory = String(book.archiveCategory || book.category || "Uncategorized").trim() || "Uncategorized";
-        if (bookArchiveCategory !== archiveCategory) return false;
+        if (bookArchiveCategory !== effectiveArchiveCategory) return false;
       }
       if (availability === "Ready" && ["unavailable", "coming-soon"].includes(book.status || "ready")) return false;
       if (availability === "Coming Soon" && book.status !== "coming-soon") return false;
@@ -362,7 +370,7 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
       return (b.tags || []).length - (a.tags || []).length
         || titleSort(a, b);
     });
-  }, [archiveCategory, availability, category, completedIds, featuredIds, newestIds, publicBooks, query, readingStatus, seriesBookIds, seriesId, showingArchive, sort, tag]);
+  }, [availability, completedIds, effectiveArchiveCategory, effectiveCategory, effectiveSeriesId, effectiveTag, featuredIds, newestIds, publicBooks, query, readingStatus, selectedSeries, seriesBookIds, showingArchive, sort]);
 
   useEffect(() => {
     if (restoredScroll.current || !books.length) return;
@@ -503,10 +511,10 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
 
       <div className="resultBar">
         <strong>{filtered.length}</strong>
-        <span>{category === "All" ? (showingArchive ? "archived books showing" : "books showing") : `${category} books`}</span>
-        {showingArchive && archiveCategory !== "All" && <em>{archiveCategory}</em>}
-        {!showingArchive && tag !== "All" && <em>{tag}</em>}
-        {!showingArchive && selectedSeries && <em>{selectedSeries.title}</em>}
+        <span>{effectiveCategory === "All" ? (showingArchive ? "archived books showing" : "books showing") : `${effectiveCategory} books`}</span>
+        {showingArchive && effectiveArchiveCategory !== "All" && <em>{effectiveArchiveCategory}</em>}
+        {!showingArchive && effectiveTag !== "All" && <em>{effectiveTag}</em>}
+        {!showingArchive && effectiveSeriesId !== "All" && selectedSeries && <em>{selectedSeries.title}</em>}
         <div className="readingStatusToggle" aria-label="Reading status">
           {(["All", "Unread", "Read"] as const).map(status => (
             <button className={readingStatus === status ? "active" : ""} key={status} type="button" onClick={() => setReadingStatus(status)}>{status}</button>

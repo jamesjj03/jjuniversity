@@ -1,14 +1,1230 @@
 {
-  "generated": "2026-05-11T00:18:51.507845Z",
-  "generatedAt": "2026-05-11T00:18:51.507845Z",
+  "generated": "2026-06-15T20:30:13.156Z",
+  "generatedAt": "2026-06-15T20:30:13.156Z",
   "counts": {
-    "books": 312,
-    "series": 0,
-    "paths": 64,
-    "tagPaths": 65,
-    "recommendedSections": 7
+    "books": 333,
+    "series": 17,
+    "paths": 5,
+    "tagPaths": 0,
+    "recommendedSections": 0
   },
-  "series": [],
+  "series": [
+    {
+      "id": "the-architects",
+      "title": "The Architects",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Builders, founders, platform-makers, industrialists, and tech bosses who shaped the modern machine.",
+      "tags": [
+        "Biography",
+        "Business & Economics",
+        "Capitalism & Corporations",
+        "Digital Culture & Technology",
+        "Technology & Innovation"
+      ],
+      "bookCount": 7,
+      "books": [
+        {
+          "id": "thiel",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "zuck",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "musk",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "jobs",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "gates",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "google",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "bezos",
+          "order": 7,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-code-breakers",
+      "title": "The Code Breakers",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Scientists, psychologists, inventors, and pattern-breakers who changed how reality gets explained.",
+      "tags": [
+        "Biography",
+        "Science History",
+        "Physics & Cosmology",
+        "Psychology & Human Behavior",
+        "Technology & Innovation"
+      ],
+      "bookCount": 13,
+      "books": [
+        {
+          "id": "franklin",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "darwin",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "galileo",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "isaac",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "tesla",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "marie",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "einstein",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "planck",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "feynman",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "hawking",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "freud",
+          "order": 11,
+          "note": ""
+        },
+        {
+          "id": "jung",
+          "order": 12,
+          "note": ""
+        },
+        {
+          "id": "descartes",
+          "order": 13,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-conquerors",
+      "title": "The Conquerors",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Kings, emperors, commanders, and empire-builders who moved history by force.",
+      "tags": [
+        "Biography",
+        "Military History",
+        "War & Conflict",
+        "Ancient Civilizations",
+        "Authoritarianism & Dictatorship"
+      ],
+      "bookCount": 10,
+      "books": [
+        {
+          "id": "ramses",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "alexander",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "caesar",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "august",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "charlemagne",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "genghis",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "tamerlane",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "napoleon",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "mansu",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "wu",
+          "order": 10,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-tyrants",
+      "title": "The Tyrants",
+      "kind": "series",
+      "type": "series",
+      "level": "advanced",
+      "description": "Dictators, strongmen, propaganda states, and political machines built around control.",
+      "tags": [
+        "Authoritarianism & Dictatorship",
+        "Biography",
+        "Propaganda & Social Control",
+        "20th Century",
+        "War & Conflict"
+      ],
+      "bookCount": 9,
+      "books": [
+        {
+          "id": "adolf",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "mussolini",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "stalin",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "putin",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "kim",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "lenin",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "kaiser",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "nero",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "northkorea",
+          "order": 9,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "god-struck",
+      "title": "God-struck",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Prophets, mystics, saints, gurus, spiritual rebels, and people hit hard by the sacred.",
+      "tags": [
+        "Biography",
+        "Religion & Spirituality",
+        "Spirituality & Mysticism",
+        "World Religions"
+      ],
+      "bookCount": 8,
+      "books": [
+        {
+          "id": "watts",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "messiah",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "muhammad",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "lron",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "buddha",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "joan",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "haile",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "woke",
+          "order": 8,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-disruptors",
+      "title": "The Disruptors",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Reformers, revolutionaries, abolitionists, and social detonators who broke the expected order.",
+      "tags": [
+        "Biography",
+        "Civil Rights & Social Justice",
+        "Revolution & Social Change",
+        "Social Movements"
+      ],
+      "bookCount": 7,
+      "books": [
+        {
+          "id": "luther",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "malcolm",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "king",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "harriet",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "gandhi",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "voltaire",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "columbus",
+          "order": 7,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "world-religions",
+      "title": "World Religions",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Religious histories, movements, traditions, and belief systems outside the scripture guide series.",
+      "tags": [
+        "World Religions",
+        "Religion & Spirituality",
+        "Christianity",
+        "Islam",
+        "Buddhism"
+      ],
+      "bookCount": 15,
+      "books": [
+        {
+          "id": "believe",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "believers",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "christianity",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "buddhism",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "islam",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "jewish",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "sikhism",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "bahai",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "zoro",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "gods",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "branches",
+          "order": 11,
+          "note": ""
+        },
+        {
+          "id": "howbible",
+          "order": 12,
+          "note": ""
+        },
+        {
+          "id": "popes",
+          "order": 13,
+          "note": ""
+        },
+        {
+          "id": "reincarnation",
+          "order": 14,
+          "note": ""
+        },
+        {
+          "id": "veil",
+          "order": 15,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-philosophers",
+      "title": "The Philosophers",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "The core philosophy shelf: ancient questions, modern doubt, ethics, mind, meaning, and reality.",
+      "tags": [
+        "Philosophy",
+        "Biography",
+        "Political Theory",
+        "Psychology & Human Behavior"
+      ],
+      "bookCount": 10,
+      "books": [
+        {
+          "id": "socrates",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "plato",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "aristotle",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "niet",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "spinoza",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "aquinas",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "confucius",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "machi",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "agency",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "materialism",
+          "order": 10,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "red-white-and-bruised",
+      "title": "Red, White, and Bruised",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "America through power, myth, corruption, surveillance, race, elections, and institutional damage.",
+      "tags": [
+        "American History",
+        "American Politics",
+        "Government & Politics",
+        "Propaganda & Social Control",
+        "Civil Rights & Social Justice"
+      ],
+      "bookCount": 16,
+      "books": [
+        {
+          "id": "1776",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "lobbied",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "campus",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "cia",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "fbi",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "nsa",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "mkultra",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "coups",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "race",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "rvb",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "rewrite",
+          "order": 11,
+          "note": ""
+        },
+        {
+          "id": "odd",
+          "order": 12,
+          "note": ""
+        },
+        {
+          "id": "georgism",
+          "order": 13,
+          "note": ""
+        },
+        {
+          "id": "elections",
+          "order": 14,
+          "note": ""
+        },
+        {
+          "id": "electoral",
+          "order": 15,
+          "note": ""
+        },
+        {
+          "id": "jesse",
+          "order": 16,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-system",
+      "title": "The System",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "The invisible machinery: bureaucracy, markets, platforms, funnels, institutions, and modern control loops.",
+      "tags": [
+        "Capitalism & Corporations",
+        "Consumer Culture",
+        "Digital Culture & Technology",
+        "Political Economy",
+        "Propaganda & Social Control"
+      ],
+      "bookCount": 14,
+      "books": [
+        {
+          "id": "gig",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "insurance",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "credit",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "web",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "bure",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "audit",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "pyramid",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "corps",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "fantasy",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "aitakeover",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "tiktok",
+          "order": 11,
+          "note": ""
+        },
+        {
+          "id": "steam",
+          "order": 12,
+          "note": ""
+        },
+        {
+          "id": "phone",
+          "order": 13,
+          "note": ""
+        },
+        {
+          "id": "schooled",
+          "order": 14,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-big-picture",
+      "title": "The Big Picture",
+      "kind": "series",
+      "type": "series",
+      "level": "advanced",
+      "description": "Big synthesis books that connect systems, myths, presidents, thinkers, drugs, money, power, and human nature.",
+      "tags": [
+        "Cultural History",
+        "Government & Politics",
+        "Mythology & Ancient Beliefs",
+        "Psychology & Human Behavior",
+        "Political Economy"
+      ],
+      "bookCount": 6,
+      "books": [
+        {
+          "id": "pantheon",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "pantheon2",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "thinkers",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "cult",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "money",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "condition",
+          "order": 6,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-noisemakers",
+      "title": "The Noisemakers",
+      "kind": "series",
+      "type": "series",
+      "level": "starter",
+      "description": "Musicians, performers, pop figures, and culture-shapers whose work moved through sound and spectacle.",
+      "tags": [
+        "Art & Music History",
+        "Biography",
+        "Cultural History",
+        "Consumer Culture"
+      ],
+      "bookCount": 8,
+      "books": [
+        {
+          "id": "music",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "kanye",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "lennon",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "mozart",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "mike",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "taylor",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "lee",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "vibes",
+          "order": 8,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-creatives",
+      "title": "The Creatives",
+      "kind": "series",
+      "type": "series",
+      "level": "starter",
+      "description": "Artists, writers, filmmakers, performers, painters, and visual storytellers outside the music lane.",
+      "tags": [
+        "Art & Music History",
+        "Biography",
+        "Cultural History",
+        "Renaissance"
+      ],
+      "bookCount": 10,
+      "books": [
+        {
+          "id": "burton",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "fresco",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "leonardo",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "shake",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "vangogh",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "van",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "theboys",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "houdini",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "orwell",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "color",
+          "order": 10,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "business-as-usual",
+      "title": "Business as Usual",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Companies, brands, industrial machines, and corporate stories that changed how people buy, eat, work, and live.",
+      "tags": [
+        "Business & Economics",
+        "Capitalism & Corporations",
+        "Consumer Culture",
+        "Food & Culture"
+      ],
+      "bookCount": 11,
+      "books": [
+        {
+          "id": "nike",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "nestle",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "ford",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "disney",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "kfc",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "nintendo",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "caffeine",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "casinos",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "lunchtime",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "biochemical",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "dollar",
+          "order": 11,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "under-the-hood",
+      "title": "Under the Hood",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Science-science: bodies, brains, physics, biology, chemistry, disease, atoms, and the mechanisms underneath experience.",
+      "tags": [
+        "Biology & Medicine",
+        "Science & Mathematics",
+        "Science History",
+        "Physics & Cosmology",
+        "Cognitive Science & Neuroscience"
+      ],
+      "bookCount": 15,
+      "books": [
+        {
+          "id": "dopamine",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "goo",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "hardest",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "cancer",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "nuclear",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "burgers",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "brain",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "bang",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "relativity",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "bees",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "plants",
+          "order": 11,
+          "note": ""
+        },
+        {
+          "id": "sleep",
+          "order": 12,
+          "note": ""
+        },
+        {
+          "id": "prenancy",
+          "order": 13,
+          "note": ""
+        },
+        {
+          "id": "pregnancy",
+          "order": 14,
+          "note": ""
+        },
+        {
+          "id": "foreskin",
+          "order": 15,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "the-social-code",
+      "title": "The Social Code",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Love, imagination, identity, social behavior, cultural scripts, and the human patterns people live inside.",
+      "tags": [
+        "Psychology & Human Behavior",
+        "Cultural History",
+        "Social Movements",
+        "Cognitive Science & Neuroscience"
+      ],
+      "bookCount": 11,
+      "books": [
+        {
+          "id": "imagination",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "love",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "rock",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "cn",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "hat",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "fortitude",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "heroes",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "insideasylum",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "intelligence",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "soaps",
+          "order": 10,
+          "note": ""
+        },
+        {
+          "id": "sitcoms",
+          "order": 11,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "high-society",
+      "title": "High Society",
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "description": "Addiction, substances, vice, medicalized dependency, dopamine loops, and the industries around them.",
+      "tags": [
+        "Addiction & Substance Use",
+        "Consumer Culture",
+        "Psychology & Human Behavior",
+        "Capitalism & Corporations"
+      ],
+      "bookCount": 10,
+      "books": [
+        {
+          "id": "addiction",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "alcohol",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "nicotine",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "nic",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "nictrap",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "purdue",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "dietpop",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "weed",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "drugs",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "tmk",
+          "order": 10,
+          "note": ""
+        }
+      ],
+      "deleted": false
+    }
+  ],
   "paths": [
     {
       "id": "101-the-core-courses",
