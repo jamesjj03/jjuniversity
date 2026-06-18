@@ -590,3 +590,782 @@ html body .dangerBtn {
     height:34px !important;
   }
 }
+
+/* Arena: diagram recall game and review factory. */
+html body .recallPage {
+  width:min(1320px, calc(100vw - 40px)) !important;
+  max-width:1320px !important;
+  margin:0 auto !important;
+  padding-top:24px !important;
+}
+
+html body .recallPhase-playing {
+  width:min(1480px, calc(100vw - 28px)) !important;
+  max-width:1480px !important;
+  padding-top:10px !important;
+}
+
+.recallLibraryShell {
+  width:min(1180px, 100%);
+  margin:0 auto;
+  display:grid;
+  gap:16px;
+  padding-top:18px;
+}
+
+.recallLibraryTop {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:18px;
+  align-items:end;
+  padding-bottom:10px;
+  border-bottom:1px solid color-mix(in srgb, var(--line) 76%, transparent);
+}
+
+.recallLibraryTop h1 {
+  margin:0;
+  color:var(--text);
+  font-size:42px;
+  line-height:.98;
+  letter-spacing:0;
+}
+
+.recallLibraryStats {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(78px, 1fr));
+  gap:8px;
+}
+
+.recallLibraryStats span {
+  min-height:54px;
+  display:grid;
+  align-content:center;
+  gap:2px;
+  padding:8px 10px;
+  border:1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 64%, transparent);
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.recallLibraryStats strong {
+  color:var(--text);
+  font-size:16px;
+  letter-spacing:0;
+  text-transform:none;
+}
+
+.recallLibraryLayout {
+  display:grid;
+  grid-template-columns:230px minmax(0, 1fr);
+  gap:14px;
+  align-items:start;
+}
+
+.recallCategoryRail {
+  position:sticky;
+  top:86px;
+  display:grid;
+  gap:6px;
+  padding:8px;
+  border:1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 70%, transparent);
+}
+
+.recallCategoryRail button {
+  min-height:58px;
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:2px 10px;
+  align-items:center;
+  padding:10px;
+  border:1px solid transparent;
+  border-radius:8px;
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  font:inherit;
+  text-align:left;
+}
+
+.recallCategoryRail button:hover,
+.recallCategoryRail button.active {
+  border-color:color-mix(in srgb, var(--gold) 46%, transparent);
+  background:color-mix(in srgb, var(--gold2) 10%, transparent);
+}
+
+.recallCategoryRail strong,
+.recallPackRow h3 {
+  min-width:0;
+  color:var(--text);
+  line-height:1.05;
+}
+
+.recallCategoryRail strong {
+  font-size:15px;
+}
+
+.recallCategoryRail span,
+.recallPackRow p:not(.kicker) {
+  min-width:0;
+  overflow:hidden;
+  color:var(--muted);
+  font-size:12px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.recallCategoryRail em {
+  grid-row:1 / span 2;
+  grid-column:2;
+  color:var(--gold);
+  font-size:11px;
+  font-style:normal;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.recallPackPanel {
+  display:grid;
+  gap:10px;
+  min-width:0;
+}
+
+.recallPackPanelTop {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(220px, 340px);
+  gap:18px;
+  align-items:end;
+  padding:14px;
+  border:1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 64%, transparent);
+}
+
+.recallPackPanelTop h2 {
+  margin:0;
+  color:var(--text);
+  font-size:28px;
+  line-height:1;
+  letter-spacing:0;
+}
+
+.recallPackPanelTop p:not(.kicker) {
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.35;
+}
+
+.recallPackRows {
+  display:grid;
+  gap:8px;
+}
+
+.recallPackRow {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto auto;
+  gap:12px;
+  align-items:center;
+  padding:12px;
+  border:1px solid color-mix(in srgb, var(--line) 74%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 58%, transparent);
+}
+
+.recallPackRow.locked,
+.recallPackRow.draft {
+  opacity:.76;
+}
+
+.recallPackRowMain {
+  min-width:0;
+  display:grid;
+  grid-template-columns:54px minmax(0, 1fr);
+  gap:12px;
+  align-items:center;
+}
+
+.recallPackThumb {
+  width:54px;
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  border:1px solid color-mix(in srgb, var(--gold) 38%, transparent);
+  border-radius:8px;
+  color:var(--gold);
+  font-weight:900;
+}
+
+.recallPackRow h3 {
+  margin:0;
+  overflow:hidden;
+  font-size:20px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.recallPackRow p:not(.kicker) {
+  margin:4px 0 0;
+  font-size:13px;
+}
+
+.recallPackRowMeta {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:6px;
+}
+
+.recallPackRowMeta span {
+  padding:6px 8px;
+  border:1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius:8px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.recallPackRow .btn {
+  min-width:96px;
+  border-radius:8px;
+}
+
+.recallGameShell {
+  height:calc(100vh - 116px);
+  min-height:620px;
+  display:grid;
+  grid-template-rows:auto auto minmax(0, 1fr) auto;
+  gap:10px;
+  overflow:hidden;
+}
+
+.recallGameTop,
+.recallModeRail,
+.recallStage,
+.recallGameBottom {
+  border:1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 72%, transparent);
+}
+
+.recallGameTop {
+  display:grid;
+  grid-template-columns:96px minmax(0, 1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:10px;
+}
+
+.recallExitBtn,
+.recallGameBottom button {
+  min-height:42px;
+  border:1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel2) 70%, transparent);
+  color:var(--text);
+  cursor:pointer;
+  font-weight:900;
+}
+
+.recallPromptBar {
+  min-width:0;
+  display:grid;
+  gap:2px;
+  text-align:center;
+}
+
+.recallPromptBar span,
+.recallModeRail span,
+.recallGameBottom span {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.recallPromptBar strong {
+  overflow:hidden;
+  color:var(--text);
+  font-size:32px;
+  line-height:1;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.recallRunMiniStats {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(58px, 1fr));
+  gap:6px;
+}
+
+.recallRunMiniStats span {
+  display:grid;
+  place-items:center;
+  min-height:42px;
+  padding:0 8px;
+  border:1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius:8px;
+  color:var(--gold);
+  font-size:14px;
+  font-weight:900;
+}
+
+.recallModeRail {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:8px;
+  padding:8px;
+}
+
+.recallModeRail button {
+  display:grid;
+  gap:3px;
+  min-height:58px;
+  padding:9px 10px;
+  border:1px solid transparent;
+  border-radius:8px;
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  font:inherit;
+  text-align:left;
+}
+
+.recallModeRail button.active,
+.recallModeRail button:hover {
+  border-color:color-mix(in srgb, var(--gold) 46%, transparent);
+  background:color-mix(in srgb, var(--gold2) 10%, transparent);
+}
+
+.recallModeRail strong {
+  color:var(--text);
+  font-size:15px;
+}
+
+.recallStage {
+  position:relative;
+  min-height:0;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  padding:8px;
+}
+
+.recallCursorPrompt {
+  position:fixed;
+  left:calc(var(--cursor-x) + 16px);
+  top:calc(var(--cursor-y) + 16px);
+  z-index:80;
+  max-width:220px;
+  padding:8px 10px;
+  border:1px solid color-mix(in srgb, var(--gold) 46%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 92%, #000 22%);
+  color:var(--text);
+  font-size:13px;
+  font-weight:900;
+  pointer-events:none;
+}
+
+.recallBrainSvg {
+  width:min(100%, 1120px);
+  height:100%;
+  min-height:320px;
+  display:block;
+}
+
+.recallSvgGrid {
+  fill:color-mix(in srgb, var(--panel2) 58%, transparent);
+  stroke:color-mix(in srgb, var(--line) 74%, transparent);
+}
+
+.recallSvgGridLines {
+  fill:url(#recallFineGrid);
+  opacity:.3;
+  stroke:transparent;
+}
+
+#recallFineGrid path {
+  fill:none;
+  stroke:color-mix(in srgb, var(--line) 58%, transparent);
+  stroke-width:1;
+}
+
+.recallBrainBase {
+  fill:color-mix(in srgb, var(--panel) 74%, #101b24 26%);
+  stroke:color-mix(in srgb, var(--gold) 30%, transparent);
+  stroke-width:3;
+}
+
+.recallBrainRidge {
+  fill:none;
+  stroke:color-mix(in srgb, var(--gold) 34%, transparent);
+  stroke-linecap:round;
+  stroke-width:8;
+}
+
+.recallTargetShape {
+  fill:rgba(255,255,255,.025);
+  stroke:rgba(255,255,255,.22);
+  stroke-width:2;
+  cursor:pointer;
+  outline:none;
+}
+
+.recallTargetShape:hover,
+.recallTargetShape:focus {
+  fill:rgba(214,178,94,.18);
+  stroke:color-mix(in srgb, var(--gold) 76%, white 10%);
+}
+
+.recallTargetShape.solved {
+  fill:rgba(121,224,141,.08);
+  stroke:rgba(121,224,141,.32);
+}
+
+.recallTargetShape.correctFlash {
+  fill:rgba(121,224,141,.35);
+  stroke:#9df0ac;
+}
+
+.recallTargetShape.wrongPick {
+  fill:rgba(239,141,104,.28);
+  stroke:#ffb29a;
+}
+
+.recallTargetShape.wrongReveal {
+  fill:rgba(214,178,94,.34);
+  stroke:var(--gold);
+}
+
+.dotTarget {
+  stroke-width:4;
+}
+
+.recallGameBottom {
+  display:grid;
+  grid-template-columns:minmax(220px, .55fr) minmax(0, 1fr) 108px;
+  gap:12px;
+  align-items:center;
+  padding:10px;
+}
+
+.recallGameBottom > div:first-child {
+  min-width:0;
+  display:grid;
+  gap:2px;
+}
+
+.recallGameBottom strong {
+  color:var(--text);
+  font-size:16px;
+  line-height:1.1;
+}
+
+.recallProgressTrack {
+  height:10px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+}
+
+.recallProgressTrack i {
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg, var(--gold), #67d7c1);
+}
+
+html body .recallDone {
+  width:min(880px, 100%);
+  margin:0 auto;
+}
+
+html body .recallDone .aboutStory {
+  max-width:none !important;
+}
+
+.recallDoneActions {
+  margin-top:14px;
+}
+
+html body .adminArenaPage {
+  width:min(1360px, calc(100vw - 40px)) !important;
+  max-width:1360px !important;
+  margin:0 auto !important;
+  padding-top:28px !important;
+}
+
+.adminArenaTop {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:14px;
+  align-items:end;
+  margin-bottom:16px;
+}
+
+.adminArenaTop h1 {
+  margin:0;
+  color:var(--text);
+  font-size:42px;
+  line-height:.95;
+  letter-spacing:0;
+}
+
+.adminArenaDrafts {
+  display:grid;
+  gap:14px;
+}
+
+.adminArenaDraft {
+  display:grid;
+  grid-template-columns:minmax(300px, .75fr) minmax(0, 1fr);
+  gap:14px;
+  padding:14px;
+  border:1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 70%, transparent);
+}
+
+.adminArenaDraftMedia {
+  min-height:360px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius:8px;
+  background:#fff;
+}
+
+.adminArenaDiagram {
+  width:min(100%, 520px);
+  aspect-ratio:var(--diagram-ratio);
+  background-image:var(--diagram-src);
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:contain;
+}
+
+.adminArenaDiagram.empty {
+  display:grid;
+  place-items:center;
+  color:#222;
+}
+
+.adminArenaDraftBody {
+  min-width:0;
+  display:grid;
+  gap:12px;
+  align-content:start;
+}
+
+.adminArenaDraftBody > header {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:12px;
+  align-items:start;
+}
+
+.adminArenaDraftBody h2 {
+  margin:0;
+  color:var(--text);
+  font-size:30px;
+  line-height:1;
+}
+
+.adminArenaDraftBody p {
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.4;
+}
+
+.adminArenaStatus,
+.adminArenaStatusGrid span,
+.adminArenaMetaGrid div,
+.adminArenaStages div {
+  border:1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius:8px;
+  background:rgba(0,0,0,.12);
+}
+
+.adminArenaStatus {
+  padding:7px 9px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.adminArenaStatusGrid,
+.adminArenaMetaGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+  gap:8px;
+}
+
+.adminArenaStatusGrid span,
+.adminArenaMetaGrid div,
+.adminArenaStages div {
+  display:grid;
+  gap:4px;
+  min-height:62px;
+  align-content:center;
+  padding:9px 10px;
+}
+
+.adminArenaStatusGrid strong,
+.adminArenaMetaGrid strong,
+.adminArenaStages strong {
+  color:var(--text);
+  font-size:13px;
+  line-height:1.1;
+}
+
+.adminArenaStatusGrid em,
+.adminArenaMetaGrid span,
+.adminArenaStages span {
+  color:var(--muted);
+  font-size:12px;
+  font-style:normal;
+}
+
+.adminArenaSource {
+  display:grid;
+  gap:8px;
+}
+
+.adminArenaSource div {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto auto auto;
+  gap:10px;
+  align-items:center;
+  padding:10px;
+  border:1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius:8px;
+}
+
+.adminArenaSource a {
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  text-decoration:none;
+}
+
+.adminArenaStages {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  gap:8px;
+}
+
+.adminArenaStatus.approved,
+.adminArenaStatusGrid .approved,
+.adminArenaStages .approved {
+  color:#9df0ac;
+  border-color:rgba(121,224,141,.46);
+}
+
+.adminArenaStatus.blocked,
+.adminArenaStatusGrid .blocked,
+.adminArenaStages .blocked {
+  color:#ffb29a;
+  border-color:rgba(239,141,104,.48);
+}
+
+.adminArenaStatusGrid .review,
+.adminArenaStages .review {
+  color:var(--gold);
+  border-color:color-mix(in srgb, var(--gold) 46%, transparent);
+}
+
+.adminArenaBlocks {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.adminArenaBlocks span {
+  color:#ffb29a;
+  font-size:12px;
+  font-weight:800;
+}
+
+.adminArenaEmpty {
+  padding:24px;
+  border:1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 72%, transparent);
+}
+
+@media (max-width:900px) {
+  html body .recallPage,
+  html body .recallPhase-playing,
+  html body .adminArenaPage {
+    width:min(100% - 20px, 1360px) !important;
+  }
+
+  .recallLibraryTop,
+  .recallLibraryLayout,
+  .recallPackPanelTop,
+  .recallPackRow,
+  .recallGameTop,
+  .recallModeRail,
+  .recallGameBottom,
+  .adminArenaTop,
+  .adminArenaDraft,
+  .adminArenaDraftBody > header,
+  .adminArenaSource div {
+    grid-template-columns:1fr !important;
+  }
+
+  .recallCategoryRail {
+    position:relative;
+    top:auto;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  .recallGameShell {
+    height:auto;
+    min-height:calc(100vh - 96px);
+    overflow:visible;
+  }
+
+  .recallStage {
+    min-height:360px;
+  }
+
+  .recallPromptBar strong {
+    font-size:30px;
+  }
+
+  .adminArenaDraftMedia {
+    min-height:300px;
+  }
+}
+
+@media (max-width:620px) {
+  .recallLibraryStats,
+  .recallCategoryRail {
+    grid-template-columns:1fr;
+  }
+
+  .recallPackRowMain {
+    grid-template-columns:44px minmax(0, 1fr);
+  }
+
+  .recallPackThumb {
+    width:44px;
+  }
+
+  .recallPromptBar strong {
+    font-size:24px;
+  }
+}

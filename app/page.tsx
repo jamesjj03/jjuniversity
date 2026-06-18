@@ -26,6 +26,7 @@ export default function HomePage() {
 
         <div className="buttonRow">
           <Link className="btn primary" href="/library">Browse the Library</Link>
+          <Link className="btn secondary" href="/arena">Recall Arena</Link>
           <AtlasHomeLink />
           <Link className="btn secondary" href="/what-this-is">What This Is</Link>
         </div>

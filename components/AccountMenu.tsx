@@ -98,6 +98,7 @@ export default function AccountMenu() {
     { href: "/", label: "Home" },
     { href: "/library", label: "Library" },
     { href: "/print", label: "Print" },
+    { href: "/arena", label: "Arena" },
     ...(atlasVisible ? [{ href: "/atlas", label: "Atlas" }] : []),
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },

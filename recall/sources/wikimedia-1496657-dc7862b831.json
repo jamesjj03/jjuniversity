@@ -1,0 +1,36 @@
+{
+  "id": "wikimedia-1496657-dc7862b831",
+  "provider": "wikimedia-commons",
+  "importedAt": "2026-06-18T00:50:38.662Z",
+  "title": "Brain human sagittal section",
+  "fileTitle": "File:Brain human sagittal section.svg",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20human%20sagittal%20section.svg",
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Brain_human_sagittal_section.svg",
+  "description": "Brain human sagittal section",
+  "artist": "Patrick J. Lynch, medical illustrator",
+  "artistHtml": "Patrick J. Lynch, medical illustrator",
+  "credit": "Patrick J. Lynch, medical illustrator",
+  "creditHtml": "Patrick J. Lynch, medical illustrator",
+  "license": {
+    "shortName": "CC BY 2.5",
+    "url": "https://creativecommons.org/licenses/by/2.5",
+    "usageTerms": "Creative Commons Attribution 2.5",
+    "attributionRequired": "true",
+    "allowedByImporter": true,
+    "importerReason": "Creative Commons attribution license."
+  },
+  "media": {
+    "mime": "image/svg+xml",
+    "width": 295,
+    "height": 326,
+    "sha1": "dc7862b8312f605c88ec740a26e11fa303374695",
+    "byteLength": 148215,
+    "publicPath": "/arena/diagrams/brain-sagittal-source-v1/wikimedia-1496657-dc7862b831.svg",
+    "localPath": "public\\arena\\diagrams\\brain-sagittal-source-v1\\wikimedia-1496657-dc7862b831.svg"
+  },
+  "review": {
+    "source": "needs-review",
+    "license": "needs-review",
+    "attribution": "needs-review"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "workingName": "Arena",
+  "generatedAt": "2026-06-18T00:00:00.000Z",
+  "policy": {
+    "sourceRequired": true,
+    "licenseRequired": true,
+    "attributionRequired": true,
+    "publishRequiresHumanApproval": true,
+    "allowedLicenseFamilies": [
+      "Public domain",
+      "CC0",
+      "CC BY",
+      "CC BY-SA"
+    ],
+    "blockedLicenseFamilies": [
+      "CC BY-NC",
+      "CC BY-ND",
+      "unknown",
+      "all-rights-reserved"
+    ]
+  },
+  "categories": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "priority": 1,
+      "packIdeas": [
+        "brain anatomy",
+        "brainstem",
+        "skull",
+        "heart",
+        "lungs",
+        "digestive system",
+        "skeleton",
+        "muscular system",
+        "eye",
+        "ear"
+      ]
+    },
+    {
+      "id": "geography",
+      "title": "Geography",
+      "priority": 2,
+      "packIdeas": [
+        "world map",
+        "United States",
+        "Europe",
+        "Africa",
+        "Asia",
+        "rivers",
+        "mountain ranges",
+        "oceans and seas"
+      ]
+    },
+    {
+      "id": "biology",
+      "title": "Biology",
+      "priority": 3,
+      "packIdeas": [
+        "animal cell",
+        "plant cell",
+        "DNA",
+        "mitosis",
+        "photosynthesis",
+        "food web",
+        "taxonomy"
+      ]
+    },
+    {
+      "id": "chemistry",
+      "title": "Chemistry",
+      "priority": 4,
+      "packIdeas": [
+        "periodic table regions",
+        "atomic structure",
+        "bonding",
+        "organic functional groups",
+        "lab glassware"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "priority": 5,
+      "packIdeas": [
+        "ancient civilizations map",
+        "Roman empire",
+        "American Revolution",
+        "World War I map",
+        "World War II map",
+        "Cold War map"
+      ]
+    },
+    {
+      "id": "math",
+      "title": "Math",
+      "priority": 6,
+      "packIdeas": [
+        "unit circle",
+        "geometric solids",
+        "function transformations",
+        "calculus graph features",
+        "matrix operations"
+      ]
+    },
+    {
+      "id": "art",
+      "title": "Art",
+      "priority": 7,
+      "packIdeas": [
+        "color wheel",
+        "composition",
+        "architecture orders",
+        "camera anatomy",
+        "music staff"
+      ]
+    },
+    {
+      "id": "religion",
+      "title": "Religion",
+      "priority": 8,
+      "packIdeas": [
+        "biblical geography",
+        "temple layout",
+        "religious timelines",
+        "denomination family tree"
+      ]
+    },
+    {
+      "id": "government",
+      "title": "Government",
+      "priority": 9,
+      "packIdeas": [
+        "branches of government",
+        "constitutional amendments",
+        "court system",
+        "election map"
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Tools",
+      "priority": 10,
+      "packIdeas": [
+        "Excel interface",
+        "spreadsheet formulas",
+        "keyboard layout",
+        "developer tools",
+        "file system"
+      ]
+    }
+  ],
+  "pipelineStages": [
+    "source-hunt",
+    "license-pass",
+    "vision-pass",
+    "fact-pass",
+    "review-pass",
+    "publish-pack"
+  ]
+}

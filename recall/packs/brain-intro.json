@@ -1,0 +1,300 @@
+{
+  "id": "brain-intro",
+  "title": "Brain Intro",
+  "workingName": "Recall Arena",
+  "domain": "neuroscience",
+  "status": "prototype",
+  "version": 1,
+  "summary": "A calibration pack for the first JJU visual recall game loop.",
+  "modes": ["find", "function", "review"],
+  "automation": {
+    "status": "manual_seed",
+    "modelPlan": "Local vision/LLM candidates feed a review queue before a pack can ship.",
+    "stages": [
+      {
+        "id": "source-hunt",
+        "label": "Pull candidate diagrams",
+        "status": "queued",
+        "owner": "pipeline",
+        "detail": "Find open diagrams or original schematics and attach source/license metadata."
+      },
+      {
+        "id": "vision-pass",
+        "label": "Suggest targets",
+        "status": "queued",
+        "owner": "local model",
+        "detail": "Use a local model to propose labels, dots, polygons, and confidence scores."
+      },
+      {
+        "id": "fact-pass",
+        "label": "Compress facts",
+        "status": "queued",
+        "owner": "local model",
+        "detail": "Generate short functional prompts, aliases, and parent-child relationships."
+      },
+      {
+        "id": "review-pass",
+        "label": "Human approve/fix",
+        "status": "active",
+        "owner": "review",
+        "detail": "Approve only the labels and targets that survive manual review."
+      },
+      {
+        "id": "publish-pack",
+        "label": "Publish pack",
+        "status": "blocked",
+        "owner": "system",
+        "detail": "Blocked until targets, facts, and license ledger are clean."
+      }
+    ]
+  },
+  "assetLedger": [
+    {
+      "id": "brain-schematic-v0",
+      "type": "original-svg",
+      "source": "JJU original schematic",
+      "license": "Internal prototype asset",
+      "status": "review",
+      "notes": "Hand-seeded calibration diagram for proving the interaction loop."
+    }
+  ],
+  "targets": [
+    {
+      "id": "frontal-lobe",
+      "label": "Frontal lobe",
+      "aliases": ["frontal cortex"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 1,
+      "color": "#ef8d68",
+      "shape": {
+        "type": "path",
+        "d": "M138 168 C177 83 283 72 346 116 C328 171 293 210 241 235 C193 258 151 235 119 204 C122 190 129 177 138 168 Z"
+      },
+      "functions": ["Plans goals and controls executive decisions", "Starts voluntary movement through motor cortex", "Supports inhibition, judgment, and personality"]
+    },
+    {
+      "id": "parietal-lobe",
+      "label": "Parietal lobe",
+      "aliases": ["somatosensory region"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 1,
+      "color": "#f3c766",
+      "shape": {
+        "type": "path",
+        "d": "M330 116 C394 62 515 83 584 160 C560 207 520 240 462 247 C390 255 314 221 294 190 C318 161 329 130 330 116 Z"
+      },
+      "functions": ["Maps touch, pressure, pain, and body position", "Supports spatial attention and body awareness", "Helps track where objects are in space"]
+    },
+    {
+      "id": "occipital-lobe",
+      "label": "Occipital lobe",
+      "aliases": ["visual cortex"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 1,
+      "color": "#82c7ff",
+      "shape": {
+        "type": "path",
+        "d": "M579 159 C665 178 713 240 706 316 C684 353 640 369 591 356 C567 319 557 260 562 210 C566 190 571 173 579 159 Z"
+      },
+      "functions": ["Processes visual input from the eyes", "Builds edges, motion, color, and shape into sight", "Primary cortical hub for vision"]
+    },
+    {
+      "id": "temporal-lobe",
+      "label": "Temporal lobe",
+      "aliases": ["temporal cortex"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 1,
+      "color": "#d6a2ff",
+      "shape": {
+        "type": "path",
+        "d": "M244 235 C309 218 369 235 406 279 C390 336 341 377 272 386 C204 395 150 360 132 306 C155 274 190 251 244 235 Z"
+      },
+      "functions": ["Processes sound and speech input", "Supports language comprehension", "Links hearing, memory, and object recognition"]
+    },
+    {
+      "id": "cerebellum",
+      "label": "Cerebellum",
+      "aliases": ["little brain"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 1,
+      "color": "#79e08d",
+      "shape": {
+        "type": "path",
+        "d": "M548 334 C619 318 681 356 684 414 C653 459 585 477 522 446 C488 417 499 361 548 334 Z"
+      },
+      "functions": ["Coordinates smooth, accurate movement", "Maintains balance and posture", "Corrects timing errors while moving"]
+    },
+    {
+      "id": "brainstem",
+      "label": "Brainstem",
+      "aliases": ["stem"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 2,
+      "color": "#f0a35d",
+      "shape": {
+        "type": "path",
+        "d": "M431 306 C474 302 509 331 512 374 C514 411 495 445 486 487 L431 487 C432 451 418 424 401 399 C378 364 392 318 431 306 Z"
+      },
+      "functions": ["Carries signals between brain and spinal cord", "Controls basic survival functions like breathing and heart rate", "Houses cranial nerve pathways and arousal systems"]
+    },
+    {
+      "id": "midbrain",
+      "label": "Midbrain",
+      "aliases": ["mesencephalon"],
+      "kind": "polygon",
+      "parentId": "brainstem",
+      "reviewStatus": "manual-seed",
+      "difficulty": 3,
+      "color": "#ff9f9f",
+      "shape": {
+        "type": "path",
+        "d": "M420 313 C454 304 489 322 500 350 C478 362 436 358 410 342 C410 331 413 321 420 313 Z"
+      },
+      "functions": ["Controls eye movement and visual orienting reflexes", "Routes movement signals through dopamine circuits", "Handles quick visual and auditory orienting"]
+    },
+    {
+      "id": "pons",
+      "label": "Pons",
+      "aliases": ["pontine region"],
+      "kind": "polygon",
+      "parentId": "brainstem",
+      "reviewStatus": "manual-seed",
+      "difficulty": 3,
+      "color": "#f07aa8",
+      "shape": {
+        "type": "path",
+        "d": "M408 350 C445 363 482 363 509 350 C522 377 504 408 469 420 C432 429 393 412 391 381 C392 368 399 358 408 350 Z"
+      },
+      "functions": ["Relay bridge between cortex and cerebellum for coordination", "Helps regulate breathing rhythm and sleep", "Carries face movement and sensation pathways"]
+    },
+    {
+      "id": "medulla",
+      "label": "Medulla",
+      "aliases": ["medulla oblongata"],
+      "kind": "polygon",
+      "parentId": "brainstem",
+      "reviewStatus": "manual-seed",
+      "difficulty": 3,
+      "color": "#b6d7a8",
+      "shape": {
+        "type": "path",
+        "d": "M424 417 C442 424 471 426 489 417 C491 444 482 469 471 494 L435 494 C433 467 423 444 424 417 Z"
+      },
+      "functions": ["Regulates heart rate, breathing, and blood pressure", "Controls swallowing, coughing, vomiting, and other reflexes", "Lowest brainstem gateway to the spinal cord"]
+    },
+    {
+      "id": "corpus-callosum",
+      "label": "Corpus callosum",
+      "aliases": ["callosal fibers"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 2,
+      "color": "#f6d365",
+      "shape": {
+        "type": "path",
+        "d": "M253 228 C331 153 459 160 543 229 C524 244 503 251 481 250 C415 205 343 204 277 259 C262 252 253 242 253 228 Z"
+      },
+      "functions": ["Connects the left and right cerebral hemispheres", "Lets both sides of the cortex share information", "Largest white matter bridge in the brain"]
+    },
+    {
+      "id": "thalamus",
+      "label": "Thalamus",
+      "aliases": ["sensory relay"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 2,
+      "color": "#9fb7ff",
+      "shape": {
+        "type": "ellipse",
+        "cx": 432,
+        "cy": 268,
+        "rx": 54,
+        "ry": 36
+      },
+      "functions": ["Relays most sensory signals to the cortex", "Helps regulate attention and consciousness", "Routes incoming information to the right cortical areas"]
+    },
+    {
+      "id": "hypothalamus",
+      "label": "Hypothalamus",
+      "aliases": ["homeostasis center"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 2,
+      "color": "#67d7c1",
+      "shape": {
+        "type": "path",
+        "d": "M402 306 C424 286 460 287 482 306 C474 329 452 342 426 335 C411 331 402 320 402 306 Z"
+      },
+      "functions": ["Maintains homeostasis for hunger, thirst, and temperature", "Controls hormone signaling through the pituitary", "Links the nervous system to endocrine control"]
+    },
+    {
+      "id": "pituitary-gland",
+      "label": "Pituitary gland",
+      "aliases": ["pituitary"],
+      "kind": "dot",
+      "parentId": "hypothalamus",
+      "reviewStatus": "manual-seed",
+      "difficulty": 3,
+      "color": "#85e3ff",
+      "shape": {
+        "type": "circle",
+        "cx": 442,
+        "cy": 366,
+        "r": 17
+      },
+      "functions": ["Releases hormones under hypothalamus control", "Master gland for growth, stress, thyroid, and reproductive signals", "Endocrine output hub hanging below the hypothalamus"]
+    },
+    {
+      "id": "pineal-gland",
+      "label": "Pineal gland",
+      "aliases": ["pineal"],
+      "kind": "dot",
+      "reviewStatus": "manual-seed",
+      "difficulty": 3,
+      "color": "#c4b5fd",
+      "shape": {
+        "type": "circle",
+        "cx": 501,
+        "cy": 253,
+        "r": 13
+      },
+      "functions": ["Releases melatonin for sleep timing", "Helps tune circadian rhythm to light and dark", "Small endocrine gland near the center of the brain"]
+    },
+    {
+      "id": "hippocampus",
+      "label": "Hippocampus",
+      "aliases": ["memory formation region"],
+      "kind": "polygon",
+      "reviewStatus": "manual-seed",
+      "difficulty": 2,
+      "color": "#a7f3d0",
+      "shape": {
+        "type": "path",
+        "d": "M335 332 C367 292 426 291 466 327 C451 338 421 345 392 348 C366 351 345 346 335 332 Z"
+      },
+      "functions": ["Builds new declarative memories", "Supports spatial memory and navigation maps", "Links events with context"]
+    },
+    {
+      "id": "amygdala",
+      "label": "Amygdala",
+      "aliases": ["salience detector"],
+      "kind": "dot",
+      "reviewStatus": "manual-seed",
+      "difficulty": 2,
+      "color": "#ef8d68",
+      "shape": {
+        "type": "circle",
+        "cx": 330,
+        "cy": 350,
+        "r": 20
+      },
+      "functions": ["Tags threats and emotionally important signals", "Supports fear learning and emotional memory", "Helps decide what sensory input matters"]
+    }
+  ]
+}
