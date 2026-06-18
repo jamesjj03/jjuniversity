@@ -1,4 +1,5 @@
 import { readdir, readFile } from "fs/promises";
+import Image from "next/image";
 import Link from "next/link";
 import path from "path";
 import type { CSSProperties } from "react";
@@ -39,8 +40,49 @@ type DraftPack = {
     status: string;
     notes?: string;
   }>;
-  targets?: unknown[];
-  correctionQueue?: unknown[];
+  targets?: DraftTarget[];
+  correctionQueue?: DraftCorrection[];
+};
+
+type DraftTarget = {
+  id: string;
+  label: string;
+  kind?: string;
+  reviewStatus?: string;
+  sourceShapeId?: string;
+  confidence?: number;
+  color?: string;
+  bounds?: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    cx: number;
+    cy: number;
+  };
+  shape?: {
+    type: "path";
+    d: string;
+  } | {
+    type: "circle";
+    cx: number;
+    cy: number;
+    r: number;
+  } | {
+    type: "ellipse";
+    cx: number;
+    cy: number;
+    rx: number;
+    ry: number;
+  };
+  functions?: string[];
+};
+
+type DraftCorrection = {
+  targetId?: string;
+  field: string;
+  message: string;
+  status: string;
 };
 
 const DRAFT_ROOT = path.join(process.cwd(), "recall", "drafts");
@@ -79,6 +121,44 @@ function statusClass(status = "") {
   return "queued";
 }
 
+function renderDraftTarget(target: DraftTarget) {
+  const className = `adminArenaTarget ${target.kind === "dot" ? "dot" : ""}`;
+  const shared = {
+    className,
+    "aria-label": target.label,
+  };
+
+  if (!target.shape) return null;
+
+  if (target.shape.type === "path") {
+    return (
+      <a href={`#target-${target.id}`} key={target.id}>
+        <path d={target.shape.d} {...shared}>
+          <title>{target.label}</title>
+        </path>
+      </a>
+    );
+  }
+
+  if (target.shape.type === "circle") {
+    return (
+      <a href={`#target-${target.id}`} key={target.id}>
+        <circle cx={target.shape.cx} cy={target.shape.cy} r={target.shape.r} {...shared}>
+          <title>{target.label}</title>
+        </circle>
+      </a>
+    );
+  }
+
+  return (
+    <a href={`#target-${target.id}`} key={target.id}>
+      <ellipse cx={target.shape.cx} cy={target.shape.cy} rx={target.shape.rx} ry={target.shape.ry} {...shared}>
+        <title>{target.label}</title>
+      </ellipse>
+    </a>
+  );
+}
+
 export default async function ArenaFactoryPage() {
   const drafts = await loadDrafts();
 
@@ -98,12 +178,25 @@ export default async function ArenaFactoryPage() {
             <div className="adminArenaDraftMedia">
               {draft.diagram ? (
                 <div
-                  className="adminArenaDiagram"
-                  style={{
-                    "--diagram-src": `url(${draft.diagram.imageSrc})`,
-                    "--diagram-ratio": `${draft.diagram.width} / ${draft.diagram.height}`,
-                  } as CSSProperties}
-                />
+                  className="adminArenaDiagramFrame"
+                  style={{ "--diagram-ratio": `${draft.diagram.width} / ${draft.diagram.height}` } as CSSProperties}
+                >
+                  <Image
+                    className="adminArenaDiagramImage"
+                    src={draft.diagram.imageSrc}
+                    alt={`${draft.title} source diagram`}
+                    width={draft.diagram.width}
+                    height={draft.diagram.height}
+                    unoptimized
+                  />
+                  <svg
+                    className="adminArenaOverlay"
+                    viewBox={`0 0 ${draft.diagram.width} ${draft.diagram.height}`}
+                    aria-label="Proposed hit zones"
+                  >
+                    {(draft.targets || []).map(renderDraftTarget)}
+                  </svg>
+                </div>
               ) : (
                 <div className="adminArenaDiagram empty">No diagram</div>
               )}
@@ -170,6 +263,48 @@ export default async function ArenaFactoryPage() {
                 <div className="adminArenaBlocks">
                   {draft.blockReasons.map(reason => <span key={reason}>{reason}</span>)}
                 </div>
+              ) : null}
+
+              {draft.targets?.length ? (
+                <section className="adminArenaReviewList" aria-label="Proposed targets">
+                  <header>
+                    <h3>Proposed Targets</h3>
+                    <span>{draft.targets.length} found</span>
+                  </header>
+                  <div>
+                    {draft.targets.map(target => (
+                      <article id={`target-${target.id}`} key={target.id}>
+                        <strong>{target.label}</strong>
+                        <span>{target.sourceShapeId || target.id}</span>
+                        <em>{target.reviewStatus || "needs-review"}</em>
+                        <p>
+                          {target.bounds
+                            ? `x ${Math.round(target.bounds.x)}, y ${Math.round(target.bounds.y)}, ${Math.round(target.bounds.width)} x ${Math.round(target.bounds.height)}`
+                            : "No bounds recorded."}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
+
+              {draft.correctionQueue?.length ? (
+                <section className="adminArenaReviewList" aria-label="Correction queue">
+                  <header>
+                    <h3>Correction Queue</h3>
+                    <span>{draft.correctionQueue.length} open</span>
+                  </header>
+                  <div>
+                    {draft.correctionQueue.map((item, index) => (
+                      <article key={`${item.targetId || "draft"}-${item.field}-${index}`}>
+                        <strong>{item.field}</strong>
+                        <span>{item.targetId || draft.id}</span>
+                        <em>{item.status}</em>
+                        <p>{item.message}</p>
+                      </article>
+                    ))}
+                  </div>
+                </section>
               ) : null}
             </div>
           </article>

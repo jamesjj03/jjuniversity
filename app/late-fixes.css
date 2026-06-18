@@ -1369,3 +1369,258 @@ html body .adminArenaPage {
     font-size:24px;
   }
 }
+
+/* Current navigation, Print, Arena, and factory polish. */
+
+html body .menuSettingsButton,
+html body .menuAccountButton {
+  width:38px !important;
+  height:38px !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  border:1px solid color-mix(in srgb, var(--gold) 38%, transparent) !important;
+  border-radius:999px !important;
+  color:var(--gold) !important;
+  background:color-mix(in srgb, var(--panel) 74%, transparent) !important;
+}
+
+html body .menuSettingsButton svg,
+html body .menuAccountButton svg {
+  width:18px !important;
+  height:18px !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}
+
+html body .printShelfPage {
+  width:min(1080px, calc(100vw - 32px)) !important;
+  max-width:1080px !important;
+  gap:14px !important;
+}
+
+html body .printShelfHero,
+html body .recallLibraryTop,
+html body .adminArenaTop {
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  justify-items:center !important;
+  gap:10px !important;
+  padding:clamp(28px, 4vw, 48px) 0 16px !important;
+  margin:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  text-align:center !important;
+}
+
+html body .printShelfHero .kicker,
+html body .printShelfHero .pageTagline,
+html body .recallLibraryTop .kicker,
+html body .adminArenaTop .kicker {
+  display:none !important;
+}
+
+html body .printShelfHero h1,
+html body .recallLibraryTop h1,
+html body .adminArenaTop h1 {
+  margin:0 !important;
+  color:var(--text) !important;
+  font-size:clamp(54px, 8vw, 96px) !important;
+  line-height:.92 !important;
+  letter-spacing:0 !important;
+  text-align:center !important;
+}
+
+html body .printCatalogGrid {
+  grid-template-columns:1fr !important;
+  gap:10px !important;
+}
+
+html body .printCatalogCard {
+  grid-template-columns:minmax(170px, 260px) minmax(0, 1fr) !important;
+  grid-template-rows:auto !important;
+  align-items:stretch !important;
+  min-height:184px !important;
+  box-shadow:none !important;
+}
+
+html body .printCatalogCard .printShelfCovers {
+  min-height:184px !important;
+  padding:18px !important;
+  align-content:center !important;
+}
+
+html body .printCatalogCard .printShelfCovers img {
+  width:70px !important;
+  margin-left:-24px !important;
+}
+
+html body .printCatalogCard .printShelfInfo {
+  align-content:center !important;
+  justify-items:start !important;
+  padding:18px 20px !important;
+  text-align:left !important;
+}
+
+html body .printCatalogCard .printShelfInfo p {
+  max-width:60ch !important;
+  margin:0 !important;
+}
+
+html body .printCatalogCard .printShelfMeta {
+  justify-content:flex-start !important;
+}
+
+.recallLibraryActions {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.recallLibraryActions span {
+  min-height:38px;
+  display:grid;
+  place-items:center;
+  padding:0 12px;
+  border:1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius:999px;
+}
+
+html body .recallLibraryLayout {
+  margin-top:4px !important;
+}
+
+.adminArenaDiagramFrame {
+  position:relative;
+  width:min(100%, 520px);
+  aspect-ratio:var(--diagram-ratio);
+}
+
+.adminArenaDiagramImage,
+.adminArenaOverlay {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.adminArenaDiagramImage {
+  object-fit:contain;
+}
+
+.adminArenaOverlay {
+  overflow:visible;
+}
+
+.adminArenaTarget {
+  fill:rgba(212, 175, 55, .16);
+  stroke:rgba(107, 78, 20, .7);
+  stroke-width:1.2;
+  cursor:pointer;
+  transition:fill .16s ease, stroke .16s ease;
+}
+
+.adminArenaTarget:hover,
+.adminArenaOverlay a:focus .adminArenaTarget {
+  fill:rgba(212, 175, 55, .34);
+  stroke:rgba(80, 48, 8, .95);
+}
+
+.adminArenaReviewList {
+  display:grid;
+  gap:8px;
+}
+
+.adminArenaReviewList > header {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:end;
+  padding-top:4px;
+  border-top:1px solid color-mix(in srgb, var(--line) 66%, transparent);
+}
+
+.adminArenaReviewList h3 {
+  margin:0;
+  color:var(--text);
+  font-size:18px;
+  line-height:1;
+}
+
+.adminArenaReviewList > header span {
+  color:var(--gold);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.adminArenaReviewList > div {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+  gap:8px;
+}
+
+.adminArenaReviewList article {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:4px 8px;
+  min-height:76px;
+  padding:10px;
+  border:1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius:8px;
+  background:rgba(0,0,0,.12);
+}
+
+.adminArenaReviewList article strong {
+  min-width:0;
+  overflow:hidden;
+  color:var(--text);
+  font-size:13px;
+  line-height:1.1;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.adminArenaReviewList article span,
+.adminArenaReviewList article em {
+  color:var(--gold);
+  font-size:11px;
+  font-style:normal;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.adminArenaReviewList article p {
+  grid-column:1 / -1;
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.35;
+}
+
+@media (max-width:720px) {
+  html body .printCatalogCard {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .printCatalogCard .printShelfInfo {
+    text-align:center !important;
+    justify-items:center !important;
+  }
+
+  html body .printCatalogCard .printShelfMeta {
+    justify-content:center !important;
+  }
+}

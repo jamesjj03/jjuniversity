@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import siteConfig from "@/public/site.json";
 
 const ACCOUNT_KEY = "jju.account";
 const STORAGE_KEY = "jju.preferences";
@@ -69,7 +68,6 @@ function readAccount() {
 export default function AccountMenu() {
   const ref = useRef<HTMLDetailsElement | null>(null);
   const pathname = usePathname();
-  const instagramUrl = typeof siteConfig.social?.instagramUrl === "string" ? siteConfig.social.instagramUrl : "";
   const [account, setAccount] = useState<Account | null>(null);
   const [preferences, setPreferences] = useState<Preferences>(DEFAULTS);
   const [atlasVisible, setAtlasVisible] = useState(false);
@@ -160,15 +158,12 @@ export default function AccountMenu() {
           <Link className="menuSettingsButton" href="/settings" onClick={closeMenu} aria-label="Settings" title="Settings">
             <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.25" /><path d="M19.4 15a8.1 8.1 0 0 0 .06-5.9l2.04-1.6-2-3.46-2.55 1a8.2 8.2 0 0 0-2.55-1.48L14 1h-4l-.4 2.56a8.2 8.2 0 0 0-2.55 1.48l-2.55-1-2 3.46 2.04 1.6a8.1 8.1 0 0 0 .06 5.9L2.5 16.5l2 3.46 2.55-1a8.2 8.2 0 0 0 2.55 1.48L10 23h4l.4-2.56a8.2 8.2 0 0 0 2.55-1.48l2.55 1 2-3.46L19.4 15Z" /></svg>
           </Link>
-          {instagramUrl && (
-            <a className="menuInstagramButton" href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram" title="Instagram">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.4" cy="6.6" r="1" />
-              </svg>
-            </a>
-          )}
+          <Link className="menuAccountButton" href="/account" onClick={closeMenu} aria-label="Account" title="Account">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4.75 21a7.25 7.25 0 0 1 14.5 0" />
+            </svg>
+          </Link>
           {account?.name ? <span>{account.name}</span> : <span className="accountMenuSpacer" aria-hidden="true" />}
           <button type="button" onClick={closeMenu}>Close</button>
         </div>

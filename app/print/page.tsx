@@ -32,9 +32,7 @@ export default function PrintIndexPage() {
   return (
     <main className="page publishingPage printShelfPage">
       <section className="publishingHero printShelfHero">
-        <p className="kicker">Print Editions</p>
-        <h1>Print Shelf</h1>
-        <p className="pageTagline">Physical JJ University collections are being wired up. The free digital library stays first.</p>
+        <h1>Print</h1>
       </section>
 
       <section className="printCatalogGrid" aria-label="Print collections">

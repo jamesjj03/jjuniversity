@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { CSSProperties, KeyboardEvent, MouseEvent } from "react";
 import type { RecallMode, RecallPack, RecallShape, RecallTarget } from "@/lib/recall";
@@ -255,13 +256,11 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
         <section className="recallLibraryShell">
           <header className="recallLibraryTop">
             <div>
-              <p className="kicker">JJ University</p>
               <h1>Arena</h1>
             </div>
-            <div className="recallLibraryStats" aria-label="Arena stats">
-              <span><strong>1</strong>ready</span>
-              <span><strong>10</strong>categories</span>
-              <span><strong>draft</strong>factory</span>
+            <div className="recallLibraryActions" aria-label="Arena actions">
+              <span>1 ready / 10 categories</span>
+              <Link className="btn secondary" href="/admin/arena">Factory</Link>
             </div>
           </header>
 
@@ -336,6 +335,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
                     <span>draft</span>
                     <span>4 proposed</span>
                   </div>
+                  <Link className="btn secondary" href="/admin/arena">Factory</Link>
                 </article>
               </div>
             </section>
