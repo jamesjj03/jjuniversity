@@ -1,0 +1,685 @@
+{
+  "id": "brain-house-sagittal-v1",
+  "title": "Brain House Sagittal",
+  "workingName": "Arena",
+  "category": "anatomy",
+  "domain": "neuroscience",
+  "status": "draft",
+  "publishable": false,
+  "blockReasons": [
+    "source review required",
+    "target review required",
+    "fact review required",
+    "house plate needs anatomy review",
+    "human approval required before publish"
+  ],
+  "version": 0,
+  "summary": "Original JJU house-style sagittal brain plate with generated hit zones.",
+  "modes": [
+    "find",
+    "function",
+    "review"
+  ],
+  "diagram": {
+    "sourceId": "jju-original-brain-house-sagittal-v1",
+    "imageSrc": "/arena/diagrams/brain-house-sagittal-v1/plate.svg",
+    "width": 760,
+    "height": 520,
+    "mime": "image/svg+xml",
+    "overlayMode": "mixed-dots-polygons",
+    "hitStyle": {
+      "idleOpacity": 0.02,
+      "hoverOpacity": 0.14,
+      "revealOpacity": 0.24,
+      "stroke": "rgba(255,255,255,.32)"
+    }
+  },
+  "approval": {
+    "source": "needs-review",
+    "license": "needs-review",
+    "attribution": "needs-review",
+    "targets": "needs-review",
+    "facts": "needs-review",
+    "publish": "blocked"
+  },
+  "automation": {
+    "status": "house-plate-qa-staged",
+    "modelPlan": "House plate generated from structured geometry; target zones are generated from the same manifest and must be reviewed before publish. Model QA artifact written with google/gemma-3-12b.",
+    "stages": [
+      {
+        "id": "source-hunt",
+        "label": "Select references",
+        "status": "complete",
+        "owner": "pipeline",
+        "detail": "Used reviewed open references instead of an unlabeled web image grab."
+      },
+      {
+        "id": "license-pass",
+        "label": "Check source, license, attribution",
+        "status": "active",
+        "owner": "review",
+        "detail": "JJU original plate with cited CC BY and public-domain references."
+      },
+      {
+        "id": "plate-pass",
+        "label": "Build house plate",
+        "status": "complete",
+        "owner": "pipeline",
+        "detail": "Generated an unlabeled SVG plate and editable geometry manifest."
+      },
+      {
+        "id": "vision-pass",
+        "label": "Suggest targets",
+        "status": "complete",
+        "owner": "pipeline",
+        "detail": "Generated 12 aligned hit zones from the same geometry as the plate."
+      },
+      {
+        "id": "fact-pass",
+        "label": "Generate fact prompts",
+        "status": "active",
+        "owner": "pipeline",
+        "detail": "Seeded short conservative prompts; review still required."
+      },
+      {
+        "id": "review-pass",
+        "label": "Approve edits",
+        "status": "active",
+        "owner": "review",
+        "detail": "Model QA completed; review target placement, labels, aliases, and facts."
+      },
+      {
+        "id": "publish-pack",
+        "label": "Publish pack",
+        "status": "blocked",
+        "owner": "review",
+        "detail": "Blocked until every approval gate passes."
+      }
+    ]
+  },
+  "assetLedger": [
+    {
+      "id": "jju-original-brain-house-sagittal-v1",
+      "type": "diagram-source",
+      "source": "/arena/diagrams/brain-house-sagittal-v1/plate.svg",
+      "license": "JJU original",
+      "attribution": "JJ University; anatomical references cited in source record.",
+      "status": "needs-review",
+      "notes": "Original editable SVG plate generated for Arena."
+    },
+    {
+      "id": "wikimedia-1496657-dc7862b831",
+      "type": "reference",
+      "source": "https://commons.wikimedia.org/wiki/File:Brain_human_sagittal_section.svg",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+      "attribution": "Patrick J. Lynch, medical illustrator",
+      "status": "needs-review",
+      "notes": "Reference for sagittal anatomy; not embedded as the visible plate."
+    },
+    {
+      "id": "wikimedia-178931371-cbc9f694f3",
+      "type": "reference",
+      "source": "https://commons.wikimedia.org/wiki/File:Brain_Lateral_(NIH_BioArt_60).svg",
+      "license": "Public domain",
+      "attribution": "Courtesy of NIAID Ryan Kissinger",
+      "status": "needs-review",
+      "notes": "Reference for external brain form; not embedded as the visible plate."
+    }
+  ],
+  "targets": [
+    {
+      "id": "frontal-lobe",
+      "label": "frontal lobe",
+      "aliases": [
+        "frontal cortex"
+      ],
+      "kind": "polygon",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "path",
+        "d": "M132 239 C126 180 156 120 215 92 C266 68 322 76 371 112 C340 148 314 190 300 246 C251 229 191 231 132 239 Z"
+      },
+      "functions": [
+        "planning, judgment, and voluntary movement",
+        "helps organize speech production"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 126,
+        "y": 68,
+        "width": 245,
+        "height": 178,
+        "cx": 248.5,
+        "cy": 157
+      },
+      "sourceShapeId": "frontal-lobe"
+    },
+    {
+      "id": "parietal-lobe",
+      "label": "parietal lobe",
+      "aliases": [
+        "parietal cortex"
+      ],
+      "kind": "polygon",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "path",
+        "d": "M365 111 C418 66 514 76 572 137 C617 184 630 240 608 292 C555 267 497 252 438 252 C397 252 354 250 300 246 C314 188 338 148 365 111 Z"
+      },
+      "functions": [
+        "body sensation and spatial attention",
+        "integrates touch and position information"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 300,
+        "y": 66,
+        "width": 330,
+        "height": 226,
+        "cx": 465,
+        "cy": 179
+      },
+      "sourceShapeId": "parietal-lobe"
+    },
+    {
+      "id": "temporal-lobe",
+      "label": "temporal lobe",
+      "aliases": [
+        "temporal cortex"
+      ],
+      "kind": "polygon",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "path",
+        "d": "M132 239 C190 232 251 231 300 246 C323 304 309 371 260 405 C220 432 166 423 135 383 C104 342 99 287 132 239 Z"
+      },
+      "functions": [
+        "hearing, memory, and language comprehension"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 99,
+        "y": 231,
+        "width": 224,
+        "height": 201,
+        "cx": 211,
+        "cy": 331.5
+      },
+      "sourceShapeId": "temporal-lobe"
+    },
+    {
+      "id": "occipital-lobe",
+      "label": "occipital lobe",
+      "aliases": [
+        "visual cortex region"
+      ],
+      "kind": "polygon",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "path",
+        "d": "M607 292 C619 335 599 381 562 411 C523 442 468 448 421 426 C444 383 455 332 438 252 C497 252 555 267 607 292 Z"
+      },
+      "functions": [
+        "visual processing"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 421,
+        "y": 252,
+        "width": 198,
+        "height": 196,
+        "cx": 520,
+        "cy": 350
+      },
+      "sourceShapeId": "occipital-lobe"
+    },
+    {
+      "id": "corpus-callosum",
+      "label": "corpus callosum",
+      "aliases": [
+        "callosal fibers"
+      ],
+      "kind": "polygon",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "path",
+        "d": "M240 226 C283 169 385 149 474 193 C489 201 500 212 506 224 C478 213 439 204 393 207 C334 211 282 229 245 260 C237 251 235 239 240 226 Z"
+      },
+      "functions": [
+        "connects the left and right cerebral hemispheres"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 235,
+        "y": 149,
+        "width": 271,
+        "height": 111,
+        "cx": 370.5,
+        "cy": 204.5
+      },
+      "sourceShapeId": "corpus-callosum"
+    },
+    {
+      "id": "thalamus",
+      "label": "thalamus",
+      "aliases": [],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "ellipse",
+        "cx": 398,
+        "cy": 271,
+        "rx": 47,
+        "ry": 31
+      },
+      "functions": [
+        "major relay for sensory and motor signals"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 351,
+        "y": 240,
+        "width": 94,
+        "height": 62,
+        "cx": 398,
+        "cy": 271
+      },
+      "sourceShapeId": "thalamus"
+    },
+    {
+      "id": "hypothalamus",
+      "label": "hypothalamus",
+      "aliases": [],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "ellipse",
+        "cx": 392,
+        "cy": 319,
+        "rx": 31,
+        "ry": 19
+      },
+      "functions": [
+        "regulates homeostasis, hunger, thirst, and body temperature"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 361,
+        "y": 300,
+        "width": 62,
+        "height": 38,
+        "cx": 392,
+        "cy": 319
+      },
+      "sourceShapeId": "hypothalamus"
+    },
+    {
+      "id": "pituitary-gland",
+      "label": "pituitary gland",
+      "aliases": [
+        "hypophysis"
+      ],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 3,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "circle",
+        "cx": 386,
+        "cy": 359,
+        "r": 16
+      },
+      "functions": [
+        "releases hormones under hypothalamic control"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 370,
+        "y": 343,
+        "width": 32,
+        "height": 32,
+        "cx": 386,
+        "cy": 359
+      },
+      "sourceShapeId": "pituitary-gland"
+    },
+    {
+      "id": "midbrain",
+      "label": "midbrain",
+      "aliases": [
+        "mesencephalon"
+      ],
+      "kind": "polygon",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "path",
+        "d": "M448 314 C483 304 515 317 530 347 C514 365 488 373 461 362 C450 349 444 333 448 314 Z"
+      },
+      "functions": [
+        "supports eye movement, arousal, and motor pathways"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 444,
+        "y": 304,
+        "width": 86,
+        "height": 69,
+        "cx": 487,
+        "cy": 338.5
+      },
+      "sourceShapeId": "midbrain"
+    },
+    {
+      "id": "pons",
+      "label": "pons",
+      "aliases": [],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "ellipse",
+        "cx": 528,
+        "cy": 386,
+        "rx": 40,
+        "ry": 28
+      },
+      "functions": [
+        "bridge between cerebrum, cerebellum, and lower brainstem"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 488,
+        "y": 358,
+        "width": 80,
+        "height": 56,
+        "cx": 528,
+        "cy": 386
+      },
+      "sourceShapeId": "pons"
+    },
+    {
+      "id": "medulla",
+      "label": "medulla",
+      "aliases": [
+        "medulla oblongata"
+      ],
+      "kind": "polygon",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "path",
+        "d": "M540 410 C566 421 579 449 570 482 C555 488 535 479 523 458 C512 438 517 418 540 410 Z"
+      },
+      "functions": [
+        "helps control breathing, heart rate, and reflexes"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 512,
+        "y": 410,
+        "width": 67,
+        "height": 78,
+        "cx": 545.5,
+        "cy": 449
+      },
+      "sourceShapeId": "medulla"
+    },
+    {
+      "id": "cerebellum",
+      "label": "cerebellum",
+      "aliases": [],
+      "kind": "polygon",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.78,
+      "shape": {
+        "type": "path",
+        "d": "M548 340 C610 323 675 360 688 420 C653 477 562 477 520 426 C501 392 514 354 548 340 Z"
+      },
+      "functions": [
+        "coordination, balance, and motor learning"
+      ],
+      "reviewNotes": [
+        "Generated from the JJU house-plate geometry manifest.",
+        "Needs human anatomy review before publish."
+      ],
+      "bounds": {
+        "x": 501,
+        "y": 323,
+        "width": 187,
+        "height": 154,
+        "cx": 594.5,
+        "cy": 400
+      },
+      "sourceShapeId": "cerebellum"
+    }
+  ],
+  "correctionQueue": [
+    {
+      "field": "source",
+      "message": "Confirm the house plate is sufficiently original and references are cited correctly.",
+      "status": "open"
+    },
+    {
+      "targetId": "frontal-lobe",
+      "field": "target",
+      "message": "Review frontal lobe hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "parietal-lobe",
+      "field": "target",
+      "message": "Review parietal lobe hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "temporal-lobe",
+      "field": "target",
+      "message": "Review temporal lobe hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "occipital-lobe",
+      "field": "target",
+      "message": "Review occipital lobe hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "corpus-callosum",
+      "field": "target",
+      "message": "Review corpus callosum hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "thalamus",
+      "field": "target",
+      "message": "Review thalamus hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "hypothalamus",
+      "field": "target",
+      "message": "Review hypothalamus hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "pituitary-gland",
+      "field": "target",
+      "message": "Review pituitary gland hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "midbrain",
+      "field": "target",
+      "message": "Review midbrain hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "pons",
+      "field": "target",
+      "message": "Review pons hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "medulla",
+      "field": "target",
+      "message": "Review medulla hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "cerebellum",
+      "field": "target",
+      "message": "Review cerebellum hit zone placement on the house sagittal plate.",
+      "status": "open"
+    },
+    {
+      "targetId": "frontal-lobe",
+      "field": "fact",
+      "message": "Review fact prompt(s) for frontal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "parietal-lobe",
+      "field": "fact",
+      "message": "Review fact prompt(s) for parietal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "temporal-lobe",
+      "field": "fact",
+      "message": "Review fact prompt(s) for temporal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "occipital-lobe",
+      "field": "fact",
+      "message": "Review fact prompt(s) for occipital lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "corpus-callosum",
+      "field": "fact",
+      "message": "Review fact prompt(s) for corpus callosum.",
+      "status": "open"
+    },
+    {
+      "targetId": "thalamus",
+      "field": "fact",
+      "message": "Review fact prompt(s) for thalamus.",
+      "status": "open"
+    },
+    {
+      "targetId": "hypothalamus",
+      "field": "fact",
+      "message": "Review fact prompt(s) for hypothalamus.",
+      "status": "open"
+    },
+    {
+      "targetId": "pituitary-gland",
+      "field": "fact",
+      "message": "Review fact prompt(s) for pituitary gland.",
+      "status": "open"
+    },
+    {
+      "targetId": "midbrain",
+      "field": "fact",
+      "message": "Review fact prompt(s) for midbrain.",
+      "status": "open"
+    },
+    {
+      "targetId": "pons",
+      "field": "fact",
+      "message": "Review fact prompt(s) for pons.",
+      "status": "open"
+    },
+    {
+      "targetId": "medulla",
+      "field": "fact",
+      "message": "Review fact prompt(s) for medulla.",
+      "status": "open"
+    },
+    {
+      "targetId": "cerebellum",
+      "field": "fact",
+      "message": "Review fact prompt(s) for cerebellum.",
+      "status": "open"
+    },
+    {
+      "targetId": "pons",
+      "field": "fact",
+      "message": "[model QA] medium: The pons is not a dot; it's an elongated structure. Rephrase the function to reflect this.",
+      "status": "open"
+    },
+    {
+      "targetId": "medulla",
+      "field": "shape",
+      "message": "[model QA] low: Shape appears too angular and flattened, consider rounding edges for better anatomical representation.",
+      "status": "open"
+    }
+  ],
+  "updatedAt": "2026-06-19T22:18:45.795Z"
+}

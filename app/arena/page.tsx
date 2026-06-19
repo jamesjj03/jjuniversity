@@ -7,6 +7,6 @@ export const metadata = {
 };
 
 export default async function ArenaPage() {
-  const packs = await getRecallPacks(["brain-intro", "brain-lateral-source-v1"]);
+  const packs = await getRecallPacks(["brain-house-sagittal-v1", "brain-lateral-source-v1"]);
   return <RecallArenaClient packs={packs} />;
 }

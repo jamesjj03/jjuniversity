@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" role="img" aria-labelledby="title desc">
+  <title id="title">JJU house-style sagittal brain plate</title>
+  <desc id="desc">Unlabeled stylized sagittal section of the human brain for Arena recall practice.</desc>
+  <metadata>
+    <source>JJU original educational plate</source>
+    <references>Patrick J. Lynch sagittal brain section, CC BY 2.5; NIAID NIH BioArt Brain Lateral, public domain.</references>
+    <generated>2026-06-19T22:18:45.415Z</generated>
+  </metadata>
+  <defs>
+    <linearGradient id="brainShell" x1="103" x2="670" y1="82" y2="454" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2d9c9"/>
+      <stop offset="0.54" stop-color="#d7c8b8"/>
+      <stop offset="1" stop-color="#bfc7bd"/>
+    </linearGradient>
+    <linearGradient id="deepGold" x1="242" x2="559" y1="184" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ddc579"/>
+      <stop offset="1" stop-color="#b68a57"/>
+    </linearGradient>
+    <filter id="softShadow" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#12100d" flood-opacity=".16"/>
+    </filter>
+    <style>
+      .plate-bg{fill:#f7f1e8}
+      .grid{fill:none;stroke:#3e514c;stroke-width:.75;stroke-opacity:.08}
+      .outer{fill:url(#brainShell);stroke:#2e342f;stroke-width:4;stroke-linejoin:round}
+      .region{stroke:#2f342e;stroke-width:2.4;stroke-linejoin:round}
+      .lobe-a{fill:#e9c5b3}.lobe-b{fill:#d7c8b4}.lobe-c{fill:#b9c5b5}.lobe-d{fill:#cbb0a3}
+      .deep{fill:url(#deepGold)}.stem{fill:#a9b79d}.stem2{fill:#93a989}.cerebellum{fill:#b7b99b}
+      .ridge{fill:none;stroke:#2e342f;stroke-width:2.1;stroke-linecap:round;stroke-opacity:.35}
+      .fine{fill:none;stroke:#2e342f;stroke-width:1.35;stroke-linecap:round;stroke-opacity:.26}
+      .ventricle{fill:none;stroke:#fff8eb;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.6}
+      .target-source{fill:none;stroke:none;opacity:0}
+    </style>
+  </defs>
+  <rect class="plate-bg" x="0" y="0" width="760" height="520" rx="18"/>
+  <path class="grid" d="M70 80H690M70 140H690M70 200H690M70 260H690M70 320H690M70 380H690M70 440H690M100 58V464M180 58V464M260 58V464M340 58V464M420 58V464M500 58V464M580 58V464M660 58V464"/>
+  <g filter="url(#softShadow)">
+    <path class="outer" d="M132 239 C115 170 153 105 219 78 C276 55 329 72 365 111 C421 65 521 76 579 143 C633 205 632 281 607 327 C666 331 707 377 697 431 C686 488 608 502 560 466 C516 454 459 449 421 426 C366 463 296 461 248 430 C193 442 133 413 111 359 C93 315 101 272 132 239 Z"/>
+    <path class="region lobe-a" d="M132 239 C126 180 156 120 215 92 C266 68 322 76 371 112 C340 148 314 190 300 246 C251 229 191 231 132 239 Z"/>
+    <path class="region lobe-b" d="M365 111 C418 66 514 76 572 137 C617 184 630 240 608 292 C555 267 497 252 438 252 C397 252 354 250 300 246 C314 188 338 148 365 111 Z"/>
+    <path class="region lobe-c" d="M607 292 C619 335 599 381 562 411 C523 442 468 448 421 426 C444 383 455 332 438 252 C497 252 555 267 607 292 Z"/>
+    <path class="region lobe-d" d="M132 239 C190 232 251 231 300 246 C323 304 309 371 260 405 C220 432 166 423 135 383 C104 342 99 287 132 239 Z"/>
+    <path class="region cerebellum" d="M548 340 C610 323 675 360 688 420 C653 477 562 477 520 426 C501 392 514 354 548 340 Z"/>
+    <path class="region deep" d="M240 226 C283 169 385 149 474 193 C489 201 500 212 506 224 C478 213 439 204 393 207 C334 211 282 229 245 260 C237 251 235 239 240 226 Z"/>
+    <ellipse class="region deep" cx="398" cy="271" rx="47" ry="31"/>
+    <ellipse class="region deep" cx="392" cy="319" rx="31" ry="19"/>
+    <circle class="region deep" cx="386" cy="359" r="16"/>
+    <path class="region stem" d="M448 314 C483 304 515 317 530 347 C514 365 488 373 461 362 C450 349 444 333 448 314 Z"/>
+    <ellipse class="region stem2" cx="528" cy="386" rx="40" ry="28"/>
+    <path class="region stem" d="M540 410 C566 421 579 449 570 482 C555 488 535 479 523 458 C512 438 517 418 540 410 Z"/>
+    <path class="ventricle" d="M287 238 C340 208 422 211 487 232"/>
+    <path class="ridge" d="M157 202 C194 155 248 122 305 105M196 229 C237 189 284 164 339 153M361 116 C407 117 454 135 497 169M444 253 C504 259 555 275 602 302M154 318 C196 296 241 298 291 327M526 371 C573 350 627 372 662 418"/>
+    <path class="fine" d="M558 360 C575 381 576 409 557 432M585 358 C602 383 601 424 578 450M617 369 C632 397 626 432 601 458"/>
+  </g>
+  <g id="target-geometry" aria-hidden="true">
+    <path id="frontal-lobe" class="target-source" d="M132 239 C126 180 156 120 215 92 C266 68 322 76 371 112 C340 148 314 190 300 246 C251 229 191 231 132 239 Z"/>
+    <path id="parietal-lobe" class="target-source" d="M365 111 C418 66 514 76 572 137 C617 184 630 240 608 292 C555 267 497 252 438 252 C397 252 354 250 300 246 C314 188 338 148 365 111 Z"/>
+    <path id="temporal-lobe" class="target-source" d="M132 239 C190 232 251 231 300 246 C323 304 309 371 260 405 C220 432 166 423 135 383 C104 342 99 287 132 239 Z"/>
+    <path id="occipital-lobe" class="target-source" d="M607 292 C619 335 599 381 562 411 C523 442 468 448 421 426 C444 383 455 332 438 252 C497 252 555 267 607 292 Z"/>
+    <path id="corpus-callosum" class="target-source" d="M240 226 C283 169 385 149 474 193 C489 201 500 212 506 224 C478 213 439 204 393 207 C334 211 282 229 245 260 C237 251 235 239 240 226 Z"/>
+    <ellipse id="thalamus" class="target-source" cx="398" cy="271" rx="47" ry="31"/>
+    <ellipse id="hypothalamus" class="target-source" cx="392" cy="319" rx="31" ry="19"/>
+    <circle id="pituitary-gland" class="target-source" cx="386" cy="359" r="16"/>
+    <path id="midbrain" class="target-source" d="M448 314 C483 304 515 317 530 347 C514 365 488 373 461 362 C450 349 444 333 448 314 Z"/>
+    <ellipse id="pons" class="target-source" cx="528" cy="386" rx="40" ry="28"/>
+    <path id="medulla" class="target-source" d="M540 410 C566 421 579 449 570 482 C555 488 535 479 523 458 C512 438 517 418 540 410 Z"/>
+    <path id="cerebellum" class="target-source" d="M548 340 C610 323 675 360 688 420 C653 477 562 477 520 426 C501 392 514 354 548 340 Z"/>
+  </g>
+</svg>

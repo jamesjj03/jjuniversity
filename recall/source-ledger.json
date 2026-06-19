@@ -1,6 +1,58 @@
 {
-  "generatedAt": "2026-06-19T20:53:46.119Z",
+  "generatedAt": "2026-06-19T22:18:45.413Z",
   "sources": [
+    {
+      "id": "jju-original-brain-house-sagittal-v1",
+      "provider": "jju-original",
+      "importedAt": "2026-06-19T22:18:45.413Z",
+      "title": "JJU House Brain Sagittal Plate",
+      "fileTitle": "plate.svg",
+      "sourceUrl": "/arena/diagrams/brain-house-sagittal-v1/plate.svg",
+      "originalUrl": "/arena/diagrams/brain-house-sagittal-v1/plate.svg",
+      "description": "Original unlabeled sagittal brain plate generated for Arena recall practice.",
+      "artist": "JJ University",
+      "artistHtml": "JJ University",
+      "credit": "JJ University; anatomical references cited in metadata.",
+      "creditHtml": "JJ University; anatomical references cited in metadata.",
+      "license": {
+        "shortName": "JJU original",
+        "url": "",
+        "usageTerms": "Original JJ University site asset; reference materials cited separately.",
+        "attributionRequired": "false",
+        "allowedByImporter": true,
+        "importerReason": "Original diagram created for JJU from open anatomical references."
+      },
+      "references": [
+        {
+          "id": "wikimedia-1496657-dc7862b831",
+          "title": "Brain human sagittal section",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain_human_sagittal_section.svg",
+          "license": "CC BY 2.5",
+          "attribution": "Patrick J. Lynch, medical illustrator",
+          "use": "Sagittal anatomy reference; not directly embedded as the visible plate."
+        },
+        {
+          "id": "wikimedia-178931371-cbc9f694f3",
+          "title": "Brain Lateral (NIH BioArt 60)",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain_Lateral_(NIH_BioArt_60).svg",
+          "license": "Public domain",
+          "attribution": "Courtesy of NIAID Ryan Kissinger",
+          "use": "General brain silhouette and style reference; not directly embedded as the visible plate."
+        }
+      ],
+      "media": {
+        "mime": "image/svg+xml",
+        "width": 760,
+        "height": 520,
+        "publicPath": "/arena/diagrams/brain-house-sagittal-v1/plate.svg",
+        "localPath": "public\\arena\\diagrams\\brain-house-sagittal-v1\\plate.svg"
+      },
+      "review": {
+        "source": "needs-review",
+        "license": "needs-review",
+        "attribution": "needs-review"
+      }
+    },
     {
       "id": "wikimedia-1496657-dc7862b831",
       "provider": "wikimedia-commons",
