@@ -1260,6 +1260,25 @@ html body .adminArenaPage {
   text-decoration:none;
 }
 
+.adminArenaActionRow {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+
+.adminArenaActionRow.compact {
+  margin-top:auto;
+}
+
+.adminArenaActionRow .btn {
+  min-height:36px;
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:12px;
+  line-height:1;
+}
+
 .adminArenaStages {
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
@@ -1647,14 +1666,40 @@ html body .recallLibraryLayout {
 }
 
 .adminArenaCandidates article {
+  position:relative;
   display:grid;
   gap:8px;
-  min-height:188px;
+  min-height:224px;
   align-content:start;
   padding:12px;
   border:1px solid color-mix(in srgb, var(--line) 72%, transparent);
   border-radius:8px;
   background:color-mix(in srgb, var(--panel) 62%, transparent);
+}
+
+.adminArenaCandidates article.promote {
+  border-color:color-mix(in srgb, #79e08d 52%, var(--line));
+}
+
+.adminArenaCandidates article.maybe {
+  border-color:color-mix(in srgb, var(--gold) 42%, var(--line));
+}
+
+.adminArenaCandidates article.reject {
+  opacity:.62;
+}
+
+.adminArenaCandidateVerdict {
+  width:max-content;
+  max-width:100%;
+  padding:5px 7px;
+  border:1px solid color-mix(in srgb, var(--gold) 42%, transparent);
+  border-radius:999px;
+  color:var(--gold);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
 }
 
 .adminArenaCandidates strong {
@@ -1673,6 +1718,12 @@ html body .recallLibraryLayout {
   line-height:1.38;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:3;
+}
+
+.adminArenaCandidates .adminArenaCuratorNote {
+  min-height:0;
+  color:var(--text);
+  -webkit-line-clamp:2;
 }
 
 .adminArenaCandidates article div {

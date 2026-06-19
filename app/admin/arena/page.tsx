@@ -90,6 +90,13 @@ type CandidateFile = {
   candidates: DraftCandidate[];
 };
 
+type CandidateShortlistFile = {
+  generatedAt: string;
+  model?: string;
+  criteria?: string[];
+  shortlist: DraftCandidate[];
+};
+
 type DraftCandidate = {
   id: string;
   title: string;
@@ -98,10 +105,18 @@ type DraftCandidate = {
   width: number;
   height: number;
   score: number;
+  heuristicQuality?: number;
   allowed: boolean;
+  originalUrl?: string;
   artist?: string;
   credit?: string;
   description?: string;
+  curator?: {
+    verdict: string;
+    score: number;
+    reason: string;
+    useCase: string;
+  };
   license?: {
     shortName?: string;
     url?: string;
@@ -110,6 +125,7 @@ type DraftCandidate = {
 
 const DRAFT_ROOT = path.join(process.cwd(), "recall", "drafts");
 const CANDIDATE_FILE = path.join(process.cwd(), "recall", "candidates", "wikimedia-brain-candidates.json");
+const SHORTLIST_FILE = path.join(process.cwd(), "recall", "candidates", "wikimedia-brain-shortlist.json");
 
 export const metadata = {
   title: "Arena Factory | JJ University",
@@ -139,6 +155,9 @@ async function loadDrafts() {
 }
 
 async function loadCandidates() {
+  const shortlist = await readJson<CandidateShortlistFile>(SHORTLIST_FILE);
+  if (shortlist?.shortlist?.length) return shortlist.shortlist;
+
   const file = await readJson<CandidateFile>(CANDIDATE_FILE);
   return (file?.candidates || [])
     .filter(candidate => candidate.allowed)
@@ -151,6 +170,12 @@ function statusClass(status = "") {
   if (status === "blocked") return "blocked";
   if (status === "active" || status === "needs-review") return "review";
   return "queued";
+}
+
+function verdictClass(verdict = "") {
+  if (verdict === "promote") return "promote";
+  if (verdict === "reject") return "reject";
+  return "maybe";
 }
 
 function renderDraftTarget(target: DraftTarget) {
@@ -246,6 +271,20 @@ export default async function ArenaFactoryPage() {
               </header>
 
               {draft.summary && <p>{draft.summary}</p>}
+
+              <div className="adminArenaActionRow" aria-label={`${draft.title} actions`}>
+                <Link className="btn secondary" href="/arena">Open Arena</Link>
+                {(draft.assetLedger || []).map(asset => (
+                  <a className="btn secondary" href={asset.source} target="_blank" rel="noreferrer" key={`${asset.id}-source`}>
+                    Source
+                  </a>
+                ))}
+                {(draft.assetLedger || []).filter(asset => asset.licenseUrl).map(asset => (
+                  <a className="btn secondary" href={asset.licenseUrl} target="_blank" rel="noreferrer" key={`${asset.id}-license`}>
+                    License
+                  </a>
+                ))}
+              </div>
 
               <div className="adminArenaStatusGrid" aria-label="Approval gates">
                 {Object.entries(draft.approval || {}).map(([key, value]) => (
@@ -348,27 +387,35 @@ export default async function ArenaFactoryPage() {
       </section>
 
       {candidates.length ? (
-        <section className="adminArenaCandidates" aria-label="Discovered diagram candidates">
+        <section className="adminArenaCandidates" aria-label="Curated diagram candidates">
           <header>
             <div>
               <p className="kicker">Source Hunt</p>
-              <h2>Diagram Candidates</h2>
+              <h2>Curated Shortlist</h2>
             </div>
-            <span>{candidates.length} shown</span>
+            <span>{candidates.length} ranked</span>
           </header>
 
           <div>
             {candidates.map(candidate => (
-              <article key={candidate.id}>
+              <article className={verdictClass(candidate.curator?.verdict)} key={candidate.id}>
+                {candidate.curator?.verdict && (
+                  <span className="adminArenaCandidateVerdict">{candidate.curator.verdict}</span>
+                )}
                 <strong>{candidate.title.replace(/^File:/, "")}</strong>
                 <p>{candidate.description || candidate.artist || candidate.credit || "No description in metadata."}</p>
+                {candidate.curator?.reason && <p className="adminArenaCuratorNote">{candidate.curator.reason}</p>}
                 <div>
                   <span>{candidate.kind}</span>
                   <span>{candidate.width} x {candidate.height}</span>
                   <span>{candidate.license?.shortName || "license unknown"}</span>
-                  <span>score {candidate.score}</span>
+                  <span>score {candidate.curator?.score ?? candidate.score}</span>
                 </div>
-                <a href={candidate.sourceUrl} target="_blank" rel="noreferrer">Open source</a>
+                <div className="adminArenaActionRow compact">
+                  <a className="btn secondary" href={candidate.sourceUrl} target="_blank" rel="noreferrer">Source</a>
+                  {candidate.license?.url && <a className="btn secondary" href={candidate.license.url} target="_blank" rel="noreferrer">License</a>}
+                  {candidate.originalUrl && <a className="btn secondary" href={candidate.originalUrl} target="_blank" rel="noreferrer">Image</a>}
+                </div>
               </article>
             ))}
           </div>

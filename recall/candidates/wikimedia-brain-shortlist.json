@@ -1,0 +1,187 @@
+{
+  "generatedAt": "2026-06-19T00:35:39.969Z",
+  "model": "heuristic-only",
+  "criteria": [
+    "unlabeled or label-removable",
+    "diagrammatic and clean",
+    "not photoreal/fleshy",
+    "no face/head background unless useful",
+    "enough anatomical detail for hit zones",
+    "open license and clear attribution"
+  ],
+  "sourceCount": 121,
+  "reviewedCount": 36,
+  "rejectedCount": 31,
+  "shortlist": [
+    {
+      "id": "commons-178931371",
+      "title": "File:Brain Lateral (NIH BioArt 60).svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20Lateral%20(NIH%20BioArt%2060).svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Brain_Lateral_%28NIH_BioArt_60%29.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 512,
+      "height": 410,
+      "byteLength": 430385,
+      "sha1": "cbc9f694f37417f5306d95a75d38f42cb16d6fa0",
+      "artist": "Courtesy of NIAID Ryan Kissinger",
+      "credit": "Brain Lateral",
+      "description": "Lateral view of a human brain.",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 68,
+      "heuristicQuality": 94,
+      "curator": {
+        "verdict": "promote",
+        "score": 102,
+        "reason": "Clean unlabeled lateral base with open public-domain source.",
+        "useCase": "Use as the first lateral-view Arena source."
+      }
+    },
+    {
+      "id": "commons-178931372",
+      "title": "File:Brain Lateral (NIH BioArt 60).png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20Lateral%20(NIH%20BioArt%2060).png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Brain_Lateral_%28NIH_BioArt_60%29.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1716,
+      "height": 1376,
+      "byteLength": 468846,
+      "sha1": "87519e26a2757b040b0a0d07426aef82d0ba021a",
+      "artist": "Courtesy of NIAID Ryan Kissinger",
+      "credit": "Brain Lateral",
+      "description": "Lateral view of a human brain.",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 64,
+      "heuristicQuality": 82,
+      "curator": {
+        "verdict": "promote",
+        "score": 86,
+        "reason": "Clean unlabeled lateral base with open public-domain source.",
+        "useCase": "Use as the first lateral-view Arena source."
+      }
+    },
+    {
+      "id": "commons-161935574",
+      "title": "File:Lobes of the brain INV.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lobes%20of%20the%20brain%20INV.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Lobes_of_the_brain_INV.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 4267,
+      "height": 3046,
+      "byteLength": 2738447,
+      "sha1": "129bd88a754532aa01d648f34800b553be92ee01",
+      "artist": "Ndelarosep",
+      "credit": "Own work",
+      "description": "Lobes of the brain",
+      "license": {
+        "shortName": "CC0",
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "usageTerms": "Creative Commons Zero, Public Domain Dedication",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 67,
+      "heuristicQuality": 77,
+      "curator": {
+        "verdict": "maybe",
+        "score": 80,
+        "reason": "May work for a lobe-category pack if it is not already labeled.",
+        "useCase": "Later lobe pack candidate."
+      }
+    },
+    {
+      "id": "commons-38108749",
+      "title": "File:Brain midsagital view.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20midsagital%20view.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Brain_midsagital_view.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1024,
+      "height": 768,
+      "byteLength": 268395,
+      "sha1": "b706bc61a6e9fd8e8a7a111e47e8e1013eaa7055",
+      "artist": "Mike Birkhead",
+      "credit": "Own work",
+      "description": "Midsagittal view of the right hemisphere of the brain.",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 68,
+      "heuristicQuality": 60,
+      "curator": {
+        "verdict": "maybe",
+        "score": 68,
+        "reason": "Potential sagittal base, but needs visual inspection before promotion.",
+        "useCase": "Candidate replacement for the current sagittal source."
+      }
+    },
+    {
+      "id": "commons-1298342",
+      "title": "File:Illu cerebrum lobes.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Illu%20cerebrum%20lobes.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Illu_cerebrum_lobes.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 371,
+      "height": 274,
+      "byteLength": 34883,
+      "sha1": "a57e5be6d874391f886b1f7c03cb9e00908ccc62",
+      "artist": "",
+      "credit": "",
+      "description": "",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 47,
+      "heuristicQuality": 47,
+      "curator": {
+        "verdict": "maybe",
+        "score": 47,
+        "reason": "Passed hard metadata filters; needs visual review before promotion.",
+        "useCase": "Needs visual review."
+      }
+    }
+  ]
+}
