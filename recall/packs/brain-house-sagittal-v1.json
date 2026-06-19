@@ -4,7 +4,7 @@
   "workingName": "Arena",
   "category": "anatomy",
   "domain": "neuroscience",
-  "status": "preview",
+  "status": "needs-rework",
   "publishable": false,
   "blockReasons": [
     "source review required",
@@ -12,10 +12,12 @@
     "fact review required",
     "house plate needs anatomy review",
     "human approval required before publish",
-    "preview pack is not published"
+    "preview pack is not published",
+    "plate rejected: not anatomically acceptable",
+    "remove from playable Arena until rebuilt from real references"
   ],
   "version": 0,
-  "summary": "Original JJU house-style sagittal brain plate with generated hit zones.",
+  "summary": "Rejected first house-style sagittal brain plate; shape is not anatomically acceptable.",
   "modes": [
     "find",
     "function",
@@ -44,8 +46,8 @@
     "publish": "blocked"
   },
   "automation": {
-    "status": "playable-preview-staged",
-    "modelPlan": "House plate generated from structured geometry; target zones are generated from the same manifest and must be reviewed before publish. Model QA artifact written with google/gemma-3-12b.",
+    "status": "plate-rejected-needs-rework",
+    "modelPlan": "First house-plate generator failed anatomy quality. Next pass must derive geometry from real anatomical source data or a reviewed trace, not freehand generated lobes.",
     "stages": [
       {
         "id": "source-hunt",
@@ -64,30 +66,30 @@
       {
         "id": "plate-pass",
         "label": "Build house plate",
-        "status": "complete",
+        "status": "blocked",
         "owner": "pipeline",
-        "detail": "Generated an unlabeled SVG plate and editable geometry manifest."
+        "detail": "Plate rejected after visual review; rebuild from real anatomical source/trace workflow."
       },
       {
         "id": "vision-pass",
         "label": "Suggest targets",
-        "status": "complete",
+        "status": "blocked",
         "owner": "pipeline",
-        "detail": "Generated 12 aligned hit zones from the same geometry as the plate."
+        "detail": "Hit zones are blocked because the underlying plate is not valid."
       },
       {
         "id": "fact-pass",
         "label": "Generate fact prompts",
-        "status": "active",
+        "status": "blocked",
         "owner": "pipeline",
-        "detail": "Seeded short conservative prompts; review still required."
+        "detail": "Facts stay blocked until the plate and targets are rebuilt."
       },
       {
         "id": "review-pass",
         "label": "Approve edits",
         "status": "active",
         "owner": "review",
-        "detail": "Model QA completed; review target placement, labels, aliases, and facts."
+        "detail": "Use this draft only as a failed prototype record."
       },
       {
         "id": "publish-pack",
@@ -522,6 +524,11 @@
   "correctionQueue": [
     {
       "field": "source",
+      "message": "Plate rejected after visual review: not a human-brain-accurate sagittal diagram. Do not publish or use in Arena.",
+      "status": "open"
+    },
+    {
+      "field": "source",
       "message": "Confirm the house plate is sufficiently original and references are cited correctly.",
       "status": "open"
     },
@@ -682,6 +689,6 @@
       "status": "open"
     }
   ],
-  "updatedAt": "2026-06-19T22:19:03.243Z",
+  "updatedAt": "2026-06-19T22:24:23.614Z",
   "previewOnly": true
 }

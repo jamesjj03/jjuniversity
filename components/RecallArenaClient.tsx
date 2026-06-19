@@ -316,7 +316,7 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
                 >
                   <strong>{category.title}</strong>
                   <span>{category.label}</span>
-                  <em>{category.count}</em>
+                  <em>{category.id === "anatomy" ? `${anatomyPacks.length} ready` : category.count}</em>
                 </button>
               ))}
             </aside>
