@@ -134,6 +134,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [misses, setMisses] = useState<Record<string, number>>({});
   const [solved, setSolved] = useState<Record<string, number>>({});
+  const [roundWrongPicks, setRoundWrongPicks] = useState<string[]>([]);
   const [result, setResult] = useState<PickResult>({ kind: "idle" });
   const [cursorPrompt, setCursorPrompt] = useState<CursorPrompt>({ visible: false, x: 0, y: 0 });
 
@@ -167,6 +168,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
         if (next >= queue.length) setPhase("complete");
         return next;
       });
+      setRoundWrongPicks([]);
       setResult({ kind: "idle" });
     }, 620);
 
@@ -189,6 +191,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
     setCorrect(0);
     setElapsedSeconds(0);
     setSolved({});
+    setRoundWrongPicks([]);
     setResult({ kind: "idle" });
     setPhase("playing");
   }
@@ -223,6 +226,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
     }
 
     setMisses(current => ({ ...current, [activeTarget.id]: (current[activeTarget.id] || 0) + 1 }));
+    setRoundWrongPicks(current => current.includes(id) ? current : [...current, id]);
     setResult({ kind: "wrong", targetId: activeTarget.id, pickedId: id });
   }
 
@@ -237,7 +241,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
   function targetClass(target: RecallTarget) {
     const isSolved = Boolean(solved[target.id]);
     const isCorrectFlash = result.kind === "correct" && result.targetId === target.id;
-    const isWrongPick = result.kind === "wrong" && result.pickedId === target.id;
+    const isWrongPick = roundWrongPicks.includes(target.id) || (result.kind === "wrong" && result.pickedId === target.id);
     const isWrongReveal = result.kind === "wrong" && result.targetId === target.id;
 
     return [

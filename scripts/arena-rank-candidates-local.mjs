@@ -1,5 +1,6 @@
-import { readFile, writeFile } from "fs/promises";
+import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
+import sharp from "sharp";
 
 const root = process.cwd();
 const DEFAULT_MODEL = "mistralai/mistral-small-3.2";
@@ -20,6 +21,18 @@ function parseArgs(argv) {
     index += 1;
   }
   return args;
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function escapeXml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function candidateText(candidate) {
@@ -98,14 +111,13 @@ function prefilter(candidates, limit) {
 
 function modelPrompt(candidates) {
   const compact = candidates.map((candidate, index) => ({
-    index,
+    index: candidate.globalIndex ?? index,
     title: candidate.title,
     kind: candidate.kind,
     size: `${candidate.width}x${candidate.height}`,
     license: candidate.license?.shortName,
-    description: candidate.description,
-    artist: candidate.artist,
-    sourceUrl: candidate.sourceUrl,
+    description: String(candidate.description || "").slice(0, 220),
+    artist: String(candidate.artist || "").slice(0, 120),
     heuristicQuality: candidate.heuristicQuality,
   }));
 
@@ -117,7 +129,30 @@ function modelPrompt(candidates) {
     "Return strict JSON only with this shape:",
     "{\"ranked\":[{\"index\":0,\"verdict\":\"promote|maybe|reject\",\"score\":0,\"reason\":\"short reason\",\"useCase\":\"short use case\"}]}",
     "Use the provided metadata only. If metadata suggests labels are present, mark maybe or reject unless it could be used only as a teacher key.",
-    JSON.stringify(compact, null, 2),
+    JSON.stringify(compact),
+  ].join("\n\n");
+}
+
+function visualPrompt(candidates) {
+  const compact = candidates.map((candidate, index) => ({
+    index: candidate.globalIndex ?? index,
+    title: candidate.title,
+    kind: candidate.kind,
+    size: `${candidate.width}x${candidate.height}`,
+    license: candidate.license?.shortName,
+    description: String(candidate.description || "").slice(0, 180),
+    heuristicQuality: candidate.heuristicQuality,
+  }));
+
+  return [
+    "You are selecting source diagrams for a clickable visual recall game called Arena.",
+    "You can see a contact sheet. Each tile is marked with its exact candidate index.",
+    "Judge by the image first and metadata second.",
+    "Promote clean unlabeled diagrams that would make good hit-zone games.",
+    "Reject images that are already labeled, too fleshy/photographic, ugly, irrelevant, too specialized for the base pack, or only useful as an answer key.",
+    "Return strict JSON only with this shape:",
+    "{\"ranked\":[{\"index\":0,\"verdict\":\"promote|maybe|reject\",\"score\":0,\"reason\":\"short reason\",\"useCase\":\"short use case\"}]}",
+    JSON.stringify(compact),
   ].join("\n\n");
 }
 
@@ -205,28 +240,171 @@ function parseJsonResponse(text) {
   }
 }
 
-async function rankWithModel(candidates, args) {
+async function postChatWithTimeout(endpoint, body, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fetchImageBuffer(url) {
+  let lastError = null;
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "User-Agent": "JJU-Arena/0.1 (local visual diagram review)",
+        },
+      });
+
+      if (response.ok) return Buffer.from(await response.arrayBuffer());
+      lastError = new Error(`${response.status} ${response.statusText}`);
+
+      if (response.status === 429 || response.status >= 500) {
+        await sleep(900 * (attempt + 1));
+        continue;
+      }
+
+      break;
+    } catch (error) {
+      lastError = error;
+      await sleep(900 * (attempt + 1));
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("Image download failed.");
+}
+
+async function previewForCandidate(candidate) {
+  try {
+    const input = await fetchImageBuffer(candidate.originalUrl);
+    return await sharp(input, { density: 144 })
+      .resize(300, 210, { fit: "inside", background: "#fff" })
+      .flatten({ background: "#fff" })
+      .png()
+      .toBuffer();
+  } catch {
+    return Buffer.from(
+      `<svg width="300" height="210" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="210" fill="#fff"/>
+        <text x="150" y="94" text-anchor="middle" font-family="Arial" font-size="15" fill="#6b4e14">preview unavailable</text>
+        <text x="150" y="118" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b4e14">${escapeXml(candidate.kind)}</text>
+      </svg>`,
+    );
+  }
+}
+
+async function makeContactSheet(candidates, args) {
+  const tileWidth = 360;
+  const tileHeight = 300;
+  const columns = Math.min(3, Math.max(1, candidates.length));
+  const rows = Math.ceil(candidates.length / columns);
+  const composites = [];
+
+  for (let index = 0; index < candidates.length; index += 1) {
+    const candidate = candidates[index];
+    const preview = await previewForCandidate(candidate);
+    const metadata = await sharp(preview).metadata();
+    const left = (index % columns) * tileWidth;
+    const top = Math.floor(index / columns) * tileHeight;
+    const globalIndex = candidate.globalIndex ?? index;
+    const title = candidate.title.replace(/^File:/, "").slice(0, 42);
+    const label = Buffer.from(
+      `<svg width="${tileWidth}" height="82" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          text { font-family: Arial, sans-serif; fill: #1d160d; }
+          .n { font-size: 21px; font-weight: 700; }
+          .t { font-size: 13px; }
+        </style>
+        <text class="n" x="14" y="26">#${globalIndex}</text>
+        <text class="t" x="58" y="26">${escapeXml(title)}</text>
+        <text class="t" x="58" y="49">${escapeXml(candidate.kind)} ${candidate.width}x${candidate.height}</text>
+      </svg>`,
+    );
+
+    composites.push({
+      input: await sharp({
+        create: {
+          width: tileWidth,
+          height: tileHeight,
+          channels: 4,
+          background: "#f7f3e8",
+        },
+      })
+        .composite([
+          {
+            input: preview,
+            left: Math.round((tileWidth - (metadata.width || 300)) / 2),
+            top: 10,
+          },
+          { input: label, left: 0, top: 218 },
+        ])
+        .png()
+        .toBuffer(),
+      left,
+      top,
+    });
+  }
+
+  const sheet = await sharp({
+    create: {
+      width: tileWidth * columns,
+      height: tileHeight * rows,
+      channels: 4,
+      background: "#201a12",
+    },
+  })
+    .composite(composites)
+    .png()
+    .toBuffer();
+
+  if (args["sheet-dir"]) {
+    const sheetDir = path.join(root, args["sheet-dir"]);
+    await mkdir(sheetDir, { recursive: true });
+    const firstIndex = candidates[0]?.globalIndex ?? 0;
+    await writeFile(path.join(sheetDir, `arena-candidates-${firstIndex}.png`), sheet);
+  }
+
+  return `data:image/png;base64,${sheet.toString("base64")}`;
+}
+
+async function rankChunkWithModel(candidates, args) {
   const endpoint = args.endpoint || process.env.LM_STUDIO_ENDPOINT || DEFAULT_ENDPOINT;
   const model = args.model || process.env.LM_STUDIO_MODEL || DEFAULT_MODEL;
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+  const timeoutMs = Number(args["timeout-ms"] || process.env.LM_STUDIO_TIMEOUT_MS || 60000);
+  const userContent = args.visual
+    ? [
+        { type: "text", text: visualPrompt(candidates) },
+        { type: "image_url", image_url: { url: await makeContactSheet(candidates, args) } },
+      ]
+    : modelPrompt(candidates);
+
+  const response = await postChatWithTimeout(endpoint, {
       model,
       temperature: 0.1,
-      max_tokens: 2400,
+      max_tokens: Number(args["max-tokens"] || 900),
       messages: [
         {
           role: "system",
-          content: "You are a strict educational diagram curator. Return valid JSON only.",
+          content: "You are a strict educational diagram curator. Return valid JSON only. No markdown fences.",
         },
         {
           role: "user",
-          content: modelPrompt(candidates),
+          content: userContent,
         },
       ],
-    }),
-  });
+    },
+    timeoutMs,
+  );
 
   if (!response.ok) {
     const errorText = await response.text().catch(() => "");
@@ -235,6 +413,29 @@ async function rankWithModel(candidates, args) {
   const data = await response.json();
   const text = data.choices?.[0]?.message?.content || "";
   return parseJsonResponse(text);
+}
+
+async function rankWithModel(candidates, args, shortlistSize) {
+  const chunkSize = Number(args["chunk-size"] || 6);
+  const ranked = [];
+  const errors = [];
+
+  for (let start = 0; start < candidates.length; start += chunkSize) {
+    const chunk = candidates.slice(start, start + chunkSize).map((candidate, offset) => ({
+      ...candidate,
+      globalIndex: start + offset,
+    }));
+
+    try {
+      const result = await rankChunkWithModel(chunk, args);
+      ranked.push(...(result.ranked || []));
+    } catch (error) {
+      errors.push(`chunk ${start}-${start + chunk.length - 1}: ${error instanceof Error ? error.message : error}`);
+      ranked.push(...chunk.map((candidate, offset) => heuristicReview(candidate, start + offset, shortlistSize)));
+    }
+  }
+
+  return { ranked, errors };
 }
 
 async function main() {
@@ -254,8 +455,10 @@ async function main() {
       ranked: candidates.map((candidate, index) => heuristicReview(candidate, index, shortlistSize)),
     };
   } else {
-    ranking = await rankWithModel(candidates, args);
+    ranking = await rankWithModel(candidates, args, shortlistSize);
     modelUsed = args.model || process.env.LM_STUDIO_MODEL || DEFAULT_MODEL;
+    if (args.visual) modelUsed = `${modelUsed}+vision`;
+    if (ranking.errors?.length) modelUsed = `${modelUsed}+heuristic-fallback`;
   }
 
   const byIndex = new Map((ranking.ranked || []).map(item => [Number(item.index), item]));
@@ -298,6 +501,8 @@ async function main() {
     sourceCount: data.candidates?.length || 0,
     reviewedCount: candidates.length,
     rejectedCount: ranked.filter(candidate => candidate.curator.verdict === "reject").length,
+    rankingMode: args.visual ? "visual-contact-sheet" : "metadata",
+    modelErrors: ranking.errors || [],
     shortlist,
   };
 
