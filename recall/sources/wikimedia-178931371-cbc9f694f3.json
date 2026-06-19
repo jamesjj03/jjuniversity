@@ -1,0 +1,36 @@
+{
+  "id": "wikimedia-178931371-cbc9f694f3",
+  "provider": "wikimedia-commons",
+  "importedAt": "2026-06-19T20:53:46.118Z",
+  "title": "Brain Lateral (NIH BioArt 60)",
+  "fileTitle": "File:Brain Lateral (NIH BioArt 60).svg",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20Lateral%20(NIH%20BioArt%2060).svg",
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Brain_Lateral_%28NIH_BioArt_60%29.svg",
+  "description": "Lateral view of a human brain.",
+  "artist": "Courtesy of NIAID Ryan Kissinger",
+  "artistHtml": "Courtesy of NIAID Ryan Kissinger",
+  "credit": "Brain Lateral",
+  "creditHtml": "Brain Lateral",
+  "license": {
+    "shortName": "Public domain",
+    "url": "",
+    "usageTerms": "Public domain",
+    "attributionRequired": "false",
+    "allowedByImporter": true,
+    "importerReason": "Open public-domain style license."
+  },
+  "media": {
+    "mime": "image/svg+xml",
+    "width": 512,
+    "height": 410,
+    "sha1": "cbc9f694f37417f5306d95a75d38f42cb16d6fa0",
+    "byteLength": 430385,
+    "publicPath": "/arena/diagrams/brain-lateral-source-v1/wikimedia-178931371-cbc9f694f3.svg",
+    "localPath": "public\\arena\\diagrams\\brain-lateral-source-v1\\wikimedia-178931371-cbc9f694f3.svg"
+  },
+  "review": {
+    "source": "needs-review",
+    "license": "needs-review",
+    "attribution": "needs-review"
+  }
+}

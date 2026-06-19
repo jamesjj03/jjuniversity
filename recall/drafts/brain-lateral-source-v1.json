@@ -1,0 +1,488 @@
+{
+  "id": "brain-lateral-source-v1",
+  "title": "Brain Lateral Source",
+  "workingName": "Arena",
+  "category": "anatomy",
+  "domain": "neuroscience",
+  "status": "draft",
+  "publishable": false,
+  "blockReasons": [
+    "source review required",
+    "target review required",
+    "fact review required",
+    "image target detection required",
+    "semantic labels required",
+    "fact prompts required",
+    "vision target placement requires review"
+  ],
+  "version": 0,
+  "summary": "Vision-ranked public-domain lateral brain diagram candidate for Arena.",
+  "modes": [
+    "find",
+    "function",
+    "review"
+  ],
+  "diagram": {
+    "sourceId": "wikimedia-178931371-cbc9f694f3",
+    "imageSrc": "/arena/diagrams/brain-lateral-source-v1/wikimedia-178931371-cbc9f694f3.svg",
+    "width": 411.67,
+    "height": 330.02,
+    "mime": "image/svg+xml",
+    "overlayMode": "dots",
+    "hitStyle": {
+      "idleOpacity": 0.02,
+      "hoverOpacity": 0.14,
+      "revealOpacity": 0.24,
+      "stroke": "rgba(255,255,255,.32)"
+    }
+  },
+  "approval": {
+    "source": "needs-review",
+    "license": "needs-review",
+    "attribution": "needs-review",
+    "targets": "needs-review",
+    "facts": "needs-review",
+    "publish": "blocked"
+  },
+  "automation": {
+    "status": "heuristic-targets-proposed",
+    "modelPlan": "Local vision did not complete (This operation was aborted); heuristic preview anchors were staged and require human review.",
+    "stages": [
+      {
+        "id": "source-hunt",
+        "label": "Pull candidate diagram",
+        "status": "complete",
+        "owner": "pipeline",
+        "detail": "Promoted File:Brain Lateral (NIH BioArt 60).svg from Wikimedia candidate discovery."
+      },
+      {
+        "id": "license-pass",
+        "label": "Check source, license, attribution",
+        "status": "active",
+        "owner": "review",
+        "detail": "Open public-domain style license."
+      },
+      {
+        "id": "vision-pass",
+        "label": "Suggest targets",
+        "status": "active",
+        "owner": "pipeline",
+        "detail": "Local vision did not complete; staged 6 heuristic preview dots."
+      },
+      {
+        "id": "fact-pass",
+        "label": "Generate fact prompts",
+        "status": "active",
+        "owner": "local model",
+        "detail": "Initial fact prompts were generated with target proposals and need review."
+      },
+      {
+        "id": "review-pass",
+        "label": "Approve edits",
+        "status": "active",
+        "owner": "review",
+        "detail": "Review target placement, labels, aliases, and facts."
+      },
+      {
+        "id": "publish-pack",
+        "label": "Publish pack",
+        "status": "blocked",
+        "owner": "system",
+        "detail": "Blocked until every approval gate passes."
+      }
+    ]
+  },
+  "assetLedger": [
+    {
+      "id": "wikimedia-178931371-cbc9f694f3",
+      "type": "diagram-source",
+      "source": "https://commons.wikimedia.org/wiki/File:Brain%20Lateral%20(NIH%20BioArt%2060).svg",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "attribution": "Courtesy of NIAID Ryan Kissinger",
+      "status": "needs-review",
+      "notes": "Open public-domain style license."
+    }
+  ],
+  "targets": [
+    {
+      "id": "frontal-lobe-01",
+      "label": "frontal lobe",
+      "aliases": [
+        "frontal cortex"
+      ],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.42,
+      "shape": {
+        "type": "circle",
+        "cx": 115.27,
+        "cy": 125.41,
+        "r": 15
+      },
+      "functions": [
+        "planning and voluntary movement",
+        "speech production support"
+      ],
+      "reviewNotes": [
+        "Heuristic fallback proposed this dot after local vision did not complete.",
+        "Heuristic fallback placement after local vision did not complete."
+      ]
+    },
+    {
+      "id": "parietal-lobe-02",
+      "label": "parietal lobe",
+      "aliases": [
+        "parietal cortex"
+      ],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.4,
+      "shape": {
+        "type": "circle",
+        "cx": 209.95,
+        "cy": 85.81,
+        "r": 15
+      },
+      "functions": [
+        "body sensation and spatial attention"
+      ],
+      "reviewNotes": [
+        "Heuristic fallback proposed this dot after local vision did not complete.",
+        "Heuristic fallback placement after local vision did not complete."
+      ]
+    },
+    {
+      "id": "temporal-lobe-03",
+      "label": "temporal lobe",
+      "aliases": [
+        "temporal cortex"
+      ],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.42,
+      "shape": {
+        "type": "circle",
+        "cx": 201.72,
+        "cy": 201.31,
+        "r": 15
+      },
+      "functions": [
+        "hearing and language comprehension",
+        "memory support"
+      ],
+      "reviewNotes": [
+        "Heuristic fallback proposed this dot after local vision did not complete.",
+        "Heuristic fallback placement after local vision did not complete."
+      ]
+    },
+    {
+      "id": "occipital-lobe-04",
+      "label": "occipital lobe",
+      "aliases": [
+        "visual cortex region"
+      ],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.38,
+      "shape": {
+        "type": "circle",
+        "cx": 316.99,
+        "cy": 128.71,
+        "r": 15
+      },
+      "functions": [
+        "visual processing"
+      ],
+      "reviewNotes": [
+        "Heuristic fallback proposed this dot after local vision did not complete.",
+        "Heuristic fallback placement after local vision did not complete."
+      ]
+    },
+    {
+      "id": "cerebellum-05",
+      "label": "cerebellum",
+      "aliases": [],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.36,
+      "shape": {
+        "type": "circle",
+        "cx": 321.1,
+        "cy": 247.51,
+        "r": 15
+      },
+      "functions": [
+        "coordination and balance"
+      ],
+      "reviewNotes": [
+        "Heuristic fallback proposed this dot after local vision did not complete.",
+        "Heuristic fallback placement after local vision did not complete."
+      ]
+    },
+    {
+      "id": "brainstem-06",
+      "label": "brainstem",
+      "aliases": [
+        "brain stem"
+      ],
+      "kind": "dot",
+      "reviewStatus": "ai-suggested",
+      "difficulty": 2,
+      "color": "#d6b25e",
+      "confidence": 0.34,
+      "shape": {
+        "type": "circle",
+        "cx": 271.7,
+        "cy": 260.72,
+        "r": 15
+      },
+      "functions": [
+        "breathing, heart rate, and arousal control"
+      ],
+      "reviewNotes": [
+        "Heuristic fallback proposed this dot after local vision did not complete.",
+        "Heuristic fallback placement after local vision did not complete."
+      ]
+    }
+  ],
+  "correctionQueue": [
+    {
+      "field": "target",
+      "message": "Run raster label/arrow detection and propose target hit zones.",
+      "status": "open"
+    },
+    {
+      "field": "fact",
+      "message": "Generate function prompts after target labels are approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-01",
+      "field": "label",
+      "message": "Name Region 01 from source shape path-77.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-02",
+      "field": "label",
+      "message": "Name Region 02 from source shape path-171.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-03",
+      "field": "label",
+      "message": "Name Region 03 from source shape path-169.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-04",
+      "field": "label",
+      "message": "Name Region 04 from source shape path-177.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-05",
+      "field": "label",
+      "message": "Name Region 05 from source shape path-214.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-06",
+      "field": "label",
+      "message": "Name Region 06 from source shape path-291.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-07",
+      "field": "label",
+      "message": "Name Region 07 from source shape path-240.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-08",
+      "field": "label",
+      "message": "Name Region 08 from source shape path-220.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-09",
+      "field": "label",
+      "message": "Name Region 09 from source shape path-209.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-10",
+      "field": "label",
+      "message": "Name Region 10 from source shape path-296.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-11",
+      "field": "label",
+      "message": "Name Region 11 from source shape path-180.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-12",
+      "field": "label",
+      "message": "Name Region 12 from source shape path-155.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-01",
+      "field": "fact",
+      "message": "Add function prompts after Region 01 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-02",
+      "field": "fact",
+      "message": "Add function prompts after Region 02 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-03",
+      "field": "fact",
+      "message": "Add function prompts after Region 03 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-04",
+      "field": "fact",
+      "message": "Add function prompts after Region 04 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-05",
+      "field": "fact",
+      "message": "Add function prompts after Region 05 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-06",
+      "field": "fact",
+      "message": "Add function prompts after Region 06 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-07",
+      "field": "fact",
+      "message": "Add function prompts after Region 07 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-08",
+      "field": "fact",
+      "message": "Add function prompts after Region 08 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-09",
+      "field": "fact",
+      "message": "Add function prompts after Region 09 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-10",
+      "field": "fact",
+      "message": "Add function prompts after Region 10 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-11",
+      "field": "fact",
+      "message": "Add function prompts after Region 11 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "svg-region-12",
+      "field": "fact",
+      "message": "Add function prompts after Region 12 is approved.",
+      "status": "open"
+    },
+    {
+      "targetId": "frontal-lobe-01",
+      "field": "target",
+      "message": "Review dot placement for frontal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "parietal-lobe-02",
+      "field": "target",
+      "message": "Review dot placement for parietal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "temporal-lobe-03",
+      "field": "target",
+      "message": "Review dot placement for temporal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "occipital-lobe-04",
+      "field": "target",
+      "message": "Review dot placement for occipital lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "cerebellum-05",
+      "field": "target",
+      "message": "Review dot placement for cerebellum.",
+      "status": "open"
+    },
+    {
+      "targetId": "brainstem-06",
+      "field": "target",
+      "message": "Review dot placement for brainstem.",
+      "status": "open"
+    },
+    {
+      "targetId": "frontal-lobe-01",
+      "field": "fact",
+      "message": "Review fact prompts for frontal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "parietal-lobe-02",
+      "field": "fact",
+      "message": "Review fact prompts for parietal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "temporal-lobe-03",
+      "field": "fact",
+      "message": "Review fact prompts for temporal lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "occipital-lobe-04",
+      "field": "fact",
+      "message": "Review fact prompts for occipital lobe.",
+      "status": "open"
+    },
+    {
+      "targetId": "cerebellum-05",
+      "field": "fact",
+      "message": "Review fact prompts for cerebellum.",
+      "status": "open"
+    },
+    {
+      "targetId": "brainstem-06",
+      "field": "fact",
+      "message": "Review fact prompts for brainstem.",
+      "status": "open"
+    }
+  ],
+  "updatedAt": "2026-06-19T21:21:55.785Z"
+}

@@ -1,5 +1,5 @@
 import RecallArenaClient from "@/components/RecallArenaClient";
-import { getRecallPack } from "@/lib/recall";
+import { getRecallPacks } from "@/lib/recall";
 
 export const metadata = {
   title: "Recall Arena | JJ University",
@@ -7,6 +7,6 @@ export const metadata = {
 };
 
 export default async function ArenaPage() {
-  const pack = await getRecallPack("brain-intro");
-  return <RecallArenaClient pack={pack} />;
+  const packs = await getRecallPacks(["brain-intro", "brain-lateral-source-v1"]);
+  return <RecallArenaClient packs={packs} />;
 }

@@ -18,6 +18,8 @@
     "arena:import-wikimedia": "node scripts/arena-import-wikimedia.mjs",
     "arena:promote-candidate": "node scripts/arena-promote-candidate.mjs",
     "arena:propose-svg-targets": "node scripts/arena-propose-svg-targets.mjs",
+    "arena:propose-vision-targets": "node scripts/arena-propose-vision-targets.mjs",
+    "arena:stage-preview": "node scripts/arena-stage-preview-pack.mjs",
     "arena:rank-candidates": "node scripts/arena-rank-candidates-local.mjs",
     "atlas:seed": "node atlas/scripts/seed_foundations.js",
     "atlas:validate": "node atlas/scripts/validate_nodes.js",

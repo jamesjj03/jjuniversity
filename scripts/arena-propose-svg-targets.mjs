@@ -25,8 +25,38 @@ function attr(value, name) {
   return found?.[1] || "";
 }
 
-function fillFrom(style) {
-  return style.match(/fill\s*:\s*([^;]+)/i)?.[1]?.trim() || "#d6b25e";
+function fillFromStyle(style) {
+  return style.match(/fill\s*:\s*([^;]+)/i)?.[1]?.trim() || "";
+}
+
+function styleClassMap(svg) {
+  const styles = [...svg.matchAll(/<(?:(?:[A-Za-z_][\w.-]*):)?style\b[^>]*>([\s\S]*?)<\/(?:(?:[A-Za-z_][\w.-]*):)?style>/gi)]
+    .map(match => match[1])
+    .join("\n");
+  const fills = new Map();
+
+  for (const match of styles.matchAll(/\.([\w-]+)\s*\{([^}]*)\}/g)) {
+    const fill = fillFromStyle(match[2]);
+    if (fill) fills.set(match[1], fill);
+  }
+
+  return fills;
+}
+
+function fillFromElement(element, classFills) {
+  const styleFill = fillFromStyle(attr(element, "style"));
+  if (styleFill) return styleFill;
+
+  const directFill = attr(element, "fill");
+  if (directFill && directFill.toLowerCase() !== "none") return directFill;
+
+  const classNames = attr(element, "class").split(/\s+/).filter(Boolean);
+  for (const className of classNames) {
+    const fill = classFills.get(className);
+    if (fill) return fill;
+  }
+
+  return "#d6b25e";
 }
 
 function numberPairs(d) {
@@ -60,21 +90,59 @@ function boundsForPath(d) {
   };
 }
 
+function svgViewBox(svg) {
+  const svgOpen = svg.match(/<(?:(?:[A-Za-z_][\w.-]*):)?svg\b[^>]*>/i)?.[0] || "";
+  const values = attr(svgOpen, "viewBox").split(/[\s,]+/).map(Number).filter(Number.isFinite);
+  if (values.length !== 4 || values[2] <= 0 || values[3] <= 0) return null;
+  return {
+    x: values[0],
+    y: values[1],
+    width: values[2],
+    height: values[3],
+    area: values[2] * values[3],
+  };
+}
+
+function pathElements(svg) {
+  return [...svg.matchAll(/<(?:(?:[A-Za-z_][\w.-]*):)?path\b[\s\S]*?(?:\/>|>\s*<\/(?:(?:[A-Za-z_][\w.-]*):)?path>)/gi)]
+    .map(match => match[0]);
+}
+
 function colorFields(svg) {
   const group = svg.match(/<g[^>]*id="Color_Fields"[^>]*>([\s\S]*?)<\/g>/i)?.[1] || "";
-  const pathMatches = [...group.matchAll(/<path\b[\s\S]*?\/>/gi)];
-  return pathMatches.map((match, index) => {
-    const element = match[0];
+  const classFills = styleClassMap(svg);
+  return pathElements(group).map((element, index) => {
     const d = attr(element, "d");
     const bounds = boundsForPath(d);
     return {
       index,
       sourceShapeId: attr(element, "id") || `color-field-${index + 1}`,
       d,
-      color: fillFrom(attr(element, "style")),
+      color: fillFromElement(element, classFills),
       bounds,
     };
   }).filter(item => item.d && item.bounds);
+}
+
+function allPathRegions(svg, viewBox) {
+  const classFills = styleClassMap(svg);
+  const maxArea = viewBox ? viewBox.area * 0.88 : Number.POSITIVE_INFINITY;
+
+  return pathElements(svg).map((element, index) => {
+    const d = attr(element, "d");
+    const bounds = boundsForPath(d);
+    return {
+      index,
+      sourceShapeId: attr(element, "id") || `path-${index + 1}`,
+      d,
+      color: fillFromElement(element, classFills),
+      bounds,
+    };
+  }).filter(item => {
+    if (!item.d || !item.bounds) return false;
+    if (!Number.isFinite(item.bounds.area) || item.bounds.area <= 0) return false;
+    return item.bounds.area <= maxArea;
+  });
 }
 
 function targetFromRegion(region, index) {
@@ -134,9 +202,12 @@ async function main() {
 
   const localSvgPath = path.join(root, "public", draft.diagram.imageSrc.replace(/^\//, ""));
   const svg = await readFile(localSvgPath, "utf8");
+  const viewBox = svgViewBox(svg);
   const minArea = Number(args["min-area"] || 70);
   const limit = Number(args.limit || 32);
-  const regions = colorFields(svg)
+  const colorFieldRegions = colorFields(svg);
+  const sourceMode = colorFieldRegions.length ? "color-fields" : "all-svg-paths";
+  const regions = (colorFieldRegions.length ? colorFieldRegions : allPathRegions(svg, viewBox))
     .filter(region => region.bounds.area >= minArea)
     .sort((a, b) => b.bounds.area - a.bounds.area)
     .slice(0, limit);
@@ -163,6 +234,11 @@ async function main() {
     ...draft,
     updatedAt: now,
     publishable: false,
+    diagram: {
+      ...draft.diagram,
+      ...(viewBox ? { width: Number(viewBox.width.toFixed(2)), height: Number(viewBox.height.toFixed(2)) } : {}),
+      overlayMode: "mixed-dots-polygons",
+    },
     blockReasons: [...new Set([...(draft.blockReasons || []), "semantic labels required", "fact prompts required"])],
     approval: {
       ...(draft.approval || {}),
@@ -179,7 +255,7 @@ async function main() {
             ...stage,
             status: "active",
             owner: "pipeline",
-            detail: `Extracted ${targets.length} SVG color regions as candidate hit zones.`,
+            detail: `Extracted ${targets.length} ${sourceMode} regions as candidate hit zones.`,
           };
         }
         if (stage.id === "fact-pass") {
@@ -201,8 +277,10 @@ async function main() {
     packId,
     svg: localSvgPath,
     proposedTargets: targets.length,
+    sourceMode,
     minArea,
     limit,
+    viewBox,
     draftPath,
   }, null, 2));
 }

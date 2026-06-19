@@ -605,6 +605,17 @@ html body .recallPhase-playing {
   padding-top:10px !important;
 }
 
+@media (min-width:901px) {
+  html:has(.recallPhase-playing),
+  html body:has(.recallPhase-playing) {
+    overflow:hidden;
+  }
+
+  html body:has(.recallPhase-playing) .siteFooter {
+    display:none;
+  }
+}
+
 .recallLibraryShell {
   width:min(1180px, 100%);
   margin:0 auto;
@@ -979,6 +990,26 @@ html body .recallPhase-playing {
   height:100%;
   min-height:320px;
   display:block;
+}
+
+.recallDiagramSvg {
+  width:min(100%, 1120px);
+  height:100%;
+  min-height:320px;
+  display:block;
+}
+
+.recallDiagramMat {
+  fill:color-mix(in srgb, var(--panel2) 50%, transparent);
+}
+
+.recallDiagramSource {
+  pointer-events:none;
+}
+
+.recallDiagramSvg .recallTargetShape {
+  fill:rgba(255,255,255,.02);
+  stroke:rgba(255,255,255,.26);
 }
 
 .recallSvgGrid {

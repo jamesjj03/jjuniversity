@@ -109,3 +109,7 @@ export async function getRecallPack(id: string): Promise<RecallPack> {
   const filePath = path.join(RECALL_PACK_ROOT, `${id}.json`);
   return JSON.parse(await readFile(filePath, "utf8")) as RecallPack;
 }
+
+export async function getRecallPacks(ids: string[]): Promise<RecallPack[]> {
+  return Promise.all(ids.map(id => getRecallPack(id)));
+}

@@ -47,7 +47,7 @@ const ARENA_CATEGORIES: Array<{
   count: string;
   description: string;
 }> = [
-  { id: "anatomy", title: "Anatomy", label: "Body diagrams", count: "1 ready", description: "Brain, organs, systems, and structures." },
+  { id: "anatomy", title: "Anatomy", label: "Body diagrams", count: "2 ready", description: "Brain, organs, systems, and structures." },
   { id: "world", title: "World", label: "Maps", count: "queued", description: "Countries, regions, rivers, and terrain." },
   { id: "history", title: "History", label: "Timelines", count: "queued", description: "Empires, wars, routes, and eras." },
   { id: "science", title: "Science", label: "Systems", count: "queued", description: "Cells, cycles, chemistry, and physics." },
@@ -123,9 +123,10 @@ function renderTargetShape(
   return <ellipse key={target.id} cx={shape.cx} cy={shape.cy} rx={shape.rx} ry={shape.ry} {...shared} />;
 }
 
-export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
+export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
   const [phase, setPhase] = useState<Phase>("hub");
   const [selectedCategory, setSelectedCategory] = useState<ArenaCategoryId>("anatomy");
+  const [activePackId, setActivePackId] = useState(packs[0]?.id || "");
   const [mode, setMode] = useState<RecallMode>("find");
   const [queue, setQueue] = useState<string[]>([]);
   const [roundIndex, setRoundIndex] = useState(0);
@@ -139,7 +140,19 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
   const [cursorPrompt, setCursorPrompt] = useState<CursorPrompt>({ visible: false, x: 0, y: 0 });
 
   const selectedCategoryData = ARENA_CATEGORIES.find(category => category.id === selectedCategory) || ARENA_CATEGORIES[0];
-  const targetMap = useMemo(() => new Map(pack.targets.map(target => [target.id, target])), [pack.targets]);
+  const anatomyPacks = useMemo(
+    () => packs.filter(item => item.category === "anatomy" || item.domain === "neuroscience"),
+    [packs],
+  );
+  const activePack = useMemo(
+    () => {
+      const found = packs.find(item => item.id === activePackId) || packs[0];
+      if (!found) throw new Error("RecallArenaClient requires at least one pack.");
+      return found;
+    },
+    [activePackId, packs],
+  );
+  const targetMap = useMemo(() => new Map(activePack.targets.map(target => [target.id, target])), [activePack.targets]);
   const activeId = queue[roundIndex] || "";
   const activeTarget = targetMap.get(activeId);
   const prompt = activeTarget ? promptFor(activeTarget, mode, roundIndex) : "";
@@ -181,11 +194,13 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
     }
   }
 
-  function startGame(nextMode: RecallMode) {
+  function startGame(nextMode: RecallMode, nextPackId = activePack.id) {
     cancelPendingAdvance();
+    const nextPack = packs.find(item => item.id === nextPackId) || activePack;
     window.scrollTo({ top: 0, behavior: "instant" });
+    setActivePackId(nextPack.id);
     setMode(nextMode);
-    setQueue(makeQueue(pack, nextMode, misses));
+    setQueue(makeQueue(nextPack, nextMode, misses));
     setRoundIndex(0);
     setAttempts(0);
     setCorrect(0);
@@ -197,7 +212,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
   }
 
   function restartCurrentMode() {
-    startGame(mode);
+    startGame(mode, activePack.id);
   }
 
   function advanceAfterCorrect(targetId: string) {
@@ -263,7 +278,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
               <h1>Arena</h1>
             </div>
             <div className="recallLibraryActions" aria-label="Arena actions">
-              <span>1 ready / 10 categories</span>
+              <span>{anatomyPacks.length} ready / 10 categories</span>
               <Link className="btn secondary" href="/admin/arena" prefetch={false}>Factory</Link>
             </div>
           </header>
@@ -295,21 +310,23 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
 
               <div className="recallPackRows">
                 {selectedCategory === "anatomy" ? (
-                  <article className="recallPackRow">
-                    <div className="recallPackRowMain">
-                      <span className="recallPackThumb" aria-hidden="true">01</span>
-                      <div>
-                        <p className="kicker">{pack.domain}</p>
-                        <h3>{pack.title}</h3>
-                        <p>{pack.targets.length} targets / Chaos, Function, Review</p>
+                  anatomyPacks.map((item, index) => (
+                    <article className="recallPackRow" key={item.id}>
+                      <div className="recallPackRowMain">
+                        <span className="recallPackThumb" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                        <div>
+                          <p className="kicker">{item.domain}</p>
+                          <h3>{item.title}</h3>
+                          <p>{item.targets.length} targets / {item.diagram ? "sourced diagram" : "manual seed"}</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="recallPackRowMeta">
-                      <span>prototype</span>
-                      <span>{pack.targets.length} targets</span>
-                    </div>
-                    <button className="btn primary" type="button" onClick={() => startGame("find")}>Start</button>
-                  </article>
+                      <div className="recallPackRowMeta">
+                        <span>{item.status}</span>
+                        <span>{item.targets.length} targets</span>
+                      </div>
+                      <button className="btn primary" type="button" onClick={() => startGame("find", item.id)}>Start</button>
+                    </article>
+                  ))
                 ) : (
                   <article className="recallPackRow locked">
                     <div className="recallPackRowMain">
@@ -331,13 +348,13 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
                     <span className="recallPackThumb" aria-hidden="true">DF</span>
                     <div>
                       <p className="kicker">Factory</p>
-                      <h3>Brain Sagittal Source</h3>
-                      <p>Real sourced SVG imported; targets proposed; blocked for review.</p>
+                      <h3>Arena Factory</h3>
+                      <p>Review imported sources, target placement, facts, and approval gates.</p>
                     </div>
                   </div>
                   <div className="recallPackRowMeta">
-                    <span>draft</span>
-                    <span>4 proposed</span>
+                    <span>admin</span>
+                    <span>review gates</span>
                   </div>
                   <Link className="btn secondary" href="/admin/arena" prefetch={false}>Factory</Link>
                 </article>
@@ -355,8 +372,8 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
               <h2>{accuracy}% accuracy.</h2>
               <p>{formatElapsed(elapsedSeconds)}. {missTotal ? `${missTotal} misses are waiting in Review.` : "Clean run."}</p>
               <div className="buttonRow recallDoneActions">
-                <button className="btn primary" type="button" onClick={() => startGame("find")}>Run Chaos Again</button>
-                <button className="btn secondary" type="button" onClick={() => startGame("review")}>Review Misses</button>
+                <button className="btn primary" type="button" onClick={() => startGame("find", activePack.id)}>Run Chaos Again</button>
+                <button className="btn secondary" type="button" onClick={() => startGame("review", activePack.id)}>Review Misses</button>
                 <button className="btn secondary" type="button" onClick={() => setPhase("hub")}>Back To Packs</button>
               </div>
             </section>
@@ -386,8 +403,8 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
           </header>
 
           <div className="recallModeRail" aria-label="Modes">
-            {pack.modes.map(item => (
-              <button className={mode === item ? "active" : ""} key={item} type="button" onClick={() => startGame(item)}>
+            {activePack.modes.map(item => (
+              <button className={mode === item ? "active" : ""} key={item} type="button" onClick={() => startGame(item, activePack.id)}>
                 <strong>{MODE_LABELS[item]}</strong>
                 <span>{MODE_DESCRIPTIONS[item]}</span>
               </button>
@@ -401,26 +418,48 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
               </div>
             )}
 
-            <svg className="recallBrainSvg" viewBox="80 70 680 440" aria-label="Clickable brain schematic">
-              <defs>
-                <pattern id="recallFineGrid" width="22" height="22" patternUnits="userSpaceOnUse">
-                  <path d="M22 0H0V22" />
-                </pattern>
-              </defs>
-              <rect className="recallSvgGrid" x="28" y="28" width="804" height="504" rx="18" />
-              <rect className="recallSvgGridLines" x="28" y="28" width="804" height="504" rx="18" />
-              <path
-                className="recallBrainBase"
-                d="M119 204 C139 100 248 51 365 86 C470 36 620 82 684 186 C741 277 713 394 616 445 C524 503 389 480 332 413 C234 434 137 376 110 295 C98 259 101 228 119 204 Z"
-              />
-              <path
-                className="recallBrainRidge"
-                d="M158 190 C222 152 274 156 326 190 M344 119 C392 137 423 164 443 210 M488 113 C524 146 544 183 552 229 M164 302 C226 283 282 290 337 333 M545 360 C590 348 629 357 661 392"
-              />
-              <g className="recallTargetLayer">
-                {pack.targets.map(target => renderTargetShape(target, target.shape, targetClass(target), pickTarget))}
-              </g>
-            </svg>
+            {activePack.diagram ? (
+              <svg
+                className="recallDiagramSvg"
+                viewBox={`0 0 ${activePack.diagram.width} ${activePack.diagram.height}`}
+                aria-label={`Clickable ${activePack.title} source diagram`}
+              >
+                <rect className="recallDiagramMat" x="0" y="0" width={activePack.diagram.width} height={activePack.diagram.height} rx="10" />
+                <image
+                  className="recallDiagramSource"
+                  href={activePack.diagram.imageSrc}
+                  x="0"
+                  y="0"
+                  width={activePack.diagram.width}
+                  height={activePack.diagram.height}
+                  preserveAspectRatio="xMidYMid meet"
+                />
+                <g className="recallTargetLayer">
+                  {activePack.targets.map(target => renderTargetShape(target, target.shape, targetClass(target), pickTarget))}
+                </g>
+              </svg>
+            ) : (
+              <svg className="recallBrainSvg" viewBox="80 70 680 440" aria-label="Clickable brain schematic">
+                <defs>
+                  <pattern id="recallFineGrid" width="22" height="22" patternUnits="userSpaceOnUse">
+                    <path d="M22 0H0V22" />
+                  </pattern>
+                </defs>
+                <rect className="recallSvgGrid" x="28" y="28" width="804" height="504" rx="18" />
+                <rect className="recallSvgGridLines" x="28" y="28" width="804" height="504" rx="18" />
+                <path
+                  className="recallBrainBase"
+                  d="M119 204 C139 100 248 51 365 86 C470 36 620 82 684 186 C741 277 713 394 616 445 C524 503 389 480 332 413 C234 434 137 376 110 295 C98 259 101 228 119 204 Z"
+                />
+                <path
+                  className="recallBrainRidge"
+                  d="M158 190 C222 152 274 156 326 190 M344 119 C392 137 423 164 443 210 M488 113 C524 146 544 183 552 229 M164 302 C226 283 282 290 337 333 M545 360 C590 348 629 357 661 392"
+                />
+                <g className="recallTargetLayer">
+                  {activePack.targets.map(target => renderTargetShape(target, target.shape, targetClass(target), pickTarget))}
+                </g>
+              </svg>
+            )}
           </div>
 
           <footer className={`recallGameBottom ${result.kind}`}>
