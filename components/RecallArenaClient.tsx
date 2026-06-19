@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { CSSProperties, KeyboardEvent, MouseEvent } from "react";
 import type { RecallMode, RecallPack, RecallShape, RecallTarget } from "@/lib/recall";
@@ -55,15 +54,37 @@ const ARENA_CATEGORIES: Array<{
   { id: "language", title: "Language", label: "Scripts", count: "queued", description: "Writing systems, grammar, and sound maps." },
 ];
 
-function stableScore(id: string) {
-  return id.split("").reduce((sum, char, index) => sum + char.charCodeAt(0) * (index + 7), 0);
+const TITLE_CASE_SMALL_WORDS = new Set(["and", "or", "of", "the", "to", "in", "on", "for", "with"]);
+
+function titleCase(value: string) {
+  return value
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word, index) => {
+      const lower = word.toLowerCase();
+      if (index > 0 && TITLE_CASE_SMALL_WORDS.has(lower)) return lower;
+      return `${lower.charAt(0).toUpperCase()}${lower.slice(1)}`;
+    })
+    .join(" ");
 }
 
-function shuffleIds(ids: string[], salt = Date.now()) {
-  return [...ids]
-    .map(id => ({ id, score: stableScore(`${id}:${salt}:${Math.random()}`) }))
-    .sort((a, b) => a.score - b.score)
-    .map(item => item.id);
+function sentenceCase(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+  return `${trimmed.charAt(0).toUpperCase()}${trimmed.slice(1)}`;
+}
+
+function displayLabel(target: RecallTarget) {
+  return titleCase(target.label);
+}
+
+function shuffleIds(ids: string[]) {
+  const next = [...ids];
+  for (let index = next.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+  }
+  return next;
 }
 
 function makeQueue(pack: RecallPack, mode: RecallMode, misses: Record<string, number>) {
@@ -86,10 +107,10 @@ function makeQueue(pack: RecallPack, mode: RecallMode, misses: Record<string, nu
 function promptFor(target: RecallTarget, mode: RecallMode, roundIndex: number) {
   if (mode === "function") {
     const fact = target.functions[(roundIndex + target.id.length) % target.functions.length] || target.functions[0] || target.label;
-    return fact.charAt(0).toUpperCase() + fact.slice(1);
+    return sentenceCase(fact);
   }
 
-  return target.label;
+  return displayLabel(target);
 }
 
 function formatElapsed(totalSeconds: number) {
@@ -108,7 +129,7 @@ function renderTargetShape(
     className,
     tabIndex: 0,
     role: "button",
-    "aria-label": `Choose ${target.label}`,
+    "aria-label": `Choose ${displayLabel(target)}`,
     onClick: () => onPick(target.id),
     onKeyDown: (event: KeyboardEvent<SVGElement>) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -279,7 +300,6 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
             </div>
             <div className="recallLibraryActions" aria-label="Arena actions">
               <span>{anatomyPacks.length} ready / 10 categories</span>
-              <Link className="btn secondary" href="/admin/arena" prefetch={false}>Factory</Link>
             </div>
           </header>
 
@@ -342,22 +362,6 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
                     </div>
                   </article>
                 )}
-
-                <article className="recallPackRow draft">
-                  <div className="recallPackRowMain">
-                    <span className="recallPackThumb" aria-hidden="true">DF</span>
-                    <div>
-                      <p className="kicker">Factory</p>
-                      <h3>Arena Factory</h3>
-                      <p>Review imported sources, target placement, facts, and approval gates.</p>
-                    </div>
-                  </div>
-                  <div className="recallPackRowMeta">
-                    <span>admin</span>
-                    <span>review gates</span>
-                  </div>
-                  <Link className="btn secondary" href="/admin/arena" prefetch={false}>Factory</Link>
-                </article>
               </div>
             </section>
           </div>
@@ -466,11 +470,11 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
             <div>
               <strong>
                 {result.kind === "correct" && "Correct"}
-                {result.kind === "wrong" && `Still looking for ${activeTarget.label}`}
+                {result.kind === "wrong" && `Still looking for ${displayLabel(activeTarget)}`}
                 {result.kind === "idle" && `${remaining} left`}
               </strong>
               <span>
-                {result.kind === "correct" && activeTarget.functions.slice(0, 2).join(" / ")}
+                {result.kind === "correct" && activeTarget.functions.slice(0, 2).map(sentenceCase).join(" / ")}
                 {result.kind === "wrong" && "The answer is highlighted. Try that spot."}
                 {result.kind === "idle" && MODE_DESCRIPTIONS[mode]}
               </span>

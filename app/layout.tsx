@@ -4,7 +4,6 @@ import Link from "next/link";
 import Script from "next/script";
 import PreferencesProvider from "@/components/PreferencesProvider";
 import AccountMenu from "@/components/AccountMenu";
-import SiteSocialLink from "@/components/SiteSocialLink";
 import ContinueReadingLink from "@/components/ContinueReadingLink";
 import SiteFooter from "@/components/SiteFooter";
 import type { Metadata } from "next";
@@ -75,7 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Link>
 
           <ContinueReadingLink />
-          <SiteSocialLink />
           <AccountMenu />
         </header>
 

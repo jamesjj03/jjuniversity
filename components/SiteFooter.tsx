@@ -12,10 +12,8 @@ export default function SiteFooter() {
       <nav aria-label="Footer navigation">
         <Link href="/library">Library</Link>
         <Link href="/print">Print</Link>
-        <Link href="/arena">Arena</Link>
         <Link href="/about">About</Link>
         <Link href="/contact">Contact</Link>
-        <Link href="/account">Account</Link>
         {instagramUrl && <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>}
       </nav>
     </footer>

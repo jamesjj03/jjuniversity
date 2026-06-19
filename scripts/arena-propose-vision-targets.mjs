@@ -87,7 +87,20 @@ async function imageInput(source) {
     return Buffer.from(await response.arrayBuffer());
   }
 
-  return source.toLowerCase().endsWith(".svg") ? await readFile(source) : source;
+  if (!source.toLowerCase().endsWith(".svg")) return source;
+
+  return normalizeSvgForSharp(await readFile(source, "utf8"));
+}
+
+function normalizeSvgForSharp(svg) {
+  const svgTag = svg.match(/<([A-Za-z_][\w.-]*):svg\b/i);
+  if (!svgTag) return Buffer.from(svg);
+
+  const prefix = svgTag[1].replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const normalized = svg
+    .replace(new RegExp(`<(/?)${prefix}:`, "g"), "<$1")
+    .replace(new RegExp(`\\sxmlns:${prefix}=`, "g"), " xmlns=");
+  return Buffer.from(normalized);
 }
 
 async function imageDataUrl(source, previewWidth) {
@@ -164,8 +177,8 @@ function fallbackTargets(limit) {
     {
       label: "brainstem",
       aliases: ["brain stem"],
-      xPct: 66,
-      yPct: 79,
+      xPct: 62,
+      yPct: 86,
       confidence: 0.34,
       functions: ["breathing, heart rate, and arousal control"],
       reviewNote: "Heuristic fallback placement after local vision did not complete.",
@@ -173,7 +186,7 @@ function fallbackTargets(limit) {
   ].slice(0, limit);
 }
 
-async function callVisionModel({ endpoint, model, prompt, imageUrl, timeoutMs }) {
+async function callVisionModel({ endpoint, model, prompt, imageUrl, timeoutMs, maxTokens }) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -184,7 +197,7 @@ async function callVisionModel({ endpoint, model, prompt, imageUrl, timeoutMs })
       body: JSON.stringify({
         model,
         temperature: 0.1,
-        max_tokens: 1800,
+        max_tokens: maxTokens,
         messages: [
           {
             role: "user",
@@ -288,6 +301,7 @@ async function main() {
       prompt: promptForDraft(draft, frame, limit),
       imageUrl,
       timeoutMs: Number(args.timeout || 120000),
+      maxTokens: Number(args["max-tokens"] || 900),
     });
   } catch (error) {
     modelError = error instanceof Error ? error.message : String(error);
