@@ -481,7 +481,7 @@ html body .dangerBtn {
 
 /* Mobile header guardrail: brand/actions on row one, Continue on row two. */
 html body .siteHeader {
-  grid-template-columns:minmax(190px, 1fr) auto auto !important;
+  grid-template-columns:minmax(190px, 1fr) auto auto auto !important;
 }
 
 @media (max-width:760px) {
@@ -491,10 +491,10 @@ html body .siteHeader {
     margin:0 auto !important;
     padding:8px !important;
     display:grid !important;
-    grid-template-columns:minmax(0, 1fr) 42px !important;
+    grid-template-columns:minmax(0, 1fr) 42px 42px !important;
     grid-template-areas:
-      "brand menu"
-      "continue continue" !important;
+      "brand social menu"
+      "continue continue continue" !important;
     gap:8px !important;
     align-items:center !important;
     overflow:visible !important;
@@ -576,7 +576,7 @@ html body .siteHeader {
 
 @media (max-width:420px) {
   html body .siteHeader {
-    grid-template-columns:minmax(0, 1fr) 38px !important;
+    grid-template-columns:minmax(0, 1fr) 38px 38px !important;
     gap:6px !important;
   }
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { CSSProperties, KeyboardEvent, MouseEvent } from "react";
 import type { RecallMode, RecallPack, RecallShape, RecallTarget } from "@/lib/recall";
@@ -300,6 +301,7 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
             </div>
             <div className="recallLibraryActions" aria-label="Arena actions">
               <span>{anatomyPacks.length} ready / 10 categories</span>
+              <Link className="btn secondary" href="/admin/arena" prefetch={false}>Factory</Link>
             </div>
           </header>
 

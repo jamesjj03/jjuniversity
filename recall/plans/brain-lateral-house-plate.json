@@ -1,0 +1,97 @@
+{
+  "id": "brain-lateral-house-plate",
+  "title": "Brain Lateral House Plate",
+  "category": "anatomy",
+  "categoryTitle": "Anatomy",
+  "status": "planned",
+  "sourceMode": "original-house-plate",
+  "createdAt": "2026-06-19T21:55:14.366Z",
+  "updatedAt": "2026-06-19T21:55:14.366Z",
+  "profile": {
+    "sourceStrategy": "open-diagram-or-house-plate",
+    "preferredInputs": [
+      "public domain or CC BY diagrams",
+      "medical/public health diagram sources",
+      "house-style redraw from multiple anatomical references"
+    ],
+    "blockedInputs": [
+      "labeled answer-key-only images",
+      "photographs unless the pack is explicitly photographic",
+      "single copyrighted diagram traces"
+    ],
+    "targetStrategy": "vision proposal plus reviewed dots/polygons",
+    "plateStrategy": "clean unlabeled diagram, optionally house-style rendered"
+  },
+  "requiredArtifacts": {
+    "source": "Original source, open source asset, or data/reference set with license and attribution.",
+    "plate": "The visible unlabeled image used in the game.",
+    "overlay": "Dots, polygons, or lines used for clicking. This is separate from the plate.",
+    "facts": "Short prompts attached to targets. Facts remain blocked until reviewed.",
+    "review": "Source, target placement, labels, aliases, and facts must be approved before publish."
+  },
+  "approval": {
+    "source": "needs-review",
+    "license": "needs-review",
+    "plate": "needs-review",
+    "targets": "needs-review",
+    "facts": "needs-review",
+    "publish": "blocked"
+  },
+  "stages": [
+    {
+      "id": "intake",
+      "status": "complete"
+    },
+    {
+      "id": "source-hunt",
+      "status": "queued"
+    },
+    {
+      "id": "license-pass",
+      "status": "queued"
+    },
+    {
+      "id": "plate-pass",
+      "status": "queued"
+    },
+    {
+      "id": "target-pass",
+      "status": "queued"
+    },
+    {
+      "id": "fact-pass",
+      "status": "queued"
+    },
+    {
+      "id": "review-pass",
+      "status": "queued"
+    },
+    {
+      "id": "stage-preview",
+      "status": "queued"
+    },
+    {
+      "id": "publish-pack",
+      "status": "blocked"
+    }
+  ],
+  "commands": [
+    {
+      "stage": "plate-pass",
+      "command": "Create or import the unlabeled house-style plate at public/arena/diagrams/brain-lateral-house-plate/plate.svg, then register references in recall/sources/ and recall/source-ledger.json."
+    },
+    {
+      "stage": "target-pass",
+      "command": "npm run arena:propose-vision-targets -- --pack brain-lateral-house-plate --limit 8 --timeout 120000 --max-tokens 900"
+    },
+    {
+      "stage": "stage-preview",
+      "command": "npm run arena:stage-preview -- --pack brain-lateral-house-plate"
+    }
+  ],
+  "notes": [
+    "The visible plate and the semantic hit zone layer are separate artifacts.",
+    "Model output is proposal-only until review approves source, target placement, labels, aliases, and facts.",
+    "Publish remains blocked until every approval gate is approved."
+  ]
+}

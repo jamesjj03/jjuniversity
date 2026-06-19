@@ -96,6 +96,7 @@ export default function AccountMenu() {
     { href: "/", label: "Home" },
     { href: "/library", label: "Library" },
     { href: "/print", label: "Print" },
+    { href: "/arena", label: "Arena" },
     ...(atlasVisible ? [{ href: "/atlas", label: "Atlas" }] : []),
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
@@ -155,6 +156,12 @@ export default function AccountMenu() {
         <div className="accountMenuTop">
           <Link className="menuSettingsButton" href="/settings" onClick={closeMenu} aria-label="Settings" title="Settings">
             <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.25" /><path d="M19.4 15a8.1 8.1 0 0 0 .06-5.9l2.04-1.6-2-3.46-2.55 1a8.2 8.2 0 0 0-2.55-1.48L14 1h-4l-.4 2.56a8.2 8.2 0 0 0-2.55 1.48l-2.55-1-2 3.46 2.04 1.6a8.1 8.1 0 0 0 .06 5.9L2.5 16.5l2 3.46 2.55-1a8.2 8.2 0 0 0 2.55 1.48L10 23h4l.4-2.56a8.2 8.2 0 0 0 2.55-1.48l2.55 1 2-3.46L19.4 15Z" /></svg>
+          </Link>
+          <Link className="menuAccountButton" href="/account" onClick={closeMenu} aria-label="Account" title="Account">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4.75 21a7.25 7.25 0 0 1 14.5 0" />
+            </svg>
           </Link>
           {account?.name ? <span>{account.name}</span> : <span className="accountMenuSpacer" aria-hidden="true" />}
           <button type="button" onClick={closeMenu}>Close</button>

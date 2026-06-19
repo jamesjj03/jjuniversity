@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-06-19T00:00:00.000Z",
+  "workingName": "Arena",
+  "principle": "Source-first diagrams, separate semantic hit zones, review-gated publishing.",
+  "artifactContract": {
+    "source": "Original source, open source asset, or data/reference set with license and attribution.",
+    "plate": "The visible unlabeled image used in the game.",
+    "overlay": "Dots, polygons, or lines used for clicking. This is separate from the plate.",
+    "facts": "Short prompts attached to targets. Facts remain blocked until reviewed.",
+    "review": "Source, target placement, labels, aliases, and facts must be approved before publish."
+  },
+  "stageOrder": [
+    "intake",
+    "source-hunt",
+    "license-pass",
+    "plate-pass",
+    "target-pass",
+    "fact-pass",
+    "review-pass",
+    "stage-preview",
+    "publish-pack"
+  ],
+  "categoryProfiles": {
+    "anatomy": {
+      "sourceStrategy": "open-diagram-or-house-plate",
+      "preferredInputs": [
+        "public domain or CC BY diagrams",
+        "medical/public health diagram sources",
+        "house-style redraw from multiple anatomical references"
+      ],
+      "blockedInputs": [
+        "labeled answer-key-only images",
+        "photographs unless the pack is explicitly photographic",
+        "single copyrighted diagram traces"
+      ],
+      "targetStrategy": "vision proposal plus reviewed dots/polygons",
+      "plateStrategy": "clean unlabeled diagram, optionally house-style rendered"
+    },
+    "geography": {
+      "sourceStrategy": "vector-data-first",
+      "preferredInputs": [
+        "open GIS/vector datasets",
+        "public domain boundary data",
+        "OpenStreetMap-derived data with license review"
+      ],
+      "blockedInputs": [
+        "text-to-image maps as factual base maps",
+        "unlicensed atlas screenshots",
+        "cropped proprietary map tiles"
+      ],
+      "targetStrategy": "data-derived polygons first, model only for naming and QA",
+      "plateStrategy": "render house-style map plates from source data"
+    },
+    "biology": {
+      "sourceStrategy": "open-diagram-or-house-plate",
+      "preferredInputs": [
+        "public domain or CC BY science diagrams",
+        "house-style redraw from multiple references"
+      ],
+      "blockedInputs": [
+        "single copyrighted textbook diagram traces",
+        "labeled diagrams without an unlabeled derivative path"
+      ],
+      "targetStrategy": "vision proposal plus reviewed dots/polygons",
+      "plateStrategy": "clean unlabeled diagram"
+    },
+    "default": {
+      "sourceStrategy": "source-ledger-required",
+      "preferredInputs": [
+        "public domain",
+        "CC0",
+        "CC BY",
+        "CC BY-SA",
+        "house-style original based on reviewed references"
+      ],
+      "blockedInputs": [
+        "unknown license",
+        "non-commercial license",
+        "no-derivatives license",
+        "all-rights-reserved source images"
+      ],
+      "targetStrategy": "model proposes, human approves",
+      "plateStrategy": "unlabeled, editable when possible"
+    }
+  },
+  "approvalGates": {
+    "source": "needs-review",
+    "license": "needs-review",
+    "plate": "needs-review",
+    "targets": "needs-review",
+    "facts": "needs-review",
+    "publish": "blocked"
+  }
+}

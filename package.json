@@ -21,6 +21,7 @@
     "arena:propose-vision-targets": "node scripts/arena-propose-vision-targets.mjs",
     "arena:stage-preview": "node scripts/arena-stage-preview-pack.mjs",
     "arena:rank-candidates": "node scripts/arena-rank-candidates-local.mjs",
+    "arena:plan-pack": "node scripts/arena-plan-pack.mjs",
     "atlas:seed": "node atlas/scripts/seed_foundations.js",
     "atlas:validate": "node atlas/scripts/validate_nodes.js",
     "atlas:index": "node atlas/scripts/build_indexes.js",
