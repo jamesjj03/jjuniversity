@@ -85,7 +85,31 @@ type DraftCorrection = {
   status: string;
 };
 
+type CandidateFile = {
+  generatedAt: string;
+  candidates: DraftCandidate[];
+};
+
+type DraftCandidate = {
+  id: string;
+  title: string;
+  sourceUrl: string;
+  kind: string;
+  width: number;
+  height: number;
+  score: number;
+  allowed: boolean;
+  artist?: string;
+  credit?: string;
+  description?: string;
+  license?: {
+    shortName?: string;
+    url?: string;
+  };
+};
+
 const DRAFT_ROOT = path.join(process.cwd(), "recall", "drafts");
+const CANDIDATE_FILE = path.join(process.cwd(), "recall", "candidates", "wikimedia-brain-candidates.json");
 
 export const metadata = {
   title: "Arena Factory | JJ University",
@@ -112,6 +136,14 @@ async function loadDrafts() {
   } catch {
     return [];
   }
+}
+
+async function loadCandidates() {
+  const file = await readJson<CandidateFile>(CANDIDATE_FILE);
+  return (file?.candidates || [])
+    .filter(candidate => candidate.allowed)
+    .filter(candidate => /brain|cerebr|lobe|sagittal|lateral|cortex|gyri|neuro/i.test(`${candidate.title} ${candidate.description || ""}`))
+    .slice(0, 16);
 }
 
 function statusClass(status = "") {
@@ -160,7 +192,7 @@ function renderDraftTarget(target: DraftTarget) {
 }
 
 export default async function ArenaFactoryPage() {
-  const drafts = await loadDrafts();
+  const [drafts, candidates] = await Promise.all([loadDrafts(), loadCandidates()]);
 
   return (
     <main className="page adminArenaPage">
@@ -314,6 +346,34 @@ export default async function ArenaFactoryPage() {
           </article>
         )}
       </section>
+
+      {candidates.length ? (
+        <section className="adminArenaCandidates" aria-label="Discovered diagram candidates">
+          <header>
+            <div>
+              <p className="kicker">Source Hunt</p>
+              <h2>Diagram Candidates</h2>
+            </div>
+            <span>{candidates.length} shown</span>
+          </header>
+
+          <div>
+            {candidates.map(candidate => (
+              <article key={candidate.id}>
+                <strong>{candidate.title.replace(/^File:/, "")}</strong>
+                <p>{candidate.description || candidate.artist || candidate.credit || "No description in metadata."}</p>
+                <div>
+                  <span>{candidate.kind}</span>
+                  <span>{candidate.width} x {candidate.height}</span>
+                  <span>{candidate.license?.shortName || "license unknown"}</span>
+                  <span>score {candidate.score}</span>
+                </div>
+                <a href={candidate.sourceUrl} target="_blank" rel="noreferrer">Open source</a>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }

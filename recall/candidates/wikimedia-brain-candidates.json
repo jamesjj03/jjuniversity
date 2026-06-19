@@ -1,0 +1,3281 @@
+{
+  "generatedAt": "2026-06-19T00:11:01.412Z",
+  "provider": "wikimedia-commons",
+  "categories": [
+    "Category:Human brain (sagittal section)",
+    "Category:Human brain (lateral view)",
+    "Category:Brain lobes",
+    "Category:SVG neuroanatomy of humans"
+  ],
+  "count": 121,
+  "allowedCount": 116,
+  "candidates": [
+    {
+      "id": "commons-83619811",
+      "title": "File:Gyri of lateral cortex.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gyri%20of%20lateral%20cortex.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Gyri_of_lateral_cortex.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 2400,
+      "height": 2400,
+      "byteLength": 3264884,
+      "sha1": "d2bad1c4c2d5b5ba4a6caffff652bcb7871bae54",
+      "artist": "Frank Gaillard",
+      "credit": "Case courtesy of A.Prof Frank Gaillard, Radiopaedia.org, rID: 46670",
+      "description": "Diagram of the gyri of the lobes of the brain shown on lateral view of hemisphere",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 81
+    },
+    {
+      "id": "commons-36443279",
+      "title": "File:Brain; lateral section. Coloured line engraving by W.H. Liza Wellcome V0008409.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%3B%20lateral%20section.%20Coloured%20line%20engraving%20by%20W.H.%20Liza%20Wellcome%20V0008409.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/Brain%3B_lateral_section._Coloured_line_engraving_by_W.H._Liza_Wellcome_V0008409.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 2177,
+      "height": 3510,
+      "byteLength": 3861909,
+      "sha1": "1f3b9edecd48b39b34c7469b64339b37a5689f29",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/b3/9d/a94575aca6c2c99af2e57bb09296.jpg Gallery: https://wellcomeimages.org/indexplus/image/V0008409.html Wellcome Collection gallery (2018-03-24): https://wellcomecollection.org/works/pehx68e7 CC-BY-4.0",
+      "description": "Brain: lateral section. Coloured line engraving by W.H. Lizars, ca. 1826. Iconographic Collections Keywords: William Home Lizars",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 76
+    },
+    {
+      "id": "commons-36443318",
+      "title": "File:Brain; lateral section. Watercolour after(?) W.H. Lizars, ca Wellcome V0008417.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%3B%20lateral%20section.%20Watercolour%20after(%3F)%20W.H.%20Lizars%2C%20ca%20Wellcome%20V0008417.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Brain%3B_lateral_section._Watercolour_after%28%3F%29_W.H._Lizars%2C_ca_Wellcome_V0008417.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 2939,
+      "height": 2649,
+      "byteLength": 3686175,
+      "sha1": "e25282f98df571e8265953883cb23be9a9db9abd",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/ae/9d/3d8f9ca75088e1bcba7e92bdb08c.jpg Gallery: https://wellcomeimages.org/indexplus/image/V0008417.html Wellcome Collection gallery (2018-03-24): https://wellcomecollection.org/works/kwzschfr CC-BY-4.0",
+      "description": "Brain: lateral section. Watercolour after(?) W.H. Lizars, ca. 1826. Iconographic Collections Keywords: William Home Lizars",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 76
+    },
+    {
+      "id": "commons-9866233",
+      "title": "File:Cognitive science heptagram tr.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cognitive%20science%20heptagram%20tr.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Cognitive_science_heptagram_tr.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1578,
+      "height": 1809,
+      "byteLength": 153911,
+      "sha1": "f637e27d1e80a4a12e2e4f6ebd90d8810f322a59",
+      "artist": "Cognitive_science_heptagram.svg: *Books-aj.svg_aj_ashton_01.svg: Original author: AJ Ashton (on OpenClipArt). Code fixed by verdy_p for XML conformance, and MediaWiki compatibility, using a stricter subset of SVG without the extensions of SVG editors, also cleaned up many unnecessary CSS attributes, or factorized them for faster performance and smaller size. All the variants linked below are based on this image. Human.svg: created by NASA Phi.svg: jossi Psi2.svg: Gdh Heptagrams.svg: Fibonacci Lobes_of_the_brain_NL.svg: Mysid Robot_icon.svg: Bilboq Syntax_tree.svg: Aaron Rotenberg derivative work: Beao derivative work: Alkd (talk)",
+      "credit": "Cognitive_science_heptagram.svg",
+      "description": "Based on w:File:CognitiveScienceSeptagram.png but with public domain SVG's. The concept is adapted from a figure presented in the following article: * Miller, George A (2003). \"The cognitive revolution: a historical perspective\". TRENDS in Cognitive Sciences 7.",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 76
+    },
+    {
+      "id": "commons-9544460",
+      "title": "File:Cognitive science heptagram.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cognitive%20science%20heptagram.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Cognitive_science_heptagram.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1578,
+      "height": 1809,
+      "byteLength": 118740,
+      "sha1": "4d0d5e9de972f24cf78327eb216cd317810ed8b7",
+      "artist": "Books-aj.svg_aj_ashton_01.svg: Original author: AJ Ashton (on OpenClipArt). Code fixed by verdy_p for XML conformance, and MediaWiki compatibility, using a stricter subset of SVG without the extensions of SVG editors, also cleaned up many unnecessary CSS attributes, or factorized them for faster performance and smaller size. All the variants linked below are based on this image. Human.svg: created by NASA Phi.svg: jossi Psi2.svg: Gdh Heptagrams.svg: Fibonacci Lobes_of_the_brain_NL.svg: Mysid Robot_icon.svg: Bilboq Syntax_tree.svg: Aaron Rotenberg derivative work: Beao",
+      "credit": "Books-aj.svg_aj_ashton_01.svg Human.svg Phi.svg Psi2.svg Heptagrams.svg Lobes_of_the_brain_NL.svg Robot_icon.svg Syntax_tree.svg",
+      "description": "Based on w:File:CognitiveScienceSeptagram.png but with public domain SVG's. The concept is adapted from a figure presented in the following article: Miller, George A. (March, 2003). \"The cognitive revolution: a historical perspective\". Trends in Cognitive Sciences 7 (3): pp. 141-144.",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 76
+    },
+    {
+      "id": "commons-42621682",
+      "title": "File:Development of nervous system.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Development%20of%20nervous%20system.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/67/Development_of_nervous_system.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1850,
+      "height": 750,
+      "byteLength": 36080,
+      "sha1": "73e56e4b4e150be729aa3ed78573f2c997dc77a6",
+      "artist": "Tauiris",
+      "credit": "Own work, based on File:Development_of_nervous_system.png",
+      "description": "Development of nervous system",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 76
+    },
+    {
+      "id": "commons-16032897",
+      "title": "File:Fr-Cognitive science heptagram.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fr-Cognitive%20science%20heptagram.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Fr-Cognitive_science_heptagram.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1600,
+      "height": 1809,
+      "byteLength": 164841,
+      "sha1": "3edcf93615403fbb2acd412feea805c87ff57274",
+      "artist": "User:Derfel73; User:Beao",
+      "credit": "File:Cognitive_science_heptagram.svg",
+      "description": "Septagram illustrating disciplines which comprise cognitive science",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 76
+    },
+    {
+      "id": "commons-87789352",
+      "title": "File:Spinal nerve no text.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spinal%20nerve%20no%20text.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/Spinal_nerve_no_text.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1175,
+      "height": 768,
+      "byteLength": 58515,
+      "sha1": "b204af4a03e62ee90b39de7b3e2d2e5f14bb47cf",
+      "artist": "jmarchn",
+      "credit": "File:Spinal_nerve_CAT.svg",
+      "description": "Modification of https://commons.wikimedia.org/wiki/File:Spinal_nerve_CAT.svg: removed text labels",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 76
+    },
+    {
+      "id": "commons-109375890",
+      "title": "File:Basic structures of the brain highlighted.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Basic%20structures%20of%20the%20brain%20highlighted.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Basic_structures_of_the_brain_highlighted.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 945,
+      "height": 763,
+      "byteLength": 273230,
+      "sha1": "28deefc516354a363d6840ec3dbabdb439121e39",
+      "artist": "Belomaad When citing cite https://sites.google.com/view/biologyerettsegi",
+      "credit": "Own work",
+      "description": "The image highlights and names the most important structures of the brain in a sagittal(longitudinal) cross-section.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 74
+    },
+    {
+      "id": "commons-3433387",
+      "title": "File:Brain sagittal.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20sagittal.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Brain_sagittal.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 936,
+      "height": 890,
+      "byteLength": 145279,
+      "sha1": "6959fdd837c991d4464af1a58abe1c0b9d957980",
+      "artist": "original author: Patrick J. Lynch, medical illustrator",
+      "credit": "Image:Skull and brain sagittal.svg, skull removed and labels added",
+      "description": "brain sagittal section",
+      "license": {
+        "shortName": "CC BY 2.5",
+        "url": "https://creativecommons.org/licenses/by/2.5",
+        "usageTerms": "Creative Commons Attribution 2.5",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 74
+    },
+    {
+      "id": "commons-4874896",
+      "title": "File:Cerebral vascular territories midline.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cerebral%20vascular%20territories%20midline.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Cerebral_vascular_territories_midline.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1024,
+      "height": 999,
+      "byteLength": 130150,
+      "sha1": "125c7cb832f3425dd9269414313d4aba7fd5be52",
+      "artist": "derivative work: Frank Gaillard (talk) Brain_human_sagittal_section.svg: Patrick J. Lynch, medical illustrator",
+      "credit": "Brain_human_sagittal_section.svg",
+      "description": "Brain human sagittal section",
+      "license": {
+        "shortName": "CC BY 2.5",
+        "url": "https://creativecommons.org/licenses/by/2.5",
+        "usageTerms": "Creative Commons Attribution 2.5",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 72
+    },
+    {
+      "id": "commons-39237155",
+      "title": "File:Brain autopsy lateral view.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20autopsy%20lateral%20view.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Brain_autopsy_lateral_view.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 2272,
+      "height": 1704,
+      "byteLength": 680575,
+      "sha1": "ad82b4baf49e855a622652e9e73ac1bc37e817bd",
+      "artist": "Jensflorian",
+      "credit": "Own work",
+      "description": "Brain autopsy lateral view after formalin fixation",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 70
+    },
+    {
+      "id": "commons-75780370",
+      "title": "File:Brain-en.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain-en.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Brain-en.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1920,
+      "height": 1095,
+      "byteLength": 1005021,
+      "sha1": "bbe317c53e0c381134cc5a6afe2b6ac839f14a26",
+      "artist": "OpenClipart-Vectors (https://pixabay.com/fr/users/openclipart-vectors-30363/) in PIXABAY",
+      "credit": "https://pixabay.com/fr/cerveau-cerveau-marqu%C3%A9-2026346/ archive copy at the Wayback Machine",
+      "description": "Brain regions and lobes.",
+      "license": {
+        "shortName": "CC0",
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "usageTerms": "Creative Commons Zero, Public Domain Dedication",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 69
+    },
+    {
+      "id": "commons-51205157",
+      "title": "File:Cerebrum lobes.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cerebrum%20lobes.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Cerebrum_lobes.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 2000,
+      "height": 1295,
+      "byteLength": 497889,
+      "sha1": "ece628cde92e7a58d9fc067a60916293212f7e57",
+      "artist": "Vectorized image by Jkwchui, via Wikimedia Commons. Labeled for reuse.",
+      "credit": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Cerebrum_lobes.svg/2000px-Cerebrum_lobes.svg.png",
+      "description": "Functional specialization of the brain.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 69
+    },
+    {
+      "id": "commons-16137447",
+      "title": "File:LobesCapts.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:LobesCapts.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/LobesCapts.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 2004,
+      "height": 1653,
+      "byteLength": 1573084,
+      "sha1": "b5a1a367a0b4f3a4a417a088458e59c88f14396b",
+      "artist": "Sebastian023",
+      "credit": "Own work",
+      "description": "Brain lobes, main sulci and boundaries",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 69
+    },
+    {
+      "id": "commons-25779540",
+      "title": "File:6 week human embryo nervous system uk.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:6%20week%20human%20embryo%20nervous%20system%20uk.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/6_week_human_embryo_nervous_system_uk.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1087,
+      "height": 608,
+      "byteLength": 38371,
+      "sha1": "08fc4aea5f8fa53c49157cc9a201d50b26d79819",
+      "artist": "Kurzon",
+      "credit": "File:6 week human embryo nervous system.svg",
+      "description": "Схема мозку і основних нервів 6-тижневого плоду людини: Нюховий Зоровий Окоруховий Блоковий Трійчастий чутливий Трійчастий руховий Відвідний Лицевий Присінково-завитковий Язико-глотковий Блукаючий Черепна частина додаткового нерва Спинно-мозкова частина додаткового нерва Під'язиковий Шинйні I, II, III і IV",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-10240266",
+      "title": "File:6 week human embryo nervous system.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:6%20week%20human%20embryo%20nervous%20system.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/33/6_week_human_embryo_nervous_system.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1087,
+      "height": 608,
+      "byteLength": 110330,
+      "sha1": "2661463b6c21471811cf9f2d4b81356944ff900a",
+      "artist": "Kurzon",
+      "credit": "Own work",
+      "description": "A diagram showing the brain and major nerves of a 6 week old human fetus. 1. olfactory 2. optic 3. oculomotor 4. trochlear 5. trigeminal sensory 6. trigeminal motor 7. abducens 8. facial 9. vestibulocochlear 10. glossopharyngeal 11. vagus 12. cranial accessory 13. spinal accessory 14. hypoglossal 15. cervical I, II, III and IV",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-47243859",
+      "title": "File:Brain Anatomy (Sagittal).png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20Anatomy%20(Sagittal).png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/86/Brain_Anatomy_%28Sagittal%29.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1024,
+      "height": 768,
+      "byteLength": 632967,
+      "sha1": "5fbf77edc2e9e8d178fe546e26cca763e22e5986",
+      "artist": "BruceBlaus",
+      "credit": "Own work",
+      "description": "Brain Anatomy (Sagittal). Animation in the reference.[1]",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-178931371",
+      "title": "File:Brain Lateral (NIH BioArt 60).svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20Lateral%20(NIH%20BioArt%2060).svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Brain_Lateral_%28NIH_BioArt_60%29.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 512,
+      "height": 410,
+      "byteLength": 430385,
+      "sha1": "cbc9f694f37417f5306d95a75d38f42cb16d6fa0",
+      "artist": "Courtesy of NIAID Ryan Kissinger",
+      "credit": "Brain Lateral",
+      "description": "Lateral view of a human brain.",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-38108749",
+      "title": "File:Brain midsagital view.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20midsagital%20view.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Brain_midsagital_view.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1024,
+      "height": 768,
+      "byteLength": 268395,
+      "sha1": "b706bc61a6e9fd8e8a7a111e47e8e1013eaa7055",
+      "artist": "Mike Birkhead",
+      "credit": "Own work",
+      "description": "Midsagittal view of the right hemisphere of the brain.",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-143617411",
+      "title": "File:Diagram o'r System Nerfol Dynol yn Gymraeg.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Diagram%20o'r%20System%20Nerfol%20Dynol%20yn%20Gymraeg.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Diagram_o%27r_System_Nerfol_Dynol_yn_Gymraeg.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 871,
+      "height": 1023,
+      "byteLength": 190498,
+      "sha1": "faa3ec5a85ef45f9e834b94b665c392a3fbc755d",
+      "artist": "Llywelyn2000",
+      "credit": "Own work",
+      "description": "Diagram o'r System Nerfol Dynol yn Gymraeg ar ffurf svg",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-18147505",
+      "title": "File:Gray722 refined.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gray722%20refined.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Gray722_refined.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1061,
+      "height": 1474,
+      "byteLength": 770006,
+      "sha1": "e77489df454fb43823e67663a4016eb2d3d93fbf",
+      "artist": "Henry Vandyke Carter",
+      "credit": "Henry Gray (1918) Anatomy of the Human Body (See \"Book\" section below) Bartleby.com: Gray's Anatomy, Plate 722",
+      "description": "",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-34304361",
+      "title": "File:Human Nervous System diagram (no text).svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Human%20Nervous%20System%20diagram%20(no%20text).svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/Human_Nervous_System_diagram_%28no_text%29.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 871,
+      "height": 1023,
+      "byteLength": 174729,
+      "sha1": "07402f9493301b691ccf43de8f42470b944cb8dd",
+      "artist": "Benevolent",
+      "credit": "Own work",
+      "description": "Human nervous system diagram (no text)",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-34213336",
+      "title": "File:Human Nervous System diagram.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Human%20Nervous%20System%20diagram.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Human_Nervous_System_diagram.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 871,
+      "height": 1023,
+      "byteLength": 187475,
+      "sha1": "e921c880cb80e2282dd21040e89ad5b8221e59f7",
+      "artist": "Benevolent",
+      "credit": "Own work",
+      "description": "Human Nervous System diagram",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-20627708",
+      "title": "File:Nervous system.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/83/Nervous_system.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1200,
+      "height": 1650,
+      "byteLength": 214665,
+      "sha1": "2f8c9d3e6ceee327896f473cf2e3683efcdd813a",
+      "artist": "Termininja",
+      "credit": "Nervous system diagram.svg Endocrine system.svg",
+      "description": "Nervous system",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-6738939",
+      "title": "File:Onionskinddistribution.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Onionskinddistribution.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Onionskinddistribution.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 744,
+      "height": 1052,
+      "byteLength": 199275,
+      "sha1": "f6e6d8feeb6dd919d3f9bc2f45bce10bef07f054",
+      "artist": "Madhero88",
+      "credit": "Own work",
+      "description": "onion distribution of pain and temperature sense by trigeminal nerve",
+      "license": {
+        "shortName": "CC BY 3.0",
+        "url": "https://creativecommons.org/licenses/by/3.0",
+        "usageTerms": "Creative Commons Attribution 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-8723208",
+      "title": "File:Spinal nerve CAT.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spinal%20nerve%20CAT.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/87/Spinal_nerve_CAT.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1175,
+      "height": 768,
+      "byteLength": 82823,
+      "sha1": "2b1b4ef65e345f42823b8baf5bb7ff6f97ceb300",
+      "artist": "Jmarchn",
+      "credit": "Own work",
+      "description": "Nervi espinal",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-8735064",
+      "title": "File:Spinal nerve Sympathetic ganglion multilingual.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spinal%20nerve%20Sympathetic%20ganglion%20multilingual.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Spinal_nerve_Sympathetic_ganglion_multilingual.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1123,
+      "height": 783,
+      "byteLength": 89557,
+      "sha1": "4fff713b56ab032a0adbf1d410e1da7ccd3a7d18",
+      "artist": "Jmarchn",
+      "credit": "Own work",
+      "description": "Schema of Spinal nerve and Sympathetic ganglion",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-157937816",
+      "title": "File:Spinal nerve-ar.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spinal%20nerve-ar.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Spinal_nerve-ar.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1200,
+      "height": 700,
+      "byteLength": 17293,
+      "sha1": "f54521859272fc04d60ad1bed489a8ff92f89bbd",
+      "artist": "Tristanb and Mysid (translated by أنون)",
+      "credit": "Spinal nerve.svg",
+      "description": "تكوين العصب الشوكي من الجذور الظهرانية والعصبية.",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-30131958",
+      "title": "File:Spinal nerve-es.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spinal%20nerve-es.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Spinal_nerve-es.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1200,
+      "height": 700,
+      "byteLength": 12823,
+      "sha1": "320e3a985513ca7c6a34796bb245fc17586bd633",
+      "artist": "Tristanb and Mysid (translated by Angelito7)",
+      "credit": "Spinal nerve.svg",
+      "description": "The formation of the spinal nerve from the dorsal and ventral roots.",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-4610993",
+      "title": "File:Spinal nerve-ja.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spinal%20nerve-ja.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/47/Spinal_nerve-ja.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 1200,
+      "height": 700,
+      "byteLength": 118872,
+      "sha1": "b52473677b53ad038f4fe3ae1f67f922bdaa2164",
+      "artist": "Tristanb and Mysid (translated by Hatsukari715)",
+      "credit": "Spinal nerve.svg",
+      "description": "前根と後根からなる脊髄神経の構造",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 68
+    },
+    {
+      "id": "commons-141580273",
+      "title": "File:Amentia Plate IA.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amentia%20Plate%20IA.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Amentia_Plate_IA.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1799,
+      "height": 2738,
+      "byteLength": 886186,
+      "sha1": "02dcfa2be44bee550bef8c51f788c99ebe6450ad",
+      "artist": "A.F. Tredgold",
+      "credit": "Mental deficiency (amentia)",
+      "description": "BRAINS IN AMENTIA. A. - Idiot's Brain, showing microgyria of occipital lobe. B. - Idiot's Brain, showing undeveloped frontal lobe and practical absence of post-central gyrus. C. - Idiot's Brain of cetacean type. Age 16 years. Weight 1,420 grammes. D. - Idiot's Brain, showing undeveloped prefrontal and microgyria of occipital lobe. E. - Hydrocephalic imbecile, age 7 years. Both cerebral hemispheres are merely large, thin-walled sacs.",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 67
+    },
+    {
+      "id": "commons-36446533",
+      "title": "File:Anatomy of the brain; lobes and cerebellum Wellcome V0009499.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anatomy%20of%20the%20brain%3B%20lobes%20and%20cerebellum%20Wellcome%20V0009499.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/56/Anatomy_of_the_brain%3B_lobes_and_cerebellum_Wellcome_V0009499.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 3008,
+      "height": 2994,
+      "byteLength": 3375686,
+      "sha1": "15f83a2bc9ddae80ae68382f1735a2126d9a2bc5",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/6d/bd/fe67887d78fb1599b648b2b5cca6.jpg Gallery: https://wellcomeimages.org/indexplus/image/V0009499.html Wellcome Collection gallery (2018-03-23): https://wellcomecollection.org/works/s3hrhh2u CC-BY-4.0",
+      "description": "Diagram of the brain for a phrenological textbook, showing lobes and cerebellum. Pen drawing, c. 1902. Iconographic Collections Keywords: Bernard Hollander",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 67
+    },
+    {
+      "id": "commons-161935574",
+      "title": "File:Lobes of the brain INV.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lobes%20of%20the%20brain%20INV.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Lobes_of_the_brain_INV.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 4267,
+      "height": 3046,
+      "byteLength": 2738447,
+      "sha1": "129bd88a754532aa01d648f34800b553be92ee01",
+      "artist": "Ndelarosep",
+      "credit": "Own work",
+      "description": "Lobes of the brain",
+      "license": {
+        "shortName": "CC0",
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "usageTerms": "Creative Commons Zero, Public Domain Dedication",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 67
+    },
+    {
+      "id": "commons-42468714",
+      "title": "File:Blausen 0104 Brain x-secs SectionalPlanes-Arabic-YM.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blausen%200104%20Brain%20x-secs%20SectionalPlanes-Arabic-YM.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/04/Blausen_0104_Brain_x-secs_SectionalPlanes-Arabic-YM.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 2250,
+      "height": 1600,
+      "byteLength": 2320305,
+      "sha1": "c411155372ebdb7ec53376cb7e5a4ec431ff6a7e",
+      "artist": "Yahia.Mokhtar",
+      "credit": "Own work",
+      "description": "مستويات قاطعة فى المخ المستوى السهمي المستوى الإكليلي المستوى المستعرض",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 66
+    },
+    {
+      "id": "commons-31118590",
+      "title": "File:Blausen 0104 Brain x-secs SectionalPlanes.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blausen%200104%20Brain%20x-secs%20SectionalPlanes.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/de/Blausen_0104_Brain_x-secs_SectionalPlanes.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 2250,
+      "height": 1600,
+      "byteLength": 1935431,
+      "sha1": "c6bff112cee9cac8b67c97653678e52623d329ec",
+      "artist": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
+      "credit": "Own work",
+      "description": "Sectional Planes of the Brain. See a related animation of this medical topic.",
+      "license": {
+        "shortName": "CC BY 3.0",
+        "url": "https://creativecommons.org/licenses/by/3.0",
+        "usageTerms": "Creative Commons Attribution 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 66
+    },
+    {
+      "id": "commons-25436303",
+      "title": "File:4167134294 d0cf029385 bTêteCoupe.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:4167134294%20d0cf029385%20bT%C3%AAteCoupe.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c2/4167134294_d0cf029385_bT%C3%AAteCoupe.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 2451,
+      "height": 3050,
+      "byteLength": 498487,
+      "sha1": "a1a03b5c894eed84d6f8845d72d4cd2b2da512af",
+      "artist": "Otis Historical Archives of “National Museum of Health &amp; Medicine” (OTIS Archive 1)",
+      "credit": "https://www.flickr.com/photos/medicalmuseum/4167134294/in/photostream",
+      "description": "A VERTICAL LONGITUDINAL SECTION OF A HUMAN HEAD MADE A LITTLE TO ONE SIDE (THE RIGHT) OF THE MEDIAN LINE. THE GREY MATTER OF THE BRAIN IS STAINED RED AND THE MUSCLES OF THE NECK ARE PAINTED A NATURAL TINT. THE SECTION ; DISPLAYS THE ANATOMY OF THE..[head and neck?]. Contributed by Gloria Edinak; photographed by Robin Anne Ferris. Received September 1989. Anatomy. Anatomical specimen",
+      "license": {
+        "shortName": "CC BY 2.0",
+        "url": "https://creativecommons.org/licenses/by/2.0",
+        "usageTerms": "Creative Commons Attribution 2.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 64
+    },
+    {
+      "id": "commons-31118589",
+      "title": "File:Blausen 0101 Brain LateralView.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blausen%200101%20Brain%20LateralView.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Blausen_0101_Brain_LateralView.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1500,
+      "height": 1340,
+      "byteLength": 1434663,
+      "sha1": "65d6ae563522d3273866a89f229e0895773b14c6",
+      "artist": "BruceBlaus",
+      "credit": "Own work",
+      "description": "Lateral View of the Brain. See a full animation of this medical topic.",
+      "license": {
+        "shortName": "CC BY 3.0",
+        "url": "https://creativecommons.org/licenses/by/3.0",
+        "usageTerms": "Creative Commons Attribution 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 64
+    },
+    {
+      "id": "commons-64627147",
+      "title": "File:Blausen 0104 Brain x-secs SectionalPlanes-ar.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blausen%200104%20Brain%20x-secs%20SectionalPlanes-ar.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Blausen_0104_Brain_x-secs_SectionalPlanes-ar.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 2250,
+      "height": 1600,
+      "byteLength": 474616,
+      "sha1": "be8fe200f3f9feb5fe30a20be0447a6ff5d912cf",
+      "artist": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
+      "credit": "This file was derived from: Blausen 0104 Brain x-secs SectionalPlanes.png by Elbasyouny",
+      "description": "صورة توضح مقاطع الدماغ",
+      "license": {
+        "shortName": "CC BY 3.0",
+        "url": "https://creativecommons.org/licenses/by/3.0",
+        "usageTerms": "Creative Commons Attribution 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 64
+    },
+    {
+      "id": "commons-178931372",
+      "title": "File:Brain Lateral (NIH BioArt 60).png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20Lateral%20(NIH%20BioArt%2060).png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Brain_Lateral_%28NIH_BioArt_60%29.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1716,
+      "height": 1376,
+      "byteLength": 468846,
+      "sha1": "87519e26a2757b040b0a0d07426aef82d0ba021a",
+      "artist": "Courtesy of NIAID Ryan Kissinger",
+      "credit": "Brain Lateral",
+      "description": "Lateral view of a human brain.",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 64
+    },
+    {
+      "id": "commons-36443245",
+      "title": "File:Brain; seven figures illustrating various portions, includin Wellcome V0008402.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%3B%20seven%20figures%20illustrating%20various%20portions%2C%20includin%20Wellcome%20V0008402.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/91/Brain%3B_seven_figures_illustrating_various_portions%2C_includin_Wellcome_V0008402.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 2169,
+      "height": 3591,
+      "byteLength": 4183408,
+      "sha1": "1f771c334a4c7e45890501312acc2c9633846a9a",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/49/7d/14542439b09ec86e250b01c5e049.jpg Gallery: https://wellcomeimages.org/indexplus/image/V0008402.html Wellcome Collection gallery (2018-03-24): https://wellcomecollection.org/works/kdackn6u CC-BY-4.0",
+      "description": "Brain: seven figures illustrating various portions, including cross-section of the base of the brain. Coloured line engraving by W.H. Lizars, ca. 1827. Iconographic Collections Keywords: William Home Lizars",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 64
+    },
+    {
+      "id": "commons-37042919",
+      "title": "File:Nervous system diagram unlabeled.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram%20unlabeled.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Nervous_system_diagram_unlabeled.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 272,
+      "height": 597,
+      "byteLength": 395137,
+      "sha1": "1525eb7d417adb2086761850b428b7f10a25fa0e",
+      "artist": "Medium69, Jmarchn",
+      "credit": "Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 64
+    },
+    {
+      "id": "commons-35858520",
+      "title": "File:\"Die Himwindungen des Menschen\", 1869 Wellcome L0001034.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%22Die%20Himwindungen%20des%20Menschen%22%2C%201869%20Wellcome%20L0001034.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bb/%22Die_Himwindungen_des_Menschen%22%2C_1869_Wellcome_L0001034.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1218,
+      "height": 1584,
+      "byteLength": 732436,
+      "sha1": "ae2edcf616ad22d0ff8af11f94f67b4717b4fdc5",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/d5/51/4c603e9db8aa7315ee4995e648ec.jpg Gallery: https://wellcomeimages.org/indexplus/image/L0001034.html Wellcome Collection gallery (2018-03-21): https://wellcomecollection.org/works/ucuxm4s3 CC-BY-4.0",
+      "description": "Brain - Lateral view, showing convolutions Wellcome Images Keywords: anatomy, brain; Neurology",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 62
+    },
+    {
+      "id": "commons-35858510",
+      "title": "File:Adult brain; Lateral side of left hemisphere Wellcome L0001031EA.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adult%20brain%3B%20Lateral%20side%20of%20left%20hemisphere%20Wellcome%20L0001031EA.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/Adult_brain%3B_Lateral_side_of_left_hemisphere_Wellcome_L0001031EA.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1612,
+      "height": 1155,
+      "byteLength": 704871,
+      "sha1": "28965adf3411b5477fd4f6416a7e04f82a1a0b92",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/ca/0e/1b38f3bff4bcd7a07c0f6f408237.jpg Gallery: https://wellcomeimages.org/indexplus/image/L0001031EA.html Wellcome Collection gallery (2018-03-23): https://wellcomecollection.org/works/tkev945a CC-BY-4.0",
+      "description": "Adult brain: lateral side of left hemisphere: medial surface shown. General Collections Keywords: Brain",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 62
+    },
+    {
+      "id": "commons-35858519",
+      "title": "File:Adult brain; lateral side of left hemisphere Wellcome L0001031EB.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adult%20brain%3B%20lateral%20side%20of%20left%20hemisphere%20Wellcome%20L0001031EB.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Adult_brain%3B_lateral_side_of_left_hemisphere_Wellcome_L0001031EB.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1644,
+      "height": 1266,
+      "byteLength": 739251,
+      "sha1": "041c06b5db6f8851256dfd9a3284565afe965985",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/b4/77/09ae455ba86cefce241352a2eb15.jpg Gallery: https://wellcomeimages.org/indexplus/image/L0001031EB.html Wellcome Collection gallery (2018-03-23): https://wellcomecollection.org/works/j2n3khey CC-BY-4.0",
+      "description": "Adult brain: lateral side of left hemisphere: functions shown. General Collections Keywords: Brain",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 62
+    },
+    {
+      "id": "commons-35858501",
+      "title": "File:Adult male brain - natural size Wellcome L0001030EB.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adult%20male%20brain%20-%20natural%20size%20Wellcome%20L0001030EB.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Adult_male_brain_-_natural_size_Wellcome_L0001030EB.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1455,
+      "height": 1318,
+      "byteLength": 694106,
+      "sha1": "93f3c6064d20d5dc0feedf278ecee753f2d2ba31",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/1a/11/5c18f6d1d16e5eb34c0259d4c5ae.jpg Gallery: https://wellcomeimages.org/indexplus/image/L0001030EB.html Wellcome Collection gallery (2018-03-23): https://wellcomecollection.org/works/wx8rsqvf CC-BY-4.0",
+      "description": "Adult male brain - natural size; lateral view with convolutions and fissures. General Collections Keywords: Anatomy; Brain; Nervous System",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 62
+    },
+    {
+      "id": "commons-16137425",
+      "title": "File:OccCapts.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:OccCapts.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/OccCapts.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1662,
+      "height": 781,
+      "byteLength": 866843,
+      "sha1": "1991dad8dc4b3d02f3cd39d2dddaeaa87a151e17",
+      "artist": "Sebastian023",
+      "credit": "Own work",
+      "description": "Occipital brain lobe, sulci an gyri",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 61
+    },
+    {
+      "id": "commons-53290280",
+      "title": "File:3d printed brain n1.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:3d%20printed%20brain%20n1.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/3d_printed_brain_n1.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 5312,
+      "height": 2988,
+      "byteLength": 3587750,
+      "sha1": "cdec8a917a8b21cfcc347270e873bf035cf70e5b",
+      "artist": "Nevit",
+      "credit": "Own work",
+      "description": "3d printed brain",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 58
+    },
+    {
+      "id": "commons-50319450",
+      "title": "File:3DPrinted Human brain 26680098405 47fc44f43d o.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:3DPrinted%20Human%20brain%2026680098405%2047fc44f43d%20o.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/3DPrinted_Human_brain_26680098405_47fc44f43d_o.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 3264,
+      "height": 2448,
+      "byteLength": 2201005,
+      "sha1": "64cca4fd88b369d876db872be4585ac3469c9055",
+      "artist": "Nevit Dilmen (talk) + NIH 3D Print Exchange, National Institutes of Health, NIH Image Gallery",
+      "credit": "Own work + http://3dprint.nih.gov/discover/3DPX-002739 + https://www.flickr.com/photos/nihgov/26680098405/in/photostream/",
+      "description": "3D printed normal human brain from NIH image gallery",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 58
+    },
+    {
+      "id": "commons-12204313",
+      "title": "File:Bourgery & Jacob-cs04cl.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bourgery%20%26%20Jacob-cs04cl.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Bourgery_%26_Jacob-cs04cl.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1944,
+      "height": 2272,
+      "byteLength": 2676434,
+      "sha1": "147164cdba05dfff28c042165ec048fa05b00795",
+      "artist": "This illustration was made by (User:Royonx) and released under the license(s) stated above. You are free to use it for any purpose as long as you credit me and follow the terms of the license. Example : © Michel Royon / Wikimedia Commons If you use this image outside of the Wikimedia projects, I would be happy to hear from you par courriel ( royonx gmail.com). Thanks ! Ce message en français",
+      "credit": "Bourgery &amp; Jacob : Anatomie de l'Homme, Guérin Ed., Paris 1962",
+      "description": "anatomical drawing : écroché :head : Charcot's cut",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 58
+    },
+    {
+      "id": "commons-114570766",
+      "title": "File:Brain lobes and regions with labels.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20lobes%20and%20regions%20with%20labels.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Brain_lobes_and_regions_with_labels.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 750,
+      "height": 389,
+      "byteLength": 412744,
+      "sha1": "e4adb3f34740cdff6314fce8b0a5dda9cafc1d97",
+      "artist": "ErMED14",
+      "credit": "File:Human+Brain.png",
+      "description": "Brain lobes and regions with labels",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 57
+    },
+    {
+      "id": "commons-68199027",
+      "title": "File:Aivot, selkäydin ja hermoradat.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aivot%2C%20selk%C3%A4ydin%20ja%20hermoradat.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Aivot%2C_selk%C3%A4ydin_ja_hermoradat.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 380,
+      "height": 750,
+      "byteLength": 378264,
+      "sha1": "4317d84c3d1c6e24fb31eb934d951170645b2085",
+      "artist": "Original By Medium69, Jmarchn - Nervous system diagram.png, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=37042919 Finnish labels by Opetustuubi",
+      "credit": "By Medium69, Jmarchn - Nervous system diagram.png, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=37042919",
+      "description": "Kuva näyttää aivot, selkäytimen ja hermoratoja.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-149030698",
+      "title": "File:Brain - Broca's and Wernicke's area Diagram.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20-%20Broca's%20and%20Wernicke's%20area%20Diagram.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Brain_-_Broca%27s_and_Wernicke%27s_area_Diagram.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 512,
+      "height": 512,
+      "byteLength": 171556,
+      "sha1": "025947679033e8f7dbfcd8aa04128d346d4788b3",
+      "artist": "UX Stalin",
+      "credit": "Image:BrocasAreaSmall.png, Taken from NIH publication 97-4257, https://www.nidcd.nih.gov/health/aphasia (https://www.nidcd.nih.gov/sites/default/files/Documents/health/voice/Aphasia6-1-16.pdf)",
+      "description": "Diagram of Broca's and Wernicke's area of Human Brain.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-88637928",
+      "title": "File:Brain Anatomy (Sagittal) ku.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20Anatomy%20(Sagittal)%20ku.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Brain_Anatomy_%28Sagittal%29_ku.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 809,
+      "height": 618,
+      "byteLength": 454206,
+      "sha1": "1768fb04bab7ed642411cb9f05d55c2a6c68c90f",
+      "artist": "BruceBlaus",
+      "credit": "File:Brain_Anatomy_(Sagittal).png",
+      "description": "KurdishːDemax ji mejî, demaxê navê, qedê( stûn)demax û ji mejikê pêk tê. Demax di nav hestiyê kiloxê de, ji aliyê perdeyên mejî û şileya mejî-dirkepetik ve dorpêçkirî ye. Perdeyên mejî û şileya mejî-dirkepetik, valahiya navbera demax û kiloxê tijî dikin. Şileya demax-dirkepetik ji boy xwedîkirina demaxê, madeyên sûdbexş dabîn dikin ji boy xaneyên demax. Herwiha şileya mejî – dirkepetik mîna balifek destek dide demax û wî ji derbeyên hawirdorê diparêzê",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-36394955",
+      "title": "File:Nervous system diagram arrows.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram%20arrows.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Nervous_system_diagram_arrows.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 322,
+      "height": 609,
+      "byteLength": 424960,
+      "sha1": "0c5e84755f866163c5e2c3a8582aa35770a1ee09",
+      "artist": "Medium69, Jmarchn",
+      "credit": "Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-36395643",
+      "title": "File:Nervous system diagram numbered.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram%20numbered.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Nervous_system_diagram_numbered.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 301,
+      "height": 605,
+      "byteLength": 488355,
+      "sha1": "b3c5ff6d30f9e46704b1f02d469afed512dead2f",
+      "artist": "Medium69, Jmarchn",
+      "credit": "Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-51484172",
+      "title": "File:Nervous system diagram-ar.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-ar.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/65/Nervous_system_diagram-ar.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 541,
+      "height": 601,
+      "byteLength": 499462,
+      "sha1": "cbc55984b6864713a3d5e6b66b2cd075b1416f13",
+      "artist": "Medium69, Jmarchn",
+      "credit": "Derivative from: this file, by باسم",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-82909172",
+      "title": "File:Nervous system diagram-bn.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-bn.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/Nervous_system_diagram-bn.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 574,
+      "height": 604,
+      "byteLength": 468331,
+      "sha1": "3c36f6f0e9f030194210a2c55b29991ea54bf69b",
+      "artist": "Medium69, Jmarchn",
+      "credit": "File:Nervous system diagram-en.svg",
+      "description": "Bengali language version of the diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-46995553",
+      "title": "File:Nervous system diagram-ca.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-ca.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Nervous_system_diagram-ca.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 517,
+      "height": 602,
+      "byteLength": 499990,
+      "sha1": "dfbd93a841ced8d2b857a9c16637422e8dac10e1",
+      "artist": "Medium69, Jmarchn",
+      "credit": "Own work",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-140730917",
+      "title": "File:Nervous system diagram-cs.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-cs.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Nervous_system_diagram-cs.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 541,
+      "height": 601,
+      "byteLength": 495355,
+      "sha1": "08a3be250ce0229777d5a84ec9d82456efc34ec8",
+      "artist": "Medium69, Jmarchn Překlad: Martin Tauchman",
+      "credit": "File:Nervous system diagram-en.svg",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-10187147",
+      "title": "File:Nervous system diagram-de.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-de.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Nervous_system_diagram-de.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 541,
+      "height": 601,
+      "byteLength": 421173,
+      "sha1": "9773df600c762f3fb8a6cb46cc907f54e3379188",
+      "artist": "",
+      "credit": "Own work",
+      "description": "Nervensystem.",
+      "license": {
+        "shortName": "CC BY 3.0",
+        "url": "https://creativecommons.org/licenses/by/3.0",
+        "usageTerms": "Creative Commons Attribution 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-36395693",
+      "title": "File:Nervous system diagram-en.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-en.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Nervous_system_diagram-en.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 541,
+      "height": 601,
+      "byteLength": 498707,
+      "sha1": "abedd1abf077468fb289024e95e0d3b056e305df",
+      "artist": "Medium69, Jmarchn",
+      "credit": "File:Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-36402701",
+      "title": "File:Nervous system diagram-es.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-es.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Nervous_system_diagram-es.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 532,
+      "height": 602,
+      "byteLength": 500632,
+      "sha1": "dfa71e61b31971315e0f1f2b226e6c74551a1511",
+      "artist": "Medium69, Jmarchn",
+      "credit": "File:Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-36402897",
+      "title": "File:Nervous system diagram-fr.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-fr.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Nervous_system_diagram-fr.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 521,
+      "height": 601,
+      "byteLength": 499987,
+      "sha1": "909b1726cdf3fc6c350a5a4803c6b482a6fec0ed",
+      "artist": "Medium69, Jmarchn",
+      "credit": "File:Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-71437420",
+      "title": "File:Nervous system diagram-gl.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-gl.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Nervous_system_diagram-gl.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 567,
+      "height": 642,
+      "byteLength": 501325,
+      "sha1": "8b8915abb2d7b0fc899e7c8b1a735ed1022be311",
+      "artist": "Medium69, Jmarchn",
+      "credit": "Nervous system diagram-es.svg",
+      "description": "Sistema nervioso central e periférico cos principais nervios.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-72087057",
+      "title": "File:Nervous system diagram-hi.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-hi.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Nervous_system_diagram-hi.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 541,
+      "height": 601,
+      "byteLength": 496910,
+      "sha1": "db766a4235c06133b74e3f73b7be9675bcc473c7",
+      "artist": "Shypoetess",
+      "credit": "File:Nervous system diagram-en.svg by Medium69, Jmarchn",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-36402898",
+      "title": "File:Nervous system diagram-hu.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-hu.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Nervous_system_diagram-hu.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 512,
+      "height": 508,
+      "byteLength": 117129,
+      "sha1": "2d4efa7d6441390f79400b63ae503db3e5c8e713",
+      "artist": "This SVG image was created by Medium69. Cette image SVG a été créée par Medium69. Please credit this : William Crochot",
+      "credit": "File:Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-36402914",
+      "title": "File:Nervous system diagram-it.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-it.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Nervous_system_diagram-it.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 531,
+      "height": 601,
+      "byteLength": 498792,
+      "sha1": "0be9b9260195d293a9e47dc42f8e536e4f38efd5",
+      "artist": "Medium69, Jmarchn",
+      "credit": "File:Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-78990978",
+      "title": "File:Nervous system diagram-ko.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-ko.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Nervous_system_diagram-ko.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 541,
+      "height": 601,
+      "byteLength": 427789,
+      "sha1": "e05571904b8ff468367cd191f0c4e5c9e8b38ccd",
+      "artist": "Pk0001",
+      "credit": "Own work",
+      "description": "Nervous system diagram-en, ko",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-29528228",
+      "title": "File:Nervous system diagram-ta.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-ta.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Nervous_system_diagram-ta.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 512,
+      "height": 508,
+      "byteLength": 117720,
+      "sha1": "d2464b36a80dd919f0b7dee8b2453099b823ea27",
+      "artist": "This SVG image was created by Medium69. Cette image SVG a été créée par Medium69. Please credit this : William Crochot",
+      "credit": "File:Nervous system diagram.png",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-79681740",
+      "title": "File:Nervous system diagram-zh.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nervous%20system%20diagram-zh.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Nervous_system_diagram-zh.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 455,
+      "height": 605,
+      "byteLength": 462260,
+      "sha1": "9d8ecc396394ad3decf62f87a9778c04ba98b0e1",
+      "artist": "File:Nervous system diagram-en.svg: Medium69, Jmarchn derivative work: GnolizX",
+      "credit": "This file was derived from: Nervous system diagram-en.svg:",
+      "description": "A diagram of the human nervous system.",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-18963866",
+      "title": "File:Schema zapojeni neuronu v sitnici.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Schema%20zapojeni%20neuronu%20v%20sitnici.svg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/71/Schema_zapojeni_neuronu_v_sitnici.svg",
+      "kind": "svg",
+      "mime": "image/svg+xml",
+      "width": 447,
+      "height": 318,
+      "byteLength": 46674,
+      "sha1": "69e40fca85f72c420ecfa507c54b4792ecdc1a99",
+      "artist": "Chid0ri",
+      "credit": "Own work",
+      "description": "Zpracování signálu v neuronálních buňkách sítnice. Modré šipky jsou glutaminergní, červené šipky GABAergní spoje.",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:SVG neuroanatomy of humans"
+      ],
+      "score": 56
+    },
+    {
+      "id": "commons-31574258",
+      "title": "File:Blausen 0113 BrainMapping Electrodes.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blausen%200113%20BrainMapping%20Electrodes.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/34/Blausen_0113_BrainMapping_Electrodes.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1500,
+      "height": 1500,
+      "byteLength": 1129619,
+      "sha1": "49c98f7f46e0d519b3977055050d01a80c235e7c",
+      "artist": "BruceBlaus",
+      "credit": "Own work",
+      "description": "Brain Mapping with Electrodes. This image was donated by Blausen Medical. Please visit our website to see more medical illustrations and animations.",
+      "license": {
+        "shortName": "CC BY 3.0",
+        "url": "https://creativecommons.org/licenses/by/3.0",
+        "usageTerms": "Creative Commons Attribution 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 52
+    },
+    {
+      "id": "commons-37683976",
+      "title": "File:Brain - Lateral Left.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20-%20Lateral%20Left.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Brain_-_Lateral_Left.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 727,
+      "height": 683,
+      "byteLength": 156029,
+      "sha1": "ce049ed40166db66a2ab078fe5f02136d3bfcc3f",
+      "artist": "Mike Birkhead",
+      "credit": "Own work",
+      "description": "Left lateral view of the human brain. Including Forebrain, Midbrain, Hindbrain, and spinal Cord",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 52
+    },
+    {
+      "id": "commons-29190139",
+      "title": "File:Sobo 1909 627.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sobo%201909%20627.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/Sobo_1909_627.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 983,
+      "height": 981,
+      "byteLength": 2898729,
+      "sha1": "35ed6c89e69c8aa123f0d4045fbe6f08f7a62112",
+      "artist": "Dr. Johannes Sobotta",
+      "credit": "Sobotta's Textbook and Atlas of Human Anatomy 1908",
+      "description": "An anatomical illustration from the 1908 edition of Sobotta's Anatomy Atlas",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 52
+    },
+    {
+      "id": "commons-29190138",
+      "title": "File:Sobo 1909 629.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sobo%201909%20629.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Sobo_1909_629.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 991,
+      "height": 1015,
+      "byteLength": 100647,
+      "sha1": "3454e3957327f269a86c37dd2a6f21309727f0fc",
+      "artist": "Dr. Johannes Sobotta",
+      "credit": "Sobotta's Textbook and Atlas of Human Anatomy 1908",
+      "description": "An anatomical illustration from the 1908 edition of Sobotta's Anatomy Atlas",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 52
+    },
+    {
+      "id": "commons-29190135",
+      "title": "File:Sobo 1909 633.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sobo%201909%20633.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Sobo_1909_633.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 1078,
+      "height": 699,
+      "byteLength": 2265025,
+      "sha1": "5b412db77436627364ad8182ef71e9cc0368ecab",
+      "artist": "Dr. Johannes Sobotta",
+      "credit": "Sobotta's Textbook and Atlas of Human Anatomy 1908",
+      "description": "An anatomical illustration from the 1908 edition of Sobotta's Anatomy Atlas",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 52
+    },
+    {
+      "id": "commons-35994138",
+      "title": "File:\"Anatomie et physiologie...\" F.J. Gall & J.C. Spurheim, 1810 Wellcome L0020420.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%22Anatomie%20et%20physiologie...%22%20F.J.%20Gall%20%26%20J.C.%20Spurheim%2C%201810%20Wellcome%20L0020420.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c9/%22Anatomie_et_physiologie...%22_F.J._Gall_%26_J.C._Spurheim%2C_1810_Wellcome_L0020420.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1496,
+      "height": 1312,
+      "byteLength": 765002,
+      "sha1": "d34e2bb71926f7ad1d381aff5a77e12d923bc41c",
+      "artist": "Franz Joseph Gall; Johann Gaspard Spurzheim",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/8c/00/7881253ddd9c2c307621c55d6bac.jpg Gallery: https://wellcomeimages.org/indexplus/image/L0020420.html Wellcome Collection gallery (2018-03-21): https://wellcomecollection.org/works/tb44gmqt CC-BY-4.0",
+      "description": "Brain, Pl. VIII Rare Books Keywords: Nervous System",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 50
+    },
+    {
+      "id": "commons-30147945",
+      "title": "File:1305 CerebrumN.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:1305%20CerebrumN.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/16/1305_CerebrumN.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1119,
+      "height": 521,
+      "byteLength": 221287,
+      "sha1": "8f2bb6eaf9e5b57aa56c5679502525b6815c36a7",
+      "artist": "OpenStax",
+      "credit": "https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface",
+      "description": "Version 8.25 from the Textbook OpenStax Anatomy and Physiology Published May 18, 2016",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 50
+    },
+    {
+      "id": "commons-141601354",
+      "title": "File:Amentia Plate XIIA (2).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amentia%20Plate%20XIIA%20(2).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/Amentia_Plate_XIIA_%282%29.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1124,
+      "height": 1377,
+      "byteLength": 320393,
+      "sha1": "5b009b4a686973f646e4d47e597cb1934374437a",
+      "artist": "A.F. Tredgold",
+      "credit": "Mental deficiency (amentia)",
+      "description": "MICROCEPHALUS. B. - Photographs of left hemisphere and vertex of brain of Fig. A. Brain small and very simply convoluted. Weight of encephalon, 568 grammes. (Photographs by Dr. J. S. Bolton.)",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 50
+    },
+    {
+      "id": "commons-35861040",
+      "title": "File:Brain, lesion of right hemisphere. Wellcome L0001993.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%2C%20lesion%20of%20right%20hemisphere.%20Wellcome%20L0001993.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Brain%2C_lesion_of_right_hemisphere._Wellcome_L0001993.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1734,
+      "height": 1068,
+      "byteLength": 647444,
+      "sha1": "60e72a3cbafd9c6a2e4ca6d75bbb8396f75a17a3",
+      "artist": "",
+      "credit": "https://wellcomeimages.org/indexplus/obf_images/dc/23/4a488c261408d9df99aad4e13aeb.jpg Gallery: https://wellcomeimages.org/indexplus/image/L0001993.html Wellcome Collection gallery (2018-03-24): https://wellcomecollection.org/works/msntdnez CC-BY-4.0",
+      "description": "Lesion of right hemisphere of brain. General Collections Keywords: physiology, brain; Anatomy; Nervous System; David Ferrier",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 50
+    },
+    {
+      "id": "commons-154089744",
+      "title": "File:Sulci of the brain.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sulci%20of%20the%20brain.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Sulci_of_the_brain.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 653,
+      "height": 904,
+      "byteLength": 204987,
+      "sha1": "938027681b9cf8c66948804d92b6fd994dfc209e",
+      "artist": "Hans Donkelaar",
+      "credit": "Frontiers of Neuroanatomy",
+      "description": "Different views of the sulci of the brain",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 50
+    },
+    {
+      "id": "commons-9576781",
+      "title": "File:Insula and poles of brain lobes.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Insula%20and%20poles%20of%20brain%20lobes.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Insula_and_poles_of_brain_lobes.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 674,
+      "height": 484,
+      "byteLength": 428902,
+      "sha1": "ff2756c30efa8e9e8fb17137c3eabc15f38e6f52",
+      "artist": "John A Beal, PhD. Dep't. of Cellular Biology &amp; Anatomy, Louisiana State University Health Sciences Center Shreveport.",
+      "credit": "http://www.healcentral.org/healapp/showMetadata?metadataId=40566",
+      "description": "Insula and poles of brain lobes.",
+      "license": {
+        "shortName": "CC BY 2.5",
+        "url": "https://creativecommons.org/licenses/by/2.5",
+        "usageTerms": "Creative Commons Attribution 2.5",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 49
+    },
+    {
+      "id": "commons-30147949",
+      "title": "File:1306 Lobes of Cerebral CortexN.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:1306%20Lobes%20of%20Cerebral%20CortexN.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a3/1306_Lobes_of_Cerebral_CortexN.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 733,
+      "height": 621,
+      "byteLength": 163486,
+      "sha1": "f75da3bb96ad3ae41e909d74e28d06351e4a8d3e",
+      "artist": "OpenStax",
+      "credit": "https://cnx.org/contents/FPtK1zmh@8.25:fEI3C8Ot@10/Preface",
+      "description": "Version 8.25 from the Textbook OpenStax Anatomy and Physiology Published May 18, 2016",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 47
+    },
+    {
+      "id": "commons-884266",
+      "title": "File:Human brain inferior-medial view description.JPG",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Human%20brain%20inferior-medial%20view%20description.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Human_brain_inferior-medial_view_description.JPG",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 702,
+      "height": 491,
+      "byteLength": 64087,
+      "sha1": "6c6e53b1fa16c2b2c0be893fd4a9e890eb612c3a",
+      "artist": "John A Beal, PhD Dep't. of Cellular Biology &amp; Anatomy, Louisiana State University Health Sciences Center Shreveport",
+      "credit": "http://www.healcentral.org/healapp/showMetadata?metadataId=40566",
+      "description": "Human brain - inferior-medial view - The Lobes Lobus frontalis Lobus parietalis Lobus occipitalis Lobus temporalis Gyrus parahippocampalis Lobus limbicus Gyrus cinguli (font: arial black, size: 12)",
+      "license": {
+        "shortName": "CC BY 2.5",
+        "url": "https://creativecommons.org/licenses/by/2.5",
+        "usageTerms": "Creative Commons Attribution 2.5",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 47
+    },
+    {
+      "id": "commons-1298342",
+      "title": "File:Illu cerebrum lobes.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Illu%20cerebrum%20lobes.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Illu_cerebrum_lobes.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 371,
+      "height": 274,
+      "byteLength": 34883,
+      "sha1": "a57e5be6d874391f886b1f7c03cb9e00908ccc62",
+      "artist": "",
+      "credit": "",
+      "description": "",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 47
+    },
+    {
+      "id": "commons-21093406",
+      "title": "File:AddictionDependence-de.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:AddictionDependence-de.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/AddictionDependence-de.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 480,
+      "height": 374,
+      "byteLength": 229455,
+      "sha1": "764f0cbb2e5a1993e0a826ed4d5d446008093028",
+      "artist": "derivative work: McZusatz",
+      "credit": "This file was derived from: Addictiondependence1.png:",
+      "description": "Sucht, Abhängigkeit",
+      "license": {
+        "shortName": "CC0",
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "usageTerms": "Creative Commons Zero, Public Domain Dedication",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-153429530",
+      "title": "File:Addictiondependence1-es.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Addictiondependence1-es.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/Addictiondependence1-es.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 480,
+      "height": 374,
+      "byteLength": 55899,
+      "sha1": "c34c022337aaf09e235faa3c7f7afa91c1121a6b",
+      "artist": "Unknown authorUnknown author",
+      "credit": "Commons File:Addictiondependence1.png",
+      "description": "Neurobiología de la drogadicción",
+      "license": {
+        "shortName": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0",
+        "usageTerms": "Creative Commons Attribution 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-21093199",
+      "title": "File:Addictiondependence1-German.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Addictiondependence1-German.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Addictiondependence1-German.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 480,
+      "height": 374,
+      "byteLength": 268488,
+      "sha1": "b3b4daf0e6ef8a9d528f1e46f000ccd0e4d83558",
+      "artist": "Unknown authorUnknown author",
+      "credit": "drugabuse.gov",
+      "description": "Source: The National Institute on Drug Abuse, part of the National Institutes of Health (NIH), which is part of the U.S. Department of Health and Human Services. Image taken from Teaching Packets: The Neurobiology of Drug Addiction",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-34647231",
+      "title": "File:Addictiondependence1.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Addictiondependence1.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Addictiondependence1.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 480,
+      "height": 374,
+      "byteLength": 140525,
+      "sha1": "4a92178713c95f83047b08742eb2568c46c033b4",
+      "artist": "Unknown authorUnknown author",
+      "credit": "drugabuse.gov",
+      "description": "Source: The National Institute on Drug Abuse, part of the National Institutes of Health (NIH), which is part of the U.S. Department of Health and Human Services. Image taken from Teaching Packets: The Neurobiology of Drug Addiction",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-41362239",
+      "title": "File:Brain art.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20art.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Brain_art.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 100,
+      "height": 92,
+      "byteLength": 14452,
+      "sha1": "073d48227a4af20b27682b6c2cf6989c100c45f8",
+      "artist": "Sergio Pinna (Wikiutente:sergejpinka)",
+      "credit": "Own work",
+      "description": "cervello Licensing Categoria:Immagini stub",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-1783288",
+      "title": "File:Brain bulbar region.PNG",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20bulbar%20region.PNG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/Brain_bulbar_region.PNG",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 295,
+      "height": 299,
+      "byteLength": 52264,
+      "sha1": "576edd515f3c8bda69e6c178e1d82e2083999e8b",
+      "artist": "",
+      "credit": "original template from Image:Brain human sagittal section.svg by User:Patrick.lynch, modifcations made by myself.",
+      "description": "The corticobulbar (or corticonuclear) tract is a white matter pathway connecting the cerebral cortex to the brainstem (the term \"bulbar\" referring to the brainstem). The 'bulb' is an archaic term for the medulla oblongata. In clinical usage, it includes the pons as well. See also [1] for reference.",
+      "license": {
+        "shortName": "CC BY 2.5",
+        "url": "https://creativecommons.org/licenses/by/2.5",
+        "usageTerms": "Creative Commons Attribution 2.5",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-128482866",
+      "title": "File:Brain headBorder (hy).png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20headBorder%20(hy).png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/Brain_headBorder_%28hy%29.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 882,
+      "height": 756,
+      "byteLength": 490209,
+      "sha1": "ed07c323def1319e1a9cf92ac0399a4785396af1",
+      "artist": "artlessstacey/artlessstacey, Armenian translation by user:GgGevorg",
+      "credit": "artlessstacey",
+      "description": "The main areas of the brain and Limbic system",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-7544044",
+      "title": "File:Brain Maksymilian Rose.PNG",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20Maksymilian%20Rose.PNG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Brain_Maksymilian_Rose.PNG",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 779,
+      "height": 479,
+      "byteLength": 173470,
+      "sha1": "b2c490b65f2df35b2932a426a78fa9906adb7e98",
+      "artist": "Maksymilian Rose",
+      "credit": "Mózg Józefa Piłsudskiego. Cz. 1. Wilno, 1938 copy retrieved from this site: http://www.thehumanbrain.info/database/db_pilsudski.php",
+      "description": "Cytoarchitectonics of human brain according to Maksymilian Rose",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-34938313",
+      "title": "File:Brain structure.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20structure.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Brain_structure.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 288,
+      "height": 196,
+      "byteLength": 28964,
+      "sha1": "b086917840e081519113f1297d1da81374d8c0a4",
+      "artist": "John Henkel, FDA staff writer[1]",
+      "credit": "Henkel, John (July-August 1998). \"Parkinson's Disease: New Treatments Slow Onslaught of Symptoms\". FDA Consumer: p. 17. ISSN 0362-1332. Retrieved on 2009-07-23.",
+      "description": "Basal Ganglia and Related Structures of the Brain",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-90645",
+      "title": "File:Brain-cerebellum.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain-cerebellum.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Brain-cerebellum.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 201,
+      "height": 169,
+      "byteLength": 38564,
+      "sha1": "f24ffc5ae56545eef2c90bfa8d0874085370f34b",
+      "artist": "",
+      "credit": "",
+      "description": "",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-15951889",
+      "title": "File:Brain-isolines.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain-isolines.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/39/Brain-isolines.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 641,
+      "height": 565,
+      "byteLength": 103349,
+      "sha1": "7029bd09e49a1deb1df922c24fd442726d2d95ba",
+      "artist": "Tiago Etiene Queiroz",
+      "credit": "Desenvolvido usando paraview e dados provenientes do site http://graphics.stanford.edu/data/voldata/",
+      "description": "Isolinhas em uma fatia do cérebro humana",
+      "license": {
+        "shortName": "CC0",
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "usageTerms": "Creative Commons Zero, Public Domain Dedication",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-30896245",
+      "title": "File:Brain-Konkani Vishwakosh.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain-Konkani%20Vishwakosh.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Brain-Konkani_Vishwakosh.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 487,
+      "height": 515,
+      "byteLength": 184467,
+      "sha1": "3a2f2a903c54ababb172e43b67b53dc1c093fb80",
+      "artist": "Multiple Authors",
+      "credit": "Konkani Vishwakosh encyclopedia, available under CC-BY-SA 3.0, see here",
+      "description": "Brain-Konkani Vishwakosh",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-9940518",
+      "title": "File:Broca-Wernicke Area Small - he.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Broca-Wernicke%20Area%20Small%20-%20he.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Broca-Wernicke_Area_Small_-_he.png",
+      "kind": "png",
+      "mime": "image/png",
+      "width": 269,
+      "height": 183,
+      "byteLength": 6986,
+      "sha1": "04fd009b7a0bbfc015a775109896a5f724d821b5",
+      "artist": "original uploader: User:Uwe Gille; translated by User:Ravit",
+      "credit": "Taken from NIH publication 97-4257, http://www.nidcd.nih.gov/health/voice/aphasia.asp",
+      "description": "Wernicke and Broca areas in the brain - Hebrew",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 40
+    },
+    {
+      "id": "commons-52398306",
+      "title": "File:10 % brain myth (2nd version).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:10%20%25%20brain%20myth%20(2nd%20version).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/10_%25_brain_myth_%282nd_version%29.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 448,
+      "height": 384,
+      "byteLength": 102313,
+      "sha1": "8c5e1386556be64c40ce943bc43f381a8a050d37",
+      "artist": "Shannan Muskopf Derivative work MagentaGreen",
+      "credit": "This file was derived from: Brain hirez.jpg:",
+      "description": "View of the convolutions and folds (gyrus) of the human cerebrum using a model (overlaid with a sector of a pie chart to illustrate the Ten percent of the brain myth).",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-52393214",
+      "title": "File:10 % brain myth.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:10%20%25%20brain%20myth.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/10_%25_brain_myth.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 464,
+      "height": 464,
+      "byteLength": 167616,
+      "sha1": "f5e7d3610e34378b6739befc3aa8628eee16c7c9",
+      "artist": "Shannan Muskopf Derivative work MagentaGreen",
+      "credit": "This file was derived from: Brain hirez.jpg:",
+      "description": "View of the convolutions and folds (gyrus) of the human cerebrum using a model (overlaid with a pie chart to illustrate the Ten percent of the brain myth).",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-1918441",
+      "title": "File:Aktivitaethinten.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aktivitaethinten.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Aktivitaethinten.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 220,
+      "height": 239,
+      "byteLength": 24984,
+      "sha1": "22c2712d2b2f8f155db8903e4856d2d15ff0ef4f",
+      "artist": "The original uploader was M.R.W.HH at German Wikipedia.",
+      "credit": "Transferred from de.wikipedia to Commons.",
+      "description": "Bildbeschreibung: Dieses Bild zeigt eine fMRT Aufnahmen des Gehirns eines 24-jährigen Probanden. Quelle: Screenshot Fotograf/Zeichner: Martin Witte Datum: 13.06.2005",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-13654088",
+      "title": "File:Anatomy and physiology LS dog's brain.JPG",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anatomy%20and%20physiology%20LS%20dog's%20brain.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Anatomy_and_physiology_LS_dog%27s_brain.JPG",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 612,
+      "height": 367,
+      "byteLength": 47586,
+      "sha1": "f182700422ab3c70dfc6ce347f8a334f7db842ee",
+      "artist": "Rlawson at English Wikibooks",
+      "credit": "Transferred from en.wikibooks to Commons by Adrignola using CommonsHelper.",
+      "description": "Diagram of LS dogs brain 2008.01 by Ruth Lawson, Otago Polytechnic",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-4265251",
+      "title": "File:Areawerinicke.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Areawerinicke.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/Areawerinicke.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 512,
+      "height": 366,
+      "byteLength": 92189,
+      "sha1": "ed6c039013a9c85dc7cc2c149ae21afc42c9e015",
+      "artist": "Charlyzona",
+      "credit": "Own work",
+      "description": "área del cerebro responsable de las relaciones significativas del lenguaje",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-2534260",
+      "title": "File:Brain (PSF).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20(PSF).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/Brain_%28PSF%29.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 622,
+      "byteLength": 91351,
+      "sha1": "cd25599bfadaeadcd0d10a89e6071c6acc92f73b",
+      "artist": "Pearson Scott Foresman",
+      "credit": "Archives of Pearson Scott Foresman, donated to the Wikimedia Foundation",
+      "description": "line art drawing",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-1560044",
+      "title": "File:Brain 2.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%202.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Brain_2.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 721,
+      "height": 540,
+      "byteLength": 174816,
+      "sha1": "1c431be2326a154aa625043c31f59c1ce43ec2df",
+      "artist": "",
+      "credit": "",
+      "description": "",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-500241",
+      "title": "File:Brain chrischan thalamus.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20chrischan%20thalamus.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Brain_chrischan_thalamus.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 860,
+      "height": 860,
+      "byteLength": 72628,
+      "sha1": "37e74d4720387c67375c1bcfe5d3d6b68605c9c3",
+      "artist": "",
+      "credit": "",
+      "description": "",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-129508",
+      "title": "File:Brain chrischan.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20chrischan.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Brain_chrischan.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 860,
+      "height": 860,
+      "byteLength": 71454,
+      "sha1": "32b9eff72b2ce969415f45d66cca4437ef323431",
+      "artist": "",
+      "credit": "",
+      "description": "",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-10178348",
+      "title": "File:Brain diagram - viewed from left side - es.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20diagram%20-%20viewed%20from%20left%20side%20-%20es.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Brain_diagram_-_viewed_from_left_side_-_es.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 700,
+      "height": 274,
+      "byteLength": 22142,
+      "sha1": "90a38052978809a0517f97fb9d5e5d8a487d0b21",
+      "artist": "Fabio ramirez",
+      "credit": "Own work",
+      "description": "SISTEMA NERVIOSO",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-4357054",
+      "title": "File:Brain headBorder.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20headBorder.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Brain_headBorder.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 504,
+      "height": 432,
+      "byteLength": 61891,
+      "sha1": "6b575e12ea576297b5f132d76f8d56028ff883ac",
+      "artist": "artlessstacey/artlessstacey",
+      "credit": "artlessstacey",
+      "description": "picture insert",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-20421525",
+      "title": "File:Brain hirez.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20hirez.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Brain_hirez.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 452,
+      "height": 335,
+      "byteLength": 49242,
+      "sha1": "3ee00a9a0c73705fb4ef3b8ec50b2d121d980b27",
+      "artist": "Shannan Muskopf",
+      "credit": "Own work",
+      "description": "External view of brain from human brain model showing the gyri of the cerebrum and the cerebellum.",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-33253363",
+      "title": "File:Brain-1-uk.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain-1-uk.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Brain-1-uk.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 484,
+      "height": 356,
+      "byteLength": 80303,
+      "sha1": "e7c979f511fde301b084e91c157dadf9b75acd87",
+      "artist": "Користувач:Shao",
+      "credit": "Own work",
+      "description": "Будова головного мозку",
+      "license": {
+        "shortName": "Public domain",
+        "url": "",
+        "usageTerms": "Public domain",
+        "attributionRequired": "false"
+      },
+      "allowed": true,
+      "licenseReason": "Open public-domain style license.",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-10899653",
+      "title": "File:Brain-3.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain-3.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Brain-3.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 326,
+      "height": 458,
+      "byteLength": 48603,
+      "sha1": "adab1f3864cb8c959ea0a72e22da1326add54163",
+      "artist": "The original uploader was Dgg32 at Chinese Wikipedia.",
+      "credit": "Transferred from zh.wikipedia to Commons by Shizhao using CommonsHelper.",
+      "description": "​大脑四叶的内外视图。",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-5205439",
+      "title": "File:Bulbe rachidien4.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bulbe%20rachidien4.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Bulbe_rachidien4.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 609,
+      "height": 611,
+      "byteLength": 74659,
+      "sha1": "49a8bbb66caa59805e959ecb1733ae7d1128cb68",
+      "artist": "Patrick J. Lynch, medical illustrator",
+      "credit": "http://commons.wikimedia.org/wiki/Image:Skull_and_brain_sagittal.svg",
+      "description": "schéma du bulbe rachidien",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-50930898",
+      "title": "File:Cerebro partes.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cerebro%20partes.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/88/Cerebro_partes.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 802,
+      "height": 508,
+      "byteLength": 164889,
+      "sha1": "ee5c462e0224255f5dab91a57a7688c2c890c9b5",
+      "artist": "By vectorized by Jkwchui [CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons",
+      "credit": "https://commons.wikimedia.org/wiki/File%3ACerebrum_lobes.svg",
+      "description": "Cerebro",
+      "license": {
+        "shortName": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-12968897",
+      "title": "File:Cortex sensorimoteur1.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cortex%20sensorimoteur1.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/52/Cortex_sensorimoteur1.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 364,
+      "height": 334,
+      "byteLength": 35639,
+      "sha1": "0abb9a1cf7177a55d54b1c2ef92b745909f14290",
+      "artist": "Pancrat",
+      "credit": "Own work",
+      "description": "cortex sensorimoteur (cortex moteur, prémoteur, AMS, aire somesthésique primaire, cortex pariétal antérieur)",
+      "license": {
+        "shortName": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "usageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "attributionRequired": "true"
+      },
+      "allowed": true,
+      "licenseReason": "Creative Commons attribution license.",
+      "categories": [
+        "Category:Brain lobes"
+      ],
+      "score": 38
+    },
+    {
+      "id": "commons-43641343",
+      "title": "File:A treatise on nervous and mental diseases, for students and practitioners of medicine (1893) (14766155582).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:A%20treatise%20on%20nervous%20and%20mental%20diseases%2C%20for%20students%20and%20practitioners%20of%20medicine%20(1893)%20(14766155582).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/A_treatise_on_nervous_and_mental_diseases%2C_for_students_and_practitioners_of_medicine_%281893%29_%2814766155582%29.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1606,
+      "height": 2112,
+      "byteLength": 905474,
+      "sha1": "ec70ec16a517e78ce7677b484ba35ccf1da02847",
+      "artist": "Internet Archive Book Images",
+      "credit": "https://www.flickr.com/photos/internetarchivebookimages/14766155582/ Source book page: https://archive.org/stream/treatiseonnervou00gray/treatiseonnervou00gray#page/n80/mode/1up",
+      "description": "\"Photograph from Fraser, showing the cerebrum and the cerebellum in the cavity of the skull covered by the membranes; also the upper portion of the spinal cord.\" Identifier: treatiseonnervou00gray (find matches) Title: A treatise on nervous and mental diseases, for students and practitioners of medicine Year: 1893 (1890s) Authors: Gray, Landon Carter, 1850-1900 Subjects: Publisher: Philadelphia, Lea Contributing Library: Columbia University Libraries Digitizing Sponsor: Open Knowledge Commons View Book Page: Book Viewer About This Book: Catalog Entry View All Images: All Images From Book Click here to view book online to see this illustration in context in a browseable online version of this book. Text Appearing Before Image: todefine very minutely the relation of a suture to the skull-bone, be-cause antiseptic surgery has rendered trephining nearly as harmlessan operation as circumcision, and in almost all cases the skull shouldbe so liberally removed as to lay bare a whole cerebral lobe or atleast several convolutions. The approximate relation, therefore, ofthe different cerebral fissures to the different sutures of the skull isall that it is necessary for the neurologist and the surgeon to know.Figs. 59 and 60, taken from Erasers beautiful atlas, will give a trueidea of the relative position of the main fissures and convolutions tothe skull, as the intra-cranial contents usually lie within the intra-cranial cavity. The fissures and convolutions can be readily identi-fied by comjjarison with Fig. 1. Various instruments have been ANATOMY. 79 devised for marking oif the skull, so-called cyrtometers, but anordinary tape line is as good as anything else. The rules followingwill be quite sufficient. Fig. 59. Text Appearing After Image: Photograph from Fraser, showing the cerebrum and the cerebellum in the cavity ofthe skull covered by the membranes; also the upper portion of the spinal cord. I. The longitudinal fissure corresponds with the median line ofthe vertex from the glabella, or junction of the nasal and frontalbones, to the inion, or occipital protuberance. II. To find tlie fi.ssure of Rolando: Measure the distance fromthe glabella to the inion, or occipital protuberance. Find 55.7 80 INTRODUCTORY. per cent, of this distance, and this will indicate the upper end of thefissure of Rolando, which is generally from 15.7 to 20.8 centimetresTo find the course of this fissure, mark off from from the glabella. Fig Note About Images Please note that these images are extracted from scanned page images that may have been digitally enhanced for readability - coloration and appearance of these illustrations may not perfectly resemble the original work.",
+      "license": {
+        "shortName": "No restrictions",
+        "url": "https://www.flickr.com/commons/usage/",
+        "usageTerms": "No known copyright restrictions",
+        "attributionRequired": "false"
+      },
+      "allowed": false,
+      "licenseReason": "Unreviewed license: No restrictions",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": -35
+    },
+    {
+      "id": "commons-43646184",
+      "title": "File:A treatise on nervous and mental diseases, for students and practitioners of medicine (1893) (14786347373).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:A%20treatise%20on%20nervous%20and%20mental%20diseases%2C%20for%20students%20and%20practitioners%20of%20medicine%20(1893)%20(14786347373).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/de/A_treatise_on_nervous_and_mental_diseases%2C_for_students_and_practitioners_of_medicine_%281893%29_%2814786347373%29.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1622,
+      "height": 2266,
+      "byteLength": 700789,
+      "sha1": "7b0a76a34e00137966d16a5d1a7d689886e9064c",
+      "artist": "Internet Archive Book Images",
+      "credit": "https://www.flickr.com/photos/internetarchivebookimages/14786347373/ Source book page: https://archive.org/stream/treatiseonnervou00gray/treatiseonnervou00gray#page/n81/mode/1up",
+      "description": "\"Photograph from Fraser, showing the cerebrum, the cerebellum, aud the upper portionof the spinal cord, the membranes having been removed.\" Identifier: treatiseonnervou00gray (find matches) Title: A treatise on nervous and mental diseases, for students and practitioners of medicine Year: 1893 (1890s) Authors: Gray, Landon Carter, 1850-1900 Subjects: Publisher: Philadelphia, Lea Contributing Library: Columbia University Libraries Digitizing Sponsor: Open Knowledge Commons View Book Page: Book Viewer About This Book: Catalog Entry View All Images: All Images From Book Click here to view book online to see this illustration in context in a browseable online version of this book. Text Appearing Before Image: Photograph from Fraser, showing the cerebrum and the cerebellum in the cavity ofthe skull covered by the membranes; also the upper portion of the spinal cord. I. The longitudinal fissure corresponds with the median line ofthe vertex from the glabella, or junction of the nasal and frontalbones, to the inion, or occipital protuberance. II. To find tlie fi.ssure of Rolando: Measure the distance fromthe glabella to the inion, or occipital protuberance. Find 55.7 80 INTRODUCTORY. per cent, of this distance, and this will indicate the upper end of thefissure of Rolando, which is generally from 15.7 to 20.8 centimetresTo find the course of this fissure, mark off from from the glabella. Fig Text Appearing After Image: Photograph from Fraser, showing the cerebrum, the cerebellum, aud the upper portionof the spinal cord, the membranes having been removed. the upper end a line that shall form an angle ot 67 degrees an-teriorly with the longitudinal fissure. This will give the directionof the upper two-thirds of the fissure of Rolando, or about 2^inches, or 5.6 centimetres. The lower third of this fissure, about 2.1 ANATOMY. 81 centimetres in length, is somewhat more vertical, the total leugth ofthe whole fissure being 8.5 centimetres. To find the lower end ofthe fissure of Rolando, mark off a line from the stephanion to theasterion, and another from the bregma to the external auditorymeatus, and the point of intersection of these two lines will be justover the lower end of the fissure about one centimetre above thefissure of Sylvius. The upper end of this fissure of Kolando variessomewhat in its position in adults of different races and sexes, butthe average variation is only about twenty millimetres, Note About Images Please note that these images are extracted from scanned page images that may have been digitally enhanced for readability - coloration and appearance of these illustrations may not perfectly resemble the original work.",
+      "license": {
+        "shortName": "No restrictions",
+        "url": "https://www.flickr.com/commons/usage/",
+        "usageTerms": "No known copyright restrictions",
+        "attributionRequired": "false"
+      },
+      "allowed": false,
+      "licenseReason": "Unreviewed license: No restrictions",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": -38
+    },
+    {
+      "id": "commons-43737641",
+      "title": "File:Brain surgery (1893) (14781134142).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20surgery%20(1893)%20(14781134142).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/Brain_surgery_%281893%29_%2814781134142%29.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1380,
+      "height": 1838,
+      "byteLength": 895643,
+      "sha1": "fd2aff0c6264189cd01508145442d183c7733a4d",
+      "artist": "Internet Archive Book Images",
+      "credit": "https://www.flickr.com/photos/internetarchivebookimages/14781134142/ Source book page: https://archive.org/stream/brainsurger0star/brainsurger0star#page/n27/mode/1up",
+      "description": "Identifier: brainsurger0star (find matches) Title: Brain surgery Year: 1893 (1890s) Authors: Starr, M. Allen (Moses Allen), 1854-1932 Subjects: Brain Brain Publisher: New York, Wood Contributing Library: Yale University, Cushing/Whitney Medical Library Digitizing Sponsor: Open Knowledge Commons and Yale University, Cushing/Whitney Medical Library View Book Page: Book Viewer About This Book: Catalog Entry View All Images: All Images From Book Click here to view book online to see this illustration in context in a browseable online version of this book. Text Appearing Before Image: e ganglia doesnot invade the internal capsule it cannot be detectedduring life. The crura cerebri, pons, and medulla contain thecentres of the various cranial nerve nuclei, and hencecranial nerve palsies are caused by disease in them.They transmit motor and sensory tracts to the spinalcord, hence numerous symptoms appear when theyare injured.1 The cerebellum, lying in the posterior cranialfossa beneath the tentorium cerebelli, controls theequilibrium of the body; hence disturbances of thenature of staggering and vertigo are produced bylesions affecting it, especially if its median lobe isinvolved. These local symptoms of brain disease must formthe chief guides to the physician in his diagnosis and 1 For a fuller statement of these facts of localization the readeris referred to my book, Familiar Forms of Nervous Disease. 12 BRAIN SURGERY. to the surgeon in operations. When they are presentthey point to a particular area of the organ whichmust be involved. When they are absent both neu- Text Appearing After Image: Fig. 6.—Photograph CFraser) Showing the Relations of the Cerebral Hemi-sphere, the Cerebellum, the Cranial Nerves, the Upper Spinal Cord and CervicalNerves to the Surface of the Head. The figures 1, 2, 3, are placed upon the chiefconvolutions of the frontal, parietal, occipital, and temporal lobes of the hemi-sphere. THE DIAGNOSIS OF CEREBRAL DISEASE. 13 rologist and surgeon are as helpless as they were beforeany of these facts of localization were determined. Cases open to Operation. There are many cases in which it is evident thatbrain disease is present, but in which it cannot be Note About Images Please note that these images are extracted from scanned page images that may have been digitally enhanced for readability - coloration and appearance of these illustrations may not perfectly resemble the original work.",
+      "license": {
+        "shortName": "No restrictions",
+        "url": "https://www.flickr.com/commons/usage/",
+        "usageTerms": "No known copyright restrictions",
+        "attributionRequired": "false"
+      },
+      "allowed": false,
+      "licenseReason": "Unreviewed license: No restrictions",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": -43
+    },
+    {
+      "id": "commons-43372561",
+      "title": "File:A text-book of human physiology (1906) (14770191352).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:A%20text-book%20of%20human%20physiology%20(1906)%20(14770191352).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/A_text-book_of_human_physiology_%281906%29_%2814770191352%29.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1716,
+      "height": 1346,
+      "byteLength": 200328,
+      "sha1": "53f4e74fb01f5eb3cc1731a73900a70953e0e369",
+      "artist": "Internet Archive Book Images",
+      "credit": "https://www.flickr.com/photos/internetarchivebookimages/14770191352/ Source book page: https://archive.org/stream/textbookofhumanp00tige/textbookofhumanp00tige#page/n635/mode/1up",
+      "description": "Fig. 267. - Median section through the brain of an adult, after His. Encephalon (brain), I-VI Rhombencephalon (hindbrain), I-III Myelencephalon (afterbrain), I Medulla oblongata (bulb), I Metencephalon (secondary hindbrain), II Pons, II1 Cerebellum, II2 Isthmus rhombencephali, III Mesencephalon (midbrain), IV Crura cerebri, IV1 Corpora quadrigemina, IV2 Prosencephalon (forebrain), V and VI Diencephalon (tweenbrain or interbrain), V Pars mamillaris hypothalami (corpus mamillare, etc.), V1 Thalamencephalon, V2 to 4 Optic thalamus, V2 Metathalamus (corpora geniculata), V3 Epithalamus (pineal body, etc.), V4 Telencephalon (endbrain), VI Pars optica hypothalami {tuber cinereum, infundibulum, pituitary body} VI1 Hemisphferium, VI2 to 4 Corpus striatum, VI2 Phinencephalon (olfactory lobe, etc.), VI3 Pallium (cortex cerebri), VI4 Identifier: textbookofhumanp00tige (find matches) Title: A text-book of human physiology Year: 1906 (1900s) Authors: Tigerstedt, Robert, 1853-1923 Murlin, John R. (John Raymond), b. 1874, tr Subjects: Physiology Publisher: New York and London, D. Appleton and Co. Contributing Library: Columbia University Libraries Digitizing Sponsor: Open Knowledge Commons View Book Page: Book Viewer About This Book: Catalog Entry View All Images: All Images From Book Click here to view book online to see this illustration in context in a browseable online version of this book. Text Appearing Before Image: nd of its different parts is therefore very inadequate, andthe data which we have are unfortunately very contradictory as to many ofthe most important points. A. METHOD The methods which can be employed in investigating the functions of thebrain are in general similar to those with which we have already become familiarin the study of the spinal cord: anatomical study of its structure, artificial stimu-lation, section or removal of different parts, clinical observations on patientsfollowed by post-mortem dissection, etc. But, as will be readily understood, thepractical difficulties to be overcome here are very much greater than those metwith in the study of the cord. Not only is the danger of disturbance to the cir-culation, caused by section or removal of a part, as well as the shock producedby the operation, greater in dealing with the brain, so that effects are very oftenmuch exaggerated at first, but in many cases the function lost is assumed by 599 600 PHYSIOLOGY OF THE BRAIN-STEM Text Appearing After Image: Fig. 267. -Median section through the brain of an adult, after His. below. The figures refer to the table Encephalon (brain), I-VI (Fig. 267) Rhombencephalon (hindbrain), I-IIIMyeleneephalon (afterbrain), I Medulla oblongata (bulb), IMetencephalon (secondary hindbrain), IIPons, IIICerebellum, II2Isthmus rhombencephali. IIIMesencephalon (midbrain), IVCrura cerebri, IVjCorpora quadrigemina, IV2Prosencephalon (forebrain), V and VI Diencephalon (tweenbrain or interbrain), V Pars mamillaris hypothalami (corpus mamillare, etc.), ViThalamencephalon, V2 to 4Optic thalamus, V2 Metathalamus (corpora geniculata), V3Epithalamus (pineal body, etc.), V4Telencephalon (endbrain), VI tuber cinereum ^Pars optica hypothalami infundibulumpituitary body VIi Hemisphferium, VT2 to 4Corpus striatum, VI2 Phinencephalon (olfactory lobe, etc.), VI3Pallium (cortex cerebri), VI4 GENERAL SURVEY 601 some other part, making the interpretation of results very difficult. Moreoverthis method has to contend with the dif Note About Images Please note that these images are extracted from scanned page images that may have been digitally enhanced for readability - coloration and appearance of these illustrations may not perfectly resemble the original work.",
+      "license": {
+        "shortName": "No restrictions",
+        "url": "https://www.flickr.com/commons/usage/",
+        "usageTerms": "No known copyright restrictions",
+        "attributionRequired": "false"
+      },
+      "allowed": false,
+      "licenseReason": "Unreviewed license: No restrictions",
+      "categories": [
+        "Category:Human brain (sagittal section)"
+      ],
+      "score": -45
+    },
+    {
+      "id": "commons-43639818",
+      "title": "File:Brain and mind; or, Mental science considered in accordance withthe principles of phrenology, and in relation to modern physiology (1882) (14594521798).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brain%20and%20mind%3B%20or%2C%20Mental%20science%20considered%20in%20accordance%20withthe%20principles%20of%20phrenology%2C%20and%20in%20relation%20to%20modern%20physiology%20(1882)%20(14594521798).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Brain_and_mind%3B_or%2C_Mental_science_considered_in_accordance_withthe_principles_of_phrenology%2C_and_in_relation_to_modern_physiology_%281882%29_%2814594521798%29.jpg",
+      "kind": "jpg",
+      "mime": "image/jpeg",
+      "width": 1812,
+      "height": 1368,
+      "byteLength": 707938,
+      "sha1": "a7014f6b0455a44a47f778618391ea60bd8cd090",
+      "artist": "Internet Archive Book Images",
+      "credit": "https://www.flickr.com/photos/internetarchivebookimages/14594521798/ Source book page: https://archive.org/stream/brainmindormenta00dray/brainmindormenta00dray#page/n55/mode/1up",
+      "description": "BRAIN IN SKULL: Position of brain in the skull – showing their relations – from Turner. S: Fissure of Silvius; R: Fissure of Rolando, SP marks the Temporal Region, the letters being on the mid-tempero-sphenoidal convolution; O: the Occipital Region, C: the Cerebellum. The irregular lines represent the course of the cranial sutures in relation to the brain. Identifier: brainmindormenta00dray (find matches) Title: Brain and mind; or, Mental science considered in accordance withthe principles of phrenology, and in relation to modern physiology Year: 1882 (1880s) Authors: Drayton, H. S. (Henry Shipton), 1840-1923 McNeill, James, 1846-1916 Subjects: Phrenology Publisher: New York, Fowler &amp; Wells Contributing Library: Yale University, Cushing/Whitney Medical Library Digitizing Sponsor: Open Knowledge Commons and Yale University, Cushing/Whitney Medical Library View Book Page: Book Viewer About This Book: Catalog Entry View All Images: All Images From Book Click here to view book online to see this illustration in context in a browseable online version of this book. Text Appearing Before Image: CHAPTER III. THE STRUCTURE OF THE BRAIN AND SKULL. The brain is the organized mass of soft matter whichoccupies the cavity of the skull; a line drawn from theouter angle of either eye, backward through the openingof the ear, and continued in that direction to the posterior Text Appearing After Image: Tig. II.—Brain in SkuluFig, II.—Position of Brain in the Skull—showing their relations—from Turner.5, Fissure of Silvius ; R, Fissure of Rolando ; SP marks the Temporal Region,the letters being on the mid-tempero-sphenoidal convolution ; O, the OccipitalRegion ; C, the Cerebellum. The irregular lines represent the course of thecranial sutures in relation to the brain. region of the head, will define practically the brains lowermargin (See Fig. ii). It is composed of two substances, a (4S) STRUCTURE OF BRAIN AND SKULL. 49 white or medullary substance, which is fibrous or striated intexture, and a gray or cineritious substance, which entersmainly into the composition of the cortical or convolutedsubstance of the brain. The surface of the brain is dis-posed in folds, something like what would appear if apiece of cloth several feet square were puckered andmade to occupy but a single foot of surface. This arrange-ment of folds, or convolutions, appears to be designed togive the gra Note About Images Please note that these images are extracted from scanned page images that may have been digitally enhanced for readability - coloration and appearance of these illustrations may not perfectly resemble the original work.",
+      "license": {
+        "shortName": "No restrictions",
+        "url": "https://www.flickr.com/commons/usage/",
+        "usageTerms": "No known copyright restrictions",
+        "attributionRequired": "false"
+      },
+      "allowed": false,
+      "licenseReason": "Unreviewed license: No restrictions",
+      "categories": [
+        "Category:Human brain (lateral view)"
+      ],
+      "score": -52
+    }
+  ]
+}

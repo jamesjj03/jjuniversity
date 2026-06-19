@@ -45,3 +45,4 @@ next-env.d.ts
 /tools/gold-cleaner/gold-output/
 /generated/
 /tmp/pdfs/
+/tmp/arena-candidates/

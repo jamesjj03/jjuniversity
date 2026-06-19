@@ -17,7 +17,17 @@
       "CC BY-ND",
       "unknown",
       "all-rights-reserved"
-    ]
+    ],
+    "originalDiagramPolicy": {
+      "allowed": true,
+      "sourceLabel": "JJU original diagram",
+      "requirements": [
+        "must cite anatomical or factual references used to build it",
+        "must be reviewed for target-level accuracy before publish",
+        "must keep editable source assets when available",
+        "must not trace or closely copy a copyrighted diagram"
+      ]
+    }
   },
   "categories": [
     {
