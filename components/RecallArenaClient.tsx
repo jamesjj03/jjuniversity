@@ -264,7 +264,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
             </div>
             <div className="recallLibraryActions" aria-label="Arena actions">
               <span>1 ready / 10 categories</span>
-              <Link className="btn secondary" href="/admin/arena">Factory</Link>
+              <Link className="btn secondary" href="/admin/arena" prefetch={false}>Factory</Link>
             </div>
           </header>
 
@@ -339,7 +339,7 @@ export default function RecallArenaClient({ pack }: { pack: RecallPack }) {
                     <span>draft</span>
                     <span>4 proposed</span>
                   </div>
-                  <Link className="btn secondary" href="/admin/arena">Factory</Link>
+                  <Link className="btn secondary" href="/admin/arena" prefetch={false}>Factory</Link>
                 </article>
               </div>
             </section>
