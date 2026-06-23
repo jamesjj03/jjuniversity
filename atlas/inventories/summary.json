@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T21:23:03.311Z",
+  "generatedAt": "2026-06-20T20:55:30.409Z",
   "totalTerms": 7557,
   "domains": [
     {
@@ -98,7 +98,7 @@
           "name": "Wikipedia Index of Psychology Articles",
           "url": "https://en.wikipedia.org/wiki/Index_of_psychology_articles",
           "status": "ok",
-          "count": 1951
+          "count": 1950
         },
         {
           "name": "Wikipedia Glossary of Psychoanalysis",
@@ -204,7 +204,7 @@
           "name": "Wikipedia Glossary of Philosophy",
           "url": "https://en.wikipedia.org/wiki/Glossary_of_philosophy",
           "status": "ok",
-          "count": 1427
+          "count": 1433
         },
         {
           "name": "Wikipedia Outline of Philosophy",
@@ -317,7 +317,7 @@
           "name": "Wikipedia Outline of Linguistics",
           "url": "https://en.wikipedia.org/wiki/Outline_of_linguistics",
           "status": "ok",
-          "count": 561
+          "count": 560
         }
       ]
     },
@@ -336,7 +336,7 @@
           "name": "Wikipedia Outline of Earth Sciences",
           "url": "https://en.wikipedia.org/wiki/Outline_of_Earth_sciences",
           "status": "ok",
-          "count": 182
+          "count": 180
         },
         {
           "name": "Wikipedia Glossary of Meteorology",
@@ -405,7 +405,7 @@
           "name": "Wikipedia Outline of the Arts",
           "url": "https://en.wikipedia.org/wiki/Outline_of_the_arts",
           "status": "ok",
-          "count": 2399
+          "count": 2404
         },
         {
           "name": "Wikipedia Glossary of Art Terms",
@@ -417,7 +417,7 @@
           "name": "Wikipedia Outline of Music",
           "url": "https://en.wikipedia.org/wiki/Outline_of_music",
           "status": "ok",
-          "count": 870
+          "count": 871
         }
       ]
     }

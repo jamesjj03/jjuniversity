@@ -1,7 +1,7 @@
 {
   "domain": "earth_science",
   "title": "Earth Science",
-  "generatedAt": "2026-06-02T21:23:03.984Z",
+  "generatedAt": "2026-06-20T20:55:30.721Z",
   "target": 350,
   "sources": [
     {
@@ -14,7 +14,7 @@
       "name": "Wikipedia Outline of Earth Sciences",
       "url": "https://en.wikipedia.org/wiki/Outline_of_Earth_sciences",
       "status": "ok",
-      "count": 182
+      "count": 180
     },
     {
       "name": "Wikipedia Glossary of Meteorology",
@@ -3878,6 +3878,21 @@
       "promoted": false
     },
     {
+      "id": "bioherm",
+      "title": "bioherm",
+      "domain": "earth_science",
+      "subdomains": [],
+      "aliases": [],
+      "sourceNames": [
+        "Wikipedia Glossary of Geology"
+      ],
+      "sourceUrls": [
+        "https://en.wikipedia.org/wiki/Glossary_of_geology"
+      ],
+      "status": "candidate",
+      "promoted": false
+    },
+    {
       "id": "biology",
       "title": "Biology",
       "domain": "earth_science",
@@ -4518,24 +4533,6 @@
       ],
       "sourceUrls": [
         "https://en.wikipedia.org/wiki/Glossary_of_geology",
-        "https://en.wikipedia.org/wiki/Outline_of_Earth_sciences"
-      ],
-      "status": "candidate",
-      "promoted": false
-    },
-    {
-      "id": "geography",
-      "title": "Geography",
-      "domain": "earth_science",
-      "subdomains": [
-        "geography"
-      ],
-      "aliases": [],
-      "sourceNames": [
-        "Atlas domain map",
-        "Wikipedia Outline of Earth Sciences"
-      ],
-      "sourceUrls": [
         "https://en.wikipedia.org/wiki/Outline_of_Earth_sciences"
       ],
       "status": "candidate",

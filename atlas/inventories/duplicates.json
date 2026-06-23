@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T21:24:10.656Z",
+  "generatedAt": "2026-06-20T20:55:31.384Z",
   "domains": 17,
   "totalTerms": 7557,
   "perDomainDuplicates": [],
@@ -6498,16 +6498,6 @@
       "titles": [
         "Geochemistry",
         "geochemistry"
-      ]
-    },
-    {
-      "id": "geography",
-      "domains": [
-        "earth_science",
-        "political_science"
-      ],
-      "titles": [
-        "Geography"
       ]
     },
     {

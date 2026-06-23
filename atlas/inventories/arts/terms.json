@@ -1,14 +1,14 @@
 {
   "domain": "arts",
   "title": "Arts",
-  "generatedAt": "2026-06-02T21:23:03.928Z",
+  "generatedAt": "2026-06-20T20:55:30.698Z",
   "target": 300,
   "sources": [
     {
       "name": "Wikipedia Outline of the Arts",
       "url": "https://en.wikipedia.org/wiki/Outline_of_the_arts",
       "status": "ok",
-      "count": 2399
+      "count": 2404
     },
     {
       "name": "Wikipedia Glossary of Art Terms",
@@ -20,7 +20,7 @@
       "name": "Wikipedia Outline of Music",
       "url": "https://en.wikipedia.org/wiki/Outline_of_music",
       "status": "ok",
-      "count": 870
+      "count": 871
     }
   ],
   "terms": [

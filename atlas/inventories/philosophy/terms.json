@@ -1,14 +1,14 @@
 {
   "domain": "philosophy",
   "title": "Philosophy",
-  "generatedAt": "2026-06-02T21:23:04.024Z",
+  "generatedAt": "2026-06-20T20:55:30.738Z",
   "target": 450,
   "sources": [
     {
       "name": "Wikipedia Glossary of Philosophy",
       "url": "https://en.wikipedia.org/wiki/Glossary_of_philosophy",
       "status": "ok",
-      "count": 1427
+      "count": 1433
     },
     {
       "name": "Wikipedia Outline of Philosophy",

@@ -1,7 +1,7 @@
 {
   "domain": "psychology",
   "title": "Psychology",
-  "generatedAt": "2026-06-02T21:23:04.048Z",
+  "generatedAt": "2026-06-20T20:55:30.748Z",
   "target": 550,
   "sources": [
     {
@@ -20,7 +20,7 @@
       "name": "Wikipedia Index of Psychology Articles",
       "url": "https://en.wikipedia.org/wiki/Index_of_psychology_articles",
       "status": "ok",
-      "count": 1951
+      "count": 1950
     },
     {
       "name": "Wikipedia Glossary of Psychoanalysis",

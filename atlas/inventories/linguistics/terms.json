@@ -1,7 +1,7 @@
 {
   "domain": "linguistics",
   "title": "Linguistics",
-  "generatedAt": "2026-06-02T21:23:04.007Z",
+  "generatedAt": "2026-06-20T20:55:30.731Z",
   "target": 350,
   "sources": [
     {
@@ -14,7 +14,7 @@
       "name": "Wikipedia Outline of Linguistics",
       "url": "https://en.wikipedia.org/wiki/Outline_of_linguistics",
       "status": "ok",
-      "count": 561
+      "count": 560
     }
   ],
   "terms": [
