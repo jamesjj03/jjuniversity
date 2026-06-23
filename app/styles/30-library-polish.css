@@ -1,0 +1,1735 @@
+﻿/* Final explicit fixes for parsed border/width edge cases. */
+html body .aboutPage .aboutEssay section {
+  border-left:1px solid rgba(199,161,87,.28) !important;
+  border-right:1px solid rgba(199,161,87,.28) !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:calc(100% - 50px) !important;
+  max-width:calc(100% - 50px) !important;
+}
+
+@media (max-width:760px) {
+  html body .contactPage .contactFormPanel,
+  html body .contactPage .card.goldCard.contactFormPanel {
+    width:calc(100% - 32px) !important;
+    max-width:calc(100% - 32px) !important;
+  }
+}
+
+/* Go-live polish: centering, admin simplification, sticky header, and old library mood. */
+:root[data-site-theme="royal"] {
+  --theme-top:#090513;
+  --theme-mid:#14081f;
+  --theme-bottom:#08030d;
+  --theme-glow:#8f5cff;
+  --panel:#1b1026;
+  --panel2:#251532;
+  --line:rgba(177,128,255,.34);
+}
+
+html body .siteHeader {
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000 !important;
+  align-items:center !important;
+}
+
+html body .siteFooter {
+  width:calc(100vw - 56px) !important;
+  max-width:calc(100vw - 56px) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+html body .brandText,
+html body .brand {
+  font-family:Arial, Helvetica, sans-serif !important;
+  font-weight:900 !important;
+}
+
+html body .menuInstagramButton {
+  width:38px !important;
+  height:38px !important;
+  display:inline-grid !important;
+  place-items:center !important;
+  border:1px solid var(--control-border, var(--line)) !important;
+  border-radius:8px !important;
+  background:var(--control-bg, rgba(0,0,0,.34)) !important;
+  color:var(--control-text, var(--text)) !important;
+}
+
+html body .menuInstagramButton svg {
+  width:18px !important;
+  height:18px !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+}
+
+html body .homePage .hero {
+  display:grid !important;
+  justify-items:center !important;
+  text-align:center !important;
+}
+
+html body .homePage .hero .homeStartSection {
+  width:min(1220px, calc(100vw - 40px)) !important;
+  max-width:1220px !important;
+  margin:clamp(34px, 5vw, 58px) auto 0 !important;
+  display:grid !important;
+  justify-items:center !important;
+  text-align:center !important;
+  justify-self:center !important;
+}
+
+html body .homePage .hero .homeStartHeader {
+  width:100% !important;
+  max-width:900px !important;
+  margin:0 auto 20px !important;
+  display:grid !important;
+  justify-items:center !important;
+  text-align:center !important;
+}
+
+html body .homePage .hero .homeStartHeader h2,
+html body .homePage .hero .homeStartHeader p {
+  width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+}
+
+html body .homePage .hero .homeStartGrid {
+  width:100% !important;
+  justify-self:center !important;
+}
+
+html body .libraryHero h1 {
+  font-family:Arial, Helvetica, sans-serif !important;
+  font-weight:950 !important;
+  letter-spacing:0 !important;
+}
+
+html body .libraryHero {
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--theme-glow) 22%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-mid) 58%, transparent), transparent) !important;
+}
+
+html body .aboutPage,
+html body .contactPage,
+html body .accountPage,
+html body .accountPageClean {
+  display:grid !important;
+  justify-items:center !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutPlain,
+html body .contactPage .contactPlain,
+html body .accountPageClean,
+html body .accountPage .accountGrid {
+  justify-self:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+html body .aboutPage .aboutEssay section,
+html body .contactPage .contactComposer,
+html body .contactPage .contactFormPanel,
+html body .contactPage .contactGuidance,
+html body .accountPageClean .accountModule,
+html body .accountPageClean .accountRuleCard {
+  text-align:left !important;
+}
+
+html body .aboutPage .aboutStory > .btn {
+  justify-self:center !important;
+  margin-left:0 !important;
+}
+
+html body .adminPulse {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:8px !important;
+  margin-top:12px !important;
+}
+
+html body .adminPulse span {
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:6px !important;
+  min-height:32px !important;
+  padding:7px 10px !important;
+  border:1px solid color-mix(in srgb, var(--line) 76%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 72%, transparent) !important;
+  color:var(--muted) !important;
+  font-size:12px !important;
+  font-weight:850 !important;
+}
+
+html body .adminPulse strong {
+  color:var(--gold) !important;
+}
+
+html body .adminSectionTabs {
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)) !important;
+}
+
+html body .adminBookWorkspace {
+  display:grid !important;
+  gap:16px !important;
+  min-width:0 !important;
+}
+
+html body .adminReaderPanel .pathBuilderTop .modelStatus:not(.ready),
+html body .adminReviewStats,
+html body .factFlagList,
+html body .reviewMap {
+  display:none !important;
+}
+
+html body .adminReaderGrid.adminReaderGridClean {
+  grid-template-columns:minmax(220px, 300px) minmax(0, 1fr) !important;
+}
+
+html body .adminReaderGrid.adminReaderGridClean .adminReaderSidebar {
+  grid-template-columns:1fr !important;
+  align-content:start !important;
+}
+
+html body .adminReaderSurface {
+  min-width:0 !important;
+}
+
+@media (max-width:900px) {
+  html body .adminReaderGrid.adminReaderGridClean {
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media (max-width:760px) {
+  html body .siteHeader {
+    grid-template-columns:minmax(0, 1fr) auto auto !important;
+    grid-template-areas:"brand social menu" "continue continue continue" !important;
+    gap:8px !important;
+    padding:8px 10px !important;
+    width:100% !important;
+  }
+
+  html body .siteHeader .brand,
+  html body .brandWithMark {
+    grid-area:brand !important;
+    min-width:0 !important;
+    gap:8px !important;
+  }
+
+  html body .brandLogo {
+    width:34px !important;
+    height:34px !important;
+  }
+
+  html body .brandText {
+    font-size:16px !important;
+    max-width:calc(100vw - 160px) !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    white-space:nowrap !important;
+  }
+
+  html body .siteSocialLink {
+    grid-area:social !important;
+    width:38px !important;
+    height:38px !important;
+  }
+
+  html body .accountMenu {
+    grid-area:menu !important;
+  }
+
+  html body .accountMenu > summary {
+    width:38px !important;
+    height:38px !important;
+  }
+
+  html body .continueReadingMenu,
+  html body .continueReadingLink {
+    grid-area:continue !important;
+    width:100% !important;
+    max-width:none !important;
+    justify-self:stretch !important;
+  }
+
+  html body .siteFooter {
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+
+  html body .homePage .hero h1 {
+    font-size:clamp(50px, 15vw, 76px) !important;
+  }
+
+  html body .homePage .hero .homeStartSection {
+    width:min(100%, calc(100vw - 24px)) !important;
+  }
+
+  html body .homeStartGrid {
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* User correction pass: quieter library hero, fixed menu row, cleaner contact/about. */
+html body .libraryHero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(58px, 7vw, 104px) !important;
+  font-weight:900 !important;
+  line-height:.96 !important;
+  letter-spacing:0 !important;
+}
+
+html body .libraryHero {
+  min-height:0 !important;
+  padding-top:clamp(36px, 6vw, 76px) !important;
+  padding-bottom:clamp(24px, 4vw, 42px) !important;
+}
+
+html body .brandLogo {
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  object-fit:contain !important;
+  border-radius:8px !important;
+}
+
+html body .accountMenuTop {
+  display:grid !important;
+  grid-template-columns:38px 38px minmax(0, 1fr) auto !important;
+  gap:8px !important;
+  align-items:center !important;
+  justify-items:start !important;
+}
+
+html body .accountMenuTop > button {
+  justify-self:end !important;
+  align-self:center !important;
+}
+
+html body .menuSettingsButton,
+html body .menuInstagramButton {
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  align-self:center !important;
+  justify-self:start !important;
+}
+
+html body .menuSettingsButton svg,
+html body .menuInstagramButton svg {
+  width:18px !important;
+  height:18px !important;
+  display:block !important;
+  margin:0 !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  padding:24px 34px !important;
+  border-left:1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+  border-right:1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p,
+html body .aboutPage .aboutDisclaimer p {
+  text-align:left !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactPlain,
+html body .contactPage .contactComposer {
+  width:min(760px, calc(100vw - 40px)) !important;
+  max-width:760px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  grid-template-columns:1fr !important;
+  justify-items:stretch !important;
+}
+
+html body .contactPage .contactFormPanel {
+  width:100% !important;
+}
+
+html body .contactPage .contactFormPanel > h2 {
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  margin-top:16px !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+}
+
+html body .contactPage .contactSupportGrid h2 {
+  font-size:16px !important;
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid p {
+  font-size:13px !important;
+  line-height:1.45 !important;
+  text-align:left !important;
+}
+
+@media (max-width:760px) {
+  html body .brandLogo {
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+  }
+
+  html body .contactPage .contactLayout,
+  html body .contactPage .contactPlain,
+  html body .contactPage .contactComposer {
+    width:min(100%, calc(100vw - 24px)) !important;
+  }
+
+  html body .contactPage .contactSupportGrid {
+    grid-template-columns:1fr !important;
+  }
+}
+
+html body .menuThemeGrid button[data-theme-choice].active,
+html body .segmentedControl button[data-theme-choice].active {
+  box-shadow:inset 0 0 0 2px color-mix(in srgb, var(--gold) 76%, #fff 12%), 0 0 0 1px rgba(0,0,0,.16) !important;
+}
+
+@media (max-width:700px) {
+  .fiberPage {
+    padding-top:18px;
+  }
+
+  .fiberHero {
+    margin-top:0;
+  }
+
+  .fiberPlanGrid {
+    display:flex;
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    padding-bottom:8px;
+    scroll-snap-type:x mandatory;
+  }
+
+  .fiberPlan {
+    min-width:250px;
+    scroll-snap-align:start;
+  }
+
+  .fiberPhotoPlaceholder {
+    min-height:220px;
+  }
+
+  .fiberSummaryPair,
+  .fiberMonthlyCompare,
+  .fiberFiveCompare {
+    grid-template-columns:1fr;
+  }
+
+  .fiberFiveHeader {
+    display:grid;
+  }
+
+  .fiberMonthStrip {
+    grid-template-columns:repeat(5,minmax(76px,1fr));
+    overflow-x:auto;
+  }
+
+  .fiberToggle {
+    grid-template-columns:auto minmax(0,1fr);
+  }
+
+  .fiberToggle b {
+    grid-column:2;
+  }
+}
+
+.fiberPageV2 {
+  --fiber-bg:#07110d;
+  --fiber-card:#f7fbf8;
+  --fiber-line:rgba(255,255,255,.12);
+  --fiber-muted:#526158;
+  max-width:1240px;
+  font-family:var(--fiber-font);
+  color:#f4fff8;
+}
+
+.fiberHeroV2 {
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1.16fr) minmax(260px,.68fr);
+  gap:14px;
+  margin:12px 0 12px;
+}
+
+.fiberHeroV2::before {
+  content:"";
+  position:absolute;
+  inset:-30px -20px auto -20px;
+  height:260px;
+  pointer-events:none;
+  background:
+    linear-gradient(115deg, color-mix(in srgb, var(--fiber-accent) 34%, transparent), transparent 58%),
+    linear-gradient(35deg, color-mix(in srgb, var(--fiber-frontier) 22%, transparent), transparent 44%);
+  opacity:.9;
+  z-index:-1;
+}
+
+.fiberHeroCopyV2,
+.fiberRepPanel,
+.fiberPanelV2,
+.fiberSummaryV2,
+.fiberInfoPanelV2,
+.fiberContactV2,
+.fiberComparisonSection,
+.fiberFaqItem {
+  border:1px solid var(--fiber-line);
+  border-radius:8px;
+  box-shadow:0 18px 48px rgba(0,0,0,.24);
+}
+
+.fiberPanelV2,
+.fiberPanelV2 *,
+.fiberInfoPanelV2,
+.fiberContactV2,
+.fiberComparisonSection {
+  min-width:0;
+}
+
+.fiberHeroCopyV2 {
+  min-height:430px;
+  display:grid;
+  align-content:end;
+  padding:clamp(24px,5vw,48px);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.10), transparent 42%),
+    linear-gradient(180deg, #101b16, #07110d);
+}
+
+.fiberEyebrow {
+  margin:0 0 10px;
+  color:var(--fiber-accent2);
+  font-size:12px;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+
+.fiberHeroCopyV2 h1 {
+  margin:0;
+  max-width:820px;
+  color:white;
+  font-size:clamp(56px,9vw,112px);
+  line-height:.86;
+  letter-spacing:0;
+}
+
+.fiberHeroCopyV2 p:not(.fiberEyebrow) {
+  max-width:720px;
+  margin:16px 0 0;
+  color:#dce8df;
+  font-size:clamp(18px,2vw,23px);
+  line-height:1.42;
+}
+
+.fiberHeroCopyV2 .fiberJjuNote {
+  color:#9fb4a7;
+  font-size:15px;
+}
+
+.fiberRepPanel {
+  display:grid;
+  gap:12px;
+  align-content:start;
+  padding:12px;
+  background:#f7fbf8;
+  color:var(--fiber-ink);
+}
+
+.fiberRepPanel img,
+.fiberImageCard img {
+  width:100%;
+  display:block;
+  object-fit:cover;
+  background:#dbe7df;
+}
+
+.fiberRepPanel img {
+  min-height:360px;
+  aspect-ratio:4/5;
+  border-radius:7px;
+}
+
+.fiberRepPanel .fiberPhotoPlaceholder {
+  min-height:360px;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--fiber-accent) 20%, white), #ecf3ef),
+    #ecf3ef;
+  border:1px dashed color-mix(in srgb, var(--fiber-accent) 45%, #ffffff);
+}
+
+.fiberRepPanel .fiberPhotoPlaceholder span {
+  color:var(--fiber-ink);
+}
+
+.fiberRepPanel .fiberPhotoPlaceholder small {
+  color:var(--fiber-accent);
+}
+
+.fiberRepPanel p {
+  margin:0;
+  color:#34443b;
+  font-weight:850;
+  line-height:1.35;
+}
+
+.fiberPageNav {
+  position:sticky;
+  top:82px;
+  z-index:30;
+  display:flex;
+  gap:8px;
+  margin:12px 0 20px;
+  padding:8px;
+  overflow-x:auto;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  background:rgba(7,17,13,.86);
+  backdrop-filter:blur(16px);
+  box-shadow:0 12px 32px rgba(0,0,0,.22);
+}
+
+.fiberPageNav a {
+  flex:0 0 auto;
+  text-decoration:none;
+  color:#e8f5ec;
+  border-radius:999px;
+  padding:10px 13px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.fiberPageNav a:hover {
+  background:var(--fiber-accent);
+  color:white;
+}
+
+.fiberQuoteV2 {
+  scroll-margin-top:140px;
+}
+
+.fiberSectionHeadV2 {
+  display:grid;
+  gap:4px;
+  margin:26px 0 12px;
+}
+
+.fiberSectionHeadV2 h2,
+.fiberInfoPanelV2 h2,
+.fiberContactV2 h2 {
+  margin:0;
+  color:white;
+  font-size:clamp(30px,4.8vw,56px);
+  line-height:.98;
+  letter-spacing:0;
+}
+
+.fiberSectionHeadV2 > p:not(.fiberEyebrow) {
+  max-width:760px;
+  margin:6px 0 0;
+  color:#b9c9c0;
+  line-height:1.5;
+}
+
+.fiberPanelV2 {
+  padding:18px;
+  background:rgba(255,255,255,.055);
+}
+
+.fiberPanelV2 .fiberPanelTitle span {
+  background:var(--fiber-accent);
+}
+
+.fiberPanelV2 .fiberMoneyInput div {
+  border-color:rgba(255,255,255,.14);
+  background:#f7fbf8;
+}
+
+.fiberPanelV2 .fiberMoneyInput span {
+  color:#b9c9c0;
+}
+
+.fiberPanelV2 .fiberMoneyInput b,
+.fiberPanelV2 .fiberMoneyInput input {
+  color:var(--fiber-ink);
+}
+
+.fiberPlan,
+.fiberToggle {
+  background:#f7fbf8;
+  border-color:rgba(255,255,255,.1);
+  color:var(--fiber-ink);
+  box-shadow:none;
+}
+
+.fiberPlan:hover,
+.fiberPlan.active,
+.fiberToggle:hover,
+.fiberToggle.active {
+  background:#ffffff;
+  border-color:var(--fiber-accent2);
+  box-shadow:0 14px 34px rgba(0,0,0,.18);
+}
+
+.fiberPlan span {
+  background:color-mix(in srgb, var(--fiber-accent) 12%, white);
+  border-color:color-mix(in srgb, var(--fiber-accent) 24%, white);
+  color:var(--fiber-accent);
+}
+
+.fiberPlan strong,
+.fiberPlan b,
+.fiberToggle strong,
+.fiberToggle b {
+  color:var(--fiber-ink);
+}
+
+.fiberPlan em,
+.fiberToggle b {
+  color:var(--fiber-accent);
+}
+
+.fiberPlan p,
+.fiberToggle p {
+  color:#526158;
+}
+
+.fiberToggle.active .fiberCheck {
+  background:var(--fiber-accent);
+  border-color:var(--fiber-accent);
+}
+
+.fiberCheck {
+  border-color:color-mix(in srgb, var(--fiber-accent) 35%, white);
+  color:white;
+}
+
+.fiberChannelGrid span {
+  background:color-mix(in srgb, var(--fiber-accent) 9%, white);
+  border-color:color-mix(in srgb, var(--fiber-accent) 22%, white);
+  color:var(--fiber-accent);
+}
+
+.fiberSummaryV2 {
+  position:sticky;
+  top:146px;
+  padding:18px;
+  color:var(--fiber-ink);
+  background:#ffffff;
+  border-top:8px solid var(--fiber-accent);
+}
+
+.fiberSummaryV2 .fiberSummaryPill {
+  background:color-mix(in srgb, var(--fiber-accent) 10%, white);
+  color:var(--fiber-accent);
+}
+
+.fiberBigSave {
+  background:
+    linear-gradient(135deg, var(--fiber-accent), color-mix(in srgb, var(--fiber-accent) 72%, var(--fiber-frontier)));
+}
+
+.fiberFiveMonths {
+  border-color:var(--fiber-accent);
+}
+
+.fiberFiveHeader strong,
+.fiberGood,
+.fiberMonthStrip strong,
+.fiberRewardLine strong {
+  color:var(--fiber-accent)!important;
+}
+
+.fiberBad {
+  color:var(--fiber-frontier)!important;
+}
+
+.fiberFiveCompare div:nth-child(2) {
+  background:var(--fiber-ink);
+}
+
+.fiberRewardLine {
+  background:color-mix(in srgb, var(--fiber-accent) 9%, white);
+  border-color:color-mix(in srgb, var(--fiber-accent) 22%, white);
+}
+
+.fiberReset,
+.fiberBtn.primary {
+  background:var(--fiber-accent);
+  border-color:var(--fiber-accent);
+}
+
+.fiberBtn.secondary {
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.14);
+  color:#f3fff7;
+}
+
+.fiberRepPanel .fiberBtn.secondary,
+.fiberContactV2 .fiberBtn.secondary {
+  background:#101a15;
+}
+
+.fiberContentGridV2 {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:24px;
+}
+
+.fiberInfoPanelV2,
+.fiberComparisonSection,
+.fiberContactV2 {
+  padding:clamp(18px,2.4vw,24px);
+  background:rgba(255,255,255,.055);
+  scroll-margin-top:140px;
+}
+
+.fiberInfoPanelV2 > p,
+.fiberContactV2 p:not(.fiberEyebrow):not(.fiberContactFine) {
+  color:#c5d3cb;
+  font-size:17px;
+  line-height:1.5;
+}
+
+.fiberInfoPanelV2 ul,
+.fiberInfoPanelV2 ol {
+  margin:16px 0 0;
+  padding-left:21px;
+  color:#dfeae4;
+  font-size:16px;
+  line-height:1.55;
+}
+
+.fiberInfoPanelV2 li + li {
+  margin-top:8px;
+}
+
+.fiberChipGrid {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:16px;
+}
+
+.fiberChipGrid span {
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  color:#f2fff6;
+  padding:8px 10px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.fiberNoteLine {
+  margin:14px 0 0;
+  color:#b9c9c0;
+  line-height:1.5;
+}
+
+.fiberLinkList {
+  display:grid;
+  gap:8px;
+  margin-top:16px;
+}
+
+.fiberLinkList a {
+  display:grid;
+  gap:4px;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;
+  background:rgba(255,255,255,.07);
+  padding:13px;
+}
+
+.fiberLinkList strong {
+  color:white;
+}
+
+.fiberLinkList span {
+  color:#b9c9c0;
+  line-height:1.35;
+}
+
+.fiberComparisonSection {
+  margin-top:24px;
+}
+
+.fiberComparisonGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:12px;
+}
+
+.fiberImageCard {
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;
+  background:#f7fbf8;
+  color:var(--fiber-ink);
+}
+
+.fiberImageCard img,
+.fiberImageCard > div {
+  aspect-ratio:16/10;
+}
+
+.fiberImageCard > div {
+  display:grid;
+  place-items:center;
+  color:#526158;
+  background:#e7eee9;
+  font-weight:900;
+}
+
+.fiberImageCard h3,
+.fiberImageCard p {
+  margin:0;
+  padding:0 14px;
+}
+
+.fiberImageCard h3 {
+  padding-top:14px;
+}
+
+.fiberImageCard p {
+  padding-bottom:14px;
+  margin-top:7px;
+  color:#526158;
+  line-height:1.4;
+}
+
+.fiberFaqSection {
+  scroll-margin-top:140px;
+}
+
+.fiberFaqItem {
+  background:rgba(255,255,255,.055);
+}
+
+.fiberFaqItem summary {
+  color:white;
+}
+
+.fiberFaqItem p {
+  color:#c5d3cb;
+}
+
+.fiberContactV2 {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:18px;
+  align-items:center;
+  margin-top:24px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--fiber-accent) 22%, transparent), transparent 48%),
+    linear-gradient(45deg, color-mix(in srgb, var(--fiber-frontier) 15%, transparent), transparent 42%),
+    rgba(255,255,255,.055);
+}
+
+.fiberContactActions {
+  justify-content:end;
+  max-width:460px;
+}
+
+.fiberContactFine {
+  grid-column:1 / -1;
+  margin:0;
+  color:#9fb4a7;
+  font-size:13px;
+}
+
+.fiberAdminPanel {
+  display:grid;
+  gap:14px;
+}
+
+.fiberAdminBlock {
+  display:grid;
+  gap:12px;
+  border:1px solid rgba(184,147,63,.28);
+  border-radius:8px;
+  background:var(--panel);
+  padding:16px;
+}
+
+.fiberAdminBlock h3 {
+  margin:0;
+  color:white;
+}
+
+.fiberAdminChecks {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+}
+
+.fiberAdminColorGrid,
+.fiberAdminThree {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px;
+}
+
+.fiberAdminRows {
+  display:grid;
+  gap:10px;
+}
+
+.fiberAdminRow {
+  display:grid;
+  grid-template-columns:1fr 1.1fr .8fr .55fr .8fr minmax(220px,1.4fr);
+  gap:8px;
+  align-items:start;
+}
+
+.fiberAdminRow.compact {
+  grid-template-columns:1fr 1.4fr 1.4fr;
+}
+
+.fiberAdminRow.faq {
+  grid-template-columns:minmax(220px,.9fr) minmax(280px,1.5fr);
+}
+
+.fiberAdminRow textarea {
+  min-height:46px;
+}
+
+.fiberRawJson {
+  min-height:360px;
+  font-family:Consolas, "Courier New", monospace;
+  font-size:12px;
+}
+
+.adminInlineNote {
+  align-self:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+@media (max-width:900px) {
+  .fiberHeroV2,
+  .fiberContentGridV2,
+  .fiberContactV2 {
+    grid-template-columns:1fr;
+  }
+
+  .fiberSummaryV2 {
+    position:relative;
+    top:auto;
+  }
+
+  .fiberPageNav {
+    top:0;
+  }
+
+  .fiberContactActions {
+    justify-content:start;
+    max-width:none;
+  }
+
+  .fiberAdminRow,
+  .fiberAdminRow.compact,
+  .fiberAdminRow.faq {
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:700px) {
+  .fiberHeroCopyV2 {
+    min-height:380px;
+  }
+
+  .fiberHeroV2::before {
+    height:210px;
+  }
+
+  .fiberPageNav {
+    border-radius:8px;
+  }
+}
+
+.fiberPageV2 {
+  --fiber-bg:#0f100d;
+  --fiber-card:#f8fbf6;
+  --fiber-cream:#f1f0e8;
+  --fiber-mint:#ddf1e5;
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--fiber-accent) 18%, transparent), transparent 360px),
+    linear-gradient(22deg, color-mix(in srgb, var(--fiber-frontier) 12%, transparent), transparent 420px);
+  padding-bottom:96px;
+  overflow-x:hidden;
+}
+
+.fiberHeroV2 {
+  grid-template-columns:minmax(0,1fr) 220px;
+  align-items:stretch;
+}
+
+.fiberHeroCopyV2 {
+  min-height:310px;
+  padding:clamp(22px,4vw,38px);
+}
+
+.fiberHeroCopyV2 h1 {
+  max-width:760px;
+  font-size:clamp(42px,7vw,82px);
+}
+
+.fiberHeroCopyV2 p:not(.fiberEyebrow) {
+  max-width:660px;
+  font-size:clamp(17px,1.7vw,21px);
+}
+
+.fiberRepPanel {
+  padding:10px;
+  background:#f5fbf7;
+}
+
+.fiberRepPanel img,
+.fiberRepPanel .fiberPhotoPlaceholder {
+  min-height:220px;
+  aspect-ratio:1;
+}
+
+.fiberRepPanel p {
+  font-size:13px;
+}
+
+.fiberPageNav {
+  top:82px;
+  max-width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:999px;
+}
+
+.fiberSectionHeadV2 h2 {
+  font-size:clamp(30px,4.2vw,50px);
+}
+
+.fiberQuoteGrid {
+  grid-template-columns:minmax(0,1fr) minmax(320px,390px);
+}
+
+.fiberPanelV2 {
+  padding:16px;
+}
+
+.fiberPanelTitle {
+  margin-bottom:12px;
+}
+
+.fiberPanelTitle span {
+  width:42px;
+  height:42px;
+  font-size:16px;
+}
+
+.fiberPanelTitle h3 {
+  font-size:clamp(22px,3vw,30px);
+}
+
+.fiberMoneyInput div {
+  min-height:64px;
+}
+
+.fiberMoneyInput input {
+  font-size:clamp(38px,6vw,54px);
+}
+
+.fiberPlanGrid {
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  padding:4px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;
+  background:rgba(255,255,255,.06);
+}
+
+.fiberPlan {
+  min-height:132px;
+  padding:12px;
+  gap:5px;
+  align-content:space-between;
+  border-radius:8px;
+  transform:translateZ(0);
+}
+
+.fiberPlan:hover,
+.fiberPlan.active {
+  transform:translateY(-2px);
+}
+
+.fiberPlan.active {
+  outline:2px solid var(--fiber-accent2);
+  outline-offset:1px;
+}
+
+.fiberPlan span {
+  padding:5px 7px;
+  font-size:10px;
+  letter-spacing:.06em;
+}
+
+.fiberPlan em {
+  font-size:clamp(20px,3vw,28px);
+  line-height:1;
+}
+
+.fiberPlan b {
+  font-size:clamp(24px,4vw,34px);
+}
+
+.fiberPlan > small {
+  color:#647269;
+  font-weight:900;
+  font-size:11px;
+}
+
+.fiberPlan p,
+.fiberPlan strong {
+  display:none;
+}
+
+.fiberSelectedPlanPanel {
+  margin-top:10px;
+  border:1px solid color-mix(in srgb, var(--fiber-accent) 22%, white);
+  border-radius:8px;
+  background:linear-gradient(135deg, #ffffff, color-mix(in srgb, var(--fiber-accent) 7%, white));
+  color:var(--fiber-ink);
+  padding:13px;
+}
+
+.fiberSelectedPlanPanel span {
+  display:inline-flex;
+  margin-bottom:6px;
+  border-radius:999px;
+  background:var(--fiber-accent);
+  color:white;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.fiberSelectedPlanPanel strong {
+  display:block;
+  font-size:24px;
+  line-height:1;
+}
+
+.fiberSelectedPlanPanel p {
+  margin:7px 0 0;
+  color:#526158;
+  line-height:1.35;
+}
+
+.fiberToggle {
+  grid-template-columns:46px minmax(0,1fr) auto;
+  align-items:center;
+  padding:12px;
+}
+
+.fiberCheck {
+  width:34px;
+  height:34px;
+  font-size:11px;
+  font-weight:950;
+}
+
+.fiberToggle strong {
+  font-size:20px;
+}
+
+.fiberToggle p {
+  font-size:14px;
+}
+
+.fiberChannelsFold {
+  margin-top:8px;
+}
+
+.fiberChannelsFold summary {
+  cursor:pointer;
+  color:var(--fiber-accent);
+  font-size:13px;
+  font-weight:950;
+}
+
+.fiberChannelsFold[open] summary {
+  margin-bottom:7px;
+}
+
+.fiberChannelGrid {
+  gap:5px;
+  margin-top:0;
+}
+
+.fiberChannelGrid span {
+  padding:4px 7px;
+  font-size:10px;
+}
+
+.fiberSummaryV2 {
+  padding:16px;
+  border-top-width:6px;
+}
+
+.fiberBigSave {
+  padding:15px;
+}
+
+.fiberBigSave strong {
+  animation:fiberPop .34s ease;
+}
+
+.fiberSummaryPair,
+.fiberMonthlyCompare,
+.fiberFiveCompare {
+  grid-template-columns:1fr 1fr;
+}
+
+.fiberSummaryPair strong,
+.fiberMonthlyCompare strong,
+.fiberFiveCompare strong {
+  font-size:clamp(24px,3.8vw,34px);
+}
+
+.fiberNumberPop {
+  animation:fiberPop .32s ease;
+}
+
+.fiberMonthStrip {
+  grid-template-columns:repeat(5,minmax(0,1fr));
+}
+
+.fiberContentGridV2 {
+  gap:10px;
+}
+
+.fiberInfoPanelV2,
+.fiberContactV2 {
+  padding:clamp(16px,2.2vw,22px);
+}
+
+.fiberInfoPanelV2 h2,
+.fiberContactV2 h2 {
+  font-size:clamp(28px,4vw,44px);
+}
+
+.fiberInfoPanelV2 ul,
+.fiberInfoPanelV2 ol {
+  font-size:16px;
+  line-height:1.45;
+}
+
+.fiberChipGrid span {
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.12);
+}
+
+.fiberFaqList {
+  gap:7px;
+}
+
+.fiberFaqItem {
+  box-shadow:none;
+}
+
+.fiberFaqItem summary {
+  padding:14px;
+}
+
+.fiberFaqItem summary::marker {
+  color:var(--fiber-accent2);
+}
+
+.fiberContactV2 {
+  margin-bottom:18px;
+}
+
+.fiberMobileCta {
+  display:none;
+}
+
+@keyframes fiberPop {
+  0% { transform:translateY(4px) scale(.98); opacity:.55; }
+  100% { transform:translateY(0) scale(1); opacity:1; }
+}
+
+@media (max-width:900px) {
+  .fiberHeroV2 {
+    grid-template-columns:minmax(0,1fr) 148px;
+  }
+
+  .fiberHeroCopyV2 {
+    min-height:260px;
+  }
+
+  .fiberRepPanel img,
+  .fiberRepPanel .fiberPhotoPlaceholder {
+    min-height:148px;
+  }
+}
+
+@media (max-width:700px) {
+  .fiberPageV2 {
+    padding-left:14px;
+    padding-right:14px;
+  }
+
+  .fiberHeroV2 {
+    grid-template-columns:82px minmax(0,1fr);
+    gap:10px;
+    margin-top:4px;
+  }
+
+  .fiberHeroCopyV2 {
+    grid-column:2;
+    grid-row:1;
+    min-height:0;
+    padding:14px 0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+  }
+
+  .fiberHeroCopyV2 h1 {
+    font-size:34px;
+    line-height:.96;
+  }
+
+  .fiberHeroCopyV2 p:not(.fiberEyebrow) {
+    margin-top:8px;
+    font-size:15px;
+    line-height:1.32;
+  }
+
+  .fiberHeroCopyV2 .fiberJjuNote {
+    font-size:12px;
+    color:#9fb4a7;
+  }
+
+  .fiberHeroActions {
+    margin-top:12px;
+    gap:7px;
+  }
+
+  .fiberBtn {
+    min-height:38px;
+    padding:9px 12px;
+    font-size:14px;
+  }
+
+  .fiberRepPanel {
+    grid-column:1;
+    grid-row:1;
+    align-self:start;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+  }
+
+  .fiberRepPanel img,
+  .fiberRepPanel .fiberPhotoPlaceholder {
+    width:82px;
+    min-height:82px;
+    aspect-ratio:1;
+    border-radius:999px;
+  }
+
+  .fiberRepPanel .fiberPhotoPlaceholder span {
+    font-size:27px;
+  }
+
+  .fiberRepPanel .fiberPhotoPlaceholder small {
+    display:none;
+  }
+
+  .fiberRepPanel p {
+    display:none;
+  }
+
+  .fiberPageNav {
+    position:relative;
+    top:auto;
+    margin:8px -14px 16px;
+    border-radius:0;
+    max-width:none;
+    border-left:0;
+    border-right:0;
+    background:rgba(5,17,12,.78);
+    box-shadow:none;
+  }
+
+  .fiberPageNav a {
+    padding:9px 11px;
+    font-size:12px;
+  }
+
+  .fiberSectionHeadV2 {
+    margin-top:14px;
+  }
+
+  .fiberSectionHeadV2 h2 {
+    font-size:31px;
+  }
+
+  .fiberQuoteGrid {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .fiberQuoteControls {
+    display:contents;
+  }
+
+  .fiberCurrentBillPanel {
+    order:1;
+  }
+
+  .fiberPlanPanel {
+    order:2;
+  }
+
+  .fiberSummaryV2 {
+    order:3;
+  }
+
+  .fiberAddonPanel {
+    order:4;
+  }
+
+  .fiberPanelV2 {
+    padding:13px;
+  }
+
+  .fiberPanelTitle span {
+    width:34px;
+    height:34px;
+    font-size:14px;
+  }
+
+  .fiberPanelTitle h3 {
+    font-size:24px;
+  }
+
+  .fiberMoneyInput div {
+    min-height:58px;
+  }
+
+  .fiberMoneyInput input {
+    font-size:42px;
+  }
+
+  .fiberPlanGrid {
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    padding:5px;
+  }
+
+  .fiberPlan {
+    min-width:128px;
+    min-height:112px;
+    padding:10px;
+  }
+
+  .fiberPlan span {
+    font-size:9px;
+  }
+
+  .fiberPlan em {
+    font-size:22px;
+  }
+
+  .fiberPlan b {
+    font-size:27px;
+  }
+
+  .fiberSelectedPlanPanel strong {
+    font-size:22px;
+  }
+
+  .fiberToggle {
+    grid-template-columns:36px minmax(0,1fr);
+    gap:10px;
+    padding:10px;
+  }
+
+  .fiberToggle b {
+    grid-column:2;
+    font-size:21px;
+  }
+
+  .fiberToggle strong {
+    font-size:19px;
+  }
+
+  .fiberToggle p {
+    font-size:13px;
+    line-height:1.25;
+  }
+
+  .fiberAddonPanel .fiberPanelTitle h3::after {
+    content:" optional";
+    color:#91a29a;
+    font-size:13px;
+    font-weight:850;
+  }
+
+  .fiberSummaryV2 {
+    padding:14px;
+  }
+
+  .fiberBigSave strong {
+    font-size:50px;
+  }
+
+  .fiberSummaryPair,
+  .fiberMonthlyCompare,
+  .fiberFiveCompare {
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .fiberSummaryPair div,
+  .fiberMonthlyCompare div,
+  .fiberFiveCompare div {
+    padding:10px;
+  }
+
+  .fiberSummaryPair strong,
+  .fiberMonthlyCompare strong,
+  .fiberFiveCompare strong {
+    font-size:24px;
+  }
+
+  .fiberFiveMonths {
+    padding:12px;
+  }
+
+  .fiberFiveHeader strong {
+    font-size:32px;
+    line-height:1;
+  }
+
+  .fiberMonthStrip {
+    display:flex;
+    overflow-x:auto;
+  }
+
+  .fiberMonthStrip div {
+    min-width:96px;
+  }
+
+  .fiberContentGridV2 {
+    margin-top:14px;
+  }
+
+  .fiberInfoPanelV2 h2,
+  .fiberContactV2 h2 {
+    font-size:30px;
+  }
+
+  .fiberInfoPanelV2 > p,
+  .fiberContactV2 p:not(.fiberEyebrow):not(.fiberContactFine) {
+    font-size:16px;
+    line-height:1.38;
+  }
+
+  .fiberInfoPanelV2 ul,
+  .fiberInfoPanelV2 ol {
+    font-size:15px;
+    line-height:1.38;
+  }
+
+  .fiberContactActions {
+    display:none;
+  }
+
+  .fiberContactFine {
+    font-size:12px;
+    overflow-wrap:anywhere;
+  }
+
+  .fiberMobileCta {
+    position:fixed;
+    left:12px;
+    right:12px;
+    bottom:12px;
+    z-index:90;
+    display:grid;
+    grid-template-columns:1.2fr .8fr .8fr;
+    gap:7px;
+    padding:8px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:999px;
+    background:rgba(5,14,10,.9);
+    backdrop-filter:blur(14px);
+    box-shadow:0 16px 36px rgba(0,0,0,.38);
+  }
+
+  .fiberMobileCta a {
+    min-height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:999px;
+    text-decoration:none;
+    color:white;
+    font-weight:950;
+  }
+
+  .fiberMobileCta a:first-child {
+    background:var(--fiber-accent);
+  }
+
+  .fiberMobileCta a:not(:first-child) {
+    background:rgba(255,255,255,.08);
+  }
+}
+

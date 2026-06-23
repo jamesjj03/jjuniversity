@@ -30,12 +30,25 @@ type CloudCompletedBook = {
   book_id: string;
 };
 
+type SavedQuote = {
+  id: string;
+  bookId: string;
+  bookTitle: string;
+  sectionId: string;
+  sectionTitle: string;
+  text: string;
+  savedAt: string;
+};
+
 const ACCOUNT_KEY = "jju.account";
 const READ_KEY = "jju.readBooks";
 const PROGRESS_KEY = "jju.readerProgress";
 const READ_EVENTS_KEY = "jju.readingEvents";
 const ACTUAL_TIME_KEY = "jju.actualReadingSeconds";
 const HISTORY_KEY = "jju.readingHistory";
+const BOOKMARKS_KEY = "jju.readerBookmarks";
+const NOTES_KEY = "jju.readerNotes";
+const QUOTES_KEY = "jju.readerQuotes";
 
 function readJson<T>(key: string, fallback: T): T {
   try {
@@ -71,14 +84,36 @@ function isVerified(user: User | null) {
   return Boolean(user?.email_confirmed_at);
 }
 
+function parseSectionKey(key: string) {
+  const divider = key.indexOf("::");
+  if (divider <= 0) return null;
+  const bookId = key.slice(0, divider);
+  const sectionId = key.slice(divider + 2);
+  if (!bookId || !sectionId) return null;
+  return { bookId, sectionId };
+}
+
 function clearLocalReadingMemory() {
   localStorage.removeItem(READ_KEY);
   localStorage.removeItem(PROGRESS_KEY);
   localStorage.removeItem(READ_EVENTS_KEY);
   localStorage.removeItem(ACTUAL_TIME_KEY);
   localStorage.removeItem(HISTORY_KEY);
+  localStorage.removeItem(BOOKMARKS_KEY);
+  localStorage.removeItem(NOTES_KEY);
+  localStorage.removeItem(QUOTES_KEY);
   window.dispatchEvent(new Event("jju-account"));
   window.dispatchEvent(new Event("jju-reading-history"));
+}
+
+function authCallbackMessage() {
+  if (typeof window === "undefined") return "";
+  const params = new URLSearchParams(window.location.search);
+  const authStatus = params.get("auth");
+  if (!authStatus) return "";
+  if (authStatus === "confirmed") return "Email verified. Cloud sync is ready.";
+  if (authStatus === "missing-code") return "Verification link was missing its login code. Request a fresh email.";
+  return params.get("message") || "Verification failed. Request a fresh email and try again.";
 }
 
 export default function AccountClient() {
@@ -95,7 +130,7 @@ export default function AccountClient() {
   const [, setEvents] = useState<ReadEvent[]>([]);
   const [cloudProgress, setCloudProgress] = useState<CloudProgress[]>([]);
   const [cloudCompleted, setCloudCompleted] = useState<CloudCompletedBook[]>([]);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(authCallbackMessage);
   const [busy, setBusy] = useState(false);
   const [deleteArmed, setDeleteArmed] = useState(false);
 
@@ -105,6 +140,9 @@ export default function AccountClient() {
     const localRead = readJson<string[]>(READ_KEY, []);
     const localProgress = readJson<Record<string, number>>(PROGRESS_KEY, {});
     const localActualSeconds = readJson<Record<string, number>>(ACTUAL_TIME_KEY, {});
+    const localBookmarks = readJson<string[]>(BOOKMARKS_KEY, []);
+    const localNotes = readJson<Record<string, string>>(NOTES_KEY, {});
+    const localQuotes = readJson<SavedQuote[]>(QUOTES_KEY, []);
     const now = new Date().toISOString();
     const progressRows = Object.entries({ ...localProgress, ...localActualSeconds })
       .map(([bookId]) => {
@@ -135,6 +173,61 @@ export default function AccountClient() {
         book_id: bookId,
         completed_at: now,
       }));
+    const bookmarkRows = localBookmarks
+      .map(key => {
+        const parsed = parseSectionKey(key);
+        if (!parsed) return null;
+        return {
+          user_id: nextUser.id,
+          key,
+          book_id: parsed.bookId,
+          section_id: parsed.sectionId,
+          section_title: "",
+          updated_at: now,
+        };
+      })
+      .filter((row): row is {
+        user_id: string;
+        key: string;
+        book_id: string;
+        section_id: string;
+        section_title: string;
+        updated_at: string;
+      } => Boolean(row));
+    const noteRows = Object.entries(localNotes)
+      .filter(([, note]) => note.trim())
+      .map(([key, note]) => {
+        const parsed = parseSectionKey(key);
+        if (!parsed) return null;
+        return {
+          user_id: nextUser.id,
+          key,
+          book_id: parsed.bookId,
+          section_id: parsed.sectionId,
+          note,
+          updated_at: now,
+        };
+      })
+      .filter((row): row is {
+        user_id: string;
+        key: string;
+        book_id: string;
+        section_id: string;
+        note: string;
+        updated_at: string;
+      } => Boolean(row));
+    const quoteRows = localQuotes
+      .filter(quote => quote.id && quote.bookId && quote.sectionId && quote.text)
+      .map(quote => ({
+        user_id: nextUser.id,
+        id: quote.id,
+        book_id: quote.bookId,
+        book_title: quote.bookTitle || "",
+        section_id: quote.sectionId,
+        section_title: quote.sectionTitle || "",
+        text: quote.text,
+        saved_at: quote.savedAt || now,
+      }));
 
     await Promise.all([
       progressRows.length
@@ -142,6 +235,15 @@ export default function AccountClient() {
         : Promise.resolve(),
       completedRows.length
         ? supabase.from("completed_books").upsert(completedRows, { onConflict: "user_id,book_id" })
+        : Promise.resolve(),
+      bookmarkRows.length
+        ? supabase.from("reader_bookmarks").upsert(bookmarkRows, { onConflict: "user_id,key" })
+        : Promise.resolve(),
+      noteRows.length
+        ? supabase.from("reader_notes").upsert(noteRows, { onConflict: "user_id,key" })
+        : Promise.resolve(),
+      quoteRows.length
+        ? supabase.from("reader_quotes").upsert(quoteRows, { onConflict: "user_id,id" })
         : Promise.resolve(),
     ]);
   }, [supabase]);
@@ -171,7 +273,7 @@ export default function AccountClient() {
   }, [supabase, syncLocalToCloud]);
 
   useEffect(() => {
-    fetch("/books.json")
+    fetch("/api/books")
       .then(response => response.json())
       .then(data => setBooks(Array.isArray(data) ? data : data.books || []))
       .catch(() => setBooks([]));
@@ -223,6 +325,17 @@ export default function AccountClient() {
   const localMinutesRead = [...readBooks].reduce((sum, id) => sum + Number(bookMap.get(id)?.readingMinutes || 0), 0);
   const cloudActualMinutes = Math.round(cloudProgress.reduce((sum, item) => sum + Number(item.actual_seconds || 0), 0) / 60);
   const readingMinutes = cloudActualMinutes || localMinutesRead;
+  const authRedirectUrl = typeof window === "undefined" ? "" : `${window.location.origin}/auth/callback`;
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("auth")) return;
+
+    params.delete("auth");
+    params.delete("message");
+    const cleanUrl = `${window.location.pathname}${params.toString() ? `?${params}` : ""}`;
+    window.history.replaceState(null, "", cleanUrl);
+  }, []);
 
   async function submitAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -237,16 +350,27 @@ export default function AccountClient() {
       if (password.length < 6) throw new Error("Use at least 6 characters for the password.");
 
       if (mode === "sign-up") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/auth/callback`,
+            emailRedirectTo: authRedirectUrl,
             data: { display_name: displayName.trim() || "JJU Reader" },
           },
         });
         if (error) throw error;
-        setMessage("Check your email to verify the account.");
+        setPassword("");
+        if (data.session && data.user) {
+          setUser(data.user);
+          await loadCloud(data.user);
+          setMessage("Account created and signed in.");
+        } else if (data.user?.email_confirmed_at) {
+          setMessage("Account created. You can sign in now.");
+        } else if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+          setMessage("That email may already have an account. Try signing in or send a password reset.");
+        } else {
+          setMessage("Account created. If email confirmation is required, use the verification link before cloud sync turns on.");
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: email.trim(),
@@ -261,6 +385,25 @@ export default function AccountClient() {
     } finally {
       setBusy(false);
     }
+  }
+
+  async function resendVerification() {
+    const targetEmail = (user?.email || email).trim();
+    if (!supabase || !targetEmail) {
+      setMessage("Enter your email first.");
+      return;
+    }
+
+    setBusy(true);
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: targetEmail,
+      options: {
+        emailRedirectTo: authRedirectUrl,
+      },
+    });
+    setBusy(false);
+    setMessage(error ? error.message : "Verification email requested. Check your inbox and spam folder.");
   }
 
   async function saveProfile() {
@@ -322,6 +465,9 @@ export default function AccountClient() {
         supabase.from("reading_progress").delete().eq("user_id", user.id),
         supabase.from("completed_books").delete().eq("user_id", user.id),
         supabase.from("reading_sessions").delete().eq("user_id", user.id),
+        supabase.from("reader_bookmarks").delete().eq("user_id", user.id),
+        supabase.from("reader_notes").delete().eq("user_id", user.id),
+        supabase.from("reader_quotes").delete().eq("user_id", user.id),
       ]);
       setCloudProgress([]);
       setCloudCompleted([]);
@@ -407,6 +553,7 @@ export default function AccountClient() {
                   {mode === "sign-up" ? "Use existing account" : "Create account"}
                 </button>
               </div>
+              {mode === "sign-up" && <button className="accountTextButton" disabled={busy || !supabase || !email.trim()} type="button" onClick={resendVerification}>Resend verification email</button>}
               {mode === "sign-in" && <button className="accountTextButton" disabled={busy || !supabase} type="button" onClick={requestPasswordReset}>Send password reset email</button>}
             </form>
           ) : (
@@ -430,6 +577,7 @@ export default function AccountClient() {
                 <button className="formBtn" disabled={busy} onClick={saveProfile}>Save Profile</button>
                 <button className="resetBtn" disabled={busy} onClick={signOut}>Sign Out</button>
               </div>
+              {!verified && <button className="accountTextButton" disabled={busy || !supabase} type="button" onClick={resendVerification}>Resend verification email</button>}
 
               <div className="accountPasswordBox">
                 <label>

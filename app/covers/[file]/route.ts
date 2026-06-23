@@ -1,6 +1,7 @@
 import { readFile, readdir } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
+import { readBooksFromSupabase } from "@/lib/bookCatalog";
 
 type BookRecord = {
   id?: string;
@@ -67,10 +68,14 @@ async function findCover(file: string) {
 }
 
 async function findBook(file: string) {
+  const wanted = compact(file);
+  const supabaseBooks = await readBooksFromSupabase().catch(() => null);
+  const supabaseBook = supabaseBooks?.find(book => compact(book.coverFile || `${book.id || ""}.jpg`) === wanted || compact(book.id || "") === wanted);
+  if (supabaseBook) return supabaseBook;
+
   const booksPath = path.join(process.cwd(), "public", "books.json");
   const raw = JSON.parse(await readFile(booksPath, "utf8"));
   const books: BookRecord[] = Array.isArray(raw) ? raw : raw.books || [];
-  const wanted = compact(file);
   return books.find(book => compact(book.coverFile || `${book.id || ""}.jpg`) === wanted || compact(book.id || "") === wanted);
 }
 

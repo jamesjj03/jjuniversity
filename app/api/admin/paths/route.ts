@@ -1,9 +1,13 @@
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
+import { readBooksFromSupabase } from "@/lib/bookCatalog";
 import { cleanPathsFile, generateFallbackPaths } from "@/lib/paths";
 
 async function readBooks() {
+  const supabaseBooks = await readBooksFromSupabase().catch(() => null);
+  if (supabaseBooks) return supabaseBooks;
+
   const booksPath = path.join(process.cwd(), "public", "books.json");
   const data = JSON.parse(await readFile(booksPath, "utf8"));
   return Array.isArray(data) ? data : data.books || [];

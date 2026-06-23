@@ -11,6 +11,8 @@
     "enrich-books": "node scripts/enrich-books.mjs",
     "sync-books": "node scripts/enrich-books.mjs",
     "supabase:seed": "node scripts/export-supabase-seed.mjs",
+    "supabase:backfill-content": "node scripts/backfill-book-content-live.mjs",
+    "supabase:upload-covers": "node scripts/upload-covers-to-supabase.mjs",
     "print:paperback": "node scripts/generate-paperback.mjs",
     "print:set-assets": "node scripts/set-print-product-assets.mjs",
     "print:upload": "node scripts/upload-paperbacks-to-supabase.mjs",

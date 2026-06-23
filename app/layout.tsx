@@ -1,6 +1,7 @@
 import "./globals.css";
-import "./late-fixes.css";
+import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
+import Image from "next/image";
 import Script from "next/script";
 import PreferencesProvider from "@/components/PreferencesProvider";
 import AccountMenu from "@/components/AccountMenu";
@@ -70,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PreferencesProvider />
         <header className="siteHeader">
           <Link href="/" className="brand brandWithMark">
-            <img className="brandLogo" src="/branding/jju-logo.png" alt="JJ University" />
+            <Image className="brandLogo" src="/branding/jju-logo.png" alt="JJ University" width={56} height={56} />
             <span className="brandText">JJ University</span>
           </Link>
 
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {children}
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );

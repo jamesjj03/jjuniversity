@@ -1,6 +1,8 @@
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { readBooksFromSupabase, saveBooksToSupabase } from "@/lib/bookCatalog";
 
 type SaveBody = {
   books?: unknown;
@@ -80,9 +82,12 @@ async function saveToGithub(content: string, message: string) {
 
 export async function GET() {
   try {
+    const supabaseBooks = await readBooksFromSupabase();
+    if (supabaseBooks) return NextResponse.json({ books: supabaseBooks, source: "supabase" });
+
     const booksPath = path.join(process.cwd(), "public", "books.json");
     const books = JSON.parse(await readFile(booksPath, "utf8"));
-    return NextResponse.json({ books: Array.isArray(books) ? books : books.books || [] });
+    return NextResponse.json({ books: Array.isArray(books) ? books : books.books || [], source: "file" });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Could not load books.json." },
@@ -98,6 +103,23 @@ export async function POST(request: Request) {
     const content = `${JSON.stringify(books, null, 2)}\n`;
     const booksPath = path.join(process.cwd(), "public", "books.json");
     const message = body.message || `Update JJU library metadata (${new Date().toISOString().slice(0, 10)})`;
+    const supabaseSave = await saveBooksToSupabase(books);
+
+    if (supabaseSave.saved) {
+      revalidatePath("/library");
+      revalidatePath("/sitemap.xml");
+
+      return NextResponse.json({
+        saved: true,
+        target: "supabase",
+        books: supabaseSave.books || books,
+        note: "Saved library metadata to Supabase.",
+      });
+    }
+
+    if (supabaseSave.error && !supabaseSave.tableMissing) {
+      throw new Error(supabaseSave.error);
+    }
 
     let localSaved = false;
     let localError = "";

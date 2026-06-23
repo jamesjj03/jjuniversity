@@ -1,25 +1,26 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { absoluteUrl, bookUrl, coverUrl, getAllTags, getBooksForTag, metadataDescription, slugify } from "@/lib/publishing";
+import { absoluteUrl, bookUrl, coverUrl, getAllTagsLive, getBooksForTagLive, metadataDescription, slugify } from "@/lib/publishing";
 import { breadcrumbJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ tagSlug: string }>;
 };
 
-function resolveTag(tagSlug: string) {
+async function resolveTag(tagSlug: string) {
   const clean = slugify(tagSlug);
-  return getAllTags().find(tag => slugify(tag) === clean);
+  return (await getAllTagsLive()).find(tag => slugify(tag) === clean);
 }
 
-export function generateStaticParams() {
-  return getAllTags().map(tag => ({ tagSlug: slugify(tag) }));
+export async function generateStaticParams() {
+  return (await getAllTagsLive()).map(tag => ({ tagSlug: slugify(tag) }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tagSlug } = await params;
-  const tag = resolveTag(tagSlug);
+  const tag = await resolveTag(tagSlug);
   if (!tag) return {};
 
   return pageMetadata({
@@ -31,9 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TagPage({ params }: Props) {
   const { tagSlug } = await params;
-  const tag = resolveTag(tagSlug);
+  const tag = await resolveTag(tagSlug);
   if (!tag) notFound();
-  const books = getBooksForTag(tag);
+  const books = await getBooksForTagLive(tag);
   const path = `/tag/${slugify(tag)}`;
   const jsonLdItems = [
     {
@@ -71,7 +72,7 @@ export default async function TagPage({ params }: Props) {
       <section className="publishingBookGrid">
         {books.map(book => (
           <Link className="publishingBookCard" href={bookUrl(book)} key={book.id}>
-            <img src={coverUrl(book)} alt="" loading="lazy" />
+            <Image src={coverUrl(book)} alt="" width={150} height={225} sizes="(max-width: 720px) 32vw, 150px" />
             <div>
               <strong>{book.title}</strong>
               <p>{book.description}</p>

@@ -24,6 +24,7 @@ type ContentBook = {
   creator?: string;
   description?: string;
   contentFile?: string;
+  contentSource?: string;
   sections: Section[];
 };
 
@@ -103,7 +104,7 @@ export default function AdminReaderEditor({ book }: Props) {
         setContentDescription(data.description || "");
         setContentFile(data.contentFile || "");
         setDirty(false);
-        setMessage(`${nextSections.length} JSON sections ready${data.contentFile ? ` from ${data.contentFile}` : ""}.`);
+        setMessage(`${nextSections.length} sections ready${data.contentFile ? ` from ${data.contentFile}` : ""}${data.contentSource ? ` (${data.contentSource})` : ""}.`);
       })
       .catch(error => {
         if (!cancelled) setMessage(error instanceof Error ? error.message : "Could not load book content.");

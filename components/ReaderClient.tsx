@@ -49,6 +49,30 @@ type SavedQuote = {
   savedAt: string;
 };
 
+type ReaderBookmarkRow = {
+  key: string;
+  book_id: string;
+  section_id: string;
+  section_title: string | null;
+};
+
+type ReaderNoteRow = {
+  key: string;
+  book_id: string;
+  section_id: string;
+  note: string;
+};
+
+type ReaderQuoteRow = {
+  id: string;
+  book_id: string;
+  book_title: string | null;
+  section_id: string;
+  section_title: string | null;
+  text: string;
+  saved_at: string;
+};
+
 type ReadingHistoryItem = {
   bookId: string;
   requestedId?: string;
@@ -135,6 +159,67 @@ function writeRecord<T>(key: string, value: T) {
   } catch {
     return;
   }
+}
+
+function parseSectionKey(key: string) {
+  const divider = key.indexOf("::");
+  if (divider <= 0) return null;
+  const bookId = key.slice(0, divider);
+  const sectionId = key.slice(divider + 2);
+  if (!bookId || !sectionId) return null;
+  return { bookId, sectionId };
+}
+
+function normalizeQuoteList(items: SavedQuote[]) {
+  return items
+    .filter(item => item.id && item.bookId && item.sectionId && item.text)
+    .sort((a, b) => Date.parse(b.savedAt || "") - Date.parse(a.savedAt || ""))
+    .slice(0, 500);
+}
+
+function sectionTitleForKey(key: string, currentBookId: string, sections: Section[]) {
+  const parsed = parseSectionKey(key);
+  if (!parsed || parsed.bookId !== currentBookId) return "";
+  return sections.find(item => item.id === parsed.sectionId)?.title || "";
+}
+
+function readerBookmarkRow(userId: string, key: string, currentBookId: string, sections: Section[]) {
+  const parsed = parseSectionKey(key);
+  if (!parsed) return null;
+  return {
+    user_id: userId,
+    key,
+    book_id: parsed.bookId,
+    section_id: parsed.sectionId,
+    section_title: sectionTitleForKey(key, currentBookId, sections),
+    updated_at: new Date().toISOString(),
+  };
+}
+
+function readerNoteRow(userId: string, key: string, value: string) {
+  const parsed = parseSectionKey(key);
+  if (!parsed) return null;
+  return {
+    user_id: userId,
+    key,
+    book_id: parsed.bookId,
+    section_id: parsed.sectionId,
+    note: value,
+    updated_at: new Date().toISOString(),
+  };
+}
+
+function readerQuoteRow(userId: string, quote: SavedQuote) {
+  return {
+    user_id: userId,
+    id: quote.id,
+    book_id: quote.bookId,
+    book_title: quote.bookTitle,
+    section_id: quote.sectionId,
+    section_title: quote.sectionTitle,
+    text: quote.text,
+    saved_at: quote.savedAt,
+  };
 }
 
 function saveReadingHistory(item: ReadingHistoryItem) {
@@ -386,6 +471,7 @@ export default function ReaderClient() {
   const [chapterDrawerOpen, setChapterDrawerOpen] = useState(defaultReaderPanelsOpen);
   const [studyPanelOpen, setStudyPanelOpen] = useState(defaultReaderPanelsOpen);
   const [focusMode, setFocusMode] = useState(false);
+  const noteSaveTimer = useRef<number | null>(null);
   const [bookmarks, setBookmarks] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
     return new Set(readRecord<string[]>(BOOKMARKS_KEY, []));
@@ -417,6 +503,34 @@ export default function ReaderClient() {
   const isBookmarked = currentSectionKey ? bookmarks.has(currentSectionKey) : false;
   const chapterQuotes = section ? quotes.filter(item => item.bookId === bookId && item.sectionId === section.id).slice(0, 4) : [];
   const bookQuotes = quotes.filter(item => item.bookId === bookId);
+
+  async function syncBookmarkToCloud(key: string, saved: boolean) {
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
+    const supabase = createSupabaseBrowserClient();
+    if (!saved) {
+      await supabase.from("reader_bookmarks").delete().eq("user_id", userId).eq("key", key);
+      return;
+    }
+    const row = readerBookmarkRow(userId, key, bookId, visibleSections);
+    if (row) await supabase.from("reader_bookmarks").upsert(row, { onConflict: "user_id,key" });
+  }
+
+  async function syncNoteToCloud(key: string, value: string) {
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
+    const supabase = createSupabaseBrowserClient();
+    if (!value.trim()) {
+      await supabase.from("reader_notes").delete().eq("user_id", userId).eq("key", key);
+      return;
+    }
+    const row = readerNoteRow(userId, key, value);
+    if (row) await supabase.from("reader_notes").upsert(row, { onConflict: "user_id,key" });
+  }
+
+  async function syncQuoteToCloud(quote: SavedQuote) {
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
+    const supabase = createSupabaseBrowserClient();
+    await supabase.from("reader_quotes").upsert(readerQuoteRow(userId, quote), { onConflict: "user_id,id" });
+  }
 
   function handleReaderKey(event: KeyboardEvent) {
     if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
@@ -463,7 +577,7 @@ export default function ReaderClient() {
           if (!response.ok) throw new Error(data.error || "Book content unavailable.");
           return data as BookContent;
         }),
-        fetch("/books.json", { cache: "no-store" }).then(response => response.json()).catch(() => []),
+        fetch("/api/books", { cache: "no-store" }).then(response => response.json()).catch(() => []),
       ]);
 
       const nextSections = [...(item.sections || [])].sort((a, b) => Number(a.index || 0) - Number(b.index || 0));
@@ -640,6 +754,90 @@ export default function ReaderClient() {
     }
   }, [actualSeconds, bookId, cloudSyncReady, estimatedMinutes, progressPercent, sectionIndex, userId, visibleSections.length]);
 
+  useEffect(() => {
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
+    let cancelled = false;
+
+    async function syncReaderMemory() {
+      const supabase = createSupabaseBrowserClient();
+      const localBookmarkKeys = readRecord<string[]>(BOOKMARKS_KEY, []);
+      const localNotes = readRecord<Record<string, string>>(NOTES_KEY, {});
+      const localQuotes = readRecord<SavedQuote[]>(QUOTES_KEY, []);
+      const now = new Date().toISOString();
+
+      const bookmarkRows = localBookmarkKeys
+        .map(key => readerBookmarkRow(userId, key, bookId, visibleSections))
+        .filter((row): row is NonNullable<ReturnType<typeof readerBookmarkRow>> => Boolean(row));
+      const noteRows = Object.entries(localNotes)
+        .filter(([, value]) => value.trim())
+        .map(([key, value]) => readerNoteRow(userId, key, value))
+        .filter((row): row is NonNullable<ReturnType<typeof readerNoteRow>> => Boolean(row));
+      const quoteRows = localQuotes.map(quote => readerQuoteRow(userId, quote));
+
+      await Promise.all([
+        bookmarkRows.length
+          ? supabase.from("reader_bookmarks").upsert(bookmarkRows, { onConflict: "user_id,key" })
+          : Promise.resolve(),
+        noteRows.length
+          ? supabase.from("reader_notes").upsert(noteRows, { onConflict: "user_id,key" })
+          : Promise.resolve(),
+        quoteRows.length
+          ? supabase.from("reader_quotes").upsert(quoteRows, { onConflict: "user_id,id" })
+          : Promise.resolve(),
+      ]);
+
+      const [cloudBookmarks, cloudNotes, cloudQuotes] = await Promise.all([
+        supabase.from("reader_bookmarks").select("key,book_id,section_id,section_title"),
+        supabase.from("reader_notes").select("key,book_id,section_id,note"),
+        supabase.from("reader_quotes").select("id,book_id,book_title,section_id,section_title,text,saved_at"),
+      ]);
+
+      if (cancelled) return;
+
+      const mergedBookmarkKeys = new Set(localBookmarkKeys);
+      ((cloudBookmarks.data || []) as ReaderBookmarkRow[]).forEach(row => {
+        if (row.key) mergedBookmarkKeys.add(row.key);
+      });
+
+      const mergedNotes: Record<string, string> = {};
+      ((cloudNotes.data || []) as ReaderNoteRow[]).forEach(row => {
+        if (row.key && row.note) mergedNotes[row.key] = row.note;
+      });
+      Object.assign(mergedNotes, localNotes);
+
+      const quoteMap = new Map<string, SavedQuote>();
+      ((cloudQuotes.data || []) as ReaderQuoteRow[]).forEach(row => {
+        if (!row.id || !row.book_id || !row.section_id || !row.text) return;
+        quoteMap.set(row.id, {
+          id: row.id,
+          bookId: row.book_id,
+          bookTitle: row.book_title || "",
+          sectionId: row.section_id,
+          sectionTitle: row.section_title || "",
+          text: row.text,
+          savedAt: row.saved_at || now,
+        });
+      });
+      localQuotes.forEach(quote => quoteMap.set(quote.id, quote));
+
+      const nextBookmarks = new Set([...mergedBookmarkKeys].sort());
+      const nextQuotes = normalizeQuoteList([...quoteMap.values()]);
+
+      setBookmarks(nextBookmarks);
+      setNotes(mergedNotes);
+      setQuotes(nextQuotes);
+      writeRecord(BOOKMARKS_KEY, [...nextBookmarks]);
+      writeRecord(NOTES_KEY, mergedNotes);
+      writeRecord(QUOTES_KEY, nextQuotes);
+    }
+
+    void syncReaderMemory();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bookId, cloudSyncReady, userId, visibleSections]);
+
   const cleanedHtml = section ? cleanSectionHtml(section.html) : "";
   const renderedHtml = displayKind === "title" && bookCoverSrc ? titleCoverHtml(title, subtitle, bookCoverSrc) : cleanedHtml;
   const showHeader = section && !["title", "dedication"].includes(displayKind) ? !htmlHasOwnHeading(cleanedHtml, displayKind) : false;
@@ -673,6 +871,7 @@ export default function ReaderClient() {
 
   function toggleBookmark() {
     if (!currentSectionKey) return;
+    const shouldSave = !bookmarks.has(currentSectionKey);
     setBookmarks(current => {
       const next = new Set(current);
       if (next.has(currentSectionKey)) {
@@ -685,16 +884,22 @@ export default function ReaderClient() {
       writeRecord(BOOKMARKS_KEY, [...next].sort());
       return next;
     });
+    void syncBookmarkToCloud(currentSectionKey, shouldSave);
   }
 
   function saveNote(value: string) {
     if (!currentSectionKey) return;
+    const key = currentSectionKey;
     setNotes(current => {
-      const next = { ...current, [currentSectionKey]: value };
-      if (!value.trim()) delete next[currentSectionKey];
+      const next = { ...current, [key]: value };
+      if (!value.trim()) delete next[key];
       writeRecord(NOTES_KEY, next);
       return next;
     });
+    if (noteSaveTimer.current !== null) window.clearTimeout(noteSaveTimer.current);
+    noteSaveTimer.current = window.setTimeout(() => {
+      void syncNoteToCloud(key, value);
+    }, 600);
   }
 
   function saveQuote() {
@@ -718,6 +923,7 @@ export default function ReaderClient() {
       writeRecord(QUOTES_KEY, next);
       return next;
     });
+    void syncQuoteToCloud(quote);
     setReaderMessage("Quote saved.");
   }
 

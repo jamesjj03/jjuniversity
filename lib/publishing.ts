@@ -4,6 +4,7 @@ import rawBooks from "@/public/books.json";
 import rawManifest from "@/public/book-content/manifest.json";
 import rawPaths from "@/public/paths.json";
 import rawPrintProducts from "@/public/print-products.json";
+import { readBooksFromSupabase } from "@/lib/bookCatalog";
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://jjuniversity.com").replace(/\/$/, "");
 
@@ -30,6 +31,8 @@ type RawBook = {
   archiveCategory?: string;
   category?: string;
   hiddenShelves?: string[];
+  primaryCategory?: string;
+  slugAliases?: string[];
 };
 
 type ManifestBook = {
@@ -182,9 +185,31 @@ export function bookUrl(book: PublishedBook) {
   return `/books/${book.slug}`;
 }
 
+function isExternalCover(value: string) {
+  return /^https?:\/\//i.test(value) || value.startsWith("data:");
+}
+
+function fileName(value: string) {
+  return decodeURIComponent(value).split(/[?#]/)[0].split(/[\\/]/).filter(Boolean).pop() || value;
+}
+
+function stem(value: string) {
+  return fileName(value).replace(/\.[^.]+$/, "");
+}
+
+function supabaseCoverUrl(file: string) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const bucket = process.env.NEXT_PUBLIC_SUPABASE_COVER_BUCKET || "covers";
+  if (!supabaseUrl) return "";
+  return `${supabaseUrl.replace(/\/$/, "")}/storage/v1/object/public/${encodeURIComponent(bucket)}/${encodeURIComponent(file)}`;
+}
+
 export function coverUrl(book: PublishedBook) {
   if (!book.coverFile) return "/branding/jju-logo.png";
-  if (/^https?:\/\//i.test(book.coverFile)) return book.coverFile;
+  if (isExternalCover(book.coverFile)) return book.coverFile;
+  const webpFile = `${stem(book.coverFile)}.webp`;
+  const remoteCover = supabaseCoverUrl(webpFile);
+  if (remoteCover) return remoteCover;
   return `/covers/${book.coverFile.includes(".") ? book.coverFile : `${book.coverFile}.jpg`}`;
 }
 
@@ -192,9 +217,29 @@ export function getPublicBooks() {
   return books.filter(book => isPublicBook(book));
 }
 
+async function getBooksSource() {
+  const supabaseBooks = await readBooksFromSupabase().catch(() => null);
+  return (supabaseBooks || rawBooks) as RawBook[];
+}
+
+export async function getAllBooksLive() {
+  const source = await getBooksSource();
+  return source.map(normalizeBook).filter(book => book.id);
+}
+
+export async function getPublicBooksLive() {
+  return (await getAllBooksLive()).filter(book => isPublicBook(book));
+}
+
 export function getAllTags() {
   const tags = new Set<string>();
   getPublicBooks().forEach(book => book.tags.forEach(tag => tags.add(tag)));
+  return [...tags].sort();
+}
+
+export async function getAllTagsLive() {
+  const tags = new Set<string>();
+  (await getPublicBooksLive()).forEach(book => book.tags.forEach(tag => tags.add(tag)));
   return [...tags].sort();
 }
 
@@ -206,8 +251,21 @@ export function getCategories() {
   })).filter(category => category.books.length);
 }
 
+export async function getCategoriesLive() {
+  const publicBooks = await getPublicBooksLive();
+  return PRIMARY_CATEGORIES.map(category => ({
+    ...category,
+    slug: slugify(category.name),
+    books: publicBooks.filter(book => book.primaryCategory === category.name || book.tags.some(tag => category.tags.includes(tag))),
+  })).filter(category => category.books.length);
+}
+
 export function getBooksForTag(tag: string) {
   return getPublicBooks().filter(book => book.tags.includes(tag));
+}
+
+export async function getBooksForTagLive(tag: string) {
+  return (await getPublicBooksLive()).filter(book => book.tags.includes(tag));
 }
 
 export function getBookBySlug(slug: string) {
@@ -218,9 +276,22 @@ export function getBookBySlug(slug: string) {
     || publicBooks.find(book => book.slugAliases.includes(clean));
 }
 
+export async function getBookBySlugLive(slug: string) {
+  const clean = slugify(slug);
+  const publicBooks = await getPublicBooksLive();
+  return publicBooks.find(book => book.slug === clean)
+    || publicBooks.find(book => book.id === clean)
+    || publicBooks.find(book => book.slugAliases.includes(clean));
+}
+
 export function getBookById(id: string) {
   const clean = String(id || "").trim().toLowerCase();
   return books.find(book => book.id === clean);
+}
+
+export async function getBookByIdLive(id: string) {
+  const clean = String(id || "").trim().toLowerCase();
+  return (await getAllBooksLive()).find(book => book.id === clean);
 }
 
 export function getRelatedBooks(book: PublishedBook, limit = 6) {
@@ -230,6 +301,27 @@ export function getRelatedBooks(book: PublishedBook, limit = 6) {
   const explicitIds = new Set(explicit.map(item => item.id));
   const tagSet = new Set(book.tags);
   const inferred = getPublicBooks()
+    .filter(item => item.id !== book.id && !explicitIds.has(item.id))
+    .map(item => ({
+      book: item,
+      score: item.tags.reduce((sum, tag) => sum + (tagSet.has(tag) ? 1 : 0), 0) + (item.primaryCategory === book.primaryCategory ? 1 : 0),
+    }))
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.book.title.localeCompare(b.book.title))
+    .map(item => item.book);
+
+  return [...explicit, ...inferred].slice(0, limit);
+}
+
+export async function getRelatedBooksLive(book: PublishedBook, limit = 6) {
+  const publicBooks = await getPublicBooksLive();
+  const byId = new Map(publicBooks.map(item => [item.id, item]));
+  const explicit = book.similar
+    .map(id => byId.get(id))
+    .filter((item): item is PublishedBook => Boolean(item && isPublicBook(item)));
+  const explicitIds = new Set(explicit.map(item => item.id));
+  const tagSet = new Set(book.tags);
+  const inferred = publicBooks
     .filter(item => item.id !== book.id && !explicitIds.has(item.id))
     .map(item => ({
       book: item,
@@ -256,9 +348,34 @@ export function getAllSeries() {
     });
 }
 
+export async function getAllSeriesLive() {
+  const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
+  const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
+  const seen = new Set<string>();
+  const allBooks = await getAllBooksLive();
+  const bookIds = new Set(allBooks.map(book => book.id));
+  return items
+    .filter(item => !item.deleted && item.id && item.title && Array.isArray(item.books) && item.books.length)
+    .map(item => normalizeSeries(item))
+    .filter(series => {
+      if (seen.has(series.slug)) return false;
+      seen.add(series.slug);
+      return series.bookIds.some(id => bookIds.has(id));
+    });
+}
+
 export function getSeriesBySlug(seriesSlug: string) {
   const clean = slugify(seriesSlug);
   return getAllSeries().find(series => {
+    if (series.slug === clean || series.id === clean) return true;
+    if (clean === "101" && series.id.includes("101")) return true;
+    return false;
+  });
+}
+
+export async function getSeriesBySlugLive(seriesSlug: string) {
+  const clean = slugify(seriesSlug);
+  return (await getAllSeriesLive()).find(series => {
     if (series.slug === clean || series.id === clean) return true;
     if (clean === "101" && series.id.includes("101")) return true;
     return false;
@@ -271,6 +388,14 @@ export function getSeriesBooks(series: PublishedSeries) {
     .filter((book): book is PublishedBook => Boolean(book && isPublicBook(book)));
 }
 
+export async function getSeriesBooksLive(series: PublishedSeries) {
+  const publicBooks = await getPublicBooksLive();
+  const byId = new Map(publicBooks.map(book => [book.id, book]));
+  return series.bookIds
+    .map(id => byId.get(id))
+    .filter((book): book is PublishedBook => Boolean(book && isPublicBook(book)));
+}
+
 export function getPrintProduct(slug: string) {
   const clean = slugify(slug);
   return PRINT_PRODUCTS.find(product => product.slug === clean);
@@ -279,6 +404,14 @@ export function getPrintProduct(slug: string) {
 export function getPrintProductBooks(product: PrintProduct) {
   return product.bookIds
     .map(id => getBookById(id))
+    .filter((book): book is PublishedBook => Boolean(book && isPublicBook(book)));
+}
+
+export async function getPrintProductBooksLive(product: PrintProduct) {
+  const publicBooks = await getPublicBooksLive();
+  const byId = new Map(publicBooks.map(book => [book.id, book]));
+  return product.bookIds
+    .map(id => byId.get(id))
     .filter((book): book is PublishedBook => Boolean(book && isPublicBook(book)));
 }
 
@@ -304,6 +437,10 @@ export function estimatePrintProductPages(product: PrintProduct): number {
   return getPrintProductPageCount(product).pages;
 }
 
+export async function estimatePrintProductPagesLive(product: PrintProduct): Promise<number> {
+  return (await getPrintProductPageCountLive(product)).pages;
+}
+
 export function getPrintProductPageCount(product: PrintProduct): PrintProductPageCount {
   if (product.actualInteriorPages) {
     return { pages: product.actualInteriorPages, actual: true };
@@ -325,6 +462,28 @@ export function getPrintProductPageCount(product: PrintProduct): PrintProductPag
   }
 
   return { pages: estimatePrintPages(getPrintProductBooks(product)), actual: false };
+}
+
+export async function getPrintProductPageCountLive(product: PrintProduct): Promise<PrintProductPageCount> {
+  if (product.actualInteriorPages) {
+    return { pages: product.actualInteriorPages, actual: true };
+  }
+
+  if (product.kind === "bundle") {
+    const components = getPrintProductComponents(product);
+    const componentCounts = await Promise.all(components.map(component => getPrintProductPageCountLive(component)));
+    if (componentCounts.length && componentCounts.every(count => count.actual)) {
+      return { pages: componentCounts.reduce((sum, count) => sum + count.pages, 0), actual: true };
+    }
+
+    const componentPages = await Promise.all(components.map(async component => estimatePrintPages(await getPrintProductBooksLive(component))));
+    return {
+      pages: componentPages.reduce((sum, pages) => sum + pages, 0),
+      actual: false,
+    };
+  }
+
+  return { pages: estimatePrintPages(await getPrintProductBooksLive(product)), actual: false };
 }
 
 export function printPriceLabel(product: PrintProduct) {
@@ -365,12 +524,13 @@ function normalizeBook(raw: RawBook): PublishedBook {
   const manifest = manifestFor(raw, id);
   const title = String(raw.title || manifest?.title || id || "Untitled").trim();
   const tags = Array.isArray(raw.tags) ? raw.tags.map(String).filter(Boolean) : [];
-  const primaryCategory = primaryCategoryFor(tags);
+  const primaryCategory = String(raw.primaryCategory || "").trim() || primaryCategoryFor(tags);
   const slug = slugify(String(raw.slug || title || manifest?.slug || id));
   const slugAliases = [...new Set([
     id,
     slugify(String(manifest?.slug || "")),
     slugify(String(raw.title || "")),
+    ...(Array.isArray(raw.slugAliases) ? raw.slugAliases.map(alias => slugify(String(alias))) : []),
   ].filter(alias => alias && alias !== slug))];
 
   return {

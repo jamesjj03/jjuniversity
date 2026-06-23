@@ -1,0 +1,597 @@
+﻿/* Late layout corrections. Keep this imported after globals.css. */
+
+html body .homePage .hero,
+html body .aboutPage .aboutHero,
+html body .contactPage .hero,
+html body .accountPageClean .accountHeroClean,
+html body .printShelfPage {
+  padding-top:clamp(34px, 5vw, 72px) !important;
+}
+
+html body .homePage,
+html body .aboutPage,
+html body .contactPage,
+html body .accountPageClean {
+  padding-top:0 !important;
+}
+
+html body .homePage .hero {
+  min-height:auto !important;
+}
+
+html body .homePage .hero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(66px, 9vw, 126px) !important;
+  line-height:.9 !important;
+  letter-spacing:0 !important;
+}
+
+html body .aboutPage .aboutHero,
+html body .contactPage .hero,
+html body .accountPageClean .accountHeroClean {
+  min-height:auto !important;
+  padding-top:clamp(28px, 4vw, 48px) !important;
+  padding-bottom:18px !important;
+}
+
+html body .aboutPage .aboutHero .kicker,
+html body .contactPage .hero .kicker {
+  display:none !important;
+}
+
+html body .aboutPage .aboutHero h1,
+html body .contactPage .hero h1,
+html body .accountPageClean .accountHeroClean h1 {
+  margin:0 !important;
+  font-size:clamp(54px, 8vw, 96px) !important;
+  line-height:.92 !important;
+}
+
+html body .contactPage .hero .heroCopy {
+  margin-top:10px !important;
+}
+
+html body .contactPage .heroCopy p {
+  max-width:720px !important;
+  margin:0 auto !important;
+  font-size:clamp(18px, 2vw, 24px) !important;
+  line-height:1.22 !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactPlain {
+  padding-top:0 !important;
+  padding-bottom:56px !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  margin-top:0 !important;
+}
+
+html body .aboutPage .aboutPlain {
+  padding-top:0 !important;
+}
+
+html body .aboutPage .aboutEditorial {
+  width:min(980px, calc(100vw - 40px)) !important;
+  max-width:980px !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:0 !important;
+  text-align:left !important;
+}
+
+html body .aboutPage .aboutEditorial section {
+  display:grid !important;
+  grid-template-columns:minmax(170px, .34fr) minmax(0, 1fr) !important;
+  column-gap:clamp(22px, 4vw, 48px) !important;
+  row-gap:8px !important;
+  margin:0 !important;
+  padding:22px 0 !important;
+  min-height:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  border-top:1px solid color-mix(in srgb, var(--gold) 28%, transparent) !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+html body .aboutPage .aboutEditorial section:first-child {
+  border-top:0 !important;
+}
+
+html body .aboutPage .aboutEditorial section::before,
+html body .aboutPage .aboutEditorial section::after {
+  display:none !important;
+}
+
+html body .aboutPage .aboutEditorial .kicker {
+  display:none !important;
+}
+
+html body .aboutPage .aboutEditorial h2 {
+  grid-column:1 !important;
+  margin:0 !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(24px, 2.5vw, 34px) !important;
+  line-height:1.02 !important;
+  text-align:right !important;
+}
+
+html body .aboutPage .aboutEditorial p,
+html body .aboutPage .aboutDisclaimer p {
+  grid-column:2 !important;
+  max-width:680px !important;
+  margin:0 0 10px !important;
+  color:var(--muted) !important;
+  font-size:17px !important;
+  line-height:1.62 !important;
+  text-align:left !important;
+}
+
+html body .aboutPage .aboutDisclaimer {
+  width:100% !important;
+  justify-self:stretch !important;
+}
+
+html body .aboutPage .aboutDisclaimer strong {
+  grid-column:2 !important;
+  display:block !important;
+  margin:0 0 8px !important;
+  color:var(--gold) !important;
+  font-size:12px !important;
+  letter-spacing:.12em !important;
+  text-align:left !important;
+  text-transform:uppercase !important;
+}
+
+html body .aboutPage .aboutEditorial > .btn {
+  justify-self:center !important;
+  margin-top:22px !important;
+}
+
+html body .printShelfPage {
+  width:min(1260px, calc(100vw - 32px)) !important;
+  max-width:1260px !important;
+  display:grid !important;
+  gap:22px !important;
+  padding-top:0 !important;
+}
+
+html body .printShelfHero {
+  padding:clamp(24px, 4vw, 42px) !important;
+  margin-bottom:0 !important;
+}
+
+html body .printShelfHero h1 {
+  font-size:clamp(56px, 8vw, 112px) !important;
+}
+
+html body .printCatalogGrid {
+  display:grid !important;
+  grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  gap:18px !important;
+  width:100% !important;
+}
+
+html body .printCatalogCard {
+  display:grid !important;
+  grid-template-rows:auto 1fr !important;
+  gap:0 !important;
+  min-height:0 !important;
+  padding:0 !important;
+  color:var(--text) !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 90%, transparent) !important;
+  box-shadow:0 18px 45px rgba(0,0,0,.2) !important;
+  overflow:hidden !important;
+}
+
+html body .printCatalogCard .printShelfCovers {
+  min-height:230px !important;
+  justify-content:center !important;
+  padding:24px 22px !important;
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.12)) !important;
+}
+
+html body .printCatalogCard .printShelfCovers img {
+  width:92px !important;
+  margin-left:-30px !important;
+}
+
+html body .printCatalogCard .printShelfCovers img:first-child {
+  margin-left:0 !important;
+}
+
+html body .printCatalogCard .printShelfInfo {
+  display:grid !important;
+  gap:10px !important;
+  align-content:start !important;
+  padding:18px !important;
+  text-align:center !important;
+}
+
+html body .printCatalogCard .printShelfInfo h2 {
+  font-size:clamp(26px, 2.7vw, 38px) !important;
+}
+
+html body .printCatalogCard .printShelfInfo p {
+  margin:0 auto !important;
+  max-width:34ch !important;
+  font-size:15px !important;
+  line-height:1.42 !important;
+}
+
+html body .printCatalogCard .printShelfMeta {
+  justify-content:center !important;
+}
+
+html body .printCatalogCard .printShelfMeta strong {
+  min-height:30px !important;
+  padding:6px 9px !important;
+  font-size:11px !important;
+}
+
+html body .printDetailLine {
+  display:inline-flex !important;
+  align-items:center !important;
+  width:max-content !important;
+  max-width:100% !important;
+  padding:8px 12px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 28%, transparent) !important;
+  border-radius:999px !important;
+  color:var(--gold) !important;
+  background:rgba(0,0,0,.14) !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  letter-spacing:.08em !important;
+  line-height:1.35 !important;
+  text-transform:uppercase !important;
+}
+
+html body .printVolumeGrid {
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:16px !important;
+}
+
+html body .printVolumeCard {
+  display:grid !important;
+  gap:9px !important;
+  min-height:180px !important;
+  padding:18px !important;
+  color:var(--text) !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 32%, transparent) !important;
+  border-radius:8px !important;
+  background:
+    radial-gradient(circle at 85% 12%, color-mix(in srgb, var(--gold) 14%, transparent), transparent 38%),
+    color-mix(in srgb, var(--panel) 86%, transparent) !important;
+}
+
+html body .printVolumeCard span {
+  color:var(--gold) !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  letter-spacing:.1em !important;
+  text-transform:uppercase !important;
+}
+
+html body .printVolumeCard strong {
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(28px, 3vw, 42px) !important;
+  line-height:1 !important;
+}
+
+html body .printVolumeCard p,
+html body .printVolumeCard em {
+  margin:0 !important;
+  color:var(--muted) !important;
+  font-size:14px !important;
+  line-height:1.42 !important;
+}
+
+html body .printVolumeCard em {
+  align-self:end !important;
+  color:var(--gold) !important;
+  font-style:normal !important;
+  font-weight:800 !important;
+}
+
+html body .printShelfNote {
+  display:none !important;
+}
+
+html body .accountPageClean .accountMainClean {
+  width:min(720px, calc(100vw - 40px)) !important;
+  max-width:720px !important;
+  grid-template-columns:1fr !important;
+  gap:12px !important;
+  margin-top:0 !important;
+  justify-content:center !important;
+}
+
+html body .accountPageClean .accountAuthModule {
+  width:100% !important;
+}
+
+html body .accountLocalStats {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  width:100% !important;
+  padding:12px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 28%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 74%, transparent) !important;
+}
+
+html body .accountLocalStats .accountSyncList {
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:8px !important;
+  flex:1 1 auto !important;
+}
+
+html body .accountLocalStats .accountSyncList div {
+  min-height:0 !important;
+  padding:10px !important;
+  border-radius:6px !important;
+}
+
+html body .accountLocalStats .resetBtn {
+  flex:0 0 auto !important;
+  min-width:150px !important;
+}
+
+html body .accountDangerZone {
+  margin-top:10px !important;
+  padding-top:12px !important;
+  border-top:1px solid color-mix(in srgb, #ef4444 24%, transparent) !important;
+}
+
+html body .dangerBtn {
+  border-color:color-mix(in srgb, #ef4444 50%, var(--line)) !important;
+  color:#ffd6d6 !important;
+}
+
+:root[data-site-theme="manuscript"] body .dangerBtn {
+  color:#7f1d1d !important;
+  background:rgba(127,29,29,.06) !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage .aboutEditorial section {
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage .aboutEditorial h2,
+:root[data-site-theme="manuscript"] body .homePage .hero h1,
+:root[data-site-theme="manuscript"] body .printCatalogCard .printShelfInfo h2 {
+  color:#211407 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage .aboutEditorial p,
+:root[data-site-theme="manuscript"] body .contactPage .heroCopy p,
+:root[data-site-theme="manuscript"] body .printCatalogCard .printShelfInfo p {
+  color:#46331d !important;
+}
+
+:root[data-site-theme="manuscript"] body .printCatalogCard,
+:root[data-site-theme="manuscript"] body .accountLocalStats {
+  background:rgba(255,248,232,.82) !important;
+  border-color:rgba(124,83,22,.28) !important;
+}
+
+@media (max-width:980px) {
+  html body .printCatalogGrid {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .printCatalogCard {
+    grid-template-columns:minmax(260px, .78fr) minmax(0, 1fr) !important;
+    grid-template-rows:auto !important;
+  }
+}
+
+@media (max-width:720px) {
+  html body .homePage .hero,
+  html body .aboutPage .aboutHero,
+  html body .contactPage .hero,
+  html body .accountPageClean .accountHeroClean,
+  html body .printShelfPage {
+    padding-top:28px !important;
+  }
+
+  html body .homePage .hero h1 {
+    font-size:clamp(52px, 15vw, 76px) !important;
+  }
+
+  html body .aboutPage .aboutHero h1,
+  html body .contactPage .hero h1,
+  html body .accountPageClean .accountHeroClean h1 {
+    font-size:clamp(44px, 12vw, 58px) !important;
+  }
+
+  html body .aboutPage .aboutEditorial {
+    width:min(100%, calc(100vw - 32px)) !important;
+  }
+
+  html body .aboutPage .aboutEditorial section {
+    grid-template-columns:1fr !important;
+    padding:20px 0 !important;
+  }
+
+  html body .aboutPage .aboutEditorial h2,
+  html body .aboutPage .aboutEditorial p,
+  html body .aboutPage .aboutDisclaimer p,
+  html body .aboutPage .aboutDisclaimer strong {
+    grid-column:1 !important;
+    text-align:left !important;
+  }
+
+  html body .printCatalogCard {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .printVolumeGrid {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .printCatalogCard .printShelfCovers {
+    min-height:178px !important;
+  }
+
+  html body .printCatalogCard .printShelfCovers img {
+    width:78px !important;
+    margin-left:-28px !important;
+  }
+
+  html body .printShelfPage {
+    padding-top:8px !important;
+  }
+
+  html body .printShelfHero {
+    padding-top:16px !important;
+  }
+
+  html body .printShelfHero .kicker {
+    display:none !important;
+  }
+
+  html body .accountPageClean .accountMainClean {
+    width:min(100%, calc(100vw - 28px)) !important;
+  }
+
+  html body .accountLocalStats {
+    display:grid !important;
+  }
+
+  html body .accountLocalStats .resetBtn {
+    width:100% !important;
+  }
+}
+
+/* Mobile header guardrail: brand/actions on row one, Continue on row two. */
+html body .siteHeader {
+  grid-template-columns:minmax(190px, 1fr) auto auto auto !important;
+}
+
+@media (max-width:760px) {
+  html body .siteHeader {
+    width:calc(100vw - 16px) !important;
+    min-height:0 !important;
+    margin:0 auto !important;
+    padding:8px !important;
+    display:grid !important;
+    grid-template-columns:minmax(0, 1fr) 42px 42px !important;
+    grid-template-areas:
+      "brand social menu"
+      "continue continue continue" !important;
+    gap:8px !important;
+    align-items:center !important;
+    overflow:visible !important;
+  }
+
+  html body .siteHeader .brand,
+  html body .brandWithMark {
+    grid-area:brand !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    width:100% !important;
+    justify-self:start !important;
+    overflow:hidden !important;
+  }
+
+  html body .brandLogo {
+    flex:0 0 36px !important;
+    width:36px !important;
+    height:36px !important;
+    border-radius:8px !important;
+  }
+
+  html body .brandText {
+    min-width:0 !important;
+    overflow:hidden !important;
+    font-size:clamp(17px, 5.2vw, 22px) !important;
+    line-height:1 !important;
+    text-overflow:ellipsis !important;
+    white-space:nowrap !important;
+  }
+
+  html body .siteSocialLink {
+    grid-area:social !important;
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    justify-self:end !important;
+  }
+
+  html body .accountMenu {
+    grid-area:menu !important;
+    width:42px !important;
+    height:42px !important;
+    justify-self:end !important;
+  }
+
+  html body .accountMenu > summary {
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    padding:0 !important;
+  }
+
+  html body .continueReadingMenu,
+  html body .continueReadingLink {
+    grid-area:continue !important;
+    display:block !important;
+    width:100% !important;
+    max-width:none !important;
+    justify-self:stretch !important;
+  }
+
+  html body .continueReadingMenu summary,
+  html body .continueReadingLink {
+    min-height:40px !important;
+    padding:7px 10px !important;
+  }
+
+  html body .continueReadingPanel,
+  html body .accountMenuPanel {
+    max-width:calc(100vw - 20px) !important;
+  }
+
+  html body .accountMenuPanel {
+    top:calc(100% + 8px) !important;
+    right:0 !important;
+  }
+}
+
+@media (max-width:420px) {
+  html body .siteHeader {
+    grid-template-columns:minmax(0, 1fr) 38px 38px !important;
+    gap:6px !important;
+  }
+
+  html body .siteSocialLink,
+  html body .accountMenu,
+  html body .accountMenu > summary {
+    width:38px !important;
+    height:38px !important;
+    min-width:38px !important;
+  }
+
+  html body .brandLogo {
+    flex-basis:34px !important;
+    width:34px !important;
+    height:34px !important;
+  }
+}
+

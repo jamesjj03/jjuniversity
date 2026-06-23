@@ -1,0 +1,692 @@
+﻿/* Recovery pass: restore character without bringing back the broken spacing */
+:root {
+  --site-shell:min(1680px, calc(100% - 56px));
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 4%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-top) 92%, #000 18%) 0%, var(--bg) 44%, color-mix(in srgb, var(--theme-bottom) 92%, #000 12%) 100%) !important;
+}
+
+.siteHeader,
+.page,
+.homePage .hero,
+.libraryWorkbench,
+.resultBar,
+.bookGrid.upgradedGrid,
+.recentReadingRail {
+  width:var(--site-shell) !important;
+}
+
+.siteHeader {
+  background:linear-gradient(180deg, rgba(7,7,6,.94), rgba(7,7,6,.82)) !important;
+}
+
+.homePage {
+  padding-top:46px !important;
+}
+
+.homePage .hero {
+  padding-top:52px !important;
+}
+
+.homePage .hero h1 {
+  font-size:clamp(74px, 9.5vw, 146px) !important;
+  line-height:.88 !important;
+}
+
+.homeStartSection {
+  position:relative !important;
+  isolation:isolate !important;
+  width:min(1240px, 100%) !important;
+  margin-top:42px !important;
+  padding:0 0 20px !important;
+}
+
+.homeStartSection::before {
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  inset:76px -36px -18px !important;
+  z-index:-1 !important;
+  border-top:1px solid color-mix(in srgb, var(--line) 55%, transparent) !important;
+  border-bottom:1px solid color-mix(in srgb, var(--line) 44%, transparent) !important;
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--gold) 10%, transparent) 0 1px, transparent 1px 74px),
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--panel) 26%, transparent), transparent) !important;
+  opacity:.9 !important;
+}
+
+.homeStartHeader h2 {
+  font-size:clamp(48px, 5.4vw, 78px) !important;
+}
+
+.homeStartGrid .homeStartCard,
+.bookCard {
+  overflow:hidden !important;
+}
+
+.homeStartCard .bookInfo {
+  min-height:112px !important;
+  justify-content:start !important;
+}
+
+.homeStartCard-science .bookInfo {
+  background:linear-gradient(145deg, rgba(28,120,109,.38), rgba(214,178,94,.12)), color-mix(in srgb, var(--panel) 92%, #000 8%) !important;
+}
+
+.homeStartCard-humans .bookInfo {
+  background:linear-gradient(145deg, rgba(33,150,185,.38), rgba(188,74,121,.12)), color-mix(in srgb, var(--panel) 92%, #000 8%) !important;
+}
+
+.homeStartCard-caesar .bookInfo {
+  background:linear-gradient(145deg, rgba(154,77,28,.42), rgba(214,178,94,.12)), color-mix(in srgb, var(--panel) 92%, #000 8%) !important;
+}
+
+.homeStartCard-bible .bookInfo {
+  background:linear-gradient(145deg, rgba(230,210,160,.26), rgba(214,178,94,.12)), color-mix(in srgb, var(--panel) 92%, #000 8%) !important;
+}
+
+.homeStartCard-edison .bookInfo {
+  background:linear-gradient(145deg, rgba(214,132,34,.36), rgba(214,178,94,.12)), color-mix(in srgb, var(--panel) 92%, #000 8%) !important;
+}
+
+.homeStartCard .bookTitle,
+.libraryPage .bookTitle {
+  font-size:20px !important;
+  line-height:1.08 !important;
+  font-weight:800 !important;
+}
+
+.homeStartDescription,
+.bookDescription {
+  font-size:14px !important;
+  line-height:1.42 !important;
+  color:color-mix(in srgb, var(--text) 90%, var(--muted)) !important;
+}
+
+.libraryPage {
+  padding-top:28px !important;
+}
+
+.libraryHero {
+  position:relative !important;
+  display:grid !important;
+  place-items:center !important;
+  min-height:250px !important;
+  padding:42px 0 34px !important;
+  overflow:hidden !important;
+}
+
+.libraryHero::before {
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  left:50% !important;
+  bottom:12px !important;
+  width:min(1180px, 78vw) !important;
+  height:150px !important;
+  transform:translateX(-50%) !important;
+  z-index:-1 !important;
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--gold) 16%, transparent) 0 1px, transparent 1px 78px),
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--panel) 52%, transparent) 72%, transparent) !important;
+  opacity:.9 !important;
+}
+
+.libraryHero h1 {
+  font-size:clamp(88px, 10vw, 156px) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  line-height:.82 !important;
+}
+
+.libraryTagline {
+  margin:16px 0 0 !important;
+  color:color-mix(in srgb, var(--text) 72%, var(--muted)) !important;
+  font-size:clamp(20px, 2vw, 30px) !important;
+  line-height:1.2 !important;
+}
+
+.libraryWorkbenchTop {
+  grid-template-columns:minmax(0, 1fr) 230px !important;
+}
+
+.searchPanel,
+.filterPanel,
+.libraryModeToggle {
+  background:linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, var(--gold) 5%), color-mix(in srgb, var(--panel) 84%, #000 14%)) !important;
+  box-shadow:0 20px 54px rgba(0,0,0,.24) !important;
+}
+
+.filterPanel,
+.libraryPage.archiveMode .filterPanel {
+  align-items:center !important;
+}
+
+.filterPanel label,
+.libraryWorkbench .filterPanel label,
+.libraryWorkbench .resetBtn {
+  min-height:58px !important;
+}
+
+.resultBar {
+  gap:6px !important;
+  color:var(--muted) !important;
+}
+
+.resultBar strong {
+  color:var(--gold) !important;
+}
+
+.bookGrid.upgradedGrid {
+  grid-template-columns:repeat(auto-fill, minmax(270px, 270px)) !important;
+  gap:26px !important;
+  justify-content:center !important;
+}
+
+.bookInfo {
+  gap:8px !important;
+  padding:14px 15px 15px !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 90%, var(--gold) 10%), color-mix(in srgb, var(--panel) 80%, #000 22%)) !important;
+}
+
+.bookMetaLine {
+  font-size:12.5px !important;
+  color:color-mix(in srgb, var(--gold) 86%, var(--text)) !important;
+}
+
+.libraryPage .bookTags {
+  display:flex !important;
+}
+
+.bookTags span {
+  font-size:10.5px !important;
+  line-height:1 !important;
+}
+
+.contactPage .hero,
+.aboutHero,
+.settingsHero {
+  position:relative !important;
+  padding-top:60px !important;
+}
+
+.contactPage .hero::before,
+.aboutHero::before,
+.settingsHero::before {
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  left:50% !important;
+  bottom:12px !important;
+  width:min(980px, 72vw) !important;
+  height:118px !important;
+  transform:translateX(-50%) !important;
+  z-index:-1 !important;
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--gold) 12%, transparent) 0 1px, transparent 1px 72px),
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--panel) 42%, transparent), transparent) !important;
+}
+
+.contactPage .card,
+.aboutStory section {
+  border:1px solid color-mix(in srgb, var(--line) 62%, transparent) !important;
+  border-radius:8px !important;
+  padding:22px !important;
+  background:linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, var(--gold) 4%), color-mix(in srgb, var(--panel) 82%, #000 14%)) !important;
+}
+
+.aboutStory section + section,
+.contactPage .card + .card {
+  margin-top:18px !important;
+}
+
+.contactSupportGrid {
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+  gap:18px !important;
+  margin-top:18px !important;
+}
+
+.contactSupportGrid > div {
+  border:1px solid color-mix(in srgb, var(--line) 60%, transparent) !important;
+  border-radius:8px !important;
+  padding:18px !important;
+  background:linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, var(--gold) 5%), color-mix(in srgb, var(--panel) 82%, #000 14%)) !important;
+}
+
+.contactSupportGrid h2 {
+  margin:0 0 8px !important;
+  color:var(--gold) !important;
+  font-size:19px !important;
+}
+
+.contactSupportGrid p {
+  margin:0 !important;
+  color:color-mix(in srgb, var(--text) 84%, var(--muted)) !important;
+}
+
+.aboutDisclaimer {
+  border:1px solid color-mix(in srgb, var(--gold) 58%, transparent) !important;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--gold) 15%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, var(--gold) 8%), color-mix(in srgb, var(--panel) 84%, #000 12%)) !important;
+}
+
+.aboutDisclaimer::after {
+  content:none !important;
+  display:none !important;
+}
+
+.aboutDisclaimer strong {
+  display:block !important;
+  margin:0 0 12px !important;
+  color:var(--gold) !important;
+  font:800 13px/1.2 Arial, sans-serif !important;
+  letter-spacing:.1em !important;
+  text-transform:uppercase !important;
+}
+
+.menuThemeGrid button.active,
+.segmentedControl button.active {
+  outline:0 !important;
+  border-color:color-mix(in srgb, var(--gold) 80%, transparent) !important;
+  box-shadow:inset 0 0 0 2px color-mix(in srgb, var(--gold) 70%, transparent) !important;
+}
+
+.exitPageBtn {
+  display:none !important;
+}
+
+.settingsHero h1 {
+  font-size:clamp(62px, 7vw, 108px) !important;
+}
+
+:root[data-site-theme="manuscript"] .contactPage .card,
+:root[data-site-theme="manuscript"] .aboutStory section,
+:root[data-site-theme="manuscript"] .contactSupportGrid > div,
+:root[data-site-theme="manuscript"] .aboutDisclaimer {
+  background:linear-gradient(180deg, rgba(245,236,218,.94), rgba(227,209,179,.9)) !important;
+}
+
+@media (max-width:1100px) {
+  :root {
+    --site-shell:calc(100% - 28px);
+  }
+
+  .libraryHero {
+    min-height:190px !important;
+  }
+
+  .contactSupportGrid {
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media (max-width:620px) {
+  :root {
+    --site-shell:calc(100% - 18px);
+  }
+
+  .homePage {
+    padding-top:20px !important;
+  }
+
+  .homePage .hero h1 {
+    font-size:clamp(58px, 18vw, 92px) !important;
+  }
+}
+
+/* Triage cleanup: keep the app readable while the older stacked CSS passes remain in place. */
+:root[data-site-theme="warm"] {
+  --bg:#160e07;
+  --panel:#22150c;
+  --panel2:#332012;
+  --text:#fff3e8;
+  --muted:#d9bca5;
+  --line:rgba(241,126,48,.4);
+  --theme-top:#2b1608;
+  --theme-bottom:#080401;
+}
+
+:root[data-site-theme="crimson"] {
+  --bg:#120708;
+  --panel:#1f0d0f;
+  --panel2:#321417;
+  --text:#fff1f1;
+  --muted:#d9b5b7;
+  --line:rgba(231,70,62,.4);
+  --theme-top:#2a0d10;
+  --theme-bottom:#070203;
+}
+
+:root[data-site-theme="manuscript"] .brand,
+:root[data-site-theme="manuscript"] .brandText,
+:root[data-site-theme="manuscript"] .pillNav a,
+:root[data-site-theme="manuscript"] .accountMenu summary {
+  color:#21170e !important;
+}
+
+:root[data-site-theme="manuscript"] .brandLogo {
+  background:#eadfc9 !important;
+  border:1px solid rgba(132,94,42,.32) !important;
+  border-radius:8px !important;
+}
+
+:root[data-site-theme="manuscript"] .libraryWorkbench .resetBtn,
+:root[data-site-theme="manuscript"] .formBtn,
+:root[data-site-theme="manuscript"] .btn.primary {
+  background:#bd9238 !important;
+  border-color:#bd9238 !important;
+  color:#fff8e8 !important;
+}
+
+.accountMenuTop {
+  grid-template-columns:38px minmax(0,1fr) auto !important;
+}
+
+.accountMenuTop > span {
+  min-width:0 !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+
+.menuSettingsButton {
+  justify-self:start !important;
+}
+
+.menuThemeGrid:not(.menuAccentGrid),
+.segmentedControl:not(.colorControl) {
+  grid-template-columns:repeat(3, minmax(0,1fr)) !important;
+}
+
+.menuThemeGrid:not(.menuAccentGrid) button,
+.segmentedControl:not(.colorControl) button {
+  position:relative !important;
+  min-height:42px !important;
+  padding:9px 10px 9px 13px !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  text-align:left !important;
+  border:1px solid color-mix(in srgb, var(--line) 80%, transparent) !important;
+  border-radius:8px !important;
+  box-shadow:none !important;
+}
+
+.menuThemeGrid:not(.menuAccentGrid) button::after,
+.segmentedControl:not(.colorControl) button::after {
+  content:"" !important;
+  position:absolute !important;
+  inset:0 auto 0 0 !important;
+  width:5px !important;
+  border-radius:8px 0 0 8px !important;
+  background:currentColor !important;
+  opacity:.75 !important;
+}
+
+.menuThemeGrid button[data-theme-choice="dark"],
+.segmentedControl button[data-theme-choice="dark"] {
+  background:linear-gradient(180deg, #1d1a12, #0b0c09) !important;
+  color:#f2c75f !important;
+}
+
+.menuThemeGrid button[data-theme-choice="carbon"],
+.segmentedControl button[data-theme-choice="carbon"] {
+  background:linear-gradient(180deg, #202934, #090b0e) !important;
+  color:#b7c7d7 !important;
+}
+
+.menuThemeGrid button[data-theme-choice="warm"],
+.segmentedControl button[data-theme-choice="warm"] {
+  background:linear-gradient(180deg, #3a1e0a, #170b03) !important;
+  color:#ff9b42 !important;
+}
+
+.menuThemeGrid button[data-theme-choice="crimson"],
+.segmentedControl button[data-theme-choice="crimson"] {
+  background:linear-gradient(180deg, #3a1014, #150405) !important;
+  color:#ff6658 !important;
+}
+
+.menuThemeGrid button[data-theme-choice="royal"],
+.segmentedControl button[data-theme-choice="royal"] {
+  background:linear-gradient(180deg, #2a1638, #100715) !important;
+  color:#c89cff !important;
+}
+
+.menuThemeGrid button[data-theme-choice="terminal"],
+.segmentedControl button[data-theme-choice="terminal"] {
+  background:linear-gradient(180deg, #123420, #04110c) !important;
+  color:#5df0a0 !important;
+}
+
+.menuThemeGrid button[data-theme-choice="navy"],
+.segmentedControl button[data-theme-choice="navy"] {
+  background:linear-gradient(180deg, #10294a, #040b16) !important;
+  color:#72aaf0 !important;
+}
+
+.menuThemeGrid button[data-theme-choice="aurora"],
+.segmentedControl button[data-theme-choice="aurora"] {
+  background:linear-gradient(180deg, #1c4b56, #08151a) !important;
+  color:#91eef4 !important;
+}
+
+.menuThemeGrid button[data-theme-choice="manuscript"],
+.segmentedControl button[data-theme-choice="manuscript"] {
+  background:linear-gradient(180deg, #f4e9d4, #d9c29e) !important;
+  color:#7a4e14 !important;
+}
+
+[data-accent-choice="crimson"]::before {
+  background:#e63d35 !important;
+}
+
+.libraryWorkbench,
+.resultBar,
+.bookGrid.upgradedGrid {
+  width:var(--site-shell) !important;
+  max-width:none !important;
+}
+
+.libraryWorkbench {
+  margin-bottom:14px !important;
+}
+
+.libraryWorkbenchTop {
+  grid-template-columns:minmax(0,1fr) minmax(180px,220px) !important;
+}
+
+.filterPanel,
+.libraryPage.archiveMode .filterPanel {
+  grid-template-columns:repeat(5, minmax(138px,1fr)) auto !important;
+  align-items:end !important;
+}
+
+.filterPanel label,
+.libraryWorkbench .filterPanel label {
+  min-height:0 !important;
+  align-content:start !important;
+}
+
+.libraryWorkbench .resetBtn {
+  width:auto !important;
+  min-width:86px !important;
+  height:42px !important;
+  min-height:42px !important;
+  align-self:end !important;
+  padding:0 16px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:8px !important;
+}
+
+.bookGrid.upgradedGrid {
+  grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)) !important;
+  justify-content:stretch !important;
+  gap:20px !important;
+}
+
+.libraryPage .bookTitle {
+  font-size:18px !important;
+}
+
+.homeStartGrid {
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) !important;
+  align-items:stretch !important;
+}
+
+.homeStartGrid .homeStartCard {
+  height:100% !important;
+}
+
+.homeStartCard .bookInfo {
+  min-height:136px !important;
+}
+
+.homeStartDescription {
+  text-align:center !important;
+}
+
+.aboutPlain,
+.contactPlain {
+  width:min(1180px, 100%) !important;
+}
+
+.contactPage .contactPlain {
+  width:min(1180px, 100%) !important;
+  max-width:1180px !important;
+}
+
+.contactPage .twoCol,
+.aboutPage .aboutSplit {
+  display:block !important;
+}
+
+.aboutStory {
+  max-width:none !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+  gap:16px !important;
+}
+
+.aboutStory::before,
+.aboutStory::after,
+.aboutStory section::before,
+.aboutStory section::after {
+  content:none !important;
+  display:none !important;
+}
+
+.contactPlain .mainStack {
+  max-width:none !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,.9fr) minmax(420px,1.1fr) !important;
+  gap:18px !important;
+  align-items:start !important;
+}
+
+.aboutStory section,
+.contactPage .card {
+  border:1px solid color-mix(in srgb, var(--line) 68%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 54%, transparent) !important;
+  box-shadow:none !important;
+  padding:20px !important;
+}
+
+.aboutStory section + section,
+.contactPage .card + .card {
+  margin-top:0 !important;
+}
+
+.aboutStory h2,
+.contactPage .card h2 {
+  font-size:clamp(24px, 3vw, 36px) !important;
+  line-height:1.05 !important;
+}
+
+.aboutStory p,
+.contactPage .card p {
+  color:color-mix(in srgb, var(--text) 84%, var(--muted)) !important;
+}
+
+.aboutDisclaimer {
+  border:1px solid color-mix(in srgb, var(--gold) 55%, transparent) !important;
+  border-radius:8px !important;
+  padding:22px !important;
+  background:color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+.aboutDisclaimer,
+.aboutStory > .btn {
+  grid-column:1 / -1 !important;
+}
+
+.aboutStory > .btn {
+  justify-self:center !important;
+  margin-top:24px !important;
+}
+
+.contactPage .card:nth-of-type(3) {
+  grid-column:2 !important;
+  grid-row:1 / span 3 !important;
+}
+
+.contactPage .formGrid {
+  padding:16px !important;
+  display:grid !important;
+  gap:12px !important;
+  background:color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+.contactSupportGrid {
+  grid-column:1 / -1 !important;
+  margin-top:0 !important;
+}
+
+@media (max-width:1100px) {
+  .filterPanel,
+  .libraryPage.archiveMode .filterPanel {
+    grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+  }
+
+  .aboutStory,
+  .contactPlain .mainStack {
+    grid-template-columns:1fr !important;
+  }
+
+  .contactPage .card:nth-of-type(3) {
+    grid-column:auto !important;
+    grid-row:auto !important;
+  }
+
+  .libraryWorkbench .resetBtn {
+    width:100% !important;
+  }
+}
+
+@media (max-width:620px) {
+  .libraryWorkbenchTop,
+  .filterPanel,
+  .libraryPage.archiveMode .filterPanel {
+    grid-template-columns:1fr !important;
+  }
+
+  .bookGrid.upgradedGrid {
+    grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+    gap:12px !important;
+  }
+
+  .menuThemeGrid:not(.menuAccentGrid),
+  .segmentedControl:not(.colorControl) {
+    grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+  }
+}
+

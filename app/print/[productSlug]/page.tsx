@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import PrintCheckoutButton from "@/components/PrintCheckoutButton";
@@ -7,9 +8,9 @@ import {
   bookUrl,
   coverUrl,
   getPrintProduct,
-  getPrintProductBooks,
+  getPrintProductBooksLive,
   getPrintProductComponents,
-  getPrintProductPageCount,
+  getPrintProductPageCountLive,
   metadataDescription,
   printPriceLabel,
   PRINT_PRODUCTS,
@@ -41,9 +42,14 @@ export default async function PrintProductPage({ params }: Props) {
   const product = getPrintProduct(productSlug);
   if (!product) notFound();
 
-  const books = getPrintProductBooks(product);
+  const books = await getPrintProductBooksLive(product);
   const components = getPrintProductComponents(product);
-  const pageCount = getPrintProductPageCount(product);
+  const pageCount = await getPrintProductPageCountLive(product);
+  const componentSummaries = await Promise.all(components.map(async component => ({
+    component,
+    books: await getPrintProductBooksLive(component),
+    pageCount: await getPrintProductPageCountLive(component),
+  })));
   const jsonLdItems = [
     {
       "@context": "https://schema.org",
@@ -97,7 +103,7 @@ export default async function PrintProductPage({ params }: Props) {
         </div>
         <div className="printDetailStack" aria-hidden="true">
           {books.slice(0, 8).map(book => (
-            <img src={coverUrl(book)} alt="" loading="lazy" key={book.id} />
+            <Image src={coverUrl(book)} alt="" width={150} height={225} sizes="100px" key={book.id} />
           ))}
         </div>
       </section>
@@ -128,9 +134,7 @@ export default async function PrintProductPage({ params }: Props) {
             <p>This set is sold as separate physical paperbacks, not one oversized brick.</p>
           </div>
           <div className="printVolumeGrid">
-            {components.map(component => {
-              const componentBooks = getPrintProductBooks(component);
-              const componentPageCount = getPrintProductPageCount(component);
+            {componentSummaries.map(({ component, books: componentBooks, pageCount: componentPageCount }) => {
               return (
                 <Link className="printVolumeCard" href={`/print/${component.slug}`} key={component.slug}>
                   <span>{component.kicker}</span>
@@ -152,7 +156,7 @@ export default async function PrintProductPage({ params }: Props) {
         <div className="printIncludedGrid">
         {books.map(book => (
           <Link className="printIncludedCard" href={bookUrl(book)} key={book.id}>
-            <img src={coverUrl(book)} alt="" loading="lazy" />
+            <Image src={coverUrl(book)} alt="" width={120} height={180} sizes="120px" />
             <div>
               <strong>{book.title}</strong>
               <p>{book.description}</p>

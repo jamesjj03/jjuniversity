@@ -1,13 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
   absoluteUrl,
   bookUrl,
   coverUrl,
-  getAllSeries,
-  getSeriesBooks,
-  getSeriesBySlug,
+  getAllSeriesLive,
+  getSeriesBooksLive,
+  getSeriesBySlugLive,
   metadataDescription,
 } from "@/lib/publishing";
 import { breadcrumbJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
@@ -16,13 +17,13 @@ type Props = {
   params: Promise<{ seriesSlug: string }>;
 };
 
-export function generateStaticParams() {
-  return getAllSeries().map(series => ({ seriesSlug: series.slug }));
+export async function generateStaticParams() {
+  return (await getAllSeriesLive()).map(series => ({ seriesSlug: series.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { seriesSlug } = await params;
-  const series = getSeriesBySlug(seriesSlug);
+  const series = await getSeriesBySlugLive(seriesSlug);
   if (!series) return {};
 
   return pageMetadata({
@@ -34,10 +35,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function SeriesPage({ params }: Props) {
   const { seriesSlug } = await params;
-  const series = getSeriesBySlug(seriesSlug);
+  const series = await getSeriesBySlugLive(seriesSlug);
   if (!series) notFound();
 
-  const books = getSeriesBooks(series);
+  const books = await getSeriesBooksLive(series);
   const is101 = series.slug === "101";
   const jsonLdItems = [
     {
@@ -98,7 +99,7 @@ export default async function SeriesPage({ params }: Props) {
         {books.map((book, index) => (
           <Link className="publishingBookCard" href={bookUrl(book)} key={book.id}>
             <span>{String(index + 1).padStart(2, "0")}</span>
-            <img src={coverUrl(book)} alt="" loading="lazy" />
+            <Image src={coverUrl(book)} alt="" width={150} height={225} sizes="(max-width: 720px) 32vw, 150px" />
             <div>
               <strong>{book.title}</strong>
               <p>{book.description}</p>

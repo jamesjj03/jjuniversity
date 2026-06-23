@@ -1,0 +1,1147 @@
+﻿/* Actual last-word overrides. Keep these at EOF. */
+html body .homeStartSection .homeStartGrid .bookCard.homeStartCard .bookInfo,
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook .bookInfo {
+  background:linear-gradient(180deg, var(--cover-panel), var(--cover-panel-2)) !important;
+  border:1px solid color-mix(in srgb, var(--cover-accent) 44%, transparent) !important;
+  color:var(--cover-text) !important;
+}
+
+html body .homeStartSection .homeStartGrid .bookCard.homeStartCard .bookTitle,
+html body .homeStartSection .homeStartGrid .bookCard.homeStartCard .homeStartDescription,
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook .bookTitle,
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook .bookDescription,
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook .bookMetaLine {
+  color:var(--cover-text) !important;
+}
+
+html body .homeStartSection .homeStartGrid .bookCard.homeStartCard .homeStartDescription,
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook .bookDescription {
+  opacity:.88 !important;
+}
+
+html body .homeStartSection .homeStartGrid .bookCard.homeStartCard .bookTags > span,
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook .bookTags > span {
+  background:rgba(0,0,0,.28) !important;
+  color:var(--cover-text) !important;
+}
+
+html body .aboutPage .aboutPlain,
+html body .contactPage .contactPlain {
+  width:min(920px, 100%) !important;
+  max-width:920px !important;
+}
+
+html body .aboutPage .aboutStory,
+html body .contactPage .contactPlain .mainStack {
+  max-width:920px !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:18px !important;
+}
+
+html body .contactPage .card:nth-of-type(3),
+html body .contactPage .contactSupportGrid,
+html body .aboutPage .aboutDisclaimer,
+html body .aboutPage .aboutStory > .btn {
+  grid-column:auto !important;
+  grid-row:auto !important;
+}
+
+html body .readerStageTop.quietStageTop {
+  min-height:10px !important;
+  margin-bottom:6px !important;
+}
+
+/* Structured mode/theme pass. Keep after previous overrides. */
+:root {
+  --ink:#f7f1e4;
+  --surface:#16130d;
+  --surface-strong:#0d0b08;
+  --surface-soft:rgba(255,255,255,.055);
+  --control-bg:rgba(0,0,0,.44);
+  --control-text:var(--ink);
+  --control-border:color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+:root[data-site-scheme="light"] {
+  --text:#241a10;
+  --muted:#665746;
+  --ink:#241a10;
+  --surface:#f2e4ca;
+  --surface-strong:#fff7e8;
+  --surface-soft:rgba(87, 62, 28, .08);
+  --panel:#f2e4ca;
+  --panel2:#fff7e8;
+  --line:rgba(111, 78, 34, .28);
+  --control-bg:#fff6e6;
+  --control-text:#21180f;
+  --control-border:rgba(91, 63, 28, .32);
+}
+
+:root[data-site-scheme="light"][data-site-theme="manuscript"] {
+  --theme-top:#f4e8d2;
+  --theme-mid:#e3d0ad;
+  --theme-bottom:#c9ad7e;
+  --theme-glow:#9f762d;
+  --panel:#f2e6d1;
+  --panel2:#fff7e9;
+  --line:rgba(107, 76, 33, .28);
+}
+
+:root[data-site-scheme="light"][data-site-theme="aurora"] {
+  --theme-top:#d8f4f5;
+  --theme-mid:#b8dfe4;
+  --theme-bottom:#89b8c2;
+  --theme-glow:#2f7e8d;
+  --panel:#e4f4f5;
+  --panel2:#f7ffff;
+  --line:rgba(44, 109, 121, .3);
+}
+
+:root[data-site-scheme="light"][data-site-theme="carbon"] {
+  --theme-top:#d9e0e4;
+  --theme-mid:#bac6ce;
+  --theme-bottom:#8796a2;
+  --theme-glow:#536b7a;
+  --panel:#e2e8ec;
+  --panel2:#f8fbfc;
+  --line:rgba(62, 79, 91, .3);
+}
+
+:root[data-site-scheme="light"][data-site-theme="navy"],
+:root[data-site-scheme="light"][data-site-theme="royal"],
+:root[data-site-scheme="light"][data-site-theme="terminal"],
+:root[data-site-scheme="light"][data-site-theme="crimson"],
+:root[data-site-scheme="light"][data-site-theme="warm"],
+:root[data-site-scheme="light"][data-site-theme="dark"] {
+  --panel:color-mix(in srgb, var(--theme-top) 18%, #fff4df);
+  --panel2:color-mix(in srgb, var(--theme-mid) 12%, #fff9ed);
+  --line:color-mix(in srgb, var(--theme-glow) 36%, rgba(80,58,28,.24));
+}
+
+body {
+  color:var(--text) !important;
+}
+
+:root[data-site-scheme="light"] body {
+  background:
+    radial-gradient(circle at 50% -12%, color-mix(in srgb, var(--theme-glow) 18%, transparent) 0 18%, transparent 44%),
+    linear-gradient(180deg, var(--theme-top) 0%, var(--theme-mid) 46%, var(--theme-bottom) 100%) !important;
+}
+
+.siteHeader,
+.topbar,
+.navbar,
+header {
+  color:var(--control-text);
+}
+
+:root[data-site-scheme="light"] .siteHeader,
+:root[data-site-scheme="light"] .topbar,
+:root[data-site-scheme="light"] .navbar,
+:root[data-site-scheme="light"] header {
+  background:color-mix(in srgb, var(--surface-strong) 88%, transparent) !important;
+  color:var(--control-text) !important;
+}
+
+:root[data-site-scheme="light"] .accountMenu > summary,
+:root[data-site-scheme="light"] .menuSettingsButton,
+:root[data-site-scheme="light"] .readerTopButton,
+:root[data-site-scheme="light"] .socialIcon,
+:root[data-site-scheme="light"] .iconBtn,
+:root[data-site-scheme="light"] button[aria-label],
+:root[data-site-theme="manuscript"] .accountMenu > summary,
+:root[data-site-theme="manuscript"] .menuSettingsButton {
+  background:var(--control-bg) !important;
+  border-color:var(--control-border) !important;
+  color:var(--control-text) !important;
+}
+
+:root[data-site-scheme="light"] .accountMenu > summary svg,
+:root[data-site-scheme="light"] .menuSettingsButton svg,
+:root[data-site-scheme="light"] .iconBtn svg,
+:root[data-site-theme="manuscript"] .accountMenu > summary svg,
+:root[data-site-theme="manuscript"] .menuSettingsButton svg {
+  color:var(--control-text) !important;
+  fill:none !important;
+  stroke:currentColor !important;
+}
+
+:root[data-site-scheme="light"] .menuBars i,
+:root[data-site-theme="manuscript"] .menuBars i {
+  background:var(--control-text) !important;
+}
+
+:root[data-site-scheme="light"] .accountMenuPanel {
+  background:color-mix(in srgb, var(--surface-strong) 92%, transparent) !important;
+  border-color:var(--control-border) !important;
+  color:var(--control-text) !important;
+}
+
+.menuThemeGrid button[data-theme-choice="carbon"],
+.segmentedControl button[data-theme-choice="carbon"] {
+  background:linear-gradient(180deg, #506272, #101820) !important;
+  color:#dbe7ef !important;
+}
+
+.menuThemeGrid button[data-theme-choice="sepia"],
+.segmentedControl button[data-theme-choice="sepia"] {
+  background:linear-gradient(180deg, #7a4a25, #241108) !important;
+  color:#f4d0a1 !important;
+}
+
+.menuThemeGrid button[data-theme-choice="crimson"]::after,
+.segmentedControl button[data-theme-choice="crimson"]::after {
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  background:linear-gradient(135deg, transparent 0 45%, rgba(255,255,255,.24) 45% 52%, transparent 52% 100%) !important;
+  pointer-events:none !important;
+}
+
+html body .bookCard.upgradedBook,
+html body .homeStartCard {
+  border-color:color-mix(in srgb, var(--cover-accent) 46%, rgba(255,255,255,.16)) !important;
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--cover-accent) 10%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--cover-panel) 92%, #050505), color-mix(in srgb, var(--cover-panel-2) 94%, #050505)) !important;
+  box-shadow:0 14px 32px rgba(0,0,0,.2), inset 0 1px 0 color-mix(in srgb, var(--cover-accent) 22%, transparent) !important;
+}
+
+html body .bookCard.upgradedBook:hover,
+html body .homeStartCard:hover {
+  border-color:color-mix(in srgb, var(--cover-accent) 68%, transparent) !important;
+  box-shadow:0 18px 42px rgba(0,0,0,.28), inset 0 1px 0 color-mix(in srgb, var(--cover-accent) 36%, transparent) !important;
+}
+
+html body .homeStartSection .homeStartGrid .bookCard.homeStartCard .bookInfo,
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook .bookInfo {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--cover-panel) 82%, #111), color-mix(in srgb, var(--cover-panel-2) 86%, #111)) !important;
+  border-color:color-mix(in srgb, var(--cover-accent) 28%, transparent) !important;
+}
+
+html body .bookTags {
+  display:grid !important;
+  grid-template-columns:minmax(0, 1fr) auto !important;
+  align-items:center !important;
+  justify-items:center !important;
+  gap:6px !important;
+  width:100% !important;
+  flex-wrap:nowrap !important;
+  overflow:visible !important;
+}
+
+html body .bookTagPrimary {
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  justify-self:end !important;
+  text-align:center !important;
+}
+
+html body .bookTagMore {
+  min-width:34px !important;
+  justify-self:start !important;
+  text-align:center !important;
+}
+
+html body .bookTagPopover {
+  white-space:normal !important;
+}
+
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook .bookTags > span,
+html body .homeStartGrid .bookCard.homeStartCard .bookTags > span {
+  border-color:color-mix(in srgb, var(--cover-accent) 34%, transparent) !important;
+  background:rgba(0,0,0,.22) !important;
+}
+
+html body .aboutPage .aboutHero,
+html body .contactPage .hero {
+  margin-bottom:clamp(24px, 4vw, 46px) !important;
+}
+
+html body .aboutPage .aboutPlain,
+html body .contactPage .contactPlain {
+  width:min(1080px, 100%) !important;
+  max-width:1080px !important;
+}
+
+html body .aboutPage .aboutEssay {
+  display:grid !important;
+  grid-template-columns:minmax(0, 1fr) !important;
+  gap:0 !important;
+  max-width:860px !important;
+  margin:0 auto !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  position:relative !important;
+  padding:24px 0 24px 34px !important;
+  border:0 !important;
+  border-left:1px solid color-mix(in srgb, var(--line) 70%, transparent) !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+html body .aboutPage .aboutEssay section::before {
+  content:"" !important;
+  position:absolute !important;
+  left:-5px !important;
+  top:34px !important;
+  width:9px !important;
+  height:9px !important;
+  border-radius:50% !important;
+  background:var(--gold) !important;
+  box-shadow:0 0 0 4px color-mix(in srgb, var(--gold) 16%, transparent) !important;
+}
+
+html body .aboutPage .aboutEssay .aboutIntroBlock:first-child {
+  padding-top:0 !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .contactPage h2 {
+  font-size:clamp(24px, 3vw, 36px) !important;
+  line-height:1.04 !important;
+}
+
+html body .aboutPage .aboutDisclaimer {
+  margin-top:28px !important;
+  padding:24px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 48%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 76%, transparent) !important;
+}
+
+html body .aboutPage .aboutDisclaimer::before {
+  display:none !important;
+}
+
+html body .aboutPage .aboutStory > .btn {
+  justify-self:start !important;
+  margin:28px 0 0 34px !important;
+}
+
+html body .contactPage .contactLayout {
+  width:min(1120px, 100%) !important;
+  max-width:1120px !important;
+}
+
+html body .contactPage .contactComposer {
+  display:grid !important;
+  grid-template-columns:minmax(460px, 1.12fr) minmax(300px, .88fr) !important;
+  gap:22px !important;
+  align-items:start !important;
+  max-width:none !important;
+}
+
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  display:grid !important;
+  grid-template-columns:minmax(460px, 1.12fr) minmax(300px, .88fr) !important;
+  gap:22px !important;
+  align-items:start !important;
+  max-width:none !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .contactGuidance .card,
+html body .contactPage .contactSupportGrid > div {
+  border:1px solid color-mix(in srgb, var(--line) 72%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 76%, transparent) !important;
+  box-shadow:none !important;
+}
+
+html body .contactPage .contactFormPanel {
+  padding:24px !important;
+}
+
+html body .contactPage .contactGuidance {
+  display:grid !important;
+  gap:14px !important;
+}
+
+html body .contactPage .contactGuidance .card {
+  padding:20px !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:14px !important;
+  margin:0 !important;
+}
+
+html body .contactPage .contactSupportGrid > div {
+  padding:18px !important;
+}
+
+html body .contactPage .formGrid {
+  background:color-mix(in srgb, var(--surface-strong) 72%, transparent) !important;
+  border:1px solid color-mix(in srgb, var(--line) 54%, transparent) !important;
+  border-radius:8px !important;
+}
+
+@media (max-width:900px) {
+  html body .contactPage .contactComposer {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .contactPage .contactPlain .mainStack.contactComposer {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .aboutPage .aboutEssay section {
+    padding-left:24px !important;
+  }
+}
+
+/* EOF swatch lock. This must stay last. */
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice],
+html body .menuThemeGrid button[data-theme-choice],
+html body .segmentedControl button[data-theme-choice] {
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  color:#fff4ec !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.78) !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice]::before,
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice]::before,
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice]::after,
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice]::after,
+html body .menuThemeGrid button[data-theme-choice]::before,
+html body .segmentedControl button[data-theme-choice]::before,
+html body .menuThemeGrid button[data-theme-choice]::after,
+html body .segmentedControl button[data-theme-choice]::after {
+  content:none !important;
+  display:none !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="dark"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="dark"],
+html body .menuThemeGrid button[data-theme-choice="dark"],
+html body .segmentedControl button[data-theme-choice="dark"] {
+  background:linear-gradient(135deg, #070706 0 49%, #b39145 49% 100%) !important;
+  color:#fff3d0 !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="carbon"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="carbon"],
+html body .menuThemeGrid button[data-theme-choice="carbon"],
+html body .segmentedControl button[data-theme-choice="carbon"] {
+  background:linear-gradient(135deg, #080b0f 0 49%, #697b8d 49% 100%) !important;
+  color:#eef7ff !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="navy"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="navy"],
+html body .menuThemeGrid button[data-theme-choice="navy"],
+html body .segmentedControl button[data-theme-choice="navy"] {
+  background:linear-gradient(135deg, #041022 0 49%, #5d91c9 49% 100%) !important;
+  color:#f2f8ff !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="royal"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="royal"],
+html body .menuThemeGrid button[data-theme-choice="royal"],
+html body .segmentedControl button[data-theme-choice="royal"] {
+  background:linear-gradient(135deg, #120717 0 49%, #82509a 49% 100%) !important;
+  color:#fff2ff !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="terminal"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="terminal"],
+html body .menuThemeGrid button[data-theme-choice="terminal"],
+html body .segmentedControl button[data-theme-choice="terminal"] {
+  background:linear-gradient(135deg, #03100a 0 49%, #43c982 49% 100%) !important;
+  color:#ecfff5 !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="crimson"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="crimson"],
+html body .menuThemeGrid button[data-theme-choice="crimson"],
+html body .segmentedControl button[data-theme-choice="crimson"] {
+  background:linear-gradient(135deg, #130306 0 49%, #6b121c 49% 100%) !important;
+  color:#ffd4d7 !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="warm"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="warm"],
+html body .menuThemeGrid button[data-theme-choice="warm"],
+html body .segmentedControl button[data-theme-choice="warm"] {
+  background:linear-gradient(135deg, #160802 0 49%, #b66b39 49% 100%) !important;
+  color:#ffe3cf !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="aurora"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="aurora"],
+html body .menuThemeGrid button[data-theme-choice="aurora"],
+html body .segmentedControl button[data-theme-choice="aurora"] {
+  background:linear-gradient(135deg, #06161c 0 49%, #75c6d2 49% 100%) !important;
+  color:#f0fdff !important;
+}
+
+:root[data-site-theme="manuscript"] body .menuThemeGrid button[data-theme-choice="manuscript"],
+:root[data-site-theme="manuscript"] body .segmentedControl button[data-theme-choice="manuscript"],
+html body .menuThemeGrid button[data-theme-choice="manuscript"],
+html body .segmentedControl button[data-theme-choice="manuscript"] {
+  background:linear-gradient(135deg, #f3e8d5 0 49%, #a87928 49% 100%) !important;
+  color:#20150b !important;
+  text-shadow:0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+/* True EOF correction lock. Do not move above older override blocks. */
+html body .libraryHero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(56px, 6.8vw, 104px) !important;
+  font-weight:900 !important;
+  line-height:.96 !important;
+  letter-spacing:0 !important;
+}
+
+html body .libraryHero {
+  min-height:0 !important;
+  padding-top:clamp(36px, 6vw, 76px) !important;
+  padding-bottom:clamp(24px, 4vw, 42px) !important;
+}
+
+html body .brandLogo {
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  object-fit:contain !important;
+  border-radius:8px !important;
+}
+
+html body .accountMenuTop {
+  display:grid !important;
+  grid-template-columns:38px 38px minmax(0, 1fr) auto !important;
+  gap:8px !important;
+  align-items:center !important;
+  justify-items:start !important;
+}
+
+html body .accountMenuTop > button {
+  justify-self:end !important;
+  align-self:center !important;
+  grid-column:4 !important;
+  grid-row:1 !important;
+}
+
+html body .menuSettingsButton,
+html body .menuInstagramButton {
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  align-self:center !important;
+  justify-self:start !important;
+}
+
+html body .menuSettingsButton {
+  grid-column:1 !important;
+  grid-row:1 !important;
+}
+
+html body .menuInstagramButton {
+  grid-column:2 !important;
+  grid-row:1 !important;
+}
+
+html body .accountMenuSpacer,
+html body .accountMenuTop > span:not(.accountMenuSpacer) {
+  grid-column:3 !important;
+  grid-row:1 !important;
+}
+
+html body .menuSettingsButton svg,
+html body .menuInstagramButton svg {
+  width:18px !important;
+  height:18px !important;
+  display:block !important;
+  margin:0 !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  padding:24px 34px !important;
+  border-left:1px solid rgba(199,161,87,.28) !important;
+  border-right:1px solid rgba(199,161,87,.28) !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p:not(.kicker),
+html body .aboutPage .aboutDisclaimer p {
+  text-align:left !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactPlain,
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  width:min(760px, calc(100vw - 40px)) !important;
+  max-width:760px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  justify-items:stretch !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:calc(100% - 50px) !important;
+  max-width:calc(100% - 50px) !important;
+  justify-self:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  grid-column:1 / -1 !important;
+  grid-row:auto !important;
+}
+
+html body .contactPage .contactFormPanel > h2 {
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  width:100% !important;
+  margin-top:16px !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  grid-column:1 / -1 !important;
+}
+
+html body .contactPage .contactSupportGrid h2 {
+  font-size:16px !important;
+  text-align:center !important;
+}
+
+html body .contactPage .contactSupportGrid p {
+  font-size:13px !important;
+  line-height:1.45 !important;
+  text-align:left !important;
+}
+
+@media (max-width:760px) {
+  html body .brandLogo {
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+  }
+
+  html body .contactPage .contactLayout,
+  html body .contactPage .contactPlain,
+  html body .contactPage .contactComposer,
+  html body .contactPage .contactPlain .mainStack.contactComposer {
+    width:min(100%, calc(100vw - 24px)) !important;
+  }
+
+  html body .contactPage .contactSupportGrid {
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Absolute last-word repairs for print/about/contact/account. */
+html body .printShelfPage,
+html body .printProductPage {
+  width:min(1240px, calc(100vw - 32px)) !important;
+  max-width:1240px !important;
+  margin:0 auto !important;
+  padding:clamp(88px, 9vw, 132px) 0 72px !important;
+}
+
+html body .printShelfHero,
+html body .printProductPage .printDetailHero {
+  margin:0 auto 24px !important;
+}
+
+html body .printShelfHero h1,
+html body .printDetailHero h1 {
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(54px, 8vw, 104px) !important;
+  line-height:.9 !important;
+  letter-spacing:0 !important;
+}
+
+html body .printShelfGrid {
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:18px !important;
+}
+
+html body .printShelfCard {
+  display:grid !important;
+  grid-template-columns:minmax(260px, .72fr) minmax(0, 1fr) !important;
+  gap:24px !important;
+  align-items:center !important;
+  min-height:280px !important;
+  padding:20px !important;
+  color:var(--text) !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 42%, transparent) !important;
+  border-radius:10px !important;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--panel2) 72%, transparent), color-mix(in srgb, var(--bg) 88%, transparent)), color-mix(in srgb, var(--panel) 92%, black) !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.24) !important;
+  overflow:hidden !important;
+}
+
+html body .printShelfCovers {
+  display:flex !important;
+  align-items:center !important;
+  min-height:230px !important;
+  padding:12px 12px 12px 28px !important;
+  overflow:hidden !important;
+}
+
+html body .printShelfCovers img {
+  width:112px !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 36%, transparent) !important;
+  box-shadow:0 18px 35px rgba(0,0,0,.36) !important;
+  margin-left:-26px !important;
+  background:var(--panel2) !important;
+}
+
+html body .printShelfCovers img:first-child {
+  margin-left:0 !important;
+}
+
+html body .printShelfInfo {
+  display:grid !important;
+  gap:10px !important;
+  align-content:center !important;
+  min-width:0 !important;
+}
+
+html body .printShelfInfo span,
+html body .printDetailCopy .kicker {
+  color:var(--gold) !important;
+  font-size:13px !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+}
+
+html body .printShelfInfo h2 {
+  margin:0 !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:clamp(34px, 4.6vw, 62px) !important;
+  line-height:.96 !important;
+}
+
+html body .printShelfInfo p,
+html body .printDetailCopy p,
+html body .printIncludedShelf .sectionHeading p {
+  max-width:720px !important;
+  margin:0 !important;
+  color:var(--muted) !important;
+  font-size:17px !important;
+  line-height:1.5 !important;
+}
+
+html body .printShelfMeta,
+html body .printDetailMeta {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:10px !important;
+  margin-top:8px !important;
+}
+
+html body .printShelfMeta strong,
+html body .printDetailMeta div {
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  min-height:38px !important;
+  padding:8px 12px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 32%, transparent) !important;
+  border-radius:999px !important;
+  background:rgba(0,0,0,.18) !important;
+  color:var(--text) !important;
+  font-size:13px !important;
+}
+
+html body .printShelfNote {
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:16px !important;
+  margin:18px auto 0 !important;
+  padding:16px 18px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, transparent) !important;
+  border-radius:10px !important;
+  color:var(--muted) !important;
+  background:rgba(0,0,0,.12) !important;
+}
+
+html body .printShelfNote p {
+  margin:0 !important;
+}
+
+html body .printShelfNote a {
+  flex:0 0 auto !important;
+  color:var(--gold) !important;
+  font-weight:900 !important;
+  text-decoration:none !important;
+}
+
+html body .printProductPage {
+  display:grid !important;
+  gap:22px !important;
+}
+
+html body .printDetailHero {
+  display:grid !important;
+  grid-template-columns:minmax(0, .95fr) minmax(300px, .7fr) !important;
+  gap:34px !important;
+  align-items:center !important;
+  width:100% !important;
+  padding:28px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 36%, transparent) !important;
+  border-radius:12px !important;
+  background:radial-gradient(circle at 80% 10%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 36%), color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+html body .printDetailCopy {
+  display:grid !important;
+  gap:14px !important;
+}
+
+html body .printDetailCopy h1 {
+  margin:0 !important;
+  color:var(--text) !important;
+}
+
+html body .printDetailStack {
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  gap:10px !important;
+}
+
+html body .printDetailStack img,
+html body .printIncludedCard img {
+  width:100% !important;
+  aspect-ratio:2 / 3 !important;
+  object-fit:cover !important;
+  border-radius:6px !important;
+}
+
+html body .printDetailStack img {
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  box-shadow:0 16px 30px rgba(0,0,0,.32) !important;
+}
+
+html body .printDetailMeta {
+  justify-content:center !important;
+  margin:0 !important;
+}
+
+html body .printDetailMeta div {
+  flex-direction:column !important;
+  min-width:180px !important;
+  min-height:72px !important;
+  border-radius:10px !important;
+}
+
+html body .printDetailMeta span {
+  color:var(--muted) !important;
+  font-size:12px !important;
+  text-transform:uppercase !important;
+  letter-spacing:.08em !important;
+}
+
+html body .printDetailMeta strong {
+  color:var(--text) !important;
+  font-size:19px !important;
+}
+
+html body .printIncludedShelf {
+  display:grid !important;
+  gap:18px !important;
+}
+
+html body .printIncludedShelf .sectionHeading {
+  text-align:center !important;
+  margin:0 auto !important;
+}
+
+html body .printIncludedGrid {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap:18px !important;
+}
+
+html body .printIncludedCard {
+  display:grid !important;
+  gap:12px !important;
+  align-content:start !important;
+  padding:12px !important;
+  text-decoration:none !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:10px !important;
+  background:color-mix(in srgb, var(--panel) 90%, transparent) !important;
+}
+
+html body .printIncludedCard strong {
+  display:block !important;
+  color:var(--text) !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  text-align:center !important;
+}
+
+html body .printIncludedCard p {
+  color:var(--muted) !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutHero,
+html body .contactPage .hero,
+html body .accountPageClean .accountHeroClean {
+  min-height:auto !important;
+  padding:clamp(86px, 10vw, 132px) 20px 28px !important;
+}
+
+html body .aboutPage .aboutPlain,
+html body .contactPage .contactLayout {
+  padding:0 20px 64px !important;
+}
+
+html body .aboutPage .aboutEssay {
+  width:min(1040px, 100%) !important;
+  max-width:1040px !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:14px !important;
+}
+
+html body .aboutPage .aboutEssay section {
+  margin:0 !important;
+  min-height:0 !important;
+  padding:20px !important;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent) !important;
+  border-radius:8px !important;
+  background:color-mix(in srgb, var(--panel) 88%, transparent) !important;
+}
+
+html body .aboutPage .aboutEssay section::before,
+html body .aboutPage .aboutDisclaimer::before,
+html body .aboutPage .aboutDisclaimer::after {
+  display:none !important;
+}
+
+html body .aboutPage .aboutEssay h2,
+html body .aboutPage .aboutEssay .kicker,
+html body .aboutPage .aboutDisclaimer h2,
+html body .aboutPage .aboutDisclaimer strong {
+  display:block !important;
+  text-align:center !important;
+}
+
+html body .aboutPage .aboutEssay p:not(.kicker),
+html body .aboutPage .aboutDisclaimer p {
+  max-width:none !important;
+  text-align:left !important;
+}
+
+html body .aboutPage .aboutDisclaimer {
+  grid-column:1 / -1 !important;
+  width:min(760px, 100%) !important;
+  justify-self:center !important;
+}
+
+html body .aboutPage .aboutEssay > .btn {
+  grid-column:1 / -1 !important;
+  justify-self:center !important;
+  margin-top:8px !important;
+}
+
+html body .contactPage .contactLayout,
+html body .contactPage .contactComposer,
+html body .contactPage .contactPlain .mainStack.contactComposer {
+  width:min(820px, 100%) !important;
+  max-width:820px !important;
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel {
+  width:100% !important;
+  max-width:100% !important;
+  padding:20px !important;
+}
+
+html body .contactPage .formGrid {
+  gap:10px !important;
+}
+
+html body .contactPage textarea {
+  min-height:130px !important;
+}
+
+html body .contactPage .contactSupportGrid {
+  margin-top:12px !important;
+  gap:10px !important;
+}
+
+html body .contactPage .contactSupportGrid > div {
+  min-height:0 !important;
+  padding:12px !important;
+  border-radius:8px !important;
+}
+
+html body .accountPageClean .accountMainClean {
+  margin-top:0 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage .aboutEssay section,
+:root[data-site-theme="manuscript"] body .aboutPage .aboutDisclaimer,
+:root[data-site-theme="manuscript"] body .contactPage .contactFormPanel,
+:root[data-site-theme="manuscript"] body .contactPage .contactSupportGrid > div,
+:root[data-site-theme="manuscript"] body .printShelfCard,
+:root[data-site-theme="manuscript"] body .printShelfNote,
+:root[data-site-theme="manuscript"] body .printDetailHero,
+:root[data-site-theme="manuscript"] body .printIncludedCard {
+  color:#261b0f !important;
+  border-color:rgba(124,83,22,.28) !important;
+  background:rgba(255,248,232,.82) !important;
+  box-shadow:0 18px 54px rgba(92,60,19,.1) !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage h1,
+:root[data-site-theme="manuscript"] body .aboutPage h2,
+:root[data-site-theme="manuscript"] body .contactPage h1,
+:root[data-site-theme="manuscript"] body .contactPage h2,
+:root[data-site-theme="manuscript"] body .accountPageClean h1,
+:root[data-site-theme="manuscript"] body .printShelfInfo h2,
+:root[data-site-theme="manuscript"] body .printDetailCopy h1,
+:root[data-site-theme="manuscript"] body .printIncludedCard strong {
+  color:#211407 !important;
+}
+
+:root[data-site-theme="manuscript"] body .aboutPage p,
+:root[data-site-theme="manuscript"] body .contactPage p,
+:root[data-site-theme="manuscript"] body .contactPage label,
+:root[data-site-theme="manuscript"] body .printShelfInfo p,
+:root[data-site-theme="manuscript"] body .printDetailCopy p,
+:root[data-site-theme="manuscript"] body .printIncludedCard p,
+:root[data-site-theme="manuscript"] body .printShelfNote {
+  color:#46331d !important;
+}
+
+:root[data-site-theme="manuscript"] body .printShelfMeta strong,
+:root[data-site-theme="manuscript"] body .printDetailMeta div {
+  background:rgba(124,83,22,.08) !important;
+  color:#211407 !important;
+}
+
+@media (max-width:900px) {
+  html body .printShelfCard,
+  html body .printDetailHero,
+  html body .aboutPage .aboutEssay {
+    grid-template-columns:1fr !important;
+  }
+
+  html body .printShelfCovers {
+    justify-content:center !important;
+    min-height:190px !important;
+    padding:8px !important;
+  }
+
+  html body .printShelfCovers img {
+    width:94px !important;
+    margin-left:-22px !important;
+  }
+
+  html body .printShelfInfo {
+    text-align:center !important;
+  }
+
+  html body .printShelfInfo p {
+    margin:0 auto !important;
+  }
+
+  html body .printShelfMeta,
+  html body .printDetailMeta {
+    justify-content:center !important;
+  }
+}
+
+@media (max-width:640px) {
+  html body .printShelfPage,
+  html body .printProductPage {
+    width:min(100%, calc(100vw - 20px)) !important;
+    padding-top:82px !important;
+  }
+
+  html body .printShelfHero h1,
+  html body .printDetailHero h1 {
+    font-size:clamp(42px, 16vw, 68px) !important;
+  }
+
+  html body .printShelfCard,
+  html body .printDetailHero {
+    padding:14px !important;
+  }
+
+  html body .printShelfCovers img {
+    width:78px !important;
+    margin-left:-28px !important;
+  }
+
+  html body .printDetailStack {
+    grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+    gap:6px !important;
+  }
+
+  html body .printShelfNote,
+  html body .contactPage .contactSupportGrid {
+    display:grid !important;
+    grid-template-columns:1fr !important;
+  }
+
+  html body .aboutPage .aboutHero,
+  html body .contactPage .hero,
+  html body .accountPageClean .accountHeroClean {
+    padding-top:78px !important;
+  }
+}
+
+/* Mobile heading clamp after visual QA. */
+@media (max-width:640px) {
+  html body .aboutPage .aboutHero h1,
+  html body .contactPage .hero h1,
+  html body .accountPageClean .accountHeroClean h1 {
+    max-width:calc(100vw - 36px) !important;
+    font-size:clamp(44px, 13vw, 58px) !important;
+    line-height:.94 !important;
+    overflow-wrap:normal !important;
+    word-break:normal !important;
+  }
+
+  html body .aboutPage .aboutHero h1 {
+    font-size:clamp(42px, 12.2vw, 54px) !important;
+  }
+}

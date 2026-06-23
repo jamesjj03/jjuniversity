@@ -1,0 +1,37 @@
+project_id = "jjuniversity"
+
+[auth]
+enabled = true
+site_url = "https://jjuniversity.com"
+additional_redirect_urls = [
+  "https://jjuniversity.com/auth/callback",
+  "https://www.jjuniversity.com/auth/callback",
+  "http://localhost:3000/auth/callback",
+  "http://localhost:3100/auth/callback"
+]
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = true
+double_confirm_changes = true
+max_frequency = "1m"
+otp_length = 6
+otp_expiry = 3600
+
+[auth.email.smtp]
+enabled = true
+host = "env(SUPABASE_SMTP_HOST)"
+port = 465
+user = "env(SUPABASE_SMTP_USER)"
+pass = "env(SUPABASE_SMTP_PASS)"
+admin_email = "env(SUPABASE_SMTP_ADMIN_EMAIL)"
+sender_name = "env(SUPABASE_SMTP_SENDER_NAME)"
+
+[auth.email.template.confirmation]
+subject = "Confirm your JJ University account"
+content_path = "./supabase/templates/confirmation.html"
+
+[auth.email.template.recovery]
+subject = "Reset your JJ University password"
+content_path = "./supabase/templates/recovery.html"

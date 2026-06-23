@@ -1,7 +1,9 @@
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-import { prepareBookContentForSave, textFromHtml, wordCount, type BookContent } from "@/lib/bookContent";
+import { readBooksFromSupabase, saveBooksToSupabase } from "@/lib/bookCatalog";
+import { prepareBookContentForSave, saveLiveBookContentToSupabase, textFromHtml, wordCount, type BookContent } from "@/lib/bookContent";
 
 type BookRecord = Record<string, unknown>;
 
@@ -204,7 +206,8 @@ export async function POST(request: Request) {
     const booksPath = path.join(process.cwd(), "public", "books.json");
     const contentDir = path.join(process.cwd(), "public", "book-content");
     const manifestPath = path.join(contentDir, "manifest.json");
-    const booksData = JSON.parse(await readFile(booksPath, "utf8"));
+    const supabaseBooks = await readBooksFromSupabase().catch(() => null);
+    const booksData = supabaseBooks ? supabaseBooks : JSON.parse(await readFile(booksPath, "utf8"));
     const books = (Array.isArray(booksData) ? booksData : booksData.books || []) as BookRecord[];
     const existingIds = new Set(books.map(book => String(book.id || "").toLowerCase()).filter(Boolean));
     if (requestedId && existingIds.has(requestedId)) throw new Error(`A book with id "${requestedId}" already exists.`);
@@ -233,6 +236,8 @@ export async function POST(request: Request) {
       category: visibility === "archive" ? String(body.archiveCategory || "Unsorted Archive").trim() : "",
       archiveCategory: visibility === "archive" ? String(body.archiveCategory || "Unsorted Archive").trim() : "",
       coverFile: `${fileName}.jpg`,
+      bookFile: `${fileName}.json`,
+      contentKey: fileName,
       sourceKind: "admin-draft",
       wordCount: contentBook.wordCount,
       readingMinutes: minutes,
@@ -263,6 +268,38 @@ export async function POST(request: Request) {
 
     const booksJson = `${JSON.stringify(Array.isArray(booksData) ? nextBooks : { ...booksData, books: nextBooks }, null, 2)}\n`;
     const manifestJson = `${JSON.stringify(nextManifest, null, 2)}\n`;
+    const message = `Create JJU draft book: ${contentBook.title}`;
+
+    const supabaseCatalogSave = await saveBooksToSupabase(nextBooks);
+    if (supabaseCatalogSave.saved) {
+      const supabaseContentSave = await saveLiveBookContentToSupabase({
+        book: contentBook,
+        fileName: `${fileName}.json`,
+        publicPath: `public/book-content/${fileName}.json`,
+        message,
+      });
+
+      if (supabaseContentSave.saved) {
+        revalidatePath("/library");
+        revalidatePath("/sitemap.xml");
+        return NextResponse.json({
+          saved: true,
+          target: "supabase",
+          book,
+          books: supabaseCatalogSave.books || nextBooks,
+          content: contentBook,
+          contentFile: `${fileName}.json`,
+          versionNumber: supabaseContentSave.versionNumber,
+          note: "Created draft catalog/content in Supabase.",
+        });
+      }
+
+      if (supabaseContentSave.error && !supabaseContentSave.tableMissing) {
+        throw new Error(supabaseContentSave.error);
+      }
+    } else if (supabaseCatalogSave.error && !supabaseCatalogSave.tableMissing) {
+      throw new Error(supabaseCatalogSave.error);
+    }
 
     await mkdir(contentDir, { recursive: true });
 
@@ -277,7 +314,6 @@ export async function POST(request: Request) {
       localError = error instanceof Error ? error.message : "Local draft save failed.";
     }
 
-    const message = `Create JJU draft book: ${contentBook.title}`;
     let githubSaved = false;
     let githubError = "";
     try {

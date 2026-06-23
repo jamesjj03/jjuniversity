@@ -3,10 +3,10 @@ import {
   absoluteUrl,
   bookUrl,
   coverUrl,
-  getAllSeries,
-  getAllTags,
-  getCategories,
-  getPublicBooks,
+  getAllSeriesLive,
+  getAllTagsLive,
+  getCategoriesLive,
+  getPublicBooksLive,
   PRINT_PRODUCTS,
   slugify,
 } from "@/lib/publishing";
@@ -16,6 +16,12 @@ import siteConfig from "@/public/site.json";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const sectionRoutes = await getAllBookSectionRoutes();
+  const [publicBooks, allSeries, categories, allTags] = await Promise.all([
+    getPublicBooksLive(),
+    getAllSeriesLive(),
+    getCategoriesLive(),
+    getAllTagsLive(),
+  ]);
   const staticPages = [
     "/",
     "/library",
@@ -38,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.2,
     }] : []),
-    ...getPublicBooks().map(book => ({
+    ...publicBooks.map(book => ({
       url: absoluteUrl(bookUrl(book)),
       lastModified: now,
       changeFrequency: "monthly" as const,
@@ -51,19 +57,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.62,
     })),
-    ...getAllSeries().map(series => ({
+    ...allSeries.map(series => ({
       url: absoluteUrl(`/series/${series.slug}`),
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: series.slug === "101" ? 0.9 : 0.72,
     })),
-    ...getCategories().map(category => ({
+    ...categories.map(category => ({
       url: absoluteUrl(`/category/${category.slug}`),
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.65,
     })),
-    ...getAllTags().map(tag => ({
+    ...allTags.map(tag => ({
       url: absoluteUrl(`/tag/${slugify(tag)}`),
       lastModified: now,
       changeFrequency: "monthly" as const,

@@ -1,6 +1,9 @@
 import { readdir, readFile, writeFile } from "fs/promises";
 import path from "path";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { readBooksFromSupabase, saveBooksToSupabase } from "@/lib/bookCatalog";
+import { listLiveBookContentIds } from "@/lib/bookContent";
 
 type BookRecord = Record<string, unknown>;
 
@@ -53,25 +56,36 @@ async function saveToGithub(content: string, message: string) {
   return updated.json();
 }
 
+async function readBooks() {
+  const supabaseBooks = await readBooksFromSupabase().catch(() => null);
+  if (supabaseBooks) return { books: supabaseBooks as BookRecord[], source: "supabase" as const };
+
+  const booksPath = path.join(process.cwd(), "public", "books.json");
+  const data = JSON.parse(await readFile(booksPath, "utf8"));
+  return { books: (Array.isArray(data) ? data : data.books || []) as BookRecord[], source: "file" as const };
+}
+
 export async function POST() {
   try {
     const booksPath = path.join(process.cwd(), "public", "books.json");
     const contentDir = path.join(process.cwd(), "public", "book-content");
-    const data = JSON.parse(await readFile(booksPath, "utf8"));
-    const books = (Array.isArray(data) ? data : data.books || []) as BookRecord[];
+    const { books, source } = await readBooks();
+    const liveContentIds = await listLiveBookContentIds();
     const files = new Set((await readdir(contentDir)).filter(file => file.toLowerCase().endsWith(".json")).map(file => file.toLowerCase()));
 
     let comingSoon = 0;
     let ready = 0;
 
     const updated = books.map(book => {
-      const contentFile = `${contentIdFor(book)}.json`.toLowerCase();
+      const contentId = contentIdFor(book).toLowerCase();
+      const contentFile = `${contentId}.json`;
       const status = String(book.status || "ready").trim().toLowerCase();
-      if (!files.has(contentFile) && !["hidden", "unavailable"].includes(status)) {
+      const hasContent = files.has(contentFile) || Boolean(liveContentIds?.has(contentId));
+      if (!hasContent && !["hidden", "unavailable"].includes(status)) {
         comingSoon += 1;
         return { ...book, status: "coming-soon" };
       }
-      if (files.has(contentFile) && status === "coming-soon") {
+      if (hasContent && status === "coming-soon") {
         ready += 1;
         return { ...book, status: "ready" };
       }
@@ -79,6 +93,24 @@ export async function POST() {
     });
 
     const content = `${JSON.stringify(updated, null, 2)}\n`;
+    const supabaseSave = await saveBooksToSupabase(updated);
+    if (supabaseSave.saved) {
+      revalidatePath("/library");
+      revalidatePath("/sitemap.xml");
+      return NextResponse.json({
+        books: supabaseSave.books || updated,
+        comingSoon,
+        ready,
+        source,
+        target: "supabase",
+        note: "Saved availability to Supabase.",
+      });
+    }
+
+    if (supabaseSave.error && !supabaseSave.tableMissing) {
+      throw new Error(supabaseSave.error);
+    }
+
     let localSaved = false;
     let localError = "";
     try {
@@ -98,6 +130,8 @@ export async function POST() {
       books: updated,
       comingSoon,
       ready,
+      source,
+      target: github ? "github" : "local",
       commit: github?.commit?.html_url,
       note: github ? undefined : "Saved locally. Add GITHUB_TOKEN and GITHUB_REPO to save live through GitHub.",
     });

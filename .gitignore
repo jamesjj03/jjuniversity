@@ -44,5 +44,7 @@ next-env.d.ts
 # local editorial outputs
 /tools/gold-cleaner/gold-output/
 /generated/
+/supabase/.temp/
+/tmp/*.log
 /tmp/pdfs/
 /tmp/arena-candidates/

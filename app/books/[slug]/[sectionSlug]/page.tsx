@@ -5,7 +5,7 @@ import {
   absoluteUrl,
   bookUrl,
   coverUrl,
-  getBookBySlug,
+  getBookBySlugLive,
   metadataDescription,
 } from "@/lib/publishing";
 import {
@@ -30,7 +30,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, sectionSlug } = await params;
-  const book = getBookBySlug(slug);
+  const book = await getBookBySlugLive(slug);
   if (!book) return {};
 
   const route = await getBookSectionRoute(book, sectionSlug);
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BookSectionPage({ params }: Props) {
   const { slug, sectionSlug } = await params;
-  const book = getBookBySlug(slug);
+  const book = await getBookBySlugLive(slug);
   if (!book) notFound();
 
   const route = await getBookSectionRoute(book, sectionSlug);

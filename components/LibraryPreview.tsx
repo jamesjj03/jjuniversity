@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { SyntheticEvent, useEffect, useState } from "react";
-import { coverFallbackSrc, coverWebpSrc, handleCoverError } from "@/lib/cover";
-import { applyCoverPalette } from "@/lib/coverPalette";
+import { useEffect, useState } from "react";
+import { coverFallbackSrc, coverWebpSrc } from "@/lib/cover";
+import CoverImage from "@/components/CoverImage";
 
 type Book = {
   id: string;
@@ -31,14 +31,6 @@ function legacyCoverFor(book: Book | undefined, fallbackId: string) {
   return coverFallbackSrc(book, fallbackId);
 }
 
-function coverFallback(event: SyntheticEvent<HTMLImageElement>) {
-  handleCoverError(event.currentTarget);
-}
-
-function coverLoaded(event: SyntheticEvent<HTMLImageElement>) {
-  applyCoverPalette(event.currentTarget);
-}
-
 function normalizeStartCards(items: typeof DEFAULT_START) {
   return items.map(item => {
     if (item.id === "caesar") return { ...item, displayTitle: "CAESAR" };
@@ -52,7 +44,7 @@ export default function LibraryPreview() {
   const [startCards, setStartCards] = useState(DEFAULT_START);
 
   useEffect(() => {
-    fetch("/books.json")
+    fetch("/api/books")
       .then(r => r.json())
       .then(data => setBooks(Array.isArray(data) ? data : data.books || []))
       .catch(() => setBooks([]));
@@ -78,7 +70,7 @@ export default function LibraryPreview() {
           return (
             <article className={`bookCard homeStartCard homeStartCard-${item.id}`} key={item.id}>
               <Link href={`/reader?book=${item.id}`}>
-                <img className="cover" src={coverFor(book, item.id)} data-fallback-src={legacyCoverFor(book, item.id)} alt={item.displayTitle} onError={coverFallback} onLoad={coverLoaded} />
+                <CoverImage className="cover" src={coverFor(book, item.id)} fallbackSrc={legacyCoverFor(book, item.id)} alt={item.displayTitle} palette />
                 <div className="bookInfo">
                   <h3 className="bookTitle">{item.displayTitle}</h3>
                   <p className="homeStartDescription">{item.why}</p>

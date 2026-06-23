@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { SyntheticEvent, useEffect, useMemo, useState } from "react";
-import { coverFallbackSrc, coverWebpSrc, handleCoverError } from "@/lib/cover";
+import { useEffect, useMemo, useState } from "react";
+import { coverFallbackSrc, coverWebpSrc } from "@/lib/cover";
+import CoverImage from "@/components/CoverImage";
 
 type Book = {
   id: string;
@@ -89,10 +90,6 @@ function legacyCoverFor(book: Book | undefined, fallbackId: string) {
   return coverFallbackSrc(book, fallbackId);
 }
 
-function coverFallback(event: SyntheticEvent<HTMLImageElement>) {
-  handleCoverError(event.currentTarget);
-}
-
 export default function PathsClient() {
   const [books, setBooks] = useState<Book[]>([]);
   const [curriculum, setCurriculum] = useState<CurriculumData>({});
@@ -103,7 +100,7 @@ export default function PathsClient() {
   const [availability, setAvailability] = useState("Ready");
 
   useEffect(() => {
-    fetch("/books.json")
+    fetch("/api/books")
       .then(response => response.json())
       .then(data => setBooks(Array.isArray(data) ? data : data.books || []))
       .catch(() => setBooks([]));
@@ -243,7 +240,7 @@ export default function PathsClient() {
                 <span className="pathIndexMeta">{stats?.ready || 0} ready / {stats?.total || item.books.length} total / {completePercent}% read</span>
                 <span className="pathCoverStrip" aria-hidden="true">
                   {previewBooks.map(book => (
-                    <img src={coverFor(book, book.id)} data-fallback-src={legacyCoverFor(book, book.id)} alt="" loading="lazy" decoding="async" onError={coverFallback} key={book.id} />
+                    <CoverImage src={coverFor(book, book.id)} fallbackSrc={legacyCoverFor(book, book.id)} alt="" loading="lazy" decoding="async" key={book.id} width={72} height={108} sizes="72px" />
                   ))}
                 </span>
               </button>
@@ -283,7 +280,7 @@ export default function PathsClient() {
                 return (
                   <Link href={locked ? "#" : `/reader?book=${pathBook.id}`} className={`pathDetailBookV2 ${locked ? "locked" : ""} ${read ? "read" : ""}`} key={`${active.id}-${pathBook.id}-${index}`}>
                     <span className="pathBookNumberV2">{index + 1}</span>
-                    <img src={coverFor(book, pathBook.id)} data-fallback-src={legacyCoverFor(book, pathBook.id)} alt="" loading="lazy" decoding="async" onError={coverFallback} />
+                    <CoverImage src={coverFor(book, pathBook.id)} fallbackSrc={legacyCoverFor(book, pathBook.id)} alt="" loading="lazy" decoding="async" width={84} height={126} sizes="84px" />
                     <span>
                       <strong>{book?.title || pathBook.id}</strong>
                       <small>

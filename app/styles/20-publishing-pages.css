@@ -1,0 +1,503 @@
+﻿/* Crawlable publishing pages */
+html body .publishingPage {
+  width:min(1180px, calc(100vw - 40px)) !important;
+  max-width:1180px !important;
+  padding-top:clamp(42px, 6vw, 84px) !important;
+}
+
+html body .publishingHero {
+  display:grid;
+  gap:18px;
+  margin:0 auto 28px;
+  padding:clamp(26px, 4vw, 46px);
+  border:1px solid color-mix(in srgb, var(--gold) 34%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--gold) 10%, transparent), transparent 45%),
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, transparent), color-mix(in srgb, var(--bg) 84%, var(--panel)));
+  box-shadow:0 22px 60px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+html body .publishingHero h1 {
+  max-width:980px;
+  margin:0;
+  color:var(--text);
+  font-size:clamp(42px, 7vw, 84px);
+  line-height:.98;
+  letter-spacing:0;
+}
+
+html body .publishingHero p {
+  max-width:780px;
+  margin:0;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.62;
+}
+
+html body .publishingHero .pageTagline {
+  color:var(--text) !important;
+  font-size:clamp(19px, 2.4vw, 28px);
+  line-height:1.28;
+}
+
+html body .bookHero {
+  grid-template-columns:minmax(190px, 280px) minmax(0, 1fr);
+  align-items:center;
+}
+
+html body .bookHeroCover {
+  padding:10px;
+  border:1px solid color-mix(in srgb, var(--gold) 42%, transparent);
+  border-radius:8px;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.18));
+}
+
+html body .bookHeroCover img {
+  display:block;
+  width:100%;
+  aspect-ratio:2 / 3;
+  object-fit:cover;
+  border-radius:5px;
+  box-shadow:0 22px 46px rgba(0,0,0,.36);
+}
+
+html body .bookHeroCopy {
+  display:grid;
+  gap:14px;
+  justify-items:start;
+}
+
+html body .publishingActions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin-top:4px;
+}
+
+html body .printCheckoutControl {
+  display:grid;
+  gap:6px;
+}
+
+html body .printCheckoutControl p {
+  margin:0;
+  max-width:260px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  line-height:1.35;
+}
+
+html body .bookMetaChips,
+html body .publishingTagRow {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+
+html body .bookMetaChips span,
+html body .publishingTagRow a {
+  min-height:32px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:7px 10px;
+  border:1px solid color-mix(in srgb, var(--gold) 28%, var(--border));
+  border-radius:999px;
+  background:color-mix(in srgb, var(--panel2) 76%, transparent);
+  color:var(--text);
+  font-size:12px;
+  font-weight:900;
+  text-decoration:none;
+}
+
+html body .publishingGrid {
+  display:grid;
+  grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr);
+  gap:18px;
+  margin:18px 0;
+}
+
+html body .publishingPanel {
+  margin:18px 0;
+  padding:clamp(20px, 3vw, 30px);
+  border:1px solid color-mix(in srgb, var(--gold) 26%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 88%, transparent), color-mix(in srgb, var(--bg) 92%, var(--panel2))),
+    var(--panel);
+}
+
+html body .publishingPanel h2,
+html body .publishingPanel h3 {
+  margin:0 0 12px;
+  color:var(--text);
+  font-size:clamp(24px, 3vw, 34px);
+  line-height:1.05;
+  letter-spacing:0;
+}
+
+html body .publishingPanel p,
+html body .publishingPanel li {
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.62;
+}
+
+html body .publishingPanel p {
+  margin:0;
+}
+
+html body .tocList {
+  display:grid;
+  gap:8px;
+  margin:0;
+  padding-left:22px;
+}
+
+html body .tocList li::marker {
+  color:var(--gold);
+  font-weight:900;
+}
+
+html body .tocList a {
+  color:var(--text);
+  font-weight:800;
+  text-decoration:none;
+}
+
+html body .tocList a:hover {
+  color:var(--gold);
+}
+
+html body .bookSectionPage {
+  max-width:980px !important;
+}
+
+html body .bookSectionShell {
+  display:grid;
+  gap:22px;
+  margin:0 auto;
+}
+
+html body .bookSectionHeader {
+  display:grid;
+  gap:14px;
+  padding:clamp(24px, 4vw, 42px);
+  border:1px solid color-mix(in srgb, var(--gold) 30%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), transparent 44%),
+    color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+html body .bookSectionHeader h1 {
+  max-width:840px;
+  margin:0;
+  color:var(--text);
+  font-size:clamp(38px, 6vw, 74px);
+  line-height:1;
+  letter-spacing:0;
+}
+
+html body .bookSectionHeader p {
+  margin:0;
+}
+
+html body .bookSectionContent {
+  padding:clamp(24px, 4vw, 46px);
+  border:1px solid color-mix(in srgb, var(--gold) 22%, var(--border));
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 92%, transparent);
+  color:var(--text);
+}
+
+html body .bookSectionContent h1,
+html body .bookSectionContent h2,
+html body .bookSectionContent h3 {
+  margin:1.2em 0 .55em;
+  color:var(--text);
+  font-size:clamp(26px, 4vw, 42px);
+  line-height:1.08;
+  letter-spacing:0;
+}
+
+html body .bookSectionContent h1:first-child,
+html body .bookSectionContent h2:first-child,
+html body .bookSectionContent h3:first-child {
+  margin-top:0;
+}
+
+html body .bookSectionContent p,
+html body .bookSectionContent li {
+  color:var(--text);
+  font-size:clamp(18px, 2vw, 21px);
+  line-height:1.72;
+}
+
+html body .bookSectionContent p {
+  margin:0 0 1.05em;
+}
+
+html body .bookSectionContent p:last-child {
+  margin-bottom:0;
+}
+
+html body .bookSectionNav {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+
+html body .bookSectionNav a {
+  display:flex;
+  min-height:54px;
+  align-items:center;
+  justify-content:center;
+  padding:12px 14px;
+  border:1px solid color-mix(in srgb, var(--gold) 30%, var(--border));
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel2) 80%, transparent);
+  color:var(--text);
+  font-size:14px;
+  font-weight:900;
+  line-height:1.2;
+  text-align:center;
+  text-decoration:none;
+}
+
+html body .publishingBookRail {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(135px, 1fr));
+  gap:14px;
+}
+
+html body .publishingBookRail a {
+  display:grid;
+  gap:8px;
+  align-content:start;
+  text-decoration:none;
+}
+
+html body .publishingBookRail img {
+  width:100%;
+  aspect-ratio:2 / 3;
+  object-fit:cover;
+  border-radius:6px;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, transparent);
+}
+
+html body .publishingBookRail strong,
+html body .publishingBookCard strong,
+html body .printProductCard strong {
+  color:var(--text);
+  line-height:1.08;
+}
+
+html body .publishingBookRail span {
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+html body .publishingBookGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(255px, 1fr));
+  gap:16px;
+  margin:20px 0;
+}
+
+html body .publishingBookCard {
+  position:relative;
+  display:grid;
+  grid-template-columns:86px minmax(0, 1fr);
+  gap:14px;
+  align-items:start;
+  min-height:154px;
+  padding:12px;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, var(--border));
+  border-radius:8px;
+  background:color-mix(in srgb, var(--panel) 90%, transparent);
+  text-decoration:none;
+}
+
+html body .publishingBookCard > span {
+  position:absolute;
+  top:12px;
+  right:12px;
+  color:color-mix(in srgb, var(--gold) 72%, var(--muted));
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+html body .publishingBookCard img {
+  width:86px;
+  aspect-ratio:2 / 3;
+  object-fit:cover;
+  border-radius:5px;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+html body .publishingBookCard div {
+  min-width:0;
+  padding-right:18px;
+}
+
+html body .publishingBookCard p {
+  display:-webkit-box;
+  margin:8px 0 0;
+  overflow:hidden;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+}
+
+html body .curriculumSplit {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:18px;
+}
+
+html body .curriculumSplit > div {
+  padding:18px;
+  border:1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  border-radius:8px;
+  background:rgba(255,255,255,.035);
+}
+
+html body .printProductGrid {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:16px;
+}
+
+html body .printProductCard {
+  min-height:230px;
+  display:grid;
+  align-content:end;
+  gap:12px;
+  padding:24px;
+  border:1px solid color-mix(in srgb, var(--gold) 30%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--gold) 16%, transparent), transparent 46%),
+    color-mix(in srgb, var(--panel) 90%, transparent);
+  text-decoration:none;
+}
+
+html body .printProductCard span,
+html body .printStats span {
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+html body .printProductCard strong {
+  font-size:clamp(24px, 3vw, 36px);
+}
+
+html body .printProductCard p {
+  margin:0;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+html body .printStats {
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:12px;
+}
+
+html body .printStats div {
+  display:grid;
+  gap:8px;
+  padding:16px;
+  border:1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  border-radius:8px;
+  background:rgba(255,255,255,.035);
+}
+
+html body .printStats strong {
+  color:var(--text);
+  font-size:clamp(20px, 2.5vw, 32px);
+  line-height:1.05;
+}
+
+:root[data-site-theme="manuscript"] body .publishingHero,
+:root[data-site-theme="manuscript"] body .publishingPanel,
+:root[data-site-theme="manuscript"] body .publishingBookCard,
+:root[data-site-theme="manuscript"] body .printProductCard {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.48), rgba(255,255,255,.12)),
+    var(--panel) !important;
+}
+
+:root[data-site-theme="manuscript"] body .publishingHero h1,
+:root[data-site-theme="manuscript"] body .publishingHero .pageTagline,
+:root[data-site-theme="manuscript"] body .publishingPanel h2,
+:root[data-site-theme="manuscript"] body .publishingPanel h3,
+:root[data-site-theme="manuscript"] body .publishingBookCard strong,
+:root[data-site-theme="manuscript"] body .printProductCard strong,
+:root[data-site-theme="manuscript"] body .printStats strong {
+  color:var(--text) !important;
+}
+
+@media (max-width:900px) {
+  html body .bookHero,
+  html body .publishingGrid,
+  html body .curriculumSplit,
+  html body .printProductGrid,
+  html body .printStats {
+    grid-template-columns:1fr;
+  }
+
+  html body .bookHeroCover {
+    width:min(240px, 68vw);
+  }
+}
+
+@media (max-width:620px) {
+  html body .publishingPage {
+    width:min(100%, calc(100vw - 24px)) !important;
+    padding-top:30px !important;
+  }
+
+  html body .publishingHero {
+    padding:22px;
+  }
+
+  html body .publishingHero h1 {
+    font-size:clamp(34px, 14vw, 56px);
+  }
+
+  html body .publishingBookCard {
+    grid-template-columns:74px minmax(0, 1fr);
+  }
+
+  html body .publishingBookCard img {
+    width:74px;
+  }
+
+  html body .publishingActions .btn {
+    width:100%;
+    justify-content:center;
+    text-align:center;
+  }
+}
+
+html body .contactPage .contactFormPanel,
+html body .contactPage .card.goldCard.contactFormPanel,
+html body .contactPage .contactSupportGrid {
+  justify-self:center !important;
+}
+

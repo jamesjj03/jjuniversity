@@ -1,0 +1,885 @@
+﻿/* Final enforcement after all visual layers */
+.libraryHero {
+  min-height:0 !important;
+  padding:42px 0 24px !important;
+  overflow:visible !important;
+}
+
+.libraryHero::before,
+.libraryHero::after {
+  content:none !important;
+}
+
+.libraryHero h1 {
+  font-size:clamp(54px, 8vw, 112px) !important;
+  line-height:.9 !important;
+}
+
+.libraryHero .pageTagline {
+  display:none !important;
+}
+
+.libraryWorkbench {
+  margin-top:0 !important;
+  margin-bottom:28px !important;
+  position:relative !important;
+  z-index:1 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+.resultBar {
+  clear:both !important;
+  margin-top:0 !important;
+  margin-bottom:18px !important;
+  position:relative !important;
+  z-index:0 !important;
+}
+
+.continueReadingMenu summary {
+  text-align:center !important;
+}
+
+.accountMenuPanel {
+  width:min(430px, calc(100vw - 28px)) !important;
+  max-height:calc(100dvh - 92px) !important;
+  overflow:auto !important;
+}
+
+.accountNavGrid a:last-child:nth-child(odd) {
+  grid-column:1 / -1;
+  width:50%;
+  justify-self:center;
+}
+
+.readerProgressPanelV2 {
+  grid-template-columns:110px minmax(160px, 1fr) auto auto !important;
+}
+
+.readerFloatingNav {
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:12px;
+  z-index:5;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+}
+
+.readerFloatingNav .readerNavBtn {
+  pointer-events:auto;
+  box-shadow:0 12px 28px rgba(0,0,0,.34);
+}
+
+.readerStageTop {
+  grid-template-columns:1fr !important;
+}
+
+.readerStageV2:fullscreen {
+  width:100vw !important;
+  height:100vh !important;
+  min-height:100vh !important;
+  padding:10px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:#080806 !important;
+}
+
+.readerStageV2:fullscreen .readerFrameWrapV2 {
+  height:calc(100vh - 126px) !important;
+  min-height:0 !important;
+}
+
+@media (max-width:760px) {
+  .readerProgressPanelV2 {
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Current UI repair layer */
+:root[data-site-accent="gold"] {
+  --gold:#d6b25e;
+  --gold2:#b8933f;
+  --accent-soft:rgba(214,178,94,.16);
+}
+
+:root[data-site-accent="blue"] {
+  --gold:#77b9ff;
+  --gold2:#4e8fca;
+  --accent-soft:rgba(119,185,255,.16);
+}
+
+:root[data-site-accent="green"] {
+  --gold:#64d69c;
+  --gold2:#3aa875;
+  --accent-soft:rgba(100,214,156,.16);
+}
+
+:root[data-site-accent="crimson"] {
+  --gold:#f06a82;
+  --gold2:#c94a62;
+  --accent-soft:rgba(240,106,130,.16);
+}
+
+:root[data-site-accent="copper"] {
+  --gold:#e3a16b;
+  --gold2:#ad6e2a;
+  --accent-soft:rgba(227,161,107,.16);
+}
+
+:root[data-site-accent="violet"] {
+  --gold:#b897ff;
+  --gold2:#8d69d7;
+  --accent-soft:rgba(184,151,255,.16);
+}
+
+:root[data-site-theme="forest"] {
+  --bg:#150912;
+  --panel:#1b0f18;
+  --panel2:#241522;
+  --text:#f7edf3;
+  --muted:#cbb2c2;
+  --line:rgba(214,178,94,.22);
+}
+
+:root[data-site-theme="navy"] {
+  --bg:#07111f;
+  --panel:#0b1728;
+  --panel2:#101f35;
+  --text:#f4f8ff;
+  --muted:#adc2dd;
+  --line:rgba(119,185,255,.24);
+}
+
+:root[data-site-theme="aurora"] {
+  --bg:#0b1820;
+  --panel:#112733;
+  --panel2:#173646;
+  --text:#eefcff;
+  --muted:#abcfd8;
+  --line:rgba(132,225,238,.26);
+}
+
+:root[data-site-theme="manuscript"] {
+  --bg:#eee4d1;
+  --panel:#f7efdf;
+  --panel2:#eadfc9;
+  --text:#21170e;
+  --muted:#6c5b49;
+  --line:rgba(125,93,42,.25);
+}
+
+[data-theme-choice="forest"] {
+  background:linear-gradient(135deg, #150912 0 50%, #743451 50%) !important;
+  color:#fff4f8 !important;
+}
+
+[data-theme-choice="navy"] {
+  background:linear-gradient(135deg, #07111f 0 50%, #355d8d 50%) !important;
+  color:#f4f8ff !important;
+}
+
+[data-theme-choice="aurora"] {
+  background:linear-gradient(135deg, #0b1820 0 50%, #83dce8 50%) !important;
+  color:#f5feff !important;
+}
+
+[data-theme-choice="manuscript"] {
+  background:linear-gradient(135deg, #f7efdf 0 50%, #ad7620 50%) !important;
+  color:#20160d !important;
+}
+
+.continueReadingMenu {
+  position:relative;
+}
+
+.continueReadingPanel {
+  width:270px !important;
+  padding:10px !important;
+  border-radius:8px !important;
+  background:linear-gradient(180deg, rgba(246,235,209,.08), rgba(246,235,209,.02)), var(--panel, #111) !important;
+  border:1px solid var(--line, rgba(214,178,94,.22)) !important;
+  box-shadow:0 18px 42px rgba(0,0,0,.36) !important;
+}
+
+.continueReadingHeader {
+  padding:8px 8px 10px;
+  text-align:center;
+  border-bottom:1px solid var(--line, rgba(214,178,94,.2));
+  margin-bottom:6px;
+}
+
+.continueReadingHeader span {
+  display:block;
+  color:var(--gold);
+  font:800 10px/1.2 var(--font-sans);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.continueReadingHeader strong {
+  display:block;
+  margin-top:4px;
+  font:700 13px/1.2 var(--font-sans);
+  color:var(--text);
+}
+
+.continueReadingPanel a {
+  min-height:56px;
+  align-items:center;
+  text-align:center;
+  border-radius:7px !important;
+}
+
+.continueReadingPanel a:hover {
+  background:var(--accent-soft, rgba(214,178,94,.14)) !important;
+}
+
+.accountMenuQuickLinks {
+  grid-template-columns:1fr 44px 44px !important;
+  align-items:center !important;
+}
+
+.accountMenuQuickLinks .menuIconLink {
+  min-height:42px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+}
+
+.accountMenuQuickLinks svg {
+  width:19px;
+  height:19px;
+  fill:currentColor;
+}
+
+:root[data-site-theme="manuscript"] .accountMenuPanel,
+:root[data-site-theme="manuscript"] .settingsPanel,
+:root[data-site-theme="manuscript"] .readerSettingsPanel,
+:root[data-site-theme="manuscript"] .card,
+:root[data-site-theme="manuscript"] .sideCard,
+:root[data-site-theme="manuscript"] .libraryWorkbench,
+:root[data-site-theme="manuscript"] .searchPanel,
+:root[data-site-theme="manuscript"] .filterPanel {
+  background:linear-gradient(180deg, rgba(255,250,240,.9), rgba(236,224,199,.9)) !important;
+  border-color:rgba(126,94,45,.28) !important;
+  box-shadow:0 16px 42px rgba(82,63,32,.14) !important;
+  color:#21170e !important;
+}
+
+:root[data-site-theme="manuscript"] .accountMenuPanel strong,
+:root[data-site-theme="manuscript"] .accountMenuPanel span,
+:root[data-site-theme="manuscript"] .settingsPanel h2,
+:root[data-site-theme="manuscript"] .settingsPanel label span,
+:root[data-site-theme="manuscript"] .card h2,
+:root[data-site-theme="manuscript"] .sideCard h3,
+:root[data-site-theme="manuscript"] .hero h1,
+:root[data-site-theme="manuscript"] .settingsHero h1 {
+  color:#21170e !important;
+}
+
+:root[data-site-theme="manuscript"] .accountMenuTop button,
+:root[data-site-theme="manuscript"] .accountMenuPanel .exitPageBtn,
+:root[data-site-theme="manuscript"] .continueReadingMenu summary,
+:root[data-site-theme="manuscript"] .accountMenu summary,
+:root[data-site-theme="manuscript"] .siteSocialLink,
+:root[data-site-theme="manuscript"] .select,
+:root[data-site-theme="manuscript"] .input,
+:root[data-site-theme="manuscript"] textarea {
+  background:#f9f0dd !important;
+  border-color:rgba(126,94,45,.34) !important;
+  color:#21170e !important;
+  box-shadow:none !important;
+}
+
+:root[data-site-theme="manuscript"] .accountMenuTop button,
+:root[data-site-theme="manuscript"] .accountMenu summary {
+  background:#20160d !important;
+  color:#fff8ec !important;
+}
+
+:root[data-site-theme="manuscript"] .accountNavGrid a,
+:root[data-site-theme="manuscript"] .accountMenuQuickLinks a,
+:root[data-site-theme="manuscript"] .menuThemeGrid button,
+:root[data-site-theme="manuscript"] .segmentedControl button {
+  color:#21170e !important;
+  border-color:rgba(126,94,45,.32) !important;
+}
+
+:root[data-site-theme="manuscript"] .accountNavGrid a.active,
+:root[data-site-theme="manuscript"] .accountMenuQuickLinks a:hover,
+:root[data-site-theme="manuscript"] .segmentedControl button.active,
+:root[data-site-theme="manuscript"] .menuThemeGrid button.active {
+  color:#fff8ec !important;
+  background:var(--gold2) !important;
+}
+
+.readerFloatingNav {
+  left:16px !important;
+  right:26px !important;
+  top:50% !important;
+  bottom:auto !important;
+  transform:translateY(-50%);
+  align-items:center;
+}
+
+.readerFloatingNav .readerNavBtn {
+  width:44px !important;
+  height:54px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  font-size:30px !important;
+  line-height:1 !important;
+}
+
+.readerFloatingNav .readerNavBtn:disabled {
+  opacity:.18 !important;
+}
+
+.readerFrameWrapV2 {
+  overflow:hidden !important;
+}
+
+.readerBottomBar {
+  margin-top:10px !important;
+  gap:8px !important;
+}
+
+.readerBottomBar > button {
+  min-height:38px !important;
+  padding:0 14px !important;
+}
+
+.bookInfo {
+  min-height:188px !important;
+  grid-template-rows:auto auto auto minmax(42px, auto) auto !important;
+  align-content:start !important;
+}
+
+.bookDescription {
+  min-height:42px !important;
+  display:-webkit-box !important;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.bookTags {
+  margin-top:8px !important;
+  align-self:end !important;
+}
+
+.completedBook .cover {
+  filter:saturate(.82) brightness(.92);
+}
+
+.completedBookBadge {
+  background:rgba(100,214,156,.13) !important;
+  border-color:rgba(100,214,156,.34) !important;
+  color:#8df0b7 !important;
+}
+
+.completedBook {
+  border-color:rgba(100,214,156,.26) !important;
+}
+
+.siteFooter {
+  width:min(1360px, calc(100vw - 48px)) !important;
+  margin:34px auto 0 !important;
+  padding:24px 0 28px !important;
+  border-top:1px solid var(--line, rgba(214,178,94,.24)) !important;
+  background:transparent !important;
+}
+
+.siteFooter strong {
+  color:var(--text) !important;
+}
+
+.siteFooter span,
+.siteFooter a {
+  color:var(--muted) !important;
+}
+
+.siteFooter a:hover {
+  color:var(--gold) !important;
+}
+
+.contactPage .twoCol {
+  grid-template-columns:minmax(0, 1fr) !important;
+  max-width:920px !important;
+}
+
+.contactPage .card,
+.contactPage .sideCard {
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+
+.contactPage .sideStack {
+  position:relative !important;
+  top:0 !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:22px !important;
+}
+
+@media (max-width:760px) {
+  .accountMenuQuickLinks {
+    grid-template-columns:1fr 42px 42px !important;
+  }
+
+  .readerFloatingNav {
+    left:8px !important;
+    right:18px !important;
+  }
+
+  .readerFloatingNav .readerNavBtn {
+    width:38px !important;
+    height:48px !important;
+    font-size:26px !important;
+  }
+
+  .contactPage .sideStack {
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Direct repair after screenshot review */
+:root {
+  --theme-glow:rgba(199,161,87,.12);
+  --theme-glow2:rgba(52,77,101,.14);
+  --theme-bottom:#070706;
+}
+
+:root[data-site-theme="warm"] {
+  --bg:#170b0d;
+  --panel:#211114;
+  --panel2:#2d171a;
+  --text:#fff2ed;
+  --muted:#d6b9b1;
+  --line:rgba(232,103,88,.24);
+  --theme-glow:rgba(232,76,64,.18);
+  --theme-glow2:rgba(214,178,94,.12);
+  --theme-bottom:#0b0505;
+}
+
+:root[data-site-theme="forest"] {
+  --bg:#100813;
+  --panel:#1a0d1e;
+  --panel2:#25132b;
+  --text:#faefff;
+  --muted:#cdb8d4;
+  --line:rgba(190,112,173,.25);
+  --theme-glow:rgba(190,86,163,.18);
+  --theme-glow2:rgba(92,55,118,.20);
+  --theme-bottom:#08040a;
+}
+
+:root[data-site-theme="navy"] {
+  --bg:#050b16;
+  --panel:#091424;
+  --panel2:#0f2036;
+  --text:#f2f7ff;
+  --muted:#aebfd5;
+  --line:rgba(92,139,198,.26);
+  --theme-glow:rgba(40,79,132,.22);
+  --theme-glow2:rgba(7,13,25,.22);
+  --theme-bottom:#030711;
+}
+
+:root[data-site-theme="aurora"] {
+  --bg:#10252b;
+  --panel:#16323a;
+  --panel2:#1d424b;
+  --text:#f1fdff;
+  --muted:#badbe2;
+  --line:rgba(132,225,238,.26);
+  --theme-glow:rgba(118,211,228,.21);
+  --theme-glow2:rgba(84,122,184,.16);
+  --theme-bottom:#08161a;
+}
+
+:root[data-site-theme="manuscript"] {
+  --bg:#eadfca;
+  --panel:#f3ead8;
+  --panel2:#e2d4ba;
+  --text:#21170e;
+  --muted:#5f5040;
+  --line:rgba(101,79,45,.28);
+  --theme-glow:rgba(134,103,55,.12);
+  --theme-glow2:rgba(74,104,100,.09);
+  --theme-bottom:#ded0b8;
+}
+
+:root[data-site-accent="copper"] {
+  --gold:#8fd8ff;
+  --gold2:#4aa6dc;
+  --accent-soft:rgba(143,216,255,.18);
+}
+
+body {
+  background:
+    radial-gradient(circle at 18% 8%, var(--theme-glow), transparent 28%),
+    radial-gradient(circle at 82% 18%, var(--theme-glow2), transparent 32%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 70%, #000) 0%, var(--bg) 42%, var(--theme-bottom) 100%) !important;
+}
+
+body::before {
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--text) 5%, transparent) 0 1px, transparent 1px 118px),
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--text) 3%, transparent) 0 1px, transparent 1px 92px) !important;
+  opacity:.36 !important;
+}
+
+body::after {
+  background:radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--gold) 13%, transparent), transparent 42%) !important;
+  opacity:.48 !important;
+}
+
+:root[data-site-theme="manuscript"] body {
+  background:
+    linear-gradient(90deg, rgba(83,64,37,.045), transparent 14%, transparent 86%, rgba(83,64,37,.045)),
+    radial-gradient(circle at 50% 0%, rgba(130,101,55,.12), transparent 36%),
+    linear-gradient(180deg, #f1e6d2 0%, #eadfca 54%, #ded0b8 100%) !important;
+}
+
+:root[data-site-theme="manuscript"] body::before {
+  opacity:.22 !important;
+}
+
+:root[data-site-theme="manuscript"] body::after {
+  opacity:.18 !important;
+}
+
+.homePage .hero::before,
+.homePage .hero::after,
+.contactPage .hero::before,
+.contactPage .hero::after,
+.aboutHero::before,
+.aboutHero::after,
+.settingsHero::before,
+.settingsHero::after {
+  content:none !important;
+}
+
+.libraryHero {
+  padding:22px 0 14px !important;
+  margin:0 auto !important;
+}
+
+.libraryHero h1 {
+  font-size:clamp(46px, 6vw, 86px) !important;
+  letter-spacing:0 !important;
+}
+
+.libraryHero .kicker,
+.libraryHero .pageTagline {
+  display:none !important;
+}
+
+.libraryWorkbench,
+.resultBar,
+.bookGrid.upgradedGrid,
+.recentReadingRail {
+  width:min(1580px, calc(100vw - 56px)) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+.libraryWorkbench {
+  gap:10px !important;
+  margin-bottom:18px !important;
+}
+
+.libraryWorkbenchTop {
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) minmax(190px,230px) !important;
+  gap:10px !important;
+}
+
+.libraryWorkbench .filterPanel,
+.libraryPage.archiveMode .filterPanel {
+  grid-template-columns:minmax(140px, .85fr) minmax(160px, 1fr) minmax(170px, 1.1fr) minmax(150px, .9fr) minmax(150px, .9fr) minmax(128px, 128px) !important;
+  gap:10px !important;
+}
+
+.libraryPage.archiveMode .filterPanel {
+  grid-template-columns:minmax(220px, 1fr) minmax(160px, .8fr) minmax(160px, .8fr) minmax(128px, 128px) !important;
+}
+
+.libraryWorkbench .searchPanel,
+.libraryWorkbench .filterPanel,
+.libraryModeToggle {
+  padding:12px !important;
+  border-radius:7px !important;
+  background:linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, var(--gold) 5%), var(--panel)) !important;
+  border:1px solid color-mix(in srgb, var(--line) 86%, var(--gold) 20%) !important;
+  box-shadow:0 14px 34px rgba(0,0,0,.22) !important;
+}
+
+.libraryModeToggle button,
+.libraryWorkbench .resetBtn {
+  height:42px !important;
+  min-height:42px !important;
+}
+
+.libraryWorkbench .resetBtn {
+  width:100% !important;
+  padding:0 14px !important;
+}
+
+.resultBar {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+  gap:10px !important;
+}
+
+.readingStatusToggle {
+  margin-left:auto;
+  display:inline-grid;
+  grid-template-columns:repeat(3, auto);
+  gap:4px;
+  padding:4px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+.readingStatusToggle button {
+  appearance:none;
+  border:0;
+  border-radius:999px;
+  padding:7px 11px;
+  background:transparent;
+  color:var(--muted);
+  font:800 12px/1 var(--font-sans);
+  cursor:pointer;
+}
+
+.readingStatusToggle button.active {
+  background:var(--gold2);
+  color:#fff;
+}
+
+.bookGrid.upgradedGrid {
+  grid-template-columns:repeat(auto-fill, minmax(205px, 1fr)) !important;
+  align-items:start !important;
+}
+
+.bookCard,
+.bookCard a {
+  height:auto !important;
+}
+
+.bookCard {
+  position:relative;
+  border-width:1.5px !important;
+  border-color:color-mix(in srgb, var(--line) 74%, var(--gold) 22%) !important;
+  box-shadow:0 12px 28px rgba(0,0,0,.24) !important;
+}
+
+.bookCard a {
+  display:block !important;
+}
+
+.libraryPage .bookTitle {
+  display:none !important;
+}
+
+.bookInfo {
+  display:block !important;
+  min-height:0 !important;
+  padding:13px 13px 14px !important;
+  background:linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, #000 18%), color-mix(in srgb, var(--panel) 82%, #000 28%)) !important;
+}
+
+.bookMetaLine {
+  margin:0 0 8px !important;
+}
+
+.bookDescription,
+.homeStartDescription {
+  display:block !important;
+  min-height:0 !important;
+  overflow:visible !important;
+  -webkit-line-clamp:unset !important;
+  -webkit-box-orient:initial !important;
+}
+
+.bookTags {
+  margin-top:10px !important;
+}
+
+.bookTags span {
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.completedBook::after {
+  content:"âœ“";
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:var(--gold2);
+  color:#fff;
+  font:900 16px/1 var(--font-sans);
+  box-shadow:0 10px 22px rgba(0,0,0,.32);
+  z-index:2;
+}
+
+.completedBookBadge {
+  display:none !important;
+}
+
+.homeStartSection {
+  padding-top:clamp(24px, 4vw, 46px) !important;
+}
+
+.homeStartGrid {
+  gap:18px !important;
+  padding-bottom:0 !important;
+}
+
+.homeStartGrid .homeStartCard {
+  max-width:214px !important;
+  border-width:1.5px !important;
+}
+
+.homeStartCard .bookInfo {
+  min-height:0 !important;
+  padding:13px !important;
+  background:linear-gradient(180deg, color-mix(in srgb, var(--panel) 86%, #000 18%), color-mix(in srgb, var(--panel) 76%, #000 30%)) !important;
+}
+
+.homeStartCard .bookTitle {
+  margin-bottom:8px !important;
+}
+
+.homeStartDescription {
+  color:color-mix(in srgb, var(--text) 78%, var(--muted)) !important;
+}
+
+:root[data-site-theme="manuscript"] .homeStartCard .bookInfo,
+:root[data-site-theme="manuscript"] .bookInfo {
+  background:linear-gradient(180deg, #e8dcc4, #d9c9ad) !important;
+}
+
+:root[data-site-theme="manuscript"] .bookTitle,
+:root[data-site-theme="manuscript"] .bookDescription,
+:root[data-site-theme="manuscript"] .homeStartDescription,
+:root[data-site-theme="manuscript"] .bookMetaLine,
+:root[data-site-theme="manuscript"] .contactPage p,
+:root[data-site-theme="manuscript"] .contactPage label,
+:root[data-site-theme="manuscript"] .contactPage .heroCopy p,
+:root[data-site-theme="manuscript"] .settingsPage p {
+  color:#3f3327 !important;
+}
+
+:root[data-site-theme="manuscript"] .contactPage .card,
+:root[data-site-theme="manuscript"] .contactPage .sideCard {
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+:root[data-site-theme="manuscript"] .card p,
+:root[data-site-theme="manuscript"] .sideCard p {
+  color:#4d4032 !important;
+}
+
+:root[data-site-theme="manuscript"] .heroCopy {
+  background:transparent !important;
+}
+
+.siteFooter {
+  margin-top:28px !important;
+  padding:18px 0 22px !important;
+  font-family:Georgia, "Times New Roman", serif !important;
+}
+
+.siteFooter span {
+  font-family:var(--font-sans) !important;
+  letter-spacing:0 !important;
+}
+
+[data-theme-choice="warm"] {
+  background:linear-gradient(135deg, #170b0d 0 50%, #b94339 50%) !important;
+  color:#fff2ed !important;
+}
+
+[data-theme-choice="forest"] {
+  background:linear-gradient(135deg, #100813 0 50%, #7d3a72 50%) !important;
+  color:#faefff !important;
+}
+
+[data-theme-choice="navy"] {
+  background:linear-gradient(135deg, #050b16 0 50%, #213f6d 50%) !important;
+}
+
+[data-theme-choice="aurora"] {
+  background:linear-gradient(135deg, #10252b 0 50%, #8bdfe9 50%) !important;
+  color:#f1fdff !important;
+}
+
+[data-theme-choice="manuscript"] {
+  background:linear-gradient(135deg, #eadfca 0 50%, #5f5040 50%) !important;
+  color:#21170e !important;
+}
+
+[data-accent-choice="copper"]::before {
+  background:#8fd8ff !important;
+}
+
+.menuSettingsButton {
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:var(--text);
+  text-decoration:none;
+  background:color-mix(in srgb, var(--panel2) 82%, transparent);
+}
+
+.menuSettingsButton svg {
+  width:18px;
+  height:18px;
+  fill:currentColor;
+}
+
+.accountMenuTop {
+  grid-template-columns:1fr auto auto !important;
+}
+
+@media (max-width:900px) {
+  .libraryWorkbench,
+  .resultBar,
+  .bookGrid.upgradedGrid,
+  .recentReadingRail {
+    width:calc(100vw - 28px) !important;
+  }
+
+  .libraryWorkbenchTop,
+  .libraryWorkbench .filterPanel,
+  .libraryPage.archiveMode .filterPanel {
+    grid-template-columns:1fr !important;
+  }
+
+  .readingStatusToggle {
+    margin-left:0;
+  }
+}
+

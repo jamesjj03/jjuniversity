@@ -2,10 +2,23 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+function safeNextPath(value: string | null) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) return "/account";
+  return value;
+}
+
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const next = requestUrl.searchParams.get("next") || "/account";
+  const authError = requestUrl.searchParams.get("error_description") || requestUrl.searchParams.get("error");
+  const next = safeNextPath(requestUrl.searchParams.get("next"));
+
+  if (authError) {
+    const redirect = new URL(next, requestUrl.origin);
+    redirect.searchParams.set("auth", "error");
+    redirect.searchParams.set("message", authError);
+    return NextResponse.redirect(redirect);
+  }
 
   if (code) {
     const cookieStore = await cookies();
@@ -26,8 +39,16 @@ export async function GET(request: Request) {
       },
     );
 
-    await supabase.auth.exchangeCodeForSession(code);
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (error) {
+      const redirect = new URL(next, requestUrl.origin);
+      redirect.searchParams.set("auth", "error");
+      redirect.searchParams.set("message", error.message);
+      return NextResponse.redirect(redirect);
+    }
   }
 
-  return NextResponse.redirect(new URL(`${next}?auth=confirmed`, requestUrl.origin));
+  const redirect = new URL(next, requestUrl.origin);
+  redirect.searchParams.set("auth", code ? "confirmed" : "missing-code");
+  return NextResponse.redirect(redirect);
 }

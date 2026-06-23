@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import {
   coverUrl,
-  getPrintProductPageCount,
-  getPrintProductBooks,
+  getPrintProductPageCountLive,
+  getPrintProductBooksLive,
   getPrintProductComponents,
   printPriceLabel,
   PRINT_PRODUCTS,
@@ -16,18 +17,18 @@ export const metadata: Metadata = pageMetadata({
   path: "/print",
 });
 
-export default function PrintIndexPage() {
-  const printShelves = PRINT_PRODUCTS.map(product => {
-    const books = getPrintProductBooks(product);
+export default async function PrintIndexPage() {
+  const printShelves = await Promise.all(PRINT_PRODUCTS.map(async product => {
+    const books = await getPrintProductBooksLive(product);
     const components = getPrintProductComponents(product);
-    const pageCount = getPrintProductPageCount(product);
+    const pageCount = await getPrintProductPageCountLive(product);
     return {
       product,
       books,
       components,
       pageCount,
     };
-  });
+  }));
 
   return (
     <main className="page publishingPage printShelfPage">
@@ -40,7 +41,7 @@ export default function PrintIndexPage() {
           <Link className="printCatalogCard" href={`/print/${product.slug}`} key={product.slug}>
             <div className="printShelfCovers" aria-hidden="true">
               {books.slice(0, 6).map(book => (
-                <img src={coverUrl(book)} alt="" loading="lazy" key={book.id} />
+                <Image src={coverUrl(book)} alt="" width={150} height={225} sizes="90px" key={book.id} />
               ))}
             </div>
             <div className="printShelfInfo">

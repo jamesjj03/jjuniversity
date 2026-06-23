@@ -1,6 +1,9 @@
 import { writeFile } from "fs/promises";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-import { prepareBookContentForSave, readBookContent, type BookContent } from "@/lib/bookContent";
+import { prepareBookContentForSave, readBookContent, saveLiveBookContentToSupabase, type BookContent } from "@/lib/bookContent";
+import { bookUrl, getPublicBooksLive } from "@/lib/publishing";
+import { getBookSectionRoutes } from "@/lib/bookSectionRoutes";
 
 type SaveBody = {
   sectionId?: string;
@@ -54,18 +57,36 @@ async function saveJsonToGithub(repoPath: string, content: string, message: stri
   return updated.json();
 }
 
+async function revalidateBookPages(bookId: string) {
+  try {
+    revalidatePath("/library");
+    revalidatePath("/sitemap.xml");
+    revalidatePath("/reader");
+
+    const book = (await getPublicBooksLive()).find(item => item.id === bookId);
+    if (!book) return;
+
+    revalidatePath(bookUrl(book));
+    const sectionRoutes = await getBookSectionRoutes(book);
+    sectionRoutes.forEach(route => revalidatePath(route.path));
+  } catch {
+    // Revalidation should never make a successful content save look failed.
+  }
+}
+
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
-    const { book, fileName, publicPath } = await readBookContent(id);
+    const { book, fileName, publicPath, source } = await readBookContent(id);
 
     return NextResponse.json({
       ...book,
       contentFile: fileName,
       contentPath: publicPath,
+      contentSource: source || "file",
     });
   } catch (error) {
     return NextResponse.json(
@@ -100,6 +121,30 @@ export async function POST(
     });
     const content = `${JSON.stringify(nextBook, null, 2)}\n`;
     const message = body.message || `Update ${nextBook.title || nextBook.id} content (${new Date().toISOString().slice(0, 10)})`;
+    const supabaseSave = await saveLiveBookContentToSupabase({
+      book: nextBook,
+      fileName,
+      publicPath,
+      message,
+    });
+
+    if (supabaseSave.saved) {
+      await revalidateBookPages(nextBook.id);
+
+      return NextResponse.json({
+        saved: true,
+        target: "supabase",
+        versionNumber: supabaseSave.versionNumber,
+        note: `Saved live to Supabase${supabaseSave.versionNumber ? ` as version ${supabaseSave.versionNumber}` : ""}.`,
+        contentFile: fileName,
+        contentPath: publicPath,
+        ...nextBook,
+      });
+    }
+
+    if (supabaseSave.error && !supabaseSave.tableMissing) {
+      throw new Error(supabaseSave.error);
+    }
 
     let localSaved = false;
     let localError = "";

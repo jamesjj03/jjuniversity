@@ -1,0 +1,1396 @@
+﻿/* Fiber polish patch: real JJU mark, safer mobile widths, visual info cards */
+html,
+body {
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+.brandWithMark {
+  gap:12px;
+}
+
+.brandLogo {
+  width:48px;
+  height:48px;
+  display:block;
+  object-fit:contain;
+  border-radius:14px;
+  background:#f8f6ef;
+  box-shadow:0 10px 28px rgba(0,0,0,.28), 0 0 0 1px rgba(214,178,94,.3);
+}
+
+.brandText {
+  color:#f7f7f2;
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:-.02em;
+  text-shadow:0 1px 14px rgba(214,178,94,.2);
+}
+
+.siteHeader::before {
+  content:"";
+  position:absolute;
+  left:16px;
+  top:8px;
+  width:210px;
+  height:64px;
+  pointer-events:none;
+  background:radial-gradient(ellipse at left, rgba(214,178,94,.18), transparent 64%);
+  filter:blur(16px);
+  z-index:-1;
+}
+
+.fiberPageV2,
+.fiberPageV2 * {
+  box-sizing:border-box;
+}
+
+.fiberHeroV2,
+.fiberQuoteGrid,
+.fiberSummaryV2,
+.fiberSummaryV2 *,
+.fiberPanelV2,
+.fiberPanelV2 *,
+.fiberContentGridV2,
+.fiberInfoPanelV2,
+.fiberMobileCta {
+  max-width:100%;
+}
+
+.fiberRepPanel img {
+  object-position:center;
+}
+
+.fiberFeatureGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:10px;
+  margin-top:16px;
+}
+
+.fiberFeatureCard {
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:12px;
+  align-items:start;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background:linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.045));
+  padding:13px;
+}
+
+.fiberFeatureCard span {
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:var(--fiber-accent);
+  color:white;
+  font-size:14px;
+  font-weight:950;
+  box-shadow:0 10px 24px color-mix(in srgb, var(--fiber-accent) 22%, transparent);
+}
+
+.fiberFeatureCard p {
+  margin:0;
+  color:#e5eee8;
+  font-size:15px;
+  line-height:1.4;
+}
+
+.fiberSummaryPair,
+.fiberMonthlyCompare,
+.fiberFiveCompare,
+.fiberMonthStrip {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.fiberSummaryPair div,
+.fiberMonthlyCompare div,
+.fiberFiveCompare div,
+.fiberMonthStrip div {
+  min-width:0;
+  overflow:hidden;
+}
+
+.fiberSummaryPair span,
+.fiberMonthlyCompare span,
+.fiberFiveHeader span,
+.fiberFiveCompare span,
+.fiberRewardLine span,
+.fiberMonthStrip span {
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.fiberSummaryPair strong,
+.fiberMonthlyCompare strong,
+.fiberFiveCompare strong,
+.fiberMonthStrip strong {
+  overflow-wrap:anywhere;
+}
+
+.fiberMobileCta {
+  background:rgba(5,14,10,.76)!important;
+  border-color:rgba(255,255,255,.16)!important;
+  backdrop-filter:blur(22px)!important;
+}
+
+@media (max-width:760px) {
+  .siteHeader {
+    position:sticky;
+    grid-template-columns:minmax(0,1fr) auto;
+    padding:10px 14px;
+  }
+
+  .brandLogo {
+    width:42px;
+    height:42px;
+    border-radius:12px;
+  }
+
+  .brandText {
+    font-size:18px;
+    white-space:nowrap;
+  }
+
+  .siteHeader::before {
+    width:170px;
+    height:52px;
+  }
+
+  .pillNav {
+    display:none;
+  }
+}
+
+@media (max-width:700px) {
+  .fiberPageV2 {
+    width:100%;
+    max-width:100vw;
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .fiberHeroV2 {
+    grid-template-columns:76px minmax(0,1fr);
+  }
+
+  .fiberRepPanel img,
+  .fiberRepPanel .fiberPhotoPlaceholder {
+    width:76px;
+    min-height:76px;
+  }
+
+  .fiberHeroCopyV2 h1 {
+    font-size:32px;
+  }
+
+  .fiberPlanGrid {
+    margin-left:0;
+    margin-right:0;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+  }
+
+  .fiberPlan {
+    min-width:132px;
+    max-width:132px;
+  }
+
+  .fiberPlan b {
+    font-size:24px;
+    white-space:nowrap;
+  }
+
+  .fiberPlan b small {
+    font-size:10px;
+  }
+
+  .fiberSummaryV2 {
+    width:100%;
+    overflow:hidden;
+  }
+
+  .fiberBigSave strong {
+    font-size:clamp(44px,15vw,58px);
+  }
+
+  .fiberSummaryPair,
+  .fiberMonthlyCompare,
+  .fiberFiveCompare {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .fiberSummaryPair span,
+  .fiberMonthlyCompare span,
+  .fiberFiveCompare span {
+    font-size:10px;
+    letter-spacing:.06em;
+  }
+
+  .fiberSummaryPair strong,
+  .fiberMonthlyCompare strong,
+  .fiberFiveCompare strong {
+    font-size:clamp(21px,7vw,28px);
+  }
+
+  .fiberFiveHeader strong {
+    font-size:clamp(28px,10vw,38px);
+  }
+
+  .fiberMonthStrip {
+    margin-right:-2px;
+    padding-bottom:4px;
+  }
+
+  .fiberMonthStrip div {
+    min-width:88px;
+  }
+
+  .fiberFeatureGrid {
+    grid-template-columns:1fr;
+  }
+
+  .fiberInfoPanelV2 ul,
+  .fiberInfoPanelV2 ol {
+    padding-left:18px;
+  }
+
+  .fiberPageNav {
+    margin-left:-12px;
+    margin-right:-12px;
+  }
+}
+
+/* Fiber QR display page */
+.fiberQrPage,
+.fiberQrPage * {
+  box-sizing:border-box;
+}
+
+.fiberQrPage {
+  width:min(1500px,calc(100vw - 48px));
+  margin:0 auto;
+  padding:74px 0 90px;
+  color:#f8fbf7;
+}
+
+.fiberQrHeader {
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  align-items:flex-end;
+  margin-bottom:26px;
+}
+
+.fiberQrHeader h1 {
+  margin:8px 0 8px;
+  font-size:clamp(42px,7vw,92px);
+  line-height:.9;
+  letter-spacing:-.06em;
+}
+
+.fiberQrHeader p {
+  margin:0;
+  max-width:760px;
+  color:#dbe8df;
+  font-size:21px;
+  line-height:1.45;
+}
+
+.fiberQrEyebrow,
+.fiberQrKicker {
+  margin:0;
+  color:#00d873!important;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-weight:950;
+  font-size:13px!important;
+}
+
+.fiberQrBack,
+.fiberQrPresentBtn {
+  border:1px solid rgba(214,178,94,.36);
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  color:white;
+  padding:14px 18px;
+  font-weight:950;
+  text-decoration:none;
+  white-space:nowrap;
+  cursor:pointer;
+}
+
+.fiberQrWorkbench {
+  display:grid;
+  grid-template-columns:minmax(260px,360px) minmax(0,1fr);
+  gap:18px;
+  align-items:start;
+}
+
+.fiberQrControls {
+  position:sticky;
+  top:94px;
+  display:grid;
+  gap:14px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:28px;
+  padding:16px;
+  background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
+  box-shadow:0 28px 80px rgba(0,0,0,.26);
+}
+
+.fiberQrDrop {
+  display:grid;
+  place-items:center;
+  min-height:178px;
+  border:1px dashed rgba(214,178,94,.55);
+  border-radius:22px;
+  background:rgba(3,16,10,.72);
+  text-align:center;
+  cursor:pointer;
+}
+
+.fiberQrDrop input {
+  display:none;
+}
+
+.fiberQrDrop span {
+  display:block;
+  color:white;
+  font-size:26px;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+
+.fiberQrDrop small,
+.fiberQrControlNote {
+  color:#bfd0c4;
+  font-size:14px;
+  line-height:1.45;
+}
+
+.fiberQrPresetList {
+  display:grid;
+  gap:10px;
+}
+
+.fiberQrPresetList button {
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  background:rgba(255,255,255,.05);
+  color:white;
+  padding:13px;
+  text-align:left;
+  cursor:pointer;
+}
+
+.fiberQrPresetList button.active {
+  border-color:#00d873;
+  background:rgba(0,136,68,.24);
+  box-shadow:0 0 0 3px rgba(0,216,115,.12);
+}
+
+.fiberQrPresetList strong,
+.fiberQrPresetList span {
+  display:block;
+}
+
+.fiberQrPresetList strong {
+  font-size:16px;
+}
+
+.fiberQrPresetList span {
+  margin-top:4px;
+  color:#dbe8df;
+  font-size:13px;
+  line-height:1.35;
+}
+
+.fiberQrPresentBtn {
+  background:#008a45;
+  border-color:#00d873;
+}
+
+.fiberQrControlNote {
+  margin:0;
+}
+
+.fiberQrPreviewWrap {
+  min-width:0;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:34px;
+  padding:clamp(16px,4vw,42px);
+  background:radial-gradient(circle at 50% 0%,rgba(0,136,68,.18),transparent 38%),rgba(255,255,255,.035);
+}
+
+.fiberQrCard {
+  position:relative;
+  width:min(100%,620px);
+  min-height:780px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:28px;
+  border:1px solid rgba(214,178,94,.32);
+  border-radius:38px;
+  padding:34px;
+  background:#07110c;
+  color:#fff;
+  box-shadow:0 40px 120px rgba(0,0,0,.48);
+  isolation:isolate;
+}
+
+.fiberQrCard-site {
+  background:
+    linear-gradient(rgba(3,12,8,.72),rgba(3,12,8,.86)),
+    radial-gradient(circle at 20% 20%,rgba(214,178,94,.30),transparent 22%),
+    radial-gradient(circle at 80% 35%,rgba(0,136,68,.36),transparent 25%),
+    #07110c;
+}
+
+.fiberQrCard-field {
+  background:
+    radial-gradient(circle at top right,rgba(0,216,115,.24),transparent 28%),
+    linear-gradient(145deg,#0b1510,#16221b 55%,#07110c);
+}
+
+.fiberQrGlow {
+  position:absolute;
+  border-radius:999px;
+  pointer-events:none;
+  filter:blur(28px);
+  opacity:.55;
+  z-index:-1;
+}
+
+.fiberQrGlowOne {
+  width:240px;
+  height:240px;
+  top:-70px;
+  right:-70px;
+  background:rgba(0,216,115,.34);
+}
+
+.fiberQrGlowTwo {
+  width:220px;
+  height:220px;
+  left:-80px;
+  bottom:120px;
+  background:rgba(214,178,94,.22);
+}
+
+.fiberQrBrandRow {
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.fiberQrBrandRow img {
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  border-radius:16px;
+  background:#fff;
+  padding:4px;
+}
+
+.fiberQrBrandRow strong,
+.fiberQrBrandRow span {
+  display:block;
+}
+
+.fiberQrBrandRow strong {
+  font-size:25px;
+  letter-spacing:-.04em;
+}
+
+.fiberQrBrandRow span {
+  color:#d6b25e;
+  text-transform:uppercase;
+  letter-spacing:.17em;
+  font-size:12px;
+  font-weight:950;
+}
+
+.fiberQrCopy h1 {
+  margin:10px 0 12px;
+  font-size:clamp(48px,8vw,82px);
+  line-height:.9;
+  letter-spacing:-.07em;
+}
+
+.fiberQrCopy p:last-child {
+  margin:0;
+  max-width:480px;
+  color:#dcebe2;
+  font-size:23px;
+  line-height:1.28;
+}
+
+.fiberQrBox {
+  width:min(100%,430px);
+  aspect-ratio:1;
+  align-self:center;
+  display:grid;
+  place-items:center;
+  border:10px solid #fff;
+  border-radius:34px;
+  background:#fff;
+  box-shadow:0 26px 70px rgba(0,0,0,.35);
+}
+
+.fiberQrBox img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:20px;
+}
+
+.fiberQrEmpty {
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:8px;
+  border:2px dashed rgba(0,0,0,.18);
+  border-radius:20px;
+  color:#061120;
+  text-align:center;
+}
+
+.fiberQrEmpty span {
+  font-size:28px;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+
+.fiberQrEmpty small {
+  color:#59675e;
+  font-weight:800;
+}
+
+.fiberQrFooter {
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:center;
+  border-top:1px solid rgba(255,255,255,.14);
+  padding-top:18px;
+  color:#dbe8df;
+}
+
+.fiberQrFooter span,
+.fiberQrFooter b {
+  font-size:15px;
+}
+
+.fiberQrFooter b {
+  color:#00d873;
+}
+
+.fiberQrPresenter {
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:#050807;
+}
+
+.fiberQrPresenter > button {
+  position:fixed;
+  right:18px;
+  top:18px;
+  z-index:2;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  color:white;
+  padding:12px 16px;
+  font-weight:950;
+}
+
+.fiberQrPresenter .fiberQrCard {
+  width:min(92vw,620px);
+  max-height:92vh;
+}
+
+@media (max-width:860px) {
+  .fiberQrPage {
+    width:min(100vw - 24px,720px);
+    padding:34px 0 80px;
+  }
+
+  .fiberQrHeader,
+  .fiberQrWorkbench {
+    grid-template-columns:1fr;
+    display:grid;
+  }
+
+  .fiberQrHeader {
+    align-items:start;
+  }
+
+  .fiberQrHeader p {
+    font-size:17px;
+  }
+
+  .fiberQrControls {
+    position:static;
+  }
+
+  .fiberQrPresetList {
+    grid-template-columns:1fr;
+  }
+
+  .fiberQrCard {
+    min-height:680px;
+    padding:24px;
+    border-radius:30px;
+  }
+
+  .fiberQrCopy h1 {
+    font-size:48px;
+  }
+
+  .fiberQrCopy p:last-child {
+    font-size:18px;
+  }
+
+  .fiberQrFooter {
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+
+@media (max-width:520px) {
+  .fiberQrCard {
+    min-height:620px;
+    padding:18px;
+  }
+
+  .fiberQrBrandRow img {
+    width:48px;
+    height:48px;
+  }
+
+  .fiberQrBrandRow strong {
+    font-size:21px;
+  }
+
+  .fiberQrCopy h1 {
+    font-size:40px;
+  }
+
+  .fiberQrBox {
+    border-width:8px;
+    border-radius:26px;
+  }
+}
+
+
+/* Fiber quote comfort patch: softer quote builder, better rep photo crop, no white blast */
+.fiberRepPanel {
+  background:linear-gradient(180deg, rgba(248,251,247,.98), rgba(232,242,235,.96));
+}
+
+.fiberRepPanel img {
+  height:100%;
+  max-height:360px;
+  object-fit:contain;
+  object-position:center top;
+  background:linear-gradient(180deg, #eaf3ed, #dfeae3);
+}
+
+.fiberQuoteV2 .fiberPanelV2,
+.fiberQuoteV2 .fiberSummaryV2 {
+  background:linear-gradient(180deg, rgba(12,28,22,.96), rgba(7,17,13,.96));
+  border-color:rgba(255,255,255,.12);
+  color:#f4fff7;
+}
+
+.fiberQuoteV2 .fiberSummaryV2 {
+  border-top-color:var(--fiber-accent);
+  box-shadow:0 22px 60px rgba(0,0,0,.34);
+}
+
+.fiberQuoteV2 .fiberPlan,
+.fiberQuoteV2 .fiberToggle,
+.fiberQuoteV2 .fiberSelectedPlanPanel,
+.fiberQuoteV2 .fiberSummaryPair div,
+.fiberQuoteV2 .fiberMonthlyCompare div,
+.fiberQuoteV2 .fiberFiveCompare div,
+.fiberQuoteV2 .fiberMonthStrip div,
+.fiberQuoteV2 .fiberRewardLine,
+.fiberQuoteV2 .fiberPanelV2 .fiberMoneyInput div {
+  background:linear-gradient(145deg, rgba(239,247,242,.94), rgba(220,235,226,.92));
+  border-color:rgba(197,221,207,.38);
+}
+
+.fiberQuoteV2 .fiberPlan:hover,
+.fiberQuoteV2 .fiberPlan.active,
+.fiberQuoteV2 .fiberToggle:hover,
+.fiberQuoteV2 .fiberToggle.active {
+  background:linear-gradient(145deg, rgba(255,255,255,.98), rgba(226,241,232,.96));
+}
+
+.fiberQuoteV2 .fiberSummaryPill,
+.fiberQuoteV2 .fiberPlan span,
+.fiberQuoteV2 .fiberSelectedPlanPanel span {
+  background:rgba(0,136,68,.13);
+  border-color:rgba(0,136,68,.2);
+  color:var(--fiber-accent);
+}
+
+.fiberQuoteV2 .fiberBigSave {
+  background:linear-gradient(135deg, #08773e, #0a5d35);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12), 0 14px 28px rgba(0,0,0,.18);
+}
+
+.fiberQuoteV2 .fiberFiveMonths {
+  background:rgba(4,12,9,.28);
+  border-color:rgba(0,190,100,.62);
+}
+
+.fiberQuoteV2 .fiberFiveCompare div:nth-child(2) {
+  background:linear-gradient(145deg, #071525, #06111d);
+  border-color:rgba(255,255,255,.08);
+}
+
+.fiberQuoteV2 .fiberFiveCompare div:nth-child(2) span,
+.fiberQuoteV2 .fiberFiveCompare div:nth-child(2) strong {
+  color:white;
+}
+
+.fiberQuoteV2 .fiberDisclaimer {
+  color:#b9c9c0;
+}
+
+@media (min-width:701px) {
+  .fiberRepPanel img {
+    object-fit:contain;
+  }
+}
+
+@media (max-width:700px) {
+  .fiberRepPanel img {
+    object-fit:cover;
+    object-position:center 18%;
+  }
+
+  .fiberQuoteV2 .fiberSummaryV2 {
+    background:linear-gradient(180deg, rgba(9,26,19,.98), rgba(5,16,11,.98));
+  }
+}
+
+/* Fiber QR private display + rep photo fix */
+.fiberRepPanel {
+  align-self:start;
+  min-height:auto!important;
+}
+
+.fiberRepPanel img {
+  width:100%;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:4 / 3!important;
+  object-fit:cover!important;
+  object-position:center 28%!important;
+  border-radius:7px;
+}
+
+.fiberRepPanel p:empty {
+  display:none;
+}
+
+@media (min-width:701px) {
+  .fiberRepPanel {
+    max-width:320px;
+  }
+}
+
+@media (max-width:700px) {
+  .fiberHeroV2 {
+    grid-template-columns:92px minmax(0,1fr)!important;
+    align-items:start;
+  }
+
+  .fiberRepPanel {
+    padding:6px;
+    border-radius:12px;
+  }
+
+  .fiberRepPanel img,
+  .fiberRepPanel .fiberPhotoPlaceholder {
+    width:100%!important;
+    aspect-ratio:1 / 1!important;
+    min-height:0!important;
+    object-fit:cover!important;
+    object-position:center 24%!important;
+  }
+}
+
+.fiberQrPrivatePage {
+  width:100%;
+  min-height:calc(100vh - 120px);
+  display:grid;
+  place-items:center;
+  padding:40px 16px 90px;
+}
+
+.fiberQrPrivateShell {
+  width:min(100%,760px);
+  display:grid;
+  justify-items:center;
+  gap:16px;
+  text-align:center;
+}
+
+.fiberQrPrivateHeader {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+}
+
+.fiberQrPrivateHeader img {
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  border-radius:16px;
+  background:white;
+}
+
+.fiberQrPrivateHeader p {
+  margin:0 0 2px;
+  color:#00d873;
+  font-size:12px;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+}
+
+.fiberQrPrivateHeader h1 {
+  margin:0;
+  color:white;
+  font-size:clamp(36px,6vw,64px);
+  line-height:.9;
+  letter-spacing:-.06em;
+}
+
+.fiberQrModeRow,
+.fiberQrActionRow {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+
+.fiberQrModeRow button,
+.fiberQrActionRow a,
+.fiberQrActionRow button,
+.fiberQrPresentBtn,
+.fiberQrBack {
+  border:1px solid rgba(214,178,94,.34);
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  color:white;
+  padding:12px 16px;
+  font-weight:950;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.fiberQrModeRow button.active,
+.fiberQrPresentBtn {
+  background:#008a45;
+  border-color:#00d873;
+  box-shadow:0 0 0 4px rgba(0,216,115,.10);
+}
+
+.fiberQrPrivatePage .fiberQrDrop {
+  width:min(100%,420px);
+  min-height:104px;
+  padding:18px;
+  border-radius:22px;
+  background:rgba(255,255,255,.055);
+}
+
+.fiberQrPrivatePage .fiberQrDrop span {
+  font-size:22px;
+}
+
+.fiberQrPrivatePage .fiberQrPreviewWrap {
+  width:100%;
+  padding:16px;
+  background:transparent;
+  border:0;
+  border-radius:0;
+}
+
+.fiberQrPrivatePage .fiberQrCard {
+  width:min(100%,520px);
+  min-height:0;
+  aspect-ratio:4 / 5.25;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:22px;
+  padding:28px;
+  border-radius:34px;
+  text-align:center;
+}
+
+.fiberQrTopMark {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.fiberQrTopMark img {
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  border-radius:14px;
+  background:white;
+}
+
+.fiberQrTopMark span {
+  color:inherit;
+  font-size:22px;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+
+.fiberQrMainCopy p,
+.fiberQrUrl {
+  margin:0;
+  color:inherit;
+  opacity:.72;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+}
+
+.fiberQrMainCopy h1 {
+  margin:8px 0 0;
+  font-size:clamp(42px,7vw,68px);
+  line-height:.88;
+  letter-spacing:-.07em;
+}
+
+.fiberQrPrivatePage .fiberQrBox {
+  width:min(86%,330px);
+  border-radius:28px;
+  border-width:9px;
+}
+
+.fiberQrPrivatePage .fiberQrFooter,
+.fiberQrPrivatePage .fiberQrBrandRow,
+.fiberQrPrivatePage .fiberQrCopy,
+.fiberQrPrivatePage .fiberQrGlow {
+  display:none!important;
+}
+
+.fiberQrCard-clean {
+  background:linear-gradient(180deg,#f8fbf7,#e5efe8)!important;
+  color:#071424!important;
+  border-color:rgba(214,178,94,.36)!important;
+}
+
+.fiberQrCard-dark {
+  background:radial-gradient(circle at 50% 0%,rgba(0,216,115,.20),transparent 42%),linear-gradient(180deg,#08110d,#030705)!important;
+  color:#fff!important;
+  border-color:rgba(0,216,115,.34)!important;
+}
+
+.fiberQrCard-library {
+  background:radial-gradient(circle at 50% 0%,rgba(214,178,94,.30),transparent 34%),linear-gradient(145deg,#061120,#0b1610 58%,#050807)!important;
+  color:#fff!important;
+  border-color:rgba(214,178,94,.55)!important;
+}
+
+.fiberQrPresenter .fiberQrCard {
+  width:min(88vw,620px)!important;
+  max-height:92vh;
+}
+
+@media (max-width:520px) {
+  .fiberQrPrivatePage .fiberQrCard {
+    width:100%;
+    padding:20px;
+    border-radius:28px;
+  }
+
+  .fiberQrMainCopy h1 {
+    font-size:38px;
+  }
+}
+
+/* Fiber full dark pass - no white card bullshit */
+.fiberPageV2 {
+  background:
+    radial-gradient(circle at 14% 0%, rgba(0, 136, 72, .22), transparent 320px),
+    radial-gradient(circle at 92% 24%, rgba(202, 165, 75, .10), transparent 340px),
+    #06101a !important;
+}
+
+.fiberHeroV2 {
+  grid-template-columns:minmax(0,1fr) 280px !important;
+  align-items:center !important;
+}
+
+.fiberRepPanel {
+  align-self:center !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:#f8fff9 !important;
+}
+
+.fiberRepPanel img {
+  width:260px !important;
+  max-width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  border-radius:14px !important;
+  background:transparent !important;
+  box-shadow:0 20px 60px rgba(0,0,0,.42), 0 0 0 1px rgba(255,255,255,.12) !important;
+}
+
+.fiberRepPanel p {
+  display:none !important;
+}
+
+.fiberPanelV2,
+.fiberSummaryV2,
+.fiberInfoPanelV2,
+.fiberContactV2,
+.fiberComparisonSection,
+.fiberFaqItem {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.028)),
+    rgba(4, 16, 12, .82) !important;
+  border-color:rgba(255,255,255,.13) !important;
+  color:#f5fff8 !important;
+  box-shadow:0 24px 64px rgba(0,0,0,.34) !important;
+}
+
+.fiberSummaryV2 {
+  border-top:1px solid rgba(255,255,255,.13) !important;
+  outline:1px solid rgba(0, 216, 115, .22) !important;
+}
+
+.fiberMoneyInput div,
+.fiberPlan,
+.fiberToggle,
+.fiberSelectedPlanPanel,
+.fiberSummaryPair div,
+.fiberMonthlyCompare div,
+.fiberFiveMonths,
+.fiberFiveCompare div,
+.fiberMonthStrip div,
+.fiberRewardLine,
+.fiberImageCard,
+.fiberLinkList a,
+.fiberFeatureCard,
+.fiberChipGrid span {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.045)),
+    rgba(8, 22, 17, .88) !important;
+  border-color:rgba(255,255,255,.14) !important;
+  color:#f7fff9 !important;
+}
+
+.fiberPlanGrid {
+  background:rgba(0,0,0,.18) !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+
+.fiberPlan:hover,
+.fiberPlan.active,
+.fiberToggle:hover,
+.fiberToggle.active {
+  background:
+    linear-gradient(145deg, rgba(0, 216, 115, .23), rgba(255,255,255,.055)),
+    rgba(5, 24, 16, .95) !important;
+  border-color:var(--fiber-accent2) !important;
+}
+
+.fiberSelectedPlanPanel {
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+.fiberMoneyInput b,
+.fiberMoneyInput input,
+.fiberPlan strong,
+.fiberPlan b,
+.fiberToggle strong,
+.fiberSelectedPlanPanel strong,
+.fiberSummaryPair strong,
+.fiberMonthlyCompare strong,
+.fiberFiveCompare strong,
+.fiberMonthStrip strong {
+  color:#f8fff9 !important;
+}
+
+.fiberPlan em,
+.fiberToggle b,
+.fiberGood,
+.fiberFiveHeader strong,
+.fiberRewardLine strong,
+.fiberMonthStrip strong {
+  color:var(--fiber-accent2) !important;
+}
+
+.fiberMoneyInput span,
+.fiberPlan > small,
+.fiberPlan p,
+.fiberToggle p,
+.fiberSelectedPlanPanel p,
+.fiberSummaryPair span,
+.fiberMonthlyCompare span,
+.fiberFiveHeader span,
+.fiberFiveCompare span,
+.fiberRewardLine span,
+.fiberMonthStrip span,
+.fiberDisclaimer,
+.fiberSectionHeadV2 > p:not(.fiberEyebrow),
+.fiberInfoPanelV2 > p,
+.fiberContactV2 p:not(.fiberEyebrow):not(.fiberContactFine),
+.fiberImageCard p,
+.fiberLinkList span {
+  color:#b9c9c0 !important;
+}
+
+.fiberSummaryPill,
+.fiberSummaryV2 .fiberSummaryPill,
+.fiberPlan span {
+  background:rgba(0, 216, 115, .12) !important;
+  border-color:rgba(0, 216, 115, .28) !important;
+  color:var(--fiber-accent2) !important;
+}
+
+.fiberPromoNote {
+  margin:10px 0 0;
+  color:#b9c9c0;
+  font-size:13px;
+  line-height:1.45;
+}
+
+/* Fiber quote cleanup: neutral base, provider-specific accent. */
+.fiberPageV2 {
+  --fiber-surface:#0d1412;
+  --fiber-surface2:#101a16;
+  --fiber-card:#121d19;
+  --fiber-line:rgba(237, 245, 239, .12);
+  --fiber-muted:#aebbb4;
+  --fiber-strong:#f4f7f2;
+}
+
+.fiberQuoteV2 .fiberPanelV2,
+.fiberQuoteV2 .fiberSummaryV2,
+.fiberInfoPanelV2,
+.fiberContactV2,
+.fiberComparisonSection,
+.fiberFaqItem {
+  background:linear-gradient(180deg, rgba(18,29,25,.96), rgba(10,17,14,.96)) !important;
+  border-color:var(--fiber-line) !important;
+  box-shadow:0 18px 45px rgba(0,0,0,.26) !important;
+}
+
+.fiberQuoteV2 .fiberSummaryV2 {
+  outline:1px solid color-mix(in srgb, var(--fiber-provider) 32%, transparent) !important;
+}
+
+.fiberProviderSwitch {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4px;
+  padding:4px;
+  border:1px solid var(--fiber-line);
+  border-radius:999px;
+  background:rgba(0,0,0,.24);
+}
+
+.fiberProviderSwitch button {
+  min-height:42px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:var(--fiber-muted);
+  cursor:pointer;
+  font:inherit;
+  font-weight:950;
+}
+
+.fiberProviderSwitch button.active,
+.fiberProviderSwitch button:hover {
+  background:var(--fiber-provider);
+  color:white;
+}
+
+.fiberBillShortcuts {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:11px;
+}
+
+.fiberPresetGroup,
+.fiberStepGroup {
+  display:flex;
+  gap:6px;
+  padding:4px;
+  border:1px solid var(--fiber-line);
+  border-radius:999px;
+  background:rgba(0,0,0,.18);
+}
+
+.fiberPresetGroup {
+  flex:1;
+}
+
+.fiberPresetGroup button,
+.fiberStepGroup button {
+  min-height:34px;
+  min-width:44px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:var(--fiber-muted);
+  cursor:pointer;
+  font:inherit;
+  font-size:12px;
+  font-weight:950;
+}
+
+.fiberPresetGroup button {
+  flex:1;
+}
+
+.fiberPresetGroup button.active,
+.fiberPresetGroup button:hover,
+.fiberStepGroup button:hover {
+  background:rgba(255,255,255,.1);
+  color:var(--fiber-strong);
+}
+
+.fiberStepGroup button {
+  min-width:38px;
+  color:var(--fiber-strong);
+}
+
+.fiberQuoteV2 .fiberMoneyInput div,
+.fiberQuoteV2 .fiberPlan,
+.fiberQuoteV2 .fiberToggle,
+.fiberQuoteV2 .fiberSelectedPlanPanel,
+.fiberQuoteV2 .fiberSummaryPair div,
+.fiberQuoteV2 .fiberMonthlyCompare div,
+.fiberQuoteV2 .fiberFiveMonths,
+.fiberQuoteV2 .fiberFiveCompare div,
+.fiberQuoteV2 .fiberMonthStrip div,
+.fiberQuoteV2 .fiberRewardLine {
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02)), var(--fiber-card) !important;
+  border-color:var(--fiber-line) !important;
+}
+
+.fiberQuoteV2 .fiberPlanGrid {
+  background:transparent !important;
+  border-color:transparent !important;
+  padding:0 !important;
+}
+
+.fiberQuoteV2 .fiberPlan:hover,
+.fiberQuoteV2 .fiberPlan.active,
+.fiberQuoteV2 .fiberToggle:hover,
+.fiberQuoteV2 .fiberToggle.active {
+  background:linear-gradient(180deg, color-mix(in srgb, var(--fiber-provider) 18%, rgba(255,255,255,.04)), rgba(255,255,255,.025)), var(--fiber-card) !important;
+  border-color:color-mix(in srgb, var(--fiber-provider) 70%, white 10%) !important;
+}
+
+.fiberQuoteV2 .fiberSummaryPill,
+.fiberQuoteV2 .fiberPlan span,
+.fiberQuoteV2 .fiberSelectedPlanPanel span {
+  background:color-mix(in srgb, var(--fiber-provider) 16%, transparent) !important;
+  border-color:color-mix(in srgb, var(--fiber-provider) 34%, transparent) !important;
+  color:var(--fiber-strong) !important;
+}
+
+.fiberQuoteV2 .fiberPlan em,
+.fiberQuoteV2 .fiberToggle b,
+.fiberQuoteV2 .fiberGood,
+.fiberQuoteV2 .fiberFiveHeader strong,
+.fiberQuoteV2 .fiberRewardLine strong,
+.fiberQuoteV2 .fiberMonthStrip strong {
+  color:var(--fiber-strong) !important;
+}
+
+.fiberQuoteV2 .fiberBigSave {
+  background:linear-gradient(135deg, color-mix(in srgb, var(--fiber-provider) 88%, #111 12%), color-mix(in srgb, var(--fiber-provider) 58%, #07120f 42%)) !important;
+}
+
+.fiberBigSave {
+  background:linear-gradient(135deg, #007f43, #00a85d) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+}
+
+.fiberFiveCompare div:nth-child(2) {
+  background:linear-gradient(145deg, #061728, #03101d) !important;
+  border-color:rgba(0,216,115,.18) !important;
+}
+
+.fiberReset {
+  box-shadow:0 14px 34px rgba(0, 136, 72, .22) !important;
+}
+
+.siteHeader::before {
+  background:radial-gradient(ellipse at left, rgba(214,178,94,.10), transparent 68%) !important;
+  opacity:.45 !important;
+}
+
+@media (max-width:900px) {
+  .fiberHeroV2 {
+    grid-template-columns:minmax(0,1fr) 190px !important;
+  }
+  .fiberRepPanel img {
+    width:180px !important;
+  }
+}
+
+@media (max-width:700px) {
+  .fiberHeroV2 {
+    grid-template-columns:82px minmax(0,1fr) !important;
+  }
+  .fiberRepPanel img,
+  .fiberRepPanel .fiberPhotoPlaceholder {
+    width:82px !important;
+    height:82px !important;
+    min-height:0 !important;
+    aspect-ratio:1 !important;
+    object-fit:cover !important;
+    border-radius:999px !important;
+  }
+}
+

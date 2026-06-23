@@ -1,0 +1,1253 @@
+﻿/* Reader rescue pass + integrated library archive switch */
+.readerPageV2 {
+  width:min(1760px, calc(100vw - 32px));
+  max-width:none;
+  padding-top:14px;
+}
+
+.readerPageV2::before {
+  display:none;
+}
+
+.readerCommandBar {
+  position:sticky;
+  top:76px;
+  z-index:80;
+  display:grid !important;
+  grid-template-columns:auto minmax(220px,1fr) auto;
+  gap:14px;
+  align-items:center;
+  margin:0 0 12px;
+  padding:12px 14px;
+  border:1px solid rgba(214,178,94,.34);
+  border-radius:14px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025)),
+    rgba(12,13,12,.94);
+  box-shadow:0 18px 42px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+}
+
+.readerPageV2 .readerTitleBlock {
+  min-width:0;
+  text-align:left;
+}
+
+.readerPageV2 .readerTitleBlock h1 {
+  margin:0;
+  color:var(--text);
+  font-size:clamp(24px,3vw,42px);
+  line-height:1;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.readerPageV2 .readerTitleBlock span {
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:14px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.readerTopActions {
+  display:flex !important;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+button.readerToolBtn,
+.readerNavBtn,
+.readerBottomBar > button,
+.readerChapterList > button,
+.readerFocusExit,
+.libraryModeToggle button {
+  appearance:none;
+  -webkit-appearance:none;
+  font:inherit;
+}
+
+button.readerToolBtn {
+  display:inline-grid;
+  place-items:center;
+  min-height:40px;
+  border:1px solid rgba(214,178,94,.28);
+  border-radius:999px;
+  background:rgba(0,0,0,.36);
+  color:var(--text);
+  padding:8px 12px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:950;
+  line-height:1;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+button.readerToolBtn:hover,
+button.readerToolBtn.primaryTool {
+  border-color:var(--gold2);
+  background:var(--gold2);
+  color:white;
+}
+
+.readerProgressPanelV2 {
+  display:grid !important;
+  grid-template-columns:150px minmax(220px,1fr) repeat(3,auto);
+  gap:14px;
+  align-items:center;
+  margin:0 0 12px;
+  padding:12px 14px;
+  border:1px solid rgba(214,178,94,.24);
+  border-radius:14px;
+  background:rgba(9,10,9,.78);
+}
+
+.readerProgressPanelV2 strong {
+  display:inline;
+  color:var(--gold);
+}
+
+.readerProgressPanelV2 small,
+.readerProgressPanelV2 span {
+  color:var(--muted);
+  font-size:13px;
+  font-weight:850;
+  white-space:nowrap;
+}
+
+.readerWorkbenchV2 {
+  display:grid !important;
+  grid-template-columns:minmax(250px,300px) minmax(0,1fr) minmax(280px,330px);
+  gap:12px;
+  min-height:0;
+  align-items:start;
+}
+
+.readerWorkbenchV2.chaptersClosed {
+  grid-template-columns:minmax(0,1fr) minmax(280px,330px);
+}
+
+.readerWorkbenchV2.studyClosed {
+  grid-template-columns:minmax(250px,300px) minmax(0,1fr);
+}
+
+.readerWorkbenchV2.chaptersClosed.studyClosed,
+.readerFocusMode .readerWorkbenchV2 {
+  grid-template-columns:minmax(0,1fr);
+}
+
+.readerChapterRail,
+.readerStudyPanel,
+.readerStageV2 {
+  min-width:0;
+  border:1px solid rgba(214,178,94,.25);
+  border-radius:14px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+    rgba(13,14,13,.9);
+  box-shadow:0 14px 34px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+.readerChapterRail,
+.readerStudyPanel {
+  position:sticky;
+  top:158px;
+  max-height:calc(100vh - 174px);
+  overflow:auto;
+  padding:12px;
+}
+
+.readerChapterList {
+  display:grid !important;
+  gap:8px;
+  margin-top:10px;
+}
+
+.readerChapterList > button {
+  display:grid !important;
+  grid-template-columns:34px minmax(0,1fr);
+  gap:5px 9px;
+  width:100%;
+  min-height:58px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  background:rgba(0,0,0,.24);
+  color:var(--text);
+  padding:9px;
+  text-align:left;
+  cursor:pointer;
+}
+
+.readerChapterList > button.active {
+  border-color:var(--gold2);
+  background:linear-gradient(145deg, rgba(214,178,94,.22), rgba(255,255,255,.035));
+}
+
+.readerChapterList > button > span {
+  grid-row:1 / 3;
+  color:var(--gold);
+  font-size:14px;
+  font-weight:950;
+}
+
+.readerChapterList strong {
+  overflow:hidden;
+  color:var(--text);
+  font-size:13px;
+  line-height:1.2;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.readerChapterList small {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.readerStageV2 {
+  display:grid !important;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  gap:10px;
+  padding:12px;
+  min-height:calc(100vh - 226px);
+}
+
+.readerStageTop {
+  display:grid !important;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+}
+
+.readerStageTop > div {
+  min-width:0;
+  text-align:center;
+}
+
+.readerStageTop strong {
+  display:block;
+  overflow:hidden;
+  color:var(--text);
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.readerNavBtn,
+.readerBottomBar > button {
+  min-height:38px;
+  border:1px solid rgba(214,178,94,.28);
+  border-radius:999px;
+  background:rgba(0,0,0,.34);
+  color:var(--text);
+  padding:8px 13px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:950;
+}
+
+.readerNavBtn:not(:disabled):hover,
+.readerBottomBar > button:hover {
+  border-color:var(--gold2);
+  background:var(--gold2);
+  color:white;
+}
+
+.readerNavBtn:disabled {
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.readerFrameWrapV2 {
+  position:relative;
+  height:calc(100vh - 330px);
+  min-height:560px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  background:#101010;
+}
+
+.viewerV2 {
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+  border:0;
+  border-radius:14px;
+  background:#151515;
+}
+
+.readerBottomBar {
+  display:flex !important;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+}
+
+.readerStudyPanel {
+  display:grid !important;
+  align-content:start;
+  gap:10px;
+}
+
+.readerMetricGrid {
+  display:grid !important;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.readerMetricGrid div {
+  min-width:0;
+}
+
+.readerMetricGrid strong,
+.readerMetricGrid span {
+  display:block;
+}
+
+.readerStudyCard textarea {
+  width:100%;
+}
+
+.readerFocusMode .readerCommandBar,
+.readerFocusMode .readerProgressPanelV2,
+.readerFocusMode .readerChapterRail,
+.readerFocusMode .readerStudyPanel,
+.readerWorkbenchV2.chaptersClosed .readerChapterRail,
+.readerWorkbenchV2.studyClosed .readerStudyPanel {
+  display:none !important;
+}
+
+.readerFocusMode .readerPageV2,
+.readerFocusMode {
+  width:min(1280px, calc(100vw - 28px));
+}
+
+.readerFocusMode .readerStageV2 {
+  min-height:calc(100vh - 32px);
+}
+
+.readerFocusMode .readerFrameWrapV2 {
+  height:calc(100vh - 138px);
+}
+
+.libraryModeToggle {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  align-content:end;
+  min-width:180px;
+}
+
+.libraryModeToggle span {
+  grid-column:1 / -1;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.libraryModeToggle button {
+  min-height:44px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#111;
+  color:var(--text);
+  cursor:pointer;
+  font-weight:950;
+}
+
+.libraryModeToggle button.active,
+.libraryModeToggle button:hover {
+  border-color:var(--gold2);
+  background:var(--gold2);
+  color:white;
+}
+
+.libraryPage.archiveMode .libraryHero .pageTagline {
+  max-width:840px;
+}
+
+@media (max-width:1180px) {
+  .readerCommandBar,
+  .readerProgressPanelV2,
+  .readerWorkbenchV2,
+  .readerWorkbenchV2.chaptersClosed,
+  .readerWorkbenchV2.studyClosed,
+  .readerWorkbenchV2.chaptersClosed.studyClosed {
+    grid-template-columns:1fr;
+  }
+
+  .readerChapterRail,
+  .readerStudyPanel {
+    position:relative;
+    top:0;
+    max-height:none;
+  }
+
+  .readerFrameWrapV2 {
+    height:72vh;
+  }
+}
+
+@media (max-width:720px) {
+  .readerPageV2 {
+    width:calc(100vw - 20px);
+    padding-top:10px;
+  }
+
+  .readerCommandBar {
+    top:8px;
+  }
+
+  .readerTopActions,
+  .readerBottomBar {
+    justify-content:flex-start;
+  }
+
+  .readerProgressPanelV2,
+  .readerStageTop {
+    grid-template-columns:1fr;
+  }
+
+  .readerFrameWrapV2 {
+    min-height:480px;
+  }
+
+  .libraryModeToggle {
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media (max-width:640px) {
+  .fiberBillShortcuts {
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .fiberPresetGroup,
+  .fiberStepGroup {
+    width:100%;
+  }
+}
+
+/* Fiber full-page brand refresh */
+.fiberPageV2 {
+  --fiber-red:#d9272e;
+  --fiber-page-bg:#090a0c;
+  --fiber-page-ink:#f6f4ef;
+  --fiber-soft:#b9c0ba;
+  background:
+    linear-gradient(115deg, color-mix(in srgb, var(--fiber-provider) 15%, transparent), transparent 28%),
+    linear-gradient(245deg, rgba(255,255,255,.035), transparent 32%),
+    linear-gradient(180deg, #101115 0%, #0b0c10 45%, #08090b 100%) !important;
+  color:var(--fiber-page-ink) !important;
+  font-family:var(--fiber-font) !important;
+}
+
+.fiberPageV2::before {
+  background:
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--fiber-provider) 42%, transparent), rgba(255,255,255,.12), transparent) !important;
+  opacity:.28 !important;
+}
+
+.fiberHeroV2 {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.018)),
+    linear-gradient(90deg, color-mix(in srgb, var(--fiber-provider) 7%, transparent), rgba(255,255,255,.025)),
+    rgba(12,13,17,.94) !important;
+  border-color:rgba(255,255,255,.13) !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.3) !important;
+}
+
+.fiberHeroV2 h1,
+.fiberSectionHeadV2 h2,
+.fiberInfoPanelV2 h2,
+.fiberFaqSection h2 {
+  letter-spacing:0 !important;
+}
+
+.fiberEyebrow,
+.fiberPanelTitle span,
+.fiberPageNav a:hover {
+  color:var(--fiber-provider) !important;
+}
+
+.fiberJjuNote {
+  color:#d9dfda !important;
+}
+
+.fiberPageNav {
+  border-color:rgba(255,255,255,.12) !important;
+  background:rgba(7,9,11,.72) !important;
+  box-shadow:0 18px 44px rgba(0,0,0,.22) !important;
+}
+
+.fiberPageNav a {
+  color:#e9eee9 !important;
+}
+
+.fiberBtn.primary,
+.fiberMobileCta a:first-child {
+  background:var(--fiber-provider) !important;
+  border-color:var(--fiber-provider) !important;
+}
+
+.fiberBtn.secondary,
+.fiberMobileCta a:not(:first-child) {
+  background:rgba(255,255,255,.06) !important;
+  border-color:rgba(255,255,255,.14) !important;
+  color:var(--fiber-page-ink) !important;
+}
+
+.fiberQuoteSection,
+.fiberContentGridV2,
+.fiberFaqSection {
+  background:transparent !important;
+}
+
+.fiberPanelV2,
+.fiberSummaryV2,
+.fiberInfoPanelV2,
+.fiberContactV2,
+.fiberComparisonSection,
+.fiberFaqItem {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.018)),
+    rgba(15,16,20,.94) !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+
+.fiberProviderSwitch {
+  background:rgba(255,255,255,.055) !important;
+}
+
+.fiberProviderSwitch button:first-child.active {
+  background:var(--fiber-red) !important;
+}
+
+.fiberProviderSwitch button:last-child.active {
+  background:var(--fiber-provider) !important;
+}
+
+.fiberPanelTitle span,
+.fiberQuoteV2 .fiberPanelV2 .fiberPanelTitle span {
+  background:var(--fiber-provider) !important;
+  border-color:transparent !important;
+  color:white !important;
+}
+
+.fiberMoneyInput div {
+  background:rgba(8,9,12,.78) !important;
+}
+
+.fiberBillShortcuts {
+  align-items:stretch;
+}
+
+.fiberPresetGroup,
+.fiberStepGroup {
+  background:rgba(255,255,255,.055) !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+
+.fiberStepGroup {
+  align-items:center;
+  display:grid;
+  grid-template-columns:34px auto 34px;
+  gap:6px;
+  padding-inline:4px;
+}
+
+.fiberStepGroup strong {
+  color:var(--fiber-page-ink);
+  font-size:12px;
+}
+
+.fiberStepGroup button {
+  display:grid;
+  place-items:center;
+  min-width:34px;
+  width:34px;
+  height:34px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.08);
+  color:var(--fiber-page-ink);
+  font-size:18px;
+  line-height:1;
+}
+
+.fiberPresetGroup button.active,
+.fiberPresetGroup button:hover,
+.fiberStepGroup button:hover {
+  background:var(--fiber-provider) !important;
+  color:white !important;
+}
+
+.fiberQuoteV2 .fiberPlanGrid {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)) !important;
+  gap:10px !important;
+}
+
+.fiberQuoteV2 .fiberPlan {
+  min-height:138px !important;
+  align-content:space-between !important;
+}
+
+.fiberQuoteV2 .fiberPlan,
+.fiberQuoteV2 .fiberToggle,
+.fiberQuoteV2 .fiberSelectedPlanPanel,
+.fiberQuoteV2 .fiberSummaryPair div,
+.fiberQuoteV2 .fiberMonthlyCompare div,
+.fiberQuoteV2 .fiberFiveMonths,
+.fiberQuoteV2 .fiberFiveCompare div,
+.fiberQuoteV2 .fiberMonthStrip div,
+.fiberQuoteV2 .fiberRewardLine,
+.fiberLinkList a,
+.fiberFeatureCard,
+.fiberChipGrid span {
+  background:rgba(255,255,255,.05) !important;
+  border-color:rgba(255,255,255,.11) !important;
+}
+
+.fiberQuoteV2 .fiberPlan.active,
+.fiberQuoteV2 .fiberToggle.active {
+  border-color:var(--fiber-provider) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 1px color-mix(in srgb, var(--fiber-provider) 32%, transparent) !important;
+}
+
+.fiberBigSave {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--fiber-provider) 82%, #111 18%), #121519) !important;
+}
+
+.fiberQuoteV2 .fiberFiveCompare div:nth-child(2) {
+  background:rgba(255,255,255,.07) !important;
+  border-color:color-mix(in srgb, var(--fiber-provider) 30%, rgba(255,255,255,.08)) !important;
+}
+
+.fiberContactFine,
+.fiberDisclaimer,
+.fiberInfoPanelV2 > p,
+.fiberFaqItem p,
+.fiberSelectedPlanPanel p,
+.fiberToggle p,
+.fiberPlan > small {
+  color:var(--fiber-soft) !important;
+}
+
+@media (min-width:1180px) {
+  .fiberQuoteV2 .fiberPlanGrid {
+    grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)) !important;
+  }
+}
+
+@media (max-width:760px) {
+  .fiberStepGroup {
+    grid-template-columns:1fr 40px auto 40px;
+  }
+
+  .fiberQuoteV2 .fiberPlanGrid {
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Final provider-color cleanup: no inherited green wash on Frontier. */
+.fiberPageV2 {
+  --fiber-neutral-panel:#101115;
+  --fiber-neutral-panel2:#14161a;
+  --fiber-neutral-line:rgba(255,255,255,.12);
+  background:
+    linear-gradient(115deg, color-mix(in srgb, var(--fiber-provider) 13%, transparent), transparent 28%),
+    linear-gradient(245deg, rgba(255,255,255,.035), transparent 34%),
+    #090a0d !important;
+}
+
+.fiberPageV2::before,
+.fiberHeroV2::before {
+  background:
+    linear-gradient(115deg, color-mix(in srgb, var(--fiber-provider) 20%, transparent), transparent 52%),
+    linear-gradient(35deg, rgba(255,255,255,.045), transparent 46%) !important;
+  opacity:.34 !important;
+}
+
+.fiberHeroCopyV2,
+.fiberQuoteV2 .fiberPanelV2,
+.fiberQuoteV2 .fiberSummaryV2,
+.fiberInfoPanelV2,
+.fiberContactV2,
+.fiberComparisonSection,
+.fiberFaqItem {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)),
+    linear-gradient(180deg, var(--fiber-neutral-panel2), var(--fiber-neutral-panel)) !important;
+  border-color:var(--fiber-neutral-line) !important;
+}
+
+.fiberQuoteV2 .fiberMoneyInput div,
+.fiberQuoteV2 .fiberPlan,
+.fiberQuoteV2 .fiberToggle,
+.fiberQuoteV2 .fiberSelectedPlanPanel,
+.fiberQuoteV2 .fiberSummaryPair div,
+.fiberQuoteV2 .fiberMonthlyCompare div,
+.fiberQuoteV2 .fiberFiveMonths,
+.fiberQuoteV2 .fiberFiveCompare div,
+.fiberQuoteV2 .fiberMonthStrip div,
+.fiberQuoteV2 .fiberRewardLine,
+.fiberLinkList a,
+.fiberFeatureCard,
+.fiberChipGrid span {
+  background:rgba(255,255,255,.052) !important;
+  border-color:var(--fiber-neutral-line) !important;
+}
+
+.fiberQuoteV2 .fiberPlan.active,
+.fiberQuoteV2 .fiberToggle.active,
+.fiberPresetGroup button.active,
+.fiberProviderSwitch button.active {
+  background:color-mix(in srgb, var(--fiber-provider) 88%, #111 12%) !important;
+}
+
+.fiberQuoteV2 .fiberBigSave,
+.fiberBigSave {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--fiber-provider) 82%, #15171b 18%), #17191e) !important;
+}
+
+.fiberPageV2[data-fiber-provider] {
+  --gold:var(--fiber-provider);
+  --gold2:var(--fiber-provider);
+  --accent:var(--fiber-provider);
+}
+
+.fiberPageV2[data-fiber-provider="frontier"] .fiberHeroV2,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberHeroCopyV2,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberQuoteV2 .fiberPanelV2,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberQuoteV2 .fiberSummaryV2,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberInfoPanelV2,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberContactV2,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberComparisonSection,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberFaqItem {
+  background:
+    linear-gradient(145deg, rgba(217,39,46,.07), rgba(255,255,255,.018)),
+    linear-gradient(180deg, #14161a, #101115) !important;
+}
+
+.fiberPageV2[data-fiber-provider="frontier"] .fiberMoneyInput > span,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberQuoteV2 .fiberPlan span,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberQuoteV2 .fiberSelectedPlanPanel span,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberQuoteV2 .fiberPlan em,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberQuoteV2 .fiberToggle b,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberPromoNote,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberSummaryPair span,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberMonthlyCompare span {
+  color:#ff9aa0 !important;
+}
+
+.fiberPageV2[data-fiber-provider="frontier"] .fiberProviderSwitch button:not(.active),
+.fiberPageV2[data-fiber-provider="frontier"] .fiberPresetGroup button:not(.active),
+.fiberPageV2[data-fiber-provider="frontier"] .fiberStepGroup strong,
+.fiberPageV2[data-fiber-provider="frontier"] .fiberStepGroup button:not(:hover) {
+  color:#ffffff !important;
+  text-shadow:none !important;
+}
+
+.fiberPageV2[data-fiber-provider="kinetic"] .fiberProviderSwitch button.active {
+  background:#1aa260 !important;
+}
+
+body:has(.fiberPageV2[data-fiber-provider="frontier"]) {
+  background:#090a0d !important;
+}
+
+body:has(.fiberPageV2[data-fiber-provider="kinetic"]) {
+  background:#08100c !important;
+}
+
+/* Stable segmented controls and small mobile overflow guardrails. */
+.fiberProviderSwitch,
+.libraryModeToggle {
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+}
+
+.fiberProviderSwitch,
+.libraryModeToggle {
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr) !important;
+}
+
+.fiberProviderSwitch button,
+.libraryModeToggle button {
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-width:0;
+  height:44px;
+  min-height:44px;
+  padding:0 12px;
+  overflow:hidden;
+  line-height:1;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.fiberProviderSwitch button {
+  height:42px;
+  min-height:42px;
+}
+
+.fiberQuoteV2 .fiberPlan,
+.fiberQuoteV2 .fiberPlan * {
+  min-width:0;
+}
+
+.fiberQuoteV2 .fiberPlan b {
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  line-height:1;
+  text-overflow:clip;
+  white-space:nowrap;
+}
+
+.fiberToggle strong small {
+  display:inline;
+  margin-left:7px;
+  color:rgba(246,244,239,.72);
+  font-size:12px;
+  font-weight:850;
+  letter-spacing:0;
+  text-transform:none;
+  white-space:nowrap;
+}
+
+@media (max-width:760px) {
+  .fiberQuoteV2 .fiberPlan {
+    padding-inline:10px !important;
+  }
+
+  .fiberQuoteV2 .fiberPlan b {
+    font-size:clamp(25px, 7.8vw, 32px) !important;
+  }
+
+  .fiberQuoteV2 .fiberPlan b small {
+    font-size:.4em !important;
+  }
+}
+
+@media (max-width:700px) {
+  .fiberPageV2 {
+    overflow-x:hidden !important;
+  }
+
+  .fiberHeroV2,
+  .fiberQuoteGrid,
+  .fiberQuoteControls,
+  .fiberPanelV2,
+  .fiberSummaryV2 {
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+
+  .fiberHeroV2 {
+    grid-template-columns:76px minmax(0, 1fr) !important;
+    overflow:hidden !important;
+  }
+
+  .fiberHeroCopyV2,
+  .fiberHeroCopyV2 p {
+    min-width:0 !important;
+    width:100% !important;
+    max-width:calc(100vw - 146px) !important;
+  }
+
+  .fiberHeroCopyV2 p:not(.fiberEyebrow) {
+    display:block !important;
+    white-space:normal !important;
+    overflow-wrap:break-word !important;
+    word-break:normal !important;
+  }
+
+  .fiberHeroCopyV2 .fiberJjuNote,
+  .fiberHeroCopyV2 p:not(.fiberEyebrow) {
+    font-size:14px !important;
+    line-height:1.35 !important;
+  }
+
+  .fiberQuoteGrid,
+  .fiberQuoteControls {
+    display:grid !important;
+    grid-template-columns:minmax(0, 1fr) !important;
+    gap:10px !important;
+  }
+
+  .fiberQuoteV2 .fiberPlanGrid {
+    overflow:visible !important;
+  }
+
+  .fiberQuoteV2 .fiberPlan {
+    width:100% !important;
+    max-width:none !important;
+  }
+
+  .fiberBillShortcuts {
+    display:grid !important;
+    grid-template-columns:minmax(0, 1fr) !important;
+    align-items:center !important;
+  }
+
+  .fiberPresetGroup {
+    width:100% !important;
+  }
+
+  .fiberStepGroup {
+    width:auto !important;
+    min-width:126px !important;
+    grid-template-columns:36px auto 36px !important;
+    justify-self:start !important;
+    flex:0 0 auto !important;
+  }
+
+  .fiberStepGroup button {
+    width:36px !important;
+    min-width:36px !important;
+  }
+}
+
+/* Fiber interest form: local-only, sends a formatted SMS. */
+.fiberContactV2 {
+  grid-template-columns:1fr !important;
+}
+
+.fiberContactIntro {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:18px;
+  align-items:start;
+}
+
+.fiberContactIntro h2 {
+  margin:0;
+  color:white;
+  font-size:clamp(30px, 4vw, 48px);
+  letter-spacing:0;
+}
+
+.fiberLeadGrid {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(280px, 380px);
+  gap:14px;
+  align-items:start;
+  margin-top:18px;
+}
+
+.fiberLeadForm,
+.fiberRecommendationPanel {
+  min-width:0;
+  border:1px solid var(--fiber-neutral-line, rgba(255,255,255,.12));
+  border-radius:8px;
+  background:rgba(255,255,255,.052);
+}
+
+.fiberLeadForm {
+  display:grid;
+  gap:14px;
+  padding:14px;
+}
+
+.fiberLeadFieldGrid {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:10px;
+}
+
+.fiberLeadForm label,
+.fiberQuestionBox {
+  display:grid;
+  gap:7px;
+  min-width:0;
+}
+
+.fiberLeadForm label span,
+.fiberUsePicker legend,
+.fiberRecommendationPanel > span {
+  color:color-mix(in srgb, var(--fiber-provider) 48%, #f6f4ef 52%);
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+.fiberLeadForm input,
+.fiberLeadForm select,
+.fiberLeadForm textarea {
+  width:100%;
+  min-width:0;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:8px;
+  background:rgba(0,0,0,.32);
+  color:#fff;
+  font:inherit;
+  font-size:15px;
+  outline:none;
+}
+
+.fiberLeadForm input,
+.fiberLeadForm select {
+  min-height:44px;
+  padding:10px 11px;
+}
+
+.fiberLeadForm textarea {
+  resize:vertical;
+  min-height:98px;
+  padding:11px;
+}
+
+.fiberLeadForm input:focus,
+.fiberLeadForm select:focus,
+.fiberLeadForm textarea:focus {
+  border-color:var(--fiber-provider);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--fiber-provider) 18%, transparent);
+}
+
+.fiberUsePicker {
+  display:grid;
+  gap:9px;
+  min-width:0;
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+.fiberUsePicker div {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.fiberUsePicker button {
+  min-height:38px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:999px;
+  background:rgba(255,255,255,.055);
+  color:#f6f4ef;
+  padding:8px 12px;
+  cursor:pointer;
+  font:inherit;
+  font-size:13px;
+  font-weight:900;
+}
+
+.fiberUsePicker button.active,
+.fiberUsePicker button:hover {
+  border-color:var(--fiber-provider);
+  background:color-mix(in srgb, var(--fiber-provider) 86%, #15171b 14%);
+  color:white;
+}
+
+.fiberRecommendationPanel {
+  display:grid;
+  gap:12px;
+  padding:16px;
+  position:sticky;
+  top:120px;
+}
+
+.fiberRecommendationPanel strong {
+  color:white;
+  font-size:clamp(26px, 3vw, 36px);
+  line-height:1;
+}
+
+.fiberRecommendationPanel p {
+  margin:0;
+  color:var(--fiber-soft, #b9c0ba) !important;
+  font-size:15px !important;
+  line-height:1.45;
+}
+
+.fiberRecommendationPanel b {
+  display:grid;
+  gap:3px;
+  color:white;
+  font-size:30px;
+  line-height:1;
+}
+
+.fiberRecommendationPanel small {
+  color:var(--fiber-soft, #b9c0ba);
+  font-size:12px;
+  font-weight:800;
+}
+
+.fiberRecommendationPanel button {
+  min-height:38px;
+  width:100%;
+  border:1px solid color-mix(in srgb, var(--fiber-provider) 44%, rgba(255,255,255,.14));
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  color:white;
+  cursor:pointer;
+  font:inherit;
+  font-size:13px;
+  font-weight:950;
+}
+
+.fiberRecommendationPanel .fiberBtn {
+  justify-content:center;
+  width:100%;
+}
+
+@media (max-width:900px) {
+  .fiberContactIntro,
+  .fiberLeadGrid {
+    grid-template-columns:1fr;
+  }
+
+  .fiberRecommendationPanel {
+    position:relative;
+    top:auto;
+  }
+}
+
+@media (max-width:700px) {
+  .fiberContactV2 .fiberContactActions {
+    display:flex !important;
+  }
+
+  .fiberLeadFieldGrid {
+    grid-template-columns:1fr;
+  }
+}
+
+/* Admin book creation flow */
+.addBookPanel {
+  display:grid;
+  gap:18px;
+}
+
+.newBookLaunch {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:20px;
+  border:1px solid rgba(231, 197, 111, .35);
+  border-radius:8px;
+  background:linear-gradient(135deg, rgba(231, 197, 111, .16), rgba(92, 184, 171, .12));
+}
+
+.newBookLaunch h3,
+.addBookOptionalHeader h3 {
+  margin:0;
+  color:var(--text);
+  font-size:20px;
+}
+
+.newBookLaunch p,
+.addBookOptionalHeader span {
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+}
+
+.newBookButton {
+  min-width:172px;
+  min-height:58px;
+  border:0;
+  border-radius:8px;
+  background:var(--gold);
+  color:#17120a;
+  cursor:pointer;
+  font-size:18px;
+  font-weight:950;
+  letter-spacing:0;
+  box-shadow:0 16px 35px rgba(0, 0, 0, .24);
+}
+
+.newBookButton:hover:not(:disabled),
+.newBookButton:focus-visible:not(:disabled) {
+  transform:translateY(-1px);
+  filter:brightness(1.04);
+}
+
+.newBookButton:disabled {
+  cursor:not-allowed;
+  opacity:.62;
+}
+
+.addBookForm {
+  display:grid;
+  gap:16px;
+  padding-top:4px;
+}
+
+.addBookOptionalHeader {
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  padding-top:6px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+
+.addBookGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:12px;
+}
+
+.addBookForm label {
+  display:grid;
+  gap:7px;
+  min-width:0;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.addBookForm textarea {
+  min-height:112px;
+  resize:vertical;
+}
+
+.addBookDraftText {
+  min-height:320px !important;
+  color:var(--text);
+  line-height:1.55;
+}
+
+.addBookPanel .adminHelpText {
+  max-width:760px;
+}
+
+@media (max-width:720px) {
+  .newBookLaunch,
+  .addBookOptionalHeader {
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .newBookButton {
+    width:100%;
+  }
+
+  .addBookDraftText {
+    min-height:240px !important;
+  }
+}
+

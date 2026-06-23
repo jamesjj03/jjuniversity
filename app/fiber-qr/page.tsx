@@ -2,6 +2,7 @@
 
 import { DragEvent, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type CardMode = "clean" | "dark" | "library";
 
@@ -46,7 +47,7 @@ export default function FiberQrPage() {
   const card = (
     <section className={`fiberQrCard fiberQrCard-${mode}`} aria-label="Fiber QR code card">
       <div className="fiberQrTopMark">
-        <img src="/branding/jju-logo.png" alt="JJ University" />
+        <Image src="/branding/jju-logo.png" alt="JJ University" width={56} height={56} />
         <span>JJ University</span>
       </div>
 
@@ -57,7 +58,7 @@ export default function FiberQrPage() {
 
       <div className="fiberQrBox">
         {qrSrc ? (
-          <img src={qrSrc} alt="Fiber QR code" />
+          <Image src={qrSrc} alt="Fiber QR code" width={480} height={480} unoptimized />
         ) : (
           <div className="fiberQrEmpty">
             <span>Drop QR here</span>
@@ -74,7 +75,7 @@ export default function FiberQrPage() {
     <main className="fiberQrPage fiberQrPrivatePage">
       <section className="fiberQrPrivateShell">
         <div className="fiberQrPrivateHeader">
-          <img src="/branding/jju-logo.png" alt="JJ University" />
+          <Image src="/branding/jju-logo.png" alt="JJ University" width={56} height={56} />
           <div>
             <p>Private fiber tool</p>
             <h1>QR display</h1>

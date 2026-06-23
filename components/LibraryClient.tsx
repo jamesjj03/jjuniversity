@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { SyntheticEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PRIMARY_CATEGORIES, TAG_TO_PRIMARY } from "@/lib/taxonomy";
-import { coverFallbackSrc, coverWebpSrc, handleCoverError } from "@/lib/cover";
-import { applyCoverPalette } from "@/lib/coverPalette";
+import { coverFallbackSrc, coverWebpSrc } from "@/lib/cover";
+import CoverImage from "@/components/CoverImage";
 
 type Book = {
   id: string;
@@ -97,14 +97,6 @@ function coverFor(book: Book) {
 
 function legacyCoverFor(book: Book) {
   return coverFallbackSrc(book);
-}
-
-function coverFallback(event: SyntheticEvent<HTMLImageElement>) {
-  handleCoverError(event.currentTarget);
-}
-
-function coverLoaded(event: SyntheticEvent<HTMLImageElement>) {
-  applyCoverPalette(event.currentTarget);
 }
 
 type LibrarySessionState = {
@@ -218,7 +210,7 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
 
   useEffect(() => {
     Promise.all([
-      fetch("/books.json").then(r => r.json()),
+      fetch("/api/books").then(r => r.json()),
       fetch("/featured.json").then(r => r.json()).catch(() => []),
       fetch("/newest.json").then(r => r.json()).catch(() => []),
       fetch("/site.json").then(r => r.json()).catch(() => ({})),
@@ -501,7 +493,7 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
           <div className="railScroller compactRecentRail">
             {recentBooks.map(book => (
               <Link className="railBook recentRailBook" href={`/reader?book=${book.id}`} key={book.id} onClick={saveLibraryPosition}>
-                <img src={coverFor(book)} data-fallback-src={legacyCoverFor(book)} alt="" loading="lazy" decoding="async" onError={coverFallback} onLoad={coverLoaded} />
+                <CoverImage src={coverFor(book)} fallbackSrc={legacyCoverFor(book)} alt="" loading="lazy" decoding="async" palette />
                 <span>{book.title || titleCaseId(book.id)}</span>
               </Link>
             ))}
@@ -534,7 +526,7 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
           return (
             <article className={`bookCard upgradedBook ${unavailable ? "unavailable" : ""} ${openedIds.has(book.id) ? "openedBook" : ""} ${completed ? "completedBook" : ""}`} key={book.id}>
               <Link href={unavailable ? "#" : `/reader?book=${book.id}`} onClick={saveLibraryPosition}>
-                <img className="cover" src={coverFor(book)} data-fallback-src={legacyCoverFor(book)} alt={book.title || book.id} loading="lazy" decoding="async" onError={coverFallback} onLoad={coverLoaded} />
+                <CoverImage className="cover" src={coverFor(book)} fallbackSrc={legacyCoverFor(book)} alt={book.title || book.id} loading="lazy" decoding="async" palette />
                 <div className="bookInfo">
                   {completed && <span className="readRibbon">Read</span>}
                   {openedIds.has(book.id) && <span className="openedBookBadge">Opened</span>}

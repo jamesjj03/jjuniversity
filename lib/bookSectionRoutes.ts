@@ -1,5 +1,5 @@
 import { readBookContent, type BookContentSection } from "@/lib/bookContent";
-import { bookUrl, getPublicBooks, slugify, type PublishedBook } from "@/lib/publishing";
+import { bookUrl, getPublicBooksLive, slugify, type PublishedBook } from "@/lib/publishing";
 
 const SKIPPED_SECTION_KINDS = new Set(["toc", "title", "dedication", "copyright", "about-author", "acknowledgments"]);
 const MIN_CRAWLABLE_WORDS = 80;
@@ -42,7 +42,7 @@ export async function getBookSectionRoutes(book: PublishedBook): Promise<Crawlab
 }
 
 export async function getAllBookSectionRoutes() {
-  const nested = await Promise.all(getPublicBooks().map(book => getBookSectionRoutes(book)));
+  const nested = await Promise.all((await getPublicBooksLive()).map(book => getBookSectionRoutes(book)));
   return nested.flat();
 }
 

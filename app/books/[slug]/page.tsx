@@ -1,14 +1,15 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
   bookUrl,
   coverUrl,
-  getBookBySlug,
+  getBookBySlugLive,
   getBookSample,
-  getPublicBooks,
+  getPublicBooksLive,
   getPrintProductsForBook,
-  getRelatedBooks,
+  getRelatedBooksLive,
   metadataDescription,
   slugify,
 } from "@/lib/publishing";
@@ -19,13 +20,13 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return getPublicBooks().map(book => ({ slug: book.slug }));
+export async function generateStaticParams() {
+  return (await getPublicBooksLive()).map(book => ({ slug: book.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const book = getBookBySlug(slug);
+  const book = await getBookBySlugLive(slug);
   if (!book) return {};
   const description = metadataDescription(book.description, `Read ${book.title} free online at JJ University.`);
 
@@ -41,12 +42,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BookPage({ params }: Props) {
   const { slug } = await params;
-  const book = getBookBySlug(slug);
+  const book = await getBookBySlugLive(slug);
   if (!book) notFound();
 
   const sample = await getBookSample(book);
   const sectionRoutes = await getBookSectionRoutes(book);
-  const related = getRelatedBooks(book, 6);
+  const related = await getRelatedBooksLive(book, 6);
   const printProducts = getPrintProductsForBook(book.id);
   const bookPath = bookUrl(book);
   const jsonLdItems = [
@@ -67,7 +68,7 @@ export default async function BookPage({ params }: Props) {
 
       <section className="publishingHero bookHero">
         <div className="bookHeroCover">
-          <img src={coverUrl(book)} alt={`${book.title} cover`} />
+          <Image src={coverUrl(book)} alt={`${book.title} cover`} width={480} height={720} sizes="(max-width: 720px) 70vw, 34vw" />
         </div>
 
         <div className="bookHeroCopy">
@@ -135,7 +136,7 @@ export default async function BookPage({ params }: Props) {
           <div className="publishingBookRail">
             {related.map(item => (
               <Link href={bookUrl(item)} key={item.id}>
-                <img src={coverUrl(item)} alt="" loading="lazy" />
+                <Image src={coverUrl(item)} alt="" width={180} height={270} sizes="(max-width: 720px) 38vw, 180px" />
                 <strong>{item.title}</strong>
                 <span>{item.primaryCategory}</span>
               </Link>

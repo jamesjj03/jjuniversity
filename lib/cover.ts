@@ -16,6 +16,13 @@ function stem(value: string) {
   return fileName(value).replace(/\.[^.]+$/, "");
 }
 
+function supabaseCoverUrl(file: string) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const bucket = process.env.NEXT_PUBLIC_SUPABASE_COVER_BUCKET || "covers";
+  if (!supabaseUrl) return "";
+  return `${supabaseUrl.replace(/\/$/, "")}/storage/v1/object/public/${encodeURIComponent(bucket)}/${encodeURIComponent(file)}`;
+}
+
 function sourceName(book: CoverSource | undefined, fallbackId = "") {
   return String(book?.coverFile || book?.cover || book?.id || fallbackId || "file").trim();
 }
@@ -23,7 +30,8 @@ function sourceName(book: CoverSource | undefined, fallbackId = "") {
 export function coverWebpSrc(book: CoverSource | undefined, fallbackId = "") {
   const source = sourceName(book, fallbackId);
   if (isExternalCover(source)) return source;
-  return `/covers-webp/${encodeURIComponent(stem(source))}.webp`;
+  const webpFile = `${stem(source)}.webp`;
+  return supabaseCoverUrl(webpFile) || `/covers-webp/${encodeURIComponent(webpFile)}`;
 }
 
 export function coverFallbackSrc(book: CoverSource | undefined, fallbackId = "") {

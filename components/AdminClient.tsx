@@ -1,9 +1,10 @@
 "use client";
 
-import { FormEvent, SyntheticEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { PRIMARY_CATEGORIES, TAG_TO_PRIMARY } from "@/lib/taxonomy";
 import AdminReaderEditor from "@/components/AdminReaderEditor";
-import { coverFallbackSrc, coverWebpSrc, handleCoverError } from "@/lib/cover";
+import { coverFallbackSrc, coverWebpSrc } from "@/lib/cover";
+import CoverImage from "@/components/CoverImage";
 import FiberAdminEditor from "@/components/FiberAdminEditor";
 import { DEFAULT_FIBER_CONFIG, FiberConfig, normalizeFiberConfig } from "@/lib/fiberConfig";
 import AtlasClient from "@/components/AtlasClient";
@@ -238,10 +239,6 @@ function legacyCoverFor(book: Partial<Book> | undefined, fallbackId = "") {
   return coverFallbackSrc(book, fallbackId);
 }
 
-function coverFallback(event: SyntheticEvent<HTMLImageElement>) {
-  handleCoverError(event.currentTarget);
-}
-
 export default function AdminClient() {
   const [books, setBooks] = useState<Book[]>([]);
   const [pathsFile, setPathsFile] = useState<PathsFile>({ generated: "", series: [], paths: [] });
@@ -268,7 +265,7 @@ export default function AdminClient() {
   const [fiberDirty, setFiberDirty] = useState(false);
 
   useEffect(() => {
-    fetch("/books.json")
+    fetch("/api/admin/books")
       .then(response => response.json())
       .then(data => {
         const arr = Array.isArray(data) ? data : data.books || [];
@@ -276,7 +273,7 @@ export default function AdminClient() {
         setBooks(normalized);
         setSelectedId(normalized[0]?.id || "");
       })
-      .catch(() => setMessage("Could not load books.json."));
+      .catch(() => setMessage("Could not load library metadata."));
 
     fetch("/api/admin/paths")
       .then(response => response.json())
@@ -972,7 +969,7 @@ export default function AdminClient() {
                   return (
                     <div className="pathBookRow" key={`${selectedPath.id}-${pathBook.id}-${index}`}>
                       <span>{index + 1}</span>
-                      <img src={coverFor(book, pathBook.id)} data-fallback-src={legacyCoverFor(book, pathBook.id)} alt="" onError={coverFallback} />
+                      <CoverImage src={coverFor(book, pathBook.id)} fallbackSrc={legacyCoverFor(book, pathBook.id)} alt="" width={52} height={78} sizes="52px" />
                       <div>
                         <strong>{book?.title || pathBook.id}</strong>
                         <small>{book?.tags.slice(0, 4).join(" / ") || pathBook.id}</small>
@@ -1016,7 +1013,7 @@ export default function AdminClient() {
             <div className="bookPickerGrid">
               {pickerBooks.map(book => (
                 <button key={book.id} onClick={() => addPathBook(book.id)}>
-                  <img src={coverFor(book)} data-fallback-src={legacyCoverFor(book)} alt="" onError={coverFallback} />
+                  <CoverImage src={coverFor(book)} fallbackSrc={legacyCoverFor(book)} alt="" width={58} height={87} sizes="58px" />
                   <span>
                     <strong>{book.title}</strong>
                     <small>{book.tags.slice(0, 4).join(" / ") || book.id}</small>
@@ -1059,7 +1056,7 @@ export default function AdminClient() {
         <aside className="adminBookCards">
           {visible.map(book => (
             <button className={book.id === selected?.id ? "active adminBookCard" : "adminBookCard"} key={book.id} onClick={() => setSelectedId(book.id)}>
-              <img src={coverFor(book)} data-fallback-src={legacyCoverFor(book)} alt="" onError={coverFallback} />
+              <CoverImage src={coverFor(book)} fallbackSrc={legacyCoverFor(book)} alt="" width={58} height={87} sizes="58px" />
               <span>
                 <strong>{book.title}</strong>
                 <small>{book.visibility === "archive" ? `ARCHIVE / ${book.archiveCategory || book.category || "Uncategorized"}` : `MAIN / ${book.tags.slice(0, 3).join(" / ") || "No tags yet"}`}</small>
@@ -1072,7 +1069,7 @@ export default function AdminClient() {
           <div className="adminBookWorkspace">
           <section className="adminPanel editorPanel">
             <div className="editorTop">
-              <img src={coverFor(selected)} data-fallback-src={legacyCoverFor(selected)} alt={selected.title} onError={coverFallback} />
+              <CoverImage src={coverFor(selected)} fallbackSrc={legacyCoverFor(selected)} alt={selected.title} width={120} height={180} sizes="120px" />
               <div>
                 <p className="kicker">{selected.id}</p>
                 <h2>{selected.title}</h2>
