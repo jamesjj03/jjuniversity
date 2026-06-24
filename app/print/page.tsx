@@ -29,16 +29,28 @@ export default async function PrintIndexPage() {
       pageCount,
     };
   }));
+  const totalBooks = printShelves.reduce((sum, shelf) => sum + shelf.books.length, 0);
+  const totalPages = printShelves.reduce((sum, shelf) => sum + shelf.pageCount.pages, 0);
 
   return (
     <main className="page publishingPage printShelfPage">
       <section className="publishingHero printShelfHero">
-        <h1>Print</h1>
+        <div>
+          <p className="kicker">Print Bench</p>
+          <h1>Print</h1>
+          <p className="pageTagline">Physical editions, proof stacks, page counts, and the shelf before checkout goes live.</p>
+        </div>
+        <div className="printBenchStats" aria-label="Print bench status">
+          <span><strong>{printShelves.length}</strong> editions</span>
+          <span><strong>{totalBooks}</strong> books</span>
+          <span><strong>{totalPages.toLocaleString()}</strong> pages</span>
+        </div>
       </section>
 
       <section className="printCatalogGrid" aria-label="Print collections">
         {printShelves.map(({ product, books, components, pageCount }) => (
           <Link className="printCatalogCard" href={`/print/${product.slug}`} key={product.slug}>
+            <span className="printProofStamp" aria-hidden="true">Proof</span>
             <div className="printShelfCovers" aria-hidden="true">
               {books.slice(0, 6).map(book => (
                 <Image src={coverUrl(book)} alt="" width={150} height={225} sizes="90px" key={book.id} />

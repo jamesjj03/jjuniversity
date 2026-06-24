@@ -1,0 +1,525 @@
+/* JJU atmosphere system: material texture, room identity, and artifact cues. */
+:root {
+  --jju-atmo-ink:#070a0c;
+  --jju-atmo-paper:#ead9b6;
+  --jju-atmo-paper-strong:#f6ead0;
+  --jju-atmo-rule:color-mix(in srgb, var(--gold) 36%, var(--line));
+  --jju-atmo-blue:#6fa4d9;
+  --jju-atmo-green:#73c58f;
+  --jju-atmo-red:#c86560;
+  --jju-atmo-shadow:0 22px 58px rgba(0,0,0,.34);
+  --jju-atmo-tight-shadow:0 12px 28px rgba(0,0,0,.26);
+  --jju-atmo-noise:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.026) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.018) 0 1px, transparent 1px 9px);
+}
+
+html body {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.22), transparent 18%, transparent 82%, rgba(0,0,0,.22)),
+    repeating-linear-gradient(90deg, rgba(214,178,94,.026) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 58px),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 82%, #04080d), var(--bg) 44%, color-mix(in srgb, var(--bg) 74%, #020304)) !important;
+}
+
+html body::after {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 210px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 5px),
+    linear-gradient(90deg, rgba(111,164,217,.06), transparent 24%, transparent 72%, rgba(200,101,96,.055)) !important;
+  opacity:.78 !important;
+}
+
+html body .siteHeader {
+  border-bottom:1px solid color-mix(in srgb, var(--gold) 28%, transparent);
+  backdrop-filter:blur(16px) saturate(1.15);
+  box-shadow:0 18px 50px rgba(0,0,0,.28);
+}
+
+html body .brandWithMark {
+  position:relative;
+}
+
+html body .brandWithMark::after {
+  content:"catalog";
+  position:absolute;
+  left:64px;
+  bottom:-10px;
+  color:var(--gold);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  opacity:.58;
+}
+
+html body .page {
+  isolation:isolate;
+}
+
+html body .hero,
+html body .libraryHero,
+html body .publishingHero,
+html body .atlasExplorerHero,
+html body .recallLibraryTop {
+  position:relative;
+  overflow:hidden;
+}
+
+html body .hero::before,
+html body .libraryHero::before,
+html body .publishingHero::before,
+html body .atlasExplorerHero::before,
+html body .recallLibraryTop::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(115deg, transparent 0 28%, color-mix(in srgb, var(--gold) 18%, transparent) 28.1% 28.3%, transparent 28.45% 100%),
+    linear-gradient(0deg, rgba(255,255,255,.036), transparent 42%),
+    var(--jju-atmo-noise);
+  opacity:.48;
+  pointer-events:none;
+}
+
+html body .hero > *,
+html body .libraryHero > *,
+html body .publishingHero > *,
+html body .atlasExplorerHero > *,
+html body .recallLibraryTop > * {
+  position:relative;
+  z-index:1;
+}
+
+html body .homePage .hero {
+  min-height:min(780px, calc(100vh - 94px));
+  align-content:center;
+  border:1px solid color-mix(in srgb, var(--gold) 24%, transparent);
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.38), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 74%, transparent), color-mix(in srgb, var(--bg) 86%, var(--panel2)));
+}
+
+html body .heroArchiveStamp {
+  width:min(260px, 100%);
+  display:grid;
+  gap:4px;
+  justify-self:start;
+  margin:0 0 8px;
+  padding:10px 12px;
+  border:1px solid color-mix(in srgb, var(--gold) 42%, transparent);
+  border-radius:6px;
+  background:color-mix(in srgb, var(--panel2) 62%, transparent);
+  box-shadow:var(--jju-atmo-tight-shadow);
+  transform:rotate(-1.2deg);
+}
+
+html body .heroArchiveStamp span,
+html body .heroLedger span,
+html body .libraryIndexCard span,
+html body .libraryIndexCard em,
+html body .printBenchStats span,
+html body .bookEvidenceStrip span,
+html body .sectionArchiveSlip span {
+  color:var(--muted);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+html body .heroArchiveStamp strong,
+html body .libraryIndexCard strong,
+html body .printBenchStats strong,
+html body .bookEvidenceStrip strong,
+html body .sectionArchiveSlip strong {
+  color:var(--text);
+  font-size:15px;
+  line-height:1.1;
+}
+
+html body .heroLedger {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  max-width:760px;
+  margin:6px 0 2px;
+}
+
+html body .heroLedger span {
+  display:inline-flex;
+  min-height:30px;
+  align-items:center;
+  border:1px solid color-mix(in srgb, var(--gold) 28%, transparent);
+  border-radius:999px;
+  padding:7px 10px;
+  background:rgba(0,0,0,.24);
+  color:var(--text);
+}
+
+html body .homeStartSection,
+html body .libraryWorkbench,
+html body .recentReadingRail,
+html body .resultBar,
+html body .publishingPanel,
+html body .bookSectionContent,
+html body .atlasControls,
+html body .atlasNodeList,
+html body .atlasNodeDetail,
+html body .atlasQualityCard,
+html body .atlasCatalogCard,
+html body .recallCategoryRail,
+html body .recallPackPanelTop,
+html body .recallPackRow,
+html body .readerChapterRail,
+html body .readerStudyCard,
+html body .readerProgressPanelV2 {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 82%, transparent), color-mix(in srgb, var(--bg) 88%, var(--panel2))),
+    var(--jju-atmo-noise) !important;
+  border-color:color-mix(in srgb, var(--gold) 24%, var(--border)) !important;
+  box-shadow:var(--jju-atmo-tight-shadow), inset 0 1px 0 rgba(255,255,255,.065);
+}
+
+html body .libraryHero {
+  grid-template-columns:minmax(0, 1fr) minmax(210px, 310px);
+  align-items:end;
+  border:1px solid color-mix(in srgb, var(--gold) 28%, transparent);
+}
+
+html body .libraryIndexCard {
+  display:grid;
+  gap:6px;
+  justify-self:end;
+  width:min(310px, 100%);
+  padding:16px;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent);
+  border-radius:6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--panel2) 82%, transparent), color-mix(in srgb, var(--panel) 78%, transparent)),
+    var(--jju-atmo-noise);
+  box-shadow:var(--jju-atmo-tight-shadow);
+}
+
+html body .libraryIndexCard em {
+  color:var(--gold);
+  font-style:normal;
+}
+
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook,
+html body .homeStartCard,
+html body .printCatalogCard,
+html body .publishingBookRail a {
+  position:relative;
+  overflow:hidden;
+}
+
+html body .bookGrid.upgradedGrid .bookCard.upgradedBook::after,
+html body .homeStartCard::after,
+html body .printCatalogCard::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.055), transparent 35%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.028) 0 1px, transparent 1px 8px);
+  opacity:.38;
+  pointer-events:none;
+}
+
+html body .bookShelfMark {
+  position:absolute;
+  top:9px;
+  left:9px;
+  z-index:4;
+  min-width:34px;
+  min-height:24px;
+  display:inline-grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:4px;
+  background:rgba(0,0,0,.5);
+  color:#fff7df;
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:.08em;
+  box-shadow:0 8px 18px rgba(0,0,0,.3);
+}
+
+html body .bookCard .cover,
+html body .homeStartCard .cover {
+  filter:saturate(.94) contrast(1.04);
+}
+
+html body .bookCard:hover .cover,
+html body .homeStartCard:hover .cover {
+  filter:saturate(1.08) contrast(1.08);
+}
+
+html body .bookInfo::before,
+html body .publishingPanel::before,
+html body .bookSectionContent::before {
+  content:"";
+  display:block;
+  width:44px;
+  height:2px;
+  margin:0 0 10px;
+  background:linear-gradient(90deg, var(--gold), transparent);
+  opacity:.7;
+}
+
+html body .printShelfHero {
+  grid-template-columns:minmax(0, 1fr) minmax(240px, 360px);
+  align-items:end;
+}
+
+html body .printBenchStats {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:8px;
+}
+
+html body .printBenchStats span {
+  min-height:72px;
+  display:grid;
+  align-content:center;
+  gap:4px;
+  padding:12px;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent);
+  border-radius:6px;
+  background:rgba(0,0,0,.18);
+  color:var(--muted);
+}
+
+html body .printBenchStats strong {
+  display:block;
+  color:var(--gold);
+  font-size:clamp(22px, 3vw, 32px);
+}
+
+html body .printCatalogGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:16px;
+}
+
+html body .printCatalogCard {
+  display:grid;
+  gap:14px;
+  min-height:100%;
+  padding:16px;
+  border:1px solid color-mix(in srgb, var(--gold) 28%, var(--border));
+  border-radius:8px;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--panel) 80%, transparent), color-mix(in srgb, var(--bg) 88%, var(--panel2))),
+    var(--jju-atmo-noise);
+  color:var(--text);
+  text-decoration:none;
+  box-shadow:var(--jju-atmo-tight-shadow);
+}
+
+html body .printProofStamp {
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:3;
+  padding:6px 9px;
+  border:1px solid color-mix(in srgb, var(--jju-atmo-red) 62%, transparent);
+  border-radius:4px;
+  color:color-mix(in srgb, var(--jju-atmo-red) 84%, var(--text));
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  transform:rotate(3deg);
+}
+
+html body .printCatalogCard:hover {
+  transform:translateY(-3px);
+  border-color:color-mix(in srgb, var(--gold) 54%, transparent);
+  box-shadow:var(--jju-atmo-shadow);
+}
+
+html body .bookEvidenceStrip,
+html body .sectionArchiveSlip {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 12px;
+  align-items:center;
+  max-width:100%;
+  padding:10px 12px;
+  border:1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+  border-radius:6px;
+  background:rgba(0,0,0,.18);
+}
+
+html body .bookEvidenceStrip strong {
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+
+html body .sectionArchiveSlip {
+  width:max-content;
+  max-width:100%;
+}
+
+html body .bookSectionShell {
+  position:relative;
+}
+
+html body .bookSectionShell::before {
+  content:"";
+  position:absolute;
+  top:18px;
+  bottom:18px;
+  left:clamp(12px, 2vw, 24px);
+  width:1px;
+  background:linear-gradient(180deg, transparent, color-mix(in srgb, var(--gold) 40%, transparent), transparent);
+  opacity:.7;
+  pointer-events:none;
+}
+
+html body .bookSectionContent {
+  position:relative;
+  padding-left:clamp(32px, 5vw, 62px);
+}
+
+html body .atlasExplorer {
+  position:relative;
+}
+
+html body .atlasExplorer::before {
+  content:"";
+  position:absolute;
+  inset:8px 0 auto;
+  height:180px;
+  background:
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--jju-atmo-blue) 16%, transparent), transparent),
+    repeating-linear-gradient(90deg, transparent 0 54px, rgba(111,164,217,.09) 54px 55px, transparent 55px 108px);
+  opacity:.42;
+  pointer-events:none;
+}
+
+html body .atlasSelectedNode {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--nodeColor, var(--gold)) 18%, transparent), transparent 46%),
+    var(--jju-atmo-noise),
+    color-mix(in srgb, var(--panel) 82%, transparent) !important;
+}
+
+html body .atlasFlowFocus {
+  box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--gold) 32%, transparent), var(--jju-atmo-tight-shadow);
+}
+
+html body .recallLibraryShell {
+  position:relative;
+}
+
+html body .recallLibraryShell::before {
+  content:"training room";
+  position:absolute;
+  right:8px;
+  top:-8px;
+  color:var(--gold);
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  opacity:.54;
+}
+
+html body .recallStage,
+html body .recallDiagramSvg,
+html body .recallBrainSvg {
+  box-shadow:var(--jju-atmo-shadow), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+html body .readerPageV2 {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.32), transparent 22%, transparent 78%, rgba(0,0,0,.32)),
+    var(--jju-atmo-noise);
+}
+
+html body .readerFrameWrapV2 {
+  position:relative;
+}
+
+html body .readerFrameWrapV2::before {
+  content:"";
+  position:absolute;
+  inset:10px;
+  border:1px solid color-mix(in srgb, var(--gold) 18%, transparent);
+  border-radius:8px;
+  pointer-events:none;
+  z-index:2;
+}
+
+html body .viewerV2 {
+  box-shadow:var(--jju-atmo-shadow) !important;
+}
+
+:root[data-site-scheme="light"] body {
+  background:
+    repeating-linear-gradient(0deg, rgba(82,58,28,.035) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(90deg, rgba(82,58,28,.025) 0 1px, transparent 1px 84px),
+    linear-gradient(180deg, var(--theme-top), var(--theme-mid) 48%, var(--theme-bottom)) !important;
+}
+
+:root[data-site-scheme="light"] body::after {
+  opacity:.4 !important;
+}
+
+:root[data-site-scheme="light"] body .heroLedger span,
+:root[data-site-scheme="light"] body .bookEvidenceStrip,
+:root[data-site-scheme="light"] body .sectionArchiveSlip,
+:root[data-site-scheme="light"] body .printBenchStats span {
+  background:rgba(255,255,255,.42);
+}
+
+@media (max-width:900px) {
+  html body .libraryHero,
+  html body .printShelfHero {
+    grid-template-columns:1fr;
+  }
+
+  html body .libraryIndexCard {
+    justify-self:start;
+  }
+
+  html body .printBenchStats {
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:680px) {
+  html body .brandWithMark::after,
+  html body .recallLibraryShell::before {
+    display:none;
+  }
+
+  html body .homePage .hero {
+    min-height:auto;
+  }
+
+  html body .heroArchiveStamp {
+    transform:none;
+  }
+
+  html body .heroLedger {
+    gap:6px;
+  }
+
+  html body .heroLedger span {
+    min-height:28px;
+    padding:6px 8px;
+    font-size:10px;
+  }
+
+  html body .bookSectionShell::before {
+    display:none;
+  }
+
+  html body .bookSectionContent {
+    padding-left:clamp(22px, 5vw, 34px);
+  }
+}

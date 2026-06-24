@@ -89,6 +89,11 @@ export default async function BookPage({ params }: Props) {
             {!!book.wordCount && <span>{book.wordCount.toLocaleString()} words</span>}
             <span>{book.status === "coming-soon" ? "Coming soon" : "Free online"}</span>
           </div>
+          <div className="bookEvidenceStrip" aria-label="Book catalog record">
+            <span>Catalog ID</span>
+            <strong>{book.id}</strong>
+            <span>{sectionRoutes.length || sample.toc.length || book.chapterCount || 0} indexed sections</span>
+          </div>
         </div>
       </section>
 

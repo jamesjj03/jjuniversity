@@ -398,12 +398,20 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
     }
   }
 
+  const readyCount = publicBooks.filter(book => !["unavailable", "coming-soon", "hidden"].includes(book.status || "ready")).length;
+  const shelfStatusLabel = showingArchive ? "archive catalog" : `${readyCount} ready books`;
+
   return (
     <main className={`page libraryPage ${showingArchive ? "archiveMode" : ""}`}>
       <section className="libraryHero">
         <div>
           <h1>Library</h1>
           <p className="libraryTagline">Pick a shelf. Fall down the rabbit hole.</p>
+        </div>
+        <div className="libraryIndexCard" aria-label="Library status">
+          <span>{showingArchive ? "Archive room" : "Main stacks"}</span>
+          <strong>{shelfStatusLabel}</strong>
+          <em>{filtered.length} showing now</em>
         </div>
 
       </section>
@@ -523,9 +531,11 @@ export default function LibraryClient({ archiveMode = false }: { archiveMode?: b
             : (book.tags || []).filter(item => !(book.hiddenShelves || []).includes(item));
           const primaryTag = visibleBookTags[0] || "Uncategorized";
           const moreTags = visibleBookTags.slice(1);
+          const shelfCode = (book.id || "book").slice(0, 3).toUpperCase();
           return (
             <article className={`bookCard upgradedBook ${unavailable ? "unavailable" : ""} ${openedIds.has(book.id) ? "openedBook" : ""} ${completed ? "completedBook" : ""}`} key={book.id}>
               <Link href={unavailable ? "#" : `/reader?book=${book.id}`} onClick={saveLibraryPosition}>
+                <span className="bookShelfMark" aria-hidden="true">{shelfCode}</span>
                 <CoverImage className="cover" src={coverFor(book)} fallbackSrc={legacyCoverFor(book)} alt={book.title || book.id} loading="lazy" decoding="async" palette />
                 <div className="bookInfo">
                   {completed && <span className="readRibbon">Read</span>}
