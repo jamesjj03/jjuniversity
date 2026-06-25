@@ -9,7 +9,6 @@ import {
   metadataDescription,
 } from "@/lib/publishing";
 import {
-  getAllBookSectionRoutes,
   getBookSectionRoute,
   getBookSectionRoutes,
   sectionExcerpt,
@@ -20,12 +19,10 @@ type Props = {
   params: Promise<{ slug: string; sectionSlug: string }>;
 };
 
-export async function generateStaticParams() {
-  const routes = await getAllBookSectionRoutes();
-  return routes.map(route => ({
-    slug: route.book.slug,
-    sectionSlug: route.sectionSlug,
-  }));
+export const revalidate = 3600;
+
+export function generateStaticParams() {
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
