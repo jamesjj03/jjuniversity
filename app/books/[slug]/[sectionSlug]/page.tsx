@@ -101,10 +101,6 @@ export default async function BookSectionPage({ params }: Props) {
           <p className="kicker">{book.title}</p>
           <h1>{route.title}</h1>
           <p className="pageTagline">Section {route.index + 1} of {route.total}</p>
-          <div className="sectionArchiveSlip" aria-label="Section record">
-            <span>{book.primaryCategory}</span>
-            <strong>{String(route.index + 1).padStart(2, "0")} / {String(route.total).padStart(2, "0")}</strong>
-          </div>
           <div className="publishingActions">
             <Link className="btn primary" href={bookPath}>Book Overview</Link>
             <Link className="btn secondary" href={`/reader?book=${encodeURIComponent(book.id)}`}>Open Reader</Link>

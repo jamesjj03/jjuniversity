@@ -392,17 +392,9 @@ function readerStyle(preferences: Preferences) {
 
   return `
     html, body { margin: 0; min-height: 100%; background: ${colors.bg}; color: ${colors.text}; }
-    body { padding: clamp(18px, 3vw, 42px); font-family: ${fontFamily}; font-size: ${fontSize}px; line-height: ${lineHeight}; background:
-      radial-gradient(circle at 12% 0%, ${colors.rule} 0 1px, transparent 1px 48px),
-      linear-gradient(90deg, rgba(0,0,0,.08), transparent 18%, transparent 82%, rgba(0,0,0,.08)),
-      ${colors.bg}; }
+    body { padding: clamp(18px, 3vw, 42px); font-family: ${fontFamily}; font-size: ${fontSize}px; line-height: ${lineHeight}; }
     * { box-sizing: border-box; }
-    .readerDoc { position:relative; max-width: ${maxWidth}; margin: 0 auto; min-height: calc(100vh - 84px); padding: clamp(28px, 5vw, 72px); background:
-      linear-gradient(90deg, rgba(0,0,0,.055), transparent 7%, transparent 93%, rgba(0,0,0,.045)),
-      repeating-linear-gradient(0deg, rgba(0,0,0,.018) 0 1px, transparent 1px 7px),
-      ${colors.page}; border: 1px solid ${colors.rule}; border-radius: 8px; box-shadow: 0 16px 48px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.22); overflow-wrap: break-word; }
-    .readerDoc::before { content:""; position:absolute; inset:18px auto 18px clamp(14px, 2vw, 26px); width:1px; background:${colors.rule}; opacity:.65; pointer-events:none; }
-    .readerDoc::after { content:"JJU / reader"; position:absolute; right:clamp(18px, 3vw, 34px); bottom:clamp(12px, 2vw, 24px); color:${colors.muted}; font:700 10px/1 Arial, sans-serif; letter-spacing:.16em; text-transform:uppercase; opacity:.42; pointer-events:none; }
+    .readerDoc { max-width: ${maxWidth}; margin: 0 auto; min-height: calc(100vh - 84px); padding: clamp(28px, 5vw, 72px); background: ${colors.page}; border-radius: 8px; box-shadow: 0 16px 48px rgba(0,0,0,.22); overflow-wrap: break-word; }
     .readerContent { min-width: 0; }
     .sectionHeader { margin: 0 0 28px; padding-bottom: 16px; border-bottom: 1px solid ${colors.rule}; }
     .sectionKicker { margin: 0 0 7px; color: ${colors.muted}; font: 700 11px/1.2 Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }

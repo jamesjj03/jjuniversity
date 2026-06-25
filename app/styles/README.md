@@ -13,6 +13,5 @@ Current shape:
 - `70-*`: reader, Fiber, and admin creation styles.
 - `80-*` through `85-*`: final override stack split by repair pass.
 - `90-*` through `91-*`: former late-fixes layer, including layout fixes and Arena/factory styles.
-- `92-*`: final atmosphere layer for material texture, room identity, and artifact cues.
 
 When cleaning further, remove or consolidate rules inside a layer first, then run `npm run build` before moving rules across layer boundaries.
