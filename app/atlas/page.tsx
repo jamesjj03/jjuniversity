@@ -1,10 +1,11 @@
-import AtlasClient from "@/components/AtlasClient";
+import AtlasMapsClient from "@/components/AtlasMapsClient";
+import { getAtlasMaps } from "@/lib/atlasMaps";
 
 export const metadata = {
-  title: "Atlas | JJ University",
-  description: "A living map of how JJ University connects knowledge across domains.",
+  title: "Atlas Maps | JJ University",
+  description: "Branching maps of theories, people, schools, and influence networks across JJ University.",
 };
 
 export default function AtlasPage() {
-  return <AtlasClient />;
+  return <AtlasMapsClient data={getAtlasMaps()} />;
 }
