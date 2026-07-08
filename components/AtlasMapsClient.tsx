@@ -35,28 +35,8 @@ function selectionFrom(territory: AtlasTerritory, branch = firstBranch(territory
   };
 }
 
-function countLiveMaps(data: AtlasMapsData) {
-  return data.territories.reduce((total, territory) => (
-    total + territory.branches.reduce((branchTotal, branch) => (
-      branchTotal + branch.maps.filter(map => map.status === "live").length
-    ), 0)
-  ), 0);
-}
-
-function countQueuedMaps(data: AtlasMapsData) {
-  return data.territories.reduce((total, territory) => (
-    total + territory.branches.reduce((branchTotal, branch) => (
-      branchTotal + branch.maps.filter(map => map.status === "queued").length
-    ), 0)
-  ), 0);
-}
-
 function className(base: string, active: boolean) {
   return active ? `${base} active` : base;
-}
-
-function relationLabel(kind: string) {
-  return kind.replace(/-/g, " ");
 }
 
 function buildWebNodes(map: AtlasMap | undefined) {
@@ -88,8 +68,6 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
 
   const webNodes = buildWebNodes(selectedMap);
   const webNodeById = new Map(webNodes.map(node => [node.id, node]));
-  const liveMaps = countLiveMaps(data);
-  const queuedMaps = countQueuedMaps(data);
 
   function selectTerritory(territory: AtlasTerritory) {
     setSelection(selectionFrom(territory));
@@ -116,34 +94,19 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
     <main className="atlasMapsPage page">
       <section className="atlasMapsHeader" aria-labelledby="atlas-title">
         <div>
-          <p className="atlasMapsKicker">Atlas system</p>
+          <p className="atlasMapsKicker">Knowledge maps</p>
           <h1 id="atlas-title">Atlas</h1>
           <p className="pageTagline">
-            A branching map engine for fields, theories, people, schools, influence chains, and the reasons each node matters.
+            Fields, theories, people, and schools arranged by shape instead of alphabet.
           </p>
         </div>
-
-        <dl className="atlasMapsStats" aria-label="Atlas status">
-          <div>
-            <dt>Territories</dt>
-            <dd>{data.territories.length}</dd>
-          </div>
-          <div>
-            <dt>Live maps</dt>
-            <dd>{liveMaps}</dd>
-          </div>
-          <div>
-            <dt>Pipeline</dt>
-            <dd>{queuedMaps}</dd>
-          </div>
-        </dl>
       </section>
 
       <section className="atlasMapsWorkbench" aria-label="Atlas map workbench">
         <aside className="atlasMapsRail" aria-label="Atlas territories">
           <div className="atlasMapsPanelHeading">
-            <span>Layer 1</span>
-            <h2>Territories</h2>
+            <span>Browse</span>
+            <h2>Territory</h2>
           </div>
 
           <div className="atlasMapsTerritories">
@@ -155,14 +118,9 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
                 onClick={() => selectTerritory(territory)}
               >
                 <span>{territory.title}</span>
-                <small>{territory.summary}</small>
+                <small>{territory.branches.length} branches</small>
               </button>
             ))}
-          </div>
-
-          <div className="atlasMapsPipeline">
-            <strong>Pipeline target</strong>
-            <p>Ingest sources, cluster names and schools, review collisions, then publish maps as stable Atlas branches.</p>
           </div>
         </aside>
 
@@ -182,7 +140,6 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
                 onClick={() => selectBranch(branch)}
               >
                 <span>{branch.title}</span>
-                <small>{branch.maps.length} map{branch.maps.length === 1 ? "" : "s"}</small>
               </button>
             ))}
           </div>
@@ -196,7 +153,7 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
                 onClick={() => selectMap(map)}
               >
                 <span>{map.title}</span>
-                <small>{map.status}</small>
+                <small>{map.status === "live" ? "Open" : "Next"}</small>
               </button>
             ))}
           </div>
@@ -204,10 +161,9 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
           {selectedMap && (
             <article className="atlasMapsOverview">
               <div className="atlasMapsOverviewText">
-                <p className="atlasMapsKicker">{selectedMap.status === "live" ? "Live map" : "Queued map"}</p>
+                <p className="atlasMapsKicker">{selectedMap.status === "live" ? selectedBranch.title : "Coming next"}</p>
                 <h2>{selectedMap.title}</h2>
-                <p>{selectedMap.subtitle}</p>
-                <q>{selectedMap.question}</q>
+                <p>{selectedMap.question}</p>
               </div>
 
               <dl className="atlasMapsMapFacts">
@@ -218,10 +174,6 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
                 <div>
                   <dt>Relations</dt>
                   <dd>{selectedMap.relations.length || "Pending"}</dd>
-                </div>
-                <div>
-                  <dt>Mode</dt>
-                  <dd>{selectedMap.buildMode}</dd>
                 </div>
               </dl>
             </article>
@@ -273,22 +225,15 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
                   >
                     <span>{group.family}</span>
                     <strong>{group.title}</strong>
-                    <small>{group.stance}</small>
                   </button>
                 ))}
               </section>
             </>
           ) : (
             <section className="atlasMapsQueuedState" aria-label="Queued map status">
-              <p className="atlasMapsKicker">Pipeline-ready shell</p>
-              <h2>{selectedMap?.title} is staged, not populated.</h2>
-              <p>{selectedMap?.summary}</p>
-              <div>
-                <span>Source ingest</span>
-                <span>Model clustering</span>
-                <span>Review pass</span>
-                <span>Publish map</span>
-              </div>
+              <p className="atlasMapsKicker">Coming next</p>
+              <h2>{selectedMap?.title}</h2>
+              <p>{selectedMap?.subtitle}</p>
             </section>
           )}
         </section>
@@ -304,17 +249,17 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
               <p className="atlasMapsDetailStance">{selectedGroup.stance}</p>
 
               <section className="atlasMapsDetailBlock">
-                <h3>Core claim</h3>
+                <h3>Claim</h3>
                 <p>{selectedGroup.centralClaim}</p>
               </section>
 
               <section className="atlasMapsDetailBlock">
-                <h3>Why it matters</h3>
+                <h3>Signal</h3>
                 <p>{selectedGroup.whyItMatters}</p>
               </section>
 
               <section className="atlasMapsDetailBlock">
-                <h3>Contributors</h3>
+                <h3>Names</h3>
                 <div className="atlasMapsContributorList">
                   {selectedGroup.contributors.map(contributor => (
                     <article key={contributor.name}>
@@ -328,15 +273,6 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
               </section>
 
               <section className="atlasMapsDetailBlock">
-                <h3>Pressure points</h3>
-                <ul className="atlasMapsObjectionList">
-                  {selectedGroup.objections.map(objection => (
-                    <li key={objection}>{objection}</li>
-                  ))}
-                </ul>
-              </section>
-
-              <section className="atlasMapsDetailBlock">
                 <h3>Related</h3>
                 <div className="atlasMapsRelatedList">
                   {relatedGroups.map(group => (
@@ -346,26 +282,12 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
                   ))}
                 </div>
               </section>
-
-              <section className="atlasMapsDetailBlock">
-                <h3>Relation notes</h3>
-                <div className="atlasMapsRelationNotes">
-                  {selectedMap?.relations
-                    .filter(relation => relation.source === selectedGroup.id || relation.target === selectedGroup.id)
-                    .map(relation => (
-                      <article key={`${relation.source}-${relation.target}-${relation.kind}`}>
-                        <span>{relationLabel(relation.kind)}</span>
-                        <p>{relation.note}</p>
-                      </article>
-                    ))}
-                </div>
-              </section>
             </>
           ) : (
             <div className="atlasMapsEmptyDetail">
               <p className="atlasMapsKicker">No family selected</p>
               <h2>Pick a live map family.</h2>
-              <p>Queued maps will fill this panel once the source and model pipeline produces reviewed nodes.</p>
+              <p>Maps open here when they have real structure.</p>
             </div>
           )}
         </aside>
