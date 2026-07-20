@@ -1,0 +1,16 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 0,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#0"
+  ],
+  "result": {
+    "people": [],
+    "concepts": [],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

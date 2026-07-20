@@ -1,0 +1,469 @@
+{
+  "stage": "group-enrichment",
+  "ok": true,
+  "groups": [
+    {
+      "id": "group-materialism",
+      "slug": "group-materialism",
+      "title": "Materialist Metaphysics",
+      "shortTitle": "Materialism",
+      "family": "Metaphysics",
+      "stance": "Physical Reductionism",
+      "centralClaim": "Reality is fundamentally physical; mental phenomena are ultimately reducible to physical processes.",
+      "whyItMatters": "Offers a parsimonious explanation of existence, grounding experience in observable and measurable physical events. Challenges dualistic accounts by eliminating the need for non-physical substances or entities.",
+      "contributors": [
+        {
+          "id": "person-hobbes",
+          "name": "Thomas Hobbes",
+          "role": "Early Advocate",
+          "reason": "Hobbes's materialism, emphasizing body and motion as the basis of reality, laid groundwork for later materialist philosophies.",
+          "texts": [
+            {
+              "id": "leviathan",
+              "title": "Leviathan",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#1",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        },
+        {
+          "id": "person-j-j-c-smart",
+          "name": "J. J. C. Smart",
+          "role": "Modern Proponent",
+          "reason": "Smart's work in the philosophy of mind, particularly his identity theory, exemplifies contemporary materialism.",
+          "texts": [
+            {
+              "id": "smart-sensations",
+              "title": "Sensations and Brain Processes",
+              "kind": "paper",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#1",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The 'hard problem' of consciousness: Explaining subjective experience (qualia) solely in terms of physical processes remains a significant challenge.",
+        "Dualism: The persistence of dualistic arguments, suggesting the existence of non-physical mental states or substances.",
+        "Intentionality: How can purely physical systems possess intentionality – aboutness or directedness?",
+        "The problem of free will: If all events are causally determined by physical processes, how is genuine freedom possible?"
+      ],
+      "relatedGroupIds": [
+        "group-consciousness-challenge",
+        "group-idealism-opposition"
+      ],
+      "keywords": [],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "group-consciousness-challenge",
+      "slug": "group-consciousness-challenge",
+      "title": "The Consciousness Problem",
+      "shortTitle": "Consciousness",
+      "family": "Metaphysics Families",
+      "stance": "Challenges physicalist accounts of reality.",
+      "centralClaim": "Subjective experience (qualia) presents a fundamental explanatory challenge to materialism.",
+      "whyItMatters": "Highlights the difficulty in reducing consciousness to purely physical processes, impacting our understanding of mind and reality.",
+      "contributors": [
+        {
+          "id": "person-plato",
+          "name": "Plato",
+          "role": "Early Formulator",
+          "reason": "His theory of Forms implicitly addresses the problem of subjective experience by positing a realm beyond the physical.",
+          "texts": [
+            {
+              "id": "dialogue-republic",
+              "title": "The Republic",
+              "kind": "dialogue",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#1",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        },
+        {
+          "id": "person-david-armstrong",
+          "name": "David Armstrong",
+          "role": "Materialist Response",
+          "reason": "Attempted to reduce mental states to brain states, directly engaging with the consciousness problem.",
+          "texts": [
+            {
+              "id": "book-consciousness",
+              "title": "A Theory of Consciousness",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#1",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The Knowledge Argument (Mary's Room)",
+        "The Explanatory Gap",
+        "The Hard Problem of Consciousness"
+      ],
+      "relatedGroupIds": [
+        "group-materialism",
+        "group-idealism-opposition"
+      ],
+      "keywords": [
+        "consciousness",
+        "qualia",
+        "subjective experience",
+        "physicalism",
+        "mind-body problem"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "group-idealism-opposition",
+      "slug": "group-idealism-opposition",
+      "title": "Idealist Opposition",
+      "shortTitle": "Idealism",
+      "family": "Metaphysics",
+      "stance": "Anti-Materialism",
+      "centralClaim": "Reality is fundamentally mental or mind-dependent.",
+      "whyItMatters": "Challenges the assumption of an independent, objective external world; emphasizes the role of consciousness in shaping reality.",
+      "contributors": [
+        {
+          "id": "person-plato",
+          "name": "Plato",
+          "role": "Founder",
+          "reason": "Developed Theory of Forms, positing a realm of perfect ideas beyond the physical world.",
+          "texts": [
+            {
+              "id": "text-republic",
+              "title": "The Republic",
+              "kind": "dialogue",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#2",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#2",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 2
+            }
+          ]
+        },
+        {
+          "id": "person-david-armstrong",
+          "name": "David Armstrong",
+          "role": "Critic & Refiner",
+          "reason": "While initially a materialist, his later work engaged with idealism and explored the limits of materialism.",
+          "texts": [
+            {
+              "id": "text-david-armstrong-forms",
+              "title": "Forms: A Personal History",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#2",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#2",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "Denies the existence of an independent external world.",
+        "Faces difficulty explaining shared experiences and intersubjectivity.",
+        "Can be accused of solipsism or excessive subjectivism.",
+        "Struggles to account for the apparent stability and predictability of the physical world."
+      ],
+      "relatedGroupIds": [
+        "group-materialism",
+        "group-consciousness-challenge"
+      ],
+      "keywords": [
+        "mind",
+        "consciousness",
+        "reality",
+        "forms",
+        "subjectivity"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "person-david-armstrong",
+      "slug": "person-david-armstrong",
+      "title": "David Armstrong",
+      "shortTitle": "David Armstrong",
+      "family": "Materialism",
+      "stance": "Naturalistic Metaphysics",
+      "centralClaim": "Mental states are ultimately reducible to physical states, aligning with a broadly materialist view of the mind.",
+      "whyItMatters": "Armstrong's work attempts to reconcile philosophical introspection with scientific findings about the brain, offering a systematic defense of materialism against dualism and other alternatives.",
+      "contributors": [
+        {
+          "id": "person-david-armstrong",
+          "name": "David Armstrong",
+          "role": "Proponent",
+          "reason": "Developed a detailed reductive account of mental states.",
+          "texts": [
+            {
+              "id": "book-david-armstrong-consciousness",
+              "title": "A Theory of Consciousness",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#1",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 1,
+                  "note": "20th century"
+                },
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#1",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1,
+              "note": "20th century"
+            },
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The multiple realizability argument challenges the idea that mental states can be reduced to specific physical states.",
+        "Qualia arguments suggest subjective experiences resist reduction to purely physical descriptions.",
+        "Epiphenomenalism poses a threat by suggesting mental states are caused by, but do not cause, physical events."
+      ],
+      "relatedGroupIds": [
+        "group-materialism",
+        "group-consciousness-challenge"
+      ],
+      "keywords": [
+        "mind",
+        "matter",
+        "reduction",
+        "consciousness",
+        "naturalism"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "20th century"
+        },
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "person-plato",
+      "slug": "person-plato",
+      "title": "Platonism",
+      "shortTitle": "Platonism",
+      "family": "Theory Family",
+      "stance": "Idealist metaphysics centered on Forms.",
+      "centralClaim": "Reality is divided into a world of imperfect particulars and a realm of perfect, eternal Forms which are the true objects of knowledge.",
+      "whyItMatters": "Introduced dualism and provided a framework for understanding abstract concepts and universal truths; profoundly influenced Western thought.",
+      "contributors": [
+        {
+          "id": "person-plato",
+          "name": "Plato",
+          "role": "Founder",
+          "reason": "Developed the theory of Forms and wrote extensively on metaphysics, epistemology, and ethics.",
+          "texts": [
+            {
+              "id": "republic",
+              "title": "The Republic",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#3",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 3,
+                  "note": "ancient source"
+                },
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#3",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#3",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 3,
+              "note": "ancient source"
+            },
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#3",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 3
+            }
+          ]
+        },
+        {
+          "id": "person-aristotle",
+          "name": "Aristotle",
+          "role": "Student & Critic",
+          "reason": "Initially a student of Plato, Aristotle later developed his own empirical and teleological philosophy, diverging from Platonic idealism.",
+          "texts": [
+            {
+              "id": "metaphysics",
+              "title": "Metaphysics",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#3",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 3,
+                  "note": "ancient source"
+                },
+                {
+                  "chunkId": "humanities-philosophy-metaphysics-families#3",
+                  "sourceId": "humanities-philosophy-metaphysics-families",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#3",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 3,
+              "note": "ancient source"
+            },
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#3",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The theory of Forms is criticized for being overly complex and lacking empirical verification.",
+        "Aristotle argued that Forms are inseparable from particulars, rejecting Plato's dualistic separation.",
+        "Critics question the accessibility and knowability of the Forms.",
+        "Plato’s allegory of the cave has been interpreted as elitist."
+      ],
+      "relatedGroupIds": [
+        "group-materialism",
+        "group-idealism-opposition"
+      ],
+      "keywords": [
+        "Forms",
+        "Idealism",
+        "Dualism",
+        "Allegory of the Cave",
+        "Metaphysics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3,
+          "note": "ancient source"
+        },
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    }
+  ]
+}

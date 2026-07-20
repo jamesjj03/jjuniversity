@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-austrian-economics",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-austrian-economics failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 2334 (line 76 column 8)"
+  },
+  "createdAt": "2026-07-11T23:30:26.833Z"
+}

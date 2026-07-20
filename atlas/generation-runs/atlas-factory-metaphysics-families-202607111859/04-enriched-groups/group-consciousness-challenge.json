@@ -1,0 +1,89 @@
+{
+  "id": "group-consciousness-challenge",
+  "slug": "group-consciousness-challenge",
+  "title": "The Consciousness Problem",
+  "shortTitle": "Consciousness",
+  "family": "Metaphysics Families",
+  "stance": "Challenges physicalist accounts of reality.",
+  "centralClaim": "Subjective experience (qualia) presents a fundamental explanatory challenge to materialism.",
+  "whyItMatters": "Highlights the difficulty in reducing consciousness to purely physical processes, impacting our understanding of mind and reality.",
+  "contributors": [
+    {
+      "id": "person-plato",
+      "name": "Plato",
+      "role": "Early Formulator",
+      "reason": "His theory of Forms implicitly addresses the problem of subjective experience by positing a realm beyond the physical.",
+      "texts": [
+        {
+          "id": "dialogue-republic",
+          "title": "The Republic",
+          "kind": "dialogue",
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "person-david-armstrong",
+      "name": "David Armstrong",
+      "role": "Materialist Response",
+      "reason": "Attempted to reduce mental states to brain states, directly engaging with the consciousness problem.",
+      "texts": [
+        {
+          "id": "book-consciousness",
+          "title": "A Theory of Consciousness",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The Knowledge Argument (Mary's Room)",
+    "The Explanatory Gap",
+    "The Hard Problem of Consciousness"
+  ],
+  "relatedGroupIds": [
+    "group-materialism",
+    "group-idealism-opposition"
+  ],
+  "keywords": [
+    "consciousness",
+    "qualia",
+    "subjective experience",
+    "physicalism",
+    "mind-body problem"
+  ],
+  "provenance": [
+    {
+      "chunkId": "humanities-philosophy-metaphysics-families#1",
+      "sourceId": "humanities-philosophy-metaphysics-families",
+      "chunkIndex": 1
+    }
+  ]
+}

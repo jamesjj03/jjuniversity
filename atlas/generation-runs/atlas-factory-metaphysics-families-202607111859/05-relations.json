@@ -1,0 +1,98 @@
+{
+  "stage": "relations",
+  "ok": true,
+  "relations": [
+    {
+      "id": "materialism-idealism",
+      "source": "group-materialism",
+      "target": "group-idealism-opposition",
+      "kind": "opposes",
+      "note": "Materialism directly contradicts the core claim of Idealist Opposition.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        },
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "consciousness-materialism",
+      "source": "group-consciousness-challenge",
+      "target": "group-materialism",
+      "kind": "opposes",
+      "note": "The Consciousness Problem poses a significant challenge to the reductionist claims of Materialist Metaphysics.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "armstrong-materialism",
+      "source": "person-david-armstrong",
+      "target": "group-materialism",
+      "kind": "borrows",
+      "note": "Armstrong's work significantly extends and defends the principles of Materialist Metaphysics.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "20th century"
+        },
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "plato-idealism",
+      "source": "person-plato",
+      "target": "group-idealism-opposition",
+      "kind": "borrows",
+      "note": "Platonism provides a foundational framework for the claims of Idealist Opposition.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3,
+          "note": "ancient source"
+        },
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        },
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "materialism-consciousness",
+      "source": "group-materialism",
+      "target": "group-consciousness-challenge",
+      "kind": "neighbors",
+      "note": "The Consciousness Problem arises as a direct consequence of the reductionist claims made by Materialist Metaphysics.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 3,
+  "chunkIds": [
+    "stem-scientists-scientific-lineages#3"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 680,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Antoine Lavoisier",
+        "role": "reshaper",
+        "reason": "conservation, measurement, nomenclature",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "initial impact"
+          }
+        ]
+      },
+      {
+        "name": "John Dalton",
+        "role": "developer",
+        "reason": "atomic theory",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "modern role"
+          }
+        ]
+      },
+      {
+        "name": "Dmitri Mendeleev",
+        "role": "organizer",
+        "reason": "periodic order",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "element organization"
+          }
+        ]
+      },
+      {
+        "name": "Marie Curie",
+        "role": "challenger",
+        "reason": "radioactivity",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "new domain"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "atomic theory",
+        "summary": "modern chemical role",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "Dalton's contribution"
+          }
+        ]
+      },
+      {
+        "label": "periodic order",
+        "summary": "element organization",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "Mendeleev’s work"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Antoine Lavoisier",
+        "target": "John Dalton",
+        "kind": "influences",
+        "note": "atomic theory development",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "Lavoisier's impact"
+          }
+        ]
+      },
+      {
+        "source": "John Dalton",
+        "target": "Dmitri Mendeleev",
+        "kind": "influences",
+        "note": "periodic order builds on atomic theory",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "sequential development"
+          }
+        ]
+      },
+      {
+        "source": "Dmitri Mendeleev",
+        "target": "Marie Curie",
+        "kind": "pressures",
+        "note": "radioactivity challenges order",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#3",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 3,
+            "note": "new domain"
+          }
+        ]
+      }
+    ]
+  }
+}

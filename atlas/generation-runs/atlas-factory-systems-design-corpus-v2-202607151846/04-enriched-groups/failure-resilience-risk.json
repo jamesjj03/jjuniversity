@@ -1,0 +1,120 @@
+{
+  "id": "failure-resilience-risk",
+  "slug": "failure-resilience-risk",
+  "title": "Failure, Resilience, And Risk Analysis",
+  "shortTitle": "Failure Analysis",
+  "family": "Systems Design",
+  "stance": "Starts from failure modes, criticality, reliability, mitigation, and resilience under stress.",
+  "centralClaim": "Good system design anticipates how components, interfaces, software, and organizations fail before failure appears in production.",
+  "whyItMatters": "This family is essential for review because it turns design from ideal operation into risk-aware operation.",
+  "contributors": [
+    {
+      "id": "failure-resilience-risk-source-synthesis",
+      "name": "FMEA and reliability engineering",
+      "role": "source-grounded design family",
+      "reason": "FMEA and reliability engineering represents the source evidence for Failure, Resilience, And Risk Analysis.",
+      "texts": [
+        {
+          "id": "failure-resilience-risk-key-text",
+          "title": "FMEA/FMECA documentation",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#1",
+              "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+              "chunkIndex": 1,
+              "note": "definition"
+            },
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#10",
+              "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+              "chunkIndex": 10,
+              "note": "Definition of FMEA."
+            },
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#2",
+              "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+              "chunkIndex": 2,
+              "note": "definition"
+            },
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+              "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+              "chunkIndex": 3,
+              "note": "definition"
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#1",
+          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+          "chunkIndex": 1,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#10",
+          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+          "chunkIndex": 10,
+          "note": "Definition of FMEA."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#2",
+          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+          "chunkIndex": 2,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+          "chunkIndex": 3,
+          "note": "definition"
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Can reduce complex failures to checklist thinking.",
+    "Risk scores can create false precision.",
+    "Rare systemic failures may be missed by component-level analysis."
+  ],
+  "relatedGroupIds": [
+    "systems-engineering-lifecycle",
+    "feedback-control-systems",
+    "complex-adaptive-system-behavior"
+  ],
+  "keywords": [
+    "FMEA",
+    "risk",
+    "reliability",
+    "resilience",
+    "failure modes"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#1",
+      "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+      "chunkIndex": 1,
+      "note": "definition"
+    },
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#10",
+      "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+      "chunkIndex": 10,
+      "note": "Definition of FMEA."
+    },
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#2",
+      "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+      "chunkIndex": 2,
+      "note": "definition"
+    },
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+      "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+      "chunkIndex": 3,
+      "note": "definition"
+    }
+  ]
+}

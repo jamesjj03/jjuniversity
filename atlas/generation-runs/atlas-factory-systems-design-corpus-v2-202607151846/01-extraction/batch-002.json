@@ -1,0 +1,71 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 2,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 718,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "systems engineering",
+        "summary": "Broad, systems-level practice.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+            "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+            "chunkIndex": 20,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "configuration management",
+        "summary": "Parallel to systems engineering.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+            "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+            "chunkIndex": 20,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "control engineering",
+        "summary": "Design and...",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+            "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+            "chunkIndex": 20,
+            "note": "mention"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "systems engineering",
+        "target": "configuration management",
+        "kind": "parallels",
+        "note": "Similar taskings.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+            "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+            "chunkIndex": 20,
+            "note": "parallel"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1154 @@
+{
+  "stage": "normalization",
+  "ok": true,
+  "people": [
+    {
+      "id": "person-hobbes",
+      "name": "Hobbes",
+      "role": "early modern philosopher",
+      "reason": "advocated a body-and-motion version of physicalism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-j-j-c-smart",
+      "name": "J. J. C. Smart",
+      "role": "twentieth-century identity theorist",
+      "reason": "turned physicalism into a philosophy of mind and science program",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-david-armstrong",
+      "name": "David Armstrong",
+      "role": "twentieth-century identity theorist",
+      "reason": "contributed to physicalism as a philosophy of mind and science program",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-berkeley",
+      "name": "Berkeley",
+      "role": "Philosopher",
+      "reason": "Argues that ordinary objects are ideas sustained by perception",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-kant",
+      "name": "Kant",
+      "role": "Philosopher",
+      "reason": "Makes the structure of experience central by asking what conditions make objects possible for us",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-hegel",
+      "name": "Hegel",
+      "role": "Philosopher",
+      "reason": "Treats reality as historically and logically articulated through reason",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-plato",
+      "name": "Plato",
+      "role": "Ancient source of Dualism",
+      "reason": "Soul and forms",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "person-rene-descartes",
+      "name": "Rene Descartes",
+      "role": "Modern source of Dualism",
+      "reason": "Mind-body problem",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "person-elisabeth-of-bohemia",
+      "name": "Elisabeth of Bohemia",
+      "role": "Presses the interaction problem in Dualism",
+      "reason": "",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "person-aristotle",
+      "name": "Aristotle",
+      "role": "Founder of hylomorphism",
+      "reason": "Developed the concept of beings as composites of form and matter.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-thomas-aquinas",
+      "name": "Thomas Aquinas",
+      "role": "Adaptor of hylomorphism",
+      "reason": "Applied the vocabulary to being, essence, causation, and theology.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-contemporary-neo-aristotelians",
+      "name": "Contemporary neo-Aristotelians",
+      "role": "Revivers of hylomorphism",
+      "reason": "Brought back categories, powers, dependence, and essence.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-heraclitus",
+      "name": "Heraclitus",
+      "role": "Ancient marker of process metaphysics",
+      "reason": "",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-whitehead",
+      "name": "Whitehead",
+      "role": "Rebuilder of metaphysics around occasions, creativity, relation, and event",
+      "reason": "",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-bergson",
+      "name": "Bergson",
+      "role": "Giver of a related account through duration and creative evolution",
+      "reason": "",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-spinoza",
+      "name": "Spinoza",
+      "role": "Dual-aspect model proponent",
+      "reason": "Proposed a dual-aspect model where mind and body express one substance.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-russell",
+      "name": "Russell",
+      "role": "Experience or neutral stuff proponent",
+      "reason": "Opened routes where experience, structure, or neutral stuff can underlie both mind and matter.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-james",
+      "name": "James",
+      "role": "Experience proponent",
+      "reason": "Opened routes where experience can underlie both mind and matter.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-charles-sanders-peirce",
+      "name": "Charles Sanders Peirce",
+      "role": "Founder of Pragmatism",
+      "reason": "Links meaning to conceivable practical effects and ties truth to inquiry.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-william-james",
+      "name": "William James",
+      "role": "Pragmatist philosopher",
+      "reason": "Emphasizes lived consequences.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-john-dewey",
+      "name": "John Dewey",
+      "role": "Pragmatist philosopher",
+      "reason": "Treats nature and experience as continuous.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "person-rudolf-carnap",
+      "name": "Rudolf Carnap",
+      "role": "Logical positivist",
+      "reason": "Challenges metaphysical language when it lacks clear empirical or logical role.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "concept-metaphysics-families",
+      "label": "Metaphysics Families",
+      "summary": "Major groups in the study of metaphysics.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#0",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 0,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-physicalism",
+      "label": "Physicalism",
+      "summary": "the claim that reality is ultimately physical or every real phenomenon depends on the physical order",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-materialism",
+      "label": "Materialism",
+      "summary": "a specific form of physicalism that asserts reality is entirely composed of physical matter",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-consciousness",
+      "label": "Consciousness",
+      "summary": "the pressure point in the debate between physicalism and materialism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-idealism",
+      "label": "Idealism",
+      "summary": "Treats mind, experience, reason, or spirit as basic to reality's intelligibility",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-independence",
+      "label": "Independence",
+      "summary": "Pressure point in idealism: denying an external world, redefining objectivity, or arguing that objectivity already depends on conceptual form",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-dualism",
+      "label": "Dualism",
+      "summary": "Deep distinction between mind and matter, soul and body, or intelligible and sensible reality",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "concept-mind-body-problem",
+      "label": "Mind-body problem",
+      "summary": "Sharpest canonical form of Dualism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "concept-interaction-problem",
+      "label": "Interaction problem",
+      "summary": "How can an immaterial mind move a material body?",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "concept-substance-metaphysics",
+      "label": "Substance metaphysics",
+      "summary": "Investigates what kinds of things exist and what makes them persist.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-hylomorphism",
+      "label": "Hylomorphism",
+      "summary": "Treats beings as composites of form and matter, potentiality and actuality.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-essence",
+      "label": "Essence",
+      "summary": "The unchanging nature or defining characteristic of a thing.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-process-metaphysics",
+      "label": "Process metaphysics",
+      "summary": "Starts from activity, change, relation, and becoming rather than static substance",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-occasions",
+      "label": "Occasions",
+      "summary": "Central concept in Whitehead's rebuilt metaphysics",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-creativity",
+      "label": "Creativity",
+      "summary": "Key aspect of Whitehead's rebuilt metaphysics",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-relation",
+      "label": "Relation",
+      "summary": "Important in process metaphysics and Whitehead's rebuilt metaphysics",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-event",
+      "label": "Event",
+      "summary": "Central concept in Whitehead's rebuilt metaphysics",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-duration",
+      "label": "Duration",
+      "summary": "Bergson's account of process through time",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-creative-evolution",
+      "label": "Creative evolution",
+      "summary": "Bergson's related account of process",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-neutral-monism",
+      "label": "Neutral monism",
+      "summary": "A philosophical position that attempts to avoid choosing between strict physicalism and strict dualism by positing a neutral substance underlying both mind and matter.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-panpsychism",
+      "label": "Panpsychism",
+      "summary": "A philosophical position that attributes mental properties to all things, including inanimate objects and fundamental physical particles.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-dual-aspect-model",
+      "label": "Dual-aspect model",
+      "summary": "A philosophical model where mind and body express one substance, as proposed by Spinoza.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-pragmatism",
+      "label": "Pragmatism",
+      "summary": "A philosophical movement that focuses on the practical implications of beliefs and theories.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-metaphysical-critique",
+      "label": "Metaphysical critique",
+      "summary": "The examination and evaluation of metaphysical claims in terms of their usefulness and implications.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-deflation",
+      "label": "Deflation",
+      "summary": "The idea that metaphysical debates should focus on the practical implications of beliefs rather than ontological disagreements.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-physicalist-and-materialist-metaphysics-begin-from-the-claim-that-realit",
+      "text": "Physicalist and materialist metaphysics begin from the claim that reality is ultimately physical or at least that every real phenomenon depends on the physical order.",
+      "subject": "Physicalism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-hobbes-gives-an-early-modern-body-and-motion-version-of-physicalism",
+      "text": "Hobbes gives an early modern body-and-motion version of physicalism.",
+      "subject": "Physicalism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-twentieth-century-identity-theorists-such-as-j-j-c-smart-and-david-armst",
+      "text": "Twentieth-century identity theorists such as J. J. C. Smart and David Armstrong turn the position into a philosophy of mind and science program.",
+      "subject": "Physicalism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-the-reviewer-should-ask-whether-subjective-experience-meaning-normativit",
+      "text": "The reviewer should ask whether subjective experience, meaning, normativity, and value have been explained or only renamed in physics.",
+      "subject": "Consciousness",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-berkeley-argues-that-ordinary-objects-are-ideas-sustained-by-perception",
+      "text": "Berkeley argues that ordinary objects are ideas sustained by perception",
+      "subject": "Berkeley",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-kant-makes-the-structure-of-experience-central-by-asking-what-conditions",
+      "text": "Kant makes the structure of experience central by asking what conditions make objects possible for us",
+      "subject": "Kant",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-hegel-radicalizes-the-line-by-treating-reality-as-historically-and-logic",
+      "text": "Hegel radicalizes the line by treating reality as historically and logically articulated through reason",
+      "subject": "Hegel",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-dualist-families-insist-on-a-deep-distinction-between-mind-and-matter-so",
+      "text": "Dualist families insist on a deep distinction between mind and matter, soul and body, or intelligible and sensible reality.",
+      "subject": "Dualist families",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "claim-plato-gives-one-ancient-source-through-soul-and-forms",
+      "text": "Plato gives one ancient source through soul and forms.",
+      "subject": "Plato",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "claim-descartes-gives-the-modern-mind-body-problem-its-sharpest-canonical-form",
+      "text": "Descartes gives the modern mind-body problem its sharpest canonical form.",
+      "subject": "Rene Descartes",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "claim-elisabeth-of-bohemia-is-essential-because-she-presses-the-interaction-pr",
+      "text": "Elisabeth of Bohemia is essential because she presses the interaction problem: how can an immaterial mind move a material body?",
+      "subject": "Elisabeth of Bohemia",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "claim-aristotle-developed-the-concept-of-beings-as-composites-of-form-and-matt",
+      "text": "Aristotle developed the concept of beings as composites of form and matter.",
+      "subject": "Aristotle",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-aquinas-adapted-hylomorphism-to-being-essence-causation-and-theology",
+      "text": "Aquinas adapted hylomorphism to being, essence, causation, and theology.",
+      "subject": "Thomas Aquinas",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-contemporary-neo-aristotelian-work-revives-categories-powers-dependence-",
+      "text": "Contemporary neo-Aristotelian work revives categories, powers, dependence, and essence.",
+      "subject": "Contemporary neo-Aristotelians",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-heraclitus-is-the-ancient-marker-of-process-metaphysics",
+      "text": "Heraclitus is the ancient marker of process metaphysics.",
+      "subject": "Heraclitus",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-whitehead-rebuilds-metaphysics-around-occasions-creativity-relation-and-",
+      "text": "Whitehead rebuilds metaphysics around occasions, creativity, relation, and event.",
+      "subject": "Whitehead",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-bergson-gives-a-related-account-through-duration-and-creative-evolution",
+      "text": "Bergson gives a related account through duration and creative evolution.",
+      "subject": "Bergson",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-neutral-monism-and-panpsychism-try-to-avoid-choosing-between-strict-phys",
+      "text": "Neutral monism and panpsychism try to avoid choosing between strict physicalism and strict dualism.",
+      "subject": "Neutral monism and panpsychism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-spinoza-gives-a-dual-aspect-model-where-mind-and-body-express-one-substa",
+      "text": "Spinoza gives a dual-aspect model where mind and body express one substance.",
+      "subject": "Spinoza",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-russell-and-james-open-routes-where-experience-structure-or-neutral-stuf",
+      "text": "Russell and James open routes where experience, structure, or neutral stuff can underlie both mind and matter.",
+      "subject": "Russell and James",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-recent-panpsychists-revive-the-family-as-a-response-to-the-hard-problem-",
+      "text": "Recent panpsychists revive the family as a response to the hard problem of consciousness.",
+      "subject": "Recent panpsychists",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-pragmatists-ask-what-metaphysical-claims-do-in-inquiry-and-life",
+      "text": "Pragmatists ask what metaphysical claims do in inquiry and life.",
+      "subject": "Pragmatism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-peirce-links-meaning-to-conceivable-practical-effects-and-ties-truth-to-",
+      "text": "Peirce links meaning to conceivable practical effects and ties truth to inquiry.",
+      "subject": "Pragmatism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-james-emphasizes-lived-consequences",
+      "text": "James emphasizes lived consequences.",
+      "subject": "Pragmatism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-dewey-treats-nature-and-experience-as-continuous",
+      "text": "Dewey treats nature and experience as continuous.",
+      "subject": "Pragmatism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "claim-carnap-challenges-metaphysical-language-when-it-lacks-clear-empirical-or",
+      "text": "Carnap challenges metaphysical language when it lacks clear empirical or logical role.",
+      "subject": "Logical positivism",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "texts": [
+    {
+      "id": "text-metaphysics-families-source-brief",
+      "title": "Metaphysics Families Source Brief",
+      "kind": "other",
+      "author": "",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#0",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 0,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "text-works-of-aristotle",
+      "title": "Works of Aristotle",
+      "kind": "book",
+      "author": "Aristotle",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "text-summa-theologica-by-thomas-aquinas",
+      "title": "Summa Theologica by Thomas Aquinas",
+      "kind": "book",
+      "author": "Thomas Aquinas",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "objections": [
+    {
+      "id": "objection-the-pressure-point-is-stability-if-everything-is-process-the-reviewer-sh",
+      "text": "The pressure point is stability. If everything is process, the reviewer should ask how identity, reference, memory, and durable institutions are preserved.",
+      "subject": "",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#5",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 5,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "relcand-interaction-problem-dualism-5a50f0b0",
+      "source": "Interaction problem",
+      "target": "Dualism",
+      "kind": "presses",
+      "note": "",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "relcand-substance-metaphysics-hylomorphism-3467550f",
+      "source": "Substance metaphysics",
+      "target": "Hylomorphism",
+      "kind": "influences",
+      "note": "Hylomorphism is a part of substance metaphysics.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "relcand-aristotle-hylomorphism-ea617e38",
+      "source": "Aristotle",
+      "target": "Hylomorphism",
+      "kind": "influences",
+      "note": "Aristotle is the founder of hylomorphism.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "relcand-thomas-aquinas-hylomorphism-314a8c77",
+      "source": "Thomas Aquinas",
+      "target": "Hylomorphism",
+      "kind": "influences",
+      "note": "Aquinas adapted hylomorphism for theology.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "relcand-neutral-monism-and-panpsychism-combination-d02eea3a",
+      "source": "Neutral monism and panpsychism",
+      "target": "Combination",
+      "kind": "pressures",
+      "note": "A map should show how many small experiential or neutral elements become a unified subject.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#6",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 6,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "relcand-pragmatism-metaphysical-critique-36ad80e8",
+      "source": "Pragmatism",
+      "target": "Metaphysical critique",
+      "kind": "influences",
+      "note": "Asks what metaphysical claims do in inquiry and life.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "relcand-pragmatism-deflation-d772be91",
+      "source": "Pragmatism",
+      "target": "Deflation",
+      "kind": "supports",
+      "note": "Focuses on practical implications of beliefs rather than ontological disagreements.",
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#7",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 7,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#0",
+    "humanities-philosophy-metaphysics-families#1",
+    "humanities-philosophy-metaphysics-families#2",
+    "humanities-philosophy-metaphysics-families#3",
+    "humanities-philosophy-metaphysics-families#4",
+    "humanities-philosophy-metaphysics-families#5",
+    "humanities-philosophy-metaphysics-families#6",
+    "humanities-philosophy-metaphysics-families#7"
+  ],
+  "counts": {
+    "people": 22,
+    "concepts": 25,
+    "claims": 26,
+    "texts": 3,
+    "objections": 1,
+    "relationships": 7
+  }
+}

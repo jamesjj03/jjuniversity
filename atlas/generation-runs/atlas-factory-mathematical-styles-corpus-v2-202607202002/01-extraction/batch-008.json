@@ -1,0 +1,70 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 8,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#17"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 696,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Calculus",
+        "summary": "Study of solutions to differential equations.",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#17",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859",
+            "chunkIndex": 17,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "Real analysis",
+        "summary": "Rigorous foundations of calculus.",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#17",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859",
+            "chunkIndex": 17,
+            "note": "foundation"
+          }
+        ]
+      },
+      {
+        "label": "Differential equations",
+        "summary": "Equations describing functions.",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#17",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859",
+            "chunkIndex": 17,
+            "note": "focus"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "None",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#17",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859",
+            "chunkIndex": 17,
+            "note": "example"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 11,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393#1"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 705,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "MOS",
+        "summary": "Software for managing optimization models",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393#1",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393",
+            "chunkIndex": 1,
+            "note": "software application"
+          },
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393#1",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393",
+            "chunkIndex": 1,
+            "note": "facilitates deployment"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "MOS arXiv ID: 2210.03813v1",
+        "kind": "paper",
+        "author": "James Hubert Merrick, Tomás Tinoco De Rubira",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393#1",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393",
+            "chunkIndex": 1,
+            "note": "introduction of MOS"
+          }
+        ]
+      },
+      {
+        "title": "MOS",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393#1",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393",
+            "chunkIndex": 1,
+            "note": "software application"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "MOS",
+        "target": "optimization models",
+        "kind": "supports",
+        "note": "manages and analyzes",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393#1",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393",
+            "chunkIndex": 1,
+            "note": "software application"
+          }
+        ]
+      }
+    ]
+  }
+}

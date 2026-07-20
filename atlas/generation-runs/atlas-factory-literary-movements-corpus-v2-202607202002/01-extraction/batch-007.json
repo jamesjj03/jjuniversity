@@ -1,0 +1,83 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 7,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#3"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 754,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Greek mythology",
+        "summary": "Earliest literary sources.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#3",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+            "chunkIndex": 3,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "Homer",
+        "summary": "Author of Iliad and Odyssey.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#3",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+            "chunkIndex": 3,
+            "note": "author"
+          }
+        ]
+      },
+      {
+        "label": "Hesiod",
+        "summary": "Author of Theogony.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#3",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+            "chunkIndex": 3,
+            "note": "author"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Iliad",
+        "kind": "other",
+        "author": "Homer",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#3",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+            "chunkIndex": 3,
+            "note": "work"
+          }
+        ]
+      },
+      {
+        "title": "Odyssey",
+        "kind": "other",
+        "author": "Homer",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#3",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+            "chunkIndex": 3,
+            "note": "work"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

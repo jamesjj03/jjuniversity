@@ -1,0 +1,70 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 17,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 724,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "big data",
+        "summary": "large volumes, diverse data types",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 197,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "relational databases",
+        "summary": "structured data, tables",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 197,
+            "note": "example"
+          }
+        ]
+      },
+      {
+        "label": "storage solutions",
+        "summary": "handle large volumes, scalable",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 197,
+            "note": "requirement"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Relational databases",
+        "kind": "book",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 197,
+            "note": "example"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

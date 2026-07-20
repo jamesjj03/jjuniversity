@@ -1,0 +1,84 @@
+{
+  "id": "group-materialism",
+  "slug": "group-materialism",
+  "title": "Materialist Metaphysics",
+  "shortTitle": "Materialism",
+  "family": "Metaphysics",
+  "stance": "Physical Reductionism",
+  "centralClaim": "Reality is fundamentally physical; mental phenomena are ultimately reducible to physical processes.",
+  "whyItMatters": "Offers a parsimonious explanation of existence, grounding experience in observable and measurable physical events. Challenges dualistic accounts by eliminating the need for non-physical substances or entities.",
+  "contributors": [
+    {
+      "id": "person-hobbes",
+      "name": "Thomas Hobbes",
+      "role": "Early Advocate",
+      "reason": "Hobbes's materialism, emphasizing body and motion as the basis of reality, laid groundwork for later materialist philosophies.",
+      "texts": [
+        {
+          "id": "leviathan",
+          "title": "Leviathan",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "person-j-j-c-smart",
+      "name": "J. J. C. Smart",
+      "role": "Modern Proponent",
+      "reason": "Smart's work in the philosophy of mind, particularly his identity theory, exemplifies contemporary materialism.",
+      "texts": [
+        {
+          "id": "smart-sensations",
+          "title": "Sensations and Brain Processes",
+          "kind": "paper",
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#1",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The 'hard problem' of consciousness: Explaining subjective experience (qualia) solely in terms of physical processes remains a significant challenge.",
+    "Dualism: The persistence of dualistic arguments, suggesting the existence of non-physical mental states or substances.",
+    "Intentionality: How can purely physical systems possess intentionality – aboutness or directedness?",
+    "The problem of free will: If all events are causally determined by physical processes, how is genuine freedom possible?"
+  ],
+  "relatedGroupIds": [
+    "group-consciousness-challenge",
+    "group-idealism-opposition"
+  ],
+  "keywords": [],
+  "provenance": [
+    {
+      "chunkId": "humanities-philosophy-metaphysics-families#1",
+      "sourceId": "humanities-philosophy-metaphysics-families",
+      "chunkIndex": 1
+    }
+  ]
+}

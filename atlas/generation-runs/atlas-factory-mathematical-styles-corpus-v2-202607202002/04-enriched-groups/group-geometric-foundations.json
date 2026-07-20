@@ -1,0 +1,78 @@
+{
+  "id": "group-geometric-foundations",
+  "slug": "group-geometric-foundations",
+  "title": "Geometric Foundations",
+  "shortTitle": "Geometry",
+  "family": "Mathematical Styles",
+  "stance": "Foundational",
+  "centralClaim": "Geometric reasoning provides a fundamental framework for understanding spatial relationships and forms.",
+  "whyItMatters": "Lays the groundwork for diverse mathematical fields, from topology to computer graphics.",
+  "contributors": [
+    {
+      "id": "person-girard-desargues",
+      "name": "Girard Desargues",
+      "role": "Pioneer",
+      "reason": "Introduced projective geometry, a foundational shift in geometric perspective.",
+      "texts": [
+        {
+          "id": "text-desargues-essayes",
+          "title": "Essayes d'une méthode pour abréger les démonstrations des propositions géométriques",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#8",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+              "chunkIndex": 8,
+              "note": "introduced projective geometry"
+            },
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#8",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+              "chunkIndex": 8
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#8",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+          "chunkIndex": 8,
+          "note": "introduced projective geometry"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#8",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+          "chunkIndex": 8
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Early projective geometry lacked rigorous axiomatization.",
+    "Focus on spatial reasoning can overshadow abstract algebraic structures.",
+    "Visual intuition can be misleading in higher dimensions.",
+    "Can be overly reliant on diagrams and constructions."
+  ],
+  "relatedGroupIds": [
+    "group-abstraction-and-structure",
+    "group-analysis-and-rigor",
+    "group-problem-solving-and-creativity"
+  ],
+  "keywords": [
+    "geometry",
+    "projective geometry",
+    "spatial reasoning",
+    "visualization",
+    "foundations",
+    "perspective"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#8",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+      "chunkIndex": 8,
+      "note": "introduced projective geometry"
+    }
+  ]
+}

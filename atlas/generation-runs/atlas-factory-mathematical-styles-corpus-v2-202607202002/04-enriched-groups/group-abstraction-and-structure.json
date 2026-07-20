@@ -1,0 +1,138 @@
+{
+  "id": "group-abstraction-and-structure",
+  "slug": "group-abstraction-and-structure",
+  "title": "Abstraction & Algebraic Structures",
+  "shortTitle": "Algebraic Abstraction",
+  "family": "Algebraic Abstraction family",
+  "stance": "base, sugar, phosphate groups",
+  "centralClaim": "This group explores the core concepts of algebra, including nucleotides, polynucleotides and their relation to broader structures. It emphasizes the power of abstraction in simplifying complex systems.",
+  "whyItMatters": "This family organizes source-backed claims about a corpus-backed discipline landscape of mathematical styles, proof cultures, abstraction modes, computational methods, applied modeling, and major problem orientations. for admin review.",
+  "contributors": [
+    {
+      "id": "group-abstraction-and-structure-source-synthesis",
+      "name": "Abstraction & Algebraic Structures source synthesis",
+      "role": "source-grounded synthesis",
+      "reason": "No clean person candidate survived model enrichment for Abstraction & Algebraic Structures; this review draft preserves the source-backed group for admin review.",
+      "texts": [
+        {
+          "id": "source-evidence-for-abstraction-algebraic-structures",
+          "title": "Source evidence for Abstraction & Algebraic Structures",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+              "chunkIndex": 227,
+              "note": "basic components"
+            },
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+              "chunkIndex": 992,
+              "note": "building blocks"
+            },
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+              "chunkIndex": 227,
+              "note": "DNA component"
+            },
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+              "chunkIndex": 227,
+              "note": "RNA component"
+            },
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+              "chunkIndex": 227,
+              "note": "chain formation"
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 227,
+          "note": "basic components"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 992,
+          "note": "building blocks"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 227,
+          "note": "DNA component"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 227,
+          "note": "RNA component"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 227,
+          "note": "chain formation"
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating Abstraction & Algebraic Structures as a complete family."
+  ],
+  "relatedGroupIds": [
+    "group-geometric-foundations",
+    "group-analysis-and-rigor",
+    "group-problem-solving-and-creativity"
+  ],
+  "keywords": [
+    "nucleotide",
+    "deoxyribose",
+    "ribose",
+    "polynucleotide",
+    "abstraction",
+    "algebraic",
+    "structures"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+      "chunkIndex": 227,
+      "note": "basic components"
+    },
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+      "chunkIndex": 992,
+      "note": "building blocks"
+    },
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+      "chunkIndex": 227,
+      "note": "DNA component"
+    },
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+      "chunkIndex": 227,
+      "note": "RNA component"
+    },
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+      "chunkIndex": 227,
+      "note": "chain formation"
+    }
+  ]
+}

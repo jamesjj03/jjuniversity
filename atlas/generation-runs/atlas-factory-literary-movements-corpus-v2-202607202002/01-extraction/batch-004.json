@@ -1,0 +1,71 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#782"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 757,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "visual op-ed columnists",
+        "summary": "Combines writing with visuals.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#782",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+            "chunkIndex": 782,
+            "note": "visual hook"
+          }
+        ]
+      },
+      {
+        "label": "graphic aids",
+        "summary": "Supports written prose.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#782",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+            "chunkIndex": 782,
+            "note": "audience expectation"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Blow combines writing and visuals.",
+        "subject": "Blow's columns",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#782",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+            "chunkIndex": 782,
+            "note": "visual hook"
+          }
+        ]
+      }
+    ],
+    "texts": [
+      {
+        "title": "Writing Guide with Handbook",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#782",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+            "chunkIndex": 782,
+            "note": "overall description"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

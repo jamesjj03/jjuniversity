@@ -1,0 +1,58 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 0,
+  "chunkIds": [
+    "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#126"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 1067,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "representation",
+        "summary": "information-bearing units of thought",
+        "provenance": [
+          {
+            "chunkId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#126",
+            "sourceId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359",
+            "chunkIndex": 126,
+            "note": "basic elements of thinking"
+          }
+        ]
+      },
+      {
+        "label": "mind-body problem",
+        "summary": "nature of the mind and its relation to the body",
+        "provenance": [
+          {
+            "chunkId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#126",
+            "sourceId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359",
+            "chunkIndex": 126,
+            "note": "metaphysics"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Aristotle's works",
+        "kind": "other",
+        "author": "Aristotle",
+        "provenance": [
+          {
+            "chunkId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#126",
+            "sourceId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359",
+            "chunkIndex": 126,
+            "note": "historical role in representation"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

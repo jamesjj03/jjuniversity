@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-mathematical-astronomy-and-mechanics",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-mathematical-astronomy-and-mechanics failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 2182 (line 48 column 6)"
+  },
+  "createdAt": "2026-07-11T23:44:32.153Z"
+}

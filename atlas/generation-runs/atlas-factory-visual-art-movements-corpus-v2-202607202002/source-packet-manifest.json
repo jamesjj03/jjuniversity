@@ -1,0 +1,418 @@
+{
+  "stage": "source-manifest",
+  "ok": true,
+  "recipe": {
+    "id": "historical_movement",
+    "title": "Historical Movement",
+    "purpose": "Organize cultural or historical material by movements, scenes, eras, and reactions.",
+    "groupingLogic": "Groups should be movements or scenes with shared style, context, institutions, or oppositional identity.",
+    "preferredGroupFields": [
+      "movementContext",
+      "definingStyle",
+      "centralClaim",
+      "contributors",
+      "keyTexts",
+      "pressurePoints"
+    ],
+    "contributorRules": "Contributors should represent the movement, launch it, popularize it, or define its counter-movement.",
+    "expectedRelationTypes": [
+      "influences",
+      "opposes",
+      "reframes",
+      "neighbors",
+      "borrows"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 10
+    },
+    "generationInstructions": "Anchor groups in context and style. Do not collapse movements into individual biography unless the source demands it. First production release QC guidance: - Avoid single linear progress narratives; require parallel movement branches, regional balance checks, and relation notes that name transmission mechanisms.",
+    "evaluationCriteria": [
+      "Groups have historical context",
+      "Movement boundaries are defensible",
+      "Relations show reaction or influence",
+      "Representative figures are justified"
+    ]
+  },
+  "sourcePacket": {
+    "sources": [
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af",
+        "title": "[Corpus v2] Writing Guide with Handbook",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-writing-guide"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb",
+        "title": "[Corpus v2] Engineering",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Engineering"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+        "title": "[Corpus v2] Introduction to Anthropology",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-anthropology"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af",
+        "title": "[Corpus v2] Writing Guide with Handbook",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-writing-guide"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af",
+        "title": "[Corpus v2] Writing Guide with Handbook",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-writing-guide"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c",
+        "title": "[Corpus v2] Art",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Art"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+        "title": "[Corpus v2] Fascism",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Fascism"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1",
+        "title": "[Corpus v2] Physics",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-physics"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232",
+        "title": "[Corpus v2] The Picture of Dorian Gray",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://www.gutenberg.org/cache/epub/174/pg174.txt"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b",
+        "title": "[Corpus v2] Renaissance",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Renaissance"
+      },
+      {
+        "id": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-e2239dd922c8",
+        "title": "[Corpus v2] Art history",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "arts",
+        "branchSlug": "visual-art",
+        "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Art_history"
+      }
+    ],
+    "chunks": [
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb",
+        "chunkIndex": 27,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb#27",
+        "heading": "Engineering",
+        "text": "=== Art ===\n\nThere are connections between engineering and art, for example, architecture, landscape architecture and industrial design (even to the extent that these disciplines may sometimes be included in a university's Faculty of Engineering).\nThe Art Institute of Chicago, for instance, held an exhibition about the art of NASA's aerospace design. Robert Maillart's bridge design is perceived by some to have been deliberately artistic. At the University of South Florida, an engineering professor, through a grant with the National Science Foundation, has developed a course that connects art and engineering.\nAmong famous historical figures, Leonardo da Vinci is a well-known Renaissance artist and engineer, and a prime example of the nexus between art and engineering.",
+        "charCount": 777,
+        "tokenEstimate": 195
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af",
+        "chunkIndex": 534,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#534",
+        "heading": "Writing Guide with Handbook",
+        "text": "Born in New Haven, Connecticut, Michiko Kakutani (b. 1955) is an American author and a literary critic. She graduated from Yale University in 1976 and began her career with The Washington Post as a reporter. She moved to Time magazine in 1977, then in 1979 began working for The New York Times , first as a reporter and then as a literary critic. She is probably best known for the position she held as chief book critic at The New York Times until her retirement in 2017. Highly respected—and often feared—as a critic, Kakutani won a Pulitzer Prize for criticism in 1998. Her book reviews for The New York Times were highly influential, with some reviews creating as much discussion and debate as the book being reviewed. American authors Jonathan Franzen (b. 1959) and Norman Mailer (1923–2007), for instance, feuded publicly with Kakutani after she published negative reviews of their works.\n\nKakutani\n\nYale University\n\nThe Washington Post\n\nTime\n\nThe New York Times\n\nNew York Times\n\nPulitzer Prize\n\ncriticism\n\nThe New York Times\n\nFranzen\n\nMailer",
+        "charCount": 1048,
+        "tokenEstimate": 262
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af",
+        "chunkIndex": 1391,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1391",
+        "heading": "Writing Guide with Handbook",
+        "text": "In this context, with death seemingly everywhere and gay men hated, Demuth created striking watercolors that say a lot about his times. Because he did not share these paintings publicly, he was probably afraid of revealing his own homosexuality. But that did not stop him from making art that reflected his own desires. Dancing Sailors , now in possession of the Cleveland Museum of Art in Ohio, was not intended for public exhibition.\n\nDancing Sailors\n\nContext. In these four well-organized paragraphs, Davis outlines the painting’s context: key details about the artist’s personal life, the military and domestic situations in America, and Demuth’s place in this world. Davis focuses on the aspects most relevant to the artwork, keeping the context short and pointed.\n\nContext.\n\nIn these four well-organized paragraphs, Davis outlines the painting’s context: key details about the artist’s personal life, the military and domestic situations in America, and Demuth’s place in this world. Davis focuses on the aspects most relevant to the artwork, keeping the context short and pointed.\n\nTension within a Painting",
+        "charCount": 1114,
+        "tokenEstimate": 279
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af",
+        "chunkIndex": 1709,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1709",
+        "heading": "Writing Guide with Handbook",
+        "text": "Present Tense The film critic Manohla Dargis claims that . . . Present Perfect Tense The film critic Manohla Dargis has claimed that . . .\n\nPresent Tense The film critic Manohla Dargis claims that . . .\n\nPresent Tense\n\nclaims\n\nPresent Perfect Tense The film critic Manohla Dargis has claimed that . . .\n\nPresent Perfect Tense\n\nhas claimed\n\nWhen you are analyzing a work of literature, common practice is to use the literary present tense in discussing both the work of the author and the action that occurs in the work:\n\nBeing cool is key to the lives of the speakers in “We Real Cool,” a poem by Gwendolyn Brooks. Brooks uses short lines and stanzas in which speakers list what it means to be cool: dropping out of school, staying out late, playing pool, drinking, carousing, and so on. Being cool unites the speakers, and they celebrate their lifestyle, even as they acknowledge in the final line of the poem that their coolness may cause them to die young.\n\nis\n\nuses\n\nlist\n\nunites\n\ncelebrate\n\nacknowledge\n\nmay cause\n\n(For more on literary present tense, see Editing Focus: Literary Works Live in the Present .)\n\nIf you are writing for a course in history, art history, philosophy, religion, or a related discipline in the humanities, you generally will use the present tense or the present perfect tense in signal phrases.",
+        "charCount": 1325,
+        "tokenEstimate": 332
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+        "chunkIndex": 134,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#134",
+        "heading": "Introduction to Anthropology",
+        "text": "In addition to animal specimens, Native American baskets and other Indigenous art objects were collected and placed in natural history museums . When visiting the Auckland Museum in Auckland, New Zealand, visitors today encounter two large totem poles in the foyer. Northwest Coast totem poles are common in most older museums throughout the world. These totem poles were gathered from America’s Northwest Coast in the late 19th and early 20th centuries as part of the worldwide conservation and naturalism movement. Most museums sought to purchase such artifacts, but in some cases, artifacts were stolen when Indigenous owners were unwilling to sell them. Many natural history museums also established dioramas depicting both Indigenous peoples and animals in their “natural” world. The practice of installing dioramas of Indigenous people is now heavily criticized because of the implication that Indigenous peoples are akin to animals and plants. Many museums have stopped this practice and have even dropped the phrase natural history from their names. However, the Smithsonian Institution’s National Museum of Natural History in Washington, DC, and the American Museum of Natural History in New York both maintain the designation and still display dioramas of Indigenous peoples.\n\nnatural history museums\n\ndioramas\n\nnatural history",
+        "charCount": 1337,
+        "tokenEstimate": 335
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+        "chunkIndex": 177,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#177",
+        "heading": "Introduction to Anthropology",
+        "text": "Three-dimensional collections\n\nThis pair of yucca sandals, collected in 1875, is an example of an organic artifact of the Southern Paiute people. Yucca is a perennial plant with large tough leaves that can be used for various purposes. (credit: “Sandals, Southern Paiute, yucca, collected in 1875 – Native American collection –Peabody Museum, Harvard University – DSC05570” by Daderot/Wikimedia Commons, CC0)\n\nAll objects in collections storage must be well organized to make them accessible for further research opportunities. Collection materials that have been used to make claims about human experience or evolution must remain accessible to future researchers in case there are challenges or additional questions about their findings. In addition, if an anthropologist who donated and is responsible for overseeing a collection at one institution should die or move to another research institute, there needs to be a plan for the period of retention for the collection, or the time that the collection will remain in the archive. Many biological and cultural collections have been preserved in repositories since the day they were collected, with no plans to ever remove them from an archive. There are collections in the Smithsonian Institution that have been there since the institution was built in the 1850s. These collections continue to grow at museums and universities around the world.\n\nperiod of retention",
+        "charCount": 1419,
+        "tokenEstimate": 355
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+        "chunkIndex": 289,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#289",
+        "heading": "Introduction to Anthropology",
+        "text": "Yin, Xiangru. 2017. “An Analysis of Corruption in China: The Guanxi Network of Chinese High Level Officials and Governors.” Master’s thesis, Clark University. International Development, Community, and Environment (IDCE) (140). https://commons.clarku.edu/idce_masters_papers/140.\n\nZhang, Lijia. 2013. “Author: In China, ‘Everyone Is Guilty of Corruption.’” CNN. October 24, 2013. http://edition.cnn.com/2013/10/23/opinion/china-corrution-lijia-zhang/.\n\n## Biological Evolution and Early Human Evidence\n\n### Introduction (m00023)\n\nThe Grand Gallery of Evolution in the National Museum of Natural History in Paris, France displays 9,500 specimens of the estimated millions of species that currently live or once lived on the Earth in its collections. In addition to educating the public about the mechanisms of evolution, the exhibitions in the museum honor the scientists who helped contribute to our current understanding of the history of life on Earth. (credit: “Great Gallery of Evolution” by Mustang Joe/flickr, Public Domain)",
+        "charCount": 1029,
+        "tokenEstimate": 258
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af",
+        "chunkIndex": 1440,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1440",
+        "heading": "Writing Guide with Handbook",
+        "text": "Los Angeles County Museum of Art. Los Angeles, CA, www.lacma.org/\n\nMcClean, Shilo T. Digital Storytelling: The Narrative Power of Visual Effects in Film . MIT P, 2007.\n\nDigital Storytelling: The Narrative Power of Visual Effects in Film\n\nNational Memorial for Peace and Justice. Montgomery, AL, museumandmemorial.eji.org/memorial\n\nNational Museum of Mexican Art. Chicago, IL, nationalmuseumofmexicanart.org/\n\nO’Connell, Mark, and Raje Airey. The Illustrated Dictionary of Signs and Symbols . Anness, 2009.\n\nThe Illustrated Dictionary of Signs and Symbols\n\nPerelman, Chaïm, and Lucie Olbrechts-Tyteca. The New Rhetoric: A Treatise on Argumentation . Translated by John Wilkinson and Purcell Weaver, U of Notre Dame P, 1969.\n\nThe New Rhetoric: A Treatise on Argumentation\n\nThe Rubin Museum of Art. New York, NY, rubinmuseum.org/\n\nThe Smithsonian National Museum Network. Washington, DC (collections with special cultural interests detailed below)\n\nAsian Pacific American Center, smithsonianapa.org/\n\nLatino Center, latino.si.edu/latino-center\n\nNational Museum of African American History and Culture, nmaahc.si.edu/\n\nNational Museum of the American Indian, americanindian.si.edu/\n\nFreer Gallery of Art and Arthur M. Sackler Gallery, the Smithsonian’s National Museum of Asian Art, asia.si.edu/\n\nStocchetti, Matteo, and Karin Kukkonen, editors. Images in Use: Towards the Critical Analysis of Visual Communication . John Benjamins, 2011.\n\nImages in Use: Towards the Critical Analysis of Visual Communication",
+        "charCount": 1504,
+        "tokenEstimate": 376
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af",
+        "chunkIndex": 1784,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1784",
+        "heading": "Writing Guide with Handbook",
+        "text": "Online Gauld, Tom. “Waiting for Godot to Join the Zoom Meeting.” You’re All Just Jealous of My Jetpack, 31 Jan. 2021, myjetpack.tumblr.com/.\n\nOnline\n\nGauld, Tom. “Waiting for Godot to Join the Zoom Meeting.” You’re All Just Jealous of My Jetpack, 31 Jan. 2021, myjetpack.tumblr.com/.\n\nYou’re All Just Jealous of My Jetpack,\n\n63. Painting or other visual artwork\n\nOriginal work Rivera, Diego. Detroit Industry Murals. 1932-33. Detroit Institute of Art. If the city is not part of the name of the museum, add it after museum. For example, if the work you viewed was at the Museum of Modern Art in New York City, you would end the entry as follows: Museum of Modern Art, New York.\n\nOriginal work\n\nRivera, Diego. Detroit Industry Murals. 1932-33. Detroit Institute of Art.\n\nDetroit Industry Murals.\n\nIf the city is not part of the name of the museum, add it after museum. For example, if the work you viewed was at the Museum of Modern Art in New York City, you would end the entry as follows: Museum of Modern Art, New York.\n\nReproduction Neel, Alice. Elenka. 1936. Alice Neel: People Come First, by Kelly Baum and Randall Griffey, The Metropolitan Museum of Art, 2021, p. 142.\n\nReproduction",
+        "charCount": 1188,
+        "tokenEstimate": 297
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af",
+        "chunkIndex": 1811,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1811",
+        "heading": "Writing Guide with Handbook",
+        "text": "For an artist whose music is available only through a website, include the URL. If the artist’s music is available on multiple platforms, you do not need to specify how you accessed it.\n\nAlbum Prince. (1984). Purple rain [Album]. Warner Brothers.\n\nAlbum\n\nPrince. (1984). Purple rain [Album]. Warner Brothers.\n\nPurple rain\n\nSong The Supremes. (1964). Baby love [Song]. On Where did our love go. Motown.\n\nSong\n\nThe Supremes. (1964). Baby love [Song]. On Where did our love go. Motown.\n\nWhere did our love go.\n\n118. Radio\n\nOverby, J. (Host). (2021, January 9). The road to higher ground: World music with African roots and more. WPR.\n\nThe road to higher ground: World music with African roots and more.\n\n119. Podcast\n\nMcEvers, K. (Host). (2019, November 7). This is not a joke (Season 9, Episode 9) [Audio podcast episode]. In Embedded. NPR.\n\nEmbedded.\n\n120. Painting or other visual artwork\n\nFor a work of visual art, give the location of the museum or gallery. If you saw the work online, add the URL after the location:\n\nRivera, D. (1932-33). Detroit industry murals [Painting]. Detroit Institute of Art, Detroit, MI, United States.\n\nDetroit industry murals\n\nBasquiat, J-M. (1983). Untitled [Painting]. Museum of Modern Art, New York, NY, United States. https://www.moma.org/collection/works/63997?artist_id=370&page=1&sov_referrer=artist\n\nUntitled",
+        "charCount": 1348,
+        "tokenEstimate": 337
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1",
+        "chunkIndex": 1725,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1#1725",
+        "heading": "Physics",
+        "text": "As a child, you probably learned the color wheel, shown on the left in . It helps if you know what color results when you mix different colors of paint together. Mixing two of the primary pigment colors—magenta, yellow, or cyan—together results in a secondary color. For example, mixing cyan and yellow makes green. This is called subtractive color mixing. Mixing different colors of light together is quite different. The diagram on the right shows additive color mixing. In this case, the primary colors are red, green, and blue, and the secondary colors are cyan, magenta, and yellow. Mixing pigments and mixing light are different because materials absorb light by a different set of rules than does the perception of light by the eye. Notice that, when all colors are subtracted, the result is no color, or black. When all colors are added, the result is white light. We see the reverse of this when white sunlight is separated into the visible spectrum by a prism or by raindrops when a rainbow appears in the sky.\n\npigment\n\nsubtractive\n\nlight\n\nadditive\n\nMixing colored pigments follows the subtractive color wheel, and mixing colored light follows the additive color wheel.",
+        "charCount": 1180,
+        "tokenEstimate": 295
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1",
+        "chunkIndex": 1726,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1#1726",
+        "heading": "Physics",
+        "text": "Color Vision This video demonstrates additive color and color filters. Try all the settings except Photons . Teacher Support Have students adjust the different colored lights for the RGB bulb simulation, first with individual settings, then with combinations of two and three colors to see what colors result and are perceived. Similarly, with the Single Bulb simulation, have students note how different filter settings affect what colors are seen for light with different color components.\n\nColor Vision\n\nThis video demonstrates additive color and color filters. Try all the settings except Photons .\n\nPhotons\n\nTeacher Support Have students adjust the different colored lights for the RGB bulb simulation, first with individual settings, then with combinations of two and three colors to see what colors result and are perceived. Similarly, with the Single Bulb simulation, have students note how different filter settings affect what colors are seen for light with different color components.\n\nTeacher Support\n\nHave students adjust the different colored lights for the RGB bulb simulation, first with individual settings, then with combinations of two and three colors to see what colors result and are perceived. Similarly, with the Single Bulb simulation, have students note how different filter settings affect what colors are seen for light with different color components.",
+        "charCount": 1380,
+        "tokenEstimate": 345
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1",
+        "chunkIndex": 2007,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1#2007",
+        "heading": "Physics",
+        "text": "Measure the distance from the CD to the wall and the distance from the center of the circular pattern to a color in the rainbow. Use those two distances to calculate tan θ . Find sin θ .\n\nLook up the wavelength of the color you chose. That is λ .\n\nSolve d sin θ = m λ for d .\n\nd\n\nCompare your answer to the usual spacing between CD tracks, which is 1,600 nm (1.6 μm). How do you know what number to use for m ? Count the rainbow rings preceding the chosen color. Calculate mfrom the frequency of the light of the chosen color. Calculate m from the wavelength of the light of the chosen color. The value of m is fixed for every color.\n\nHow do you know what number to use for m ?\n\nm\n\nCount the rainbow rings preceding the chosen color.\n\nCalculate mfrom the frequency of the light of the chosen color.\n\nCalculate m from the wavelength of the light of the chosen color.\n\nm\n\nThe value of m is fixed for every color.",
+        "charCount": 910,
+        "tokenEstimate": 228
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232",
+        "chunkIndex": 283,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232#283",
+        "heading": "The Picture of Dorian Gray",
+        "text": "An exclamation of horror broke from the painter’s lips as he saw in the\ndim light the hideous face on the canvas grinning at him. There was\nsomething in its expression that filled him with disgust and loathing.\nGood heavens! it was Dorian Gray’s own face that he was looking at! The\nhorror, whatever it was, had not yet entirely spoiled that marvellous\nbeauty. There was still some gold in the thinning hair and some scarlet\non the sensual mouth. The sodden eyes had kept something of the\nloveliness of their blue, the noble curves had not yet completely\npassed away from chiselled nostrils and from plastic throat. Yes, it\nwas Dorian himself. But who had done it? He seemed to recognize his own\nbrushwork, and the frame was his own design. The idea was monstrous,\nyet he felt afraid. He seized the lighted candle, and held it to the\npicture. In the left-hand corner was his own name, traced in long\nletters of bright vermilion.",
+        "charCount": 928,
+        "tokenEstimate": 232
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+        "chunkIndex": 16,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+        "heading": "Fascism",
+        "text": "Futurism was both an artistic-cultural movement and initially a political movement in Italy led by Filippo Tommaso Marinetti (1876-1944) who wrote the Manifesto of Futurism (1908), that championed the causes of modernism, action, and political violence as necessary elements of politics while denouncing liberalism and parliamentary politics. Futurism influenced fascism in its emphasis on recognizing the virile nature of violent action and war as necessities of modern civilization.\n\n=== World War I and its aftermath (1914–1929) ===",
+        "charCount": 535,
+        "tokenEstimate": 134
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+        "chunkIndex": 52,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#52",
+        "heading": "Fascism",
+        "text": "=== Palingenesis and modernism ===",
+        "charCount": 34,
+        "tokenEstimate": 9
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+        "chunkIndex": 53,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#53",
+        "heading": "Fascism",
+        "text": "Fascism emphasizes both palingenesis (national rebirth or re-creation) and modernism. In particular, fascism's nationalism has been identified as having a palingenetic character. Fascism promotes the nation's regeneration and purging it of decadence. Fascism accepts forms of modernism that it deems promote national regeneration while rejecting forms of modernism regarded as antithetical to national regeneration. Fascism aestheticized modern technology and its association with speed, power, and violence. Fascism admired advances in the economy in the early 20th century, particularly Fordism and scientific management. Fascist modernism has been recognized as inspired or developed by various figures—such as Filippo Tommaso Marinetti, Ernst Jünger, Gottfried Benn, Louis-Ferdinand Céline, Knut Hamsun, Ezra Pound and Wyndham Lewis.\nIn Italy, such modernist influence was exemplified by Marinetti, who advocated a palingenetic modernist society that condemned liberal-bourgeois values of tradition and psychology while promoting a technological-martial religion of national renewal that emphasized militant nationalism. In Germany, it was exemplified by Jünger who was influenced by his observation of the technological warfare during World War I and claimed that a new social class had been created that he described as the \"warrior-worker\"; Like Marinetti, Jünger emphasized the revolutionary capacities of technology. He emphasized an \"organic construction\" between humans and machines as a liberating and regenerative force that challenged liberal democracy, conceptions of individual autonomy, bourgeois nihilism, and decadence. He conceived of a society based on a totalitarian concept of \"total mobilization\" of such disciplined warrior-workers.",
+        "charCount": 1757,
+        "tokenEstimate": 440
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c",
+        "chunkIndex": 9,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c#9",
+        "heading": "Art",
+        "text": "The western Age of Enlightenment in the 18th century saw artistic depictions of physical and rational certainties of the clockwork universe, as well as politically revolutionary visions of a post-monarchist world, such as Blake's portrayal of Newton as a divine geometer, or David's propagandistic paintings. This led to Romantic rejections of this in favor of pictures of the emotional side and individuality of humans, exemplified in the novels of Goethe. The late 19th century then saw a host of artistic movements, such as academic art, Symbolism, impressionism and fauvism among others.\nThe history of 20th-century art is a narrative of endless possibilities and the search for new standards, each being torn down in succession by the next. Thus the parameters of Impressionism, Expressionism, Fauvism, Cubism, Dadaism, Surrealism, etc. cannot be maintained very much beyond the time of their invention. Increasing global interaction during this time saw an equivalent influence of other cultures into Western art. Thus, Japanese woodblock prints (themselves influenced by Western Renaissance draftsmanship) had an immense influence on impressionism and subsequent development. Later, African sculptures were taken up by Picasso and to some extent by Matisse. Similarly, in the 19th and 20th centuries the West has had huge impacts on Eastern art with originally western ideas like Communism and Post-Modernism exerting a powerful influence.\nModernism, the idealistic search for truth, gave way in the latter half of the 20th century to a realization of its unattainability. Theodor W. Adorno said in 1970, \"It is now taken for granted that nothing which concerns art can be taken for granted any more: neither art itself, nor art in relationship to the whole, nor even the right of art to exist.\" Relativism was accepted as an unavoidable truth, which led to the period of contemporary art and postmodern criticism, where cultures of the world and of history are seen as changing forms, which can be appreciated and drawn from only with skepticism and irony. Furthermore, the separation of cultures is increasingly blurred and some argue it is now more appropriate to think in terms of a global culture, rather than of regional ones.\nIn The Origin of the Work of Art, Martin Heidegger, a German philosopher and seminal thinker, describes the essence of art in terms of the concepts of being and truth. He argues that art is not only a way of expressing the element of truth in a culture, but the means of creating it and providing a springboard from which \"that which is\" can be revealed. Works of art are not merely representations of the way things are, but actually produce a community's shared understanding. Each time a new artwork is added to any culture, the meaning of what it is to exist is inherently changed.\nHistorically, art and artistic skills and ideas have often been spread through trade. An example of this is the Silk Road, where Hellenistic, Iranian, Indian and Chinese influences could mix. Greco Buddhist art is one of the most vivid examples of this interaction. The meeting of different cultures and worldviews also influenced artistic creation. An example of this is the multicultural port metropolis of Trieste at the beginning of the 20th century, where James Joyce met writers from Central Europe and the artistic development of New York City as a cultural melting pot.",
+        "charCount": 3403,
+        "tokenEstimate": 851
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c",
+        "chunkIndex": 25,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c#25",
+        "heading": "Art",
+        "text": "Before Modernism, aesthetics in Western art was greatly concerned with achieving the appropriate balance between different aspects of realism or truth to nature and the ideal; ideas as to what the appropriate balance is have shifted to and fro over the centuries. This concern is largely absent in other traditions of art. The aesthetic theorist John Ruskin, who championed what he saw as the naturalism of J. M. W. Turner, saw art's role as the communication by artifice of an essential truth that could only be found in nature.\nThe definition and evaluation of art has become especially problematic since the 20th century. Richard Wollheim distinguishes three approaches to assessing the aesthetic value of art: the Realist, whereby aesthetic quality is an absolute value independent of any human view; the Objectivist, whereby it is also an absolute value, but is dependent on general human experience; and the Relativist position, whereby it is not an absolute value, but depends on, and varies with, the human experience of different humans.\n\n=== Arrival of Modernism ===",
+        "charCount": 1076,
+        "tokenEstimate": 269
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c",
+        "chunkIndex": 26,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c#26",
+        "heading": "Art",
+        "text": "The arrival of Modernism in the late 19th century led to a radical break in the conception of the function of art, and then again in the late 20th century with the advent of postmodernism. Clement Greenberg's 1960 article \"Modernist Painting\" defines modern art as \"the use of characteristic methods of a discipline to criticize the discipline itself\". Greenberg originally applied this idea to the Abstract Expressionist movement and used it as a way to understand and justify flat (non-illusionistic) abstract painting:",
+        "charCount": 521,
+        "tokenEstimate": 131
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af",
+        "chunkIndex": 1055,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af#1055",
+        "heading": "Writing Guide with Handbook",
+        "text": "Biographical dictionaries contain information about people who have made some mark on history in many different fields. Consult the following: Contemporary Authors (I962–present), containing short biographies of authors who have published during the year; Current Biography (1940–present), containing articles and photographs of people in the news; and Who’s Who in America (1899–present), the standard biographical reference for living Americans.\n\nBiographical dictionaries\n\nContemporary Authors\n\nCurrent Biography\n\nWho’s Who in America\n\nDictionaries contain definitions and histories of words, along with their syllabication, and correct spelling and usage.\n\nDictionaries\n\nEncyclopedias provide basic information, explanations, and definitions of virtually every topic, concept, country, institution, historical person or movement, and cultural artifact imaginable. One-volume works such as the Random House Encyclopedia and the Columbia Encyclopedia give brief overviews. Larger works, such as the New Encyclopædia Britannica (32 volumes, also online), contain more detailed information.\n\nEncyclopedias\n\nRandom House Encyclopedia\n\nColumbia Encyclopedia\n\nNew Encyclopædia Britannica\n\nBoth print and electronic texts provide excellent general resources for people of all ages. (credit: “The future of books” by Johan Larsson/flickr, CC BY 2.0)\n\nDatabases",
+        "charCount": 1355,
+        "tokenEstimate": 339
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af",
+        "chunkIndex": 1397,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af#1397",
+        "heading": "Writing Guide with Handbook",
+        "text": "Context and Analysis. The author uses context and analysis to reach a conclusion about Demuth’s intention in creating the painting and its significance in the history of American homoerotic art.\n\nContext and Analysis.\n\nThe author uses context and analysis to reach a conclusion about Demuth’s intention in creating the painting and its significance in the history of American homoerotic art.\n\nAlthough Demuth died at the relatively early age of 52, his work remains influential in American art. The geometric background of Dancing Sailors shows his increased interest in architectural watercolors. Later in his career, these paintings were hailed as key to the development of the precisionist movement. His unique expressions of modernism are a precursor to the abstract expressionism that developed in the 1940s and later influenced pop art innovators such as Andy Warhol (1928–1987). Aside from its historical significance, the vibrant sensuousness of Dancing Sailors continues to have relevance and appeal for art lovers today.\n\nDancing Sailors\n\nContext. Leo Davis concludes by extending his argument for Demuth’s influence, tracing the effect of his work through later artists and movements and stating the reason Dancing Sailors continues to have value as a work of art.\n\nContext.",
+        "charCount": 1285,
+        "tokenEstimate": 322
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af",
+        "chunkIndex": 1647,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af#1647",
+        "heading": "Writing Guide with Handbook",
+        "text": "It is important to remember that many thoughtful and powerful English-language works from the past took masculine words for granted. English use of words such as man , men , he , him , and his was, one would hope, meant to include both men and women. Consider Thomas Jefferson ’s “All men are created equal” and Thomas Paine ’s “These are the times that try men’s souls.” The contemporary equivalent of those words might be “All people are created equal” and “These are the times that try our souls,” which are two of several possible fixes for such gender exclusivity. When you read historic texts, recognize that the rules were different then, and the writers are no more at fault than the culture in which they lived. Contemporary writing, however, should reflect inclusivity, which in turn reflects the culture in which you live today. (See Spotlight on... Bias in Language and Research for more about language bias.)\n\nman\n\nmen\n\nhe\n\nhim\n\nhis\n\nJefferson\n\nPaine",
+        "charCount": 963,
+        "tokenEstimate": 241
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b",
+        "chunkIndex": 14,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b#14",
+        "heading": "Renaissance",
+        "text": "== Characteristics ==\n\n=== Humanism ===\n\nIn some ways, Renaissance humanism was not a philosophy but a method of learning. In contrast to the medieval scholastic mode, which focused on resolving contradictions between authors, Renaissance humanists would study ancient texts in their original languages and appraise them through a combination of reasoning and empirical evidence. Humanist education was based on the programme of Studia Humanitatis, the study of five humanities: poetry, grammar, history, moral philosophy, and rhetoric. Although historians have sometimes struggled to define humanism precisely, most have settled on \"a middle of the road definition... the movement to recover, interpret, and assimilate the language, literature, learning and values of ancient Greece and Rome\". Above all, humanists asserted \"the genius of man ... the unique and extraordinary ability of the human mind\".",
+        "charCount": 904,
+        "tokenEstimate": 226
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b",
+        "chunkIndex": 15,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b#15",
+        "heading": "Renaissance",
+        "text": "Humanist scholars shaped the intellectual landscape throughout the early modern period. Political philosophers such as Niccolò Machiavelli and Thomas More revived the ideas of Greek and Roman thinkers and applied them in critiques of contemporary government, following the Islamic steps of Ibn Khaldun. Pico della Mirandola wrote the \"manifesto\" of the Renaissance, the Oration on the Dignity of Man, a vibrant defence of thinking. Matteo Palmieri (1406–1475), another humanist, is most known for his work Della vita civile (\"On Civic Life\"; printed 1528), which advocated civic humanism, and for his influence in refining the Tuscan vernacular to the same level as Latin. Palmieri drew on Roman philosophers and theorists, especially Cicero, who, like Palmieri, lived an active public life as a citizen and official, as well as a theorist and philosopher and also Quintilian. Perhaps the most succinct expression of his perspective on humanism is in a 1465 poetic work La città di vita, but an earlier work, Della vita civile, is more wide-ranging. Composed as a series of dialogues set in a country house in the Mugello countryside outside Florence during the plague of 1430, Palmieri expounds on the qualities of the ideal citizen. The dialogues include ideas about how children develop mentally and physically, how citizens can conduct themselves morally, how citizens and states can ensure probity in public life, and an important debate on the difference between that which is pragmatically useful and that which is honest.\nThe humanists believed that it is important to transcend to the afterlife with a perfect mind and body, which could be attained with education. The purpose of humanism was to create a universal man whose person combined intellectual and physical excellence and who was capable of functioning honorably in virtually any situation. This ideology was referred to as the uomo universale, an ancient Greco-Roman ideal. Education during the Renaissance was mainly composed of ancient literature and history as it was thought that the classics provided moral instruction and an intensive understanding of human behavior.",
+        "charCount": 2143,
+        "tokenEstimate": 536
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b",
+        "chunkIndex": 33,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b#33",
+        "heading": "Renaissance",
+        "text": "=== Germany ===\n\nIn the second half of the 15th century, the Renaissance spirit spread to Germany and the Low Countries, where the development of the printing press (ca. 1450) and Renaissance artists such as Albrecht Dürer (1471–1528) predated the influence from Italy. In the early Protestant areas of the country humanism became closely linked to the turmoil of the Reformation, and the art and writing of the German Renaissance frequently reflected this dispute. However, the Gothic style and medieval scholastic philosophy remained exclusively until the turn of the 16th century. Emperor Maximilian I of Habsburg (ruling 1493–1519) was the first truly Renaissance monarch of the Holy Roman Empire.\n\n=== Hungary ===",
+        "charCount": 718,
+        "tokenEstimate": 180
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-e2239dd922c8",
+        "chunkIndex": 1,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-e2239dd922c8#1",
+        "heading": "Art history",
+        "text": "Art history is an academic discipline devoted to the study of artistic production and visual culture throughout human history. Art historians use a historical method or a philosophy, such as historical materialism or critical theory, to analyze artworks. Among other topics, they study art's impact on societies and cultures, the relationship between art and politics, and how artistic styles and formal characteristics of works of art have changed throughout history. As a discipline, art history is distinguished from art criticism, which is concerned with establishing a relative artistic value for critiquing individual works, and aesthetics, which is a branch of philosophy.\nThe study of art’s history emerged as a way to document and interpret artistic production. Early traditions of art-historical writing developed in several cultures, including Ancient Greece, Imperial China, and Renaissance Italy, each producing influential figures and approaches that shaped later scholarship. As an academic discipline, art history emerged in the 19th century and was a largely Eurocentric field, concentrating on Western definitions of the fine and decorative arts, particularly painting, drawing, sculpture, and architecture.\nIn the contemporary era, however, art history has expanded to examine broader aspects of visual culture, including the various cultural, political, and socioeconomic issues related to art. Today, art history is a broad academic field encompassing numerous methodologies and interdisciplinary approaches to the study of artistic production globally, including European, Asian, African, or American Indigenous arts, among others. Some of the subfields include Marxist art history, feminist art history, iconography and the study of symbols, visual culture studies, and design history.",
+        "charCount": 1808,
+        "tokenEstimate": 452
+      },
+      {
+        "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-e2239dd922c8",
+        "chunkIndex": 4,
+        "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-e2239dd922c8#4",
+        "heading": "Art history",
+        "text": "== Notable concentrations and fields of study ==\n\nMost art historians choose a specific historical period within art history to specialize or gain an academic degree in. Concentrations on art movements, periods and certain fields such as Prehistoric art, Ancient art, Medieval art, Renaissance art, Romanticism, Realism, Modern art, Contemporary art, Pop art, Feminist art, Queer art and much more are common in the academic world. These periods of art movements attempt to cover the broader aspect of art history while distinctively separating them.\n\n=== Feminist art history ===",
+        "charCount": 580,
+        "tokenEstimate": 145
+      }
+    ],
+    "sourceMapSlug": "visual-art-movements-corpus-v2-202607202002",
+    "packetHash": "e702f0a91a7e975e29731ac071522f1f7e3e0294cfebe36954f24e31c380496a"
+  }
+}

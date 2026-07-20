@@ -1,0 +1,87 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 18,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 723,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "assumptions",
+        "summary": "beliefs not yet confirmed",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 1120,
+            "note": "definition"
+          },
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 1120,
+            "note": "distinction from constraints"
+          }
+        ]
+      },
+      {
+        "label": "constraints",
+        "summary": "limitations or restrictions",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 1120,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "time series",
+        "summary": "predictive model data",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 1120,
+            "note": "data source"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "historical data represents future conditions",
+        "subject": "predictive models",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 1120,
+            "note": "assumption"
+          }
+        ]
+      },
+      {
+        "text": "past patterns persist",
+        "subject": "predictive models",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+            "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+            "chunkIndex": 1120,
+            "note": "assumption"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

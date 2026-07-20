@@ -1,0 +1,58 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 22,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 725,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "load sharing complex systems",
+        "summary": "Nodes interact based on strength, load, and neighbor support.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+            "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+            "chunkIndex": 1,
+            "note": "abstract"
+          }
+        ]
+      },
+      {
+        "label": "node/component failure",
+        "summary": "Dependent on strength, load, and neighbor support.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+            "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+            "chunkIndex": 1,
+            "note": "abstract"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Phys. Rev. E 89, 012816",
+        "kind": "paper",
+        "author": "Shahnewaz Siddique, Vitali Volovoi",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+            "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+            "chunkIndex": 1,
+            "note": "journal reference"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

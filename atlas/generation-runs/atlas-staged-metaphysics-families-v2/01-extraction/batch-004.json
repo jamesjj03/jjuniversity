@@ -1,0 +1,200 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#4"
+  ],
+  "result": {
+    "people": [
+      {
+        "name": "Aristotle",
+        "role": "Founder of hylomorphism",
+        "reason": "Developed the concept of beings as composites of form and matter.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Thomas Aquinas",
+        "role": "Adaptor of hylomorphism",
+        "reason": "Applied the vocabulary to being, essence, causation, and theology.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Contemporary neo-Aristotelians",
+        "role": "Revivers of hylomorphism",
+        "reason": "Brought back categories, powers, dependence, and essence.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Substance metaphysics",
+        "summary": "Investigates what kinds of things exist and what makes them persist.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Hylomorphism",
+        "summary": "Treats beings as composites of form and matter, potentiality and actuality.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Essence",
+        "summary": "The unchanging nature or defining characteristic of a thing.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Aristotle developed the concept of beings as composites of form and matter.",
+        "subject": "Aristotle",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Aquinas adapted hylomorphism to being, essence, causation, and theology.",
+        "subject": "Thomas Aquinas",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Contemporary neo-Aristotelian work revives categories, powers, dependence, and essence.",
+        "subject": "Contemporary neo-Aristotelians",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "texts": [
+      {
+        "title": "Works of Aristotle",
+        "kind": "book",
+        "author": "Aristotle",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "title": "Summa Theologica by Thomas Aquinas",
+        "kind": "book",
+        "author": "Thomas Aquinas",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Substance metaphysics",
+        "target": "Hylomorphism",
+        "kind": "influences",
+        "note": "Hylomorphism is a part of substance metaphysics.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "source": "Aristotle",
+        "target": "Hylomorphism",
+        "kind": "influences",
+        "note": "Aristotle is the founder of hylomorphism.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "source": "Thomas Aquinas",
+        "target": "Hylomorphism",
+        "kind": "influences",
+        "note": "Aquinas adapted hylomorphism for theology.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ]
+  }
+}

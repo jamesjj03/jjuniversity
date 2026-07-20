@@ -1,0 +1,64 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 19,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 707,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "requirements engineering",
+        "summary": "First phase in waterfall model; ongoing in RUP.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+            "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+            "chunkIndex": 1,
+            "note": "definition"
+          },
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+            "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+            "chunkIndex": 1,
+            "note": "RUP"
+          }
+        ]
+      },
+      {
+        "label": "Systems Engineering",
+        "summary": "Includes requirements management.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+            "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+            "chunkIndex": 1,
+            "note": "sub-function"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "INCOSE manuals",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+            "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+            "chunkIndex": 1,
+            "note": "indexed in"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

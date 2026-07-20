@@ -1,0 +1,78 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 0,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#1594"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 754,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Paul Laurence Dunbar",
+        "role": "poet",
+        "reason": "central figure in realist period",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#1594",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 1594,
+            "note": "identified as realist poet"
+          },
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#1594",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 1594,
+            "note": "dealt with race issues"
+          }
+        ]
+      },
+      {
+        "name": "William Dean Howells",
+        "role": "editor",
+        "reason": "supported Dunbar's career",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#1594",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 1594,
+            "note": "Atlantic Monthly editor"
+          }
+        ]
+      },
+      {
+        "name": "Paul Laurence Dunbar",
+        "role": "novelist",
+        "reason": "literary career",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#1594",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 1594,
+            "note": "novelist"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "realist period",
+        "summary": "literary era",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#1594",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 1594,
+            "note": "Dunbar's era"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

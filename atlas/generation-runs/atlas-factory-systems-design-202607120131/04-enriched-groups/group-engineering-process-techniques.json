@@ -1,0 +1,65 @@
+{
+  "id": "group-engineering-process-techniques",
+  "slug": "group-engineering-process-techniques",
+  "title": "Engineering Design Process Techniques",
+  "shortTitle": "Techniques & Methods",
+  "family": "Engineering Processes",
+  "stance": "neutral",
+  "centralClaim": "Structured techniques enhance design effectiveness and reduce risk.",
+  "whyItMatters": "Provides a toolkit for analyzing, planning, and executing engineering projects effectively.",
+  "contributors": [
+    {
+      "id": "person-systems-engineers",
+      "name": "Systems Engineers",
+      "role": "Design & Advocacy",
+      "reason": "Develop and promote these techniques as core practices.",
+      "texts": [
+        {
+          "id": "text-systems-engineering-methods",
+          "title": "Systems engineering methods",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+              "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 3
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Can be overly rigid and stifle creativity.",
+    "May increase upfront costs and time investment.",
+    "Risk of analysis paralysis if applied too extensively.",
+    "Requires specialized training and expertise."
+  ],
+  "relatedGroupIds": [
+    "group-engineering-process-fundamentals",
+    "group-engineering-process-models",
+    "group-engineering-process-overview"
+  ],
+  "keywords": [
+    "design",
+    "engineering",
+    "methods",
+    "techniques",
+    "assessment",
+    "reverse engineering"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+      "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+      "chunkIndex": 3
+    }
+  ]
+}

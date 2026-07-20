@@ -1,0 +1,56 @@
+{
+  "runId": "atlas-factory-economic-schools-prod-20260711185931",
+  "jobId": "atlas-job-economic-schools-prod-20260711185931",
+  "status": "complete",
+  "currentStage": "complete",
+  "completedStages": [
+    "source-manifest",
+    "extraction",
+    "normalization",
+    "clustering",
+    "group-enrichment",
+    "relations",
+    "assembly",
+    "complete"
+  ],
+  "recipe": {
+    "id": "theory_family",
+    "title": "Theory Family",
+    "purpose": "Organize a field by major explanatory families or schools of thought.",
+    "groupingLogic": "Groups should be stable explanatory families or schools with distinct stances. Keep the category level broad enough to organize a field, but narrow enough that each family has its own central claim, pressure points, contributors, and relation pattern. Do not promote individual people, single objections, key texts, or one-off concepts into top-level groups unless the sources explicitly identify them as a school or family.",
+    "preferredGroupFields": [
+      "stance",
+      "centralClaim",
+      "whyItMatters",
+      "objections",
+      "contributors",
+      "keyTexts"
+    ],
+    "contributorRules": "Attach contributors to the family they shaped, extended, or centrally challenged. Avoid duplicating a contributor across groups unless the source supports a cross-family role and the reason states why. Treat precursors and hybrid figures as contributors or bridge notes before creating a separate family for them.",
+    "expectedRelationTypes": [
+      "opposes",
+      "answers",
+      "reframes",
+      "borrows",
+      "neighbors"
+    ],
+    "recommendedGroupCount": {
+      "min": 6,
+      "max": 10
+    },
+    "generationInstructions": "Prioritize source-backed family boundaries before enrichment. After clustering, audit for missing named families, person-as-category errors, objection-as-category errors, and overlapping categories. Keep pressure points under objections unless they are established schools. Relations must name a specific conceptual contrast, answer, borrowing, reframing, or neighboring boundary.",
+    "evaluationCriteria": [
+      "Each group is a source-backed explanatory family, not a person, single text, or objection.",
+      "Groups are mutually useful and minimally overlapping.",
+      "Major source-backed families are not missing before enrichment starts.",
+      "Contributors are placed by family role with explicit reasons for any duplicates.",
+      "Objections cover the family pressure point rather than becoming standalone categories.",
+      "Relations explain specific conceptual movement between families.",
+      "Provenance supports the actual category claim and key text anchor."
+    ]
+  },
+  "errors": [],
+  "repairAttempts": 17,
+  "outputDraftPath": "atlas/generation-runs/atlas-factory-economic-schools-prod-20260711185931/06-final-draft.json",
+  "updatedAt": "2026-07-11T23:36:03.270Z"
+}

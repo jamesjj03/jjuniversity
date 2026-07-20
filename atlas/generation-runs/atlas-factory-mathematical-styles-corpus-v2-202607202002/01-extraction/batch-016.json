@@ -1,0 +1,53 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 16,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0#13"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 700,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Dimensionality Reduction",
+        "summary": "Reducing the number of variables.",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0#13",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0",
+            "chunkIndex": 13,
+            "note": "definition"
+          },
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0#13",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0",
+            "chunkIndex": 13,
+            "note": "feature set"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Dimensionality Reduction",
+        "target": "PCA",
+        "kind": "supports",
+        "note": "PCA is a method.",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0#13",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0",
+            "chunkIndex": 13,
+            "note": "method"
+          }
+        ]
+      }
+    ]
+  }
+}

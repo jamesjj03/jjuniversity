@@ -1,0 +1,71 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 15,
+  "chunkIds": [
+    "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#39"
+  ],
+  "charLimit": 420,
+  "estimatedInputTokens": 651,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "sovereignty",
+        "summary": "Supreme authority within a state",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#39",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+            "chunkIndex": 39,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "authority",
+        "summary": "Legitimate power to issue commands",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#39",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+            "chunkIndex": 39,
+            "note": "related to sovereignty"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "The Stanford Encyclopedia of Philosophy",
+        "kind": "paper",
+        "author": "Edward N. Zalta",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#39",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+            "chunkIndex": 39,
+            "note": "reference"
+          }
+        ]
+      },
+      {
+        "title": "Sovereignty",
+        "kind": "paper",
+        "author": "Daniel Philpott",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#39",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+            "chunkIndex": 39,
+            "note": "reference"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 0,
+  "chunkIds": [
+    "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#204"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 705,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "federalism",
+        "summary": "division of power between states & federal government",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#204",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+            "chunkIndex": 204,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "decentralization",
+        "summary": "state autonomy",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#204",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+            "chunkIndex": 204,
+            "note": "example"
+          }
+        ]
+      },
+      {
+        "label": "centralization",
+        "summary": "strong central government",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#204",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+            "chunkIndex": 204,
+            "note": "example"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "federalism safeguards state interests & creates a strong union",
+        "subject": "American Government",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#204",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+            "chunkIndex": 204,
+            "note": "benefit"
+          }
+        ]
+      },
+      {
+        "text": "federalism balances decentralization & centralization",
+        "subject": "American Government",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#204",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+            "chunkIndex": 204,
+            "note": "goal"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

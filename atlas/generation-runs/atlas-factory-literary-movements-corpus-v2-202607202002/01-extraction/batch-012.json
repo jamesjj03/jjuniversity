@@ -1,0 +1,84 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 12,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 727,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Filippo Tommaso Marinetti",
+        "role": "leader",
+        "reason": "Futurism founder",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+            "chunkIndex": 16,
+            "note": "led Futurism"
+          }
+        ]
+      },
+      {
+        "name": "Marinetti",
+        "role": "author",
+        "reason": "Manifesto author",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+            "chunkIndex": 16,
+            "note": "wrote Manifesto"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Futurism",
+        "summary": "Artistic and political movement",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+            "chunkIndex": 16,
+            "note": "defined"
+          }
+        ]
+      },
+      {
+        "label": "Fascism",
+        "summary": "Political movement influenced by Futurism",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+            "chunkIndex": 16,
+            "note": "influenced"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "War is a necessity of modern civilization.",
+        "subject": "Futurism",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+            "chunkIndex": 16,
+            "note": "Futurist claim"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

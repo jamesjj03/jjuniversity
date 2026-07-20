@@ -1,0 +1,32 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 3,
+  "chunkIds": [
+    "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-dcbe4fa40741#1"
+  ],
+  "charLimit": 420,
+  "estimatedInputTokens": 1005,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "metaphysics",
+        "summary": "examines fundamental reality",
+        "provenance": [
+          {
+            "chunkId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-dcbe4fa40741#1",
+            "sourceId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-dcbe4fa40741",
+            "chunkIndex": 1,
+            "note": "definition"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

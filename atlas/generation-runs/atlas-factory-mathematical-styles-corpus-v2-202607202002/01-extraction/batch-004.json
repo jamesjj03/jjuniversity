@@ -1,0 +1,80 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#463"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 702,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "rational function",
+        "summary": "continuous where defined",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#463",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d",
+            "chunkIndex": 463,
+            "note": "continuity"
+          },
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#463",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d",
+            "chunkIndex": 463,
+            "note": "domain"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Calculus Volume 1",
+        "kind": "book",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#463",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d",
+            "chunkIndex": 463,
+            "note": "source"
+          }
+        ]
+      },
+      {
+        "title": "f(x) = x - 1 / x^2 + 2x",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#463",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d",
+            "chunkIndex": 463,
+            "note": "example"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "rational function",
+        "target": "continuity",
+        "kind": "supports",
+        "note": "inherent property",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#463",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d",
+            "chunkIndex": 463,
+            "note": "continuity"
+          }
+        ]
+      }
+    ]
+  }
+}

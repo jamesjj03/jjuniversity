@@ -1,0 +1,119 @@
+{
+  "id": "keynesian-and-macroeconomic-management",
+  "slug": "keynesian-and-macroeconomic-management",
+  "title": "Keynesian and macroeconomic management",
+  "shortTitle": "Keynesian",
+  "family": "Keynesian family",
+  "stance": "Aggregate demand, uncertainty, unemployment, money, expectations, and policy stabilization.",
+  "centralClaim": "economies can settle into underemployment",
+  "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+  "contributors": [
+    {
+      "id": "person-john-maynard-keynes",
+      "name": "John Maynard Keynes",
+      "role": "source contributor",
+      "reason": "anchors the family",
+      "texts": [
+        {
+          "id": "source-evidence-for-john-maynard-keynes",
+          "title": "Source evidence for John Maynard Keynes",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#4",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "person-joan-robinson",
+      "name": "Joan Robinson",
+      "role": "source contributor",
+      "reason": "develops branches of tradition",
+      "texts": [
+        {
+          "id": "source-evidence-for-joan-robinson",
+          "title": "Source evidence for Joan Robinson",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#4",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "person-paul-samuelson",
+      "name": "Paul Samuelson",
+      "role": "source contributor",
+      "reason": "develops branches of tradition",
+      "texts": [
+        {
+          "id": "source-evidence-for-paul-samuelson",
+          "title": "Source evidence for Paul Samuelson",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#4",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "overconfidence in government steering ability"
+  ],
+  "relatedGroupIds": [
+    "classical-political-economy",
+    "marxian-economics",
+    "neoclassical-and-marginalist-economics"
+  ],
+  "keywords": [
+    "keynesian",
+    "macroeconomic",
+    "management"
+  ],
+  "provenance": [
+    {
+      "chunkId": "society-economics-economic-schools#4",
+      "sourceId": "society-economics-economic-schools",
+      "chunkIndex": 4
+    },
+    {
+      "chunkId": "society-economics-economic-schools#0",
+      "sourceId": "society-economics-economic-schools",
+      "chunkIndex": 0,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}

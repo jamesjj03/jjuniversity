@@ -1,0 +1,74 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 2,
+  "chunkIds": [
+    "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1391"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 762,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "homosexuality",
+        "summary": "personal reflection in art",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1391",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af",
+            "chunkIndex": 1391,
+            "note": "artist's fear"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Dancing Sailors",
+        "kind": "other",
+        "author": "Demuth",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1391",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af",
+            "chunkIndex": 1391,
+            "note": "Cleveland Museum of Art"
+          }
+        ]
+      },
+      {
+        "title": "Writing Guide with Handbook",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1391",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af",
+            "chunkIndex": 1391,
+            "note": "contextual information"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Demuth",
+        "target": "Dancing Sailors",
+        "kind": "created",
+        "note": "watercolors reflecting desires",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1391",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af",
+            "chunkIndex": 1391,
+            "note": "personal reflection"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1078 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batches": [
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 0,
+      "chunkIds": [
+        "arts-music-music-lineages#0"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 606,
+      "splitDepth": 0,
+      "result": {
+        "people": [],
+        "concepts": [],
+        "claims": [],
+        "texts": [],
+        "objections": [],
+        "relationships": []
+      }
+    },
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 1,
+      "chunkIds": [
+        "arts-music-music-lineages#1"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 691,
+      "splitDepth": 0,
+      "result": {
+        "people": [
+          {
+            "name": "J. S. Bach",
+            "role": "anchor",
+            "reason": "contrapuntal craft, Lutheran sacred music",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#1",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 1,
+                "note": "anchors contrapuntal craft"
+              }
+            ]
+          },
+          {
+            "name": "Haydn",
+            "role": "shaper",
+            "reason": "classical form, symphony",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#1",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 1,
+                "note": "shapes classical form"
+              }
+            ]
+          },
+          {
+            "name": "Beethoven",
+            "role": "shaper",
+            "reason": "symphony, chamber music",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#1",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 1,
+                "note": "shapes symphony"
+              }
+            ]
+          },
+          {
+            "name": "Wagner",
+            "role": "pusher",
+            "reason": "harmony, orchestration",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#1",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 1,
+                "note": "pushes harmony"
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          {
+            "label": "canon",
+            "summary": "pressure point",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#1",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 1,
+                "note": "pressure point"
+              }
+            ]
+          }
+        ],
+        "claims": [],
+        "texts": [],
+        "objections": [],
+        "relationships": [
+          {
+            "source": "J. S. Bach",
+            "target": "Haydn",
+            "kind": "influences",
+            "note": "",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#1",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 1,
+                "note": "lineage"
+              }
+            ]
+          },
+          {
+            "source": "Haydn",
+            "target": "Beethoven",
+            "kind": "influences",
+            "note": "",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#1",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 1,
+                "note": "lineage"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 2,
+      "chunkIds": [
+        "arts-music-music-lineages#2"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 699,
+      "splitDepth": 0,
+      "result": {
+        "people": [
+          {
+            "name": "Louis Armstrong",
+            "role": "representative",
+            "reason": "ensemble logic",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#2",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 2,
+                "note": "example figure"
+              }
+            ]
+          },
+          {
+            "name": "Miles Davis",
+            "role": "representative",
+            "reason": "improvisation, harmony, rhythm, voice",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#2",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 2,
+                "note": "example figure"
+              }
+            ]
+          }
+        ],
+        "concepts": [],
+        "claims": [],
+        "texts": [],
+        "objections": [],
+        "relationships": []
+      }
+    },
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 3,
+      "chunkIds": [
+        "arts-music-music-lineages#3"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 697,
+      "splitDepth": 0,
+      "result": {
+        "people": [
+          {
+            "name": "Carter Family",
+            "role": "anchor",
+            "reason": "early commercial country",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          },
+          {
+            "name": "Jimmie Rodgers",
+            "role": "anchor",
+            "reason": "early commercial country",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          },
+          {
+            "name": "Bob Dylan",
+            "role": "bridge",
+            "reason": "folk, country, poetry, song",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          {
+            "label": "authenticity",
+            "summary": "pressure point",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          },
+          {
+            "label": "regional identity",
+            "summary": "organizing factor",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          },
+          {
+            "label": "oral transmission",
+            "summary": "transmission method",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          }
+        ],
+        "claims": [
+          {
+            "text": "Roots and tradition shaped by industry.",
+            "subject": "authenticity claims",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          },
+          {
+            "text": "Radio influenced transmission.",
+            "subject": "oral tradition",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          }
+        ],
+        "texts": [
+          {
+            "title": "ballads",
+            "kind": "other",
+            "author": "",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          },
+          {
+            "title": "radio broadcasts",
+            "kind": "other",
+            "author": "",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          }
+        ],
+        "objections": [],
+        "relationships": [
+          {
+            "source": "Carter Family",
+            "target": "Jimmie Rodgers",
+            "kind": "neighbors",
+            "note": "early commercial country",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          },
+          {
+            "source": "Woody Guthrie",
+            "target": "Pete Seeger",
+            "kind": "influences",
+            "note": "political folk revival",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#3",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 3,
+                "note": "extracted from this chunk"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 4,
+      "chunkIds": [
+        "arts-music-music-lineages#4"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 692,
+      "splitDepth": 0,
+      "result": {
+        "people": [
+          {
+            "name": "Chuck Berry",
+            "role": "pioneer",
+            "reason": "early rock influence",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "initial mention"
+              }
+            ]
+          },
+          {
+            "name": "Elvis Presley",
+            "role": "icon",
+            "reason": "popularized rock",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "initial mention"
+              }
+            ]
+          },
+          {
+            "name": "James Brown",
+            "role": "innovator",
+            "reason": "funk pioneer",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "initial mention"
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          {
+            "label": "Rock music",
+            "summary": "amplified popular music lineage",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "heading"
+              }
+            ]
+          },
+          {
+            "label": "Funk",
+            "summary": "rhythmic, danceable style",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "initial mention"
+              }
+            ]
+          },
+          {
+            "label": "Amplification",
+            "summary": "key technology enabling lineage",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "contextual factor"
+              }
+            ]
+          }
+        ],
+        "claims": [
+          {
+            "text": "Borrowing is a pressure point.",
+            "subject": "musical lineages",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "pressure point identified"
+              }
+            ]
+          },
+          {
+            "text": "Racial, commercial, and technological transfer are important.",
+            "subject": "genre change",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "reviewer guidance"
+              }
+            ]
+          }
+        ],
+        "texts": [],
+        "objections": [],
+        "relationships": [
+          {
+            "source": "Rock music",
+            "target": "Rhythm and blues",
+            "kind": "borrows",
+            "note": "stylistic inheritance",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "lineage origin"
+              }
+            ]
+          },
+          {
+            "source": "Funk",
+            "target": "Rock music",
+            "kind": "influences",
+            "note": "rhythmic development",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#4",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 4,
+                "note": "stylistic inheritance"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 5,
+      "chunkIds": [
+        "arts-music-music-lineages#5"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 683,
+      "splitDepth": 0,
+      "result": {
+        "people": [
+          {
+            "name": "DJ Kool Herc",
+            "role": "founder",
+            "reason": "early innovator",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "block party culture"
+              }
+            ]
+          },
+          {
+            "name": "Afrika Bambaataa",
+            "role": "innovator",
+            "reason": "early innovator",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "block party culture"
+              }
+            ]
+          },
+          {
+            "name": "Kendrick Lamar",
+            "role": "modern artist",
+            "reason": "defines shifts",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "modern artist"
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          {
+            "label": "Hip-hop culture",
+            "summary": "block party culture",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "origin"
+              }
+            ]
+          },
+          {
+            "label": "DJing",
+            "summary": "core technique",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "foundational element"
+              }
+            ]
+          }
+        ],
+        "claims": [
+          {
+            "text": "Hip-hop is a culture of DJing, MCing...",
+            "subject": "hip-hop definition",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "definition"
+              }
+            ]
+          },
+          {
+            "text": "Shifts in flow, production, politics.",
+            "subject": "evolution of hip hop",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "shifts"
+              }
+            ]
+          }
+        ],
+        "texts": [
+          {
+            "title": "Various Hip Hop Albums",
+            "kind": "other",
+            "author": "Multiple Artists",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "defining artists"
+              }
+            ]
+          },
+          {
+            "title": "Hip hop lyrics",
+            "kind": "other",
+            "author": "Various Artists",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "not reduced to lyrics"
+              }
+            ]
+          }
+        ],
+        "objections": [],
+        "relationships": [
+          {
+            "source": "DJ Kool Herc",
+            "target": "Afrika Bambaataa",
+            "kind": "influences",
+            "note": "early innovators",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "shared lineage"
+              }
+            ]
+          },
+          {
+            "source": "Run-DMC",
+            "target": "Public Enemy",
+            "kind": "influences",
+            "note": "stylistic shifts",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#5",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 5,
+                "note": "shifts in flow"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 6,
+      "chunkIds": [
+        "arts-music-music-lineages#6"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 688,
+      "splitDepth": 0,
+      "result": {
+        "people": [
+          {
+            "name": "Pierre Schaeffer",
+            "role": "pioneer",
+            "reason": "early electronic music",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#6",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 6,
+                "note": "electronic music lineages"
+              }
+            ]
+          },
+          {
+            "name": "Karlheinz Stockhausen",
+            "role": "composer",
+            "reason": "experimental music",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#6",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 6,
+                "note": "electronic music lineages"
+              }
+            ]
+          },
+          {
+            "name": "Kraftwerk",
+            "role": "band",
+            "reason": "early electronic pop",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#6",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 6,
+                "note": "electronic music lineages"
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          {
+            "label": "Electronic Music",
+            "summary": "Early experimentation with technology.",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#6",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 6,
+                "note": "early electronic music"
+              }
+            ]
+          },
+          {
+            "label": "Techno",
+            "summary": "Detroit origin, dance music.",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#6",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 6,
+                "note": "electronic music lineages"
+              }
+            ]
+          },
+          {
+            "label": "House Music",
+            "summary": "Chicago origin, dance music.",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#6",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 6,
+                "note": "electronic music lineages"
+              }
+            ]
+          }
+        ],
+        "claims": [],
+        "texts": [],
+        "objections": [],
+        "relationships": [
+          {
+            "source": "Pierre Schaeffer",
+            "target": "Electronic Music",
+            "kind": "influences",
+            "note": "pioneer",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#6",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 6,
+                "note": "early electronic music"
+              }
+            ]
+          },
+          {
+            "source": "Kraftwerk",
+            "target": "Techno",
+            "kind": "influences",
+            "note": "stylistic influence",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#6",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 6,
+                "note": "electronic music lineages"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 7,
+      "chunkIds": [
+        "arts-music-music-lineages#7"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 694,
+      "splitDepth": 0,
+      "result": {
+        "people": [
+          {
+            "name": "Bob Marley",
+            "role": "musician",
+            "reason": "Reggae pioneer",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#7",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 7,
+                "note": "example figure"
+              }
+            ]
+          },
+          {
+            "name": "Lee Scratch Perry",
+            "role": "producer",
+            "reason": "Dub innovator",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#7",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 7,
+                "note": "example figure"
+              }
+            ]
+          },
+          {
+            "name": "Fela Kuti",
+            "role": "musician",
+            "reason": "Afrobeat founder",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#7",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 7,
+                "note": "example figure"
+              }
+            ]
+          }
+        ],
+        "concepts": [
+          {
+            "label": "Afrobeat",
+            "summary": "Highlife, jazz, funk fusion",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#7",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 7,
+                "note": "defined in text"
+              }
+            ]
+          },
+          {
+            "label": "Dub",
+            "summary": "Reggae subgenre",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#7",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 7,
+                "note": "defined in text"
+              }
+            ]
+          },
+          {
+            "label": "Global popular music",
+            "summary": "Music shaped by exchange",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#7",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 7,
+                "note": "central topic"
+              }
+            ]
+          }
+        ],
+        "claims": [],
+        "texts": [],
+        "objections": [],
+        "relationships": [
+          {
+            "source": "Reggae",
+            "target": "Dub",
+            "kind": "influences",
+            "note": "subgenre development",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#7",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 7,
+                "note": "implied relationship"
+              }
+            ]
+          },
+          {
+            "source": "Afrobeat",
+            "target": "Jazz",
+            "kind": "borrows",
+            "note": "stylistic influence",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#7",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 7,
+                "note": "defined in text"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "stage": "source-extraction",
+      "ok": true,
+      "batchIndex": 8,
+      "chunkIds": [
+        "arts-music-music-lineages#8"
+      ],
+      "charLimit": 900,
+      "estimatedInputTokens": 688,
+      "splitDepth": 0,
+      "result": {
+        "people": [
+          {
+            "name": "John Cage",
+            "role": "innovator",
+            "reason": "experimental music pioneer",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "pioneer"
+              }
+            ]
+          },
+          {
+            "name": "Patti Smith",
+            "role": "musician",
+            "reason": "punk art-rock influence",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "influential artist"
+              }
+            ]
+          },
+          {
+            "name": "Nirvana",
+            "role": "band",
+            "reason": "alternative rock impact",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "significant band"
+              }
+            ]
+          }
+        ],
+        "concepts": [],
+        "claims": [
+          {
+            "text": "Boundary drawing is a pressure point.",
+            "subject": "scenes",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "key challenge"
+              }
+            ]
+          },
+          {
+            "text": "Experimental lineages reject commercial formulas.",
+            "subject": "experimental music",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "defining characteristic"
+              }
+            ]
+          }
+        ],
+        "texts": [
+          {
+            "title": "Various works",
+            "kind": "other",
+            "author": "John Cage",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "experimental output"
+              }
+            ]
+          },
+          {
+            "title": "Various works",
+            "kind": "other",
+            "author": "The Velvet Underground",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "influential band"
+              }
+            ]
+          }
+        ],
+        "objections": [],
+        "relationships": [
+          {
+            "source": "John Cage",
+            "target": "Brian Eno",
+            "kind": "influences",
+            "note": "experimental lineage",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "stylistic inheritance"
+              }
+            ]
+          },
+          {
+            "source": "The Velvet Underground",
+            "target": "Patti Smith",
+            "kind": "influences",
+            "note": "art rock influence",
+            "provenance": [
+              {
+                "chunkId": "arts-music-music-lineages#8",
+                "sourceId": "arts-music-music-lineages",
+                "chunkIndex": 8,
+                "note": "stylistic connection"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "chunkIds": [
+    "arts-music-music-lineages#0",
+    "arts-music-music-lineages#1",
+    "arts-music-music-lineages#2",
+    "arts-music-music-lineages#3",
+    "arts-music-music-lineages#4",
+    "arts-music-music-lineages#5",
+    "arts-music-music-lineages#6",
+    "arts-music-music-lineages#7",
+    "arts-music-music-lineages#8"
+  ]
+}

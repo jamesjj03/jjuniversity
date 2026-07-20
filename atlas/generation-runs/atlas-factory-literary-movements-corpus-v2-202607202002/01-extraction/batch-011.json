@@ -1,0 +1,70 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 11,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#19"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 755,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Drama",
+        "summary": "Literature for performance.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#19",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 19,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "Playwright",
+        "summary": "Author of plays.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#19",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 19,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "Closet drama",
+        "summary": "Drama written for reading.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#19",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 19,
+            "note": "definition"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Greek drama",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#19",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 19,
+            "note": "earliest form"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "id": "chemistry-elements-and-molecular-order",
+  "slug": "chemistry-elements-and-molecular-order",
+  "title": "Chemistry, elements, and molecular order",
+  "shortTitle": "Chemistry",
+  "family": "Chemistry family",
+  "stance": "Matter becomes classifiable and measurable through elements, atoms, molecules, periodicity, and radioactivity.",
+  "centralClaim": "Matter becomes classifiable and measurable through elements, atoms, molecules, periodicity, and radioactivity.",
+  "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+  "contributors": [
+    {
+      "id": "person-antoine-lavoisier",
+      "name": "Antoine Lavoisier",
+      "role": "source contributor",
+      "reason": "conservation, measurement, nomenclature",
+      "texts": [
+        {
+          "id": "source-evidence-for-antoine-lavoisier",
+          "title": "Source evidence for Antoine Lavoisier",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#3",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#3",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "person-john-dalton",
+      "name": "John Dalton",
+      "role": "source contributor",
+      "reason": "atomic theory",
+      "texts": [
+        {
+          "id": "source-evidence-for-john-dalton",
+          "title": "Source evidence for John Dalton",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#3",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#3",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "person-dmitri-mendeleev",
+      "name": "Dmitri Mendeleev",
+      "role": "source contributor",
+      "reason": "periodic order",
+      "texts": [
+        {
+          "id": "source-evidence-for-dmitri-mendeleev",
+          "title": "Source evidence for Dmitri Mendeleev",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#3",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#3",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "person-marie-curie",
+      "name": "Marie Curie",
+      "role": "source contributor",
+      "reason": "radioactivity",
+      "texts": [
+        {
+          "id": "source-evidence-for-marie-curie",
+          "title": "Source evidence for Marie Curie",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#3",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#3",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 3
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating Chemistry, elements, and molecular order as a complete family."
+  ],
+  "relatedGroupIds": [
+    "mathematical-astronomy-and-mechanics",
+    "experimental-electricity-and-field-physics",
+    "evolutionary-biology-and-natural-history"
+  ],
+  "keywords": [
+    "chemistry,",
+    "elements,",
+    "molecular",
+    "order"
+  ],
+  "provenance": [
+    {
+      "chunkId": "stem-scientists-scientific-lineages#3",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 3
+    },
+    {
+      "chunkId": "stem-scientists-scientific-lineages#0",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 0,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}

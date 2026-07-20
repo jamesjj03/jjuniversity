@@ -1,0 +1,12 @@
+{
+  "stageName": "group-enrichment-group-problem-solving-and-creativity",
+  "ok": false,
+  "errors": [
+    "Group stance is required.",
+    "Group centralClaim is required.",
+    "Group whyItMatters is required.",
+    "Group needs at least one contributor."
+  ],
+  "rawExcerpt": "```json\n{\n  \"id\": \"group-problem-solving-and-creativity\",\n  \"title\": \"Problem Solving & Creativity\",\n  \"shortTitle\": \"Creative Problem Solving\",\n  \"description\": \"This group highlights the role of creativity and ingenuity in tackling mathematical challenges, recognizing that innovative approaches are often essential for breakthroughs.\",\n  \"memberCandidateIds\": [\n    \"claim-creativity-aids-problem-solving\"\n  ],\n  \"provenance\": [\n    {\n      \"chunkId\": \"corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38\",\n      \"sourceId\": \"corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564\",\n      \"chunkIndex\": 38,\n      \"note\": \"solving process\"\n    }\n  ],\n  \"candidates\": [\n    {\n      \"id\": \"claim-creativity-aids-problem-solving\",\n      \"type\": \"claim\",\n      \"label\": \"mathematical work\",\n      \"summary\": \"creativity aids problem solving\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38\",\n          \"sourceId\": \"corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564\",\n          \"chunkIndex\": 38\n        }\n      ]\n    }\n  ],\n  \"people\": [],\n  \"texts\": [],\n  \"concepts\": [],\n  \"claims\": [\n    {\n      \"id\": \"claim-creativity-aids-problem-solving\",\n      \"type\": \"claim\",\n      \"label\": \"mathematical work\",\n      \"summary\": \"creativity aids problem solving\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38\",\n          \"sourceId\": \"corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564\",\n          \"chunkIndex\": 38\n        }\n      ]\n    }\n  ],\n  \"objections\": []\n}\n```",
+  "createdAt": "2026-07-20T20:38:45.328Z"
+}

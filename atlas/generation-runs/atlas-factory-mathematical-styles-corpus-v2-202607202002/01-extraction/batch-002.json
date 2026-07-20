@@ -1,0 +1,82 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 2,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 700,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "nucleotide",
+        "summary": "building block of DNA",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+            "chunkIndex": 992,
+            "note": "building blocks"
+          }
+        ]
+      },
+      {
+        "label": "nitrogenous base",
+        "summary": "part of nucleotide",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+            "chunkIndex": 992,
+            "note": "components of nucleotide"
+          }
+        ]
+      },
+      {
+        "label": "purine",
+        "summary": "nitrogenous base (A, G)",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+            "chunkIndex": 992,
+            "note": "example of nitrogenous base"
+          }
+        ]
+      },
+      {
+        "label": "pyrimidine",
+        "summary": "nitrogenous base (C, T)",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+            "chunkIndex": 992,
+            "note": "example of nitrogenous base"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "DNA Structure and Sequencing",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+            "chunkIndex": 992,
+            "note": "heading"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

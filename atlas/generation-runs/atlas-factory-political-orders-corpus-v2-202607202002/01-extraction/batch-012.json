@@ -1,0 +1,68 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 12,
+  "chunkIds": [
+    "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1020"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 692,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "authority",
+        "summary": "Power to rule.",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1020",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1020,
+            "note": "power to rule"
+          },
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1020",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1020,
+            "note": "needed for governance"
+          }
+        ]
+      },
+      {
+        "label": "legitimacy",
+        "summary": "Justification of authority.",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1020",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1020,
+            "note": "justification of rule"
+          },
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1020",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1020,
+            "note": "determines authority extent"
+          }
+        ]
+      },
+      {
+        "label": "divine rule",
+        "summary": "Authority from a deity.",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1020",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1020,
+            "note": "a source of legitimacy"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

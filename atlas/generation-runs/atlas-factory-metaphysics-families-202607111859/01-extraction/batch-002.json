@@ -1,0 +1,82 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 2,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#2"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 658,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "mind",
+        "summary": "fundamental to reality",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "definition of Idealism"
+          }
+        ]
+      },
+      {
+        "label": "experience",
+        "summary": "central to intelligibility",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "definition of Idealism"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "ordinary objects are ideas sustained by perception",
+        "subject": "Berkeley",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "Berkeley's view"
+          }
+        ]
+      },
+      {
+        "text": "structure of experience is central",
+        "subject": "Kant",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "Kant's view"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [
+      {
+        "text": "denies external world",
+        "subject": "Idealism",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "pressure point"
+          }
+        ]
+      }
+    ],
+    "relationships": []
+  }
+}

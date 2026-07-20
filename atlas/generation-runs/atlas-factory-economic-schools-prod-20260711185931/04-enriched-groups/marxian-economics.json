@@ -1,0 +1,120 @@
+{
+  "id": "marxian-economics",
+  "slug": "marxian-economics",
+  "title": "Marxian economics",
+  "shortTitle": "Marxian",
+  "family": "Marxian family",
+  "stance": "framework for understanding history",
+  "centralClaim": "capitalism is a historical system organized by class relations",
+  "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+  "contributors": [
+    {
+      "id": "person-karl-marx",
+      "name": "Karl Marx",
+      "role": "source contributor",
+      "reason": "value, exploitation, commodity fetishism, historical materialism",
+      "texts": [
+        {
+          "id": "source-evidence-for-karl-marx",
+          "title": "Source evidence for Karl Marx",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#2",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "person-rosa-luxemburg",
+      "name": "Rosa Luxemburg",
+      "role": "source contributor",
+      "reason": "imperialism, finance analysis",
+      "texts": [
+        {
+          "id": "source-evidence-for-rosa-luxemburg",
+          "title": "Source evidence for Rosa Luxemburg",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#2",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "person-rudolf-hilferding",
+      "name": "Rudolf Hilferding",
+      "role": "source contributor",
+      "reason": "monopoly, crisis theory",
+      "texts": [
+        {
+          "id": "source-evidence-for-rudolf-hilferding",
+          "title": "Source evidence for Rudolf Hilferding",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#2",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating Marxian economics as a complete family."
+  ],
+  "relatedGroupIds": [
+    "classical-political-economy",
+    "neoclassical-and-marginalist-economics",
+    "keynesian-and-macroeconomic-management"
+  ],
+  "keywords": [
+    "historical materialism",
+    "commodity fetishism",
+    "marxian",
+    "economics"
+  ],
+  "provenance": [
+    {
+      "chunkId": "society-economics-economic-schools#2",
+      "sourceId": "society-economics-economic-schools",
+      "chunkIndex": 2
+    },
+    {
+      "chunkId": "society-economics-economic-schools#0",
+      "sourceId": "society-economics-economic-schools",
+      "chunkIndex": 0,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}

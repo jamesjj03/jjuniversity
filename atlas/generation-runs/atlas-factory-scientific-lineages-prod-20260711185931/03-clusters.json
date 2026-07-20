@@ -1,0 +1,217 @@
+{
+  "stage": "clustering",
+  "ok": true,
+  "groups": [
+    {
+      "id": "mathematical-astronomy-and-mechanics",
+      "title": "Mathematical astronomy and mechanics",
+      "shortTitle": "Astronomy/mechanics",
+      "description": "Measurement, geometry, mathematics, and experiment become a durable method for explaining motion.",
+      "memberCandidateIds": [
+        "person-nicolaus-copernicus",
+        "person-johannes-kepler",
+        "person-galileo-galilei",
+        "person-isaac-newton",
+        "concept-mathematical-laws",
+        "concept-gravitation"
+      ],
+      "relatedGroupIds": [
+        "experimental-electricity-and-field-physics",
+        "relativity-and-quantum-revolutions"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#1",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "experimental-electricity-and-field-physics",
+      "title": "Experimental electricity and field physics",
+      "shortTitle": "Field physics",
+      "description": "Laboratory experiment becomes field theory and a new account of electricity, magnetism, and light.",
+      "memberCandidateIds": [
+        "person-benjamin-franklin",
+        "person-michael-faraday",
+        "person-james-clerk-maxwell",
+        "person-heinrich-hertz",
+        "concept-field-theory",
+        "concept-electromagnetic-waves"
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "relativity-and-quantum-revolutions"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#2",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "chemistry-elements-and-molecular-order",
+      "title": "Chemistry, elements, and molecular order",
+      "shortTitle": "Chemistry",
+      "description": "Matter becomes classifiable and measurable through elements, atoms, molecules, periodicity, and radioactivity.",
+      "memberCandidateIds": [
+        "person-antoine-lavoisier",
+        "person-john-dalton",
+        "person-dmitri-mendeleev",
+        "person-marie-curie",
+        "concept-elements",
+        "concept-periodicity"
+      ],
+      "relatedGroupIds": [
+        "genetics-molecular-biology-and-information",
+        "experimental-electricity-and-field-physics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#3",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "evolutionary-biology-and-natural-history",
+      "title": "Evolutionary biology and natural history",
+      "shortTitle": "Evolution",
+      "description": "Species, variation, adaptation, heredity, and deep time become historical science.",
+      "memberCandidateIds": [
+        "person-charles-darwin",
+        "person-alfred-russel-wallace",
+        "person-thomas-huxley",
+        "person-ronald-fisher",
+        "person-j-b-s-haldane",
+        "person-sewall-wright",
+        "person-theodosius-dobzhansky",
+        "person-ernst-mayr",
+        "concept-natural-selection"
+      ],
+      "relatedGroupIds": [
+        "genetics-molecular-biology-and-information",
+        "earth-systems-and-environmental-science"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#4",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "genetics-molecular-biology-and-information",
+      "title": "Genetics, molecular biology, and information",
+      "shortTitle": "Genetics/molecular",
+      "description": "Heredity moves from breeding patterns to chromosomes, DNA, code, and molecular mechanisms.",
+      "memberCandidateIds": [
+        "person-gregor-mendel",
+        "person-thomas-hunt-morgan",
+        "person-oswald-avery",
+        "person-james-watson",
+        "person-francis-crick",
+        "person-rosalind-franklin",
+        "person-barbara-mcclintock",
+        "concept-dna",
+        "concept-genetic-code"
+      ],
+      "relatedGroupIds": [
+        "evolutionary-biology-and-natural-history",
+        "chemistry-elements-and-molecular-order"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#5",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 5
+        }
+      ]
+    },
+    {
+      "id": "relativity-and-quantum-revolutions",
+      "title": "Relativity and quantum revolutions",
+      "shortTitle": "Relativity/quantum",
+      "description": "Classical assumptions about space, time, measurement, matter, probability, and observation are broken and rebuilt.",
+      "memberCandidateIds": [
+        "person-albert-einstein",
+        "person-max-planck",
+        "person-niels-bohr",
+        "person-werner-heisenberg",
+        "person-erwin-schrodinger",
+        "person-paul-dirac",
+        "person-richard-feynman",
+        "concept-quantum-theory"
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "experimental-electricity-and-field-physics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#6",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    },
+    {
+      "id": "earth-systems-and-environmental-science",
+      "title": "Earth systems and environmental science",
+      "shortTitle": "Earth systems",
+      "description": "Earth becomes a historical, planetary, coupled system linking geology, ecology, atmosphere, ocean, and human activity.",
+      "memberCandidateIds": [
+        "person-james-hutton",
+        "person-charles-lyell",
+        "person-alfred-wegener",
+        "person-rachel-carson",
+        "person-james-lovelock",
+        "person-lynn-margulis",
+        "concept-plate-tectonics",
+        "concept-climate-models"
+      ],
+      "relatedGroupIds": [
+        "evolutionary-biology-and-natural-history",
+        "computation-systems-and-scientific-modeling"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#7",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 7
+        }
+      ]
+    },
+    {
+      "id": "computation-systems-and-scientific-modeling",
+      "title": "Computation, systems, and scientific modeling",
+      "shortTitle": "Computation/modeling",
+      "description": "Simulation, information, feedback, and computation become central tools for science.",
+      "memberCandidateIds": [
+        "person-alan-turing",
+        "person-norbert-wiener",
+        "person-john-von-neumann",
+        "person-claude-shannon",
+        "concept-computation",
+        "concept-cybernetics",
+        "concept-information-theory"
+      ],
+      "relatedGroupIds": [
+        "earth-systems-and-environmental-science",
+        "relativity-and-quantum-revolutions"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#8",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 8
+        }
+      ]
+    }
+  ]
+}

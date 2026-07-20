@@ -1,0 +1,65 @@
+{
+  "id": "group-engineering-process-fundamentals",
+  "slug": "group-engineering-process-fundamentals",
+  "title": "Engineering Design Process Fundamentals",
+  "shortTitle": "Process Foundations",
+  "family": "Systems Design",
+  "stance": "Neutral",
+  "centralClaim": "The engineering design process is a structured, iterative approach to problem solving involving collaboration and decision-making.",
+  "whyItMatters": "Provides the foundational understanding for all subsequent engineering activities; enables effective project management and team coordination.",
+  "contributors": [
+    {
+      "id": "person-engineering-design-process",
+      "name": "Engineering Design Process",
+      "role": "Conceptualization",
+      "reason": "Represents the core concept of structured design methodologies.",
+      "texts": [
+        {
+          "id": "group-engineering-process-fundamentals-text-1",
+          "title": "Source text 1",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "corpus-systems-design-source-054dda302408#1",
+              "sourceId": "corpus-systems-design-source-054dda302408",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Can be overly rigid and stifle creativity.",
+    "May not be suitable for all types of projects (e.g., exploratory research).",
+    "Requires significant upfront planning and documentation.",
+    "Risk of analysis paralysis if stages are overemphasized."
+  ],
+  "relatedGroupIds": [
+    "group-engineering-process-techniques",
+    "group-engineering-process-models",
+    "group-engineering-process-overview"
+  ],
+  "keywords": [
+    "design process",
+    "engineering",
+    "iteration",
+    "collaboration",
+    "decision making",
+    "stages"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-systems-design-source-054dda302408#1",
+      "sourceId": "corpus-systems-design-source-054dda302408",
+      "chunkIndex": 1
+    }
+  ]
+}

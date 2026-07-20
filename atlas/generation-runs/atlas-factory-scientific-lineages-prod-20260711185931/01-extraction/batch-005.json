@@ -1,0 +1,178 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 5,
+  "chunkIds": [
+    "stem-scientists-scientific-lineages#5"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 703,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Gregor Mendel",
+        "role": "founder",
+        "reason": "particulate inheritance",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "initial anchor"
+          }
+        ]
+      },
+      {
+        "name": "Thomas Hunt Morgan",
+        "role": "linker",
+        "reason": "heredity to chromosomes",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "linkage discovery"
+          }
+        ]
+      },
+      {
+        "name": "Barbara McClintock",
+        "role": "revealer",
+        "reason": "genome dynamism",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "transposition discovery"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "heredity",
+        "summary": "particulate factors",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "Mendel's work"
+          },
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "initial concept"
+          }
+        ]
+      },
+      {
+        "label": "DNA",
+        "summary": "genetic material",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "Avery, McCarty, & McLeod"
+          },
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "identification"
+          }
+        ]
+      },
+      {
+        "label": "genome dynamism",
+        "summary": "transposition",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "McClintock's discovery"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Mendel's work",
+        "kind": "paper",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "initial anchor"
+          }
+        ]
+      },
+      {
+        "title": "DNA structure story",
+        "kind": "other",
+        "author": "Watson, Crick, Franklin, Wilkins",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "discovery"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Gregor Mendel",
+        "target": "Thomas Hunt Morgan",
+        "kind": "influences",
+        "note": "inheritance to chromosomes",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "linkage discovery"
+          }
+        ]
+      },
+      {
+        "source": "Thomas Hunt Morgan",
+        "target": "Oswald Avery",
+        "kind": "influences",
+        "note": "heredity to DNA",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "DNA identification"
+          }
+        ]
+      },
+      {
+        "source": "James Watson",
+        "target": "Barbara McClintock",
+        "kind": "influences",
+        "note": "genome dynamism",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#5",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 5,
+            "note": "transposition discovery"
+          }
+        ]
+      }
+    ]
+  }
+}

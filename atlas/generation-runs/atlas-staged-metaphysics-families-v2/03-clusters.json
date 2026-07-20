@@ -1,0 +1,92 @@
+{
+  "stage": "clustering",
+  "ok": true,
+  "groups": [
+    {
+      "id": "physicalism-and-materialism",
+      "title": "Physicalism and Materialism",
+      "shortTitle": "Physicalism",
+      "description": "The claim that reality is ultimately physical or every real phenomenon depends on the physical order.",
+      "memberCandidateIds": [
+        "person-hobbes",
+        "person-j-j-c-smart",
+        "person-david-armstrong"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#1",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "idealism",
+      "title": "Idealism",
+      "shortTitle": "Idealism",
+      "description": "Treats mind, experience, reason, or spirit as basic to reality's intelligibility.",
+      "memberCandidateIds": [
+        "person-berkeley",
+        "person-kant",
+        "person-hegel"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "dualism",
+      "title": "Dualism",
+      "shortTitle": "Dualism",
+      "description": "Deep distinction between mind and matter, soul and body, or intelligible and sensible reality.",
+      "memberCandidateIds": [
+        "person-plato",
+        "person-rene-descartes",
+        "person-elisabeth-of-bohemia"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#3",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "substance-metaphysics",
+      "title": "Substance Metaphysics",
+      "shortTitle": "Substance",
+      "description": "Investigates what kinds of things exist and what makes them persist.",
+      "memberCandidateIds": [
+        "person-aristotle"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "hylomorphism",
+      "title": "Hylomorphism",
+      "shortTitle": "Hylomorphism",
+      "description": "Treats beings as composites of form and matter, potentiality and actuality.",
+      "memberCandidateIds": [
+        "person-aristotle"
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4
+        }
+      ]
+    }
+  ]
+}

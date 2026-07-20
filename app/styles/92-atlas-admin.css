@@ -1,0 +1,1219 @@
+html body .atlasAdminPage {
+  max-width: 1480px;
+}
+
+.atlasAdminHero,
+.atlasAdminStats,
+.atlasAdminShell,
+.atlasAdminPanelTop,
+.atlasAdminSectionHeader,
+.atlasAdminHeroActions,
+.atlasAdminMapRow,
+.atlasAdminContributorCard header,
+.atlasAdminRelationCard > div {
+  display: grid;
+  gap: 14px;
+}
+
+.atlasAdminHero {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  margin: 18px 0 20px;
+}
+
+.atlasAdminHero h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 5rem);
+  letter-spacing: 0;
+}
+
+.atlasAdminHeroActions {
+  grid-auto-flow: column;
+  align-items: center;
+}
+
+.atlasAdminStats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.atlasAdminStats div,
+.atlasAdminMetaGrid div,
+.atlasAdminMapRow,
+.atlasSourceRow,
+.atlasAdminGroupCard,
+.atlasAdminContributorCard,
+.atlasAdminRelationCard {
+  border: 1px solid rgba(232, 211, 161, 0.16);
+  background: rgba(16, 14, 12, 0.7);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+}
+
+.atlasAdminStats div {
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.atlasAdminStats strong {
+  display: block;
+  color: var(--gold);
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.atlasAdminStats span,
+.atlasAdminMapRow small,
+.atlasAdminMapRow time,
+.atlasAdminMetaGrid span,
+.atlasSourceRow small,
+.atlasSourceMeta span,
+.atlasAdminContributorCard span,
+.atlasAdminTextChips span,
+.atlasAdminRelationCard span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.atlasAdminShell {
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  align-items: start;
+}
+
+.atlasAdminMapList {
+  display: grid;
+  gap: 10px;
+  position: sticky;
+  top: 92px;
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+}
+
+.atlasAdminMapRow {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 14px;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.atlasAdminMapRow.active,
+.atlasAdminMapRow:hover {
+  border-color: rgba(232, 211, 161, 0.42);
+  background: rgba(232, 211, 161, 0.08);
+}
+
+.atlasAdminMapRow strong,
+.atlasAdminGroupCard summary strong,
+.atlasAdminContributorCard strong {
+  display: block;
+  color: var(--text);
+}
+
+.atlasAdminStatus {
+  width: fit-content;
+  border: 1px solid rgba(232, 211, 161, 0.22);
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: var(--gold);
+  font-style: normal;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.atlasAdminStatus.draft {
+  color: #9ec7ff;
+  border-color: rgba(158, 199, 255, 0.32);
+}
+
+.atlasAdminStatus.needs_review {
+  color: #ffd36c;
+  border-color: rgba(255, 211, 108, 0.34);
+}
+
+.atlasAdminStatus.archived {
+  color: #c5b9a1;
+  border-color: rgba(197, 185, 161, 0.3);
+}
+
+.atlasAdminEditor,
+.atlasAdminColumn,
+.atlasAdminContributorStack,
+.atlasSourceIngestPanel,
+.atlasSourceList,
+.atlasSourceRow,
+.atlasDraftImportPanel,
+.atlasDraftImportPanel form {
+  display: grid;
+  gap: 16px;
+}
+
+.atlasAdminMapForm {
+  display: grid;
+  gap: 18px;
+}
+
+.atlasAdminPanelTop,
+.atlasAdminSectionHeader {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.atlasAdminPanelTop h2,
+.atlasAdminSectionHeader h2,
+.atlasAdminEmpty h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.atlasAdminMetaGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.atlasAdminMetaGrid div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.atlasAdminMetaGrid code {
+  overflow: hidden;
+  color: var(--gold);
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.atlasAdminFormGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+  gap: 14px;
+}
+
+.atlasAdminMapForm label,
+.atlasAdminGroupForm label,
+.atlasAdminContributorCard label,
+.atlasAdminRelationCard label {
+  display: grid;
+  gap: 7px;
+}
+
+.atlasAdminMapForm textarea,
+.atlasAdminGroupForm textarea,
+.atlasAdminContributorCard textarea,
+.atlasAdminRelationCard textarea,
+.atlasDraftImportPanel textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.atlasDraftImportPanel {
+  margin-bottom: 18px;
+}
+
+.atlasSourceIngestPanel {
+  margin-bottom: 18px;
+}
+
+.atlasSourceStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.atlasSourceStats span,
+.atlasSourceNotice {
+  border: 1px solid rgba(232, 211, 161, 0.18);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: rgba(232, 211, 161, 0.06);
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.atlasSourceStats strong {
+  color: var(--gold);
+}
+
+.atlasSourceList {
+  gap: 10px;
+}
+
+.atlasSourceRow {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px 14px;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.atlasSourceRow strong {
+  display: block;
+}
+
+.atlasSourceMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: flex-end;
+}
+
+.atlasSourceMeta span {
+  border: 1px solid rgba(232, 211, 161, 0.16);
+  border-radius: 999px;
+  padding: 5px 8px;
+  background: rgba(232, 211, 161, 0.06);
+}
+
+.atlasSourceRow code {
+  grid-column: 1 / -1;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.atlasDraftImportPanel textarea {
+  min-height: 220px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.atlasDraftImportActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.atlasDraftImportActions code {
+  overflow-wrap: anywhere;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.atlasDraftImportNotice {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.atlasDraftImportNotice.success {
+  border-color: rgba(129, 203, 151, 0.38);
+}
+
+.atlasDraftImportNotice span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.atlasDraftImportErrors {
+  display: grid;
+  gap: 6px;
+  border: 1px solid rgba(255, 122, 122, 0.26);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(120, 20, 20, 0.16);
+}
+
+.atlasDraftImportErrors p {
+  margin: 0;
+  color: #ffc4c4;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.atlasAdminStructure {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  gap: 16px;
+}
+
+.atlasAdminGroupCard,
+.atlasAdminContributorCard,
+.atlasAdminRelationCard {
+  border-radius: 8px;
+}
+
+.atlasAdminGroupCard summary {
+  display: block;
+  cursor: pointer;
+  padding: 16px;
+}
+
+.atlasAdminGroupCard summary::-webkit-details-marker {
+  display: none;
+}
+
+.atlasAdminGroupForm {
+  display: grid;
+  gap: 14px;
+  padding: 0 16px 16px;
+}
+
+.atlasAdminContributorStack {
+  padding: 0 16px 16px;
+}
+
+.atlasAdminContributorCard {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.atlasAdminContributorCard header {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.atlasAdminContributorCard code {
+  color: var(--gold);
+  font-size: 0.72rem;
+}
+
+.atlasAdminTextChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.atlasProvenanceChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 16px 12px;
+}
+
+.atlasAdminContributorCard .atlasProvenanceChips,
+.atlasAdminRelationCard .atlasProvenanceChips {
+  padding: 0;
+}
+
+.atlasAdminTextChips span {
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgba(232, 211, 161, 0.16);
+  border-radius: 999px;
+  padding: 5px 8px;
+  background: rgba(232, 211, 161, 0.06);
+}
+
+.atlasAdminTextChips em,
+.atlasProvenanceChips code {
+  overflow-wrap: anywhere;
+  color: rgba(232, 211, 161, 0.72);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.7rem;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.atlasProvenanceChips code {
+  border: 1px solid rgba(129, 203, 151, 0.24);
+  border-radius: 999px;
+  padding: 4px 7px;
+  background: rgba(129, 203, 151, 0.08);
+}
+
+.atlasAdminContributorCard form,
+.atlasAdminRelationCard {
+  display: grid;
+  gap: 10px;
+}
+
+.atlasAdminRelationCard {
+  padding: 14px;
+}
+
+.atlasAdminRelationCard > div {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.atlasAdminRelationCard > div strong:last-child {
+  text-align: right;
+}
+
+.atlasAdminNotice {
+  margin-bottom: 16px;
+}
+
+.atlasAdminEmpty {
+  display: grid;
+  gap: 8px;
+}
+
+.atlasAdminEmpty p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.atlasFactoryPanel,
+.atlasFactoryLayout,
+.atlasFactoryPlannedStack,
+.atlasFactorySideStack,
+.atlasFactoryJobs,
+.atlasFactoryRecipes,
+.atlasFactoryPlannedCard,
+.atlasFactoryQueueForm,
+.atlasFactorySettingsForm,
+.atlasFactoryRecipeForm,
+.atlasFactoryJobCard,
+.atlasFactoryRecipeCard {
+  display: grid;
+  gap: 14px;
+}
+
+.atlasFactoryPanel {
+  margin-bottom: 18px;
+}
+
+.atlasFactoryStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.atlasFactoryStats span,
+.atlasFactoryMeta span,
+.atlasFactoryNote {
+  border: 1px solid rgba(232, 211, 161, 0.18);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: rgba(232, 211, 161, 0.06);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.atlasFactoryStats strong {
+  color: var(--gold);
+}
+
+.atlasFactoryLayout {
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  align-items: start;
+}
+
+.atlasFactoryPlannedCard,
+.atlasFactoryJobCard,
+.atlasFactoryRecipeCard {
+  border: 1px solid rgba(232, 211, 161, 0.16);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(16, 14, 12, 0.7);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+}
+
+.atlasFactoryPlannedCard header,
+.atlasFactoryJobCard header,
+.atlasFactoryRecipeCard summary,
+.atlasFactoryMeta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+}
+
+.atlasFactoryRecipeCard summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.atlasFactoryRecipeCard summary::-webkit-details-marker {
+  display: none;
+}
+
+.atlasFactoryPlannedCard strong,
+.atlasFactoryJobCard strong,
+.atlasFactoryRecipeCard strong {
+  display: block;
+}
+
+.atlasFactoryPlannedCard small,
+.atlasFactoryJobCard small,
+.atlasFactoryRecipeCard small,
+.atlasFactorySourcePicker small {
+  color: var(--muted);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.atlasFactoryPlannedCard p,
+.atlasFactoryJobCard p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.atlasFactoryStatus {
+  width: fit-content;
+  border: 1px solid rgba(232, 211, 161, 0.22);
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: var(--gold);
+  font-style: normal;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.atlasFactoryStatus.idea,
+.atlasFactoryStatus.queued {
+  color: #9ec7ff;
+  border-color: rgba(158, 199, 255, 0.32);
+}
+
+.atlasFactoryStatus.generating,
+.atlasFactoryStatus.running {
+  color: #ffd36c;
+  border-color: rgba(255, 211, 108, 0.34);
+}
+
+.atlasFactoryStatus.needs_review,
+.atlasFactoryStatus.draft_ready {
+  color: #81cb97;
+  border-color: rgba(129, 203, 151, 0.34);
+}
+
+.atlasFactoryStatus.failed,
+.atlasFactoryStatus.paused {
+  color: #ffc4c4;
+  border-color: rgba(255, 122, 122, 0.34);
+}
+
+.atlasFactorySettingsForm {
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 200px) auto;
+  align-items: end;
+}
+
+.atlasFactoryQueueForm,
+.atlasFactoryRecipeForm {
+  padding-top: 4px;
+}
+
+.atlasFactoryQueueForm label,
+.atlasFactorySettingsForm label,
+.atlasFactoryRecipeForm label {
+  display: grid;
+  gap: 7px;
+}
+
+.atlasFactoryQueueForm textarea,
+.atlasFactoryRecipeForm textarea {
+  min-height: 82px;
+  resize: vertical;
+}
+
+.atlasFactorySourcePicker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.atlasFactorySourcePicker > span,
+.atlasFactorySourcePicker label {
+  min-width: 0;
+  border: 1px solid rgba(232, 211, 161, 0.14);
+  border-radius: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.atlasFactorySourcePicker label {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.atlasFactorySourcePicker input {
+  margin-top: 3px;
+}
+
+.atlasFactoryModelGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.atlasFactoryMeta {
+  align-items: center;
+}
+
+.atlasFactoryMeta code,
+.atlasFactoryJobCard code {
+  overflow-wrap: anywhere;
+  color: rgba(232, 211, 161, 0.72);
+  font-size: 0.76rem;
+}
+
+.atlasFactoryProgress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.atlasFactoryProgress span {
+  border: 1px solid rgba(232, 211, 161, 0.16);
+  border-radius: 999px;
+  padding: 5px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.atlasFactoryProgress strong {
+  color: var(--gold);
+}
+
+.atlasFactoryJobCard details {
+  display: grid;
+  gap: 8px;
+}
+
+.atlasFactoryJobCard summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-size: 0.82rem;
+}
+
+.atlasCorpusBridgePanel,
+.atlasCorpusCandidatePanel,
+.atlasSufficiencySummary,
+.atlasCorpusCandidateForm,
+.atlasCorpusCandidateCard > span,
+.atlasCorpusChunkList,
+.atlasCorpusLaneDetails,
+.atlasCorpusLaneForm {
+  display: grid;
+  gap: 10px;
+}
+
+.atlasCorpusBridgePanel,
+.atlasCorpusCandidatePanel {
+  border: 1px solid rgba(232, 211, 161, 0.14);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.atlasCorpusBridgePanel header,
+.atlasCorpusCandidatePanel header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+}
+
+.atlasCorpusBridgePanel h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.atlasCorpusBridgePanel em {
+  border: 1px solid rgba(232, 211, 161, 0.2);
+  border-radius: 999px;
+  padding: 5px 8px;
+  font-size: 0.72rem;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.atlasCorpusBridgePanel em.ready {
+  color: #81cb97;
+  border-color: rgba(129, 203, 151, 0.34);
+}
+
+.atlasCorpusBridgePanel em.blocked {
+  color: #ffc4c4;
+  border-color: rgba(255, 122, 122, 0.34);
+}
+
+.atlasCorpusBridgePanel code,
+.atlasCorpusCandidatePanel code {
+  overflow-wrap: anywhere;
+  color: rgba(232, 211, 161, 0.72);
+  font-size: 0.74rem;
+}
+
+.atlasSufficiencyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.atlasSufficiencyGrid span {
+  border: 1px solid rgba(232, 211, 161, 0.14);
+  border-radius: 8px;
+  padding: 7px 8px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.atlasSufficiencyGrid strong {
+  color: var(--gold);
+}
+
+.atlasCorpusDiagnostics,
+.atlasCorpusTagRow,
+.atlasCorpusLaneCoverage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.atlasCorpusDiagnostics span,
+.atlasCorpusTagRow b,
+.atlasCorpusTagRow i,
+.atlasCorpusLaneCoverage span {
+  border: 1px solid rgba(232, 211, 161, 0.14);
+  border-radius: 999px;
+  padding: 5px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-style: normal;
+}
+
+.atlasCorpusDiagnostics strong,
+.atlasCorpusTagRow b,
+.atlasCorpusLaneCoverage strong {
+  color: var(--gold);
+}
+
+.atlasCorpusLaneCoverage span.missing {
+  border-color: rgba(255, 122, 122, 0.32);
+  color: #ffc4c4;
+}
+
+.atlasCorpusLaneCoverage small {
+  margin-left: 5px;
+  color: var(--muted);
+}
+
+.atlasCorpusLaneDetails {
+  border: 1px solid rgba(232, 211, 161, 0.14);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.atlasCorpusLaneDetails summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-size: 0.82rem;
+}
+
+.atlasCorpusLaneForm textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.atlasCorpusLaneForm label {
+  display: grid;
+  gap: 7px;
+}
+
+.atlasCorpusLaneGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.atlasCorpusLaneGrid label {
+  min-width: 0;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  border: 1px solid rgba(232, 211, 161, 0.14);
+  border-radius: 8px;
+  padding: 8px;
+  background: rgba(16, 14, 12, 0.5);
+}
+
+.atlasCorpusLaneGrid input {
+  margin-top: 3px;
+}
+
+.atlasCorpusLaneGrid small,
+.atlasCorpusLaneGrid em,
+.atlasCorpusChunkList small {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-style: normal;
+}
+
+.atlasSufficiencyWarnings {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-left: 18px;
+  color: #ffc4c4;
+  font-size: 0.82rem;
+}
+
+.atlasCorpusCandidateList {
+  display: grid;
+  gap: 8px;
+  max-height: 520px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.atlasCorpusCandidateCard {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  border: 1px solid rgba(232, 211, 161, 0.14);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(16, 14, 12, 0.58);
+}
+
+.atlasCorpusCandidateCard input {
+  margin-top: 4px;
+}
+
+.atlasCorpusCandidateCard small,
+.atlasCorpusCandidateCard em {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.atlasCorpusCandidateCard em {
+  font-style: normal;
+}
+
+.atlasCorpusChunkList span {
+  border-left: 2px solid rgba(232, 211, 161, 0.2);
+  padding-left: 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.atlasCorpusChunkList b {
+  margin-right: 6px;
+  color: var(--gold);
+}
+
+@media (max-width: 980px) {
+  .atlasAdminHero,
+  .atlasAdminShell,
+  .atlasAdminStructure,
+  .atlasAdminPanelTop,
+  .atlasAdminSectionHeader,
+  .atlasSourceRow,
+  .atlasFactoryLayout,
+  .atlasFactoryPlannedCard header,
+  .atlasFactoryJobCard header,
+  .atlasFactoryRecipeCard summary,
+  .atlasFactoryMeta,
+  .atlasFactorySettingsForm {
+    grid-template-columns: 1fr;
+  }
+
+  .atlasAdminMapList {
+    position: relative;
+    top: 0;
+    max-height: none;
+  }
+
+  .atlasAdminStats,
+  .atlasAdminMetaGrid,
+  .atlasAdminFormGrid,
+  .atlasFactorySourcePicker,
+  .atlasFactoryModelGrid,
+  .atlasSufficiencyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .atlasAdminStats,
+  .atlasAdminMetaGrid,
+  .atlasAdminFormGrid,
+  .atlasAdminRelationCard > div,
+  .atlasFactorySourcePicker,
+  .atlasFactoryModelGrid,
+  .atlasSufficiencyGrid,
+  .atlasCorpusLaneGrid,
+  .atlasCorpusBridgePanel header,
+  .atlasCorpusCandidatePanel header {
+    grid-template-columns: 1fr;
+  }
+
+  .atlasAdminHeroActions {
+    grid-auto-flow: row;
+  }
+
+  .atlasSourceStats,
+  .atlasFactoryStats,
+  .atlasSourceMeta {
+    justify-content: flex-start;
+  }
+
+  .atlasAdminRelationCard > div strong:last-child {
+    text-align: left;
+  }
+}
+
+.atlasAdminEditorStack,
+.atlasCategoryReviewPanel,
+.atlasCategoryGroups,
+.atlasCategorySide,
+.atlasCategoryGroupForm,
+.atlasCategoryOperationGrid,
+.atlasCategoryPanelBlock,
+.atlasCorrectionForm,
+.atlasCorrectionList,
+.atlasRecipeFeedbackForm,
+.atlasCategoryChunks {
+  display: grid;
+  gap: 14px;
+}
+
+.atlasCategoryReviewPanel {
+  margin-bottom: 18px;
+}
+
+.atlasCategoryStatusStack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 8px;
+}
+
+.atlasCategoryStatusStack span,
+.atlasCategoryStatusStack code {
+  border: 1px solid rgba(232, 211, 161, 0.2);
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: var(--gold);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.atlasCategoryReferenceForm,
+.atlasCategoryInlineForm,
+.atlasCategoryTwoCol,
+.atlasCategoryMiniActions,
+.atlasCategoryCompareStats,
+.atlasScoreGrid {
+  display: grid;
+  gap: 10px;
+}
+
+.atlasCategoryReferenceForm,
+.atlasCategoryInlineForm {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.atlasCategoryReferenceForm {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.atlasCategoryGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.85fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.atlasCategoryGroupCard,
+.atlasCategoryPanelBlock {
+  border: 1px solid rgba(232, 211, 161, 0.16);
+  border-radius: 8px;
+  background: rgba(16, 14, 12, 0.72);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+}
+
+.atlasCategoryGroupCard {
+  padding: 0;
+}
+
+.atlasCategoryGroupCard summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  padding: 14px;
+  cursor: pointer;
+}
+
+.atlasCategoryGroupCard summary strong,
+.atlasCategoryPanelBlock h2,
+.atlasCategoryMemberGrid h3,
+.atlasCategoryDiffList h3 {
+  margin: 0;
+  color: var(--text);
+  letter-spacing: 0;
+}
+
+.atlasCategoryGroupCard summary small,
+.atlasCategoryMemberGrid code,
+.atlasCategoryDiffList em,
+.atlasCorrectionList span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.atlasCategoryGroupCard.accepted {
+  border-color: rgba(102, 207, 142, 0.32);
+}
+
+.atlasCategoryGroupCard.revised {
+  border-color: rgba(255, 211, 108, 0.34);
+}
+
+.atlasCategoryGroupCard.rejected {
+  border-color: rgba(255, 126, 126, 0.34);
+}
+
+.atlasCategoryGroupForm,
+.atlasCategoryMemberGrid,
+.atlasCategoryOperationGrid,
+.atlasCategoryChunks {
+  padding: 0 14px 14px;
+}
+
+.atlasCategoryTwoCol {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.atlasCategoryGroupForm label,
+.atlasCategoryInlineForm label,
+.atlasCategoryReferenceForm label,
+.atlasCorrectionForm label,
+.atlasQualityScorecard label,
+.atlasRecipeFeedbackForm label,
+.atlasCategoryPanelBlock label,
+.atlasCategoryOperationGrid label {
+  display: grid;
+  gap: 7px;
+}
+
+.atlasCategoryGroupForm textarea,
+.atlasCategoryOperationGrid textarea,
+.atlasCorrectionForm textarea,
+.atlasQualityScorecard textarea,
+.atlasRecipeFeedbackForm textarea,
+.atlasCategoryPanelBlock textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+.atlasCategoryChunks article,
+.atlasCategoryMemberGrid > div,
+.atlasCorrectionList article,
+.atlasRecipeFeedbackForm {
+  border: 1px solid rgba(232, 211, 161, 0.12);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.atlasCategoryChunks article {
+  display: grid;
+  gap: 5px;
+}
+
+.atlasCategoryChunks code,
+.atlasCategoryMemberGrid code,
+.atlasFactoryJobCard code {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.atlasCategoryChunks p,
+.atlasCorrectionList p,
+.atlasCategoryPanelBlock p {
+  margin: 0;
+}
+
+.atlasCategoryMemberGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.atlasCategoryMemberGrid span,
+.atlasCategoryDiffList span {
+  display: grid;
+  gap: 3px;
+  border-top: 1px solid rgba(232, 211, 161, 0.09);
+  padding: 8px 0;
+}
+
+.atlasCategoryOperationGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.atlasCategoryMiniActions {
+  align-content: start;
+}
+
+.atlasCategoryPanelBlock {
+  padding: 14px;
+}
+
+.atlasCategoryCompareStats,
+.atlasScoreGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.atlasCategoryCompareStats span {
+  border: 1px solid rgba(232, 211, 161, 0.12);
+  border-radius: 8px;
+  padding: 9px;
+  color: var(--muted);
+}
+
+.atlasCategoryCompareStats strong {
+  display: block;
+  color: var(--gold);
+}
+
+.atlasCategoryDiffList {
+  display: grid;
+  gap: 7px;
+}
+
+.atlasCorrectionList article {
+  display: grid;
+  gap: 5px;
+}
+
+.resetBtn.danger {
+  border-color: rgba(255, 126, 126, 0.34);
+  color: #ffb1a8;
+}
+
+@media (max-width: 1100px) {
+  .atlasCategoryGrid,
+  .atlasCategoryOperationGrid,
+  .atlasCategoryMemberGrid,
+  .atlasCategoryReferenceForm,
+  .atlasCategoryInlineForm,
+  .atlasCategoryTwoCol,
+  .atlasScoreGrid {
+    grid-template-columns: 1fr;
+  }
+}

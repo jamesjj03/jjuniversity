@@ -1,0 +1,9 @@
+{
+  "stageName": "clustering",
+  "ok": false,
+  "errors": [
+    "JSON parse failed: Expected ',' or ']' after array element in JSON at position 759 (line 24 column 6)"
+  ],
+  "rawExcerpt": "```json\n{\n  \"groups\": [\n    {\n      \"id\": \"marxian-economics\",\n      \"title\": \"Marxian Economics\",\n      \"shortTitle\": \"Marxian\",\n      \"description\": \"Focuses on class relations, exploitation, and historical materialism.\",\n      \"memberCandidateIds\": [\n        \"person-karl-marx\",\n        \"person-rosa-luxemburg\",\n        \"person-rudolf-hilferding\",\n        \"claim-capitalism-is-a-historical-system-organized-by-class-relations\",\n        \"claim-labor-creates-surplus-value\",\n        \"concept-historical-materialism\",\n        \"concept-commodity-fetishism\"\n      ],\n      \"provenance\": [\n        {\n          \"chunkId\": \"society-economics-economic-schools#2\",\n          \"sourceId\": \"society-economics-economic-schools\",\n          \"chunkIndex\": 2\n        }\n      ]\n    },\n    {\n      \"id\": \"neoclassical-economics\",\n      \"title\": \"Neoclassical Economics\",\n      \"shortTitle\": \"Neoclassical\",\n      \"description\": \"Explains prices and allocation through marginal choice and optimization.\",\n      \"memberCandidateIds\": [\n        \"person-william-stanley-jevons\",\n        \"person-leon-walras\",\n        \"claim-prices-and-allocation-explained-through-marginal-choice\",\n        \"claim-optimization-clarifies-economic-choices\",\n        \"concept-marginal-choice\",\n        \"concept-equilibrium\"\n      ],\n      \"provenance\": [\n        {\n          \"chunkId\": \"society-economics",
+  "createdAt": "2026-07-11T23:19:42.555Z"
+}

@@ -1,0 +1,44 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 21,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#794"
+  ],
+  "charLimit": 420,
+  "estimatedInputTokens": 704,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "colonialism",
+        "summary": "shaped political systems",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#794",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f",
+            "chunkIndex": 794,
+            "note": "shaped political systems"
+          }
+        ]
+      },
+      {
+        "label": "political systems",
+        "summary": "development shaped by colonialism",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#794",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f",
+            "chunkIndex": 794,
+            "note": "development shaped by colonialism"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

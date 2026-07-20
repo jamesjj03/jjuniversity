@@ -1,0 +1,165 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 5,
+  "chunkIds": [
+    "arts-music-music-lineages#5"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 683,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "DJ Kool Herc",
+        "role": "founder",
+        "reason": "early innovator",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "block party culture"
+          }
+        ]
+      },
+      {
+        "name": "Afrika Bambaataa",
+        "role": "innovator",
+        "reason": "early innovator",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "block party culture"
+          }
+        ]
+      },
+      {
+        "name": "Kendrick Lamar",
+        "role": "modern artist",
+        "reason": "defines shifts",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "modern artist"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Hip-hop culture",
+        "summary": "block party culture",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "origin"
+          }
+        ]
+      },
+      {
+        "label": "DJing",
+        "summary": "core technique",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "foundational element"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Hip-hop is a culture of DJing, MCing...",
+        "subject": "hip-hop definition",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "text": "Shifts in flow, production, politics.",
+        "subject": "evolution of hip hop",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "shifts"
+          }
+        ]
+      }
+    ],
+    "texts": [
+      {
+        "title": "Various Hip Hop Albums",
+        "kind": "other",
+        "author": "Multiple Artists",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "defining artists"
+          }
+        ]
+      },
+      {
+        "title": "Hip hop lyrics",
+        "kind": "other",
+        "author": "Various Artists",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "not reduced to lyrics"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "DJ Kool Herc",
+        "target": "Afrika Bambaataa",
+        "kind": "influences",
+        "note": "early innovators",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "shared lineage"
+          }
+        ]
+      },
+      {
+        "source": "Run-DMC",
+        "target": "Public Enemy",
+        "kind": "influences",
+        "note": "stylistic shifts",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#5",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 5,
+            "note": "shifts in flow"
+          }
+        ]
+      }
+    ]
+  }
+}

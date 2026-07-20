@@ -1,0 +1,46 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 8,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 722,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "FMEA",
+        "summary": "Failure modes & effects analysis tool",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+            "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+            "chunkIndex": 3,
+            "note": "definition"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "FME(C)A documentation",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+            "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+            "chunkIndex": 3,
+            "note": "description"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

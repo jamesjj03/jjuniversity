@@ -1,0 +1,46 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 9,
+  "chunkIds": [
+    "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1811"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 763,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Purple rain",
+        "kind": "other",
+        "author": "Prince",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1811",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af",
+            "chunkIndex": 1811,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "title": "Baby love",
+        "kind": "other",
+        "author": "The Supremes",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1811",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af",
+            "chunkIndex": 1811,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

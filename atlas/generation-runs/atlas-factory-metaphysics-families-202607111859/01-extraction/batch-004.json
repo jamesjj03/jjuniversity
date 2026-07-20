@@ -1,0 +1,100 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#4"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 658,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "substance",
+        "summary": "composite of form & matter",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "definition"
+          },
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "Aristotle's view"
+          }
+        ]
+      },
+      {
+        "label": "form and matter",
+        "summary": "components of substance",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "Aristotelian composite"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "essences can handle evolution",
+        "subject": "essences",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "pressure point question"
+          }
+        ]
+      },
+      {
+        "text": "essences can handle social construction",
+        "subject": "essences",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "pressure point question"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [
+      {
+        "text": "rigidity",
+        "subject": "essences",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "pressure point"
+          }
+        ]
+      },
+      {
+        "text": "fuzzy boundaries",
+        "subject": "systems",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "pressure point question"
+          }
+        ]
+      }
+    ],
+    "relationships": []
+  }
+}

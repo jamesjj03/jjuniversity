@@ -1,0 +1,128 @@
+{
+  "stage": "source-manifest",
+  "ok": true,
+  "recipe": {
+    "id": "theory_family",
+    "title": "Theory Family",
+    "purpose": "Organize a field by major explanatory families or schools of thought.",
+    "groupingLogic": "Groups should be conceptual families with distinct explanatory stances, not just people or chronology.",
+    "preferredGroupFields": [
+      "stance",
+      "centralClaim",
+      "whyItMatters",
+      "objections",
+      "contributors",
+      "keyTexts"
+    ],
+    "contributorRules": "Contributors should be attached to the theory family they shaped, extended, or strongly challenged.",
+    "expectedRelationTypes": [
+      "opposes",
+      "answers",
+      "reframes",
+      "borrows",
+      "neighbors"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 10
+    },
+    "generationInstructions": "Prioritize stable families, central claims, pressure points, and representative contributors. Avoid making one group per person.",
+    "evaluationCriteria": [
+      "Groups are mutually useful rather than cosmetic",
+      "Central claims are distinct",
+      "Objections expose real pressure points",
+      "Relations explain conceptual movement"
+    ]
+  },
+  "sourcePacket": {
+    "sources": [
+      {
+        "id": "humanities-philosophy-metaphysics-families",
+        "title": "Metaphysics families source brief",
+        "creator": "JJ University",
+        "sourceType": "seed",
+        "territorySlug": "humanities",
+        "branchSlug": "philosophy",
+        "mapSlug": "metaphysics-families",
+        "filePath": "atlas/sources/humanities/philosophy/metaphysics-families.md",
+        "canonicalUrl": ""
+      }
+    ],
+    "chunks": [
+      {
+        "sourceId": "humanities-philosophy-metaphysics-families",
+        "chunkIndex": 0,
+        "chunkId": "humanities-philosophy-metaphysics-families#0",
+        "heading": "Metaphysics families source brief",
+        "text": "# Metaphysics families source brief\n\nThis seed note exists to ground an Atlas map about major families in metaphysics. It is not a final scholarly survey. It gives the generator and reviewer a compact set of families, tensions, contributors, and text anchors to check before any draft becomes public.",
+        "charCount": 300,
+        "tokenEstimate": 75
+      },
+      {
+        "sourceId": "humanities-philosophy-metaphysics-families",
+        "chunkIndex": 1,
+        "chunkId": "humanities-philosophy-metaphysics-families#1",
+        "heading": "Physicalism and materialism",
+        "text": "## Physicalism and materialism\n\nPhysicalist and materialist metaphysics begin from the claim that reality is ultimately physical, or at least that every real phenomenon depends on the physical order. Hobbes gives an early modern body-and-motion version. Twentieth-century identity theorists such as J. J. C. Smart and David Armstrong turn the position into a philosophy of mind and science program.\n\nThe pressure point is consciousness. If physics gives structural and behavioral descriptions, the reviewer should ask whether subjective experience, meaning, normativity, and value have been explained or only renamed.",
+        "charCount": 617,
+        "tokenEstimate": 155
+      },
+      {
+        "sourceId": "humanities-philosophy-metaphysics-families",
+        "chunkIndex": 2,
+        "chunkId": "humanities-philosophy-metaphysics-families#2",
+        "heading": "Idealism",
+        "text": "## Idealism\n\nIdealist traditions treat mind, experience, reason, or spirit as basic to reality's intelligibility. Berkeley argues that ordinary objects are ideas sustained by perception. Kant makes the structure of experience central by asking what conditions make objects possible for us. Hegel radicalizes the line by treating reality as historically and logically articulated through reason.\n\nThe pressure point is independence. A good map should show whether an idealist family denies an external world, redefines objectivity, or argues that objectivity already depends on conceptual form.",
+        "charCount": 593,
+        "tokenEstimate": 149
+      },
+      {
+        "sourceId": "humanities-philosophy-metaphysics-families",
+        "chunkIndex": 3,
+        "chunkId": "humanities-philosophy-metaphysics-families#3",
+        "heading": "Dualism",
+        "text": "## Dualism\n\nDualist families insist on a deep distinction between mind and matter, soul and body, or intelligible and sensible reality. Plato gives one ancient source through soul and forms. Descartes gives the modern mind-body problem its sharpest canonical form. Elisabeth of Bohemia is essential because she presses the interaction problem: how can an immaterial mind move a material body?\n\nThe pressure point is interaction. If mind and matter are fundamentally different, the reviewer should ask whether causation across the divide is explained, denied, or replaced by another framework.",
+        "charCount": 592,
+        "tokenEstimate": 148
+      },
+      {
+        "sourceId": "humanities-philosophy-metaphysics-families",
+        "chunkIndex": 4,
+        "chunkId": "humanities-philosophy-metaphysics-families#4",
+        "heading": "Substance and hylomorphism",
+        "text": "## Substance and hylomorphism\n\nSubstance metaphysics asks what kinds of things exist and what makes them persist as one thing through change. Aristotle's hylomorphism treats beings as composites of form and matter, potentiality and actuality. Aquinas adapts this vocabulary to being, essence, causation, and theology. Contemporary neo-Aristotelian work revives categories, powers, dependence, and essence.\n\nThe pressure point is rigidity. The map should ask whether essences can handle evolution, social construction, historical change, and systems whose boundaries are fuzzy.",
+        "charCount": 576,
+        "tokenEstimate": 144
+      },
+      {
+        "sourceId": "humanities-philosophy-metaphysics-families",
+        "chunkIndex": 5,
+        "chunkId": "humanities-philosophy-metaphysics-families#5",
+        "heading": "Process and becoming",
+        "text": "## Process and becoming\n\nProcess metaphysics starts from activity, change, relation, and becoming rather than static substance. Heraclitus is the ancient marker. Whitehead rebuilds metaphysics around occasions, creativity, relation, and event. Bergson gives a related account through duration and creative evolution.\n\nThe pressure point is stability. If everything is process, the reviewer should ask how identity, reference, memory, and durable institutions are preserved.",
+        "charCount": 473,
+        "tokenEstimate": 119
+      },
+      {
+        "sourceId": "humanities-philosophy-metaphysics-families",
+        "chunkIndex": 6,
+        "chunkId": "humanities-philosophy-metaphysics-families#6",
+        "heading": "Neutral monism and panpsychism",
+        "text": "## Neutral monism and panpsychism\n\nNeutral monism and panpsychism try to avoid choosing between strict physicalism and strict dualism. Spinoza gives a dual-aspect model where mind and body express one substance. Russell and James open routes where experience, structure, or neutral stuff can underlie both mind and matter. Recent panpsychists revive the family as a response to the hard problem of consciousness.\n\nThe pressure point is combination. A map should show how many small experiential or neutral elements become a unified subject, and whether the theory explains more than it names.",
+        "charCount": 592,
+        "tokenEstimate": 148
+      },
+      {
+        "sourceId": "humanities-philosophy-metaphysics-families",
+        "chunkIndex": 7,
+        "chunkId": "humanities-philosophy-metaphysics-families#7",
+        "heading": "Pragmatism and metaphysical critique",
+        "text": "## Pragmatism and metaphysical critique\n\nPragmatist and critical approaches ask what metaphysical claims do in inquiry and life. Peirce links meaning to conceivable practical effects while keeping truth tied to inquiry. James emphasizes lived consequences. Dewey treats nature and experience as continuous. Carnap challenges metaphysical language when it lacks clear empirical or logical role.\n\nThe pressure point is deflation. A reviewable Atlas map should distinguish healthy critique from avoiding real ontological disagreement.",
+        "charCount": 531,
+        "tokenEstimate": 133
+      }
+    ],
+    "sourceMapSlug": "metaphysics-families",
+    "packetHash": "9ef9ac8c86174b8e2289ba9bc1d97101c814d735a83a8b9d21c514f7977787ef"
+  }
+}

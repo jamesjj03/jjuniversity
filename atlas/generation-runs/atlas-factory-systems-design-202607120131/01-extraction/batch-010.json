@@ -1,0 +1,19 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 10,
+  "chunkIds": [
+    "corpus-systems-design-source-2926d95aed10#1"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 682,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

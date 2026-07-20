@@ -1,0 +1,45 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 3,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#340"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 757,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "bilingual writing",
+        "summary": "incorporating another language into writing",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#340",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+            "chunkIndex": 340,
+            "note": "practice of Cisneros and Adichie"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "incorporating language enriches writing",
+        "subject": "bilingual writing",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#340",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+            "chunkIndex": 340,
+            "note": "implied by examples"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

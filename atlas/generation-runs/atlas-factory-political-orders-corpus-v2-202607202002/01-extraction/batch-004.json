@@ -1,0 +1,84 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1063"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 708,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Pierre-Joseph Proudhon",
+        "role": "philosopher",
+        "reason": "advocate of anarchism",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1063",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+            "chunkIndex": 1063,
+            "note": "observation on government control"
+          }
+        ]
+      },
+      {
+        "name": "Proudhon",
+        "role": "philosopher",
+        "reason": "advocate of anarchism",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1063",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+            "chunkIndex": 1063,
+            "note": "observation on government control"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "anarchism",
+        "summary": "opposition to governance",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1063",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+            "chunkIndex": 1063,
+            "note": "defense of anarchism"
+          }
+        ]
+      },
+      {
+        "label": "government",
+        "summary": "exercise of control",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1063",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+            "chunkIndex": 1063,
+            "note": "criticized by Proudhon"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "governments impermissible actions",
+        "subject": "government actions",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1063",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+            "chunkIndex": 1063,
+            "note": "defense of anarchism"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

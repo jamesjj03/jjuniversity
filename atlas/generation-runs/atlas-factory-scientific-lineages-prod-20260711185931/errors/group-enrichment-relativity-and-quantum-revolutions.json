@@ -1,0 +1,12 @@
+{
+  "stageName": "group-enrichment-relativity-and-quantum-revolutions",
+  "ok": false,
+  "errors": [
+    "Group stance is required.",
+    "Group centralClaim is required.",
+    "Group whyItMatters is required.",
+    "Group needs at least one contributor."
+  ],
+  "rawExcerpt": "```json\n{\n  \"id\": \"relativity-and-quantum-revolutions\",\n  \"title\": \"Relativity and quantum revolutions\",\n  \"shortTitle\": \"Relativity/quantum\",\n  \"description\": \"Classical assumptions about space, time, measurement, matter, probability, and observation are broken and rebuilt.\",\n  \"memberCandidateIds\": [\n    \"person-albert-einstein\",\n    \"person-max-planck\",\n    \"person-niels-bohr\",\n    \"person-werner-heisenberg\",\n    \"person-erwin-schrodinger\",\n    \"person-paul-dirac\",\n    \"person-richard-feynman\",\n    \"concept-quantum-theory\"\n  ],\n  \"relatedGroupIds\": [\n    \"mathematical-astronomy-and-mechanics\",\n    \"experimental-electricity-and-field-physics\"\n  ],\n  \"provenance\": [\n    {\n      \"chunkId\": \"stem-scientists-scientific-lineages#6\",\n      \"sourceId\": \"stem-scientists-scientific-lineages\",\n      \"chunkIndex\": 6\n    }\n  ]\n}\n```",
+  "createdAt": "2026-07-11T23:53:02.068Z"
+}

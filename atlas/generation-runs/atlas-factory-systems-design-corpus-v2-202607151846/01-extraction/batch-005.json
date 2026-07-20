@@ -1,0 +1,98 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 5,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 717,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Pierre-Simon Laplace",
+        "role": "inventor",
+        "reason": "Z-transform",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+            "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+            "chunkIndex": 27,
+            "note": "Z-transform"
+          }
+        ]
+      },
+      {
+        "name": "Irmgard Flugge-Lotz",
+        "role": "developer",
+        "reason": "discontinuous control theory",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+            "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+            "chunkIndex": 27,
+            "note": "discontinuous control"
+          }
+        ]
+      },
+      {
+        "name": "Alexander Lyapunov",
+        "role": "developer",
+        "reason": "stability theory",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+            "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+            "chunkIndex": 27,
+            "note": "stability theory"
+          }
+        ]
+      },
+      {
+        "name": "Harold S. Black",
+        "role": "inventor",
+        "reason": "negative feedback amplifiers",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+            "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+            "chunkIndex": 27,
+            "note": "negative feedback"
+          }
+        ]
+      },
+      {
+        "name": "Harry Nyquist",
+        "role": "developer",
+        "reason": "stability criterion",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+            "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+            "chunkIndex": 27,
+            "note": "stability criterion"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Z-transform",
+        "summary": "discrete-time control solution",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+            "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+            "chunkIndex": 27,
+            "note": "discrete time"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

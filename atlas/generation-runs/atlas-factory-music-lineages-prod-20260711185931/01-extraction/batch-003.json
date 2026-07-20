@@ -1,0 +1,177 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 3,
+  "chunkIds": [
+    "arts-music-music-lineages#3"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 697,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Carter Family",
+        "role": "anchor",
+        "reason": "early commercial country",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Jimmie Rodgers",
+        "role": "anchor",
+        "reason": "early commercial country",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Bob Dylan",
+        "role": "bridge",
+        "reason": "folk, country, poetry, song",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "authenticity",
+        "summary": "pressure point",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "regional identity",
+        "summary": "organizing factor",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "oral transmission",
+        "summary": "transmission method",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Roots and tradition shaped by industry.",
+        "subject": "authenticity claims",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Radio influenced transmission.",
+        "subject": "oral tradition",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "texts": [
+      {
+        "title": "ballads",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "title": "radio broadcasts",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Carter Family",
+        "target": "Jimmie Rodgers",
+        "kind": "neighbors",
+        "note": "early commercial country",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "source": "Woody Guthrie",
+        "target": "Pete Seeger",
+        "kind": "influences",
+        "note": "political folk revival",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#3",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 3,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ]
+  }
+}

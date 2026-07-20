@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-earth-systems-and-environmental-science",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-earth-systems-and-environmental-science failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 2923 (line 105 column 6)"
+  },
+  "createdAt": "2026-07-11T23:57:02.379Z"
+}

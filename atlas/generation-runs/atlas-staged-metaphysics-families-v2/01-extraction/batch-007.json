@@ -1,0 +1,196 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 7,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#7"
+  ],
+  "result": {
+    "people": [
+      {
+        "name": "Charles Sanders Peirce",
+        "role": "Founder of Pragmatism",
+        "reason": "Links meaning to conceivable practical effects and ties truth to inquiry.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "William James",
+        "role": "Pragmatist philosopher",
+        "reason": "Emphasizes lived consequences.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "John Dewey",
+        "role": "Pragmatist philosopher",
+        "reason": "Treats nature and experience as continuous.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Rudolf Carnap",
+        "role": "Logical positivist",
+        "reason": "Challenges metaphysical language when it lacks clear empirical or logical role.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Pragmatism",
+        "summary": "A philosophical movement that focuses on the practical implications of beliefs and theories.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Metaphysical critique",
+        "summary": "The examination and evaluation of metaphysical claims in terms of their usefulness and implications.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Deflation",
+        "summary": "The idea that metaphysical debates should focus on the practical implications of beliefs rather than ontological disagreements.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Pragmatists ask what metaphysical claims do in inquiry and life.",
+        "subject": "Pragmatism",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Peirce links meaning to conceivable practical effects and ties truth to inquiry.",
+        "subject": "Pragmatism",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "James emphasizes lived consequences.",
+        "subject": "Pragmatism",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Dewey treats nature and experience as continuous.",
+        "subject": "Pragmatism",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Carnap challenges metaphysical language when it lacks clear empirical or logical role.",
+        "subject": "Logical positivism",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Pragmatism",
+        "target": "Metaphysical critique",
+        "kind": "influences",
+        "note": "Asks what metaphysical claims do in inquiry and life.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "source": "Pragmatism",
+        "target": "Deflation",
+        "kind": "supports",
+        "note": "Focuses on practical implications of beliefs rather than ontological disagreements.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#7",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 7,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ]
+  }
+}

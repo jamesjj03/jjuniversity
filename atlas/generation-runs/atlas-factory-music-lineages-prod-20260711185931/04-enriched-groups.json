@@ -1,0 +1,942 @@
+{
+  "stage": "group-enrichment",
+  "ok": true,
+  "groups": [
+    {
+      "id": "european-classical-and-art-music-lineages",
+      "slug": "european-classical-and-art-music-lineages",
+      "title": "European classical and art-music lineages",
+      "shortTitle": "Classical/art music",
+      "family": "Classical/art music family",
+      "stance": "pressure point",
+      "centralClaim": "Liturgical, court, concert, conservatory, and modernist lineages of European art music.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable historical-movement atlas draft for music lineages from the selected source brief. emphasize scenes, movements, stylistic inheritance, technology, and exchange. for admin review.",
+      "contributors": [
+        {
+          "id": "person-j-s-bach",
+          "name": "J. S. Bach",
+          "role": "source contributor",
+          "reason": "contrapuntal craft, Lutheran sacred music",
+          "texts": [
+            {
+              "id": "source-evidence-for-j-s-bach",
+              "title": "Source evidence for J. S. Bach",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#1",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#1",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        },
+        {
+          "id": "person-haydn",
+          "name": "Haydn",
+          "role": "source contributor",
+          "reason": "classical form, symphony",
+          "texts": [
+            {
+              "id": "source-evidence-for-haydn",
+              "title": "Source evidence for Haydn",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#1",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#1",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        },
+        {
+          "id": "person-beethoven",
+          "name": "Beethoven",
+          "role": "source contributor",
+          "reason": "symphony, chamber music",
+          "texts": [
+            {
+              "id": "source-evidence-for-beethoven",
+              "title": "Source evidence for Beethoven",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#1",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#1",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        },
+        {
+          "id": "person-wagner",
+          "name": "Wagner",
+          "role": "source contributor",
+          "reason": "harmony, orchestration",
+          "texts": [
+            {
+              "id": "source-evidence-for-wagner",
+              "title": "Source evidence for Wagner",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#1",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#1",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating European classical and art-music lineages as a complete family."
+      ],
+      "relatedGroupIds": [
+        "african-diasporic-blues-gospel-and-jazz",
+        "folk-country-and-singer-songwriter-traditions",
+        "rock-soul-funk-and-amplified-popular-music"
+      ],
+      "keywords": [
+        "canon",
+        "european",
+        "classical",
+        "art-music",
+        "lineages"
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#1",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 1
+        },
+        {
+          "chunkId": "arts-music-music-lineages#0",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "african-diasporic-blues-gospel-and-jazz",
+      "slug": "african-diasporic-blues-gospel-and-jazz",
+      "title": "African diasporic blues, gospel, and jazz",
+      "shortTitle": "Blues/gospel/jazz",
+      "family": "Blues/gospel/jazz family",
+      "stance": "Spirituals, work songs, blues, gospel, ragtime, jazz, improvisation, harmony, and ensemble lineages.",
+      "centralClaim": "Spirituals, work songs, blues, gospel, ragtime, jazz, improvisation, harmony, and ensemble lineages.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable historical-movement atlas draft for music lineages from the selected source brief. emphasize scenes, movements, stylistic inheritance, technology, and exchange. for admin review.",
+      "contributors": [
+        {
+          "id": "person-louis-armstrong",
+          "name": "Louis Armstrong",
+          "role": "source contributor",
+          "reason": "ensemble logic",
+          "texts": [
+            {
+              "id": "source-evidence-for-louis-armstrong",
+              "title": "Source evidence for Louis Armstrong",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#2",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#2",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        },
+        {
+          "id": "person-miles-davis",
+          "name": "Miles Davis",
+          "role": "source contributor",
+          "reason": "improvisation, harmony, rhythm, voice",
+          "texts": [
+            {
+              "id": "source-evidence-for-miles-davis",
+              "title": "Source evidence for Miles Davis",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#2",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#2",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating African diasporic blues, gospel, and jazz as a complete family."
+      ],
+      "relatedGroupIds": [
+        "european-classical-and-art-music-lineages",
+        "folk-country-and-singer-songwriter-traditions",
+        "rock-soul-funk-and-amplified-popular-music"
+      ],
+      "keywords": [
+        "african",
+        "diasporic",
+        "blues,",
+        "gospel,",
+        "jazz"
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#2",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 2
+        },
+        {
+          "chunkId": "arts-music-music-lineages#0",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "folk-country-and-singer-songwriter-traditions",
+      "slug": "folk-country-and-singer-songwriter-traditions",
+      "title": "Folk, country, and singer-songwriter traditions",
+      "shortTitle": "Folk/country",
+      "family": "Folk/country family",
+      "stance": "Vernacular song, balladry, dance music, oral transmission, radio, recording, regional identity, and authorship.",
+      "centralClaim": "Vernacular song, balladry, dance music, oral transmission, radio, recording, regional identity, and authorship.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable historical-movement atlas draft for music lineages from the selected source brief. emphasize scenes, movements, stylistic inheritance, technology, and exchange. for admin review.",
+      "contributors": [
+        {
+          "id": "person-jimmie-rodgers",
+          "name": "Jimmie Rodgers",
+          "role": "source contributor",
+          "reason": "early commercial country",
+          "texts": [
+            {
+              "id": "source-evidence-for-jimmie-rodgers",
+              "title": "Source evidence for Jimmie Rodgers",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#3",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#3",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        },
+        {
+          "id": "person-bob-dylan",
+          "name": "Bob Dylan",
+          "role": "source contributor",
+          "reason": "folk, country, poetry, song",
+          "texts": [
+            {
+              "id": "source-evidence-for-bob-dylan",
+              "title": "Source evidence for Bob Dylan",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#3",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#3",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Folk, country, and singer-songwriter traditions as a complete family."
+      ],
+      "relatedGroupIds": [
+        "european-classical-and-art-music-lineages",
+        "african-diasporic-blues-gospel-and-jazz",
+        "rock-soul-funk-and-amplified-popular-music"
+      ],
+      "keywords": [
+        "folk,",
+        "country,",
+        "singer-songwriter",
+        "traditions"
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#3",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 3
+        },
+        {
+          "chunkId": "arts-music-music-lineages#0",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "rock-soul-funk-and-amplified-popular-music",
+      "slug": "rock-soul-funk-and-amplified-popular-music",
+      "title": "Rock, soul, funk, and amplified popular music",
+      "shortTitle": "Rock/soul/funk",
+      "family": "Rock/soul/funk family",
+      "stance": "Amplification, youth culture, studio recording, rhythm and blues, gospel, guitar, voice, rhythm, and mass media.",
+      "centralClaim": "Amplification, youth culture, studio recording, rhythm and blues, gospel, guitar, voice, rhythm, and mass media.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable historical-movement atlas draft for music lineages from the selected source brief. emphasize scenes, movements, stylistic inheritance, technology, and exchange. for admin review.",
+      "contributors": [
+        {
+          "id": "person-chuck-berry",
+          "name": "Chuck Berry",
+          "role": "source contributor",
+          "reason": "early rock influence",
+          "texts": [
+            {
+              "id": "source-evidence-for-chuck-berry",
+              "title": "Source evidence for Chuck Berry",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#4",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#4",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        },
+        {
+          "id": "person-elvis-presley",
+          "name": "Elvis Presley",
+          "role": "source contributor",
+          "reason": "popularized rock",
+          "texts": [
+            {
+              "id": "source-evidence-for-elvis-presley",
+              "title": "Source evidence for Elvis Presley",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#4",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#4",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        },
+        {
+          "id": "person-james-brown",
+          "name": "James Brown",
+          "role": "source contributor",
+          "reason": "funk pioneer",
+          "texts": [
+            {
+              "id": "source-evidence-for-james-brown",
+              "title": "Source evidence for James Brown",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#4",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#4",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Rock, soul, funk, and amplified popular music as a complete family."
+      ],
+      "relatedGroupIds": [
+        "european-classical-and-art-music-lineages",
+        "african-diasporic-blues-gospel-and-jazz",
+        "folk-country-and-singer-songwriter-traditions"
+      ],
+      "keywords": [
+        "rock,",
+        "soul,",
+        "funk,",
+        "amplified",
+        "popular",
+        "music"
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#4",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 4
+        },
+        {
+          "chunkId": "arts-music-music-lineages#0",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "hip-hop-and-sample-based-lineages",
+      "slug": "hip-hop-and-sample-based-lineages",
+      "title": "Hip-hop and sample-based lineages",
+      "shortTitle": "Hip-hop",
+      "family": "Popular Music",
+      "stance": "innovative",
+      "centralClaim": "A culture born from DJing, MCing, breakdance, graffiti, sampling, flow, production, regional identity, political expression, and industry evolution.",
+      "whyItMatters": "Hip-hop revolutionized music production through sampling and redefined cultural expression for marginalized communities. Its influence spans global popular music and continues to evolve.",
+      "contributors": [
+        {
+          "id": "person-dj-kool-herc",
+          "name": "DJ Kool Herc",
+          "role": "Founder",
+          "reason": "Pioneered breakbeat DJing, foundational technique of hip-hop.",
+          "texts": [
+            {
+              "id": "early-breakbeat-techniques-demonstration",
+              "title": "Early Breakbeat Techniques (demonstration)",
+              "kind": "lecture",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#5",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#5",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 5
+            }
+          ]
+        },
+        {
+          "id": "person-afrika-bambaataa",
+          "name": "Afrika Bambaataa",
+          "role": "Cultural Architect",
+          "reason": "Coined the term 'hip hop' and fostered a sense of community through Zulu Nation.",
+          "texts": [
+            {
+              "id": "zulu-nation-manifesto-oral-tradition",
+              "title": "Zulu Nation Manifesto (oral tradition)",
+              "kind": "dialogue",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#5",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#5",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 5
+            }
+          ]
+        },
+        {
+          "id": "person-kendrick-lamar",
+          "name": "Kendrick Lamar",
+          "role": "Contemporary Innovator",
+          "reason": "Represents a shift towards complex lyrical narratives and conceptual albums within hip-hop.",
+          "texts": [
+            {
+              "id": "to-pimp-a-butterfly-album",
+              "title": "To Pimp a Butterfly (album)",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#5",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#5",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 5
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "Early hip-hop's reliance on sampling raised copyright concerns.",
+        "Commercialization diluted some of the original cultural values.",
+        "Regional variations sometimes led to divisions within the community.",
+        "The genre has been criticized for perpetuating harmful stereotypes."
+      ],
+      "relatedGroupIds": [
+        "african-diasporic-blues-gospel-and-jazz",
+        "electronic-dance-and-studio-technology-lineages",
+        "global-popular-and-diasporic-exchange"
+      ],
+      "keywords": [
+        "sampling",
+        "DJing",
+        "MCing",
+        "breakbeat",
+        "Zulu Nation",
+        "cultural expression",
+        "production techniques"
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#5",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 5
+        }
+      ]
+    },
+    {
+      "id": "electronic-dance-and-studio-technology-lineages",
+      "slug": "electronic-dance-and-studio-technology-lineages",
+      "title": "Electronic, dance, and studio technology lineages",
+      "shortTitle": "Electronic/dance",
+      "family": "Music",
+      "stance": "innovative",
+      "centralClaim": "The convergence of technological innovation (tape manipulation, synthesizers, drum machines) with evolving musical aesthetics shaped new forms of dance music and studio production.",
+      "whyItMatters": "This lineage demonstrates the profound impact of technology on artistic expression, influencing popular music genres and redefining the role of the producer as an artist.",
+      "contributors": [
+        {
+          "id": "person-pierre-schaeffer",
+          "name": "Pierre Schaeffer",
+          "role": "pioneer",
+          "reason": "Developed *musique concrète*, a foundational technique for electronic music using recorded sounds.",
+          "texts": [
+            {
+              "id": "text-pierre-schaeffer-in-salons",
+              "title": "In salons",
+              "kind": "essay",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#6",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#6",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        },
+        {
+          "id": "person-karlheinz-stockhausen",
+          "name": "Karlheinz Stockhausen",
+          "role": "innovator",
+          "reason": "Expanded electronic music through serial composition and spatial audio experimentation.",
+          "texts": [
+            {
+              "id": "text-karlheinz-stockhausen-studien-i-ii-iii",
+              "title": "Studien I-III",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#6",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#6",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        },
+        {
+          "id": "person-kraftwerk",
+          "name": "Kraftwerk",
+          "role": "popularizer",
+          "reason": "Brought electronic music to a wider audience through accessible pop structures and iconic imagery.",
+          "texts": [
+            {
+              "id": "text-kraftwerk-autobahn",
+              "title": "Autobahn",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#6",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#6",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "Early electronic music was often perceived as cold and sterile.",
+        "The reliance on technology could overshadow artistic creativity.",
+        "Accessibility to studio equipment limited participation in the movement.",
+        "Commercialization diluted experimental approaches."
+      ],
+      "relatedGroupIds": [
+        "hip-hop-and-sample-based-lineages",
+        "experimental-punk-and-independent-scenes"
+      ],
+      "keywords": [
+        "electronic music",
+        "studio technology",
+        "dance music",
+        "synthesis",
+        "sampling",
+        "musique concrète"
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#6",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    },
+    {
+      "id": "global-popular-and-diasporic-exchange",
+      "slug": "global-popular-and-diasporic-exchange",
+      "title": "Global Popular and Diasporic Exchange",
+      "shortTitle": "Global exchange",
+      "family": "Music Lineages",
+      "stance": "Influential",
+      "centralClaim": "The global spread of popular music is shaped by diasporic communities, technological innovation, and localized adaptations, creating a dynamic exchange of styles and influences.",
+      "whyItMatters": "This movement demonstrates how musical forms transcend geographical boundaries, reflecting broader patterns of cultural interaction and globalization. It highlights the agency of marginalized communities in shaping global culture.",
+      "contributors": [
+        {
+          "id": "person-bob-marley",
+          "name": "Bob Marley",
+          "role": "Pioneer",
+          "reason": "Marley's music popularized reggae internationally, becoming a symbol of Jamaican identity and diaspora.",
+          "texts": [
+            {
+              "id": "text-various-works",
+              "title": "Various works",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#8",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#7",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 7
+            }
+          ]
+        },
+        {
+          "id": "person-lee-scratch-perry",
+          "name": "Lee Scratch Perry",
+          "role": "Innovator",
+          "reason": "Perry's pioneering work in dub production techniques significantly influenced global music production and sound design.",
+          "texts": [
+            {
+              "id": "text-various-works",
+              "title": "Various works",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#8",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#7",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 7
+            }
+          ]
+        },
+        {
+          "id": "person-fela-kuti",
+          "name": "Fela Kuti",
+          "role": "Founder",
+          "reason": "Kuti created Afrobeat, a powerful fusion of West African music and jazz that addressed social and political issues with global resonance.",
+          "texts": [
+            {
+              "id": "text-various-works",
+              "title": "Various works",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#8",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#7",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 7
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The term 'global popular music' can be overly broad and obscures regional variations.",
+        "Attributing agency solely to diasporic communities risks overlooking the role of colonial power structures in shaping musical exchange.",
+        "Focusing on technological innovation may overshadow the cultural significance and artistic creativity within these movements.",
+        "Defining a clear boundary for this movement is challenging due to its inherently fluid nature."
+      ],
+      "relatedGroupIds": [
+        "african-diasporic-blues-gospel-and-jazz",
+        "electronic-dance-and-studio-technology-lineages",
+        "hip-hop-and-sample-based-lineages"
+      ],
+      "keywords": [
+        "globalization",
+        "diaspora",
+        "exchange",
+        "migration",
+        "technology",
+        "reggae",
+        "afrobeat",
+        "dub"
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#7",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 7
+        }
+      ]
+    },
+    {
+      "id": "experimental-punk-and-independent-scenes",
+      "slug": "experimental-punk-and-independent-scenes",
+      "title": "Experimental, punk, and independent scenes",
+      "shortTitle": "Experimental/punk/indie",
+      "family": "Music Lineages",
+      "stance": "Innovative & Disruptive",
+      "centralClaim": "Challenging established musical norms through experimentation, DIY ethics, and a rejection of mainstream commercialism.",
+      "whyItMatters": "This movement fostered radical artistic expression, democratized music production, and profoundly influenced subsequent genres by prioritizing authenticity over polish.",
+      "contributors": [
+        {
+          "id": "person-john-cage",
+          "name": "John Cage",
+          "role": "Pioneer",
+          "reason": "His experimental approach to composition fundamentally altered musical conventions and inspired generations of artists.",
+          "texts": [
+            {
+              "id": "book-4316",
+              "title": "Silence",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#8",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#8",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        },
+        {
+          "id": "person-patti-smith",
+          "name": "Patti Smith",
+          "role": "Influencer",
+          "reason": "Bridged punk rock and poetry, establishing a vital artistic voice for the independent scene.",
+          "texts": [
+            {
+              "id": "book-7891",
+              "title": "Just Kids",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#8",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#8",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        },
+        {
+          "id": "person-nirvana",
+          "name": "Nirvana",
+          "role": "Popularizer",
+          "reason": "Brought alternative and independent music to a mainstream audience, impacting youth culture globally.",
+          "texts": [
+            {
+              "id": "album-nevermind",
+              "title": "Nevermind",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "arts-music-music-lineages#8",
+                  "sourceId": "arts-music-music-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#8",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "Can be overly broad, encompassing diverse and sometimes conflicting aesthetics.",
+        "Risk of romanticizing DIY ethos without acknowledging its limitations.",
+        "Defining boundaries between 'experimental' and mainstream rock can be subjective.",
+        "Some subgenres within the scene may have been more commercially successful than others."
+      ],
+      "relatedGroupIds": [
+        "european-classical-and-art-music-lineages",
+        "rock-soul-funk-and-amplified-popular-music",
+        "electronic-dance-and-studio-technology-lineages"
+      ],
+      "keywords": [
+        "experimental music",
+        "punk rock",
+        "independent music",
+        "DIY",
+        "alternative rock",
+        "noise",
+        "minimalism"
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#8",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 8
+        }
+      ]
+    }
+  ]
+}

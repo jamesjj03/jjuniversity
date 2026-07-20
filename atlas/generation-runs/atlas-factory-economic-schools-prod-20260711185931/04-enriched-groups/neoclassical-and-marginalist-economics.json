@@ -1,0 +1,168 @@
+{
+  "id": "neoclassical-and-marginalist-economics",
+  "slug": "neoclassical-and-marginalist-economics",
+  "title": "Neoclassical and marginalist economics",
+  "shortTitle": "Neoclassical",
+  "family": "Neoclassical family",
+  "stance": "basis of price and allocation",
+  "centralClaim": "Prices and allocation through marginal choice, utility, scarcity, equilibrium, and optimization.",
+  "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+  "contributors": [
+    {
+      "id": "person-william-stanley-jevons",
+      "name": "William Stanley Jevons",
+      "role": "source contributor",
+      "reason": "helped define analytic core",
+      "texts": [
+        {
+          "id": "source-evidence-for-william-stanley-jevons",
+          "title": "Source evidence for William Stanley Jevons",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#3",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "person-leon-walras",
+      "name": "Leon Walras",
+      "role": "source contributor",
+      "reason": "helped define analytic core",
+      "texts": [
+        {
+          "id": "source-evidence-for-leon-walras",
+          "title": "Source evidence for Leon Walras",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#3",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "person-carl-menger",
+      "name": "Carl Menger",
+      "role": "source contributor",
+      "reason": "helped define analytic core",
+      "texts": [
+        {
+          "id": "source-evidence-for-carl-menger",
+          "title": "Source evidence for Carl Menger",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#3",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 3
+            },
+            {
+              "chunkId": "society-economics-economic-schools#5",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 5
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3
+        },
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5
+        }
+      ]
+    },
+    {
+      "id": "person-paul-samuelson",
+      "name": "Paul Samuelson",
+      "role": "source contributor",
+      "reason": "develops branches of tradition",
+      "texts": [
+        {
+          "id": "source-evidence-for-paul-samuelson",
+          "title": "Source evidence for Paul Samuelson",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#4",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating Neoclassical and marginalist economics as a complete family."
+  ],
+  "relatedGroupIds": [
+    "classical-political-economy",
+    "marxian-economics",
+    "keynesian-and-macroeconomic-management"
+  ],
+  "keywords": [
+    "marginal choice",
+    "equilibrium",
+    "neoclassical",
+    "marginalist",
+    "economics"
+  ],
+  "provenance": [
+    {
+      "chunkId": "society-economics-economic-schools#3",
+      "sourceId": "society-economics-economic-schools",
+      "chunkIndex": 3
+    },
+    {
+      "chunkId": "society-economics-economic-schools#5",
+      "sourceId": "society-economics-economic-schools",
+      "chunkIndex": 5
+    },
+    {
+      "chunkId": "society-economics-economic-schools#4",
+      "sourceId": "society-economics-economic-schools",
+      "chunkIndex": 4
+    },
+    {
+      "chunkId": "society-economics-economic-schools#0",
+      "sourceId": "society-economics-economic-schools",
+      "chunkIndex": 0,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}

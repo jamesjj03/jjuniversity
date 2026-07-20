@@ -1,0 +1,19 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 1,
+  "chunkIds": [
+    "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#537"
+  ],
+  "charLimit": 420,
+  "estimatedInputTokens": 1011,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

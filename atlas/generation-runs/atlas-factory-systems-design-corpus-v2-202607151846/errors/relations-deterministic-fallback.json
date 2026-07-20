@@ -1,0 +1,10 @@
+{
+  "stageName": "relations",
+  "ok": true,
+  "fallback": "deterministic-relations",
+  "reason": {
+    "category": "prompt_budget",
+    "message": "relations estimated 3377 input tokens, over safe budget 2200 for google/gemma-3-12b."
+  },
+  "createdAt": "2026-07-15T23:10:03.405Z"
+}

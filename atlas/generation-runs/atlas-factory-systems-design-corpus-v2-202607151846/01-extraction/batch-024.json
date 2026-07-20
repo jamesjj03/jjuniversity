@@ -1,0 +1,70 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 24,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 724,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "subunit power",
+        "summary": "Dependence on goods/services with few substitutes.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+            "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+            "chunkIndex": 1227,
+            "note": "dependence on goods/services"
+          }
+        ]
+      },
+      {
+        "label": "work centrality",
+        "summary": "Importance to enterprise operations.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+            "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+            "chunkIndex": 1227,
+            "note": "central importance"
+          }
+        ]
+      },
+      {
+        "label": "workflow pervasiveness",
+        "summary": "Degree of work interconnectedness.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+            "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+            "chunkIndex": 1227,
+            "note": "interconnectedness"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Organizational Systems",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+            "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+            "chunkIndex": 1227,
+            "note": "context"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

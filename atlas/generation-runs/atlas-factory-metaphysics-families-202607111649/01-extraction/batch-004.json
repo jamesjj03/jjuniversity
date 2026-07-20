@@ -1,0 +1,118 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#4"
+  ],
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "substance",
+        "summary": "fundamental reality",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "intro"
+          }
+        ]
+      },
+      {
+        "label": "form",
+        "summary": "structure, organization",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "intro"
+          }
+        ]
+      },
+      {
+        "label": "matter",
+        "summary": "stuff, material",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "intro"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "beings are composites of form and matter",
+        "subject": "hylomorphism",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "Aristotle's view"
+          }
+        ]
+      },
+      {
+        "text": "essences can handle evolution",
+        "subject": "essences",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "pressure point"
+          }
+        ]
+      }
+    ],
+    "texts": [
+      {
+        "title": "Aristotle's works",
+        "kind": "book",
+        "author": "Aristotle",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "foundation"
+          }
+        ]
+      },
+      {
+        "title": "Aquinas's works",
+        "kind": "book",
+        "author": "Aquinas",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "adaptation"
+          }
+        ]
+      }
+    ],
+    "objections": [
+      {
+        "text": "essences struggle with change",
+        "subject": "essences",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#4",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 4,
+            "note": "pressure point"
+          }
+        ]
+      }
+    ],
+    "relationships": []
+  }
+}

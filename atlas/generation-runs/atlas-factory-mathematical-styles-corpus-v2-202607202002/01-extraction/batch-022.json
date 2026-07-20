@@ -1,0 +1,81 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 22,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 699,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "proof",
+        "summary": "rigorous demonstration; potentially automated",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+            "chunkIndex": 38,
+            "note": "core element"
+          }
+        ]
+      },
+      {
+        "label": "creativity",
+        "summary": "essential for problem solving",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+            "chunkIndex": 38,
+            "note": "role in discovery"
+          }
+        ]
+      },
+      {
+        "label": "Apery's theorem",
+        "summary": "example of creative problem solving",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+            "chunkIndex": 38,
+            "note": "illustrative case"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "theorem validity relies on proof rigor",
+        "subject": "mathematical theorem",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+            "chunkIndex": 38,
+            "note": "validity criterion"
+          }
+        ]
+      },
+      {
+        "text": "creativity aids problem solving",
+        "subject": "mathematical work",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+            "chunkIndex": 38,
+            "note": "solving process"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "runId": "atlas-factory-systems-design-corpus-v2-202607151846",
+  "generator": "atlas-staged-model-generation-v2",
+  "createdAt": "2026-07-15T23:10:02.535Z",
+  "territorySlug": "technology",
+  "branchSlug": "systems",
+  "mapSlug": "systems-design-corpus-v2",
+  "sourceMapSlug": "systems-design-corpus-v2",
+  "selectedSourceIds": [
+    "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+    "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+    "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+    "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+    "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+    "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+    "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+    "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+    "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7"
+  ],
+  "topicPrompt": "A comparison map of systems design patterns, constraints, failure modes, feedback/control, architecture, socio-technical systems, requirements, resilience, and complex-system tradeoffs.",
+  "recipe": {
+    "id": "system_comparison",
+    "title": "System Comparison",
+    "purpose": "Compare social, political, technical, or philosophical systems by design commitments and tradeoffs.",
+    "groupingLogic": "Groups should be systems or system families, separated by governance logic, constraints, values, or operating model.",
+    "preferredGroupFields": [
+      "systemLogic",
+      "centralClaim",
+      "tradeoffs",
+      "contributors",
+      "keyTexts",
+      "failureModes"
+    ],
+    "contributorRules": "Contributors should be tied to system design, advocacy, critique, or canonical articulation.",
+    "expectedRelationTypes": [
+      "opposes",
+      "answers",
+      "reframes",
+      "neighbors",
+      "borrows"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 9
+    },
+    "generationInstructions": "Surface the operating logic of each system and the concrete tradeoffs between systems.",
+    "evaluationCriteria": [
+      "Systems are compared on meaningful axes",
+      "Tradeoffs are explicit",
+      "Relations expose conflict or borrowing",
+      "Claims are not slogans"
+    ]
+  },
+  "maxChunks": 25,
+  "chunkCharLimit": 700,
+  "chunkBatchSize": 1,
+  "concurrency": 1,
+  "retryCount": 2,
+  "force": false,
+  "importOnSuccess": true,
+  "modelConfig": {
+    "provider": "local-openai-compatible",
+    "baseUrl": "http://127.0.0.1:1234/v1",
+    "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+    "model": "google/gemma-3-12b",
+    "profileId": "google/gemma-3-12b",
+    "contextWindowTokens": 4096,
+    "safeInputTokens": 2200,
+    "allowNoKey": true,
+    "temperature": 0.1,
+    "maxTokens": 700,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": false
+  },
+  "stageModelConfigs": {
+    "extraction": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": false
+    },
+    "clustering": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": false
+    },
+    "enrichment": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": false
+    },
+    "relations": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": false
+    }
+  },
+  "preflight": [
+    {
+      "provider": "local-openai-compatible",
+      "model": "google/gemma-3-12b",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "modelsUrl": "http://127.0.0.1:1234/v1/models",
+      "ok": true,
+      "available": true,
+      "loaded": true,
+      "detectedContextWindowTokens": 4096,
+      "configuredSafeInputTokens": 2200,
+      "configuredMaxOutputTokens": 700,
+      "error": ""
+    }
+  ]
+}

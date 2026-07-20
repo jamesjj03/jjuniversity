@@ -1,0 +1,80 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 13,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#11"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 699,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Calculus",
+        "summary": "Study of continuous variable relationships",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#11",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564",
+            "chunkIndex": 11,
+            "note": "initial definition"
+          }
+        ]
+      },
+      {
+        "label": "Analysis",
+        "summary": "Advanced calculus theory",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#11",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564",
+            "chunkIndex": 11,
+            "note": "expansion of calculus"
+          }
+        ]
+      },
+      {
+        "label": "Function",
+        "summary": "Concept introduced by Euler",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#11",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564",
+            "chunkIndex": 11,
+            "note": "Euler's contribution"
+          }
+        ]
+      },
+      {
+        "label": "Real Analysis",
+        "summary": "Variables represent real numbers",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#11",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564",
+            "chunkIndex": 11,
+            "note": "subdivision of analysis"
+          }
+        ]
+      },
+      {
+        "label": "Complex Analysis",
+        "summary": "Variables represent complex numbers",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#11",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564",
+            "chunkIndex": 11,
+            "note": "subdivision of analysis"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

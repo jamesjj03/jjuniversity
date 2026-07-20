@@ -1,0 +1,423 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-08",
+  "territories": [
+    {
+      "id": "society",
+      "slug": "society",
+      "title": "Society",
+      "summary": "Politics, economics, institutions, law, technology adoption, media, and social organization.",
+      "branches": [
+        {
+          "id": "economics",
+          "slug": "economics",
+          "title": "Economics",
+          "summary": "Schools, models, crises, institutions, measures, policy regimes, and tradeoffs.",
+          "maps": [
+            {
+              "id": "economic-schools",
+              "slug": "economic-schools",
+              "title": "Economic schools",
+              "subtitle": "A draft map of major economic traditions by what each thinks economies are made of.",
+              "question": "What does each school think economies are, and what problem is it trying to solve?",
+              "summary": "This starter map organizes economic schools by explanatory stance: production, class conflict, marginal choice, aggregate demand, market process, and institutions or behavior.",
+              "status": "live",
+              "buildMode": "seeded",
+              "groups": [
+                {
+                  "id": "classical-political-economy",
+                  "slug": "classical-political-economy",
+                  "title": "Classical political economy",
+                  "shortTitle": "Classical",
+                  "family": "Production-first",
+                  "stance": "Economies are systems of production, labor, land, capital, prices, and trade shaped by social order.",
+                  "centralClaim": "Wealth grows through specialization, markets, productivity, and the allocation of surplus across classes.",
+                  "whyItMatters": "Classical economics created the base vocabulary for markets, labor, value, rent, trade, and growth.",
+                  "contributors": [
+                    {
+                      "id": "adam-smith",
+                      "name": "Adam Smith",
+                      "role": "foundational synthesizer",
+                      "reason": "Connected division of labor, market coordination, moral sentiment, and political economy into a durable frame.",
+                      "texts": [
+                        {
+                          "id": "the-wealth-of-nations",
+                          "title": "The Wealth of Nations",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "david-ricardo",
+                      "name": "David Ricardo",
+                      "role": "distribution theorist",
+                      "reason": "Formalized rent, comparative advantage, and distribution among wages, profits, and land.",
+                      "texts": [
+                        {
+                          "id": "principles-of-political-economy-and-taxation",
+                          "title": "Principles of Political Economy and Taxation",
+                          "kind": "book"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "It can understate power, monopoly, colonial extraction, and unpaid labor.",
+                    "Labor-value language became difficult to reconcile with later marginal price theory.",
+                    "Its broad social frame can be less mathematically precise than later schools."
+                  ],
+                  "relatedGroupIds": [
+                    "marxian-economics",
+                    "neoclassical-economics",
+                    "institutional-and-behavioral-economics"
+                  ],
+                  "keywords": [
+                    "production",
+                    "trade",
+                    "labor",
+                    "rent",
+                    "growth"
+                  ]
+                },
+                {
+                  "id": "marxian-economics",
+                  "slug": "marxian-economics",
+                  "title": "Marxian economics",
+                  "shortTitle": "Marxian",
+                  "family": "Conflict-first",
+                  "stance": "Capitalist economies are historical systems organized by class power, exploitation, accumulation, and crisis.",
+                  "centralClaim": "The wage relation hides extraction of surplus value, and capitalism tends toward instability and conflict.",
+                  "whyItMatters": "It makes power, ownership, labor, ideology, and crisis central instead of treating markets as neutral exchange systems.",
+                  "contributors": [
+                    {
+                      "id": "karl-marx",
+                      "name": "Karl Marx",
+                      "role": "critical architect",
+                      "reason": "Built a theory of capitalism around labor, value, class struggle, accumulation, and historical change.",
+                      "texts": [
+                        {
+                          "id": "capital-volume-one",
+                          "title": "Capital, Volume One",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rosa-luxemburg",
+                      "name": "Rosa Luxemburg",
+                      "role": "imperialism critic",
+                      "reason": "Linked accumulation to expansion, imperialism, and the political pressure of capitalism beyond the factory.",
+                      "texts": [
+                        {
+                          "id": "the-accumulation-of-capital",
+                          "title": "The Accumulation of Capital",
+                          "kind": "book"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Critics dispute labor value theory and its predictive claims.",
+                    "State socialist experiments raised practical objections about planning, incentives, and political control.",
+                    "Some versions can reduce culture, law, and institutions too strongly to class interest."
+                  ],
+                  "relatedGroupIds": [
+                    "classical-political-economy",
+                    "keynesian-economics",
+                    "institutional-and-behavioral-economics"
+                  ],
+                  "keywords": [
+                    "class",
+                    "capital",
+                    "exploitation",
+                    "crisis",
+                    "surplus"
+                  ]
+                },
+                {
+                  "id": "neoclassical-economics",
+                  "slug": "neoclassical-economics",
+                  "title": "Neoclassical economics",
+                  "shortTitle": "Neoclassical",
+                  "family": "Choice-first",
+                  "stance": "Economies can be modeled as choices under scarcity, where prices coordinate marginal tradeoffs.",
+                  "centralClaim": "Value emerges from marginal utility, constraints, preferences, and equilibrium among optimizing agents.",
+                  "whyItMatters": "It became the dominant toolkit for microeconomics, welfare analysis, price theory, and formal policy modeling.",
+                  "contributors": [
+                    {
+                      "id": "william-stanley-jevons",
+                      "name": "William Stanley Jevons",
+                      "role": "marginalist founder",
+                      "reason": "Helped shift value theory from labor and cost toward marginal utility and mathematical reasoning.",
+                      "texts": [
+                        {
+                          "id": "the-theory-of-political-economy",
+                          "title": "The Theory of Political Economy",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "alfred-marshall",
+                      "name": "Alfred Marshall",
+                      "role": "supply-demand synthesizer",
+                      "reason": "Stabilized the tools of partial equilibrium, supply and demand, elasticity, and marginal analysis.",
+                      "texts": [
+                        {
+                          "id": "principles-of-economics",
+                          "title": "Principles of Economics",
+                          "kind": "book"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "It can over-idealize rationality, information, equilibrium, and representative agents.",
+                    "Power, institutions, ecology, and history can appear as external complications.",
+                    "Formal elegance can hide fragile assumptions."
+                  ],
+                  "relatedGroupIds": [
+                    "classical-political-economy",
+                    "keynesian-economics",
+                    "austrian-economics",
+                    "institutional-and-behavioral-economics"
+                  ],
+                  "keywords": [
+                    "marginalism",
+                    "scarcity",
+                    "equilibrium",
+                    "utility",
+                    "prices"
+                  ]
+                },
+                {
+                  "id": "keynesian-economics",
+                  "slug": "keynesian-economics",
+                  "title": "Keynesian economics",
+                  "shortTitle": "Keynesian",
+                  "family": "Demand-first",
+                  "stance": "Economies can settle into bad equilibria when aggregate demand, expectations, money, and investment fail.",
+                  "centralClaim": "Markets do not automatically restore full employment quickly, so public policy can stabilize demand and confidence.",
+                  "whyItMatters": "It reshaped macroeconomics, fiscal policy, central banking debates, and crisis response.",
+                  "contributors": [
+                    {
+                      "id": "john-maynard-keynes",
+                      "name": "John Maynard Keynes",
+                      "role": "macro founder",
+                      "reason": "Reframed unemployment, money, investment, uncertainty, and demand as central macroeconomic problems.",
+                      "texts": [
+                        {
+                          "id": "the-general-theory-of-employment-interest-and-money",
+                          "title": "The General Theory of Employment, Interest and Money",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "joan-robinson",
+                      "name": "Joan Robinson",
+                      "role": "post-keynesian critic",
+                      "reason": "Extended imperfect competition and challenged simple equilibrium stories inside and outside Keynesian economics.",
+                      "texts": [
+                        {
+                          "id": "the-economics-of-imperfect-competition",
+                          "title": "The Economics of Imperfect Competition",
+                          "kind": "book"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Critics argue stimulus can create inflation, debt pressure, or political dependence.",
+                    "Some models rely on policy timing and knowledge governments may not have.",
+                    "New classical critics challenged its treatment of expectations."
+                  ],
+                  "relatedGroupIds": [
+                    "neoclassical-economics",
+                    "marxian-economics",
+                    "institutional-and-behavioral-economics"
+                  ],
+                  "keywords": [
+                    "demand",
+                    "uncertainty",
+                    "unemployment",
+                    "fiscal policy",
+                    "macro"
+                  ]
+                },
+                {
+                  "id": "austrian-economics",
+                  "slug": "austrian-economics",
+                  "title": "Austrian economics",
+                  "shortTitle": "Austrian",
+                  "family": "Process-first",
+                  "stance": "Economies are discovery processes driven by entrepreneurship, dispersed knowledge, prices, and time.",
+                  "centralClaim": "Market prices coordinate knowledge no planner can fully possess, and intervention can distort capital and signals.",
+                  "whyItMatters": "It sharpens questions about information, spontaneous order, money, business cycles, and centralized planning.",
+                  "contributors": [
+                    {
+                      "id": "carl-menger",
+                      "name": "Carl Menger",
+                      "role": "subjective value founder",
+                      "reason": "Grounded value in subjective use and helped launch marginalist thinking from an Austrian line.",
+                      "texts": [
+                        {
+                          "id": "principles-of-economics-menger",
+                          "title": "Principles of Economics",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "friedrich-hayek",
+                      "name": "Friedrich Hayek",
+                      "role": "knowledge theorist",
+                      "reason": "Argued that prices communicate dispersed knowledge and that planning faces deep information limits.",
+                      "texts": [
+                        {
+                          "id": "the-use-of-knowledge-in-society",
+                          "title": "The Use of Knowledge in Society",
+                          "kind": "essay"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Its policy conclusions can understate market failures, public goods, and inequality.",
+                    "Some claims resist formal testing or macro measurement.",
+                    "Its anti-planning frame can become too broad for mixed economies."
+                  ],
+                  "relatedGroupIds": [
+                    "neoclassical-economics",
+                    "keynesian-economics",
+                    "institutional-and-behavioral-economics"
+                  ],
+                  "keywords": [
+                    "knowledge",
+                    "entrepreneurship",
+                    "prices",
+                    "capital",
+                    "spontaneous order"
+                  ]
+                },
+                {
+                  "id": "institutional-and-behavioral-economics",
+                  "slug": "institutional-and-behavioral-economics",
+                  "title": "Institutional and behavioral economics",
+                  "shortTitle": "Institutions",
+                  "family": "Rules-and-humans",
+                  "stance": "Real economies are shaped by institutions, norms, bounded rationality, psychology, law, and collective action.",
+                  "centralClaim": "To explain economic behavior, models must include the rules and mental shortcuts that structure choice.",
+                  "whyItMatters": "This family repairs overly abstract models by bringing in organizations, culture, cognition, and governance.",
+                  "contributors": [
+                    {
+                      "id": "thorstein-veblen",
+                      "name": "Thorstein Veblen",
+                      "role": "institutional critic",
+                      "reason": "Treated habits, status, business power, and institutions as central to economic behavior.",
+                      "texts": [
+                        {
+                          "id": "the-theory-of-the-leisure-class",
+                          "title": "The Theory of the Leisure Class",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "daniel-kahneman",
+                      "name": "Daniel Kahneman",
+                      "role": "behavioral founder",
+                      "reason": "Brought cognitive bias, heuristics, and empirical psychology into economic judgment and choice.",
+                      "texts": [
+                        {
+                          "id": "judgment-under-uncertainty",
+                          "title": "Judgment under Uncertainty",
+                          "kind": "paper"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "elinor-ostrom",
+                      "name": "Elinor Ostrom",
+                      "role": "governance theorist",
+                      "reason": "Showed how communities can govern shared resources through rules beyond simple state or market binaries.",
+                      "texts": [
+                        {
+                          "id": "governing-the-commons",
+                          "title": "Governing the Commons",
+                          "kind": "book"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "The family is broad and can become a toolbox rather than one unified theory.",
+                    "Institutional detail can reduce portability across contexts.",
+                    "Behavioral findings can be hard to scale into full macroeconomic theory."
+                  ],
+                  "relatedGroupIds": [
+                    "neoclassical-economics",
+                    "keynesian-economics",
+                    "austrian-economics",
+                    "marxian-economics"
+                  ],
+                  "keywords": [
+                    "institutions",
+                    "behavior",
+                    "rules",
+                    "bias",
+                    "governance"
+                  ]
+                }
+              ],
+              "relations": [
+                {
+                  "id": "classical-marxian",
+                  "source": "classical-political-economy",
+                  "target": "marxian-economics",
+                  "kind": "reframes",
+                  "note": "Marxian economics inherits classical concerns with labor, value, and surplus, then reframes them through class conflict."
+                },
+                {
+                  "id": "classical-neoclassical",
+                  "source": "classical-political-economy",
+                  "target": "neoclassical-economics",
+                  "kind": "reframes",
+                  "note": "Neoclassical economics shifts the center from production and class distribution to marginal choice and equilibrium."
+                },
+                {
+                  "id": "neoclassical-keynesian",
+                  "source": "neoclassical-economics",
+                  "target": "keynesian-economics",
+                  "kind": "opposes",
+                  "note": "Keynesian economics challenges the idea that markets automatically clear quickly at full employment."
+                },
+                {
+                  "id": "keynesian-austrian",
+                  "source": "keynesian-economics",
+                  "target": "austrian-economics",
+                  "kind": "opposes",
+                  "note": "They disagree over policy intervention, capital distortion, knowledge limits, and the causes of cycles."
+                },
+                {
+                  "id": "neoclassical-institutional-behavioral",
+                  "source": "neoclassical-economics",
+                  "target": "institutional-and-behavioral-economics",
+                  "kind": "answers",
+                  "note": "Institutional and behavioral work addresses assumptions about rationality, rules, and context in standard models."
+                },
+                {
+                  "id": "austrian-institutional-behavioral",
+                  "source": "austrian-economics",
+                  "target": "institutional-and-behavioral-economics",
+                  "kind": "neighbors",
+                  "note": "Both care about local knowledge and real-world rules, but they emphasize different institutional lessons."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

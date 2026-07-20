@@ -1,0 +1,549 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-08",
+  "territories": [
+    {
+      "id": "humanities",
+      "slug": "humanities",
+      "title": "Humanities",
+      "summary": "Humanities source-grounded Atlas drafts and review material.",
+      "branches": [
+        {
+          "id": "philosophy",
+          "slug": "philosophy",
+          "title": "Philosophy",
+          "summary": "Philosophy source-grounded drafts built from ingested Atlas source chunks.",
+          "maps": [
+            {
+              "id": "metaphysics-families-grounded-v0",
+              "slug": "metaphysics-families-grounded-v0",
+              "title": "Metaphysics Families",
+              "subtitle": "A source-grounded review draft.",
+              "question": "What are the major families inside metaphysics families, and what pressure point does each family expose?",
+              "summary": "Source-grounded draft based on 8 ingested chunk(s). Prompt: Map the major metaphysical families from ingested source chunks, including their claims, pressure points, contributors, key texts, and relations. Sources: Metaphysics families source brief.",
+              "status": "queued",
+              "buildMode": "pipeline-ready",
+              "groups": [
+                {
+                  "id": "physicalism-and-materialism",
+                  "slug": "physicalism-and-materialism",
+                  "title": "Physicalism and materialism",
+                  "shortTitle": "Physicalism",
+                  "family": "Naturalist metaphysics",
+                  "stance": "Physicalist and materialist metaphysics begin from the claim that reality is ultimately physical, or at least that every real phenomenon depends on the physical order.",
+                  "centralClaim": "Hobbes gives an early modern body-and-motion version.",
+                  "whyItMatters": "Twentieth-century identity theorists such as J.",
+                  "contributors": [
+                    {
+                      "id": "thomas-hobbes",
+                      "name": "Thomas Hobbes",
+                      "role": "physicalism reference",
+                      "reason": "Thomas Hobbes appears in the ingested physicalism and materialism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 1.",
+                      "texts": [
+                        {
+                          "id": "leviathan",
+                          "title": "Leviathan",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "j-j-c-smart",
+                      "name": "J. J. C. Smart",
+                      "role": "physicalism reference",
+                      "reason": "J. J. C. Smart appears in the ingested physicalism and materialism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 1.",
+                      "texts": [
+                        {
+                          "id": "sensations-and-brain-processes",
+                          "title": "Sensations and Brain Processes",
+                          "kind": "essay"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "david-armstrong",
+                      "name": "David Armstrong",
+                      "role": "physicalism reference",
+                      "reason": "David Armstrong appears in the ingested physicalism and materialism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 1.",
+                      "texts": [
+                        {
+                          "id": "a-materialist-theory-of-the-mind",
+                          "title": "A Materialist Theory of the Mind",
+                          "kind": "book"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "consciousness. If physics gives structural and behavioral descriptions, the reviewer should ask whether subjective experience, meaning, normativity, and value have been explained or only renamed"
+                  ],
+                  "relatedGroupIds": [
+                    "pragmatism-and-metaphysical-critique",
+                    "idealism"
+                  ],
+                  "keywords": [
+                    "physicalism",
+                    "and",
+                    "materialism",
+                    "reality",
+                    "identity",
+                    "mind",
+                    "pressure",
+                    "experience"
+                  ]
+                },
+                {
+                  "id": "idealism",
+                  "slug": "idealism",
+                  "title": "Idealism",
+                  "shortTitle": "Idealism",
+                  "family": "Mind-first metaphysics",
+                  "stance": "Idealist traditions treat mind, experience, reason, or spirit as basic to reality's intelligibility.",
+                  "centralClaim": "Berkeley argues that ordinary objects are ideas sustained by perception.",
+                  "whyItMatters": "Kant makes the structure of experience central by asking what conditions make objects possible for us.",
+                  "contributors": [
+                    {
+                      "id": "george-berkeley",
+                      "name": "George Berkeley",
+                      "role": "idealism reference",
+                      "reason": "George Berkeley appears in the ingested idealism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 2.",
+                      "texts": [
+                        {
+                          "id": "a-treatise-concerning-the-principles-of-human-knowledge",
+                          "title": "A Treatise Concerning the Principles of Human Knowledge",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "immanuel-kant",
+                      "name": "Immanuel Kant",
+                      "role": "idealism reference",
+                      "reason": "Immanuel Kant appears in the ingested idealism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 2.",
+                      "texts": [
+                        {
+                          "id": "critique-of-pure-reason",
+                          "title": "Critique of Pure Reason",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "g-w-f-hegel",
+                      "name": "G. W. F. Hegel",
+                      "role": "idealism reference",
+                      "reason": "G. W. F. Hegel appears in the ingested idealism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 2.",
+                      "texts": [
+                        {
+                          "id": "phenomenology-of-spirit",
+                          "title": "Phenomenology of Spirit",
+                          "kind": "book"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "independence. A good map should show whether an idealist family denies an external world, redefines objectivity, or argues that objectivity already depends on conceptual form"
+                  ],
+                  "relatedGroupIds": [
+                    "physicalism-and-materialism",
+                    "dualism"
+                  ],
+                  "keywords": [
+                    "idealism",
+                    "mind",
+                    "experience",
+                    "reality",
+                    "pressure"
+                  ]
+                },
+                {
+                  "id": "dualism",
+                  "slug": "dualism",
+                  "title": "Dualism",
+                  "shortTitle": "Dualism",
+                  "family": "Two-principle metaphysics",
+                  "stance": "Dualist families insist on a deep distinction between mind and matter, soul and body, or intelligible and sensible reality.",
+                  "centralClaim": "Plato gives one ancient source through soul and forms.",
+                  "whyItMatters": "Descartes gives the modern mind-body problem its sharpest canonical form.",
+                  "contributors": [
+                    {
+                      "id": "plato",
+                      "name": "Plato",
+                      "role": "dualism reference",
+                      "reason": "Plato appears in the ingested dualism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 3.",
+                      "texts": [
+                        {
+                          "id": "phaedo",
+                          "title": "Phaedo",
+                          "kind": "dialogue"
+                        },
+                        {
+                          "id": "republic",
+                          "title": "Republic",
+                          "kind": "dialogue"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rene-descartes",
+                      "name": "Rene Descartes",
+                      "role": "dualism reference",
+                      "reason": "Rene Descartes appears in the ingested dualism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 3.",
+                      "texts": [
+                        {
+                          "id": "meditations-on-first-philosophy",
+                          "title": "Meditations on First Philosophy",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "elisabeth-of-bohemia",
+                      "name": "Elisabeth of Bohemia",
+                      "role": "dualism reference",
+                      "reason": "Elisabeth of Bohemia appears in the ingested dualism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 3.",
+                      "texts": [
+                        {
+                          "id": "correspondence-with-descartes",
+                          "title": "Correspondence with Descartes",
+                          "kind": "other"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "interaction. If mind and matter are fundamentally different, the reviewer should ask whether causation across the divide is explained, denied, or replaced by another framework"
+                  ],
+                  "relatedGroupIds": [
+                    "idealism",
+                    "substance-and-hylomorphism"
+                  ],
+                  "keywords": [
+                    "dualism",
+                    "mind",
+                    "matter",
+                    "reality",
+                    "pressure",
+                    "causation"
+                  ]
+                },
+                {
+                  "id": "substance-and-hylomorphism",
+                  "slug": "substance-and-hylomorphism",
+                  "title": "Substance and hylomorphism",
+                  "shortTitle": "Substance",
+                  "family": "Form-and-substance metaphysics",
+                  "stance": "Substance metaphysics asks what kinds of things exist and what makes them persist as one thing through change.",
+                  "centralClaim": "Aristotle's hylomorphism treats beings as composites of form and matter, potentiality and actuality.",
+                  "whyItMatters": "Aquinas adapts this vocabulary to being, essence, causation, and theology.",
+                  "contributors": [
+                    {
+                      "id": "aristotle",
+                      "name": "Aristotle",
+                      "role": "substance reference",
+                      "reason": "Aristotle appears in the ingested substance and hylomorphism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 4.",
+                      "texts": [
+                        {
+                          "id": "metaphysics",
+                          "title": "Metaphysics",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "thomas-aquinas",
+                      "name": "Thomas Aquinas",
+                      "role": "substance reference",
+                      "reason": "Thomas Aquinas appears in the ingested substance and hylomorphism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 4.",
+                      "texts": [
+                        {
+                          "id": "on-being-and-essence",
+                          "title": "On Being and Essence",
+                          "kind": "essay"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "rigidity. The map should ask whether essences can handle evolution, social construction, historical change, and systems whose boundaries are fuzzy"
+                  ],
+                  "relatedGroupIds": [
+                    "dualism",
+                    "process-and-becoming"
+                  ],
+                  "keywords": [
+                    "substance",
+                    "and",
+                    "hylomorphism",
+                    "matter",
+                    "causation",
+                    "pressure"
+                  ]
+                },
+                {
+                  "id": "process-and-becoming",
+                  "slug": "process-and-becoming",
+                  "title": "Process and becoming",
+                  "shortTitle": "Process",
+                  "family": "Becoming-first metaphysics",
+                  "stance": "Process metaphysics starts from activity, change, relation, and becoming rather than static substance.",
+                  "centralClaim": "Heraclitus is the ancient marker.",
+                  "whyItMatters": "Whitehead rebuilds metaphysics around occasions, creativity, relation, and event.",
+                  "contributors": [
+                    {
+                      "id": "heraclitus",
+                      "name": "Heraclitus",
+                      "role": "process reference",
+                      "reason": "Heraclitus appears in the ingested process and becoming source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 5.",
+                      "texts": [
+                        {
+                          "id": "fragments",
+                          "title": "Fragments",
+                          "kind": "other"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "alfred-north-whitehead",
+                      "name": "Alfred North Whitehead",
+                      "role": "process reference",
+                      "reason": "Alfred North Whitehead appears in the ingested process and becoming source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 5.",
+                      "texts": [
+                        {
+                          "id": "process-and-reality",
+                          "title": "Process and Reality",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "henri-bergson",
+                      "name": "Henri Bergson",
+                      "role": "process reference",
+                      "reason": "Henri Bergson appears in the ingested process and becoming source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 5.",
+                      "texts": [
+                        {
+                          "id": "creative-evolution",
+                          "title": "Creative Evolution",
+                          "kind": "book"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "stability. If everything is process, the reviewer should ask how identity, reference, memory, and durable institutions are preserved"
+                  ],
+                  "relatedGroupIds": [
+                    "substance-and-hylomorphism",
+                    "neutral-monism-and-panpsychism"
+                  ],
+                  "keywords": [
+                    "process",
+                    "and",
+                    "becoming",
+                    "substance",
+                    "pressure",
+                    "identity"
+                  ]
+                },
+                {
+                  "id": "neutral-monism-and-panpsychism",
+                  "slug": "neutral-monism-and-panpsychism",
+                  "title": "Neutral monism and panpsychism",
+                  "shortTitle": "Neutral monism",
+                  "family": "Mind-matter bridge metaphysics",
+                  "stance": "Neutral monism and panpsychism try to avoid choosing between strict physicalism and strict dualism.",
+                  "centralClaim": "Spinoza gives a dual-aspect model where mind and body express one substance.",
+                  "whyItMatters": "Russell and James open routes where experience, structure, or neutral stuff can underlie both mind and matter.",
+                  "contributors": [
+                    {
+                      "id": "baruch-spinoza",
+                      "name": "Baruch Spinoza",
+                      "role": "neutral monism reference",
+                      "reason": "Baruch Spinoza appears in the ingested neutral monism and panpsychism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 6.",
+                      "texts": [
+                        {
+                          "id": "ethics",
+                          "title": "Ethics",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "bertrand-russell",
+                      "name": "Bertrand Russell",
+                      "role": "neutral monism reference",
+                      "reason": "Bertrand Russell appears in the ingested neutral monism and panpsychism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 6.",
+                      "texts": [
+                        {
+                          "id": "the-analysis-of-matter",
+                          "title": "The Analysis of Matter",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "william-james",
+                      "name": "William James",
+                      "role": "neutral monism reference",
+                      "reason": "William James appears in the ingested neutral monism and panpsychism source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 6.",
+                      "texts": [
+                        {
+                          "id": "essays-in-radical-empiricism",
+                          "title": "Essays in Radical Empiricism",
+                          "kind": "essay"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "combination. A map should show how many small experiential or neutral elements become a unified subject, and whether the theory explains more than it names"
+                  ],
+                  "relatedGroupIds": [
+                    "process-and-becoming",
+                    "pragmatism-and-metaphysical-critique"
+                  ],
+                  "keywords": [
+                    "neutral",
+                    "monism",
+                    "and",
+                    "panpsychism",
+                    "mind",
+                    "substance",
+                    "experience",
+                    "matter",
+                    "pressure"
+                  ]
+                },
+                {
+                  "id": "pragmatism-and-metaphysical-critique",
+                  "slug": "pragmatism-and-metaphysical-critique",
+                  "title": "Pragmatism and metaphysical critique",
+                  "shortTitle": "Pragmatism",
+                  "family": "Naturalist metaphysics",
+                  "stance": "Pragmatist and critical approaches ask what metaphysical claims do in inquiry and life.",
+                  "centralClaim": "Peirce links meaning to conceivable practical effects while keeping truth tied to inquiry.",
+                  "whyItMatters": "James emphasizes lived consequences.",
+                  "contributors": [
+                    {
+                      "id": "william-james",
+                      "name": "William James",
+                      "role": "pragmatism reference",
+                      "reason": "William James appears in the ingested pragmatism and metaphysical critique source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 7.",
+                      "texts": [
+                        {
+                          "id": "essays-in-radical-empiricism",
+                          "title": "Essays in Radical Empiricism",
+                          "kind": "essay"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "charles-sanders-peirce",
+                      "name": "Charles Sanders Peirce",
+                      "role": "pragmatism reference",
+                      "reason": "Charles Sanders Peirce appears in the ingested pragmatism and metaphysical critique source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 7.",
+                      "texts": [
+                        {
+                          "id": "how-to-make-our-ideas-clear",
+                          "title": "How to Make Our Ideas Clear",
+                          "kind": "essay"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "john-dewey",
+                      "name": "John Dewey",
+                      "role": "pragmatism reference",
+                      "reason": "John Dewey appears in the ingested pragmatism and metaphysical critique source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 7.",
+                      "texts": [
+                        {
+                          "id": "experience-and-nature",
+                          "title": "Experience and Nature",
+                          "kind": "book"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rudolf-carnap",
+                      "name": "Rudolf Carnap",
+                      "role": "pragmatism reference",
+                      "reason": "Rudolf Carnap appears in the ingested pragmatism and metaphysical critique source chunk as a reference point for this family. Source: humanities-philosophy-metaphysics-families chunk 7.",
+                      "texts": [
+                        {
+                          "id": "the-elimination-of-metaphysics-through-logical-analysis-of-language",
+                          "title": "The Elimination of Metaphysics Through Logical Analysis of Language",
+                          "kind": "essay"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "deflation. A reviewable Atlas map should distinguish healthy critique from avoiding real ontological disagreement"
+                  ],
+                  "relatedGroupIds": [
+                    "neutral-monism-and-panpsychism",
+                    "physicalism-and-materialism"
+                  ],
+                  "keywords": [
+                    "pragmatism",
+                    "and",
+                    "metaphysical",
+                    "critique",
+                    "experience",
+                    "pressure"
+                  ]
+                }
+              ],
+              "relations": [
+                {
+                  "id": "physicalism-and-materialism-to-idealism",
+                  "source": "physicalism-and-materialism",
+                  "target": "idealism",
+                  "kind": "opposes",
+                  "note": "Source-grounded draft relation between Physicalism and Idealism; review the source packet before publishing."
+                },
+                {
+                  "id": "physicalism-and-materialism-to-dualism",
+                  "source": "physicalism-and-materialism",
+                  "target": "dualism",
+                  "kind": "answers",
+                  "note": "Source-grounded draft relation between Physicalism and Dualism; review the source packet before publishing."
+                },
+                {
+                  "id": "dualism-to-neutral-monism-and-panpsychism",
+                  "source": "dualism",
+                  "target": "neutral-monism-and-panpsychism",
+                  "kind": "reframes",
+                  "note": "Source-grounded draft relation between Dualism and Neutral monism; review the source packet before publishing."
+                },
+                {
+                  "id": "substance-and-hylomorphism-to-process-and-becoming",
+                  "source": "substance-and-hylomorphism",
+                  "target": "process-and-becoming",
+                  "kind": "reframes",
+                  "note": "Source-grounded draft relation between Substance and Process; review the source packet before publishing."
+                },
+                {
+                  "id": "process-and-becoming-to-pragmatism-and-metaphysical-critique",
+                  "source": "process-and-becoming",
+                  "target": "pragmatism-and-metaphysical-critique",
+                  "kind": "neighbors",
+                  "note": "Source-grounded draft relation between Process and Pragmatism; review the source packet before publishing."
+                },
+                {
+                  "id": "neutral-monism-and-panpsychism-to-idealism",
+                  "source": "neutral-monism-and-panpsychism",
+                  "target": "idealism",
+                  "kind": "borrows",
+                  "note": "Source-grounded draft relation between Neutral monism and Idealism; review the source packet before publishing."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

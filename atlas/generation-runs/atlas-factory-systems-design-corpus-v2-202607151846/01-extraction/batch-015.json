@@ -1,0 +1,58 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 15,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 723,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "information systems",
+        "summary": "People, processes, data, hardware, software.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+            "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+            "chunkIndex": 258,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "systems analysis and design",
+        "summary": "Stepwise process for development.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+            "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+            "chunkIndex": 258,
+            "note": "process"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "prescription order process",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+            "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+            "chunkIndex": 258,
+            "note": "example"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

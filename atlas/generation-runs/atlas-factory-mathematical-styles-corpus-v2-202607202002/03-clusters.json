@@ -1,0 +1,131 @@
+{
+  "stage": "clustering",
+  "ok": true,
+  "groups": [
+    {
+      "id": "group-geometric-foundations",
+      "title": "Geometric Foundations",
+      "shortTitle": "Geometry",
+      "description": "This group focuses on the development of geometric concepts and their foundational role in mathematics. It highlights individuals who pioneered new approaches to spatial reasoning and visualization.",
+      "memberCandidateIds": [
+        "person-girard-desargues"
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#8",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+          "chunkIndex": 8,
+          "note": "introduced projective geometry"
+        }
+      ]
+    },
+    {
+      "id": "group-abstraction-and-structure",
+      "title": "Abstraction & Algebraic Structures",
+      "shortTitle": "Algebraic Abstraction",
+      "description": "This group explores the core concepts of algebra, including nucleotides, polynucleotides and their relation to broader structures. It emphasizes the power of abstraction in simplifying complex systems.",
+      "memberCandidateIds": [
+        "concept-nucleotide",
+        "concept-deoxyribose",
+        "concept-ribose",
+        "concept-polynucleotide"
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 227,
+          "note": "basic components"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 992,
+          "note": "building blocks"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 227,
+          "note": "DNA component"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 227,
+          "note": "RNA component"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "chunkIndex": 227,
+          "note": "chain formation"
+        }
+      ]
+    },
+    {
+      "id": "group-analysis-and-rigor",
+      "title": "Analysis & Proof Rigor",
+      "shortTitle": "Analytical Rigor",
+      "description": "This group centers on the principles of calculus and proof, emphasizing the relationship between differentiability, continuity, and the importance of rigorous justification in mathematical claims.",
+      "memberCandidateIds": [
+        "claim-differentiability-implies-continuity",
+        "claim-theorem-validity-relies-on-proof-rigor"
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#597",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d",
+          "chunkIndex": 597,
+          "note": "proven statement"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+          "chunkIndex": 38,
+          "note": "validity criterion"
+        }
+      ]
+    },
+    {
+      "id": "group-problem-solving-and-creativity",
+      "title": "Problem Solving & Creativity",
+      "shortTitle": "Creative Problem Solving",
+      "description": "This group highlights the role of creativity and ingenuity in tackling mathematical challenges, recognizing that innovative approaches are often essential for breakthroughs.",
+      "memberCandidateIds": [
+        "claim-creativity-aids-problem-solving"
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+          "chunkIndex": 38,
+          "note": "solving process"
+        }
+      ]
+    },
+    {
+      "id": "group-effectiveness-and-phenomena",
+      "title": "Effectiveness & Unexplained Phenomena",
+      "shortTitle": "Unreasonable Effectiveness",
+      "description": "This group examines the surprising effectiveness of mathematics in describing and predicting phenomena, as highlighted by Eugene Wigner's observations.",
+      "memberCandidateIds": [
+        "person-eugene-wigner"
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#26",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+          "chunkIndex": 26,
+          "note": "identified phenomenon"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#26",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+          "chunkIndex": 26,
+          "note": "observed applications"
+        }
+      ]
+    }
+  ]
+}

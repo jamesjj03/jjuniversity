@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-marxian-economics",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-marxian-economics failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 2813 (line 65 column 6)"
+  },
+  "createdAt": "2026-07-11T23:24:52.126Z"
+}

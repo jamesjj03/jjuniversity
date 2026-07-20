@@ -1,0 +1,302 @@
+{
+  "stage": "clustering",
+  "ok": true,
+  "groups": [
+    {
+      "id": "systems-engineering-lifecycle",
+      "title": "Systems Engineering And Lifecycle Architecture",
+      "shortTitle": "Systems Engineering",
+      "description": "Systems engineering organizes requirements, lifecycle coordination, modeling, validation, and interdisciplinary architecture.",
+      "memberCandidateIds": [
+        "concept-systems-engineering",
+        "concept-service-systems-engineering-sse",
+        "concept-systems-modeling-language",
+        "concept-lifecycle-modeling-language",
+        "concept-configuration-management",
+        "text-sysml",
+        "text-lml"
+      ],
+      "relatedGroupIds": [],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 6,
+          "note": "Defines PSE, ESE, SSE."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 20,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+          "chunkIndex": 1,
+          "note": "sub-function"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#19",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 19,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "feedback-control-systems",
+      "title": "Feedback And Control Systems",
+      "shortTitle": "Feedback Control",
+      "description": "Control-oriented systems use models, feedback loops, controllers, stability criteria, and optimization to regulate behavior.",
+      "memberCandidateIds": [
+        "concept-control-theory",
+        "concept-dynamical-systems",
+        "concept-controller",
+        "concept-pid-controller",
+        "concept-stability",
+        "text-control-theory-literature",
+        "person-harold-s-black",
+        "person-harry-nyquist"
+      ],
+      "relatedGroupIds": [],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#1",
+          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+          "chunkIndex": 1,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16",
+          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+          "chunkIndex": 16,
+          "note": "general controller"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+          "chunkIndex": 27,
+          "note": "negative feedback"
+        }
+      ]
+    },
+    {
+      "id": "failure-resilience-risk",
+      "title": "Failure, Resilience, And Risk Analysis",
+      "shortTitle": "Failure Analysis",
+      "description": "Failure-analysis families design from possible failure modes, criticality, risk priority, reliability, and mitigation.",
+      "memberCandidateIds": [
+        "concept-failure-mode-and-effects-analysis",
+        "concept-fmea",
+        "concept-fmeca",
+        "concept-rpn-risk-priority-number",
+        "concept-failure-cause",
+        "claim-fmea-identifies-potential-failure-modes",
+        "text-fme-c-a-documentation"
+      ],
+      "relatedGroupIds": [],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#1",
+          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+          "chunkIndex": 1,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#10",
+          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+          "chunkIndex": 10,
+          "note": "Definition of FMEA."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#2",
+          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+          "chunkIndex": 2,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+          "chunkIndex": 3,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "software-architecture-patterns",
+      "title": "Software Architecture And Computational Structure",
+      "shortTitle": "Architecture",
+      "description": "Architecture families emphasize modular structure, interfaces, computation, networks, and implementation constraints.",
+      "memberCandidateIds": [
+        "concept-computer-science",
+        "concept-computer-architecture",
+        "concept-computational-logic",
+        "concept-algorithms",
+        "concept-data-structures",
+        "text-spice",
+        "text-ibm-research",
+        "person-frederick-p-brooks-jr"
+      ],
+      "relatedGroupIds": [],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#1",
+          "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+          "chunkIndex": 1,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#17",
+          "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+          "chunkIndex": 17,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#14",
+          "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+          "chunkIndex": 14,
+          "note": "circuit design"
+        }
+      ]
+    },
+    {
+      "id": "socio-technical-enterprise-systems",
+      "title": "Socio-Technical And Enterprise Systems",
+      "shortTitle": "Socio-Technical",
+      "description": "Socio-technical systems treat stakeholders, workflows, organizations, information systems, and enterprise architecture as part of the design object.",
+      "memberCandidateIds": [
+        "concept-zachman-framework",
+        "concept-enterprise-architecture",
+        "concept-information-systems",
+        "concept-systems-analysis-and-design",
+        "concept-enterprise",
+        "concept-stakeholders",
+        "concept-workflow-pervasiveness",
+        "text-zachman-framework"
+      ],
+      "relatedGroupIds": [],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#61",
+          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+          "chunkIndex": 61,
+          "note": "Defines framework."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#62",
+          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+          "chunkIndex": 62,
+          "note": "Describes framework."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+          "chunkIndex": 258,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#334",
+          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+          "chunkIndex": 334,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+          "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+          "chunkIndex": 487,
+          "note": "affected by decisions"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+          "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+          "chunkIndex": 1227,
+          "note": "interconnectedness"
+        }
+      ]
+    },
+    {
+      "id": "requirements-design-process",
+      "title": "Requirements And Design Process",
+      "shortTitle": "Requirements",
+      "description": "Requirements-centered design focuses on elicitation, analysis, negotiation, traceability, prototyping, and iterative problem definition.",
+      "memberCandidateIds": [
+        "concept-requirements-engineering",
+        "concept-requirements-elicitation",
+        "text-incose-manuals",
+        "text-unified-modeling-language-uml"
+      ],
+      "relatedGroupIds": [],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+          "chunkIndex": 1,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#3",
+          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+          "chunkIndex": 3,
+          "note": "problems listed"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#2",
+          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+          "chunkIndex": 2,
+          "note": "Initial step."
+        }
+      ]
+    },
+    {
+      "id": "constraints-tradeoffs-scalability",
+      "title": "Constraints, Tradeoffs, And Scalability",
+      "shortTitle": "Tradeoffs",
+      "description": "Tradeoff-centered systems design balances cost, complexity, reliability, performance, scalability, assumptions, and maintainability.",
+      "memberCandidateIds": [
+        "concept-big-data",
+        "concept-relational-databases",
+        "concept-storage-solutions",
+        "concept-assumptions",
+        "concept-constraints",
+        "claim-historical-data-represents-future-conditions",
+        "claim-past-patterns-persist",
+        "text-relational-databases"
+      ],
+      "relatedGroupIds": [],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197",
+          "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+          "chunkIndex": 197,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+          "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+          "chunkIndex": 1120,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "complex-adaptive-system-behavior",
+      "title": "Complex And Adaptive System Behavior",
+      "shortTitle": "Complex Systems",
+      "description": "Complex-system families focus on emergence, nonlinear behavior, load sharing, network effects, and adaptive behavior under stress.",
+      "memberCandidateIds": [
+        "concept-load-sharing-complex-systems",
+        "text-phys-rev-e-89-012816"
+      ],
+      "relatedGroupIds": [],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+          "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+          "chunkIndex": 1,
+          "note": "abstract"
+        }
+      ]
+    }
+  ]
+}

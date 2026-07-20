@@ -1,0 +1,79 @@
+{
+  "default": {
+    "provider": "openai-compatible",
+    "model": "",
+    "contextWindowTokens": 8192,
+    "maxOutputTokens": 700,
+    "safeInputTokens": 2600,
+    "recommendedExtractionBatchSize": 1,
+    "timeoutMs": 90000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "mistralai/mistral-7b-instruct-v0.3": {
+    "provider": "local-openai-compatible",
+    "model": "mistralai/mistral-7b-instruct-v0.3",
+    "contextWindowTokens": 32768,
+    "maxOutputTokens": 700,
+    "safeInputTokens": 5000,
+    "recommendedExtractionBatchSize": 1,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "google/gemma-3-12b": {
+    "provider": "local-openai-compatible",
+    "model": "google/gemma-3-12b",
+    "contextWindowTokens": 4096,
+    "maxOutputTokens": 700,
+    "safeInputTokens": 2200,
+    "recommendedExtractionBatchSize": 1,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "mistralai/mistral-small-3.2": {
+    "provider": "local-openai-compatible",
+    "model": "mistralai/mistral-small-3.2",
+    "contextWindowTokens": 4096,
+    "maxOutputTokens": 360,
+    "safeInputTokens": 1400,
+    "recommendedExtractionBatchSize": 1,
+    "timeoutMs": 180000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "atlas_v4": {
+    "provider": "local-openai-compatible",
+    "model": "atlas_v4",
+    "contextWindowTokens": 32768,
+    "maxOutputTokens": 700,
+    "safeInputTokens": 5000,
+    "recommendedExtractionBatchSize": 1,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "atlas_v3": {
+    "provider": "local-openai-compatible",
+    "model": "atlas_v3",
+    "contextWindowTokens": 32768,
+    "maxOutputTokens": 700,
+    "safeInputTokens": 5000,
+    "recommendedExtractionBatchSize": 1,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "qwen/qwen3-32b": {
+    "provider": "local-openai-compatible",
+    "model": "qwen/qwen3-32b",
+    "contextWindowTokens": 32768,
+    "maxOutputTokens": 700,
+    "safeInputTokens": 5000,
+    "recommendedExtractionBatchSize": 1,
+    "timeoutMs": 180000,
+    "concurrency": 1,
+    "jsonMode": true
+  }
+}

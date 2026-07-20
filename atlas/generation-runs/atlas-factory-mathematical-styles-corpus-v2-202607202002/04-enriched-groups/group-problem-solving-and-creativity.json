@@ -1,0 +1,95 @@
+{
+  "id": "group-problem-solving-and-creativity",
+  "slug": "group-problem-solving-and-creativity",
+  "title": "Problem Solving & Creativity",
+  "shortTitle": "Creative Problem Solving",
+  "family": "Creative Problem Solving family",
+  "stance": "This group highlights the role of creativity and ingenuity in tackling mathematical challenges, recognizing that innovative approaches are often essential for breakthroughs.",
+  "centralClaim": "creativity aids problem solving",
+  "whyItMatters": "This family organizes source-backed claims about a corpus-backed discipline landscape of mathematical styles, proof cultures, abstraction modes, computational methods, applied modeling, and major problem orientations. for admin review.",
+  "contributors": [
+    {
+      "id": "group-problem-solving-and-creativity-source-synthesis",
+      "name": "Problem Solving & Creativity source synthesis",
+      "role": "source-grounded synthesis",
+      "reason": "No clean person candidate survived model enrichment for Problem Solving & Creativity; this review draft preserves the source-backed group for admin review.",
+      "texts": [
+        {
+          "id": "source-evidence-for-problem-solving-creativity",
+          "title": "Source evidence for Problem Solving & Creativity",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+              "chunkIndex": 38,
+              "note": "solving process"
+            },
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+              "chunkIndex": 38
+            },
+            {
+              "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564#10",
+              "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564",
+              "chunkIndex": 10,
+              "note": "deterministic fallback source support"
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+          "chunkIndex": 38,
+          "note": "solving process"
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+          "chunkIndex": 38
+        },
+        {
+          "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564#10",
+          "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564",
+          "chunkIndex": 10,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating Problem Solving & Creativity as a complete family."
+  ],
+  "relatedGroupIds": [
+    "group-geometric-foundations",
+    "group-abstraction-and-structure",
+    "group-analysis-and-rigor"
+  ],
+  "keywords": [
+    "problem",
+    "solving",
+    "creativity"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+      "chunkIndex": 38,
+      "note": "solving process"
+    },
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+      "chunkIndex": 38
+    },
+    {
+      "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564#10",
+      "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564",
+      "chunkIndex": 10,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 13,
+  "chunkIds": [
+    "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1029"
+  ],
+  "charLimit": 420,
+  "estimatedInputTokens": 648,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Max Weber",
+        "role": "sociologist",
+        "reason": "identified sources of legitimacy",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1029",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1029,
+            "note": "identified legitimacy sources"
+          }
+        ]
+      },
+      {
+        "name": "Hobbes",
+        "role": "philosopher",
+        "reason": "tackled normative legitimacy",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1029",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1029,
+            "note": "tackled legitimacy"
+          }
+        ]
+      },
+      {
+        "name": "Locke",
+        "role": "philosopher",
+        "reason": "tackled normative legitimacy",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1029",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1029,
+            "note": "tackled legitimacy"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Legitimacy",
+        "summary": "explanation/justification of authority",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1029",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1029,
+            "note": "defined as explanation/justification"
+          }
+        ]
+      },
+      {
+        "label": "Authority",
+        "summary": "power or influence",
+        "provenance": [
+          {
+            "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1029",
+            "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+            "chunkIndex": 1029,
+            "note": "linked to legitimacy"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

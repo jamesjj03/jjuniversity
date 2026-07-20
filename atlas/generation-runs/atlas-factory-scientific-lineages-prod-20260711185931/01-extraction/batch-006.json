@@ -1,0 +1,113 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 6,
+  "chunkIds": [
+    "stem-scientists-scientific-lineages#6"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 681,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Albert Einstein",
+        "role": "founder",
+        "reason": "remakes space-time",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#6",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 6,
+            "note": "relativity"
+          }
+        ]
+      },
+      {
+        "name": "Max Planck",
+        "role": "originator",
+        "reason": "opens quantum discontinuity",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#6",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 6,
+            "note": "quantum"
+          }
+        ]
+      },
+      {
+        "name": "Richard Feynman",
+        "role": "developer",
+        "reason": "reshapes quantum fields",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#6",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 6,
+            "note": "later figure"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "space-time",
+        "summary": "remade by Einstein",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#6",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 6,
+            "note": "relativity"
+          }
+        ]
+      },
+      {
+        "label": "quantum discontinuity",
+        "summary": "introduced by Planck",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#6",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 6,
+            "note": "quantum"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Albert Einstein",
+        "target": "general relativity",
+        "kind": "influences",
+        "note": "remakes space-time",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#6",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 6,
+            "note": "relativity"
+          }
+        ]
+      },
+      {
+        "source": "Max Planck",
+        "target": "quantum theory",
+        "kind": "influences",
+        "note": "opens discontinuity",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#6",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 6,
+            "note": "quantum"
+          }
+        ]
+      }
+    ]
+  }
+}

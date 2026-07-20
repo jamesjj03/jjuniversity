@@ -1,0 +1,148 @@
+{
+  "id": "european-classical-and-art-music-lineages",
+  "slug": "european-classical-and-art-music-lineages",
+  "title": "European classical and art-music lineages",
+  "shortTitle": "Classical/art music",
+  "family": "Classical/art music family",
+  "stance": "pressure point",
+  "centralClaim": "Liturgical, court, concert, conservatory, and modernist lineages of European art music.",
+  "whyItMatters": "This family organizes source-backed claims about build a reviewable historical-movement atlas draft for music lineages from the selected source brief. emphasize scenes, movements, stylistic inheritance, technology, and exchange. for admin review.",
+  "contributors": [
+    {
+      "id": "person-j-s-bach",
+      "name": "J. S. Bach",
+      "role": "source contributor",
+      "reason": "contrapuntal craft, Lutheran sacred music",
+      "texts": [
+        {
+          "id": "source-evidence-for-j-s-bach",
+          "title": "Source evidence for J. S. Bach",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#1",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#1",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "person-haydn",
+      "name": "Haydn",
+      "role": "source contributor",
+      "reason": "classical form, symphony",
+      "texts": [
+        {
+          "id": "source-evidence-for-haydn",
+          "title": "Source evidence for Haydn",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#1",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#1",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "person-beethoven",
+      "name": "Beethoven",
+      "role": "source contributor",
+      "reason": "symphony, chamber music",
+      "texts": [
+        {
+          "id": "source-evidence-for-beethoven",
+          "title": "Source evidence for Beethoven",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#1",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#1",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "person-wagner",
+      "name": "Wagner",
+      "role": "source contributor",
+      "reason": "harmony, orchestration",
+      "texts": [
+        {
+          "id": "source-evidence-for-wagner",
+          "title": "Source evidence for Wagner",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#1",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#1",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 1
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating European classical and art-music lineages as a complete family."
+  ],
+  "relatedGroupIds": [
+    "african-diasporic-blues-gospel-and-jazz",
+    "folk-country-and-singer-songwriter-traditions",
+    "rock-soul-funk-and-amplified-popular-music"
+  ],
+  "keywords": [
+    "canon",
+    "european",
+    "classical",
+    "art-music",
+    "lineages"
+  ],
+  "provenance": [
+    {
+      "chunkId": "arts-music-music-lineages#1",
+      "sourceId": "arts-music-music-lineages",
+      "chunkIndex": 1
+    },
+    {
+      "chunkId": "arts-music-music-lineages#0",
+      "sourceId": "arts-music-music-lineages",
+      "chunkIndex": 0,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}

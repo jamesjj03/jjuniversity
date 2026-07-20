@@ -1,0 +1,143 @@
+{
+  "runId": "atlas-factory-visual-art-movements-corpus-v2-202607202002",
+  "generator": "atlas-staged-model-generation-v2",
+  "createdAt": "2026-07-20T21:36:00.653Z",
+  "territorySlug": "arts",
+  "branchSlug": "visual-art",
+  "mapSlug": "visual-art-movements-corpus-v2-202607202002",
+  "sourceMapSlug": "visual-art-movements-corpus-v2-202607202002",
+  "selectedSourceIds": [],
+  "topicPrompt": "A corpus-backed historical movement map of visual art movements, style shifts, institutions, artists, manifestos, reactions, and global context.",
+  "recipe": {
+    "id": "historical_movement",
+    "title": "Historical Movement",
+    "purpose": "Organize cultural or historical material by movements, scenes, eras, and reactions.",
+    "groupingLogic": "Groups should be movements or scenes with shared style, context, institutions, or oppositional identity.",
+    "preferredGroupFields": [
+      "movementContext",
+      "definingStyle",
+      "centralClaim",
+      "contributors",
+      "keyTexts",
+      "pressurePoints"
+    ],
+    "contributorRules": "Contributors should represent the movement, launch it, popularize it, or define its counter-movement.",
+    "expectedRelationTypes": [
+      "influences",
+      "opposes",
+      "reframes",
+      "neighbors",
+      "borrows"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 10
+    },
+    "generationInstructions": "Anchor groups in context and style. Do not collapse movements into individual biography unless the source demands it. First production release QC guidance: - Avoid single linear progress narratives; require parallel movement branches, regional balance checks, and relation notes that name transmission mechanisms.",
+    "evaluationCriteria": [
+      "Groups have historical context",
+      "Movement boundaries are defensible",
+      "Relations show reaction or influence",
+      "Representative figures are justified"
+    ]
+  },
+  "maxChunks": 28,
+  "chunkCharLimit": 420,
+  "chunkBatchSize": 1,
+  "concurrency": 1,
+  "retryCount": 3,
+  "force": false,
+  "importOnSuccess": true,
+  "modelConfig": {
+    "provider": "local-openai-compatible",
+    "baseUrl": "http://127.0.0.1:1234/v1",
+    "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+    "model": "atlas_v4",
+    "profileId": "atlas_v4",
+    "contextWindowTokens": 32768,
+    "safeInputTokens": 5000,
+    "allowNoKey": true,
+    "temperature": 0.1,
+    "maxTokens": 700,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "stageModelConfigs": {
+    "extraction": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "atlas_v4",
+      "profileId": "atlas_v4",
+      "contextWindowTokens": 32768,
+      "safeInputTokens": 5000,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "clustering": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "atlas_v4",
+      "profileId": "atlas_v4",
+      "contextWindowTokens": 32768,
+      "safeInputTokens": 5000,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "enrichment": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "atlas_v4",
+      "profileId": "atlas_v4",
+      "contextWindowTokens": 32768,
+      "safeInputTokens": 5000,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "relations": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "atlas_v4",
+      "profileId": "atlas_v4",
+      "contextWindowTokens": 32768,
+      "safeInputTokens": 5000,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    }
+  },
+  "preflight": [
+    {
+      "provider": "local-openai-compatible",
+      "model": "atlas_v4",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "modelsUrl": "http://127.0.0.1:1234/v1/models",
+      "ok": true,
+      "available": true,
+      "loaded": false,
+      "detectedContextWindowTokens": 32768,
+      "configuredSafeInputTokens": 5000,
+      "configuredMaxOutputTokens": 700,
+      "error": ""
+    }
+  ]
+}

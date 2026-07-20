@@ -1,0 +1,29 @@
+{
+  "stageName": "relations",
+  "ok": false,
+  "errors": [
+    "relations[0].source is not a group id.",
+    "relations[0].target is not a group id.",
+    "relations[0].kind is invalid.",
+    "relations[1].source is not a group id.",
+    "relations[1].target is not a group id.",
+    "relations[1].kind is invalid.",
+    "relations[2].source is not a group id.",
+    "relations[2].target is not a group id.",
+    "relations[2].kind is invalid.",
+    "relations[3].source is not a group id.",
+    "relations[3].target is not a group id.",
+    "relations[3].kind is invalid.",
+    "relations[4].source is not a group id.",
+    "relations[4].target is not a group id.",
+    "relations[4].kind is invalid.",
+    "relations[5].source is not a group id.",
+    "relations[5].target is not a group id.",
+    "relations[5].kind is invalid.",
+    "relations[6].source is not a group id.",
+    "relations[6].target is not a group id.",
+    "relations[6].kind is invalid."
+  ],
+  "rawExcerpt": " Here is the corrected JSON with the specified errors resolved:\n\n```json\n{\n  \"relations\": [\n    {\n      \"id\": \"relcand-interaction-problem-dualism-5a50f0b0\",\n      \"source\": \"Interaction problem\",\n      \"target\": \"Dualism\",\n      \"kind\": \"presses\",\n      \"note\": \"\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"humanities-philosophy-metaphysics-families#3\",\n          \"sourceId\": \"humanities-philosophy-metaphysics-families\",\n          \"chunkIndex\": 3\n        }\n      ]\n    },\n    {\n      \"id\": \"relcand-substance-metaphysics-hylomorphism-3467550f\",\n      \"source\": \"Substance metaphysics\",\n      \"target\": \"Hylomorphism\",\n      \"kind\": \"influences\",\n      \"note\": \"Hylomorphism is a part of substance metaphysics.\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"humanities-philosophy-metaphysics-families#4\",\n          \"sourceId\": \"humanities-philosophy-metaphysics-families\",\n          \"chunkIndex\": 4\n        }\n      ]\n    },\n    {\n      \"id\": \"relcand-aristotle-hylomorphism-ea617e38\",\n      \"source\": \"Aristotle\",\n      \"target\": \"Hylomorphism\",\n      \"kind\": \"influences\",\n      \"note\": \"Aristotle is the founder of hylomorphism.\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"humanities-philosophy-metaphysics-families#4\",\n          \"sourceId\": \"humanities-philosophy-metaphysics-families\",\n          \"chunkIndex\": 4\n        }\n      ]\n    },\n    {\n      \"id\": \"relcand-thomas-aquinas-hylomorphism-314a8c77\",\n      \"source\": \"Thomas Aquinas\",\n      \"target\": \"Hylomorphism\",\n      \"kind\": \"influences\",\n      \"note\": \"Aquinas adapted hylomorphism for theology.\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"humanities-philosophy-metaphysics-families#4\",\n          \"sourceId\": \"humanities-philosophy-metaphysics-families\",\n          \"chunkIndex\": 4\n        }\n      ]\n    },\n    {\n      \"id\": \"relcand-neutral-monism-and-panpsychism-combination-d02eea3a\",\n      \"source\": \"Neutral monism and panpsychism\",\n      \"target\": \"Combination\",\n      \"kind\": \"pressures\",\n      \"note\": \"A map should show how many small experiential or neutral elements become a unified subject.\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"humanities-philosophy-metaphysics-families#6\",\n          \"sourceId\": \"humanities-philosophy-metaphysics-families\",\n          \"chunkIndex\": 6\n        }\n      ]\n    },\n    {\n      \"id\": \"relcand-pragmatism-metaphysical-critique-36ad80e8\",\n      \"source\": \"Pragmatism\",\n      \"target\": \"Metaphysical critique\",\n      \"kind\": \"influences\",\n      \"note\": \"Asks what metaphysical claims do in inquiry and life.\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"humanities-philosophy-metaphysics-families#7\",\n          \"sourceId\": \"humanities-philosophy-metaphysics-families\",\n          \"chunkIndex\": 7\n        }\n      ]\n    },\n    {\n      \"id\": \"relcand-pragmatism-deflation-d772be91\",\n      \"source\": \"Pragmatism\",\n      \"target\": \"Deflation\",\n      \"kind\": \"supports\",\n      \"note\": \"Focuses on practical implications of beliefs rather than ontological disagreements.\",\n      \"provenance\": [\n        {\n          \"chunkId\": \"humanities-philosophy-metaphysics-families#7\",\n          \"sourceId\": \"humanities-philosophy-metaphysics-families\",\n          \"chunkIndex\": 7\n        }\n      ]\n    }\n  ]\n}\n```",
+  "createdAt": "2026-07-11T16:01:06.363Z"
+}

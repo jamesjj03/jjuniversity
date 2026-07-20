@@ -1,0 +1,428 @@
+{
+  "stage": "normalization",
+  "ok": true,
+  "people": [
+    {
+      "id": "person-engineering-design-process",
+      "name": "Engineering Design Process",
+      "role": "Subject",
+      "reason": "Represents the overall concept of engineering design processes.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "concept-iterative-process",
+      "label": "Iterative Process",
+      "summary": "The engineering design process is iterative, meaning activities and decisions may need to be revisited.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-progression-through-stages",
+      "label": "Progression through Stages",
+      "summary": "The engineering design process can be described as a progression through steps or stages.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-collaborative-activity",
+      "label": "Collaborative Activity",
+      "summary": "The engineering design process involves many participants in a collaborative social activity.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-decision-making-process",
+      "label": "Decision Making Process",
+      "summary": "The engineering design process is a decision making process.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "concept-engineering-design-process",
+      "label": "engineering design process",
+      "summary": "Stages vary by model.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#2",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 2,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#4",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 4,
+          "note": "heading"
+        }
+      ]
+    },
+    {
+      "id": "concept-feasibility-assessment",
+      "label": "feasibility assessment",
+      "summary": "Stage in design process.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#2",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 2,
+          "note": "stage"
+        }
+      ]
+    },
+    {
+      "id": "concept-design-process",
+      "label": "design process",
+      "summary": "Stages involve research & consideration.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#3",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 3,
+          "note": "research stages"
+        }
+      ]
+    },
+    {
+      "id": "concept-reverse-engineering",
+      "label": "reverse engineering",
+      "summary": "Technique for analyzing existing solutions.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#3",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 3,
+          "note": "solution analysis"
+        }
+      ]
+    },
+    {
+      "id": "concept-feasibility-study",
+      "label": "feasibility study",
+      "summary": "evaluates project potential",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#4",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 4,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "concept-concept-study",
+      "label": "concept study",
+      "summary": "Idea generation & evaluation.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#5",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 5,
+          "note": "Defines concept study."
+        }
+      ]
+    },
+    {
+      "id": "concept-ideation",
+      "label": "ideation",
+      "summary": "Mental process for generating ideas.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#5",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 5,
+          "note": "Describes ideation."
+        }
+      ]
+    },
+    {
+      "id": "concept-systems-engineering",
+      "label": "systems engineering",
+      "summary": "Design, integration, management of complex systems.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#1",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 1,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#2",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 2,
+          "note": "heading"
+        },
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 3,
+          "note": "origin"
+        },
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#4",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 4,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#5",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 5,
+          "note": "broader definition"
+        }
+      ]
+    },
+    {
+      "id": "concept-systems-thinking",
+      "label": "systems thinking",
+      "summary": "Principles for organizing systems engineering knowledge.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#1",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 1,
+          "note": "core"
+        }
+      ]
+    },
+    {
+      "id": "concept-engineered-system",
+      "label": "engineered system",
+      "summary": "Components working synergistically.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#1",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 1,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "concept-tradeoffs",
+      "label": "Tradeoffs",
+      "summary": "Explicit comparisons.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#2",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 2,
+          "note": "recipe"
+        }
+      ]
+    },
+    {
+      "id": "concept-system-properties",
+      "label": "system properties",
+      "summary": "whole > sum of parts",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 3,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "concept-discipline",
+      "label": "discipline",
+      "summary": "Formalized approach to engineering.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#4",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 4,
+          "note": "formalization"
+        }
+      ]
+    },
+    {
+      "id": "concept-system",
+      "label": "system",
+      "summary": "Evolving concept; physical to human components.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#5",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 5,
+          "note": "broader definition"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-the-engineering-design-process-is-iterative",
+      "text": "The engineering design process is iterative.",
+      "subject": "Engineering Design Process",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "texts": [
+    {
+      "id": "text-engineering-design-process",
+      "title": "Engineering Design Process",
+      "kind": "essay",
+      "author": "",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "text-systems-engineering-body-of-knowledge",
+      "title": "Systems engineering body of knowledge",
+      "kind": "other",
+      "author": "",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#1",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 1,
+          "note": "knowledge"
+        }
+      ]
+    },
+    {
+      "id": "text-systems-engineering-methods",
+      "title": "Systems engineering methods",
+      "kind": "other",
+      "author": "",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 3,
+          "note": "development"
+        }
+      ]
+    },
+    {
+      "id": "text-systems-engineering",
+      "title": "Systems engineering",
+      "kind": "other",
+      "author": "",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#4",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 4,
+          "note": "term"
+        }
+      ]
+    },
+    {
+      "id": "text-checklands-work",
+      "title": "Checkland's work",
+      "kind": "other",
+      "author": "",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-23d5c9cd10a4#5",
+          "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+          "chunkIndex": 5,
+          "note": "human component"
+        }
+      ]
+    }
+  ],
+  "objections": [],
+  "relationships": [
+    {
+      "id": "relcand-iterative-process-engineering-design-process-ea86a86d",
+      "source": "Iterative Process",
+      "target": "Engineering Design Process",
+      "kind": "influences",
+      "note": "",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    },
+    {
+      "id": "relcand-progression-through-stages-engineering-design-process-ea86a86d",
+      "source": "Progression through Stages",
+      "target": "Engineering Design Process",
+      "kind": "influences",
+      "note": "",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1,
+          "note": "extracted from this chunk"
+        }
+      ]
+    }
+  ],
+  "chunkIds": [
+    "corpus-systems-design-source-054dda302408#1",
+    "corpus-systems-design-source-054dda302408#2",
+    "corpus-systems-design-source-054dda302408#3",
+    "corpus-systems-design-source-054dda302408#4",
+    "corpus-systems-design-source-054dda302408#5",
+    "corpus-systems-design-source-23d5c9cd10a4#1",
+    "corpus-systems-design-source-23d5c9cd10a4#2",
+    "corpus-systems-design-source-23d5c9cd10a4#3",
+    "corpus-systems-design-source-23d5c9cd10a4#4",
+    "corpus-systems-design-source-23d5c9cd10a4#5",
+    "corpus-systems-design-source-2926d95aed10#1",
+    "corpus-systems-design-source-2926d95aed10#2"
+  ],
+  "counts": {
+    "people": 1,
+    "concepts": 18,
+    "claims": 1,
+    "texts": 5,
+    "objections": 0,
+    "relationships": 2
+  }
+}

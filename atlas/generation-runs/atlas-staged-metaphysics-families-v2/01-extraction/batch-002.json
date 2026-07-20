@@ -1,0 +1,118 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 2,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#2"
+  ],
+  "result": {
+    "people": [
+      {
+        "name": "Berkeley",
+        "role": "Philosopher",
+        "reason": "Argues that ordinary objects are ideas sustained by perception",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Kant",
+        "role": "Philosopher",
+        "reason": "Makes the structure of experience central by asking what conditions make objects possible for us",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Hegel",
+        "role": "Philosopher",
+        "reason": "Treats reality as historically and logically articulated through reason",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Idealism",
+        "summary": "Treats mind, experience, reason, or spirit as basic to reality's intelligibility",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Independence",
+        "summary": "Pressure point in idealism: denying an external world, redefining objectivity, or arguing that objectivity already depends on conceptual form",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Berkeley argues that ordinary objects are ideas sustained by perception",
+        "subject": "Berkeley",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Kant makes the structure of experience central by asking what conditions make objects possible for us",
+        "subject": "Kant",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Hegel radicalizes the line by treating reality as historically and logically articulated through reason",
+        "subject": "Hegel",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#2",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 2,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

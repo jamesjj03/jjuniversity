@@ -1,0 +1,9 @@
+{
+  "stageName": "relations",
+  "ok": false,
+  "errors": [
+    "Relations must include relations array."
+  ],
+  "rawExcerpt": "```json\n{\n  \"id\": \"experimental-punk-and-independent-scenes\",\n  \"title\": \"Experimental, punk, and independent scenes\",\n  \"stance\": \"Innovative & Disruptive\",\n  \"centralClaim\": \"Challenging established musical norms through experimentation, DIY ethics, and a rejection of mainstream commercialism.\",\n  \"provenance\": [\n    {\n      \"chunkId\": \"arts-music-music-lineages#8\",\n      \"sourceId\": \"arts-music-music-lineages\",\n      \"chunkIndex\": 8\n    }\n  ],\n  \"relatedGroupIds\": [\n    \"electronic-dance-and-studio-technology-lineages\"\n  ]\n}\n```",
+  "createdAt": "2026-07-12T00:25:34.263Z"
+}

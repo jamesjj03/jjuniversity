@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-group-abstraction-and-structure",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-group-abstraction-and-structure failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 1810 (line 39 column 6)"
+  },
+  "createdAt": "2026-07-20T20:34:11.227Z"
+}

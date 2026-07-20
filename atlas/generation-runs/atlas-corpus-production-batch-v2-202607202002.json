@@ -1,0 +1,1344 @@
+{
+  "stamp": "202607202002",
+  "model": "atlas_v4",
+  "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+  "pipelineDbPath": "C:\\Users\\james\\Documents\\The Pipeline\\sources\\jju_sources.sqlite",
+  "referencePatternNote": "docs/atlas-reference-patterns.md",
+  "systemsDesign": {
+    "mapSlug": "systems-design-corpus-v2",
+    "published": false,
+    "decision": "kept_needs_review",
+    "blockers": [
+      "factual accuracy needs human SME pass",
+      "extra complex-systems coverage attached after generation, not regenerated into final categories"
+    ],
+    "invalidRefs": 0
+  },
+  "maps": [
+    {
+      "target": "mathematical-styles-corpus-v2-202607202002",
+      "recipeId": "discipline_landscape",
+      "jobId": "atlas-job-mathematical-styles-corpus-v2-202607202002",
+      "runId": "atlas-factory-mathematical-styles-corpus-v2-202607202002",
+      "status": "generated",
+      "generatorExitCode": 0,
+      "sourcePacket": {
+        "sourceIds": [
+          "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564",
+          "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-db64f594f9c3",
+          "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564",
+          "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+          "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564",
+          "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0",
+          "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859",
+          "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d",
+          "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564",
+          "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-090978915a5c",
+          "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393",
+          "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782"
+        ],
+        "sourceCount": 12,
+        "chunkCount": 24,
+        "laneCoverage": [
+          {
+            "laneId": "proof-abstraction",
+            "title": "Proof And Abstraction",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          },
+          {
+            "laneId": "algebra-structures",
+            "title": "Algebra And Structures",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          },
+          {
+            "laneId": "geometry-topology",
+            "title": "Geometry And Topology",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          },
+          {
+            "laneId": "analysis-calculus",
+            "title": "Analysis And Continuity",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "computation-discrete",
+            "title": "Computation And Discrete Methods",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          },
+          {
+            "laneId": "applied-modeling",
+            "title": "Applied Modeling",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 2
+          }
+        ],
+        "confidence": "strong",
+        "warnings": [],
+        "selectedSourceTitles": [
+          "Mathematics",
+          "Energy",
+          "Mathematics",
+          "Biology 2e",
+          "Mathematics",
+          "Machine learning",
+          "Calculus",
+          "Calculus Volume 1",
+          "Mathematics",
+          "Lecture notes on quantum computing",
+          "MOS: A Mathematical Optimization Service",
+          "Rigorous mathematical optimization of synthetic hepatic vascular trees"
+        ],
+        "overrepresentationWarnings": [
+          "Mathematics is overrepresented across 4 lanes."
+        ]
+      },
+      "generation": {
+        "run": {
+          "id": "atlas-factory-mathematical-styles-corpus-v2-202607202002",
+          "validation_ok": true,
+          "validation_errors": [],
+          "output_draft_path": "atlas/generation-runs/atlas-factory-mathematical-styles-corpus-v2-202607202002/06-final-draft.json",
+          "metadata": {
+            "jobId": "atlas-job-mathematical-styles-corpus-v2-202607202002",
+            "model": "atlas_v4",
+            "recipe": {
+              "id": "discipline_landscape",
+              "title": "Discipline Landscape",
+              "purpose": "Map a discipline by methods, subfields, styles, or problem-solving orientations.",
+              "groupingLogic": "Groups should reveal how the discipline is internally organized and how its major methods differ.",
+              "contributorRules": "Contributors should be included when they exemplify or institutionalize a method or subfield.",
+              "evaluationCriteria": [
+                "Categories help users learn the field",
+                "Methods are distinguishable",
+                "Relations show dependencies and overlap",
+                "No group is filler"
+              ],
+              "preferredGroupFields": [
+                "method",
+                "centralProblem",
+                "useCases",
+                "contributors",
+                "keyTexts",
+                "limitations"
+              ],
+              "expectedRelationTypes": [
+                "neighbors",
+                "borrows",
+                "answers",
+                "opposes",
+                "reframes"
+              ],
+              "recommendedGroupCount": {
+                "max": 10,
+                "min": 5
+              },
+              "generationInstructions": "Prefer categories useful for learning the discipline over encyclopedia taxonomy. Make the map navigable."
+            },
+            "runDir": "atlas/generation-runs/atlas-factory-mathematical-styles-corpus-v2-202607202002",
+            "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+            "provider": "local-openai-compatible",
+            "generator": "atlas-staged-model-generation-v2",
+            "chunkCount": 24,
+            "retryCount": 3,
+            "concurrency": 1,
+            "sourceCount": 12,
+            "chunkIdsUsed": [
+              "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564#10",
+              "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#227",
+              "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#992",
+              "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#1435",
+              "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#463",
+              "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#467",
+              "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d#597",
+              "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#15",
+              "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#17",
+              "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#28",
+              "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782#2",
+              "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393#1",
+              "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-090978915a5c#2",
+              "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#11",
+              "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#13",
+              "corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564#15",
+              "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0#13",
+              "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#7",
+              "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#8",
+              "corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564#26",
+              "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#14",
+              "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#35",
+              "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564#38",
+              "corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-db64f594f9c3#6"
+            ],
+            "currentStage": "complete",
+            "importResult": {
+              "counts": {
+                "maps": 1,
+                "texts": 5,
+                "groups": 5,
+                "branches": 1,
+                "relations": 4,
+                "territories": 1,
+                "contributors": 5
+              },
+              "mapIds": [
+                "mathematical-styles-corpus-v2-202607202002"
+              ],
+              "published": false,
+              "reviewStatus": "needs_review"
+            },
+            "modelCallLog": [],
+            "outputCounts": {
+              "texts": 5,
+              "groups": 5,
+              "relations": 4,
+              "contributors": 5
+            },
+            "sourceMapSlug": "mathematical-styles-corpus-v2-202607202002",
+            "chunkBatchSize": 1,
+            "chunkCharLimit": 420,
+            "failureDetails": [],
+            "repairAttempts": 0,
+            "completedStages": [
+              "source-manifest",
+              "extraction",
+              "normalization",
+              "clustering",
+              "group-enrichment",
+              "relations",
+              "assembly",
+              "complete"
+            ],
+            "provenanceStats": {
+              "refs": 62,
+              "texts": 5,
+              "groups": 5,
+              "relations": 4,
+              "contributors": 5
+            },
+            "sourcePacketHash": "d23b83f2e545742707d4d7488ea7a4d4ea957755ac697baff02b1e74aba96795",
+            "selectedSourceIds": []
+          }
+        },
+        "map": {
+          "id": "mathematical-styles-corpus-v2-202607202002",
+          "reviewStatus": "needs_review",
+          "published": false
+        },
+        "counts": {
+          "groups": 5,
+          "contributors": 5,
+          "texts": 5,
+          "relations": 4
+        },
+        "groups": [
+          "Geometric Foundations",
+          "Abstraction & Algebraic Structures",
+          "Analysis & Proof Rigor",
+          "Problem Solving & Creativity",
+          "Effectiveness & Unexplained Phenomena"
+        ],
+        "invalidRefs": 0
+      },
+      "qc": {
+        "saved": true,
+        "reviewId": "atlas-category-review-mathematical-styles-corpus-v2-202607202002-no-reference",
+        "score": {
+          "category": 4,
+          "field": 4,
+          "factual": 3,
+          "contributor": 3,
+          "texts": 3,
+          "objection": 3,
+          "relation": 3,
+          "useful": 4,
+          "redundancy": 4,
+          "provenance": 4
+        },
+        "readyToPublish": false,
+        "blockers": [
+          "factual accuracy needs human review",
+          "contributor placement needs editorial review",
+          "relation quality needs editorial review"
+        ],
+        "counts": {
+          "groups": 5,
+          "contributors": 5,
+          "texts": 5,
+          "relations": 4
+        },
+        "invalidRefs": 0,
+        "groups": [
+          "Geometric Foundations",
+          "Abstraction & Algebraic Structures",
+          "Analysis & Proof Rigor",
+          "Problem Solving & Creativity",
+          "Effectiveness & Unexplained Phenomena"
+        ]
+      },
+      "outputTail": "Generated staged AtlasMapSpec draft.\n- run: atlas-factory-mathematical-styles-corpus-v2-202607202002\n- provider: local-openai-compatible\n- model: atlas_v4\n- run dir: C:\\Users\\james\\Desktop\\MATRIX\\jju\\jjuniversity\\atlas\\generation-runs\\atlas-factory-mathematical-styles-corpus-v2-202607202002\n- final draft: C:\\Users\\james\\Desktop\\MATRIX\\jju\\jjuniversity\\atlas\\generation-runs\\atlas-factory-mathematical-styles-corpus-v2-202607202002\\06-final-draft.json\n- source ids: corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782, corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-a413763b7393, corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-090978915a5c, corpus-mathematical-styles-corpus-v2-202607202002-computation-discrete-257c0ca7a564, corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-509d3fe2419d, corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859, corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-15979b6085c0, corpus-mathematical-styles-corpus-v2-202607202002-geometry-topology-257c0ca7a564, corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df, corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-257c0ca7a564, corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-db64f594f9c3, corpus-mathematical-styles-corpus-v2-202607202002-proof-abstraction-257c0ca7a564\n- chunks used: 24\n- groups: 5\n- contributors: 5\n- texts: 5\n- relations: 4\n- provenance refs: 62\n- repair attempts: 0\nValidation passed.\nImported as needs_review. Not published.\n\n(node:22712) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/james/Desktop/MATRIX/jju/jjuniversity/lib/atlasMaps.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to \\\\?\\C:\\Users\\james\\Desktop\\MATRIX\\jju\\jjuniversity\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+    },
+    {
+      "target": "literary-movements-corpus-v2-202607202002",
+      "recipeId": "historical_movement",
+      "jobId": "atlas-job-literary-movements-corpus-v2-202607202002",
+      "runId": "atlas-factory-literary-movements-corpus-v2-202607202002",
+      "status": "failed",
+      "generatorExitCode": 1,
+      "sourcePacket": {
+        "sourceIds": [
+          "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+          "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+          "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-798e3aac5e37",
+          "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b",
+          "corpus-literary-movements-corpus-v2-202607202002-romanticism-realism-49774c511f08",
+          "corpus-literary-movements-corpus-v2-202607202002-romanticism-realism-e2239dd922c8",
+          "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+          "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807",
+          "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f",
+          "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0",
+          "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+          "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08"
+        ],
+        "sourceCount": 12,
+        "chunkCount": 32,
+        "laneCoverage": [
+          {
+            "laneId": "classical-medieval",
+            "title": "Classical And Medieval Traditions",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "renaissance-enlightenment",
+            "title": "Renaissance And Enlightenment",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 5
+          },
+          {
+            "laneId": "romanticism-realism",
+            "title": "Romanticism And Realism",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          },
+          {
+            "laneId": "modernism-avant-garde",
+            "title": "Modernism And Avant-Garde",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "postmodern-contemporary",
+            "title": "Postmodern And Contemporary",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 5
+          },
+          {
+            "laneId": "authors-texts",
+            "title": "Authors And Texts",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          }
+        ],
+        "confidence": "strong",
+        "warnings": [],
+        "selectedSourceTitles": [
+          "Literature",
+          "Greek mythology",
+          "Literary criticism",
+          "Renaissance",
+          "U.S. History",
+          "Art history",
+          "Fascism",
+          "Hinduism",
+          "Introduction to Anthropology",
+          "Architecture",
+          "Writing Guide with Handbook",
+          "U.S. History"
+        ],
+        "overrepresentationWarnings": []
+      },
+      "generation": {
+        "run": {
+          "id": "atlas-factory-literary-movements-corpus-v2-202607202002",
+          "validation_ok": false,
+          "validation_errors": [
+            "extraction-batch-24: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+          ],
+          "output_draft_path": null,
+          "metadata": {
+            "jobId": "atlas-job-literary-movements-corpus-v2-202607202002",
+            "model": "atlas_v4",
+            "recipe": {
+              "id": "historical_movement",
+              "title": "Historical Movement",
+              "purpose": "Organize cultural or historical material by movements, scenes, eras, and reactions.",
+              "groupingLogic": "Groups should be movements or scenes with shared style, context, institutions, or oppositional identity.",
+              "contributorRules": "Contributors should represent the movement, launch it, popularize it, or define its counter-movement.",
+              "evaluationCriteria": [
+                "Groups have historical context",
+                "Movement boundaries are defensible",
+                "Relations show reaction or influence",
+                "Representative figures are justified"
+              ],
+              "preferredGroupFields": [
+                "movementContext",
+                "definingStyle",
+                "centralClaim",
+                "contributors",
+                "keyTexts",
+                "pressurePoints"
+              ],
+              "expectedRelationTypes": [
+                "influences",
+                "opposes",
+                "reframes",
+                "neighbors",
+                "borrows"
+              ],
+              "recommendedGroupCount": {
+                "max": 10,
+                "min": 5
+              },
+              "generationInstructions": "Anchor groups in context and style. Do not collapse movements into individual biography unless the source demands it. First production release QC guidance: - Avoid single linear progress narratives; require parallel movement branches, regional balance checks, and relation notes that name transmission mechanisms."
+            },
+            "runDir": "atlas/generation-runs/atlas-factory-literary-movements-corpus-v2-202607202002",
+            "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+            "provider": "local-openai-compatible",
+            "generator": "atlas-staged-model-generation-v2",
+            "chunkCount": 28,
+            "retryCount": 3,
+            "concurrency": 1,
+            "sourceCount": 12,
+            "chunkIdsUsed": [
+              "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#1594",
+              "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2018",
+              "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2374",
+              "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#340",
+              "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#782",
+              "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#831",
+              "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#1",
+              "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#3",
+              "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#37",
+              "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#6",
+              "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#7",
+              "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#19",
+              "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+              "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#52",
+              "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#53",
+              "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807#18",
+              "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807#57",
+              "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807#60",
+              "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0#1",
+              "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0#16",
+              "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#780",
+              "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#794",
+              "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#1373",
+              "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-798e3aac5e37#3",
+              "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-798e3aac5e37#11",
+              "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b#14",
+              "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b#21",
+              "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b#33"
+            ],
+            "currentStage": "extraction",
+            "importResult": null,
+            "modelCallLog": [
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 0,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:35:45.057Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-24",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 701
+              },
+              {
+                "ok": false,
+                "error": "Model returned no message content.",
+                "model": "atlas_v4",
+                "attempt": 1,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:35:49.110Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-24",
+                "errorCategory": "model_runtime",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 701
+              },
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 2,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:35:52.700Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-24",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 701
+              },
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 3,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:35:57.798Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-24",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 701
+              }
+            ],
+            "outputCounts": null,
+            "sourceMapSlug": "literary-movements-corpus-v2-202607202002",
+            "chunkBatchSize": 1,
+            "chunkCharLimit": 420,
+            "failureDetails": [
+              "extraction-batch-24: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+            ],
+            "repairAttempts": 3,
+            "completedStages": [
+              "source-manifest"
+            ],
+            "provenanceStats": null,
+            "sourcePacketHash": "9f83fc1adfd1e83cc806f0803179b1d468e835911eae83764ad548a20e05250a",
+            "selectedSourceIds": []
+          }
+        },
+        "map": null
+      },
+      "qc": {
+        "saved": false,
+        "readyToPublish": false,
+        "blockers": [
+          "No imported map found for literary-movements-corpus-v2-202607202002."
+        ]
+      },
+      "outputTail": "}\n[extraction-batch-24] prompt 701/5000 input tokens, output 700, model atlas_v4\n[extraction-batch-24] model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}\n\n(node:13652) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/james/Desktop/MATRIX/jju/jjuniversity/lib/atlasMaps.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to \\\\?\\C:\\Users\\james\\Desktop\\MATRIX\\jju\\jjuniversity\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nextraction-batch-24 failed: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}\n"
+    },
+    {
+      "target": "visual-art-movements-corpus-v2-202607202002",
+      "recipeId": "historical_movement",
+      "jobId": "atlas-job-visual-art-movements-corpus-v2-202607202002",
+      "runId": "atlas-factory-visual-art-movements-corpus-v2-202607202002",
+      "status": "failed",
+      "generatorExitCode": 1,
+      "sourcePacket": {
+        "sourceIds": [
+          "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-e2239dd922c8",
+          "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b",
+          "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232",
+          "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1",
+          "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+          "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c",
+          "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af",
+          "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af",
+          "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+          "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb",
+          "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af"
+        ],
+        "sourceCount": 11,
+        "chunkCount": 28,
+        "laneCoverage": [
+          {
+            "laneId": "renaissance-academic",
+            "title": "Renaissance And Academic Traditions",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 5
+          },
+          {
+            "laneId": "impressionism-postimpressionism",
+            "title": "Impressionism And Post-Impressionism",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          },
+          {
+            "laneId": "modernism-avant-garde",
+            "title": "Modernism And Avant-Garde",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "postwar-contemporary",
+            "title": "Postwar And Contemporary",
+            "covered": true,
+            "sourceCount": 1,
+            "chunkCount": 3
+          },
+          {
+            "laneId": "global-institutions",
+            "title": "Global And Institutional Context",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "artists-manifestos",
+            "title": "Artists And Manifestos",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          }
+        ],
+        "confidence": "strong",
+        "warnings": [],
+        "selectedSourceTitles": [
+          "Art history",
+          "Renaissance",
+          "The Picture of Dorian Gray",
+          "Physics",
+          "Fascism",
+          "Art",
+          "Writing Guide with Handbook",
+          "Writing Guide with Handbook",
+          "Introduction to Anthropology",
+          "Engineering",
+          "Writing Guide with Handbook"
+        ],
+        "overrepresentationWarnings": []
+      },
+      "generation": {
+        "run": {
+          "id": "atlas-factory-visual-art-movements-corpus-v2-202607202002",
+          "validation_ok": false,
+          "validation_errors": [
+            "extraction-batch-14: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+          ],
+          "output_draft_path": null,
+          "metadata": {
+            "jobId": "atlas-job-visual-art-movements-corpus-v2-202607202002",
+            "model": "atlas_v4",
+            "recipe": {
+              "id": "historical_movement",
+              "title": "Historical Movement",
+              "purpose": "Organize cultural or historical material by movements, scenes, eras, and reactions.",
+              "groupingLogic": "Groups should be movements or scenes with shared style, context, institutions, or oppositional identity.",
+              "contributorRules": "Contributors should represent the movement, launch it, popularize it, or define its counter-movement.",
+              "evaluationCriteria": [
+                "Groups have historical context",
+                "Movement boundaries are defensible",
+                "Relations show reaction or influence",
+                "Representative figures are justified"
+              ],
+              "preferredGroupFields": [
+                "movementContext",
+                "definingStyle",
+                "centralClaim",
+                "contributors",
+                "keyTexts",
+                "pressurePoints"
+              ],
+              "expectedRelationTypes": [
+                "influences",
+                "opposes",
+                "reframes",
+                "neighbors",
+                "borrows"
+              ],
+              "recommendedGroupCount": {
+                "max": 10,
+                "min": 5
+              },
+              "generationInstructions": "Anchor groups in context and style. Do not collapse movements into individual biography unless the source demands it. First production release QC guidance: - Avoid single linear progress narratives; require parallel movement branches, regional balance checks, and relation notes that name transmission mechanisms."
+            },
+            "runDir": "atlas/generation-runs/atlas-factory-visual-art-movements-corpus-v2-202607202002",
+            "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+            "provider": "local-openai-compatible",
+            "generator": "atlas-staged-model-generation-v2",
+            "chunkCount": 28,
+            "retryCount": 3,
+            "concurrency": 1,
+            "sourceCount": 11,
+            "chunkIdsUsed": [
+              "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb#27",
+              "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#534",
+              "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1391",
+              "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-ea82464167af#1709",
+              "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#134",
+              "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#177",
+              "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#289",
+              "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1440",
+              "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1784",
+              "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-ea82464167af#1811",
+              "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1#1725",
+              "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1#1726",
+              "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-1d1ac5e05ce1#2007",
+              "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232#283",
+              "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+              "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#52",
+              "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#53",
+              "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c#9",
+              "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c#25",
+              "corpus-visual-art-movements-corpus-v2-202607202002-modernism-avant-garde-82e96371f12c#26",
+              "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af#1055",
+              "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af#1397",
+              "corpus-visual-art-movements-corpus-v2-202607202002-postwar-contemporary-ea82464167af#1647",
+              "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b#14",
+              "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b#15",
+              "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-8739950d693b#33",
+              "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-e2239dd922c8#1",
+              "corpus-visual-art-movements-corpus-v2-202607202002-renaissance-academic-e2239dd922c8#4"
+            ],
+            "currentStage": "extraction",
+            "importResult": null,
+            "modelCallLog": [
+              {
+                "ok": false,
+                "error": "Model returned no message content.",
+                "model": "atlas_v4",
+                "attempt": 0,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:03.771Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-14",
+                "errorCategory": "model_runtime",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 701
+              },
+              {
+                "ok": false,
+                "error": "Model returned no message content.",
+                "model": "atlas_v4",
+                "attempt": 1,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:04.583Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-14",
+                "errorCategory": "model_runtime",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 701
+              },
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 2,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:07.683Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-14",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 701
+              },
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 3,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:13.281Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-14",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 701
+              }
+            ],
+            "outputCounts": null,
+            "sourceMapSlug": "visual-art-movements-corpus-v2-202607202002",
+            "chunkBatchSize": 1,
+            "chunkCharLimit": 420,
+            "failureDetails": [
+              "extraction-batch-14: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+            ],
+            "repairAttempts": 3,
+            "completedStages": [
+              "source-manifest"
+            ],
+            "provenanceStats": null,
+            "sourcePacketHash": "e702f0a91a7e975e29731ac071522f1f7e3e0294cfebe36954f24e31c380496a",
+            "selectedSourceIds": []
+          }
+        },
+        "map": null
+      },
+      "qc": {
+        "saved": false,
+        "readyToPublish": false,
+        "blockers": [
+          "No imported map found for visual-art-movements-corpus-v2-202607202002."
+        ]
+      },
+      "outputTail": "}\n[extraction-batch-14] prompt 701/5000 input tokens, output 700, model atlas_v4\n[extraction-batch-14] model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}\n\n(node:6492) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/james/Desktop/MATRIX/jju/jjuniversity/lib/atlasMaps.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to \\\\?\\C:\\Users\\james\\Desktop\\MATRIX\\jju\\jjuniversity\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nextraction-batch-14 failed: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}\n"
+    },
+    {
+      "target": "political-orders-corpus-v2-202607202002",
+      "recipeId": "system_comparison",
+      "jobId": "atlas-job-political-orders-corpus-v2-202607202002",
+      "runId": "atlas-factory-political-orders-corpus-v2-202607202002",
+      "status": "failed",
+      "generatorExitCode": 1,
+      "sourcePacket": {
+        "sourceIds": [
+          "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+          "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+          "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08",
+          "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f",
+          "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d",
+          "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359",
+          "corpus-political-orders-corpus-v2-202607202002-monarchy-oligarchy-4ac009615018",
+          "corpus-political-orders-corpus-v2-202607202002-monarchy-oligarchy-e6604a345b1d",
+          "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+          "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+          "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-527b4f529680",
+          "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08"
+        ],
+        "sourceCount": 12,
+        "chunkCount": 36,
+        "laneCoverage": [
+          {
+            "laneId": "authority-legitimacy",
+            "title": "Authority And Legitimacy",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "democracy-republic",
+            "title": "Democratic And Republican Orders",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "authoritarian-totalitarian",
+            "title": "Authoritarian And Totalitarian Orders",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "monarchy-oligarchy",
+            "title": "Monarchy And Oligarchy",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "anarchism-federalism",
+            "title": "Distributed And Anti-Central Orders",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "failure-tradeoffs",
+            "title": "Failure Modes And Tradeoffs",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          }
+        ],
+        "confidence": "strong",
+        "warnings": [],
+        "selectedSourceTitles": [
+          "Introduction to Philosophy 2e",
+          "Introduction to Political Science",
+          "U.S. History",
+          "Democracy",
+          "Introduction to Political Science",
+          "Introduction to Philosophy 2e",
+          "Introduction to Sociology 3e",
+          "Introduction to Political Science",
+          "American Government 4e",
+          "Introduction to Philosophy 2e",
+          "Business Ethics",
+          "U.S. History"
+        ],
+        "overrepresentationWarnings": []
+      },
+      "generation": {
+        "run": {
+          "id": "atlas-factory-political-orders-corpus-v2-202607202002",
+          "validation_ok": false,
+          "validation_errors": [
+            "extraction-batch-16: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+          ],
+          "output_draft_path": null,
+          "metadata": {
+            "jobId": "atlas-job-political-orders-corpus-v2-202607202002",
+            "model": "atlas_v4",
+            "recipe": {
+              "id": "system_comparison",
+              "title": "System Comparison",
+              "purpose": "Compare social, political, technical, or philosophical systems by design commitments and tradeoffs.",
+              "groupingLogic": "Groups should be systems or system families, separated by governance logic, constraints, values, or operating model.",
+              "contributorRules": "Contributors should be tied to system design, advocacy, critique, or canonical articulation.",
+              "evaluationCriteria": [
+                "Systems are compared on meaningful axes",
+                "Tradeoffs are explicit",
+                "Relations expose conflict or borrowing",
+                "Claims are not slogans"
+              ],
+              "preferredGroupFields": [
+                "systemLogic",
+                "centralClaim",
+                "tradeoffs",
+                "contributors",
+                "keyTexts",
+                "failureModes"
+              ],
+              "expectedRelationTypes": [
+                "opposes",
+                "answers",
+                "reframes",
+                "neighbors",
+                "borrows"
+              ],
+              "recommendedGroupCount": {
+                "max": 9,
+                "min": 5
+              },
+              "generationInstructions": "Surface the operating logic of each system and the concrete tradeoffs between systems."
+            },
+            "runDir": "atlas/generation-runs/atlas-factory-political-orders-corpus-v2-202607202002",
+            "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+            "provider": "local-openai-compatible",
+            "generator": "atlas-staged-model-generation-v2",
+            "chunkCount": 28,
+            "retryCount": 3,
+            "concurrency": 1,
+            "sourceCount": 12,
+            "chunkIdsUsed": [
+              "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#204",
+              "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#214",
+              "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#215",
+              "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1062",
+              "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1063",
+              "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1065",
+              "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359#916",
+              "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359#1011",
+              "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359#1013",
+              "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d#949",
+              "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d#950",
+              "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d#1145",
+              "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1020",
+              "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1029",
+              "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1030",
+              "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#39",
+              "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#1264",
+              "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#1613",
+              "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08#488",
+              "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08#555",
+              "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08#724",
+              "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f#17",
+              "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f#30",
+              "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f#39",
+              "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08#411",
+              "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08#501",
+              "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08#1620",
+              "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-527b4f529680#127"
+            ],
+            "currentStage": "extraction",
+            "importResult": null,
+            "modelCallLog": [
+              {
+                "ok": false,
+                "error": "Model returned no message content.",
+                "model": "atlas_v4",
+                "attempt": 0,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:18.886Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-16",
+                "errorCategory": "model_runtime",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 652
+              },
+              {
+                "ok": false,
+                "error": "Model returned no message content.",
+                "model": "atlas_v4",
+                "attempt": 1,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:19.707Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-16",
+                "errorCategory": "model_runtime",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 652
+              },
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 2,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:23.028Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-16",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 652
+              },
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 3,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:28.115Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-16",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 652
+              }
+            ],
+            "outputCounts": null,
+            "sourceMapSlug": "political-orders-corpus-v2-202607202002",
+            "chunkBatchSize": 1,
+            "chunkCharLimit": 420,
+            "failureDetails": [
+              "extraction-batch-16: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+            ],
+            "repairAttempts": 3,
+            "completedStages": [
+              "source-manifest"
+            ],
+            "provenanceStats": null,
+            "sourcePacketHash": "25991847154fd5c8867f670fd499615d2d969adc5ddc474a1f60cc360ab71d7c",
+            "selectedSourceIds": []
+          }
+        },
+        "map": null
+      },
+      "qc": {
+        "saved": false,
+        "readyToPublish": false,
+        "blockers": [
+          "No imported map found for political-orders-corpus-v2-202607202002."
+        ]
+      },
+      "outputTail": "}\n[extraction-batch-16] prompt 652/5000 input tokens, output 700, model atlas_v4\n[extraction-batch-16] model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}\n\n(node:22976) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/james/Desktop/MATRIX/jju/jjuniversity/lib/atlasMaps.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to \\\\?\\C:\\Users\\james\\Desktop\\MATRIX\\jju\\jjuniversity\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nextraction-batch-16 failed: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}\n"
+    },
+    {
+      "target": "consciousness-theories-v2-corpus-test-202607202002",
+      "recipeId": "theory_family",
+      "jobId": "atlas-job-consciousness-theories-v2-corpus-test-202607202002",
+      "runId": "atlas-factory-consciousness-theories-v2-corpus-test-202607202002",
+      "status": "failed",
+      "generatorExitCode": 1,
+      "sourcePacket": {
+        "sourceIds": [
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-materialist-neurobiological-cd5ca881f359",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-materialist-neurobiological-f0f8425c9d94",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-functional-computational-f306b7f62c71",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-functional-computational-57fba5016419",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-higher-order-representational-aa3fbec5b251",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-higher-order-representational-70600e0b9f78",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-phenomenology-enactive-cd5ca881f359",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-phenomenology-enactive-3a585d32fe2f",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-panpsychism-monism-cd5ca881f359",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-panpsychism-monism-a8e742220807",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359",
+          "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-dcbe4fa40741"
+        ],
+        "sourceCount": 12,
+        "chunkCount": 29,
+        "laneCoverage": [
+          {
+            "laneId": "materialist-neurobiological",
+            "title": "Materialist And Neurobiological",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "functional-computational",
+            "title": "Functional And Computational",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 3
+          },
+          {
+            "laneId": "higher-order-representational",
+            "title": "Higher-Order And Representational",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          },
+          {
+            "laneId": "phenomenology-enactive",
+            "title": "Phenomenology And Enactive",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "panpsychism-monism",
+            "title": "Panpsychism And Monism",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 4
+          },
+          {
+            "laneId": "dualism-idealism",
+            "title": "Dualism And Idealism",
+            "covered": true,
+            "sourceCount": 2,
+            "chunkCount": 6
+          },
+          {
+            "laneId": "empirical-objections",
+            "title": "Empirical Tests And Objections",
+            "covered": false,
+            "sourceCount": 0,
+            "chunkCount": 0
+          }
+        ],
+        "confidence": "usable",
+        "warnings": [
+          "Missing source coverage for lane: Empirical Tests And Objections."
+        ],
+        "selectedSourceTitles": [
+          "Introduction to Philosophy 2e",
+          "Consciousness.",
+          "Understanding Information Processing in Human Brain by Interpreting Machine Learning Models",
+          "Cognitive computational neuroscience",
+          "Introduction to Behavioral Neuroscience",
+          "Toward a theory of consciousness: A review of the neural correlates of inattentional blindness.",
+          "Introduction to Philosophy 2e",
+          "Introduction to Anthropology",
+          "Introduction to Philosophy 2e",
+          "Hinduism",
+          "Introduction to Philosophy 2e",
+          "Metaphysics"
+        ],
+        "overrepresentationWarnings": [
+          "Introduction to Philosophy 2e is overrepresented across 4 lanes."
+        ]
+      },
+      "generation": {
+        "run": {
+          "id": "atlas-factory-consciousness-theories-v2-corpus-test-202607202002",
+          "validation_ok": false,
+          "validation_errors": [
+            "extraction-batch-5: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+          ],
+          "output_draft_path": null,
+          "metadata": {
+            "jobId": "atlas-job-consciousness-theories-v2-corpus-test-202607202002",
+            "model": "atlas_v4",
+            "recipe": {
+              "id": "theory_family",
+              "title": "Theory Family",
+              "purpose": "Organize a field by major explanatory families or schools of thought.",
+              "groupingLogic": "Groups should be stable explanatory families or schools with distinct stances. Keep the category level broad enough to organize a field, but narrow enough that each family has its own central claim, pressure points, contributors, and relation pattern. Do not promote individual people, single objections, key texts, or one-off concepts into top-level groups unless the sources explicitly identify them as a school or family.",
+              "contributorRules": "Attach contributors to the family they shaped, extended, or centrally challenged. Avoid duplicating a contributor across groups unless the source supports a cross-family role and the reason states why. Treat precursors and hybrid figures as contributors or bridge notes before creating a separate family for them.",
+              "evaluationCriteria": [
+                "Each group is a source-backed explanatory family, not a person, single text, or objection.",
+                "Groups are mutually useful and minimally overlapping.",
+                "Major source-backed families are not missing before enrichment starts.",
+                "Contributors are placed by family role with explicit reasons for any duplicates.",
+                "Objections cover the family pressure point rather than becoming standalone categories.",
+                "Relations explain specific conceptual movement between families.",
+                "Provenance supports the actual category claim and key text anchor."
+              ],
+              "preferredGroupFields": [
+                "stance",
+                "centralClaim",
+                "whyItMatters",
+                "objections",
+                "contributors",
+                "keyTexts"
+              ],
+              "expectedRelationTypes": [
+                "opposes",
+                "answers",
+                "reframes",
+                "borrows",
+                "neighbors"
+              ],
+              "recommendedGroupCount": {
+                "max": 10,
+                "min": 6
+              },
+              "generationInstructions": "Prioritize source-backed family boundaries before enrichment. After clustering, audit for missing named families, person-as-category errors, objection-as-category errors, and overlapping categories. Keep pressure points under objections unless they are established schools. Relations must name a specific conceptual contrast, answer, borrowing, reframing, or neighboring boundary. First production release QC guidance: - Publication candidates must replace source-synthesis placeholders with named contributors and text anchors before publishing."
+            },
+            "runDir": "atlas/generation-runs/atlas-factory-consciousness-theories-v2-corpus-test-202607202002",
+            "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+            "provider": "local-openai-compatible",
+            "generator": "atlas-staged-model-generation-v2",
+            "chunkCount": 28,
+            "retryCount": 3,
+            "concurrency": 1,
+            "sourceCount": 12,
+            "chunkIdsUsed": [
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#126",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#537",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#571",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-dcbe4fa40741#1",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-dcbe4fa40741#17",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-dcbe4fa40741#27",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-functional-computational-57fba5016419#1",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-functional-computational-f306b7f62c71#1",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-functional-computational-f306b7f62c71#2",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-higher-order-representational-70600e0b9f78#2",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-higher-order-representational-aa3fbec5b251#638",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-higher-order-representational-aa3fbec5b251#2009",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-higher-order-representational-aa3fbec5b251#2019",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-materialist-neurobiological-cd5ca881f359#533",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-materialist-neurobiological-cd5ca881f359#574",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-materialist-neurobiological-cd5ca881f359#1087",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-materialist-neurobiological-f0f8425c9d94#1",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-materialist-neurobiological-f0f8425c9d94#2",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-materialist-neurobiological-f0f8425c9d94#3",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-panpsychism-monism-a8e742220807#36",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-panpsychism-monism-cd5ca881f359#326",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-panpsychism-monism-cd5ca881f359#501",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-panpsychism-monism-cd5ca881f359#502",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-phenomenology-enactive-3a585d32fe2f#596",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-phenomenology-enactive-3a585d32fe2f#1517",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-phenomenology-enactive-3a585d32fe2f#1584",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-phenomenology-enactive-cd5ca881f359#1108",
+              "corpus-consciousness-theories-v2-corpus-test-202607202002-phenomenology-enactive-cd5ca881f359#1109"
+            ],
+            "currentStage": "extraction",
+            "importResult": null,
+            "modelCallLog": [
+              {
+                "ok": false,
+                "error": "Model returned no message content.",
+                "model": "atlas_v4",
+                "attempt": 0,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:34.197Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-5",
+                "errorCategory": "model_runtime",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 1004
+              },
+              {
+                "ok": false,
+                "error": "Model returned no message content.",
+                "model": "atlas_v4",
+                "attempt": 1,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:35.004Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-5",
+                "errorCategory": "model_runtime",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 1004
+              },
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 2,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:38.103Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-5",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 1004
+              },
+              {
+                "ok": false,
+                "error": "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}",
+                "model": "atlas_v4",
+                "attempt": 3,
+                "provider": "local-openai-compatible",
+                "createdAt": "2026-07-20T21:36:43.190Z",
+                "profileId": "atlas_v4",
+                "stageName": "extraction-batch-5",
+                "errorCategory": "model_load_canceled",
+                "maxOutputTokens": 700,
+                "safeInputTokens": 5000,
+                "contextWindowTokens": 32768,
+                "estimatedInputTokens": 1004
+              }
+            ],
+            "outputCounts": null,
+            "sourceMapSlug": "consciousness-theories-v2-corpus-test-202607202002",
+            "chunkBatchSize": 1,
+            "chunkCharLimit": 420,
+            "failureDetails": [
+              "extraction-batch-5: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+            ],
+            "repairAttempts": 3,
+            "completedStages": [
+              "source-manifest"
+            ],
+            "provenanceStats": null,
+            "sourcePacketHash": "ff29ebb4551566c3a608ed468ffbab7b6bee0bd53de9d69db2df5dfd345590b4",
+            "selectedSourceIds": []
+          }
+        },
+        "map": null
+      },
+      "qc": {
+        "saved": false,
+        "readyToPublish": false,
+        "blockers": [
+          "No imported map found for consciousness-theories-v2-corpus-test-202607202002."
+        ]
+      },
+      "outputTail": "}\n[extraction-batch-5] prompt 1004/5000 input tokens, output 700, model atlas_v4\n[extraction-batch-5] model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}\n\n(node:20384) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/james/Desktop/MATRIX/jju/jjuniversity/lib/atlasMaps.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to \\\\?\\C:\\Users\\james\\Desktop\\MATRIX\\jju\\jjuniversity\\package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\nextraction-batch-5 failed: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}\n"
+    }
+  ],
+  "reusableLearnings": [
+    "Corpus-only generation still needs an editorial pass; keep batch outputs in needs_review unless every score clears threshold.",
+    "Lane templates should prefer at least two chunks for every required lane when the corpus has enough material.",
+    "Category checkpoints are useful as a humane reliability layer when local models produce malformed clustering JSON."
+  ]
+}

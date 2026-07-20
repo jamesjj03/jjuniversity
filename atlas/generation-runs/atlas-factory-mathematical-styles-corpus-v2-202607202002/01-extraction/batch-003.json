@@ -1,0 +1,47 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 3,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#1435"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 700,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "systematics",
+        "summary": "organize & classify organisms",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#1435",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+            "chunkIndex": 1435,
+            "note": "classify organisms"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "systematics",
+        "target": "phylogeny",
+        "kind": "supports",
+        "note": "determine phylogeny",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df#1435",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-algebra-structures-2e049ff516df",
+            "chunkIndex": 1435,
+            "note": "phylogeny determination"
+          }
+        ]
+      }
+    ]
+  }
+}

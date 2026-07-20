@@ -1,0 +1,58 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 7,
+  "chunkIds": [
+    "corpus-systems-design-source-23d5c9cd10a4#3"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 679,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "systems engineering",
+        "summary": "discipline for complex projects",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+            "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+            "chunkIndex": 3,
+            "note": "origin"
+          }
+        ]
+      },
+      {
+        "label": "system properties",
+        "summary": "whole > sum of parts",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+            "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+            "chunkIndex": 3,
+            "note": "definition"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Systems engineering methods",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-source-23d5c9cd10a4#3",
+            "sourceId": "corpus-systems-design-source-23d5c9cd10a4",
+            "chunkIndex": 3,
+            "note": "development"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

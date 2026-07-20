@@ -1,0 +1,429 @@
+{
+  "stage": "source-manifest",
+  "ok": true,
+  "recipe": {
+    "id": "system_comparison",
+    "title": "System Comparison",
+    "purpose": "Compare social, political, technical, or philosophical systems by design commitments and tradeoffs.",
+    "groupingLogic": "Groups should be systems or system families, separated by governance logic, constraints, values, or operating model.",
+    "preferredGroupFields": [
+      "systemLogic",
+      "centralClaim",
+      "tradeoffs",
+      "contributors",
+      "keyTexts",
+      "failureModes"
+    ],
+    "contributorRules": "Contributors should be tied to system design, advocacy, critique, or canonical articulation.",
+    "expectedRelationTypes": [
+      "opposes",
+      "answers",
+      "reframes",
+      "neighbors",
+      "borrows"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 9
+    },
+    "generationInstructions": "Surface the operating logic of each system and the concrete tradeoffs between systems.",
+    "evaluationCriteria": [
+      "Systems are compared on meaningful axes",
+      "Tradeoffs are explicit",
+      "Relations expose conflict or borrowing",
+      "Claims are not slogans"
+    ]
+  },
+  "sourcePacket": {
+    "sources": [
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08",
+        "title": "[Corpus v2] U.S. History",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-us-history"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-527b4f529680",
+        "title": "[Corpus v2] Business Ethics",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-business-ethics"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+        "title": "[Corpus v2] Introduction to Philosophy 2e",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-philosophy"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+        "title": "[Corpus v2] American Government 4e",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-american-government"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-monarchy-oligarchy-e6604a345b1d",
+        "title": "[Corpus v2] Introduction to Political Science",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-political-science"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-monarchy-oligarchy-4ac009615018",
+        "title": "[Corpus v2] Introduction to Sociology 3e",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-sociology"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359",
+        "title": "[Corpus v2] Introduction to Philosophy 2e",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-philosophy"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d",
+        "title": "[Corpus v2] Introduction to Political Science",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-political-science"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f",
+        "title": "[Corpus v2] Democracy",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Democracy"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08",
+        "title": "[Corpus v2] U.S. History",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-us-history"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+        "title": "[Corpus v2] Introduction to Political Science",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-political-science"
+      },
+      {
+        "id": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+        "title": "[Corpus v2] Introduction to Philosophy 2e",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "society",
+        "branchSlug": "politics",
+        "mapSlug": "political-orders-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-philosophy"
+      }
+    ],
+    "chunks": [
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+        "chunkIndex": 204,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#204",
+        "heading": "American Government 4e",
+        "text": "Federalism figures prominently in the U.S. political system. Specifically, the federal design spelled out in the Constitution divides powers between two levels of government—the states and the federal government—and creates a mechanism for them to check and balance one another. As an institutional design, federalism both safeguards state interests and creates a strong union led by a capable central government. American federalism also seeks to balance the forces of decentralization and centralization . We see decentralization when we cross state lines and encounter different taxation levels, welfare eligibility requirements, and voting regulations. Centralization is apparent in the fact that the federal government is the only entity permitted to print money, to challenge the legality of state laws, or to employ money grants and mandates to shape state actions. Colorful billboards with simple messages may greet us at state borders ( ), but behind them lies a complex and evolving federal design that has structured relationships between states and the federal government since the late 1700s.\n\nfederalism\n\ndecentralization\n\ncentralization",
+        "charCount": 1151,
+        "tokenEstimate": 288
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+        "chunkIndex": 214,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#214",
+        "heading": "American Government 4e",
+        "text": "Division of power can also occur via a unitary structure or confederation ( ). In contrast to federalism, a unitary system makes subnational governments dependent on the national government, where significant authority is concentrated. Before the late 1990s, the United Kingdom’s unitary system was centralized to the extent that the national government held the most important levers of power. Since then, power has been gradually decentralized through a process of devolution , leading to the creation of regional governments in Scotland, Wales, and Northern Ireland as well as the delegation of specific responsibilities to them. Other democratic countries with unitary systems, such as France, Japan, and Sweden, have followed a similar path of decentralization.\n\nunitary system\n\ndevolution\n\nThere are three general systems of government—unitary systems, federations, and confederations—each of which allocates power differently.",
+        "charCount": 933,
+        "tokenEstimate": 234
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23",
+        "chunkIndex": 215,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-8a11840d6b23#215",
+        "heading": "American Government 4e",
+        "text": "In a confederation, authority is decentralized, and the central government’s ability to act depends on the consent of the subnational governments. Under the Articles of Confederation (the first constitution of the United States), states were sovereign and powerful while the national government was subordinate and weak. Because states were reluctant to give up any of their power, the national government lacked authority in the face of challenges such as servicing the war debt, ending commercial disputes among states, negotiating trade agreements with other countries, and addressing popular uprisings that were sweeping the country. As the brief American experience with confederation clearly shows, the main drawback with this system of government is that it maximizes regional self-rule at the expense of effective national governance.\n\nArticles of Confederation\n\nFEDERALISM AND THE CONSTITUTION\n\nThe Constitution contains several provisions that direct the functioning of U.S. federalism . Some delineate the scope of national and state power, while others restrict it. The remaining provisions shape relationships among the states and between the states and the federal government.\n\nConstitution\n\nfederalism",
+        "charCount": 1216,
+        "tokenEstimate": 304
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+        "chunkIndex": 1062,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1062",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "The result of selling their labor is that they begin to see others as commodities as well. They begin to identify people not by who they are but by what they have accumulated and their worth as a product. In this way, they become alienated from themselves and from others, seeing them always as potential competition. For Marx, this leads to a sense of despair that is filled with material goods, thus solidifying the worker in their dependence on the capitalist system.\n\nAnarchism\n\nWhile the idea of negative liberty decries unnecessary government intervention in people’s lives, anarchism literally means “no ruler” or “no government.” The absence of a political authority conjures an image of the state of nature imagined by Thomas Hobbes—that is, a state of chaos. Anarchists, however, believe that disorder comes from government. According to this view, rational individuals mostly desire to live peaceful lives, free of government intervention, and this desire naturally leads them to create societies and institutions built on the principles of self-governance.\n\nanarchism\n\nMotivations for Anarchism",
+        "charCount": 1106,
+        "tokenEstimate": 277
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+        "chunkIndex": 1063,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1063",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "One defense of anarchism is that governments do things that would be impermissible for private individuals. French philosopher Pierre-Joseph Proudhon (1809–1865) observes that governments monitor citizens’ activities and attempt to control their behavior through force. The more technology governments have, the greater their attempts to control people. Proudhon ([1849] 2012) observes that such treatment is against human dignity.\n\nProudhon\n\nProudhonian anarchists are aware of the argument that people may have consented to give up some of their power to the government (as people do in a representative democracy, for example), which means that they must accept the treatment they receive. Yet Proudhon would deny that there is any example in history of a just government. Lysander Spooner (1808–1887), the 19th-century anarchist, says that all governments have come into existence through force and maintain their existence through force (Spooner 1870). Thus, some defend anarchism on the grounds that governments violate human rights.\n\nSpooner\n\nLimits of Anarchism",
+        "charCount": 1069,
+        "tokenEstimate": 268
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359",
+        "chunkIndex": 1065,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-anarchism-federalism-cd5ca881f359#1065",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "Born in Lithuania in 1869, Emma Goldman experienced anti-Semitic persecution before moving to the United States at age 16 and becoming a factory worker. She was quickly introduced to the anarchist movement and became a prolific writer and passionate speaker advocating the movement’s principles. (credit: “Emma Goldman on a Street Car, Library of Congress)\n\nAnarchism and Feminism\n\nWithin anarchism, anarcha-feminism seeks to fight against gendered concepts that create inequity. Traditional gender roles only serve to cement unequal power distribution and further the class divide. Particularly, traditional concepts of women’s role in the domestic sphere mirror the depersonalization of the worker, with the woman seen as an extension of the home and domestic labor, rather than an independent autonomous person. It is worth noting that anarcha-feminism is in direct opposition to Proudhon, who believed that family was an essential aspect of society and that the traditional role of women within the family was necessary for its success (Proudhon 1875).\n\nanarcha-feminism",
+        "charCount": 1074,
+        "tokenEstimate": 269
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359",
+        "chunkIndex": 916,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359#916",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "The Tuskegee experiment and experimentation conducted by Nazi physicians on human subjects during World War II are examples in which vulnerable populations are exploited and treated as expendable in the pursuit of scientific knowledge. When subjects are recruited in exploitative trials, their “consent” is often a consequence of coercion , whether explicit or implicit. Issues of coercion occur when recruiters, for example, withhold important information about the trial, misrepresent trial goals, take advantage of participants’ desperate situations, and fail to adequately bridge language barriers to ensure trial parameters and participation requirements are understood.\n\ncoercion\n\nNormative Moral Frameworks Applied to Clinical Trials\n\nThe four main ethical concepts discussed above can (and should) guide decision-making in a clinical setting. Not only do normative moral frameworks provide additional and more robust guidance for moral decision making and conduct, but their application to specific issues can also shed light on why we support the adoption of ethical practices.",
+        "charCount": 1086,
+        "tokenEstimate": 272
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359",
+        "chunkIndex": 1011,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359#1011",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "Totalitarian Forms of Government\n\nTotalitarianism\n\nTotalitarianism is a system of government that exercises complete control over its population in both personal and public life by eliminating free press and imposing censorship and mass surveillance, along with other social controls. In a totalitarian system, opposition to the state is prohibited, and repercussions for disobedience are generally severe. Totalitarianism can also take the form of autocracy, in which power is concentrated in the hands of an individual, through a dictatorship under a single leader. For example, in the 20th century, the Soviet Union under Joseph Stalin (1878–1953) and the Italian Fascist regime under Benito Mussolini (1883–1945) were totalitarian regimes. A totalitarian system is different from tyranny, fascism, or communism, although there are enough similarities among these terms that the terms are often incorrectly used interchangeably.\n\nincorrectly\n\nCommunism\n\nCommunism , an ideology that has engendered totalitarian governments, is largely associated with the Soviet Union (1922–1991) and the People’s Republic of China (1949–present). While traces of communist ideas can be found much earlier in history, modern communism springs from the work of Karl Marx and Friedrich Engels, who called for a “dictatorship of the proletariat” to seize the means of production from private control and establish instead a system of labor and goods distribution that would benefit the working class.",
+        "charCount": 1483,
+        "tokenEstimate": 371
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359",
+        "chunkIndex": 1013,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-cd5ca881f359#1013",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "Fascism is another ideology that produced totalitarian political systems. As an ideology, fascism is characterized by a strong sense of nationalism, a disdain for democratic principles, and a belief in social hierarchy (Soucy 2021). Fascism was largely popular during the time known as the interwar years, meaning the years between the two world wars (roughly 1920–1938), although the fascism of Italy and Germany continued through World War II (1939–1945) and fascism under Francisco Franco in Spain, which began in 1936, continued until 1975. In Italy, Benito Mussolini rose to power and established a fascist dictatorship beginning in 1925. The devastation caused by World War I (1914–1918), after which Europe struggled to rebuild and cope with food shortages and unemployment, created conditions that were ripe for the emergence of charismatic strongmen who promised to bring prosperity back to their nations.",
+        "charCount": 914,
+        "tokenEstimate": 229
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d",
+        "chunkIndex": 949,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d#949",
+        "heading": "Introduction to Political Science",
+        "text": "The process discussed here—in which ideas come freely from all actors, are debated seriously, and can result in changes—is most characteristic of legislatures in democratic regimes. Legislatures in authoritarian countries may be far less independent, far less capable of policy making and representation, and far more responsive to the authoritarian leader. They do, however, play important roles in their political systems, such as making their governments more stable than authoritarian governments without legislatures. Carles Boix and Milan W. Svolik, “The Foundations of Limited Authoritarian Government: Institutions, Commitment, and Power-Sharing in Dictatorships,” Journal of Politics 75, no. 2 (April 2013): 300–316, https://www.jstor.org/stable/10.1017/s0022381613000029; Jennifer Gandhi and Adam Przeworski, “Authoritarian Institutions and the Survival of Autocrats,” Comparative Political Studies 40, no. 11 (November 2007): 1279–1301, https://doi.org/10.1177/0010414007305817. Authoritarian legislatures provide a venue where key social groups may make their voices heard in policy debates, encouraging that stability. Ora John Reuter and Graeme B. Robertson, “Legislatures, Cooptation, and Social Protest in Contemporary Authoritarian Regimes,” Journal of Politics 77, no. 1 (January 2015): 235–248, https://doi.org/10.1086/678390; Jennifer Gandhi, Political Institutions under Dictatorship (New York: Cambridge University Press, 2008). Additionally, the legislature maintains a role in the policy process, as the authoritarian leader may choose to delegate decision-making authority in particular policy areas to actors with their own policy preferences. Scott Williamson and Beatriz Magaloni, “Legislatures and Policy Making in Authoritarian Regimes,” Comparative Political Studies 53, no. 9 (August 2020): 1525–1543. Although legislatures exist on a spectrum of power and independence, with legislatures in democratic systems tending to be more powerful and independent than legislatures in authoritarian regimes, all legislatures play a significant role in their systems of government.",
+        "charCount": 2103,
+        "tokenEstimate": 526
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d",
+        "chunkIndex": 950,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d#950",
+        "heading": "Introduction to Political Science",
+        "text": "Carles Boix and Milan W. Svolik, “The Foundations of Limited Authoritarian Government: Institutions, Commitment, and Power-Sharing in Dictatorships,” Journal of Politics 75, no. 2 (April 2013): 300–316, https://www.jstor.org/stable/10.1017/s0022381613000029; Jennifer Gandhi and Adam Przeworski, “Authoritarian Institutions and the Survival of Autocrats,” Comparative Political Studies 40, no. 11 (November 2007): 1279–1301, https://doi.org/10.1177/0010414007305817.\n\nJournal of Politics\n\nComparative Political Studies\n\nOra John Reuter and Graeme B. Robertson, “Legislatures, Cooptation, and Social Protest in Contemporary Authoritarian Regimes,” Journal of Politics 77, no. 1 (January 2015): 235–248, https://doi.org/10.1086/678390; Jennifer Gandhi, Political Institutions under Dictatorship (New York: Cambridge University Press, 2008).\n\nPolitical Institutions under Dictatorship\n\nScott Williamson and Beatriz Magaloni, “Legislatures and Policy Making in Authoritarian Regimes,” Comparative Political Studies 53, no. 9 (August 2020): 1525–1543.\n\nComparative Political Studies\n\nOrganizing the Legislature’s Work\n\nThe work of legislatures requires a large number of people to collaborate. Every legislator has their own goals, things they want to take credit for, and blame they are trying to avoid—and everyone thinks they are right. Even when individuals agree that a particular policy is worth working on, they may disagree on the exact solution. Legislatures must create structures to keep their members moving productively in roughly the same direction.",
+        "charCount": 1558,
+        "tokenEstimate": 390
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d",
+        "chunkIndex": 1145,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authoritarian-totalitarian-e6604a345b1d#1145",
+        "heading": "Introduction to Political Science",
+        "text": "To implement controversial policies so as to allow political distance from core elements of the regime Tom Ginsburg and Tamir Moustafa, “Introduction: The Functions of Courts in Authoritarian Politics,” in Rule by Law: The Politics of Courts in Authoritarian Regimes , ed. Tom Ginsburg and Tamir Moustafa (Cambridge: Cambridge University Press), 1–22, https://doi.org/10.1017/CBO9780511814822.001.\n\nTom Ginsburg and Tamir Moustafa, “Introduction: The Functions of Courts in Authoritarian Politics,” in Rule by Law: The Politics of Courts in Authoritarian Regimes , ed. Tom Ginsburg and Tamir Moustafa (Cambridge: Cambridge University Press), 1–22, https://doi.org/10.1017/CBO9780511814822.001.\n\nRule by Law: The Politics of Courts in Authoritarian Regimes\n\nJustice Handed Over to Dictatorship from the Film Judgment at Nuremberg The 1961 film Judgment at Nuremberg portrays the military tribunal at which four German judges who served while the Nazis were in power face charges of crimes against humanity. In this clip, the former minister of justice explains changes in the judiciary under the dictatorship of the Third Reich.\n\nJustice Handed Over to Dictatorship from the Film Judgment at Nuremberg",
+        "charCount": 1200,
+        "tokenEstimate": 300
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+        "chunkIndex": 1020,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1020",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "No matter what system of government a society adopts, a government needs authority to rule. What gives rulers their authority, and what rights, if any, do citizens have? One fundamental question of political theory becomes, What are the sources of the legitimacy of a political system, and by extension, how much authority do rulers or leaders have over citizens? Further, what obligations does a state owe its citizens, and vice versa? This section will explore different ideas and characteristics of the source of authority and the obligations of its members.\n\nlegitimacy\n\nDivine Rule",
+        "charCount": 586,
+        "tokenEstimate": 147
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+        "chunkIndex": 1029,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1029",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "Legitimacy can be descriptive (an explanation of authority) or normative (a justification for authority). Hobbes and Locke tackled issues of normative legitimacy. A descriptive account of legitimacy can be found in sociologist Max Weber ’s (1864–1920) influential essay “Three Types of Legitimate Rule,” in which he identifies three sources of legitimacy: traditional, charismatic, and rational-legal.\n\nWeber\n\nTraditional Legitimacy\n\nTraditional legitimacy , not surprisingly, relies on tradition, or long-standing practice, to determine authority. Once a system is deemed legitimate, power is granted to certain individuals based either on inheritance or a belief that they are given rule through divine right. Al-Farabi’s idea of a supreme ruler is one such example. Perhaps the most common form of traditional legitimacy, however, is monarchy: a system in which the state is ruled by a single individual, usually for the duration of their lifetime. In an absolute monarchy, the right to rule usually is grounded in the notion that the monarchy was established by God and derives its authority from God (known as the divine right of kings). As such, the monarchies in medieval Europe, for example, were not beholden to any form of constitutional authority. In a constitutional monarchy, the head of state is subject to a constitution.\n\nTraditional legitimacy\n\nCharismatic Legitimacy",
+        "charCount": 1384,
+        "tokenEstimate": 346
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359",
+        "chunkIndex": 1030,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-cd5ca881f359#1030",
+        "heading": "Introduction to Philosophy 2e",
+        "text": "Charismatic legitimacy is granted to an authority figure who has tremendous social appeal. Citizens of society grant these figures power to speak and act on their behalf due to their perceived ability to understand and empathize with the people they represent. Charismatic figures may or may not hold official government positions. Nelson Mandela (1918–2013) is an example of a charismatic authority figure who held great influence as an anti-apartheid activist even prior to becoming president of South Africa. Weber maintained that this is the most unstable form of authority because it is dependent on the individual and can be lost through death or a failure to live up to expectations.\n\nCharismatic legitimacy\n\nTwo leaders often described as charismatic: South African president Nelson Mandela (center) with US president Bill Clinton (left). Prior to serving as the first Black president of South Africa, Mandela spent 27 years in prison for leading the anti-apartheid movement. (credit: “Philadelphia Freedom Festival & Awards” by Robert McNeely/White House Photograph Office/Clinton Digital Library, Public Domain)\n\nRational-Legal Legitimacy",
+        "charCount": 1148,
+        "tokenEstimate": 287
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+        "chunkIndex": 39,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#39",
+        "heading": "Introduction to Political Science",
+        "text": "Bolsonaro\n\nThe highest form of power is called sovereign power. If no other entity (person or institution) has authority over a state, that state is said to have sovereignty, and the supreme authority in that state is called the sovereign. ​​Daniel Philpott, “Sovereignty,” in The Stanford Encyclopedia of Philosophy (Fall 2020), ed. Edward N. Zalta, https://plato.stanford.edu/archives/fall2020/entries/sovereignty/. In many countries, the sovereign is the highest-ranking individual leader, such as the queen or king. In the United States and in other democracies, the people are sovereign, not their elected officials. The people elect their leaders, and the people can unseat them either by selecting others in the next election or by removing them—for example, through impeachment, a legal process for removing elected officials from their posts for misconduct.\n\nsovereign\n\n​​Daniel Philpott, “Sovereignty,” in The Stanford Encyclopedia of Philosophy (Fall 2020), ed. Edward N. Zalta, https://plato.stanford.edu/archives/fall2020/entries/sovereignty/.\n\nThe Stanford Encyclopedia of Philosophy",
+        "charCount": 1097,
+        "tokenEstimate": 275
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+        "chunkIndex": 1264,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#1264",
+        "heading": "Introduction to Political Science",
+        "text": "UK Supreme Court Rules Prorogation “Unlawful”\n\nIn 2019, the UK Supreme Court ruled that Prime Minister Boris Johnson acted unlawfully when he stopped the work of Parliament during Brexit debates.\n\nFurthermore, an act of Parliament cannot be challenged in court as unconstitutional, as Parliament is the supreme lawmaker. However, since World War II, the British Parliament’s power has been curtailed in some measure by new laws and agreements to be bound by international treaties. Nevertheless, Parliament retains the ability to repeal these laws or consent to any of these international agreements. “Parliament’s Authority,” What is the role of Parliament?, UK Parliament, accessed January 11, 2022, https://www.parliament.uk/about/how/role/sovereignty/.\n\n“Parliament’s Authority,” What is the role of Parliament?, UK Parliament, accessed January 11, 2022, https://www.parliament.uk/about/how/role/sovereignty/.",
+        "charCount": 913,
+        "tokenEstimate": 229
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d",
+        "chunkIndex": 1613,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-authority-legitimacy-e6604a345b1d#1613",
+        "heading": "Introduction to Political Science",
+        "text": "Because the United Nations was founded in part on the principle of the sovereignty of member states, it is not and cannot become a “world government” with ultimate authority over its members. UN decisions are not binding on member states without the consent of those states. Like international law, the UN contributes to global governance by setting obligations and rules of behavior for member states. The United Nations Charter recognizes the rights of sovereign states and their obligations as members of the international community while emphasizing the importance of multilateral cooperation as the cornerstone to peace and prosperity for all. Member states commit to use peaceful means to settle disputes and to uphold and support UN decisions. The Charter specifies that the UN may intervene to stop acts of aggression or threats to the peace and that member states are only to use force in self-defense.\n\nsovereignty\n\nUnited Nations Charter\n\nThe UN website displays the organization’s slogan: “peace, dignity and equality on a healthy planet.” The three overarching goals of the United Nations are promoting peace, ensuring human rights, and achieving sustainable development with a focus on protecting the environment—all collective goods that can be elusive in a system of sovereign states each concerned only with its own survival and well-being.",
+        "charCount": 1357,
+        "tokenEstimate": 340
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08",
+        "chunkIndex": 488,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08#488",
+        "heading": "U.S. History",
+        "text": "During the 1770s and 1780s, Americans took bold steps to define American equality. Each state held constitutional conventions and crafted state constitutions that defined how government would operate and who could participate in political life. Many elite revolutionaries recoiled in horror from the idea of majority rule—the basic principle of democracy—fearing that it would effectively create a “mob rule” that would bring about the ruin of the hard-fought struggle for independence. Statesmen everywhere believed that a republic should replace the British monarchy: a government where the important affairs would be entrusted only to representative men of learning and refinement.\n\n## Creating Republican Governments, 1776–1790\n\n### Common Sense: From Monarchy to an American Republic (m50031)",
+        "charCount": 797,
+        "tokenEstimate": 200
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08",
+        "chunkIndex": 555,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08#555",
+        "heading": "U.S. History",
+        "text": "THE QUESTION OF DEMOCRACY\n\nMany of the delegates to the Constitutional Convention had serious reservations about democracy, which they believed promoted anarchy. To allay these fears, the Constitution blunted democratic tendencies that appeared to undermine the republic. Thus, to avoid giving the people too much direct power, the delegates made certain that senators were chosen by the state legislatures, not elected directly by the people (direct elections of senators came with the Seventeenth Amendment to the Constitution, ratified in 1913). As an additional safeguard, the delegates created the Electoral College , the mechanism for choosing the president. Under this plan, each state has a certain number of electors, which is its number of senators (two) plus its number of representatives in the House of Representatives. Critics, then as now, argue that this process prevents the direct election of the president.\n\nElectoral College\n\nTHE FIGHT OVER RATIFICATION\n\nThe draft constitution was finished in September 1787. The delegates decided that in order for the new national government to be implemented, each state must first hold a special ratifying convention. When nine of the thirteen had approved the plan, the constitution would go into effect.",
+        "charCount": 1263,
+        "tokenEstimate": 316
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08",
+        "chunkIndex": 724,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-49774c511f08#724",
+        "heading": "U.S. History",
+        "text": "The most extraordinary political development in the years before the Civil War was the rise of American democracy. Whereas the founders envisioned the United States as a republic, not a democracy, and had placed safeguards such as the Electoral College in the 1787 Constitution to prevent simple majority rule, the early 1820s saw many Americans embracing majority rule and rejecting old forms of deference that were based on elite ideas of virtue, learning, and family lineage.\n\nA new breed of politicians learned to harness the magic of the many by appealing to the resentments, fears, and passions of ordinary citizens to win elections. The charismatic Andrew Jackson gained a reputation as a fighter and defender of American expansion, emerging as the quintessential figure leading the rise of American democracy. In the image above ( ), crowds flock to the White House to celebrate his inauguration as president. While earlier inaugurations had been reserved for Washington’s political elite, Jackson’s was an event for the people, so much so that the pushing throngs caused thousands of dollars of damage to White House property. Characteristics of modern American democracy, including the turbulent nature of majority rule, first appeared during the Age of Jackson.\n\n## Jacksonian Democracy, 1820–1840\n\n### A New Political Style: From John Quincy Adams to Andrew Jackson (m50050)",
+        "charCount": 1386,
+        "tokenEstimate": 347
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f",
+        "chunkIndex": 17,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f#17",
+        "heading": "Democracy",
+        "text": "The voting franchise in the United Kingdom was expanded and made more uniform in a series of reforms that began with the Reform Act 1832 and continued into the 20th century, notably with the Representation of the People Act 1918 and the Equal Franchise Act 1928. Universal male suffrage was established in France in March 1848 in the wake of the French Revolution of 1848. During that year, several revolutions broke out in Europe as rulers were confronted with popular demands for liberal constitutions and more democratic government.\nIn 1876, the Ottoman Empire transitioned from an absolute monarchy to a constitutional one, and held two elections the next year to elect members to her newly formed parliament. Provisional Electoral Regulations were issued, stating that the elected members of the Provincial Administrative Councils would elect members to the first Parliament. Later that year, a new constitution was promulgated, which provided for a bicameral Parliament with a Senate appointed by the Sultan and a popularly elected Chamber of Deputies. Only men above the age of 30 who were competent in Turkish and had full civil rights were allowed to stand for election. Reasons for disqualification included holding dual citizenship, being employed by a foreign government, being bankrupt, employed as a servant, or having \"notoriety for ill deeds\". Full universal suffrage was achieved in 1934.\nIn 1893, the self-governing colony New Zealand became the first country in the world (except for the short-lived 18th-century Corsican Republic) to establish active universal suffrage by recognizing women as having the right to vote.",
+        "charCount": 1639,
+        "tokenEstimate": 410
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f",
+        "chunkIndex": 30,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f#30",
+        "heading": "Democracy",
+        "text": "Change constitutional laws,\nPut forth initiatives, referendums and suggestions for laws\nWithin modern-day representative governments, certain electoral tools like referendums, citizens' initiatives and recall elections are referred to as forms of direct democracy. However, some advocates of direct democracy argue for local assemblies of face-to-face discussion. Direct democracy as a government system currently exists in the Swiss cantons of Appenzell Innerrhoden and Glarus, the Rebel Zapatista Autonomous Municipalities, communities affiliated with the CIPO-RFM, the Bolivian city councils of FEJUVE, and Kurdish cantons of Rojava.",
+        "charCount": 636,
+        "tokenEstimate": 159
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f",
+        "chunkIndex": 39,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-democracy-republic-5710d2aa6e8f#39",
+        "heading": "Democracy",
+        "text": "Marxist theory supports a democratic society centering the working class. Some Marxists and Trotskyists believe in direct democracy or workers' councils (which are sometimes called soviets). This system can begin with workplace democracy and can manifest itself as soviet democracy or dictatorship of the proletariat. Trotskyist groups have interpreted socialist democracy to be synonymous with multi-party far-left representation, autonomous union organizations, worker's control of production, internal party democracy and the mass participation of the working masses. Some communist parties support a soviet republic with democratic centralism. The Whole-process people's democracy applies consequentialism to democracy, prioritising results delivered to the people over procedure.",
+        "charCount": 784,
+        "tokenEstimate": 196
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08",
+        "chunkIndex": 411,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08#411",
+        "heading": "U.S. History",
+        "text": "The ban on the theater aimed to do away with another corrupt British practice. Critics had long believed that theatrical performances drained money from working people. Moreover, they argued, theatergoers learned to lie and deceive from what they saw on stage. The delegates felt banning the theater would demonstrate their resolve to act honestly and without pretence in their fight against corruption.\n\nFinally, eighteenth-century mourning practices often required lavish spending on luxury items and even the employment of professional mourners who, for a price, would shed tears at the grave. Prohibiting these practices reflected the idea that luxury bred corruption, and the First Continental Congress wanted to demonstrate that the colonists would do without British vices. Congress emphasized the need to be frugal and self-sufficient when confronted with corruption.\n\nThe First Continental Congress banned all four activities—horse races, cockfights, the theater, and elaborate funerals—and entrusted the Continental Association with enforcement. Rejecting what they saw as corruption coming from Great Britain, the delegates were also identifying themselves as standing apart from their British relatives. They cast themselves as virtuous defenders of liberty against a corrupt Parliament.",
+        "charCount": 1299,
+        "tokenEstimate": 325
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08",
+        "chunkIndex": 501,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08#501",
+        "heading": "U.S. History",
+        "text": "What defined republicanism as a social philosophy? Citizenship within a republic meant accepting certain rights and responsibilities as well as cultivating virtuous behavior. This philosophy was based on the notion that the success or failure of the republic depended upon the virtue or corruption of its citizens.\n\nWhat defined republicanism as a social philosophy?\n\nCitizenship within a republic meant accepting certain rights and responsibilities as well as cultivating virtuous behavior. This philosophy was based on the notion that the success or failure of the republic depended upon the virtue or corruption of its citizens.\n\n## Creating Republican Governments, 1776–1790\n\n### How Much Revolutionary Change? (m50034)\n\nElite republican revolutionaries did not envision a completely new society; traditional ideas and categories of race and gender, order and decorum remained firmly entrenched among members of their privileged class. Many Americans rejected the elitist and aristocratic republican order, however, and advocated radical changes. Their efforts represented a groundswell of sentiment for greater equality, a part of the democratic impulse unleashed by the Revolution.\n\nTHE STATUS OF WOMEN",
+        "charCount": 1208,
+        "tokenEstimate": 302
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08",
+        "chunkIndex": 1620,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-49774c511f08#1620",
+        "heading": "U.S. History",
+        "text": "The Democrats likewise sought a candidate who could champion reform against growing political corruption. They found their man in Samuel J. Tilden, governor of New York and a self-made millionaire, who had made a successful political career fighting corruption in New York City, including spearheading the prosecution against Tammany Hall Boss William Tweed, who was later jailed. Both parties tapped into the popular mood of the day, each claiming to champion reform and promising an end to the corruption that had become rampant in Washington ( ). Likewise, both parties promised an end to post-Civil War Reconstruction.\n\nThese campaign posters for Rutherford B. Hayes (a) and Samuel Tilden (b) underscore the tactics of each party, which remained largely unchanged, regardless of the candidates. The Republican placard highlights the party’s role in preserving “liberty and union” in the wake of the Civil War, hoping to tap into the northern voters’ pride in victory over secession. The Democratic poster addresses the economic turmoil and corruption of the day, specifically that of the Grant administration, promising “honesty, reform, and prosperity” for all.",
+        "charCount": 1166,
+        "tokenEstimate": 292
+      },
+      {
+        "sourceId": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-527b4f529680",
+        "chunkIndex": 127,
+        "chunkId": "corpus-political-orders-corpus-v2-202607202002-failure-tradeoffs-527b4f529680#127",
+        "heading": "Business Ethics",
+        "text": "During Bentham’s lifetime, revolutions occurred in the American colonies and in France, producing the Bill of Rights and the Déclaration des Droits de l’Homme (Declaration of the Rights of Man), both of which were based on liberty, equality, and self-determination. Karl Marx and Friedrich Engels published The Communist Manifesto in 1848. Revolutionary movements broke out that year in France, Italy, Austria, Poland, and elsewhere. In addition, the Industrial Revolution transformed Great Britain and eventually the rest of Europe from an agrarian (farm-based) society into an industrial one, in which steam and coal increased manufacturing production dramatically, changing the nature of work, property ownership, and family. This period also included advances in chemistry, astronomy, navigation, human anatomy, and immunology, among other sciences.\n\nDéclaration des Droits de l’Homme\n\nThe Communist Manifesto",
+        "charCount": 913,
+        "tokenEstimate": 229
+      }
+    ],
+    "sourceMapSlug": "political-orders-corpus-v2-202607202002",
+    "packetHash": "25991847154fd5c8867f670fd499615d2d969adc5ddc474a1f60cc360ab71d7c"
+  }
+}

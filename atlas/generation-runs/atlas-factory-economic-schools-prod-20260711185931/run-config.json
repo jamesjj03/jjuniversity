@@ -1,0 +1,148 @@
+{
+  "runId": "atlas-factory-economic-schools-prod-20260711185931",
+  "generator": "atlas-staged-model-generation-v2",
+  "createdAt": "2026-07-11T23:21:00.193Z",
+  "territorySlug": "society",
+  "branchSlug": "economics",
+  "mapSlug": "economic-schools-prod-20260711185931",
+  "sourceMapSlug": "economic-schools",
+  "selectedSourceIds": [
+    "society-economics-economic-schools"
+  ],
+  "topicPrompt": "Build a reviewable theory-family Atlas draft for major economic schools from the selected source brief. Keep schools as families, not individual economists.",
+  "recipe": {
+    "id": "theory_family",
+    "title": "Theory Family",
+    "purpose": "Organize a field by major explanatory families or schools of thought.",
+    "groupingLogic": "Groups should be stable explanatory families or schools with distinct stances. Keep the category level broad enough to organize a field, but narrow enough that each family has its own central claim, pressure points, contributors, and relation pattern. Do not promote individual people, single objections, key texts, or one-off concepts into top-level groups unless the sources explicitly identify them as a school or family.",
+    "preferredGroupFields": [
+      "stance",
+      "centralClaim",
+      "whyItMatters",
+      "objections",
+      "contributors",
+      "keyTexts"
+    ],
+    "contributorRules": "Attach contributors to the family they shaped, extended, or centrally challenged. Avoid duplicating a contributor across groups unless the source supports a cross-family role and the reason states why. Treat precursors and hybrid figures as contributors or bridge notes before creating a separate family for them.",
+    "expectedRelationTypes": [
+      "opposes",
+      "answers",
+      "reframes",
+      "borrows",
+      "neighbors"
+    ],
+    "recommendedGroupCount": {
+      "min": 6,
+      "max": 10
+    },
+    "generationInstructions": "Prioritize source-backed family boundaries before enrichment. After clustering, audit for missing named families, person-as-category errors, objection-as-category errors, and overlapping categories. Keep pressure points under objections unless they are established schools. Relations must name a specific conceptual contrast, answer, borrowing, reframing, or neighboring boundary.",
+    "evaluationCriteria": [
+      "Each group is a source-backed explanatory family, not a person, single text, or objection.",
+      "Groups are mutually useful and minimally overlapping.",
+      "Major source-backed families are not missing before enrichment starts.",
+      "Contributors are placed by family role with explicit reasons for any duplicates.",
+      "Objections cover the family pressure point rather than becoming standalone categories.",
+      "Relations explain specific conceptual movement between families.",
+      "Provenance supports the actual category claim and key text anchor."
+    ]
+  },
+  "maxChunks": 12,
+  "chunkCharLimit": 900,
+  "chunkBatchSize": 1,
+  "concurrency": 1,
+  "retryCount": 1,
+  "force": false,
+  "importOnSuccess": true,
+  "modelConfig": {
+    "provider": "local-openai-compatible",
+    "baseUrl": "http://127.0.0.1:1234/v1",
+    "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+    "model": "google/gemma-3-12b",
+    "profileId": "google/gemma-3-12b",
+    "contextWindowTokens": 4096,
+    "safeInputTokens": 2200,
+    "allowNoKey": true,
+    "temperature": 0.1,
+    "maxTokens": 700,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "stageModelConfigs": {
+    "extraction": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "clustering": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "enrichment": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "relations": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    }
+  },
+  "preflight": [
+    {
+      "provider": "local-openai-compatible",
+      "model": "google/gemma-3-12b",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "modelsUrl": "http://127.0.0.1:1234/v1/models",
+      "ok": true,
+      "available": true,
+      "loaded": false,
+      "detectedContextWindowTokens": 131072,
+      "configuredSafeInputTokens": 2200,
+      "configuredMaxOutputTokens": 700,
+      "error": ""
+    }
+  ]
+}

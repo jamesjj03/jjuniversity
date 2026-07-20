@@ -1,0 +1,58 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 11,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#14"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 721,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "scientific computing",
+        "summary": "mathematical models & quantitative analysis",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#14",
+            "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+            "chunkIndex": 14,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "computational fluid dynamics",
+        "summary": "simulates processes",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#14",
+            "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+            "chunkIndex": 14,
+            "note": "example"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "SPICE",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#14",
+            "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+            "chunkIndex": 14,
+            "note": "circuit design"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

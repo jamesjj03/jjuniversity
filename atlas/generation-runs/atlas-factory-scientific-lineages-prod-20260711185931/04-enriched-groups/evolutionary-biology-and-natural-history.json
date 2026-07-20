@@ -1,0 +1,147 @@
+{
+  "id": "evolutionary-biology-and-natural-history",
+  "slug": "evolutionary-biology-and-natural-history",
+  "title": "Evolutionary biology and natural history",
+  "shortTitle": "Evolution",
+  "family": "Evolution family",
+  "stance": "Species, variation, adaptation, heredity, and deep time become historical science.",
+  "centralClaim": "Species, variation, adaptation, heredity, and deep time become historical science.",
+  "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+  "contributors": [
+    {
+      "id": "person-charles-darwin",
+      "name": "Charles Darwin",
+      "role": "source contributor",
+      "reason": "natural selection",
+      "texts": [
+        {
+          "id": "source-evidence-for-charles-darwin",
+          "title": "Source evidence for Charles Darwin",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#4",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#4",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "person-alfred-russel-wallace",
+      "name": "Alfred Russel Wallace",
+      "role": "source contributor",
+      "reason": "natural selection",
+      "texts": [
+        {
+          "id": "source-evidence-for-alfred-russel-wallace",
+          "title": "Source evidence for Alfred Russel Wallace",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#4",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#4",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "person-thomas-huxley",
+      "name": "Thomas Huxley",
+      "role": "source contributor",
+      "reason": "evolutionary interpretation",
+      "texts": [
+        {
+          "id": "source-evidence-for-thomas-huxley",
+          "title": "Source evidence for Thomas Huxley",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#4",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#4",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "person-ronald-fisher",
+      "name": "Ronald Fisher",
+      "role": "source contributor",
+      "reason": "later synthesis",
+      "texts": [
+        {
+          "id": "source-evidence-for-ronald-fisher",
+          "title": "Source evidence for Ronald Fisher",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#4",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#4",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 4
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating Evolutionary biology and natural history as a complete family."
+  ],
+  "relatedGroupIds": [
+    "mathematical-astronomy-and-mechanics",
+    "experimental-electricity-and-field-physics",
+    "chemistry-elements-and-molecular-order"
+  ],
+  "keywords": [
+    "evolutionary",
+    "biology",
+    "natural",
+    "history"
+  ],
+  "provenance": [
+    {
+      "chunkId": "stem-scientists-scientific-lineages#4",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 4
+    },
+    {
+      "chunkId": "stem-scientists-scientific-lineages#0",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 0,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}

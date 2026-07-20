@@ -1,0 +1,781 @@
+{
+  "stage": "normalization",
+  "ok": true,
+  "people": [
+    {
+      "id": "person-karl-marx",
+      "name": "Karl Marx",
+      "role": "anchor",
+      "reason": "value, exploitation, commodity fetishism, historical materialism",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "person-rosa-luxemburg",
+      "name": "Rosa Luxemburg",
+      "role": "extender",
+      "reason": "imperialism, finance analysis",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "person-rudolf-hilferding",
+      "name": "Rudolf Hilferding",
+      "role": "extender",
+      "reason": "monopoly, crisis theory",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "person-william-stanley-jevons",
+      "name": "William Stanley Jevons",
+      "role": "contributor",
+      "reason": "helped define analytic core",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "person-leon-walras",
+      "name": "Leon Walras",
+      "role": "contributor",
+      "reason": "helped define analytic core",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "person-carl-menger",
+      "name": "Carl Menger",
+      "role": "contributor",
+      "reason": "helped define analytic core",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "definition"
+        },
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5,
+          "note": "start"
+        }
+      ]
+    },
+    {
+      "id": "person-john-maynard-keynes",
+      "name": "John Maynard Keynes",
+      "role": "founder",
+      "reason": "anchors the family",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4,
+          "note": "anchors"
+        }
+      ]
+    },
+    {
+      "id": "person-joan-robinson",
+      "name": "Joan Robinson",
+      "role": "developer",
+      "reason": "develops branches of tradition",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4,
+          "note": "develops"
+        }
+      ]
+    },
+    {
+      "id": "person-paul-samuelson",
+      "name": "Paul Samuelson",
+      "role": "developer",
+      "reason": "develops branches of tradition",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4,
+          "note": "develops"
+        }
+      ]
+    },
+    {
+      "id": "person-ludwig-von-mises",
+      "name": "Ludwig von Mises",
+      "role": "developer",
+      "reason": "calculation, knowledge arguments",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5,
+          "note": "development"
+        }
+      ]
+    },
+    {
+      "id": "person-friedrich-hayek",
+      "name": "Friedrich Hayek",
+      "role": "developer",
+      "reason": "spontaneous order arguments",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5,
+          "note": "development"
+        }
+      ]
+    },
+    {
+      "id": "person-thorstein-veblen",
+      "name": "Thorstein Veblen",
+      "role": "contributor",
+      "reason": "early institutionalism",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#6",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 6,
+          "note": "anchor early institutionalism"
+        }
+      ]
+    },
+    {
+      "id": "person-john-r-commons",
+      "name": "John R. Commons",
+      "role": "contributor",
+      "reason": "early institutionalism",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#6",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 6,
+          "note": "anchor early institutionalism"
+        }
+      ]
+    },
+    {
+      "id": "person-wesley-mitchell",
+      "name": "Wesley Mitchell",
+      "role": "contributor",
+      "reason": "early institutionalism",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#6",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 6,
+          "note": "anchor early institutionalism"
+        }
+      ]
+    },
+    {
+      "id": "person-douglass-north",
+      "name": "Douglass North",
+      "role": "contributor",
+      "reason": "later institutional and evolutionary economists",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#6",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 6,
+          "note": "emphasize institutions, path dependence"
+        }
+      ]
+    },
+    {
+      "id": "person-geoffrey-hodgson",
+      "name": "Geoffrey Hodgson",
+      "role": "contributor",
+      "reason": "later institutional and evolutionary economists",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#6",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 6,
+          "note": "emphasize institutions, path dependence"
+        }
+      ]
+    },
+    {
+      "id": "person-richard-nelson",
+      "name": "Richard Nelson",
+      "role": "contributor",
+      "reason": "later institutional and evolutionary economists",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#6",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 6,
+          "note": "emphasize institutions, path dependence"
+        }
+      ]
+    },
+    {
+      "id": "person-herbert-simon",
+      "name": "Herbert Simon",
+      "role": "contributor",
+      "reason": "bounded rationality",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7,
+          "note": "essential"
+        }
+      ]
+    },
+    {
+      "id": "person-daniel-kahneman",
+      "name": "Daniel Kahneman",
+      "role": "contributor",
+      "reason": "behavioral economics program",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7,
+          "note": "program"
+        }
+      ]
+    },
+    {
+      "id": "person-richard-thaler",
+      "name": "Richard Thaler",
+      "role": "contributor",
+      "reason": "behavioral economics program",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7,
+          "note": "program"
+        }
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "concept-wealth",
+      "label": "wealth",
+      "summary": "studied in classical political economy",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#1",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 1,
+          "note": "heading"
+        }
+      ]
+    },
+    {
+      "id": "concept-historical-materialism",
+      "label": "historical materialism",
+      "summary": "framework for understanding history",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "concept-commodity-fetishism",
+      "label": "commodity fetishism",
+      "summary": "obscuring labor relations",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "concept-marginal-choice",
+      "label": "marginal choice",
+      "summary": "basis of price and allocation",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "explanation"
+        }
+      ]
+    },
+    {
+      "id": "concept-equilibrium",
+      "label": "equilibrium",
+      "summary": "central concept",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "explanation"
+        }
+      ]
+    },
+    {
+      "id": "concept-subjective-value",
+      "label": "subjective value",
+      "summary": "value determined by individual preferences",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5,
+          "note": "emphasis"
+        }
+      ]
+    },
+    {
+      "id": "concept-market-process",
+      "label": "market process",
+      "summary": "coordination through price signals",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5,
+          "note": "emphasis"
+        }
+      ]
+    },
+    {
+      "id": "concept-bounded-rationality",
+      "label": "bounded rationality",
+      "summary": "limits to rationality",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7,
+          "note": "studies"
+        }
+      ]
+    },
+    {
+      "id": "concept-heuristics",
+      "label": "heuristics",
+      "summary": "mental shortcuts",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7,
+          "note": "studies"
+        }
+      ]
+    },
+    {
+      "id": "concept-biases",
+      "label": "biases",
+      "summary": "cognitive biases",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7,
+          "note": "studies"
+        }
+      ]
+    },
+    {
+      "id": "concept-complex-adaptive-systems",
+      "label": "complex adaptive systems",
+      "summary": "economies as adaptive systems",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#8",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 8,
+          "note": "description"
+        }
+      ]
+    },
+    {
+      "id": "concept-commons-governance",
+      "label": "commons governance",
+      "summary": "Ostrom's study area",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#8",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 8,
+          "note": "description"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-classical-economics-explains-distribution-and-power-or-treats-them-as-ba",
+      "text": "classical economics explains distribution and power or treats them as background conditions",
+      "subject": "distribution and power",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#1",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 1,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "claim-capitalism-is-a-historical-system-organized-by-class-relations",
+      "text": "capitalism is a historical system organized by class relations",
+      "subject": "capitalism",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "claim-labor-creates-surplus-value",
+      "text": "labor creates surplus value",
+      "subject": "surplus extraction",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "claim-prices-and-allocation-explained-through-marginal-choice",
+      "text": "Prices and allocation explained through marginal choice.",
+      "subject": "Neoclassical economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "definition"
+        }
+      ]
+    },
+    {
+      "id": "claim-optimization-clarifies-economic-choices",
+      "text": "Optimization clarifies economic choices.",
+      "subject": "Neoclassical economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "claim-economies-can-settle-into-underemployment",
+      "text": "economies can settle into underemployment",
+      "subject": "Keynesian economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4,
+          "note": "argues"
+        }
+      ]
+    },
+    {
+      "id": "claim-state-policy-can-matter",
+      "text": "state policy can matter",
+      "subject": "Keynesian economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4,
+          "note": "argues"
+        }
+      ]
+    },
+    {
+      "id": "claim-market-processes-explain-coordination",
+      "text": "Market processes explain coordination.",
+      "subject": "Coordination",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5,
+          "note": "explanation"
+        }
+      ]
+    },
+    {
+      "id": "claim-institutions-and-power-are-pressure-points",
+      "text": "Institutions and power are pressure points.",
+      "subject": "Austrian economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "claim-precision-is-a-pressure-point",
+      "text": "precision is a pressure point",
+      "subject": "Institutional and evolutionary economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#6",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 6,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "claim-behavioral-findings-revise-economic-theory-deeply",
+      "text": "behavioral findings revise economic theory deeply",
+      "subject": "scope",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "claim-behavioral-findings-become-local-patches",
+      "text": "behavioral findings become local patches",
+      "subject": "neoclassical frame",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "claim-economies-are-adaptive-systems-embedded-in-networks",
+      "text": "economies are adaptive systems embedded in networks",
+      "subject": "economy",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#8",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 8,
+          "note": "description"
+        }
+      ]
+    }
+  ],
+  "texts": [
+    {
+      "id": "text-canonical-synthesis-of-markets",
+      "title": "canonical synthesis of markets",
+      "kind": "book",
+      "author": "Adam Smith",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#1",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 1,
+          "note": "summary"
+        }
+      ]
+    }
+  ],
+  "objections": [
+    {
+      "id": "objection-determinism-is-a-pressure-point",
+      "text": "determinism is a pressure point",
+      "subject": "Marxian economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "objection-overcommitment-to-historical-mechanism",
+      "text": "overcommitment to historical mechanism",
+      "subject": "structural conflict",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2,
+          "note": "Marxian economics definition"
+        }
+      ]
+    },
+    {
+      "id": "objection-optimization-hides-institutions-and-bounded-behavior",
+      "text": "Optimization hides institutions and bounded behavior.",
+      "subject": "abstraction",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "objection-equilibrium-obscures-historical-context",
+      "text": "Equilibrium obscures historical context.",
+      "subject": "equilibrium",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "objection-overconfidence-in-government-steering-ability",
+      "text": "overconfidence in government steering ability",
+      "subject": "Keynesian policy confidence",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "objection-integration-of-approaches",
+      "text": "integration of approaches",
+      "subject": "complexity, ecological, and pluralist economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#8",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 8,
+          "note": "pressure point"
+        }
+      ]
+    },
+    {
+      "id": "objection-biophysical-limits",
+      "text": "biophysical limits",
+      "subject": "ecological economics",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#8",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 8,
+          "note": "center of ecological economics"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "relcand-austrian-economics-market-process-d21125a8",
+      "source": "Austrian economics",
+      "target": "market process",
+      "kind": "influences",
+      "note": "explains coordination",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5,
+          "note": "explanation"
+        }
+      ]
+    },
+    {
+      "id": "relcand-complexity-ecological-and-pluralist-economics-systems-thinking-853d9f9c",
+      "source": "complexity, ecological, and pluralist economics",
+      "target": "systems thinking",
+      "kind": "neighbors",
+      "note": "linked by systems thinking",
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#8",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 8,
+          "note": "relation"
+        }
+      ]
+    }
+  ],
+  "chunkIds": [
+    "society-economics-economic-schools#0",
+    "society-economics-economic-schools#1",
+    "society-economics-economic-schools#2",
+    "society-economics-economic-schools#3",
+    "society-economics-economic-schools#4",
+    "society-economics-economic-schools#5",
+    "society-economics-economic-schools#6",
+    "society-economics-economic-schools#7",
+    "society-economics-economic-schools#8"
+  ],
+  "counts": {
+    "people": 20,
+    "concepts": 12,
+    "claims": 13,
+    "texts": 1,
+    "objections": 7,
+    "relationships": 2
+  }
+}

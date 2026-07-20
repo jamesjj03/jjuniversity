@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-group-problem-solving-and-creativity",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "validation_failure",
+    "message": "group-enrichment-group-problem-solving-and-creativity failed: Group stance is required.; Group centralClaim is required.; Group whyItMatters is required.; Group needs at least one contributor."
+  },
+  "createdAt": "2026-07-20T20:38:45.329Z"
+}

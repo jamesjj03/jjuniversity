@@ -1,0 +1,58 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 6,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#1"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 755,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Greek mythology",
+        "summary": "Ancient Greek stories about gods, heroes, and origins.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#1",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+            "chunkIndex": 1,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "ancient Greece",
+        "summary": "Culture and civilization of ancient Greeks.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#1",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+            "chunkIndex": 1,
+            "note": "context"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Greek myths",
+        "kind": "other",
+        "author": "ancient Greeks",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#1",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+            "chunkIndex": 1,
+            "note": "primary source"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

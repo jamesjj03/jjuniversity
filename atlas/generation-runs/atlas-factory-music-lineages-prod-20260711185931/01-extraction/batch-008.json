@@ -1,0 +1,140 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 8,
+  "chunkIds": [
+    "arts-music-music-lineages#8"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 688,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "John Cage",
+        "role": "innovator",
+        "reason": "experimental music pioneer",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "pioneer"
+          }
+        ]
+      },
+      {
+        "name": "Patti Smith",
+        "role": "musician",
+        "reason": "punk art-rock influence",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "influential artist"
+          }
+        ]
+      },
+      {
+        "name": "Nirvana",
+        "role": "band",
+        "reason": "alternative rock impact",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "significant band"
+          }
+        ]
+      }
+    ],
+    "concepts": [],
+    "claims": [
+      {
+        "text": "Boundary drawing is a pressure point.",
+        "subject": "scenes",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "key challenge"
+          }
+        ]
+      },
+      {
+        "text": "Experimental lineages reject commercial formulas.",
+        "subject": "experimental music",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "defining characteristic"
+          }
+        ]
+      }
+    ],
+    "texts": [
+      {
+        "title": "Various works",
+        "kind": "other",
+        "author": "John Cage",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "experimental output"
+          }
+        ]
+      },
+      {
+        "title": "Various works",
+        "kind": "other",
+        "author": "The Velvet Underground",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "influential band"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "John Cage",
+        "target": "Brian Eno",
+        "kind": "influences",
+        "note": "experimental lineage",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "stylistic inheritance"
+          }
+        ]
+      },
+      {
+        "source": "The Velvet Underground",
+        "target": "Patti Smith",
+        "kind": "influences",
+        "note": "art rock influence",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#8",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 8,
+            "note": "stylistic connection"
+          }
+        ]
+      }
+    ]
+  }
+}

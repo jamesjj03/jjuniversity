@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-complexity-ecological-and-pluralist-economics",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-complexity-ecological-and-pluralist-economics failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 2743 (line 67 column 6)"
+  },
+  "createdAt": "2026-07-11T23:36:02.014Z"
+}

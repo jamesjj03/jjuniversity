@@ -1,0 +1,191 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 5,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#5"
+  ],
+  "result": {
+    "people": [
+      {
+        "name": "Heraclitus",
+        "role": "Ancient marker of process metaphysics",
+        "reason": "",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Whitehead",
+        "role": "Rebuilder of metaphysics around occasions, creativity, relation, and event",
+        "reason": "",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Bergson",
+        "role": "Giver of a related account through duration and creative evolution",
+        "reason": "",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Process metaphysics",
+        "summary": "Starts from activity, change, relation, and becoming rather than static substance",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Occasions",
+        "summary": "Central concept in Whitehead's rebuilt metaphysics",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Creativity",
+        "summary": "Key aspect of Whitehead's rebuilt metaphysics",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Relation",
+        "summary": "Important in process metaphysics and Whitehead's rebuilt metaphysics",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Event",
+        "summary": "Central concept in Whitehead's rebuilt metaphysics",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Duration",
+        "summary": "Bergson's account of process through time",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Creative evolution",
+        "summary": "Bergson's related account of process",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Heraclitus is the ancient marker of process metaphysics.",
+        "subject": "Heraclitus",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Whitehead rebuilds metaphysics around occasions, creativity, relation, and event.",
+        "subject": "Whitehead",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Bergson gives a related account through duration and creative evolution.",
+        "subject": "Bergson",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [
+      {
+        "text": "The pressure point is stability. If everything is process, the reviewer should ask how identity, reference, memory, and durable institutions are preserved.",
+        "subject": "",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "relationships": []
+  }
+}

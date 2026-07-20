@@ -1,0 +1,48 @@
+{
+  "runId": "atlas-factory-literary-movements-corpus-v2-202607202002",
+  "jobId": "atlas-job-literary-movements-corpus-v2-202607202002",
+  "status": "failed",
+  "currentStage": "extraction",
+  "completedStages": [
+    "source-manifest"
+  ],
+  "recipe": {
+    "id": "historical_movement",
+    "title": "Historical Movement",
+    "purpose": "Organize cultural or historical material by movements, scenes, eras, and reactions.",
+    "groupingLogic": "Groups should be movements or scenes with shared style, context, institutions, or oppositional identity.",
+    "preferredGroupFields": [
+      "movementContext",
+      "definingStyle",
+      "centralClaim",
+      "contributors",
+      "keyTexts",
+      "pressurePoints"
+    ],
+    "contributorRules": "Contributors should represent the movement, launch it, popularize it, or define its counter-movement.",
+    "expectedRelationTypes": [
+      "influences",
+      "opposes",
+      "reframes",
+      "neighbors",
+      "borrows"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 10
+    },
+    "generationInstructions": "Anchor groups in context and style. Do not collapse movements into individual biography unless the source demands it. First production release QC guidance: - Avoid single linear progress narratives; require parallel movement branches, regional balance checks, and relation notes that name transmission mechanisms.",
+    "evaluationCriteria": [
+      "Groups have historical context",
+      "Movement boundaries are defensible",
+      "Relations show reaction or influence",
+      "Representative figures are justified"
+    ]
+  },
+  "errors": [
+    "extraction-batch-24: model_load_canceled: Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"atlas_v4\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+  ],
+  "repairAttempts": 3,
+  "outputDraftPath": null,
+  "updatedAt": "2026-07-20T21:35:57.799Z"
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { AtlasBranch, AtlasMap, AtlasMapsData, AtlasTerritory, AtlasTheoryGroup } from "@/lib/atlasMaps";
+import type { AtlasBranch, AtlasGroup, AtlasMap, AtlasMapsData, AtlasTerritory } from "@/lib/atlasMaps";
 
 type Selection = {
   territoryId: string;
@@ -86,7 +86,7 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
     });
   }
 
-  function selectGroup(group: AtlasTheoryGroup) {
+  function selectGroup(group: AtlasGroup) {
     setSelection(current => ({ ...current, groupId: group.id }));
   }
 
@@ -262,11 +262,11 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
                 <h3>Names</h3>
                 <div className="atlasMapsContributorList">
                   {selectedGroup.contributors.map(contributor => (
-                    <article key={contributor.name}>
+                    <article key={contributor.id}>
                       <strong>{contributor.name}</strong>
                       <span>{contributor.role}</span>
                       <p>{contributor.reason}</p>
-                      <small>{contributor.texts.join(", ")}</small>
+                      <small>{contributor.texts.map(text => text.title).join(", ")}</small>
                     </article>
                   ))}
                 </div>

@@ -1,0 +1,86 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 10,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782#2"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 713,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "mathematical optimization",
+        "summary": "NLP formulation for vascular trees",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782#2",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782",
+            "chunkIndex": 2,
+            "note": "rigorous formulation"
+          }
+        ]
+      },
+      {
+        "label": "synthetic vascular trees",
+        "summary": "Generated via optimization",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782#2",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782",
+            "chunkIndex": 2,
+            "note": "optimization framework"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Rigorous mathematical optimization of synthetic hepatic vascular trees",
+        "kind": "paper",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782#2",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782",
+            "chunkIndex": 2,
+            "note": "paper introduction"
+          }
+        ]
+      },
+      {
+        "title": "interior point method",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782#2",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782",
+            "chunkIndex": 2,
+            "note": "solution algorithm"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "mathematical optimization",
+        "target": "synthetic vascular trees",
+        "kind": "supports",
+        "note": "optimization generates trees",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782#2",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-applied-modeling-8d4e69c5f782",
+            "chunkIndex": 2,
+            "note": "framework"
+          }
+        ]
+      }
+    ]
+  }
+}

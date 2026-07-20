@@ -1,0 +1,134 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 3,
+  "chunkIds": [
+    "society-economics-economic-schools#3"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 960,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "William Stanley Jevons",
+        "role": "contributor",
+        "reason": "helped define analytic core",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "name": "Leon Walras",
+        "role": "contributor",
+        "reason": "helped define analytic core",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "name": "Carl Menger",
+        "role": "contributor",
+        "reason": "helped define analytic core",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "definition"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "marginal choice",
+        "summary": "basis of price and allocation",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "explanation"
+          }
+        ]
+      },
+      {
+        "label": "equilibrium",
+        "summary": "central concept",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "explanation"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Prices and allocation explained through marginal choice.",
+        "subject": "Neoclassical economics",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "text": "Optimization clarifies economic choices.",
+        "subject": "Neoclassical economics",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "pressure point"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [
+      {
+        "text": "Optimization hides institutions and bounded behavior.",
+        "subject": "abstraction",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "pressure point"
+          }
+        ]
+      },
+      {
+        "text": "Equilibrium obscures historical context.",
+        "subject": "equilibrium",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#3",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 3,
+            "note": "pressure point"
+          }
+        ]
+      }
+    ],
+    "relationships": []
+  }
+}

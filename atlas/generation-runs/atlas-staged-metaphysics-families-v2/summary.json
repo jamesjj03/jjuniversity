@@ -1,0 +1,19 @@
+{
+  "runId": "atlas-staged-metaphysics-families-v2",
+  "status": "complete",
+  "currentStage": "complete",
+  "completedStages": [
+    "source-manifest",
+    "extraction",
+    "normalization",
+    "clustering",
+    "group-enrichment",
+    "relations",
+    "assembly",
+    "complete"
+  ],
+  "errors": [],
+  "repairAttempts": 0,
+  "outputDraftPath": "atlas/generation-runs/atlas-staged-metaphysics-families-v2/06-final-draft.json",
+  "updatedAt": "2026-07-11T16:02:39.795Z"
+}

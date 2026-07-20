@@ -1,0 +1,1128 @@
+{
+  "stage": "group-enrichment",
+  "ok": true,
+  "groups": [
+    {
+      "id": "mathematical-astronomy-and-mechanics",
+      "slug": "mathematical-astronomy-and-mechanics",
+      "title": "Mathematical astronomy and mechanics",
+      "shortTitle": "Astronomy/mechanics",
+      "family": "Astronomy/mechanics family",
+      "stance": "Measurement, geometry, mathematics, and experiment become a durable method for explaining motion.",
+      "centralClaim": "Measurement, geometry, mathematics, and experiment become a durable method for explaining motion.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+      "contributors": [
+        {
+          "id": "person-nicolaus-copernicus",
+          "name": "Nicolaus Copernicus",
+          "role": "source contributor",
+          "reason": "reframe planetary order",
+          "texts": [
+            {
+              "id": "source-evidence-for-nicolaus-copernicus",
+              "title": "Source evidence for Nicolaus Copernicus",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#1",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#1",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        },
+        {
+          "id": "person-johannes-kepler",
+          "name": "Johannes Kepler",
+          "role": "source contributor",
+          "reason": "mathematical laws from data",
+          "texts": [
+            {
+              "id": "source-evidence-for-johannes-kepler",
+              "title": "Source evidence for Johannes Kepler",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#1",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#1",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        },
+        {
+          "id": "person-galileo-galilei",
+          "name": "Galileo Galilei",
+          "role": "source contributor",
+          "reason": "experiment, mathematized motion, observation",
+          "texts": [
+            {
+              "id": "source-evidence-for-galileo-galilei",
+              "title": "Source evidence for Galileo Galilei",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#1",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#1",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        },
+        {
+          "id": "person-isaac-newton",
+          "name": "Isaac Newton",
+          "role": "source contributor",
+          "reason": "mechanics and gravitation system",
+          "texts": [
+            {
+              "id": "source-evidence-for-isaac-newton",
+              "title": "Source evidence for Isaac Newton",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#1",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#1",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Mathematical astronomy and mechanics as a complete family."
+      ],
+      "relatedGroupIds": [
+        "experimental-electricity-and-field-physics",
+        "chemistry-elements-and-molecular-order",
+        "evolutionary-biology-and-natural-history"
+      ],
+      "keywords": [
+        "mathematical",
+        "astronomy",
+        "mechanics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#1",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 1
+        },
+        {
+          "chunkId": "stem-scientists-scientific-lineages#0",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "experimental-electricity-and-field-physics",
+      "slug": "experimental-electricity-and-field-physics",
+      "title": "Experimental electricity and field physics",
+      "shortTitle": "Field physics",
+      "family": "Field physics family",
+      "stance": "Laboratory experiment becomes field theory and a new account of electricity, magnetism, and light.",
+      "centralClaim": "Laboratory experiment becomes field theory and a new account of electricity, magnetism, and light.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+      "contributors": [
+        {
+          "id": "person-benjamin-franklin",
+          "name": "Benjamin Franklin",
+          "role": "source contributor",
+          "reason": "organized early electrical phenomena",
+          "texts": [
+            {
+              "id": "source-evidence-for-benjamin-franklin",
+              "title": "Source evidence for Benjamin Franklin",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#2",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#2",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        },
+        {
+          "id": "person-michael-faraday",
+          "name": "Michael Faraday",
+          "role": "source contributor",
+          "reason": "developed field concepts",
+          "texts": [
+            {
+              "id": "source-evidence-for-michael-faraday",
+              "title": "Source evidence for Michael Faraday",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#2",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#2",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        },
+        {
+          "id": "person-james-clerk-maxwell",
+          "name": "James Clerk Maxwell",
+          "role": "source contributor",
+          "reason": "mathematized fields, unified electromagnetism and light",
+          "texts": [
+            {
+              "id": "source-evidence-for-james-clerk-maxwell",
+              "title": "Source evidence for James Clerk Maxwell",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#2",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#2",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        },
+        {
+          "id": "person-heinrich-hertz",
+          "name": "Heinrich Hertz",
+          "role": "source contributor",
+          "reason": "confirmed electromagnetic waves",
+          "texts": [
+            {
+              "id": "source-evidence-for-heinrich-hertz",
+              "title": "Source evidence for Heinrich Hertz",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#2",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#2",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Experimental electricity and field physics as a complete family."
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "chemistry-elements-and-molecular-order",
+        "evolutionary-biology-and-natural-history"
+      ],
+      "keywords": [
+        "experimental",
+        "electricity",
+        "field",
+        "physics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#2",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 2
+        },
+        {
+          "chunkId": "stem-scientists-scientific-lineages#0",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "chemistry-elements-and-molecular-order",
+      "slug": "chemistry-elements-and-molecular-order",
+      "title": "Chemistry, elements, and molecular order",
+      "shortTitle": "Chemistry",
+      "family": "Chemistry family",
+      "stance": "Matter becomes classifiable and measurable through elements, atoms, molecules, periodicity, and radioactivity.",
+      "centralClaim": "Matter becomes classifiable and measurable through elements, atoms, molecules, periodicity, and radioactivity.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+      "contributors": [
+        {
+          "id": "person-antoine-lavoisier",
+          "name": "Antoine Lavoisier",
+          "role": "source contributor",
+          "reason": "conservation, measurement, nomenclature",
+          "texts": [
+            {
+              "id": "source-evidence-for-antoine-lavoisier",
+              "title": "Source evidence for Antoine Lavoisier",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#3",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#3",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        },
+        {
+          "id": "person-john-dalton",
+          "name": "John Dalton",
+          "role": "source contributor",
+          "reason": "atomic theory",
+          "texts": [
+            {
+              "id": "source-evidence-for-john-dalton",
+              "title": "Source evidence for John Dalton",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#3",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#3",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        },
+        {
+          "id": "person-dmitri-mendeleev",
+          "name": "Dmitri Mendeleev",
+          "role": "source contributor",
+          "reason": "periodic order",
+          "texts": [
+            {
+              "id": "source-evidence-for-dmitri-mendeleev",
+              "title": "Source evidence for Dmitri Mendeleev",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#3",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#3",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        },
+        {
+          "id": "person-marie-curie",
+          "name": "Marie Curie",
+          "role": "source contributor",
+          "reason": "radioactivity",
+          "texts": [
+            {
+              "id": "source-evidence-for-marie-curie",
+              "title": "Source evidence for Marie Curie",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#3",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#3",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Chemistry, elements, and molecular order as a complete family."
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "experimental-electricity-and-field-physics",
+        "evolutionary-biology-and-natural-history"
+      ],
+      "keywords": [
+        "chemistry,",
+        "elements,",
+        "molecular",
+        "order"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#3",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 3
+        },
+        {
+          "chunkId": "stem-scientists-scientific-lineages#0",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "evolutionary-biology-and-natural-history",
+      "slug": "evolutionary-biology-and-natural-history",
+      "title": "Evolutionary biology and natural history",
+      "shortTitle": "Evolution",
+      "family": "Evolution family",
+      "stance": "Species, variation, adaptation, heredity, and deep time become historical science.",
+      "centralClaim": "Species, variation, adaptation, heredity, and deep time become historical science.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+      "contributors": [
+        {
+          "id": "person-charles-darwin",
+          "name": "Charles Darwin",
+          "role": "source contributor",
+          "reason": "natural selection",
+          "texts": [
+            {
+              "id": "source-evidence-for-charles-darwin",
+              "title": "Source evidence for Charles Darwin",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#4",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#4",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        },
+        {
+          "id": "person-alfred-russel-wallace",
+          "name": "Alfred Russel Wallace",
+          "role": "source contributor",
+          "reason": "natural selection",
+          "texts": [
+            {
+              "id": "source-evidence-for-alfred-russel-wallace",
+              "title": "Source evidence for Alfred Russel Wallace",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#4",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#4",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        },
+        {
+          "id": "person-thomas-huxley",
+          "name": "Thomas Huxley",
+          "role": "source contributor",
+          "reason": "evolutionary interpretation",
+          "texts": [
+            {
+              "id": "source-evidence-for-thomas-huxley",
+              "title": "Source evidence for Thomas Huxley",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#4",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#4",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        },
+        {
+          "id": "person-ronald-fisher",
+          "name": "Ronald Fisher",
+          "role": "source contributor",
+          "reason": "later synthesis",
+          "texts": [
+            {
+              "id": "source-evidence-for-ronald-fisher",
+              "title": "Source evidence for Ronald Fisher",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#4",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#4",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Evolutionary biology and natural history as a complete family."
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "experimental-electricity-and-field-physics",
+        "chemistry-elements-and-molecular-order"
+      ],
+      "keywords": [
+        "evolutionary",
+        "biology",
+        "natural",
+        "history"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#4",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 4
+        },
+        {
+          "chunkId": "stem-scientists-scientific-lineages#0",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "genetics-molecular-biology-and-information",
+      "slug": "genetics-molecular-biology-and-information",
+      "title": "Genetics, molecular biology, and information",
+      "shortTitle": "Genetics/molecular",
+      "family": "Genetics/molecular family",
+      "stance": "genetic material",
+      "centralClaim": "Heredity moves from breeding patterns to chromosomes, DNA, code, and molecular mechanisms.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+      "contributors": [
+        {
+          "id": "person-gregor-mendel",
+          "name": "Gregor Mendel",
+          "role": "source contributor",
+          "reason": "particulate inheritance",
+          "texts": [
+            {
+              "id": "source-evidence-for-gregor-mendel",
+              "title": "Source evidence for Gregor Mendel",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#5",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#5",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 5
+            }
+          ]
+        },
+        {
+          "id": "person-thomas-hunt-morgan",
+          "name": "Thomas Hunt Morgan",
+          "role": "source contributor",
+          "reason": "heredity to chromosomes",
+          "texts": [
+            {
+              "id": "source-evidence-for-thomas-hunt-morgan",
+              "title": "Source evidence for Thomas Hunt Morgan",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#5",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#5",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 5
+            }
+          ]
+        },
+        {
+          "id": "person-barbara-mcclintock",
+          "name": "Barbara McClintock",
+          "role": "source contributor",
+          "reason": "genome dynamism",
+          "texts": [
+            {
+              "id": "source-evidence-for-barbara-mcclintock",
+              "title": "Source evidence for Barbara McClintock",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#5",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#5",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 5
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Genetics, molecular biology, and information as a complete family."
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "experimental-electricity-and-field-physics",
+        "chemistry-elements-and-molecular-order"
+      ],
+      "keywords": [
+        "DNA",
+        "genetics,",
+        "molecular",
+        "biology,",
+        "information"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#5",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 5
+        },
+        {
+          "chunkId": "stem-scientists-scientific-lineages#0",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "relativity-and-quantum-revolutions",
+      "slug": "relativity-and-quantum-revolutions",
+      "title": "Relativity and Quantum Revolutions",
+      "shortTitle": "Relativity/quantum",
+      "family": "physics",
+      "stance": "revolutionary",
+      "centralClaim": "Classical physics' assumptions about space, time, measurement, matter, probability, and observation were fundamentally challenged and rebuilt.",
+      "whyItMatters": "These revolutions reshaped our understanding of the universe at its most fundamental levels, leading to transformative technologies and ongoing scientific inquiry.",
+      "contributors": [
+        {
+          "id": "person-albert-einstein",
+          "name": "Albert Einstein",
+          "role": "Founder",
+          "reason": "Developed special and general relativity, fundamentally altering concepts of space and time. His work laid groundwork for subsequent quantum developments.",
+          "texts": [
+            {
+              "id": "book-relativity-the-special-and-general-theory",
+              "title": "Relativity: The Special and General Theory",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#6",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#6",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        },
+        {
+          "id": "person-max-planck",
+          "name": "Max Planck",
+          "role": "Initiator",
+          "reason": "Introduced the concept of quantized energy, marking the birth of quantum theory and challenging classical thermodynamics.",
+          "texts": [
+            {
+              "id": "paper-on-the-motion-of-heat-radiation",
+              "title": "On the Motion of Heat Radiation",
+              "kind": "paper",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#6",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#6",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        },
+        {
+          "id": "person-richard-feynman",
+          "name": "Richard Feynman",
+          "role": "Synthesizer",
+          "reason": "Developed path integral formulation of quantum mechanics and made significant contributions to quantum electrodynamics, clarifying complex phenomena.",
+          "texts": [
+            {
+              "id": "book-qed-the-strange-theory-of-light-and-matter",
+              "title": "QED: The Strange Theory of Light and Matter",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#6",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#6",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "Initial resistance to relativity due to conflict with Newtonian mechanics.",
+        "Early quantum theory faced criticism for its probabilistic nature and apparent abandonment of determinism.",
+        "The incompatibility between general relativity and quantum mechanics remains a major challenge.",
+        "Interpretational problems within quantum mechanics (e.g., the measurement problem)."
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "experimental-electricity-and-field-physics"
+      ],
+      "keywords": [
+        "relativity",
+        "quantum mechanics",
+        "space-time",
+        "energy quantization",
+        "probability",
+        "observation"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#6",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    },
+    {
+      "id": "earth-systems-and-environmental-science",
+      "slug": "earth-systems-and-environmental-science",
+      "title": "Earth systems and environmental science",
+      "shortTitle": "Earth systems",
+      "family": "Earth systems family",
+      "stance": "Earth becomes a historical, planetary, coupled system linking geology, ecology, atmosphere, ocean, and human activity.",
+      "centralClaim": "Earth becomes a historical, planetary, coupled system linking geology, ecology, atmosphere, ocean, and human activity.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+      "contributors": [
+        {
+          "id": "person-james-hutton",
+          "name": "James Hutton",
+          "role": "source contributor",
+          "reason": "deep time geology",
+          "texts": [
+            {
+              "id": "source-evidence-for-james-hutton",
+              "title": "Source evidence for James Hutton",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#7",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 7
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#7",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 7
+            }
+          ]
+        },
+        {
+          "id": "person-charles-lyell",
+          "name": "Charles Lyell",
+          "role": "source contributor",
+          "reason": "gradual process geology",
+          "texts": [
+            {
+              "id": "source-evidence-for-charles-lyell",
+              "title": "Source evidence for Charles Lyell",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#7",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 7
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#7",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 7
+            }
+          ]
+        },
+        {
+          "id": "person-alfred-wegener",
+          "name": "Alfred Wegener",
+          "role": "source contributor",
+          "reason": "continental drift",
+          "texts": [
+            {
+              "id": "source-evidence-for-alfred-wegener",
+              "title": "Source evidence for Alfred Wegener",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#7",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 7
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#7",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 7
+            }
+          ]
+        },
+        {
+          "id": "person-rachel-carson",
+          "name": "Rachel Carson",
+          "role": "source contributor",
+          "reason": "ecology, chemistry, public risk",
+          "texts": [
+            {
+              "id": "source-evidence-for-rachel-carson",
+              "title": "Source evidence for Rachel Carson",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#7",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 7
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#7",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 7
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Earth systems and environmental science as a complete family."
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "experimental-electricity-and-field-physics",
+        "chemistry-elements-and-molecular-order"
+      ],
+      "keywords": [
+        "earth",
+        "systems",
+        "environmental",
+        "science"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#7",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 7
+        },
+        {
+          "chunkId": "stem-scientists-scientific-lineages#0",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "computation-systems-and-scientific-modeling",
+      "slug": "computation-systems-and-scientific-modeling",
+      "title": "Computation, systems, and scientific modeling",
+      "shortTitle": "Computation/modeling",
+      "family": "Computation/modeling family",
+      "stance": "central scientific tool",
+      "centralClaim": "Simulation, information, feedback, and computation become central tools for science.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+      "contributors": [
+        {
+          "id": "person-alan-turing",
+          "name": "Alan Turing",
+          "role": "source contributor",
+          "reason": "formalized computation, mathematical biology",
+          "texts": [
+            {
+              "id": "source-evidence-for-alan-turing",
+              "title": "Source evidence for Alan Turing",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#8",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#8",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        },
+        {
+          "id": "person-norbert-wiener",
+          "name": "Norbert Wiener",
+          "role": "source contributor",
+          "reason": "developed cybernetics",
+          "texts": [
+            {
+              "id": "source-evidence-for-norbert-wiener",
+              "title": "Source evidence for Norbert Wiener",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#8",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#8",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        },
+        {
+          "id": "person-john-von-neumann",
+          "name": "John von Neumann",
+          "role": "source contributor",
+          "reason": "computation, game theory, automata",
+          "texts": [
+            {
+              "id": "source-evidence-for-john-von-neumann",
+              "title": "Source evidence for John von Neumann",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#8",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#8",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        },
+        {
+          "id": "person-claude-shannon",
+          "name": "Claude Shannon",
+          "role": "source contributor",
+          "reason": "information theory",
+          "texts": [
+            {
+              "id": "source-evidence-for-claude-shannon",
+              "title": "Source evidence for Claude Shannon",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "stem-scientists-scientific-lineages#8",
+                  "sourceId": "stem-scientists-scientific-lineages",
+                  "chunkIndex": 8
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#8",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Computation, systems, and scientific modeling as a complete family."
+      ],
+      "relatedGroupIds": [
+        "mathematical-astronomy-and-mechanics",
+        "experimental-electricity-and-field-physics",
+        "chemistry-elements-and-molecular-order"
+      ],
+      "keywords": [
+        "computation",
+        "cybernetics",
+        "computation,",
+        "systems,",
+        "scientific",
+        "modeling"
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#8",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 8
+        },
+        {
+          "chunkId": "stem-scientists-scientific-lineages#0",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    }
+  ]
+}

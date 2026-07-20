@@ -1,0 +1,56 @@
+{
+  "id": "substance-metaphysics",
+  "slug": "substance-metaphysics",
+  "title": "Substance Metaphysics",
+  "shortTitle": "Substance",
+  "family": "substance-metaphysics",
+  "stance": "Foundational",
+  "centralClaim": "Beings are composites of form and matter.",
+  "whyItMatters": "Understanding the nature of things and their persistence is fundamental to metaphysics.",
+  "contributors": [
+    {
+      "id": "person-aristotle",
+      "name": "Aristotle",
+      "role": "Founder",
+      "reason": "Developed the concept of beings as composites of form and matter.",
+      "texts": [
+        {
+          "id": "humanities-philosophy-metaphysics-families-4",
+          "title": "Humanities Philosophy Metaphysics Families",
+          "kind": "essay",
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#4",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#4",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 4
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Aristotle's theory does not fully account for change and motion."
+  ],
+  "relatedGroupIds": [
+    "physicalism-and-materialism",
+    "idealism",
+    "dualism",
+    "hylomorphism"
+  ],
+  "keywords": [],
+  "provenance": [
+    {
+      "chunkId": "humanities-philosophy-metaphysics-families#4",
+      "sourceId": "humanities-philosophy-metaphysics-families",
+      "chunkIndex": 4
+    }
+  ]
+}

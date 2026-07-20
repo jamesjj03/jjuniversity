@@ -1,0 +1,71 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 13,
+  "chunkIds": [
+    "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232#283"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 769,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Dorian Gray",
+        "summary": "Painter's subject; embodies decay",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232#283",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232",
+            "chunkIndex": 283,
+            "note": "subject of painting"
+          }
+        ]
+      },
+      {
+        "label": "Painter",
+        "summary": "Witness to Dorian's decay",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232#283",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232",
+            "chunkIndex": 283,
+            "note": "observes Dorian's transformation"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Horror broke from painter’s lips",
+        "subject": "painter",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232#283",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232",
+            "chunkIndex": 283,
+            "note": "initial reaction"
+          }
+        ]
+      }
+    ],
+    "texts": [
+      {
+        "title": "The Picture of Dorian Gray",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232#283",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-impressionism-postimpressionism-8a8ca7f00232",
+            "chunkIndex": 283,
+            "note": "excerpt"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

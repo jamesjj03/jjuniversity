@@ -1,0 +1,69 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 23,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 723,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "stakeholders",
+        "summary": "Affected parties",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+            "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+            "chunkIndex": 487,
+            "note": "affected by decisions"
+          }
+        ]
+      },
+      {
+        "label": "managerial decision-making",
+        "summary": "Complex, incomplete information, time constraints",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+            "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+            "chunkIndex": 487,
+            "note": "characteristics"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Decisions impact organization and stakeholders.",
+        "subject": "managerial decision-making",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+            "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+            "chunkIndex": 487,
+            "note": "impacts"
+          }
+        ]
+      },
+      {
+        "text": "Multiple options exist.",
+        "subject": "managerial decision-making",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+            "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+            "chunkIndex": 487,
+            "note": "options"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

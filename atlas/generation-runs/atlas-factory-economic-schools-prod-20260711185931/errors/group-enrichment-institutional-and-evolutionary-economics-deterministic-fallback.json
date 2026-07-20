@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-institutional-and-evolutionary-economics",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-institutional-and-evolutionary-economics failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 2692 (line 1 column 2693)"
+  },
+  "createdAt": "2026-07-11T23:32:16.820Z"
+}

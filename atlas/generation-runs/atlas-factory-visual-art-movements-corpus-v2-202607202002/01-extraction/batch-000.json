@@ -1,0 +1,61 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 0,
+  "chunkIds": [
+    "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb#27"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 757,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "architecture",
+        "summary": "art form",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb#27",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb",
+            "chunkIndex": 27,
+            "note": "art form"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "NASA aerospace design exhibition",
+        "kind": "other",
+        "author": "Art Institute of Chicago",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb#27",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb",
+            "chunkIndex": 27,
+            "note": "exhibition"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "engineering",
+        "target": "architecture",
+        "kind": "influences",
+        "note": "shared connection",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb#27",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-artists-manifestos-8032629658fb",
+            "chunkIndex": 27,
+            "note": "shared connection"
+          }
+        ]
+      }
+    ]
+  }
+}

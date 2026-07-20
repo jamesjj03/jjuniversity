@@ -1,0 +1,137 @@
+{
+  "stage": "source-manifest",
+  "ok": true,
+  "recipe": {
+    "id": "intellectual_lineage",
+    "title": "Intellectual Lineage",
+    "purpose": "Trace how ideas, methods, or styles pass through people, schools, and generations.",
+    "groupingLogic": "Groups should be lineages, handoff points, or influence chains with attention to inheritance and mutation.",
+    "preferredGroupFields": [
+      "lineage",
+      "centralInheritance",
+      "turningPoint",
+      "contributors",
+      "keyTexts",
+      "objections"
+    ],
+    "contributorRules": "Contributors should appear where their work changes, transmits, or redirects the lineage.",
+    "expectedRelationTypes": [
+      "influences",
+      "borrows",
+      "reframes",
+      "opposes",
+      "answers"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 9
+    },
+    "generationInstructions": "Emphasize influence, divergence, continuity, and discontinuity. Preserve chronology where it clarifies structure.",
+    "evaluationCriteria": [
+      "Influence claims are explicit",
+      "Groups are not flat eras",
+      "Relations show transmission or rupture",
+      "Contributors have clear lineage roles"
+    ]
+  },
+  "sourcePacket": {
+    "sources": [
+      {
+        "id": "stem-scientists-scientific-lineages",
+        "title": "Scientific lineages source brief",
+        "creator": "JJ University",
+        "sourceType": "seed",
+        "territorySlug": "stem",
+        "branchSlug": "scientists",
+        "mapSlug": "scientific-lineages",
+        "filePath": "atlas/sources/stem/scientists/scientific-lineages.md",
+        "canonicalUrl": ""
+      }
+    ],
+    "chunks": [
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 0,
+        "chunkId": "stem-scientists-scientific-lineages#0",
+        "heading": "Scientific lineages source brief",
+        "text": "# Scientific lineages source brief\n\nThis seed note grounds an Atlas map about scientific lineages. It is not a complete history of science. It gives the generator and reviewer compact source material about traditions, handoffs, methods, representative scientists, text anchors, and relation cues.",
+        "charCount": 296,
+        "tokenEstimate": 74
+      },
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 1,
+        "chunkId": "stem-scientists-scientific-lineages#1",
+        "heading": "Mathematical astronomy and mechanics",
+        "text": "## Mathematical astronomy and mechanics\n\nThis lineage turns measurement, geometry, and mathematics into a way to explain motion in the heavens and on Earth. Nicolaus Copernicus reframes planetary order. Johannes Kepler makes mathematical laws from astronomical data. Galileo Galilei joins experiment, mathematized motion, and telescopic observation. Isaac Newton synthesizes mechanics and gravitation in a system that becomes a model for scientific explanation.\n\nThe pressure point is idealization. A good map should show how mathematical simplification makes prediction possible while leaving friction, complexity, and measurement limits to later work.",
+        "charCount": 653,
+        "tokenEstimate": 164
+      },
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 2,
+        "chunkId": "stem-scientists-scientific-lineages#2",
+        "heading": "Experimental electricity and field physics",
+        "text": "## Experimental electricity and field physics\n\nThis lineage grows from laboratory experiment into field theory and modern physics. Benjamin Franklin organizes early electrical phenomena. Michael Faraday develops experimental field concepts through electricity and magnetism. James Clerk Maxwell mathematizes fields and unifies electricity, magnetism, and light. Heinrich Hertz confirms electromagnetic waves.\n\nThe pressure point is translation. The reviewer should ask how experimental intuition becomes mathematical structure without losing contact with observation.",
+        "charCount": 567,
+        "tokenEstimate": 142
+      },
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 3,
+        "chunkId": "stem-scientists-scientific-lineages#3",
+        "heading": "Chemistry, elements, and molecular order",
+        "text": "## Chemistry, elements, and molecular order\n\nThis lineage makes matter classifiable and measurable through elements, compounds, atoms, and periodic order. Antoine Lavoisier reshapes chemistry through conservation, measurement, and nomenclature. John Dalton gives atomic theory a modern chemical role. Dmitri Mendeleev organizes elements through periodicity. Marie Curie opens radioactivity as a new domain that pressures the older picture of stable elements.\n\nThe pressure point is classification. A good map should show when classification merely names patterns and when it predicts missing structure.",
+        "charCount": 602,
+        "tokenEstimate": 151
+      },
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 4,
+        "chunkId": "stem-scientists-scientific-lineages#4",
+        "heading": "Evolutionary biology and natural history",
+        "text": "## Evolutionary biology and natural history\n\nThis lineage turns species, variation, adaptation, and deep time into a historical science. Charles Darwin and Alfred Russel Wallace formulate natural selection. Thomas Huxley defends evolutionary interpretation. Later synthesis figures such as Ronald Fisher, J. B. S. Haldane, Sewall Wright, Theodosius Dobzhansky, and Ernst Mayr connect genetics, populations, and speciation.\n\nThe pressure point is reduction. The reviewer should ask how selection, heredity, development, ecology, and contingency fit together without flattening life into one mechanism.",
+        "charCount": 600,
+        "tokenEstimate": 150
+      },
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 5,
+        "chunkId": "stem-scientists-scientific-lineages#5",
+        "heading": "Genetics, molecular biology, and information",
+        "text": "## Genetics, molecular biology, and information\n\nThis lineage moves heredity from breeding patterns to chromosomes, DNA, code, and molecular mechanisms. Gregor Mendel anchors inheritance through particulate factors. Thomas Hunt Morgan links heredity to chromosomes. Oswald Avery, Colin MacLeod, and Maclyn McCarty identify DNA as genetic material. James Watson, Francis Crick, Rosalind Franklin, and Maurice Wilkins shape the DNA structure story. Barbara McClintock shows genome dynamism through transposition.\n\nThe pressure point is metaphor. A good map should ask when information language clarifies molecular biology and when it hides cellular, developmental, and environmental context.",
+        "charCount": 689,
+        "tokenEstimate": 173
+      },
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 6,
+        "chunkId": "stem-scientists-scientific-lineages#6",
+        "heading": "Relativity and quantum revolutions",
+        "text": "## Relativity and quantum revolutions\n\nThis lineage breaks classical assumptions about space, time, measurement, and matter. Albert Einstein remakes space-time and gravitation through special and general relativity. Max Planck opens quantum discontinuity. Niels Bohr, Werner Heisenberg, Erwin Schrodinger, Paul Dirac, and Max Born develop quantum theory. Later figures such as Richard Feynman help reshape quantum fields and calculation.\n\nThe pressure point is interpretation. The reviewer should distinguish predictive formalism from what the theory says about reality, measurement, probability, and observation.",
+        "charCount": 613,
+        "tokenEstimate": 154
+      },
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 7,
+        "chunkId": "stem-scientists-scientific-lineages#7",
+        "heading": "Earth systems and environmental science",
+        "text": "## Earth systems and environmental science\n\nThis lineage studies Earth as layered, historical, dynamic, and increasingly coupled to human activity. James Hutton and Charles Lyell shape geology through deep time and gradual process. Alfred Wegener proposes continental drift, later transformed by plate tectonics. Rachel Carson connects ecology, chemistry, and public risk. James Lovelock and Lynn Margulis develop Gaia-style Earth system thinking, while climate scientists build atmospheric and oceanic models.\n\nThe pressure point is scale. A good map should show how local evidence, planetary processes, long time scales, and social consequences interact.",
+        "charCount": 656,
+        "tokenEstimate": 164
+      },
+      {
+        "sourceId": "stem-scientists-scientific-lineages",
+        "chunkIndex": 8,
+        "chunkId": "stem-scientists-scientific-lineages#8",
+        "heading": "Computation, systems, and scientific modeling",
+        "text": "## Computation, systems, and scientific modeling\n\nThis lineage makes simulation, information, feedback, and computation central scientific tools. Alan Turing formalizes computation and contributes to mathematical biology. Norbert Wiener develops cybernetics. John von Neumann bridges computation, game theory, automata, and mathematical physics. Claude Shannon gives information theory a durable form. Later computational science uses models and simulation where analytic solutions are unavailable.\n\nThe pressure point is reality testing. The reviewer should ask when a model explains the world and when it only explains its own assumptions.",
+        "charCount": 641,
+        "tokenEstimate": 161
+      }
+    ],
+    "sourceMapSlug": "scientific-lineages",
+    "packetHash": "d753ed7b0bda21cd4d69e769ee6cec3b06fe162d9e47f756f8a90cdac74a765b"
+  }
+}

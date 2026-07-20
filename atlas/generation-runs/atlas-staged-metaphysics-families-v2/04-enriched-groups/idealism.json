@@ -1,0 +1,116 @@
+{
+  "id": "idealism-enriched",
+  "slug": "idealism-enriched",
+  "title": "Idealism: Mind, Experience, and Reason as Basic to Reality's Intelligibility",
+  "shortTitle": "Idealism",
+  "family": "idealism",
+  "stance": "affirmative",
+  "centralClaim": "Mind, experience, reason, or spirit are considered basic to reality's intelligibility.",
+  "whyItMatters": "Understanding the role of mind and reason in shaping our perception of reality can provide insights into the nature of existence and knowledge.",
+  "contributors": [
+    {
+      "id": "person-berkeley",
+      "name": "Berkeley",
+      "role": "Foundational Figure",
+      "reason": "Argues that ordinary objects are ideas sustained by perception",
+      "texts": [
+        {
+          "id": "humanities-philosophy-metaphysics-families-2",
+          "title": "An Essay Towards a New Theory of Vision",
+          "kind": "essay",
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#2",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "person-kant",
+      "name": "Kant",
+      "role": "Central Figure",
+      "reason": "Makes the structure of experience central by asking what conditions make objects possible for us",
+      "texts": [
+        {
+          "id": "humanities-philosophy-metaphysics-families-2",
+          "title": "Critique of Pure Reason",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#2",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "person-hegel",
+      "name": "Hegel",
+      "role": "Influential Figure",
+      "reason": "Treats reality as historically and logically articulated through reason",
+      "texts": [
+        {
+          "id": "humanities-philosophy-metaphysics-families-2",
+          "title": "The Phenomenology of Spirit",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "humanities-philosophy-metaphysics-families#2",
+              "sourceId": "humanities-philosophy-metaphysics-families",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "humanities-philosophy-metaphysics-families#2",
+          "sourceId": "humanities-philosophy-metaphysics-families",
+          "chunkIndex": 2
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Idealism is criticized for being too subjective and detached from the physical world.",
+    "Some argue that idealism fails to account for the existence of objects when we are not perceiving them."
+  ],
+  "relatedGroupIds": [
+    "physicalism-and-materialism",
+    "dualism"
+  ],
+  "keywords": [
+    "mind",
+    "experience",
+    "reason",
+    "spirit",
+    "reality",
+    "intelligibility"
+  ],
+  "provenance": [
+    {
+      "chunkId": "humanities-philosophy-metaphysics-families#2",
+      "sourceId": "humanities-philosophy-metaphysics-families",
+      "chunkIndex": 2
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 8,
+  "chunkIds": [
+    "stem-scientists-scientific-lineages#8"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 691,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Alan Turing",
+        "role": "formalizer",
+        "reason": "formalized computation, mathematical biology",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#8",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 8,
+            "note": "initial mention"
+          }
+        ]
+      },
+      {
+        "name": "Norbert Wiener",
+        "role": "developer",
+        "reason": "developed cybernetics",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#8",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 8,
+            "note": "initial mention"
+          }
+        ]
+      },
+      {
+        "name": "John von Neumann",
+        "role": "bridge",
+        "reason": "computation, game theory, automata",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#8",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 8,
+            "note": "initial mention"
+          }
+        ]
+      },
+      {
+        "name": "Claude Shannon",
+        "role": "formalizer",
+        "reason": "information theory",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#8",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 8,
+            "note": "initial mention"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "computation",
+        "summary": "central scientific tool",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#8",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 8,
+            "note": "core concept"
+          }
+        ]
+      },
+      {
+        "label": "cybernetics",
+        "summary": "feedback, information",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#8",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 8,
+            "note": "Wiener's field"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Alan Turing",
+        "target": "mathematical biology",
+        "kind": "influences",
+        "note": "formalization",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#8",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 8,
+            "note": "Turing's contribution"
+          }
+        ]
+      },
+      {
+        "source": "Norbert Wiener",
+        "target": "cybernetics",
+        "kind": "influences",
+        "note": "development",
+        "provenance": [
+          {
+            "chunkId": "stem-scientists-scientific-lineages#8",
+            "sourceId": "stem-scientists-scientific-lineages",
+            "chunkIndex": 8,
+            "note": "Wiener's field"
+          }
+        ]
+      }
+    ]
+  }
+}

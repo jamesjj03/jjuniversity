@@ -1,0 +1,114 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 1,
+  "chunkIds": [
+    "arts-music-music-lineages#1"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 691,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "J. S. Bach",
+        "role": "anchor",
+        "reason": "contrapuntal craft, Lutheran sacred music",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#1",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 1,
+            "note": "anchors contrapuntal craft"
+          }
+        ]
+      },
+      {
+        "name": "Haydn",
+        "role": "shaper",
+        "reason": "classical form, symphony",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#1",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 1,
+            "note": "shapes classical form"
+          }
+        ]
+      },
+      {
+        "name": "Beethoven",
+        "role": "shaper",
+        "reason": "symphony, chamber music",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#1",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 1,
+            "note": "shapes symphony"
+          }
+        ]
+      },
+      {
+        "name": "Wagner",
+        "role": "pusher",
+        "reason": "harmony, orchestration",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#1",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 1,
+            "note": "pushes harmony"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "canon",
+        "summary": "pressure point",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#1",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 1,
+            "note": "pressure point"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "J. S. Bach",
+        "target": "Haydn",
+        "kind": "influences",
+        "note": "",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#1",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 1,
+            "note": "lineage"
+          }
+        ]
+      },
+      {
+        "source": "Haydn",
+        "target": "Beethoven",
+        "kind": "influences",
+        "note": "",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#1",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 1,
+            "note": "lineage"
+          }
+        ]
+      }
+    ]
+  }
+}

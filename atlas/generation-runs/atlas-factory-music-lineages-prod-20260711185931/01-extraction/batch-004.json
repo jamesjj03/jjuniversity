@@ -1,0 +1,150 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "arts-music-music-lineages#4"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 692,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Chuck Berry",
+        "role": "pioneer",
+        "reason": "early rock influence",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "initial mention"
+          }
+        ]
+      },
+      {
+        "name": "Elvis Presley",
+        "role": "icon",
+        "reason": "popularized rock",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "initial mention"
+          }
+        ]
+      },
+      {
+        "name": "James Brown",
+        "role": "innovator",
+        "reason": "funk pioneer",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "initial mention"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Rock music",
+        "summary": "amplified popular music lineage",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "heading"
+          }
+        ]
+      },
+      {
+        "label": "Funk",
+        "summary": "rhythmic, danceable style",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "initial mention"
+          }
+        ]
+      },
+      {
+        "label": "Amplification",
+        "summary": "key technology enabling lineage",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "contextual factor"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Borrowing is a pressure point.",
+        "subject": "musical lineages",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "pressure point identified"
+          }
+        ]
+      },
+      {
+        "text": "Racial, commercial, and technological transfer are important.",
+        "subject": "genre change",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "reviewer guidance"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Rock music",
+        "target": "Rhythm and blues",
+        "kind": "borrows",
+        "note": "stylistic inheritance",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "lineage origin"
+          }
+        ]
+      },
+      {
+        "source": "Funk",
+        "target": "Rock music",
+        "kind": "influences",
+        "note": "rhythmic development",
+        "provenance": [
+          {
+            "chunkId": "arts-music-music-lineages#4",
+            "sourceId": "arts-music-music-lineages",
+            "chunkIndex": 4,
+            "note": "stylistic inheritance"
+          }
+        ]
+      }
+    ]
+  }
+}

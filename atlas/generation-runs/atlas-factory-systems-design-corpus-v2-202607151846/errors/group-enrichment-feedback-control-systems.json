@@ -1,0 +1,12 @@
+{
+  "stageName": "group-enrichment-feedback-control-systems",
+  "ok": false,
+  "errors": [
+    "Group stance is required.",
+    "Group centralClaim is required.",
+    "Group whyItMatters is required.",
+    "Group needs at least one contributor."
+  ],
+  "rawExcerpt": "```json\n{\n  \"id\": \"feedback-control-systems\",\n  \"title\": \"Feedback And Control Systems\",\n  \"shortTitle\": \"Feedback Control\",\n  \"description\": \"Control-oriented systems use models, feedback loops, controllers, stability criteria, and optimization to regulate behavior.\",\n  \"memberCandidateIds\": [\n    \"concept-control-theory\",\n    \"concept-dynamical-systems\",\n    \"concept-controller\",\n    \"concept-pid-controller\",\n    \"concept-stability\",\n    \"text-control-theory-literature\",\n    \"person-harold-s-black\",\n    \"person-harry-nyquist\"\n  ],\n  \"relatedGroupIds\": [],\n  \"provenance\": [\n    {\n      \"chunkId\": \"corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#1\",\n      \"sourceId\": \"corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f\",\n      \"chunkIndex\": 1,\n      \"note\": \"definition\"\n    },\n    {\n      \"chunkId\": \"corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16\",\n      \"sourceId\": \"corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f\",\n      \"chunkIndex\": 16,\n      \"note\": \"general controller\"\n    },\n    {\n      \"chunkId\": \"corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27\",\n      \"sourceId\": \"corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f\",\n      \"chunkIndex\": 27,\n      \"note\": \"negative feedback\"\n    }\n  ]\n}\n```",
+  "createdAt": "2026-07-15T23:08:32.870Z"
+}

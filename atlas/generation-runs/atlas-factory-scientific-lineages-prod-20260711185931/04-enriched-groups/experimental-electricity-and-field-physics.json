@@ -1,0 +1,147 @@
+{
+  "id": "experimental-electricity-and-field-physics",
+  "slug": "experimental-electricity-and-field-physics",
+  "title": "Experimental electricity and field physics",
+  "shortTitle": "Field physics",
+  "family": "Field physics family",
+  "stance": "Laboratory experiment becomes field theory and a new account of electricity, magnetism, and light.",
+  "centralClaim": "Laboratory experiment becomes field theory and a new account of electricity, magnetism, and light.",
+  "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+  "contributors": [
+    {
+      "id": "person-benjamin-franklin",
+      "name": "Benjamin Franklin",
+      "role": "source contributor",
+      "reason": "organized early electrical phenomena",
+      "texts": [
+        {
+          "id": "source-evidence-for-benjamin-franklin",
+          "title": "Source evidence for Benjamin Franklin",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#2",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#2",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "person-michael-faraday",
+      "name": "Michael Faraday",
+      "role": "source contributor",
+      "reason": "developed field concepts",
+      "texts": [
+        {
+          "id": "source-evidence-for-michael-faraday",
+          "title": "Source evidence for Michael Faraday",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#2",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#2",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "person-james-clerk-maxwell",
+      "name": "James Clerk Maxwell",
+      "role": "source contributor",
+      "reason": "mathematized fields, unified electromagnetism and light",
+      "texts": [
+        {
+          "id": "source-evidence-for-james-clerk-maxwell",
+          "title": "Source evidence for James Clerk Maxwell",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#2",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#2",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "person-heinrich-hertz",
+      "name": "Heinrich Hertz",
+      "role": "source contributor",
+      "reason": "confirmed electromagnetic waves",
+      "texts": [
+        {
+          "id": "source-evidence-for-heinrich-hertz",
+          "title": "Source evidence for Heinrich Hertz",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#2",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#2",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 2
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating Experimental electricity and field physics as a complete family."
+  ],
+  "relatedGroupIds": [
+    "mathematical-astronomy-and-mechanics",
+    "chemistry-elements-and-molecular-order",
+    "evolutionary-biology-and-natural-history"
+  ],
+  "keywords": [
+    "experimental",
+    "electricity",
+    "field",
+    "physics"
+  ],
+  "provenance": [
+    {
+      "chunkId": "stem-scientists-scientific-lineages#2",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 2
+    },
+    {
+      "chunkId": "stem-scientists-scientific-lineages#0",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 0,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 import AtlasMapsClient from "@/components/AtlasMapsClient";
-import { getAtlasMaps } from "@/lib/atlasMaps";
+import { getAtlasMapsWithFallback } from "@/lib/atlasMapStore";
 
 export const metadata = {
   title: "Atlas Maps | JJ University",
   description: "Branching maps of theories, people, schools, and influence networks across JJ University.",
 };
 
-export default function AtlasPage() {
-  return <AtlasMapsClient data={getAtlasMaps()} />;
+export default async function AtlasPage() {
+  return <AtlasMapsClient data={await getAtlasMapsWithFallback()} />;
 }

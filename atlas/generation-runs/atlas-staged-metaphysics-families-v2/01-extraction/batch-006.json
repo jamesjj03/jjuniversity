@@ -1,0 +1,157 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 6,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#6"
+  ],
+  "result": {
+    "people": [
+      {
+        "name": "Spinoza",
+        "role": "Dual-aspect model proponent",
+        "reason": "Proposed a dual-aspect model where mind and body express one substance.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "Russell",
+        "role": "Experience or neutral stuff proponent",
+        "reason": "Opened routes where experience, structure, or neutral stuff can underlie both mind and matter.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "name": "James",
+        "role": "Experience proponent",
+        "reason": "Opened routes where experience can underlie both mind and matter.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "Neutral monism",
+        "summary": "A philosophical position that attempts to avoid choosing between strict physicalism and strict dualism by positing a neutral substance underlying both mind and matter.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Panpsychism",
+        "summary": "A philosophical position that attributes mental properties to all things, including inanimate objects and fundamental physical particles.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "label": "Dual-aspect model",
+        "summary": "A philosophical model where mind and body express one substance, as proposed by Spinoza.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Neutral monism and panpsychism try to avoid choosing between strict physicalism and strict dualism.",
+        "subject": "Neutral monism and panpsychism",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Spinoza gives a dual-aspect model where mind and body express one substance.",
+        "subject": "Spinoza",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Russell and James open routes where experience, structure, or neutral stuff can underlie both mind and matter.",
+        "subject": "Russell and James",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      },
+      {
+        "text": "Recent panpsychists revive the family as a response to the hard problem of consciousness.",
+        "subject": "Recent panpsychists",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Neutral monism and panpsychism",
+        "target": "Combination",
+        "kind": "pressures",
+        "note": "A map should show how many small experiential or neutral elements become a unified subject.",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#6",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 6,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ]
+  }
+}

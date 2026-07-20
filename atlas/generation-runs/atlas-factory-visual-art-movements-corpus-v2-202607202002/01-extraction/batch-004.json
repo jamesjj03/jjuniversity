@@ -1,0 +1,61 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#134"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 764,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "totem poles",
+        "summary": "Indigenous art objects",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#134",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+            "chunkIndex": 134,
+            "note": "collected by museums"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "dialogue",
+        "kind": "other",
+        "author": "Indigenous owners",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#134",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+            "chunkIndex": 134,
+            "note": "unwilling to part with artifacts"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "museums",
+        "target": "Indigenous owners",
+        "kind": "pressures",
+        "note": "artifact acquisition",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#134",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+            "chunkIndex": 134,
+            "note": "acquisition methods"
+          }
+        ]
+      }
+    ]
+  }
+}

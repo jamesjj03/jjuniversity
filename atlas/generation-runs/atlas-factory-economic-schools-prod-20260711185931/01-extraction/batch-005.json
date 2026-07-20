@@ -1,0 +1,124 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 5,
+  "chunkIds": [
+    "society-economics-economic-schools#5"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 953,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Carl Menger",
+        "role": "founder",
+        "reason": "marginalist root",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#5",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 5,
+            "note": "start"
+          }
+        ]
+      },
+      {
+        "name": "Ludwig von Mises",
+        "role": "developer",
+        "reason": "calculation, knowledge arguments",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#5",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 5,
+            "note": "development"
+          }
+        ]
+      },
+      {
+        "name": "Friedrich Hayek",
+        "role": "developer",
+        "reason": "spontaneous order arguments",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#5",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 5,
+            "note": "development"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "subjective value",
+        "summary": "value determined by individual preferences",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#5",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 5,
+            "note": "emphasis"
+          }
+        ]
+      },
+      {
+        "label": "market process",
+        "summary": "coordination through price signals",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#5",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 5,
+            "note": "emphasis"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Market processes explain coordination.",
+        "subject": "Coordination",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#5",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 5,
+            "note": "explanation"
+          }
+        ]
+      },
+      {
+        "text": "Institutions and power are pressure points.",
+        "subject": "Austrian economics",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#5",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 5,
+            "note": "pressure point"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Austrian economics",
+        "target": "market process",
+        "kind": "influences",
+        "note": "explains coordination",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#5",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 5,
+            "note": "explanation"
+          }
+        ]
+      }
+    ]
+  }
+}

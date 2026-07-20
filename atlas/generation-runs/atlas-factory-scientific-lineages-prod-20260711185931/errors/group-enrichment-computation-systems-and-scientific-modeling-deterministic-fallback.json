@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-computation-systems-and-scientific-modeling",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-computation-systems-and-scientific-modeling failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 3817 (line 96 column 6)"
+  },
+  "createdAt": "2026-07-11T23:59:29.813Z"
+}

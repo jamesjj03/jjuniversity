@@ -1,0 +1,44 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 18,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0#1"
+  ],
+  "charLimit": 420,
+  "estimatedInputTokens": 700,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Architecture",
+        "summary": "Designing habitable structures.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0#1",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0",
+            "chunkIndex": 1,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "Ancient Greek ἀρχιτέκτων",
+        "summary": "Origin of 'architect'.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0#1",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0",
+            "chunkIndex": 1,
+            "note": "etymology"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

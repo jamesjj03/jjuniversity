@@ -1,0 +1,111 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 6,
+  "chunkIds": [
+    "society-economics-economic-schools#6"
+  ],
+  "charLimit": 900,
+  "estimatedInputTokens": 976,
+  "splitDepth": 0,
+  "result": {
+    "people": [
+      {
+        "name": "Thorstein Veblen",
+        "role": "contributor",
+        "reason": "early institutionalism",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#6",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 6,
+            "note": "anchor early institutionalism"
+          }
+        ]
+      },
+      {
+        "name": "John R. Commons",
+        "role": "contributor",
+        "reason": "early institutionalism",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#6",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 6,
+            "note": "anchor early institutionalism"
+          }
+        ]
+      },
+      {
+        "name": "Wesley Mitchell",
+        "role": "contributor",
+        "reason": "early institutionalism",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#6",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 6,
+            "note": "anchor early institutionalism"
+          }
+        ]
+      },
+      {
+        "name": "Douglass North",
+        "role": "contributor",
+        "reason": "later institutional and evolutionary economists",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#6",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 6,
+            "note": "emphasize institutions, path dependence"
+          }
+        ]
+      },
+      {
+        "name": "Geoffrey Hodgson",
+        "role": "contributor",
+        "reason": "later institutional and evolutionary economists",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#6",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 6,
+            "note": "emphasize institutions, path dependence"
+          }
+        ]
+      },
+      {
+        "name": "Richard Nelson",
+        "role": "contributor",
+        "reason": "later institutional and evolutionary economists",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#6",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 6,
+            "note": "emphasize institutions, path dependence"
+          }
+        ]
+      }
+    ],
+    "concepts": [],
+    "claims": [
+      {
+        "text": "precision is a pressure point",
+        "subject": "Institutional and evolutionary economics",
+        "provenance": [
+          {
+            "chunkId": "society-economics-economic-schools#6",
+            "sourceId": "society-economics-economic-schools",
+            "chunkIndex": 6,
+            "note": "pressure point"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 718,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "PID controller",
+        "summary": "General control strategy",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16",
+            "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+            "chunkIndex": 16,
+            "note": "general controller"
+          }
+        ]
+      },
+      {
+        "label": "Stability",
+        "summary": "Closed-loop system property",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16",
+            "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+            "chunkIndex": 16,
+            "note": "essential specification"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

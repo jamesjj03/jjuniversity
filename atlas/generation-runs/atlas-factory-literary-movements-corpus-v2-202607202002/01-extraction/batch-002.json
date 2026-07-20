@@ -1,0 +1,69 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 2,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2374"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 753,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "House Committee on Un-American Activities",
+        "summary": "Investigated disloyalty claims.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2374",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 2374,
+            "note": "investigation"
+          }
+        ]
+      },
+      {
+        "label": "Communists",
+        "summary": "Target of HUAC investigation.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2374",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 2374,
+            "note": "investigation"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "Motion pictures used for pro-Soviet propaganda.",
+        "subject": "Hollywood",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2374",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 2374,
+            "note": "fear"
+          }
+        ]
+      },
+      {
+        "text": "Refusal to testify results in imprisonment.",
+        "subject": "Witnesses",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2374",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 2374,
+            "note": "consequence"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

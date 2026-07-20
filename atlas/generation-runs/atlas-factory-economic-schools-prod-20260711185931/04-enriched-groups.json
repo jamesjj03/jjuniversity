@@ -1,0 +1,968 @@
+{
+  "stage": "group-enrichment",
+  "ok": true,
+  "groups": [
+    {
+      "id": "classical-political-economy",
+      "slug": "classical-political-economy",
+      "title": "Classical political economy",
+      "shortTitle": "Classical",
+      "family": "Classical family",
+      "stance": "studied in classical political economy",
+      "centralClaim": "classical economics explains distribution and power or treats them as...",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+      "contributors": [
+        {
+          "id": "classical-political-economy-source-synthesis",
+          "name": "Classical political economy source synthesis",
+          "role": "source-grounded synthesis",
+          "reason": "No clean person candidate survived model enrichment for Classical political economy; this review draft preserves the source-backed group for admin review.",
+          "texts": [
+            {
+              "id": "text-canonical-synthesis-of-markets",
+              "title": "canonical synthesis of markets",
+              "kind": "book",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#1",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 1
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#1",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 1
+            },
+            {
+              "chunkId": "society-economics-economic-schools#0",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 0,
+              "note": "deterministic fallback source support"
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Classical political economy as a complete family."
+      ],
+      "relatedGroupIds": [
+        "marxian-economics",
+        "neoclassical-and-marginalist-economics",
+        "keynesian-and-macroeconomic-management"
+      ],
+      "keywords": [
+        "wealth",
+        "classical",
+        "political",
+        "economy"
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#1",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 1
+        },
+        {
+          "chunkId": "society-economics-economic-schools#0",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "marxian-economics",
+      "slug": "marxian-economics",
+      "title": "Marxian economics",
+      "shortTitle": "Marxian",
+      "family": "Marxian family",
+      "stance": "framework for understanding history",
+      "centralClaim": "capitalism is a historical system organized by class relations",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+      "contributors": [
+        {
+          "id": "person-karl-marx",
+          "name": "Karl Marx",
+          "role": "source contributor",
+          "reason": "value, exploitation, commodity fetishism, historical materialism",
+          "texts": [
+            {
+              "id": "source-evidence-for-karl-marx",
+              "title": "Source evidence for Karl Marx",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#2",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#2",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 2
+            }
+          ]
+        },
+        {
+          "id": "person-rosa-luxemburg",
+          "name": "Rosa Luxemburg",
+          "role": "source contributor",
+          "reason": "imperialism, finance analysis",
+          "texts": [
+            {
+              "id": "source-evidence-for-rosa-luxemburg",
+              "title": "Source evidence for Rosa Luxemburg",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#2",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#2",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 2
+            }
+          ]
+        },
+        {
+          "id": "person-rudolf-hilferding",
+          "name": "Rudolf Hilferding",
+          "role": "source contributor",
+          "reason": "monopoly, crisis theory",
+          "texts": [
+            {
+              "id": "source-evidence-for-rudolf-hilferding",
+              "title": "Source evidence for Rudolf Hilferding",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#2",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 2
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#2",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Marxian economics as a complete family."
+      ],
+      "relatedGroupIds": [
+        "classical-political-economy",
+        "neoclassical-and-marginalist-economics",
+        "keynesian-and-macroeconomic-management"
+      ],
+      "keywords": [
+        "historical materialism",
+        "commodity fetishism",
+        "marxian",
+        "economics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#2",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 2
+        },
+        {
+          "chunkId": "society-economics-economic-schools#0",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "neoclassical-and-marginalist-economics",
+      "slug": "neoclassical-and-marginalist-economics",
+      "title": "Neoclassical and marginalist economics",
+      "shortTitle": "Neoclassical",
+      "family": "Neoclassical family",
+      "stance": "basis of price and allocation",
+      "centralClaim": "Prices and allocation through marginal choice, utility, scarcity, equilibrium, and optimization.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+      "contributors": [
+        {
+          "id": "person-william-stanley-jevons",
+          "name": "William Stanley Jevons",
+          "role": "source contributor",
+          "reason": "helped define analytic core",
+          "texts": [
+            {
+              "id": "source-evidence-for-william-stanley-jevons",
+              "title": "Source evidence for William Stanley Jevons",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#3",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#3",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 3
+            }
+          ]
+        },
+        {
+          "id": "person-leon-walras",
+          "name": "Leon Walras",
+          "role": "source contributor",
+          "reason": "helped define analytic core",
+          "texts": [
+            {
+              "id": "source-evidence-for-leon-walras",
+              "title": "Source evidence for Leon Walras",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#3",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 3
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#3",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 3
+            }
+          ]
+        },
+        {
+          "id": "person-carl-menger",
+          "name": "Carl Menger",
+          "role": "source contributor",
+          "reason": "helped define analytic core",
+          "texts": [
+            {
+              "id": "source-evidence-for-carl-menger",
+              "title": "Source evidence for Carl Menger",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#3",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 3
+                },
+                {
+                  "chunkId": "society-economics-economic-schools#5",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#3",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 3
+            },
+            {
+              "chunkId": "society-economics-economic-schools#5",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 5
+            }
+          ]
+        },
+        {
+          "id": "person-paul-samuelson",
+          "name": "Paul Samuelson",
+          "role": "source contributor",
+          "reason": "develops branches of tradition",
+          "texts": [
+            {
+              "id": "source-evidence-for-paul-samuelson",
+              "title": "Source evidence for Paul Samuelson",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#4",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#4",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Neoclassical and marginalist economics as a complete family."
+      ],
+      "relatedGroupIds": [
+        "classical-political-economy",
+        "marxian-economics",
+        "keynesian-and-macroeconomic-management"
+      ],
+      "keywords": [
+        "marginal choice",
+        "equilibrium",
+        "neoclassical",
+        "marginalist",
+        "economics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3
+        },
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5
+        },
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4
+        },
+        {
+          "chunkId": "society-economics-economic-schools#0",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "keynesian-and-macroeconomic-management",
+      "slug": "keynesian-and-macroeconomic-management",
+      "title": "Keynesian and macroeconomic management",
+      "shortTitle": "Keynesian",
+      "family": "Keynesian family",
+      "stance": "Aggregate demand, uncertainty, unemployment, money, expectations, and policy stabilization.",
+      "centralClaim": "economies can settle into underemployment",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+      "contributors": [
+        {
+          "id": "person-john-maynard-keynes",
+          "name": "John Maynard Keynes",
+          "role": "source contributor",
+          "reason": "anchors the family",
+          "texts": [
+            {
+              "id": "source-evidence-for-john-maynard-keynes",
+              "title": "Source evidence for John Maynard Keynes",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#4",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#4",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 4
+            }
+          ]
+        },
+        {
+          "id": "person-joan-robinson",
+          "name": "Joan Robinson",
+          "role": "source contributor",
+          "reason": "develops branches of tradition",
+          "texts": [
+            {
+              "id": "source-evidence-for-joan-robinson",
+              "title": "Source evidence for Joan Robinson",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#4",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#4",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 4
+            }
+          ]
+        },
+        {
+          "id": "person-paul-samuelson",
+          "name": "Paul Samuelson",
+          "role": "source contributor",
+          "reason": "develops branches of tradition",
+          "texts": [
+            {
+              "id": "source-evidence-for-paul-samuelson",
+              "title": "Source evidence for Paul Samuelson",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#4",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 4
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#4",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "overconfidence in government steering ability"
+      ],
+      "relatedGroupIds": [
+        "classical-political-economy",
+        "marxian-economics",
+        "neoclassical-and-marginalist-economics"
+      ],
+      "keywords": [
+        "keynesian",
+        "macroeconomic",
+        "management"
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#4",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 4
+        },
+        {
+          "chunkId": "society-economics-economic-schools#0",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "austrian-economics",
+      "slug": "austrian-economics",
+      "title": "Austrian economics",
+      "shortTitle": "Austrian",
+      "family": "Austrian family",
+      "stance": "value determined by individual preferences",
+      "centralClaim": "Market processes explain coordination.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+      "contributors": [
+        {
+          "id": "person-carl-menger",
+          "name": "Carl Menger",
+          "role": "source contributor",
+          "reason": "helped define analytic core",
+          "texts": [
+            {
+              "id": "source-evidence-for-carl-menger",
+              "title": "Source evidence for Carl Menger",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#3",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 3
+                },
+                {
+                  "chunkId": "society-economics-economic-schools#5",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#3",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 3
+            },
+            {
+              "chunkId": "society-economics-economic-schools#5",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 5
+            }
+          ]
+        },
+        {
+          "id": "person-ludwig-von-mises",
+          "name": "Ludwig von Mises",
+          "role": "source contributor",
+          "reason": "calculation, knowledge arguments",
+          "texts": [
+            {
+              "id": "source-evidence-for-ludwig-von-mises",
+              "title": "Source evidence for Ludwig von Mises",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#5",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#5",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 5
+            }
+          ]
+        },
+        {
+          "id": "person-friedrich-hayek",
+          "name": "Friedrich Hayek",
+          "role": "source contributor",
+          "reason": "spontaneous order arguments",
+          "texts": [
+            {
+              "id": "source-evidence-for-friedrich-hayek",
+              "title": "Source evidence for Friedrich Hayek",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#5",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 5
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#5",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 5
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Austrian economics as a complete family."
+      ],
+      "relatedGroupIds": [
+        "classical-political-economy",
+        "marxian-economics",
+        "neoclassical-and-marginalist-economics"
+      ],
+      "keywords": [
+        "subjective value",
+        "market process",
+        "austrian",
+        "economics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#5",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 5
+        },
+        {
+          "chunkId": "society-economics-economic-schools#3",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 3
+        },
+        {
+          "chunkId": "society-economics-economic-schools#0",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "institutional-and-evolutionary-economics",
+      "slug": "institutional-and-evolutionary-economics",
+      "title": "Institutional and evolutionary economics",
+      "shortTitle": "Institutional",
+      "family": "Institutional family",
+      "stance": "Economies as rule-bound, historically embedded systems shaped by habits, organizations, law, technology, and power.",
+      "centralClaim": "Economies as rule-bound, historically embedded systems shaped by habits, organizations, law, technology, and power.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+      "contributors": [
+        {
+          "id": "person-thorstein-veblen",
+          "name": "Thorstein Veblen",
+          "role": "source contributor",
+          "reason": "early institutionalism",
+          "texts": [
+            {
+              "id": "source-evidence-for-thorstein-veblen",
+              "title": "Source evidence for Thorstein Veblen",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#6",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#6",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 6
+            }
+          ]
+        },
+        {
+          "id": "person-john-r-commons",
+          "name": "John R. Commons",
+          "role": "source contributor",
+          "reason": "early institutionalism",
+          "texts": [
+            {
+              "id": "source-evidence-for-john-r-commons",
+              "title": "Source evidence for John R. Commons",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#6",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#6",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 6
+            }
+          ]
+        },
+        {
+          "id": "person-wesley-mitchell",
+          "name": "Wesley Mitchell",
+          "role": "source contributor",
+          "reason": "early institutionalism",
+          "texts": [
+            {
+              "id": "source-evidence-for-wesley-mitchell",
+              "title": "Source evidence for Wesley Mitchell",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#6",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#6",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 6
+            }
+          ]
+        },
+        {
+          "id": "person-douglass-north",
+          "name": "Douglass North",
+          "role": "source contributor",
+          "reason": "later institutional and evolutionary economists",
+          "texts": [
+            {
+              "id": "source-evidence-for-douglass-north",
+              "title": "Source evidence for Douglass North",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#6",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 6
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#6",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Institutional and evolutionary economics as a complete family."
+      ],
+      "relatedGroupIds": [
+        "classical-political-economy",
+        "marxian-economics",
+        "neoclassical-and-marginalist-economics"
+      ],
+      "keywords": [
+        "institutional",
+        "evolutionary",
+        "economics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#6",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 6
+        },
+        {
+          "chunkId": "society-economics-economic-schools#0",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "behavioral-economics",
+      "slug": "behavioral-economics",
+      "title": "Behavioral economics",
+      "shortTitle": "Behavioral",
+      "family": "Behavioral family",
+      "stance": "limits to rationality",
+      "centralClaim": "Bounded rationality, heuristics, biases, framing, loss aversion, fairness, and real decision behavior.",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+      "contributors": [
+        {
+          "id": "person-herbert-simon",
+          "name": "Herbert Simon",
+          "role": "source contributor",
+          "reason": "bounded rationality",
+          "texts": [
+            {
+              "id": "source-evidence-for-herbert-simon",
+              "title": "Source evidence for Herbert Simon",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#7",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 7
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#7",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 7
+            }
+          ]
+        },
+        {
+          "id": "person-daniel-kahneman",
+          "name": "Daniel Kahneman",
+          "role": "source contributor",
+          "reason": "behavioral economics program",
+          "texts": [
+            {
+              "id": "source-evidence-for-daniel-kahneman",
+              "title": "Source evidence for Daniel Kahneman",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#7",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 7
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#7",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 7
+            }
+          ]
+        },
+        {
+          "id": "person-richard-thaler",
+          "name": "Richard Thaler",
+          "role": "source contributor",
+          "reason": "behavioral economics program",
+          "texts": [
+            {
+              "id": "source-evidence-for-richard-thaler",
+              "title": "Source evidence for Richard Thaler",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#7",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 7
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#7",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 7
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "The source packet requires review before treating Behavioral economics as a complete family."
+      ],
+      "relatedGroupIds": [
+        "classical-political-economy",
+        "marxian-economics",
+        "neoclassical-and-marginalist-economics"
+      ],
+      "keywords": [
+        "bounded rationality",
+        "heuristics",
+        "biases",
+        "behavioral",
+        "economics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#7",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 7
+        },
+        {
+          "chunkId": "society-economics-economic-schools#0",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    },
+    {
+      "id": "complexity-ecological-and-pluralist-economics",
+      "slug": "complexity-ecological-and-pluralist-economics",
+      "title": "Complexity, ecological, and pluralist economics",
+      "shortTitle": "Complexity/ecological",
+      "family": "Complexity/ecological family",
+      "stance": "economies as adaptive systems",
+      "centralClaim": "economies are adaptive systems embedded in networks",
+      "whyItMatters": "This family organizes source-backed claims about build a reviewable theory-family atlas draft for major economic schools from the selected source brief. keep schools as families, not individual economists. for admin review.",
+      "contributors": [
+        {
+          "id": "complexity-ecological-and-pluralist-economics-source-synthesis",
+          "name": "Complexity, ecological, and pluralist economics source synthesis",
+          "role": "source-grounded synthesis",
+          "reason": "No clean person candidate survived model enrichment for Complexity, ecological, and pluralist economics; this review draft preserves the source-backed group for admin review.",
+          "texts": [
+            {
+              "id": "source-evidence-for-complexity-ecological-and-pluralist-economics",
+              "title": "Source evidence for Complexity, ecological, and pluralist economics",
+              "kind": "other",
+              "provenance": [
+                {
+                  "chunkId": "society-economics-economic-schools#8",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 8
+                },
+                {
+                  "chunkId": "society-economics-economic-schools#0",
+                  "sourceId": "society-economics-economic-schools",
+                  "chunkIndex": 0,
+                  "note": "deterministic fallback source support"
+                }
+              ]
+            }
+          ],
+          "provenance": [
+            {
+              "chunkId": "society-economics-economic-schools#8",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 8
+            },
+            {
+              "chunkId": "society-economics-economic-schools#0",
+              "sourceId": "society-economics-economic-schools",
+              "chunkIndex": 0,
+              "note": "deterministic fallback source support"
+            }
+          ]
+        }
+      ],
+      "objections": [
+        "integration of approaches",
+        "biophysical limits"
+      ],
+      "relatedGroupIds": [
+        "classical-political-economy",
+        "marxian-economics",
+        "neoclassical-and-marginalist-economics"
+      ],
+      "keywords": [
+        "complex adaptive systems",
+        "commons governance",
+        "complexity,",
+        "ecological,",
+        "pluralist",
+        "economics"
+      ],
+      "provenance": [
+        {
+          "chunkId": "society-economics-economic-schools#8",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 8
+        },
+        {
+          "chunkId": "society-economics-economic-schools#0",
+          "sourceId": "society-economics-economic-schools",
+          "chunkIndex": 0,
+          "note": "deterministic fallback source support"
+        }
+      ]
+    }
+  ]
+}

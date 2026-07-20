@@ -1,0 +1,106 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 5,
+  "chunkIds": [
+    "humanities-philosophy-metaphysics-families#5"
+  ],
+  "result": {
+    "people": [
+      {
+        "name": "Heraclitus",
+        "role": "marker",
+        "reason": "ancient marker of process metaphysics",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "identified as ancient marker"
+          }
+        ]
+      },
+      {
+        "name": "Whitehead",
+        "role": "rebuilder",
+        "reason": "rebuilds metaphysics around process",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "rebuilt metaphysics"
+          }
+        ]
+      },
+      {
+        "name": "Bergson",
+        "role": "accountant",
+        "reason": "related account through duration",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "gave related account"
+          }
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "label": "process metaphysics",
+        "summary": "starts from activity, change, relation",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "definition of process metaphysics"
+          }
+        ]
+      },
+      {
+        "label": "duration",
+        "summary": "Bergson's account of time",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "related to Bergson"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "text": "everything is process",
+        "subject": "process metaphysics",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "central claim of process metaphysics"
+          }
+        ]
+      },
+      {
+        "text": "how identity is preserved",
+        "subject": "stability",
+        "provenance": [
+          {
+            "chunkId": "humanities-philosophy-metaphysics-families#5",
+            "sourceId": "humanities-philosophy-metaphysics-families",
+            "chunkIndex": 5,
+            "note": "pressure point question"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

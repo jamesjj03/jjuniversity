@@ -1,0 +1,83 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 10,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#7"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 754,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Hundred Schools of Thought",
+        "summary": "Diverse philosophical schools in Eastern Zhou dynasty",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#7",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 7,
+            "note": "early literature origin"
+          }
+        ]
+      },
+      {
+        "label": "Sun Tzu",
+        "summary": "Military strategist, The Art of War",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#7",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 7,
+            "note": "military science"
+          }
+        ]
+      },
+      {
+        "label": "Sima Qian",
+        "summary": "Historian, Records of the Grand Historian",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#7",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 7,
+            "note": "Chinese history"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "The Art of War",
+        "kind": "book",
+        "author": "Sun Tzu",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#7",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 7,
+            "note": "military science"
+          }
+        ]
+      },
+      {
+        "title": "Records of the Grand Historian",
+        "kind": "book",
+        "author": "Sima Qian",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#7",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+            "chunkIndex": 7,
+            "note": "Chinese history"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

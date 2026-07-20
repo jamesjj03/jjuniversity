@@ -1,0 +1,996 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-15",
+  "territories": [
+    {
+      "id": "technology",
+      "slug": "technology",
+      "title": "Technology",
+      "summary": "Technology staged Atlas drafts and review material.",
+      "branches": [
+        {
+          "id": "systems",
+          "slug": "systems",
+          "title": "Systems",
+          "summary": "Systems staged drafts built from grounded Atlas source chunks.",
+          "maps": [
+            {
+              "id": "systems-design-corpus-v2",
+              "slug": "systems-design-corpus-v2",
+              "title": "Systems Design Corpus V2",
+              "subtitle": "A staged, model-assisted, source-grounded review draft.",
+              "question": "What are the major families inside systems design corpus v2, and what does each family claim about reality?",
+              "summary": "Staged draft assembled from 25 source chunks. Prompt: A comparison map of systems design patterns, constraints, failure modes, feedback/control, architecture, socio-technical systems, requirements, resilience, and complex-system tradeoffs.",
+              "status": "queued",
+              "buildMode": "pipeline-ready",
+              "groups": [
+                {
+                  "id": "systems-engineering-lifecycle",
+                  "slug": "systems-engineering-lifecycle",
+                  "title": "Systems Engineering And Lifecycle Architecture",
+                  "shortTitle": "Systems Engineering",
+                  "family": "Systems Design",
+                  "stance": "Coordinates complex work through lifecycle models, requirements, architecture, verification, and validation.",
+                  "centralClaim": "Complex systems need explicit lifecycle architecture so requirements, interfaces, and validation do not drift apart.",
+                  "whyItMatters": "This family anchors the map because it supplies the integrative discipline: connecting stakeholders, models, requirements, and implementation across the system life cycle.",
+                  "contributors": [
+                    {
+                      "id": "systems-engineering-lifecycle-source-synthesis",
+                      "name": "Systems engineering / SysML",
+                      "role": "source-grounded design family",
+                      "reason": "Systems engineering / SysML represents the source evidence for Systems Engineering And Lifecycle Architecture.",
+                      "texts": [
+                        {
+                          "id": "systems-engineering-lifecycle-key-text",
+                          "title": "Systems engineering and SysML source chunks",
+                          "kind": "other",
+                          "provenance": [
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+                              "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                              "chunkIndex": 6,
+                              "note": "Defines PSE, ESE, SSE."
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+                              "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                              "chunkIndex": 20,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                              "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                              "chunkIndex": 1,
+                              "note": "sub-function"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#19",
+                              "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                              "chunkIndex": 19,
+                              "note": "definition"
+                            }
+                          ]
+                        }
+                      ],
+                      "provenance": [
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+                          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                          "chunkIndex": 6,
+                          "note": "Defines PSE, ESE, SSE."
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+                          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                          "chunkIndex": 20,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                          "chunkIndex": 1,
+                          "note": "sub-function"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#19",
+                          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                          "chunkIndex": 19,
+                          "note": "definition"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Can become process-heavy or bureaucratic.",
+                    "May understate political and organizational constraints.",
+                    "Models can look complete while hiding implementation risk."
+                  ],
+                  "relatedGroupIds": [
+                    "requirements-design-process",
+                    "software-architecture-patterns",
+                    "failure-resilience-risk"
+                  ],
+                  "keywords": [
+                    "systems engineering",
+                    "lifecycle",
+                    "requirements",
+                    "validation",
+                    "architecture"
+                  ],
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 6,
+                      "note": "Defines PSE, ESE, SSE."
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 20,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                      "chunkIndex": 1,
+                      "note": "sub-function"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#19",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 19,
+                      "note": "definition"
+                    }
+                  ]
+                },
+                {
+                  "id": "feedback-control-systems",
+                  "slug": "feedback-control-systems",
+                  "title": "Feedback And Control Systems",
+                  "shortTitle": "Feedback Control",
+                  "family": "Systems Design",
+                  "stance": "Designs systems around feedback loops, controllers, stability, and regulation of dynamic behavior.",
+                  "centralClaim": "A system can be designed as something steered: sensors, controllers, feedback, and stability criteria keep behavior near intended goals.",
+                  "whyItMatters": "This family adds a dynamic lens that v1 lacked: systems are not only built, they are regulated under changing conditions.",
+                  "contributors": [
+                    {
+                      "id": "feedback-control-systems-source-synthesis",
+                      "name": "Control theory and feedback systems",
+                      "role": "source-grounded design family",
+                      "reason": "Control theory and feedback systems represents the source evidence for Feedback And Control Systems.",
+                      "texts": [
+                        {
+                          "id": "feedback-control-systems-key-text",
+                          "title": "Control theory literature",
+                          "kind": "other",
+                          "provenance": [
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#1",
+                              "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                              "chunkIndex": 1,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16",
+                              "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                              "chunkIndex": 16,
+                              "note": "general controller"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+                              "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                              "chunkIndex": 27,
+                              "note": "negative feedback"
+                            }
+                          ]
+                        }
+                      ],
+                      "provenance": [
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#1",
+                          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                          "chunkIndex": 1,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16",
+                          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                          "chunkIndex": 16,
+                          "note": "general controller"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+                          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                          "chunkIndex": 27,
+                          "note": "negative feedback"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Control models may oversimplify social or ambiguous goals.",
+                    "Optimization can stabilize the wrong target.",
+                    "Feedback delays can create oscillation or fragility."
+                  ],
+                  "relatedGroupIds": [
+                    "complex-adaptive-system-behavior",
+                    "constraints-tradeoffs-scalability",
+                    "failure-resilience-risk"
+                  ],
+                  "keywords": [
+                    "feedback",
+                    "control theory",
+                    "stability",
+                    "controller",
+                    "optimization"
+                  ],
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                      "chunkIndex": 1,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16",
+                      "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                      "chunkIndex": 16,
+                      "note": "general controller"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+                      "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                      "chunkIndex": 27,
+                      "note": "negative feedback"
+                    }
+                  ]
+                },
+                {
+                  "id": "failure-resilience-risk",
+                  "slug": "failure-resilience-risk",
+                  "title": "Failure, Resilience, And Risk Analysis",
+                  "shortTitle": "Failure Analysis",
+                  "family": "Systems Design",
+                  "stance": "Starts from failure modes, criticality, reliability, mitigation, and resilience under stress.",
+                  "centralClaim": "Good system design anticipates how components, interfaces, software, and organizations fail before failure appears in production.",
+                  "whyItMatters": "This family is essential for review because it turns design from ideal operation into risk-aware operation.",
+                  "contributors": [
+                    {
+                      "id": "failure-resilience-risk-source-synthesis",
+                      "name": "FMEA and reliability engineering",
+                      "role": "source-grounded design family",
+                      "reason": "FMEA and reliability engineering represents the source evidence for Failure, Resilience, And Risk Analysis.",
+                      "texts": [
+                        {
+                          "id": "failure-resilience-risk-key-text",
+                          "title": "FMEA/FMECA documentation",
+                          "kind": "other",
+                          "provenance": [
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#1",
+                              "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                              "chunkIndex": 1,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#10",
+                              "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                              "chunkIndex": 10,
+                              "note": "Definition of FMEA."
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#2",
+                              "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                              "chunkIndex": 2,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+                              "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                              "chunkIndex": 3,
+                              "note": "definition"
+                            }
+                          ]
+                        }
+                      ],
+                      "provenance": [
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#1",
+                          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                          "chunkIndex": 1,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#10",
+                          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                          "chunkIndex": 10,
+                          "note": "Definition of FMEA."
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#2",
+                          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                          "chunkIndex": 2,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+                          "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                          "chunkIndex": 3,
+                          "note": "definition"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Can reduce complex failures to checklist thinking.",
+                    "Risk scores can create false precision.",
+                    "Rare systemic failures may be missed by component-level analysis."
+                  ],
+                  "relatedGroupIds": [
+                    "systems-engineering-lifecycle",
+                    "feedback-control-systems",
+                    "complex-adaptive-system-behavior"
+                  ],
+                  "keywords": [
+                    "FMEA",
+                    "risk",
+                    "reliability",
+                    "resilience",
+                    "failure modes"
+                  ],
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                      "chunkIndex": 1,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#10",
+                      "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                      "chunkIndex": 10,
+                      "note": "Definition of FMEA."
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#2",
+                      "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                      "chunkIndex": 2,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004#3",
+                      "sourceId": "corpus-systems-design-corpus-v2-03-failure-resilience-source-49c3a48e9004",
+                      "chunkIndex": 3,
+                      "note": "definition"
+                    }
+                  ]
+                },
+                {
+                  "id": "software-architecture-patterns",
+                  "slug": "software-architecture-patterns",
+                  "title": "Software Architecture And Computational Structure",
+                  "shortTitle": "Architecture",
+                  "family": "Systems Design",
+                  "stance": "Treats systems as modular computational structures of interfaces, data, algorithms, networks, and implementation constraints.",
+                  "centralClaim": "Architecture decisions shape what can scale, what can change, what fails together, and what teams can reason about.",
+                  "whyItMatters": "This family broadens systems design beyond generic engineering process into computational structure and software/system patterns.",
+                  "contributors": [
+                    {
+                      "id": "software-architecture-patterns-source-synthesis",
+                      "name": "Computer science and software architecture",
+                      "role": "source-grounded design family",
+                      "reason": "Computer science and software architecture represents the source evidence for Software Architecture And Computational Structure.",
+                      "texts": [
+                        {
+                          "id": "software-architecture-patterns-key-text",
+                          "title": "Computer science and architecture source chunks",
+                          "kind": "other",
+                          "provenance": [
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#1",
+                              "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                              "chunkIndex": 1,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#17",
+                              "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                              "chunkIndex": 17,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#14",
+                              "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                              "chunkIndex": 14,
+                              "note": "circuit design"
+                            }
+                          ]
+                        }
+                      ],
+                      "provenance": [
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#1",
+                          "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                          "chunkIndex": 1,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#17",
+                          "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                          "chunkIndex": 17,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#14",
+                          "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                          "chunkIndex": 14,
+                          "note": "circuit design"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Can become too abstract from operations.",
+                    "Patterns may be copied without context.",
+                    "Architecture diagrams can hide runtime behavior."
+                  ],
+                  "relatedGroupIds": [
+                    "systems-engineering-lifecycle",
+                    "constraints-tradeoffs-scalability",
+                    "socio-technical-enterprise-systems"
+                  ],
+                  "keywords": [
+                    "software architecture",
+                    "modularity",
+                    "interfaces",
+                    "computer architecture",
+                    "patterns"
+                  ],
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                      "chunkIndex": 1,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#17",
+                      "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                      "chunkIndex": 17,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a#14",
+                      "sourceId": "corpus-systems-design-corpus-v2-04-software-architecture-source-1124dfceac0a",
+                      "chunkIndex": 14,
+                      "note": "circuit design"
+                    }
+                  ]
+                },
+                {
+                  "id": "socio-technical-enterprise-systems",
+                  "slug": "socio-technical-enterprise-systems",
+                  "title": "Socio-Technical And Enterprise Systems",
+                  "shortTitle": "Socio-Technical",
+                  "family": "Systems Design",
+                  "stance": "Frames systems as coupled technical, organizational, stakeholder, workflow, and enterprise structures.",
+                  "centralClaim": "Many systems fail because the designed artifact and the human organization around it do not match.",
+                  "whyItMatters": "This family corrects the narrow technical bias by making stakeholders, workflows, and enterprise architecture part of the design object.",
+                  "contributors": [
+                    {
+                      "id": "socio-technical-enterprise-systems-source-synthesis",
+                      "name": "Enterprise architecture and organizational systems",
+                      "role": "source-grounded design family",
+                      "reason": "Enterprise architecture and organizational systems represents the source evidence for Socio-Technical And Enterprise Systems.",
+                      "texts": [
+                        {
+                          "id": "socio-technical-enterprise-systems-key-text",
+                          "title": "Zachman Framework and organizational systems sources",
+                          "kind": "other",
+                          "provenance": [
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#61",
+                              "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                              "chunkIndex": 61,
+                              "note": "Defines framework."
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#62",
+                              "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                              "chunkIndex": 62,
+                              "note": "Describes framework."
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+                              "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                              "chunkIndex": 258,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#334",
+                              "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                              "chunkIndex": 334,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+                              "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+                              "chunkIndex": 487,
+                              "note": "affected by decisions"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+                              "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+                              "chunkIndex": 1227,
+                              "note": "interconnectedness"
+                            }
+                          ]
+                        }
+                      ],
+                      "provenance": [
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#61",
+                          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                          "chunkIndex": 61,
+                          "note": "Defines framework."
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#62",
+                          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                          "chunkIndex": 62,
+                          "note": "Describes framework."
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+                          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                          "chunkIndex": 258,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#334",
+                          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                          "chunkIndex": 334,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+                          "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+                          "chunkIndex": 487,
+                          "note": "affected by decisions"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+                          "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+                          "chunkIndex": 1227,
+                          "note": "interconnectedness"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Can become vague if every stakeholder concern is included.",
+                    "Organizational evidence may be less formal than technical evidence.",
+                    "Enterprise frameworks can over-document without improving decisions."
+                  ],
+                  "relatedGroupIds": [
+                    "requirements-design-process",
+                    "software-architecture-patterns",
+                    "constraints-tradeoffs-scalability"
+                  ],
+                  "keywords": [
+                    "socio-technical",
+                    "stakeholders",
+                    "enterprise architecture",
+                    "workflow",
+                    "organization"
+                  ],
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#61",
+                      "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                      "chunkIndex": 61,
+                      "note": "Defines framework."
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#62",
+                      "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                      "chunkIndex": 62,
+                      "note": "Describes framework."
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+                      "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                      "chunkIndex": 258,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#334",
+                      "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+                      "chunkIndex": 334,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+                      "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+                      "chunkIndex": 487,
+                      "note": "affected by decisions"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+                      "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+                      "chunkIndex": 1227,
+                      "note": "interconnectedness"
+                    }
+                  ]
+                },
+                {
+                  "id": "requirements-design-process",
+                  "slug": "requirements-design-process",
+                  "title": "Requirements And Design Process",
+                  "shortTitle": "Requirements",
+                  "family": "Systems Design",
+                  "stance": "Focuses on elicitation, analysis, negotiation, traceability, iteration, and problem definition.",
+                  "centralClaim": "Requirements convert needs and constraints into design commitments that can be debated, built, verified, and revised.",
+                  "whyItMatters": "This keeps the useful part of v1, but makes it one category rather than the entire map.",
+                  "contributors": [
+                    {
+                      "id": "requirements-design-process-source-synthesis",
+                      "name": "Requirements engineering",
+                      "role": "source-grounded design family",
+                      "reason": "Requirements engineering represents the source evidence for Requirements And Design Process.",
+                      "texts": [
+                        {
+                          "id": "requirements-design-process-key-text",
+                          "title": "Requirements engineering and INCOSE/UML source chunks",
+                          "kind": "other",
+                          "provenance": [
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                              "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                              "chunkIndex": 1,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#3",
+                              "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                              "chunkIndex": 3,
+                              "note": "problems listed"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#2",
+                              "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                              "chunkIndex": 2,
+                              "note": "Initial step."
+                            }
+                          ]
+                        }
+                      ],
+                      "provenance": [
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                          "chunkIndex": 1,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#3",
+                          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                          "chunkIndex": 3,
+                          "note": "problems listed"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#2",
+                          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                          "chunkIndex": 2,
+                          "note": "Initial step."
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Requirements can freeze uncertainty too early.",
+                    "Stakeholders may not know what they need.",
+                    "Traceability can become paperwork if not tied to decisions."
+                  ],
+                  "relatedGroupIds": [
+                    "systems-engineering-lifecycle",
+                    "socio-technical-enterprise-systems",
+                    "constraints-tradeoffs-scalability"
+                  ],
+                  "keywords": [
+                    "requirements",
+                    "elicitation",
+                    "traceability",
+                    "iteration",
+                    "problem definition"
+                  ],
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                      "chunkIndex": 1,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#3",
+                      "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                      "chunkIndex": 3,
+                      "note": "problems listed"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#2",
+                      "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                      "chunkIndex": 2,
+                      "note": "Initial step."
+                    }
+                  ]
+                },
+                {
+                  "id": "constraints-tradeoffs-scalability",
+                  "slug": "constraints-tradeoffs-scalability",
+                  "title": "Constraints, Tradeoffs, And Scalability",
+                  "shortTitle": "Tradeoffs",
+                  "family": "Systems Design",
+                  "stance": "Evaluates systems through cost, complexity, scalability, reliability, performance, maintainability, and assumptions.",
+                  "centralClaim": "System design is mostly choosing constraints: improving one dimension often pressures another.",
+                  "whyItMatters": "This family makes the system-comparison recipe explicit by foregrounding tradeoffs rather than only naming methods.",
+                  "contributors": [
+                    {
+                      "id": "constraints-tradeoffs-scalability-source-synthesis",
+                      "name": "Scalability and data-system design",
+                      "role": "source-grounded design family",
+                      "reason": "Scalability and data-system design represents the source evidence for Constraints, Tradeoffs, And Scalability.",
+                      "texts": [
+                        {
+                          "id": "constraints-tradeoffs-scalability-key-text",
+                          "title": "Scalability, assumptions, and relational database source chunks",
+                          "kind": "other",
+                          "provenance": [
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197",
+                              "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+                              "chunkIndex": 197,
+                              "note": "definition"
+                            },
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+                              "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+                              "chunkIndex": 1120,
+                              "note": "definition"
+                            }
+                          ]
+                        }
+                      ],
+                      "provenance": [
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197",
+                          "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+                          "chunkIndex": 197,
+                          "note": "definition"
+                        },
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+                          "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+                          "chunkIndex": 1120,
+                          "note": "definition"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Tradeoff language can become generic without concrete metrics.",
+                    "Optimizing visible constraints may ignore hidden social costs.",
+                    "Scalability concerns can dominate maintainability or safety."
+                  ],
+                  "relatedGroupIds": [
+                    "software-architecture-patterns",
+                    "failure-resilience-risk",
+                    "socio-technical-enterprise-systems"
+                  ],
+                  "keywords": [
+                    "tradeoffs",
+                    "constraints",
+                    "scalability",
+                    "performance",
+                    "maintainability"
+                  ],
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#197",
+                      "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+                      "chunkIndex": 197,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396#1120",
+                      "sourceId": "corpus-systems-design-corpus-v2-06-tradeoffs-constraints-source-7e57382b6396",
+                      "chunkIndex": 1120,
+                      "note": "definition"
+                    }
+                  ]
+                },
+                {
+                  "id": "complex-adaptive-system-behavior",
+                  "slug": "complex-adaptive-system-behavior",
+                  "title": "Complex And Adaptive System Behavior",
+                  "shortTitle": "Complex Systems",
+                  "family": "Systems Design",
+                  "stance": "Studies emergence, nonlinear behavior, load sharing, adaptation, and system-level behavior under stress.",
+                  "centralClaim": "Some failures and behaviors only appear at the system level, after interactions compound beyond local components.",
+                  "whyItMatters": "This family gives the map a nonlinear systems layer and prevents the packet from being only process and architecture.",
+                  "contributors": [
+                    {
+                      "id": "complex-adaptive-system-behavior-source-synthesis",
+                      "name": "Complex systems and load-sharing research",
+                      "role": "source-grounded design family",
+                      "reason": "Complex systems and load-sharing research represents the source evidence for Complex And Adaptive System Behavior.",
+                      "texts": [
+                        {
+                          "id": "complex-adaptive-system-behavior-key-text",
+                          "title": "Load-sharing complex systems source",
+                          "kind": "other",
+                          "provenance": [
+                            {
+                              "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+                              "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+                              "chunkIndex": 1,
+                              "note": "abstract"
+                            }
+                          ]
+                        }
+                      ],
+                      "provenance": [
+                        {
+                          "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+                          "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+                          "chunkIndex": 1,
+                          "note": "abstract"
+                        }
+                      ]
+                    }
+                  ],
+                  "objections": [
+                    "Can be too abstract for direct design decisions.",
+                    "Emergent behavior is hard to verify before deployment.",
+                    "Complexity explanations can become unfalsifiable if not tied to evidence."
+                  ],
+                  "relatedGroupIds": [
+                    "feedback-control-systems",
+                    "failure-resilience-risk",
+                    "constraints-tradeoffs-scalability"
+                  ],
+                  "keywords": [
+                    "complex systems",
+                    "emergence",
+                    "load sharing",
+                    "nonlinear",
+                    "adaptation"
+                  ],
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+                      "chunkIndex": 1,
+                      "note": "abstract"
+                    }
+                  ]
+                }
+              ],
+              "relations": [
+                {
+                  "id": "systems-engineering-lifecycle-requirements-design-process",
+                  "source": "systems-engineering-lifecycle",
+                  "target": "requirements-design-process",
+                  "kind": "neighbors",
+                  "note": "Systems Engineering and Requirements are related by the enriched group review.",
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 6,
+                      "note": "Defines PSE, ESE, SSE."
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 20,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                      "chunkIndex": 1,
+                      "note": "sub-function"
+                    }
+                  ]
+                },
+                {
+                  "id": "systems-engineering-lifecycle-software-architecture-patterns",
+                  "source": "systems-engineering-lifecycle",
+                  "target": "software-architecture-patterns",
+                  "kind": "neighbors",
+                  "note": "Systems Engineering and Architecture are related by the enriched group review.",
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 6,
+                      "note": "Defines PSE, ESE, SSE."
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 20,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                      "chunkIndex": 1,
+                      "note": "sub-function"
+                    }
+                  ]
+                },
+                {
+                  "id": "systems-engineering-lifecycle-failure-resilience-risk",
+                  "source": "systems-engineering-lifecycle",
+                  "target": "failure-resilience-risk",
+                  "kind": "neighbors",
+                  "note": "Systems Engineering and Failure Analysis are related by the enriched group review.",
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 6,
+                      "note": "Defines PSE, ESE, SSE."
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+                      "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+                      "chunkIndex": 20,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+                      "chunkIndex": 1,
+                      "note": "sub-function"
+                    }
+                  ]
+                },
+                {
+                  "id": "feedback-control-systems-complex-adaptive-system-behavior",
+                  "source": "feedback-control-systems",
+                  "target": "complex-adaptive-system-behavior",
+                  "kind": "neighbors",
+                  "note": "Feedback Control and Complex Systems are related by the enriched group review.",
+                  "provenance": [
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#1",
+                      "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                      "chunkIndex": 1,
+                      "note": "definition"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16",
+                      "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                      "chunkIndex": 16,
+                      "note": "general controller"
+                    },
+                    {
+                      "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+                      "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+                      "chunkIndex": 27,
+                      "note": "negative feedback"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

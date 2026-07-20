@@ -1,0 +1,33 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 2,
+  "chunkIds": [
+    "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#571"
+  ],
+  "charLimit": 420,
+  "estimatedInputTokens": 1010,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Metaphysics",
+        "kind": "book",
+        "author": "Aristotle",
+        "provenance": [
+          {
+            "chunkId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359#571",
+            "sourceId": "corpus-consciousness-theories-v2-corpus-test-202607202002-dualism-idealism-cd5ca881f359",
+            "chunkIndex": 571,
+            "note": "extracted from this chunk"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

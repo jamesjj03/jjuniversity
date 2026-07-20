@@ -1,0 +1,71 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 6,
+  "chunkIds": [
+    "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#289"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 764,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "corruption",
+        "summary": "networked influence",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#289",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+            "chunkIndex": 289,
+            "note": "Zhang, 2013"
+          }
+        ]
+      },
+      {
+        "label": "guanxi",
+        "summary": "Chinese influence network",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#289",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+            "chunkIndex": 289,
+            "note": "Yin, 2017"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Master’s thesis",
+        "kind": "other",
+        "author": "Yin, Xiangru",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#289",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+            "chunkIndex": 289,
+            "note": "IDCE"
+          }
+        ]
+      },
+      {
+        "title": "CNN article",
+        "kind": "other",
+        "author": "Zhang, Lijia",
+        "provenance": [
+          {
+            "chunkId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f#289",
+            "sourceId": "corpus-visual-art-movements-corpus-v2-202607202002-global-institutions-3a585d32fe2f",
+            "chunkIndex": 289,
+            "note": "CNN"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

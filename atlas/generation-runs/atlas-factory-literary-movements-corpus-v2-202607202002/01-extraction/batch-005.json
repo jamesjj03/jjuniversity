@@ -1,0 +1,48 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 5,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#831"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 756,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [],
+    "claims": [],
+    "texts": [
+      {
+        "title": "Glance at Genre: Rhetorical Strategies",
+        "kind": "other",
+        "author": "",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#831",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+            "chunkIndex": 831,
+            "note": "discusses logical fallacies."
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "logical fallacies",
+        "target": "writing",
+        "kind": "pressures",
+        "note": "writers should be aware of them",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#831",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+            "chunkIndex": 831,
+            "note": "writers should be aware of them."
+          }
+        ]
+      }
+    ]
+  }
+}

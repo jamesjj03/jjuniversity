@@ -1,0 +1,118 @@
+{
+  "id": "electronic-dance-and-studio-technology-lineages",
+  "slug": "electronic-dance-and-studio-technology-lineages",
+  "title": "Electronic, dance, and studio technology lineages",
+  "shortTitle": "Electronic/dance",
+  "family": "Music",
+  "stance": "innovative",
+  "centralClaim": "The convergence of technological innovation (tape manipulation, synthesizers, drum machines) with evolving musical aesthetics shaped new forms of dance music and studio production.",
+  "whyItMatters": "This lineage demonstrates the profound impact of technology on artistic expression, influencing popular music genres and redefining the role of the producer as an artist.",
+  "contributors": [
+    {
+      "id": "person-pierre-schaeffer",
+      "name": "Pierre Schaeffer",
+      "role": "pioneer",
+      "reason": "Developed *musique concrète*, a foundational technique for electronic music using recorded sounds.",
+      "texts": [
+        {
+          "id": "text-pierre-schaeffer-in-salons",
+          "title": "In salons",
+          "kind": "essay",
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#6",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#6",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    },
+    {
+      "id": "person-karlheinz-stockhausen",
+      "name": "Karlheinz Stockhausen",
+      "role": "innovator",
+      "reason": "Expanded electronic music through serial composition and spatial audio experimentation.",
+      "texts": [
+        {
+          "id": "text-karlheinz-stockhausen-studien-i-ii-iii",
+          "title": "Studien I-III",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#6",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#6",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    },
+    {
+      "id": "person-kraftwerk",
+      "name": "Kraftwerk",
+      "role": "popularizer",
+      "reason": "Brought electronic music to a wider audience through accessible pop structures and iconic imagery.",
+      "texts": [
+        {
+          "id": "text-kraftwerk-autobahn",
+          "title": "Autobahn",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "arts-music-music-lineages#6",
+              "sourceId": "arts-music-music-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "arts-music-music-lineages#6",
+          "sourceId": "arts-music-music-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Early electronic music was often perceived as cold and sterile.",
+    "The reliance on technology could overshadow artistic creativity.",
+    "Accessibility to studio equipment limited participation in the movement.",
+    "Commercialization diluted experimental approaches."
+  ],
+  "relatedGroupIds": [
+    "hip-hop-and-sample-based-lineages",
+    "experimental-punk-and-independent-scenes"
+  ],
+  "keywords": [
+    "electronic music",
+    "studio technology",
+    "dance music",
+    "synthesis",
+    "sampling",
+    "musique concrète"
+  ],
+  "provenance": [
+    {
+      "chunkId": "arts-music-music-lineages#6",
+      "sourceId": "arts-music-music-lineages",
+      "chunkIndex": 6
+    }
+  ]
+}

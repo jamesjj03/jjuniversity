@@ -1,0 +1,114 @@
+{
+  "stage": "relations",
+  "ok": true,
+  "relations": [
+    {
+      "id": "systems-engineering-lifecycle-requirements-design-process",
+      "source": "systems-engineering-lifecycle",
+      "target": "requirements-design-process",
+      "kind": "neighbors",
+      "note": "Systems Engineering and Requirements are related by the enriched group review.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 6,
+          "note": "Defines PSE, ESE, SSE."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 20,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+          "chunkIndex": 1,
+          "note": "sub-function"
+        }
+      ]
+    },
+    {
+      "id": "systems-engineering-lifecycle-software-architecture-patterns",
+      "source": "systems-engineering-lifecycle",
+      "target": "software-architecture-patterns",
+      "kind": "neighbors",
+      "note": "Systems Engineering and Architecture are related by the enriched group review.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 6,
+          "note": "Defines PSE, ESE, SSE."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 20,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+          "chunkIndex": 1,
+          "note": "sub-function"
+        }
+      ]
+    },
+    {
+      "id": "systems-engineering-lifecycle-failure-resilience-risk",
+      "source": "systems-engineering-lifecycle",
+      "target": "failure-resilience-risk",
+      "kind": "neighbors",
+      "note": "Systems Engineering and Failure Analysis are related by the enriched group review.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#6",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 6,
+          "note": "Defines PSE, ESE, SSE."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4#20",
+          "sourceId": "corpus-systems-design-corpus-v2-01-systems-engineering-source-23d5c9cd10a4",
+          "chunkIndex": 20,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e#1",
+          "sourceId": "corpus-systems-design-corpus-v2-07-design-process-source-f3ca436c628e",
+          "chunkIndex": 1,
+          "note": "sub-function"
+        }
+      ]
+    },
+    {
+      "id": "feedback-control-systems-complex-adaptive-system-behavior",
+      "source": "feedback-control-systems",
+      "target": "complex-adaptive-system-behavior",
+      "kind": "neighbors",
+      "note": "Feedback Control and Complex Systems are related by the enriched group review.",
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#1",
+          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+          "chunkIndex": 1,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#16",
+          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+          "chunkIndex": 16,
+          "note": "general controller"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f#27",
+          "sourceId": "corpus-systems-design-corpus-v2-02-control-feedback-source-e20d8648008f",
+          "chunkIndex": 27,
+          "note": "negative feedback"
+        }
+      ]
+    }
+  ]
+}

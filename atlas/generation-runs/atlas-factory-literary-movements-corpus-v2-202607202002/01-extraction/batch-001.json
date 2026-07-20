@@ -1,0 +1,47 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 1,
+  "chunkIds": [
+    "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2018"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 752,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "Harlem Renaissance",
+        "summary": "Cultural expression by urban Black people.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2018",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 2018,
+            "note": "defined"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": [
+      {
+        "source": "Harlem Renaissance",
+        "target": "African American artists and writers",
+        "kind": "influences",
+        "note": "Formulated culture.",
+        "provenance": [
+          {
+            "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2018",
+            "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+            "chunkIndex": 2018,
+            "note": "defined"
+          }
+        ]
+      }
+    ]
+  }
+}

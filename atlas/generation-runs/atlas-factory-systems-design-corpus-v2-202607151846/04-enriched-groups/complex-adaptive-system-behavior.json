@@ -1,0 +1,66 @@
+{
+  "id": "complex-adaptive-system-behavior",
+  "slug": "complex-adaptive-system-behavior",
+  "title": "Complex And Adaptive System Behavior",
+  "shortTitle": "Complex Systems",
+  "family": "Systems Design",
+  "stance": "Studies emergence, nonlinear behavior, load sharing, adaptation, and system-level behavior under stress.",
+  "centralClaim": "Some failures and behaviors only appear at the system level, after interactions compound beyond local components.",
+  "whyItMatters": "This family gives the map a nonlinear systems layer and prevents the packet from being only process and architecture.",
+  "contributors": [
+    {
+      "id": "complex-adaptive-system-behavior-source-synthesis",
+      "name": "Complex systems and load-sharing research",
+      "role": "source-grounded design family",
+      "reason": "Complex systems and load-sharing research represents the source evidence for Complex And Adaptive System Behavior.",
+      "texts": [
+        {
+          "id": "complex-adaptive-system-behavior-key-text",
+          "title": "Load-sharing complex systems source",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+              "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+              "chunkIndex": 1,
+              "note": "abstract"
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+          "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+          "chunkIndex": 1,
+          "note": "abstract"
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Can be too abstract for direct design decisions.",
+    "Emergent behavior is hard to verify before deployment.",
+    "Complexity explanations can become unfalsifiable if not tied to evidence."
+  ],
+  "relatedGroupIds": [
+    "feedback-control-systems",
+    "failure-resilience-risk",
+    "constraints-tradeoffs-scalability"
+  ],
+  "keywords": [
+    "complex systems",
+    "emergence",
+    "load sharing",
+    "nonlinear",
+    "adaptation"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3#1",
+      "sourceId": "corpus-systems-design-corpus-v2-08-complex-systems-source-d8dd301f82e3",
+      "chunkIndex": 1,
+      "note": "abstract"
+    }
+  ]
+}

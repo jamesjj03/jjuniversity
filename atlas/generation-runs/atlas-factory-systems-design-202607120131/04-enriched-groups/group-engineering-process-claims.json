@@ -1,0 +1,76 @@
+{
+  "id": "group-engineering-process-claims",
+  "slug": "group-engineering-process-claims",
+  "title": "Engineering Design Process Claims",
+  "shortTitle": "Process Claims",
+  "family": "Engineering Design Process Claims family",
+  "stance": "Neutral",
+  "centralClaim": "The engineering design process is iterative.",
+  "whyItMatters": "Iterative processes allow for adaptation to changing requirements and early identification of flaws, improving overall system quality.",
+  "contributors": [
+    {
+      "id": "person-eric-raymond",
+      "name": "Eric Raymond",
+      "role": "Advocate",
+      "reason": "Raymond champions iterative development in software engineering, emphasizing rapid prototyping and feedback loops.",
+      "texts": [
+        {
+          "id": "text-the-art-of-unix-programming",
+          "title": "The Art of Unix Programming",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "corpus-systems-design-source-054dda302408#1",
+              "sourceId": "corpus-systems-design-source-054dda302408",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "person-donald-knuth",
+      "name": "Donald Knuth",
+      "role": "Advocate",
+      "reason": "Knuth's work on the TeX typesetting system exemplifies an iterative design approach, with continuous refinement based on user feedback.",
+      "texts": [
+        {
+          "id": "text-the-texbook",
+          "title": "The TeXBook",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "corpus-systems-design-source-054dda302408#1",
+              "sourceId": "corpus-systems-design-source-054dda302408",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1
+        }
+      ]
+    }
+  ],
+  "objections": [],
+  "relatedGroupIds": [],
+  "keywords": [],
+  "provenance": [
+    {
+      "chunkId": "corpus-systems-design-source-054dda302408#1",
+      "sourceId": "corpus-systems-design-source-054dda302408",
+      "chunkIndex": 1
+    }
+  ]
+}

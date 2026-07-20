@@ -1,0 +1,429 @@
+{
+  "stage": "source-manifest",
+  "ok": true,
+  "recipe": {
+    "id": "historical_movement",
+    "title": "Historical Movement",
+    "purpose": "Organize cultural or historical material by movements, scenes, eras, and reactions.",
+    "groupingLogic": "Groups should be movements or scenes with shared style, context, institutions, or oppositional identity.",
+    "preferredGroupFields": [
+      "movementContext",
+      "definingStyle",
+      "centralClaim",
+      "contributors",
+      "keyTexts",
+      "pressurePoints"
+    ],
+    "contributorRules": "Contributors should represent the movement, launch it, popularize it, or define its counter-movement.",
+    "expectedRelationTypes": [
+      "influences",
+      "opposes",
+      "reframes",
+      "neighbors",
+      "borrows"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 10
+    },
+    "generationInstructions": "Anchor groups in context and style. Do not collapse movements into individual biography unless the source demands it. First production release QC guidance: - Avoid single linear progress narratives; require parallel movement branches, regional balance checks, and relation notes that name transmission mechanisms.",
+    "evaluationCriteria": [
+      "Groups have historical context",
+      "Movement boundaries are defensible",
+      "Relations show reaction or influence",
+      "Representative figures are justified"
+    ]
+  },
+  "sourcePacket": {
+    "sources": [
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+        "title": "[Corpus v2] U.S. History",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-us-history"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+        "title": "[Corpus v2] Writing Guide with Handbook",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-writing-guide"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0",
+        "title": "[Corpus v2] Architecture",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Architecture"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f",
+        "title": "[Corpus v2] Introduction to Anthropology",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-introduction-anthropology"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807",
+        "title": "[Corpus v2] Hinduism",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Hinduism"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+        "title": "[Corpus v2] Fascism",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Fascism"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-romanticism-realism-e2239dd922c8",
+        "title": "[Corpus v2] Art history",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Art_history"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-romanticism-realism-49774c511f08",
+        "title": "[Corpus v2] U.S. History",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://github.com/openstax/osbooks-us-history"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b",
+        "title": "[Corpus v2] Renaissance",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Renaissance"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-798e3aac5e37",
+        "title": "[Corpus v2] Literary criticism",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Literary_criticism"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+        "title": "[Corpus v2] Greek mythology",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Greek_mythology"
+      },
+      {
+        "id": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+        "title": "[Corpus v2] Literature",
+        "creator": "Pipeline KB",
+        "sourceType": "other",
+        "territorySlug": "humanities",
+        "branchSlug": "literature",
+        "mapSlug": "literary-movements-corpus-v2-202607202002",
+        "filePath": "",
+        "canonicalUrl": "https://en.wikipedia.org/wiki/Literature"
+      }
+    ],
+    "chunks": [
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+        "chunkIndex": 1594,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#1594",
+        "heading": "U.S. History",
+        "text": "African American poet, playwright, and novelist of the realist period, Paul Laurence Dunbar dealt with issues of race at a time when most reform-minded Americans preferred to focus on other issues. Through his combination of writing in both standard English and Black dialect, Dunbar delighted readers with his rich portrayals of the successes and struggles associated with African American life. Although he initially struggled to find the patronage and financial support required to develop a full-time literary career, Dunbar’s subsequent professional relationship with literary critic and Atlantic Monthly editor William Dean Howells helped to firmly cement his literary credentials as the foremost African American writer of his generation. As with Chopin and Harding Davis, Dunbar’s writing highlighted parts of the American experience that were not well understood by the dominant demographic of the country. In their work, these authors provided readers with insights into a world that was not necessarily familiar to them and also gave hidden communities—be it iron mill workers, southern women, or African American men—a sense of voice.\n\nAtlantic Monthly",
+        "charCount": 1164,
+        "tokenEstimate": 291
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+        "chunkIndex": 2018,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2018",
+        "heading": "U.S. History",
+        "text": "Revived by the wartime migration and fired up by the  violence of the postwar riots, urban Black people developed a strong cultural expression in the 1920s that came to be known as the Harlem Renaissance. In this rediscovery of Black culture, African American artists and writers formulated an independent Black culture and encouraged racial pride, rejecting any emulation of  American culture. Claude McKay’s poem “If We Must Die” called on African Americans to start fighting back in the wake of the Red Summer riots of 1919 (discussed in a previous chapter, ). Langston Hughes, often nicknamed the “poet laureate” of the movement, invoked sacrifice and the just cause of civil rights in “The Colored Soldier,” while another author of the movement, Zora Neale Hurston, celebrated the life and dialect of rural Black people in a fictional, all-Black town in Florida. Hurston’s Their Eyes Were Watching God was published in 1937.\n\nTheir Eyes Were Watching God\n\nThe Jamaican-born poet and novelist Claude McKay articulated the new sense of self and urban community of African Americans during the Harlem Renaissance. Although centered in the Harlem neighborhood of Manhattan, this cultural movement emerged in urban centers throughout the Northeast and Midwest.",
+        "charCount": 1260,
+        "tokenEstimate": 315
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08",
+        "chunkIndex": 2374,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-49774c511f08#2374",
+        "heading": "U.S. History",
+        "text": "In addition to loyalty review boards, the House Committee on Un-American Activities (HUAC) was established in 1938 to investigate claims of disloyalty and subversive activities among private citizens. It directed much of its attention to rooting out suspected Communists in business, academia, and the media. HUAC was particularly interested in Hollywood because it feared that Communist sympathizers might use motion pictures as pro-Soviet propaganda. Witnesses were subpoenaed and required to testify before the committee; refusal could result in imprisonment. Those who invoked Fifth Amendment protections, or were otherwise suspected of Communist sympathies, often lost their jobs or found themselves on a blacklist , which prevented them from securing employment. Notable artists who were blacklisted in the 1940s and 1950s include composer Leonard Bernstein, novelist Dashiell Hammett, playwright and screenwriter Lillian Hellman, actor and singer Paul Robeson, and musician Artie Shaw.\n\nblacklist\n\nTO THE TRENCHES AGAIN",
+        "charCount": 1026,
+        "tokenEstimate": 257
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+        "chunkIndex": 340,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#340",
+        "heading": "Writing Guide with Handbook",
+        "text": "“Vous avez des livres de Dickens?” the woman inquired. “Yes,” I responded, “we have several books by Dickens.”\n\nAlternatively, consider sharing your own thoughts in another language, retaining traces of that language’s structure and grammar. Reflection Trailblazer: Sandra Cisneros does this in Spanish, and Nigerian author Chimamanda Ngozi-Adichie (b. 1977) does this in Igbo. Both serve as models of how to incorporate another language into writing. In addition, some professional authors write in the language of the country they live in. For example, Irish playwright, poet, and novelist Samuel Beckett (1906–1989) lived in France and wrote in both French and English. American author Jhumpa Lahiri (b. 1967), who was born in London to Indian parents, lived for years in Italy and has written in Italian as well as her native English.\n\nCisneros\n\nNgozi-Adichie\n\nBeckett\n\nLahiri\n\nPublish Your Work\n\nPublishing your personal writing is the next step you may want to take. In addition to your campus literary magazine, the following journals accept undergraduate creative work and are often looking for submissions.\n\nThe Allegheny Review\n\nCreative Nonfiction\n\nInquiries Journal\n\nInternational Journal of Undergraduate Research & Creative Activities\n\n## Memoir or Personal Narrative: Learning Lessons from the Personal\n\n### Portfolio: Filtered Memories (m00047)\n\nLearning Outcomes\n\nBy the end of this section, you will be able to:\n\nReflect on the composition process.",
+        "charCount": 1466,
+        "tokenEstimate": 367
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+        "chunkIndex": 782,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#782",
+        "heading": "Writing Guide with Handbook",
+        "text": "First, when an interesting news item comes over the airwaves, Blow decides his opinion on the subject. Then he thinks about whether his readers might care about the subject. He does not stop there, though. Because Blow is a visual op-ed columnist, he will not pursue the topic if he cannot think of a visual hook to support his position or argument. He then studies data about the topic and asks himself whether the data surprises him or might surprise readers. His audience expects solid graphic aids in his columns, and it is the combination of written prose and visual hooks that makes him stand apart from other op-ed writers.\n\nIn addition to writing for The New York Times , Blow is the author of the memoir Fire Shut Up in My Bones and The Devil You Know: A Black Power Manifesto .\n\nThe New York Times\n\nFire Shut Up in My Bones\n\nThe Devil You Know: A Black Power Manifesto\n\nDevil You Know: A Black Power Manifesto\n\nDiscussion Questions\n\n## Position Argument: Practicing the Art of Rhetoric\n\n### Glance at Genre: Thesis, Reasoning, and Evidence (m00101)\n\nLearning Outcomes\n\nBy the end of this section, you will be able to:\n\nArticulate and analyze key rhetorical concepts in presenting a position or an argument.\n\nDemonstrate awareness of context, audience, and purpose in a position argument.",
+        "charCount": 1297,
+        "tokenEstimate": 325
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af",
+        "chunkIndex": 831,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-authors-texts-ea82464167af#831",
+        "heading": "Writing Guide with Handbook",
+        "text": "Fallacies are mistakes in logic. Readers and writers should be aware of these when they creep into writing, indicating that the points the writers make may not be valid. Two common fallacies are hasty generalizations and circular arguments. See Glance at Genre: Rhetorical Strategies for more on logical fallacies.\n\nFallacies\n\nA hasty generalization is a conclusion based on either inadequate or biased evidence. Consider this statement: “Two students in Math 103 were nervous before their recent test; therefore, all students in that class must have text anxiety.” This is a hasty generalization because the second part of the statement (the generalization about all students in the class) is inadequate to support what the writer noted about only two students.\n\nhasty generalization\n\nA circular argument is one that merely restates what has already been said. Consider this statement: “ The Hate U Give is a well-written book because Angie Thomas, its author, is a good novelist.” The statement that Thomas is a good novelist does not explain why her book is well written.\n\ncircular argument\n\nThe Hate U Give\n\nThomas\n\nIn addition to checking work for fallacies, consider propaganda , information worded so that it endorses a particular viewpoint, often of a political nature. Two common types of propaganda are bandwagon and fear .\n\npropaganda\n\nbandwagon\n\nfear",
+        "charCount": 1362,
+        "tokenEstimate": 341
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+        "chunkIndex": 1,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#1",
+        "heading": "Greek mythology",
+        "text": "Greek mythology is the body of myths originally told by the ancient Greeks, and a genre of ancient Greek folklore, today absorbed alongside Roman mythology into the broader designation of classical mythology. These stories concern the  origin and nature of the world, the lives of deities, and heroes and the significance of the ancient Greeks' cult and ritual practices. Modern scholars study the myths to shed light on the religious and political institutions of ancient Greece, and to better understand the nature of mythmaking itself.\nThe Greek myths were initially propagated in an oral-poetic tradition most likely by Minoan and Mycenaean singers starting in the 18th century BC; eventually the myths of the heroes of the Trojan War and its aftermath became part of the oral tradition of Homer's epic poems, the Iliad and the Odyssey. Two poems by Homer's near contemporary Hesiod, the Theogony and the Works and Days, contain accounts of the genesis of the world, the succession of divine rulers, the succession of human ages, the origin of human woes, and the origin of sacrificial practices. Myths are also preserved in the Homeric Hymns, in fragments of epic poems of the Epic Cycle, in lyric poems, in the works of the tragedians and comedians of the fifth century BC, in writings of scholars and poets of the Hellenistic Age, and in texts from the time of the Roman Empire by writers such as Plutarch and Pausanias.\nAside from this narrative deposit in ancient Greek literature, pictorial representations of gods, heroes, and mythic episodes featured prominently in ancient vase paintings and the decoration of votive gifts and many other artifacts. Geometric designs on pottery of the eighth century BC depict scenes from the Epic Cycle as well as the adventures of Heracles. In the succeeding Archaic, Classical, and Hellenistic periods, Homeric and various other mythological scenes appear, supplementing the existing literary evidence.\nGreek mythology has had an extensive influence on the culture, arts, and literature of Western civilization and remains part of Western heritage and language. Poets and artists from ancient times to the present have derived inspiration from Greek mythology and have discovered contemporary significance and relevance in the themes.",
+        "charCount": 2283,
+        "tokenEstimate": 571
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+        "chunkIndex": 3,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#3",
+        "heading": "Greek mythology",
+        "text": "Among the earliest literary sources are Homer's two epic poems, the Iliad and the Odyssey. Other poets completed the Epic Cycle, but these later and lesser poems now are lost almost entirely. Despite their traditional name, the Homeric Hymns have no direct connection with Homer. The oldest are choral hymns from the earlier part of the so-called Lyric age. Hesiod, a possible contemporary with Homer, offers in his Theogony (Origin of the Gods) the fullest account of the earliest Greek myths, dealing with the creation of the world, the origin of the gods, Titans, and Giants, as well as elaborate genealogies, folktales, and aetiological myths. Hesiod's Works and Days, a didactic poem about farming life, also includes the myths of Prometheus, Pandora, and the Five Ages. The poet advises on the best way to succeed in a dangerous world, rendered yet more dangerous by its gods.\nLyrical poets often took their subjects from myth, but their treatment became gradually less narrative and more allusive. Greek lyric poets, including Pindar, Bacchylides and Simonides, and bucolic poets such as Theocritus and Bion, relate individual mythological incidents. Additionally, myth was central to classical Athenian drama. The tragic playwrights Aeschylus, Sophocles, and Euripides took most of their plots from myths of the age of heroes and the Trojan War. Many of the great tragic stories (e.g. Agamemnon and his children, Oedipus, Jason, Medea, etc.) took on their classic form in these tragedies. The comic playwright Aristophanes also used myths, in The Birds and The Frogs.\nHistorians Herodotus and Diodorus Siculus, and geographers Pausanias and Strabo, who traveled throughout the Greek world and noted the stories they heard, supplied numerous local myths and legends, often giving little-known alternative versions. Herodotus in particular, searched the various traditions he encountered and found the historical or mythological roots in the confrontation between Greece and the East. Herodotus attempted to reconcile origins and the blending of differing cultural concepts.\nThe poetry of the Hellenistic and Roman ages was primarily composed as a literary rather than cultic exercise. Nevertheless, it contains many important details that would otherwise be lost. This category includes the works of:",
+        "charCount": 2307,
+        "tokenEstimate": 577
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff",
+        "chunkIndex": 37,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-71eb20e65bff#37",
+        "heading": "Greek mythology",
+        "text": "== Motifs in Western art and literature ==\n\nThe widespread adoption of Christianity did not curb the popularity of the myths. The Matter of Rome, one of the major literary cycles of Medieval Europe, covered material from ancient Greek myths as well as stories from Greek and Roman history. With the revival of interest in classical literature in the Renaissance, the poetry of Ovid became a major influence on the imagination of poets, dramatists, musicians and artists. From the early years of Renaissance, artists such as Leonardo da Vinci, Michelangelo, and Raphael, portrayed the pagan subjects of Greek mythology alongside more conventional Christian themes. Through the medium of Latin and the works of Ovid, Greek myth influenced medieval and Renaissance poets such as Petrarch, Boccaccio and Dante in Italy.",
+        "charCount": 815,
+        "tokenEstimate": 204
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+        "chunkIndex": 6,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#6",
+        "heading": "Literature",
+        "text": "Ancient Egyptian literature, along with Sumerian literature, are considered the world's oldest literatures. The primary genres of the literature of ancient Egypt—didactic texts, hymns and prayers, and tales—were written almost entirely in verse; By the Old Kingdom (26th century BC to 22nd century BC), literary works included funerary texts, epistles and letters, hymns and poems, and commemorative autobiographical texts recounting the careers of prominent administrative officials. It was not until the early Middle Kingdom (21st century BC to 17th century BC) that a narrative Egyptian literature was created.\nMany works of early periods, even in narrative form, had a covert moral or didactic purpose, such as the Sanskrit Panchatantra (200 BC–300 AD), based on older oral tradition. Drama and satire also developed as urban cultures, which provided a larger public audience, and later readership for literary production. Lyric poetry (as opposed to epic poetry) was often the speciality of courts and aristocratic circles, particularly in East Asia where songs were collected by the Chinese aristocracy as poems, the most notable being the Shijing or Book of Songs (1046–c. 600 BC).",
+        "charCount": 1188,
+        "tokenEstimate": 297
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+        "chunkIndex": 7,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#7",
+        "heading": "Literature",
+        "text": "In ancient China, early literature was primarily focused on philosophy, historiography, military science, agriculture, and poetry. China, the origin of modern paper making and woodblock printing, produced the world's first print cultures. Much of Chinese literature originates with the Hundred Schools of Thought period that occurred during the Eastern Zhou dynasty (769–269 BC). The most important of these include the Classics of Confucianism, of Daoism, of Mohism, of Legalism, as well as works of military science (e.g. Sun Tzu's The Art of War, c. 5th century BC) and Chinese history (e.g. Sima Qian's Records of the Grand Historian, c. 94 BC). Ancient Chinese literature had a heavy emphasis on historiography, with often very detailed court records. An exemplary piece of narrative history of ancient China was the Zuo Zhuan, which was compiled no later than 389 BC, and attributed to the blind 5th-century BC historian Zuo Qiuming.\nIn ancient India, literature originated from stories that were originally orally transmitted. Early genres included drama, fables, sutras and epic poetry. Sanskrit literature begins with the Vedas, dating back to 1500–1000 BC, and continues with the Sanskrit Epics of Iron Age India. The Vedas are among the oldest sacred texts. The Samhitas (vedic collections) date to roughly 1500–1000 BC, and the \"circum-Vedic\" texts, as well as the redaction of the Samhitas, date to c. 1000–500 BC, resulting in a Vedic period, spanning the mid-2nd to mid-1st millennium BC, or the Late Bronze Age and the Iron Age. The period between approximately the 6th to 1st centuries BC saw the composition and redaction of the two most influential Indian epics, the Mahabharata and the Ramayana, with subsequent redaction progressing down to the 4th century AD such as Ramcharitmanas.\nThe earliest known Greek writings are Mycenaean (c. 1600–1100 BC), written in the Linear B syllabary on clay tablets. These documents contain prosaic records largely concerned with trade (lists, inventories, receipts, etc.); no real literature has been discovered. Michael Ventris and John Chadwick, the original decipherers of Linear B, state that literature almost certainly existed in Mycenaean Greece, but it was either not written down or, if it was, it was on parchment or wooden tablets, which did not survive the destruction of the Mycenaean palaces in the twelfth century BC. Homer's epic poems, the Iliad and the Odyssey, are central works of ancient Greek literature. It is generally accepted that the poems were composed at some point around the late eighth or early seventh century BC. Modern scholars consider these accounts legendary. Most researchers believe that the poems were originally transmitted orally. From antiquity until the present day, the influence of Homeric epic on Western civilization has been significant, inspiring many of its most famous works of literature, music, art and film. The Homeric epics were the greatest influence on ancient Greek culture and education; to Plato, Homer was simply the one who \"has taught Greece\" – ten Hellada pepaideuken. Hesiod's Works and Days (c.700 BC) and Theogony are some of the earliest and most influential works of ancient Greek literature. Classical Greek genres included philosophy, poetry, historiography, comedies and dramas. Plato (428/427 or 424/423 – 348/347 BC) and Aristotle (384–322 BC) authored philosophical texts that are regarded as the foundation of Western philosophy, Sappho (c. 630 – c. 570 BC) and Pindar were influential lyric poets, and Herodotus (c. 484 – c. 425 BC) and Thucydides were early Greek historians. Although drama was popular in ancient Greece, of the hundreds of tragedies written and performed during the classical age, only a limited number of plays by three authors still exist: Aeschylus, Sophocles, and Euripides. The plays of Aristophanes (c. 446 – c. 386 BC) provide the only real examples of a genre of comic drama known as Old Comedy, the earliest form of Greek Comedy, and are in fact used to define the genre.\nThe Hebrew religious text, the Torah, is widely seen as a product of the Persian period (539–333 BC, probably 450–350 BC). This consensus echoes a traditional Jewish view which gives Ezra, the leader of the Jewish community on its return from Babylon, a pivotal role in its promulgation. This represents a major source of Christianity's Bible, which has had a major influence on Western literature.\nThe beginning of Roman literature dates to 240 BC, when a Roman audience saw a Latin version of a Greek play. Literature in Latin would flourish for the next six centuries, and includes essays, histories, poems, plays, and other writings.\nThe Qur'an (610 AD–632 AD), the main holy book of Islam, had a significant influence on the Arab language, and marked the beginning of Islamic literature. Muslims believe it was transcribed in the Arabic dialect of the Quraysh, the tribe of Muhammad. As Islam spread, the Quran had the effect of unifying and standardizing Arabic.\nTheological works in Latin were the dominant form of literature in Europe typically found in libraries during the Middle Ages. Western Vernacular literature includes the Poetic Edda and the sagas, or heroic epics, of Iceland, the Anglo-Saxon Beowulf, and the German Song of Hildebrandt. A later form of medieval fiction was the romance, an adventurous and sometimes magical narrative with strong popular appeal.\nControversial, religious, political and instructional literature proliferated during the European Renaissance as a result of the Johannes Gutenberg's invention of the printing press around 1440, while the Medieval romance developed into the novel.",
+        "charCount": 5665,
+        "tokenEstimate": 1417
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e",
+        "chunkIndex": 19,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-classical-medieval-d2242029010e#19",
+        "heading": "Literature",
+        "text": "Drama is literature intended for performance. The form is combined with music and dance in opera and musical theatre (see libretto). A play is a written dramatic work by a playwright that is intended for performance in a theatre; it comprises chiefly dialogue between characters. A closet drama, by contrast, is written to be read rather than to be performed; the meaning of which can be realized fully on the page. Nearly all drama took verse form until comparatively recently.\nThe earliest form of which there exists substantial knowledge is Greek drama. This developed as a performance associated with religious and civic festivals, typically enacting or developing upon well-known historical, or mythological themes,\nIn the twentieth century, scripts written for non-stage media have been added to this form, including radio, television and film.\n\n== Law ==\n\n=== Law and literature ===\nThe law and literature movement focuses on the interdisciplinary connection between law and literature.\n\n=== Copyright ===\n\nCopyright is a type of intellectual property that gives its owner the exclusive right to make copies of a creative work, usually for a limited time. The creative work may be in a literary, artistic, educational, or musical form. Copyright is intended to protect the original expression of an idea in the form of a creative work, but not the idea itself.",
+        "charCount": 1367,
+        "tokenEstimate": 342
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+        "chunkIndex": 16,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#16",
+        "heading": "Fascism",
+        "text": "Futurism was both an artistic-cultural movement and initially a political movement in Italy led by Filippo Tommaso Marinetti (1876-1944) who wrote the Manifesto of Futurism (1908), that championed the causes of modernism, action, and political violence as necessary elements of politics while denouncing liberalism and parliamentary politics. Futurism influenced fascism in its emphasis on recognizing the virile nature of violent action and war as necessities of modern civilization.\n\n=== World War I and its aftermath (1914–1929) ===",
+        "charCount": 535,
+        "tokenEstimate": 134
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+        "chunkIndex": 52,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#52",
+        "heading": "Fascism",
+        "text": "=== Palingenesis and modernism ===",
+        "charCount": 34,
+        "tokenEstimate": 9
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c",
+        "chunkIndex": 53,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-3d6234d3895c#53",
+        "heading": "Fascism",
+        "text": "Fascism emphasizes both palingenesis (national rebirth or re-creation) and modernism. In particular, fascism's nationalism has been identified as having a palingenetic character. Fascism promotes the nation's regeneration and purging it of decadence. Fascism accepts forms of modernism that it deems promote national regeneration while rejecting forms of modernism regarded as antithetical to national regeneration. Fascism aestheticized modern technology and its association with speed, power, and violence. Fascism admired advances in the economy in the early 20th century, particularly Fordism and scientific management. Fascist modernism has been recognized as inspired or developed by various figures—such as Filippo Tommaso Marinetti, Ernst Jünger, Gottfried Benn, Louis-Ferdinand Céline, Knut Hamsun, Ezra Pound and Wyndham Lewis.\nIn Italy, such modernist influence was exemplified by Marinetti, who advocated a palingenetic modernist society that condemned liberal-bourgeois values of tradition and psychology while promoting a technological-martial religion of national renewal that emphasized militant nationalism. In Germany, it was exemplified by Jünger who was influenced by his observation of the technological warfare during World War I and claimed that a new social class had been created that he described as the \"warrior-worker\"; Like Marinetti, Jünger emphasized the revolutionary capacities of technology. He emphasized an \"organic construction\" between humans and machines as a liberating and regenerative force that challenged liberal democracy, conceptions of individual autonomy, bourgeois nihilism, and decadence. He conceived of a society based on a totalitarian concept of \"total mobilization\" of such disciplined warrior-workers.",
+        "charCount": 1757,
+        "tokenEstimate": 440
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807",
+        "chunkIndex": 18,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807#18",
+        "heading": "Hinduism",
+        "text": "==== Hindu modernism and neo-Vedanta ====",
+        "charCount": 41,
+        "tokenEstimate": 11
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807",
+        "chunkIndex": 57,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807#57",
+        "heading": "Hinduism",
+        "text": "Hinduism has a developed system of symbolism and iconography to represent the sacred in art, architecture, literature and worship. These symbols gain their meaning from the scriptures or cultural traditions. The syllable Om (which represents the Brahman and Atman) has grown to represent Hinduism itself, while other markings such as the Swastika (from the Sanskrit: स्वस्तिक, romanized: svastika) a sign that represents auspiciousness, and Tilaka (literally, seed) on forehead – considered to be the location of spiritual third eye, marks ceremonious welcome, blessing or one's participation in a ritual or rite of passage. Elaborate Tilaka with lines may also identify a devotee of a particular denomination. Flowers, birds, animals, instruments, symmetric mandala drawings, objects, lingam, idols are all part of symbolic iconography in Hinduism.\n\n=== Ahiṃsā and food customs ===",
+        "charCount": 882,
+        "tokenEstimate": 221
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807",
+        "chunkIndex": 60,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-modernism-avant-garde-a8e742220807#60",
+        "heading": "Hinduism",
+        "text": "A Hindu temple is a house of god(s). It is a space and structure designed to bring human beings and gods together, infused with symbolism to express the ideas and beliefs of Hinduism. A temple incorporates all elements of Hindu cosmology, the highest spire or dome representing Mount Meru – reminder of the abode of Brahma and the center of spiritual universe, the carvings and iconography symbolically presenting dharma, kama, artha, moksha and karma. The layout, the motifs, the plan and the building process recite ancient rituals, geometric symbolisms, and reflect beliefs and values innate within various schools of Hinduism. Hindu temples are spiritual destinations for many Hindus (not all), as well as landmarks for arts, annual festivals, rite of passage rituals, and community celebrations.\nHindu temples come in many styles, diverse locations, deploy different construction methods and are adapted to different deities and regional beliefs. Two major styles of Hindu temples include the Gopuram style found in south India, and Nagara style found in north India. Other styles include cave, forest and mountain temples. Yet, despite their differences, almost all Hindu temples share certain common architectural principles, core ideas, symbolism and themes.\nMany temples feature one or more idols (murtis). The idol and Grabhgriya in the Brahma-pada (the center of the temple), under the main spire, serves as a focal point (darsana, a sight) in a Hindu temple. In larger temples, the central space typically is surrounded by an ambulatory for the devotee to walk around and ritually circumambulate the Purusa (Brahman), the universal essence.",
+        "charCount": 1652,
+        "tokenEstimate": 413
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0",
+        "chunkIndex": 1,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0#1",
+        "heading": "Architecture",
+        "text": "Architecture is the study and practice of designing structures, especially habitable ones. It utilizes civil engineering techniques, but is considered a visual art. It is both the process and the product of sketching, conceiving, planning, designing, and constructing buildings or other structures. The term comes from Latin  architectura; from Ancient Greek  ἀρχιτέκτων (arkhitéktōn) 'architect'; from  ἀρχι- (arkhi-) 'chief' and  τέκτων (téktōn) 'creator'. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.\nThe practice of architecture itself, which began in the prehistoric era, has been used as a way of expressing culture by civilizations on all seven continents. For this reason, architecture is considered to be a form of art. Texts on architecture have been written since ancient times. The earliest surviving text on architectural theories is the 1st century BC treatise De architectura by the Roman architect Vitruvius, according to whom a good building embodies firmitas, utilitas, and venustas (durability, utility, and beauty). Centuries later, Leon Battista Alberti developed his ideas further, seeing beauty as an objective quality of buildings to be found in their proportions. In the 19th century, Louis Sullivan declared that \"form follows function\". \"Function\" began to replace the classical \"utility\" and was understood to include not only practical but also aesthetic, psychological, and cultural dimensions. The idea of sustainable architecture was introduced in the late 20th century.\nArchitecture began as rural, oral vernacular architecture that developed from trial and error to successful replication. Ancient urban architecture was preoccupied with building religious structures and buildings symbolizing the political power of rulers until Greek and Roman architecture shifted focus to civic virtues. Indian and Chinese architecture influenced forms all over Asia and Buddhist architecture in particular took diverse local flavors. During the Middle Ages, pan-European styles of Romanesque and Gothic cathedrals and abbeys emerged while the Renaissance favored Classical forms implemented by architects known by name. Later, the roles of architects and engineers became separated.\nModern architecture began after World War I as an avant-garde movement that sought to develop a completely new style appropriate for a new post-war social and economic order focused on meeting the needs of the middle and working classes. Emphasis was put on modern techniques, materials, and simplified geometric forms, paving the way for high-rise superstructures. Many architects became disillusioned with modernism which they perceived as ahistorical and anti-aesthetic, and postmodern and contemporary architecture developed. Over the years, the field of architectural construction has branched out to include everything from ship design to interior decorating.",
+        "charCount": 3037,
+        "tokenEstimate": 760
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0",
+        "chunkIndex": 16,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-02178d2d64d0#16",
+        "heading": "Architecture",
+        "text": "Many architects resisted modernism, finding it devoid of the decorative richness of historical styles. As the first generation of modernists began to die after World War II, the second generation of architects including Paul Rudolph, Marcel Breuer, and Eero Saarinen tried to expand the aesthetics of modernism with Brutalism, buildings with expressive sculpture façades made of unfinished concrete. But an even younger postwar generation critiqued modernism and Brutalism for being too austere, standardized, monotone, and not taking into account the richness of human experience offered in historical buildings across time and in different places and cultures.\nOne such reaction to the cold aesthetic of modernism and Brutalism is the school of metaphoric architecture, which includes such things as bio morphism and zoomorphic architecture, both using nature as the primary source of inspiration and design. While it is considered by some to be merely an aspect of postmodernism, others consider it to be a school in its own right and a later development of expressionist architecture.\nBeginning in the late 1950s and 1960s, architectural phenomenology emerged as an important movement in the early reaction against modernism, with architects like Charles Moore in the United States, Christian Norberg-Schulz in Norway, and Ernesto Nathan Rogers, Vittorio Gregotti, Michele Valori, and Bruno Zevi in Italy, who collectively popularized an interest in a new contemporary architecture aimed at expanding human experience using historical buildings as models and precedents. Postmodernism produced a style that combined contemporary building technology and cheap materials with the aesthetics of older pre-modern and non-modern styles, from high classical architecture to popular or vernacular regional building styles. Robert Venturi famously defined postmodern architecture as a \"decorated shed\" (an ordinary building which is functionally designed inside and embellished on the outside) and upheld it against modernist and brutalist \"ducks\" (buildings with unnecessarily expressive tectonic forms).",
+        "charCount": 2101,
+        "tokenEstimate": 526
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f",
+        "chunkIndex": 780,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#780",
+        "heading": "Introduction to Anthropology",
+        "text": "As both Aztec and American societies demonstrate, the economic and political systems of state societies are deeply entwined, and this relationship is often reflected in the dominant ideas of a society. Political economy is the study of the way political and economic realms frequently reinforce and sometimes contradict one another over time.\n\nPolitical economy\n\n## Authority, Decisions, and Power: Political Anthropology\n\n### Modern Nation-States (m00053)\n\nLearning Outcomes\n\nBy the end of this section, you will be able to:\n\nDistinguish nation from state and describe how the two are linked in modern nation-states.\n\nDefine the concept of imagined communities.\n\nIdentify the importance of colonialism in shaping postcolonial nation-states.\n\nDescribe the field of postcolonial studies.\n\nExplain the fragility of postcolonial states.\n\nProvide two examples of the consequences of globalization for national identities and politics.\n\nBefore 1400 or so, the world was a variegated array of empires, kingdoms, and chiefdoms with their tributary societies, loosely linked by trade with acephalous societies at the peripheries. The contemporary globe is an economically integrated order fundamentally organized into nation-states. How did this happen?",
+        "charCount": 1245,
+        "tokenEstimate": 312
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f",
+        "chunkIndex": 794,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#794",
+        "heading": "Introduction to Anthropology",
+        "text": "Anthropologists working on political issues in previously colonized states (such as most African ones) often combine historical and contemporary research to understand the intersection of local and foreign influences that make up this complex picture. In one form or another, colonial processes shaped the development of political systems in Africa, the Middle East, South and Southeast Asia, the Caribbean, the Americas, and eastern Europe. The interdisciplinary field of postcolonial studies emerged in the 1970s, combining history, anthropology, political science, and area studies in an effort to understand the diversity, complexity, and legacy of colonialism throughout the world.\n\npostcolonial studies\n\n“Fragile” States and “Failed” States: The Legacies of Colonialism",
+        "charCount": 775,
+        "tokenEstimate": 194
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f",
+        "chunkIndex": 1373,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-postmodern-contemporary-3a585d32fe2f#1373",
+        "heading": "Introduction to Anthropology",
+        "text": "Focusing on more contemporary contexts, many media anthropologists analyze the images produced by postcolonial subjects themselves, along with the producers of those images and the production process. Rather than scrutinizing the imperial or ethnographic gaze, these scholars are interested in local forms of gazing at the self and others in photographs.\n\nAnthropologist Liam Buckley (2000) has conducted research on studio photography in the West African country of Gambia. Through interviews with photographers and their subjects, Buckley traced the development of photographic strategies from the more realist style of the 1950s to the more fanciful and imaginative style common from the 1970s to the early 2000s.\n\nBuckley",
+        "charCount": 725,
+        "tokenEstimate": 182
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-798e3aac5e37",
+        "chunkIndex": 3,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-798e3aac5e37#3",
+        "heading": "Literary criticism",
+        "text": "=== Renaissance criticism ===\nThe literary criticism of the Renaissance developed classical ideas of unity of form and content into literary neoclassicism, proclaiming literature as central to culture, entrusting the poet and the author with preservation of a long literary tradition. The birth of Renaissance criticism was in 1498, with the recovery of classic texts, most notably, Giorgio Valla's Latin translation of Aristotle's Poetics. The work of Aristotle, especially Poetics, was the most important influence upon literary criticism until the late eighteenth century. Lodovico Castelvetro was one of the most influential Renaissance critics who wrote commentaries on Aristotle's Poetics in 1570.",
+        "charCount": 703,
+        "tokenEstimate": 176
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-798e3aac5e37",
+        "chunkIndex": 11,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-798e3aac5e37#11",
+        "heading": "Literary criticism",
+        "text": "=== Renaissance period ===\nLodovico Castelvetro: The Poetics of Aristotle Translated and Explained\nJoachim du Bellay: La Défense et illustration de la langue française\nPhilip Sidney: An Apology for Poetry\nJacopo Mazzoni: On the Defense of the Comedy of Dante\nTorquato Tasso: Discourses on the Heroic Poem\nFrancis Bacon: The Advancement of Learning\nHenry Reynolds: Mythomystes\nJohn Mandaville: Composed in the mid-14th century – most probably by a french physician\n\n=== Enlightenment period ===\n\n=== 19th century ===\n\n=== 20th century ===\n\n== See also ==\nBook review\nComparative literature\nCritical lens\nGenre studies\nHistory of the book\nLiterary critics\nLiterary translation\nPhilosophy and literature\nPoetic tradition\nSocial criticism\nTranslation criticism\n\n== References ==\n\n== External links ==\n\nLiterary Criticism  at the Encyclopædia Britannica\nLiterary Criticism at the Dictionary of the History of Ideas\nVince Brewton. \"Literary Theory\". Internet Encyclopedia of Philosophy.\nJosé Ángel García Landa. \"A Bibliography of Literary Theory, Criticism and Philology\".\nInternet Public Library: Literary Criticism Collection of Critical and Biographical Websites\nHow to Do Literary Analysis: An Experimental Reflection Based on the Yellow Wall-Paper\nTruman Capote Award for Literary Criticism Award Winners\nRichards, I. A. (1928), Principles of literary criticism. United States: Harcourt, Brace and Company.",
+        "charCount": 1406,
+        "tokenEstimate": 352
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b",
+        "chunkIndex": 14,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b#14",
+        "heading": "Renaissance",
+        "text": "== Characteristics ==\n\n=== Humanism ===\n\nIn some ways, Renaissance humanism was not a philosophy but a method of learning. In contrast to the medieval scholastic mode, which focused on resolving contradictions between authors, Renaissance humanists would study ancient texts in their original languages and appraise them through a combination of reasoning and empirical evidence. Humanist education was based on the programme of Studia Humanitatis, the study of five humanities: poetry, grammar, history, moral philosophy, and rhetoric. Although historians have sometimes struggled to define humanism precisely, most have settled on \"a middle of the road definition... the movement to recover, interpret, and assimilate the language, literature, learning and values of ancient Greece and Rome\". Above all, humanists asserted \"the genius of man ... the unique and extraordinary ability of the human mind\".",
+        "charCount": 904,
+        "tokenEstimate": 226
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b",
+        "chunkIndex": 21,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b#21",
+        "heading": "Renaissance",
+        "text": "The new ideals of humanism, although more secular in some aspects, developed against a Christian backdrop, especially in the Northern Renaissance. Much, if not most, of the new art was commissioned by or in dedication to the Roman Catholic Church. However, the Renaissance had a profound effect on contemporary theology, particularly in the way people perceived the relationship between man and God. Many of the period's foremost theologians were followers of the humanist method, including Erasmus, Huldrych Zwingli, Thomas More, Martin Luther, and John Calvin.",
+        "charCount": 562,
+        "tokenEstimate": 141
+      },
+      {
+        "sourceId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b",
+        "chunkIndex": 33,
+        "chunkId": "corpus-literary-movements-corpus-v2-202607202002-renaissance-enlightenment-8739950d693b#33",
+        "heading": "Renaissance",
+        "text": "=== Germany ===\n\nIn the second half of the 15th century, the Renaissance spirit spread to Germany and the Low Countries, where the development of the printing press (ca. 1450) and Renaissance artists such as Albrecht Dürer (1471–1528) predated the influence from Italy. In the early Protestant areas of the country humanism became closely linked to the turmoil of the Reformation, and the art and writing of the German Renaissance frequently reflected this dispute. However, the Gothic style and medieval scholastic philosophy remained exclusively until the turn of the 16th century. Emperor Maximilian I of Habsburg (ruling 1493–1519) was the first truly Renaissance monarch of the Holy Roman Empire.\n\n=== Hungary ===",
+        "charCount": 718,
+        "tokenEstimate": 180
+      }
+    ],
+    "sourceMapSlug": "literary-movements-corpus-v2-202607202002",
+    "packetHash": "9f83fc1adfd1e83cc806f0803179b1d468e835911eae83764ad548a20e05250a"
+  }
+}

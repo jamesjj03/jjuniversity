@@ -1,0 +1,64 @@
+{
+  "id": "group-engineering-process-overview",
+  "slug": "group-engineering-process-overview",
+  "title": "Engineering Design Process Overview",
+  "shortTitle": "Process Overview",
+  "family": "Systems Design",
+  "stance": "Neutral",
+  "centralClaim": "The engineering design process is a structured approach to problem solving, involving iterative stages that vary by model.",
+  "whyItMatters": "Provides a foundational understanding of how engineered systems are developed and refined.",
+  "contributors": [
+    {
+      "id": "unknown",
+      "name": "Unknown Author(s)",
+      "role": "Articulator",
+      "reason": "Authoring the 'Engineering Design Process' essay which outlines the process.",
+      "texts": [
+        {
+          "id": "text-engineering-design-process",
+          "title": "Engineering Design Process",
+          "kind": "essay",
+          "provenance": [
+            {
+              "chunkId": "corpus-systems-design-source-054dda302408#1",
+              "sourceId": "corpus-systems-design-source-054dda302408",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-source-054dda302408#1",
+          "sourceId": "corpus-systems-design-source-054dda302408",
+          "chunkIndex": 1
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Models can be overly rigid and fail to account for emergent properties.",
+    "The iterative nature can lead to scope creep and increased costs.",
+    "Stages are often simplified, obscuring the complexity of real-world design challenges."
+  ],
+  "relatedGroupIds": [
+    "group-engineering-process-fundamentals",
+    "group-engineering-process-techniques",
+    "group-engineering-process-models",
+    "group-engineering-process-claims"
+  ],
+  "keywords": [
+    "design process",
+    "engineering",
+    "stages",
+    "iteration",
+    "problem solving"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-systems-design-source-054dda302408#1",
+      "sourceId": "corpus-systems-design-source-054dda302408",
+      "chunkIndex": 1
+    }
+  ]
+}

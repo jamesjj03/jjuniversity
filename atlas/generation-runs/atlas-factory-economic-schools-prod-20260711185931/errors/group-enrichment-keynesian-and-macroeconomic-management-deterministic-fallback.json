@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-keynesian-and-macroeconomic-management",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "malformed_json",
+    "message": "group-enrichment-keynesian-and-macroeconomic-management failed: JSON parse failed: Expected ',' or ']' after array element in JSON at position 2633 (line 71 column 6)"
+  },
+  "createdAt": "2026-07-11T23:28:36.056Z"
+}

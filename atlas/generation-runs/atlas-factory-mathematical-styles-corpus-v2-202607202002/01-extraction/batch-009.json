@@ -1,0 +1,58 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 9,
+  "chunkIds": [
+    "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#28"
+  ],
+  "charLimit": 650,
+  "estimatedInputTokens": 699,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "calculus",
+        "summary": "rigorous development from axioms",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#28",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859",
+            "chunkIndex": 28,
+            "note": "definition"
+          }
+        ]
+      },
+      {
+        "label": "infinitesimals",
+        "summary": "quantities criticized as unrigorous",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#28",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859",
+            "chunkIndex": 28,
+            "note": "criticism"
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [
+      {
+        "title": "The Analyst",
+        "kind": "book",
+        "author": "Berkeley",
+        "provenance": [
+          {
+            "chunkId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859#28",
+            "sourceId": "corpus-mathematical-styles-corpus-v2-202607202002-analysis-calculus-cda74a2fb859",
+            "chunkIndex": 28,
+            "note": "description of infinitesimals"
+          }
+        ]
+      }
+    ],
+    "objections": [],
+    "relationships": []
+  }
+}

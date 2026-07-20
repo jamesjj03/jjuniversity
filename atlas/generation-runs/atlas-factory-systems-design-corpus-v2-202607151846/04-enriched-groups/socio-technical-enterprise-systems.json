@@ -1,0 +1,156 @@
+{
+  "id": "socio-technical-enterprise-systems",
+  "slug": "socio-technical-enterprise-systems",
+  "title": "Socio-Technical And Enterprise Systems",
+  "shortTitle": "Socio-Technical",
+  "family": "Systems Design",
+  "stance": "Frames systems as coupled technical, organizational, stakeholder, workflow, and enterprise structures.",
+  "centralClaim": "Many systems fail because the designed artifact and the human organization around it do not match.",
+  "whyItMatters": "This family corrects the narrow technical bias by making stakeholders, workflows, and enterprise architecture part of the design object.",
+  "contributors": [
+    {
+      "id": "socio-technical-enterprise-systems-source-synthesis",
+      "name": "Enterprise architecture and organizational systems",
+      "role": "source-grounded design family",
+      "reason": "Enterprise architecture and organizational systems represents the source evidence for Socio-Technical And Enterprise Systems.",
+      "texts": [
+        {
+          "id": "socio-technical-enterprise-systems-key-text",
+          "title": "Zachman Framework and organizational systems sources",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#61",
+              "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+              "chunkIndex": 61,
+              "note": "Defines framework."
+            },
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#62",
+              "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+              "chunkIndex": 62,
+              "note": "Describes framework."
+            },
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+              "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+              "chunkIndex": 258,
+              "note": "definition"
+            },
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#334",
+              "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+              "chunkIndex": 334,
+              "note": "definition"
+            },
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+              "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+              "chunkIndex": 487,
+              "note": "affected by decisions"
+            },
+            {
+              "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+              "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+              "chunkIndex": 1227,
+              "note": "interconnectedness"
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#61",
+          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+          "chunkIndex": 61,
+          "note": "Defines framework."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#62",
+          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+          "chunkIndex": 62,
+          "note": "Describes framework."
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+          "chunkIndex": 258,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#334",
+          "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+          "chunkIndex": 334,
+          "note": "definition"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+          "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+          "chunkIndex": 487,
+          "note": "affected by decisions"
+        },
+        {
+          "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+          "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+          "chunkIndex": 1227,
+          "note": "interconnectedness"
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Can become vague if every stakeholder concern is included.",
+    "Organizational evidence may be less formal than technical evidence.",
+    "Enterprise frameworks can over-document without improving decisions."
+  ],
+  "relatedGroupIds": [
+    "requirements-design-process",
+    "software-architecture-patterns",
+    "constraints-tradeoffs-scalability"
+  ],
+  "keywords": [
+    "socio-technical",
+    "stakeholders",
+    "enterprise architecture",
+    "workflow",
+    "organization"
+  ],
+  "provenance": [
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#61",
+      "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+      "chunkIndex": 61,
+      "note": "Defines framework."
+    },
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#62",
+      "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+      "chunkIndex": 62,
+      "note": "Describes framework."
+    },
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#258",
+      "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+      "chunkIndex": 258,
+      "note": "definition"
+    },
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10#334",
+      "sourceId": "corpus-systems-design-corpus-v2-05-socio-technical-source-2926d95aed10",
+      "chunkIndex": 334,
+      "note": "definition"
+    },
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#487",
+      "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+      "chunkIndex": 487,
+      "note": "affected by decisions"
+    },
+    {
+      "chunkId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7#1227",
+      "sourceId": "corpus-systems-design-corpus-v2-09-organizational-systems-source-c7639502ccd7",
+      "chunkIndex": 1227,
+      "note": "interconnectedness"
+    }
+  ]
+}

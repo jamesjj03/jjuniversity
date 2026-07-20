@@ -1,0 +1,118 @@
+{
+  "id": "relativity-and-quantum-revolutions",
+  "slug": "relativity-and-quantum-revolutions",
+  "title": "Relativity and Quantum Revolutions",
+  "shortTitle": "Relativity/quantum",
+  "family": "physics",
+  "stance": "revolutionary",
+  "centralClaim": "Classical physics' assumptions about space, time, measurement, matter, probability, and observation were fundamentally challenged and rebuilt.",
+  "whyItMatters": "These revolutions reshaped our understanding of the universe at its most fundamental levels, leading to transformative technologies and ongoing scientific inquiry.",
+  "contributors": [
+    {
+      "id": "person-albert-einstein",
+      "name": "Albert Einstein",
+      "role": "Founder",
+      "reason": "Developed special and general relativity, fundamentally altering concepts of space and time. His work laid groundwork for subsequent quantum developments.",
+      "texts": [
+        {
+          "id": "book-relativity-the-special-and-general-theory",
+          "title": "Relativity: The Special and General Theory",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#6",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#6",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    },
+    {
+      "id": "person-max-planck",
+      "name": "Max Planck",
+      "role": "Initiator",
+      "reason": "Introduced the concept of quantized energy, marking the birth of quantum theory and challenging classical thermodynamics.",
+      "texts": [
+        {
+          "id": "paper-on-the-motion-of-heat-radiation",
+          "title": "On the Motion of Heat Radiation",
+          "kind": "paper",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#6",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#6",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    },
+    {
+      "id": "person-richard-feynman",
+      "name": "Richard Feynman",
+      "role": "Synthesizer",
+      "reason": "Developed path integral formulation of quantum mechanics and made significant contributions to quantum electrodynamics, clarifying complex phenomena.",
+      "texts": [
+        {
+          "id": "book-qed-the-strange-theory-of-light-and-matter",
+          "title": "QED: The Strange Theory of Light and Matter",
+          "kind": "book",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#6",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#6",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 6
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "Initial resistance to relativity due to conflict with Newtonian mechanics.",
+    "Early quantum theory faced criticism for its probabilistic nature and apparent abandonment of determinism.",
+    "The incompatibility between general relativity and quantum mechanics remains a major challenge.",
+    "Interpretational problems within quantum mechanics (e.g., the measurement problem)."
+  ],
+  "relatedGroupIds": [
+    "mathematical-astronomy-and-mechanics",
+    "experimental-electricity-and-field-physics"
+  ],
+  "keywords": [
+    "relativity",
+    "quantum mechanics",
+    "space-time",
+    "energy quantization",
+    "probability",
+    "observation"
+  ],
+  "provenance": [
+    {
+      "chunkId": "stem-scientists-scientific-lineages#6",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 6
+    }
+  ]
+}

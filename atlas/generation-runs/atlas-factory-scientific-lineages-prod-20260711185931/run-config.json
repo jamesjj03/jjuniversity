@@ -1,0 +1,145 @@
+{
+  "runId": "atlas-factory-scientific-lineages-prod-20260711185931",
+  "generator": "atlas-staged-model-generation-v2",
+  "createdAt": "2026-07-11T23:53:14.996Z",
+  "territorySlug": "stem",
+  "branchSlug": "scientists",
+  "mapSlug": "scientific-lineages-prod-20260711185931",
+  "sourceMapSlug": "scientific-lineages",
+  "selectedSourceIds": [
+    "stem-scientists-scientific-lineages"
+  ],
+  "topicPrompt": "Build a reviewable intellectual-lineage Atlas draft for scientific lineages from the selected source brief. Emphasize handoffs, methods, revolutions, and influence chains.",
+  "recipe": {
+    "id": "intellectual_lineage",
+    "title": "Intellectual Lineage",
+    "purpose": "Trace how ideas, methods, or styles pass through people, schools, and generations.",
+    "groupingLogic": "Groups should be lineages, handoff points, or influence chains with attention to inheritance and mutation.",
+    "preferredGroupFields": [
+      "lineage",
+      "centralInheritance",
+      "turningPoint",
+      "contributors",
+      "keyTexts",
+      "objections"
+    ],
+    "contributorRules": "Contributors should appear where their work changes, transmits, or redirects the lineage.",
+    "expectedRelationTypes": [
+      "influences",
+      "borrows",
+      "reframes",
+      "opposes",
+      "answers"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 9
+    },
+    "generationInstructions": "Emphasize influence, divergence, continuity, and discontinuity. Preserve chronology where it clarifies structure.",
+    "evaluationCriteria": [
+      "Influence claims are explicit",
+      "Groups are not flat eras",
+      "Relations show transmission or rupture",
+      "Contributors have clear lineage roles"
+    ]
+  },
+  "maxChunks": 12,
+  "chunkCharLimit": 900,
+  "chunkBatchSize": 1,
+  "concurrency": 1,
+  "retryCount": 1,
+  "force": false,
+  "importOnSuccess": true,
+  "modelConfig": {
+    "provider": "local-openai-compatible",
+    "baseUrl": "http://127.0.0.1:1234/v1",
+    "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+    "model": "google/gemma-3-12b",
+    "profileId": "google/gemma-3-12b",
+    "contextWindowTokens": 4096,
+    "safeInputTokens": 2200,
+    "allowNoKey": true,
+    "temperature": 0.1,
+    "maxTokens": 700,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "stageModelConfigs": {
+    "extraction": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "clustering": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "enrichment": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 1000,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "relations": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "google/gemma-3-12b",
+      "profileId": "google/gemma-3-12b",
+      "contextWindowTokens": 4096,
+      "safeInputTokens": 2200,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    }
+  },
+  "preflight": [
+    {
+      "provider": "local-openai-compatible",
+      "model": "google/gemma-3-12b",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "modelsUrl": "http://127.0.0.1:1234/v1/models",
+      "ok": true,
+      "available": true,
+      "loaded": true,
+      "detectedContextWindowTokens": 4096,
+      "configuredSafeInputTokens": 2200,
+      "configuredMaxOutputTokens": 700,
+      "error": ""
+    }
+  ]
+}

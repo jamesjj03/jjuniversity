@@ -1,0 +1,48 @@
+{
+  "runId": "atlas-factory-metaphysics-families-202607111646",
+  "jobId": "atlas-job-metaphysics-families-202607111646",
+  "status": "failed",
+  "currentStage": "extraction",
+  "completedStages": [
+    "source-manifest"
+  ],
+  "recipe": {
+    "id": "theory_family",
+    "title": "Theory Family",
+    "purpose": "Organize a field by major explanatory families or schools of thought.",
+    "groupingLogic": "Groups should be conceptual families with distinct explanatory stances, not just people or chronology.",
+    "preferredGroupFields": [
+      "stance",
+      "centralClaim",
+      "whyItMatters",
+      "objections",
+      "contributors",
+      "keyTexts"
+    ],
+    "contributorRules": "Contributors should be attached to the theory family they shaped, extended, or strongly challenged.",
+    "expectedRelationTypes": [
+      "opposes",
+      "answers",
+      "reframes",
+      "borrows",
+      "neighbors"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 10
+    },
+    "generationInstructions": "Prioritize stable families, central claims, pressure points, and representative contributors. Avoid making one group per person.",
+    "evaluationCriteria": [
+      "Groups are mutually useful rather than cosmetic",
+      "Central claims are distinct",
+      "Objections expose real pressure points",
+      "Relations explain conceptual movement"
+    ]
+  },
+  "errors": [
+    "Model request failed: 400 Bad Request {\n    \"error\": {\n        \"message\": \"Failed to load model \\\"mistralai/mistral-7b-instruct-v0.3\\\". Error: Operation canceled.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+  ],
+  "repairAttempts": 0,
+  "outputDraftPath": null,
+  "updatedAt": "2026-07-11T16:47:22.736Z"
+}

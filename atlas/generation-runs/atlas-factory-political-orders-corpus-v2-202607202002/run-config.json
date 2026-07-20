@@ -1,0 +1,143 @@
+{
+  "runId": "atlas-factory-political-orders-corpus-v2-202607202002",
+  "generator": "atlas-staged-model-generation-v2",
+  "createdAt": "2026-07-20T21:36:16.069Z",
+  "territorySlug": "society",
+  "branchSlug": "politics",
+  "mapSlug": "political-orders-corpus-v2-202607202002",
+  "sourceMapSlug": "political-orders-corpus-v2-202607202002",
+  "selectedSourceIds": [],
+  "topicPrompt": "A corpus-backed system-comparison map of political orders, legitimacy, institutional logics, governance tradeoffs, coercion, liberty, stability, and failure modes.",
+  "recipe": {
+    "id": "system_comparison",
+    "title": "System Comparison",
+    "purpose": "Compare social, political, technical, or philosophical systems by design commitments and tradeoffs.",
+    "groupingLogic": "Groups should be systems or system families, separated by governance logic, constraints, values, or operating model.",
+    "preferredGroupFields": [
+      "systemLogic",
+      "centralClaim",
+      "tradeoffs",
+      "contributors",
+      "keyTexts",
+      "failureModes"
+    ],
+    "contributorRules": "Contributors should be tied to system design, advocacy, critique, or canonical articulation.",
+    "expectedRelationTypes": [
+      "opposes",
+      "answers",
+      "reframes",
+      "neighbors",
+      "borrows"
+    ],
+    "recommendedGroupCount": {
+      "min": 5,
+      "max": 9
+    },
+    "generationInstructions": "Surface the operating logic of each system and the concrete tradeoffs between systems.",
+    "evaluationCriteria": [
+      "Systems are compared on meaningful axes",
+      "Tradeoffs are explicit",
+      "Relations expose conflict or borrowing",
+      "Claims are not slogans"
+    ]
+  },
+  "maxChunks": 28,
+  "chunkCharLimit": 420,
+  "chunkBatchSize": 1,
+  "concurrency": 1,
+  "retryCount": 3,
+  "force": false,
+  "importOnSuccess": true,
+  "modelConfig": {
+    "provider": "local-openai-compatible",
+    "baseUrl": "http://127.0.0.1:1234/v1",
+    "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+    "model": "atlas_v4",
+    "profileId": "atlas_v4",
+    "contextWindowTokens": 32768,
+    "safeInputTokens": 5000,
+    "allowNoKey": true,
+    "temperature": 0.1,
+    "maxTokens": 700,
+    "timeoutMs": 120000,
+    "concurrency": 1,
+    "jsonMode": true
+  },
+  "stageModelConfigs": {
+    "extraction": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "atlas_v4",
+      "profileId": "atlas_v4",
+      "contextWindowTokens": 32768,
+      "safeInputTokens": 5000,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "clustering": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "atlas_v4",
+      "profileId": "atlas_v4",
+      "contextWindowTokens": 32768,
+      "safeInputTokens": 5000,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "enrichment": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "atlas_v4",
+      "profileId": "atlas_v4",
+      "contextWindowTokens": 32768,
+      "safeInputTokens": 5000,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    },
+    "relations": {
+      "provider": "local-openai-compatible",
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "model": "atlas_v4",
+      "profileId": "atlas_v4",
+      "contextWindowTokens": 32768,
+      "safeInputTokens": 5000,
+      "allowNoKey": true,
+      "temperature": 0.1,
+      "maxTokens": 700,
+      "timeoutMs": 120000,
+      "concurrency": 1,
+      "jsonMode": true
+    }
+  },
+  "preflight": [
+    {
+      "provider": "local-openai-compatible",
+      "model": "atlas_v4",
+      "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+      "modelsUrl": "http://127.0.0.1:1234/v1/models",
+      "ok": true,
+      "available": true,
+      "loaded": false,
+      "detectedContextWindowTokens": 32768,
+      "configuredSafeInputTokens": 5000,
+      "configuredMaxOutputTokens": 700,
+      "error": ""
+    }
+  ]
+}

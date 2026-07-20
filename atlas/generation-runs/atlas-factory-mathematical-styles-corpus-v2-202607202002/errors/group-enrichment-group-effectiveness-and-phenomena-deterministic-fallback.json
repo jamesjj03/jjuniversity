@@ -1,0 +1,10 @@
+{
+  "stageName": "group-enrichment-group-effectiveness-and-phenomena",
+  "ok": true,
+  "fallback": "deterministic-enriched-group",
+  "reason": {
+    "category": "validation_failure",
+    "message": "group-enrichment-group-effectiveness-and-phenomena failed: Group stance is required.; Group centralClaim is required.; Group whyItMatters is required.; Group needs at least one contributor."
+  },
+  "createdAt": "2026-07-20T20:40:32.216Z"
+}

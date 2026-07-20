@@ -1,0 +1,44 @@
+{
+  "stage": "source-extraction",
+  "ok": true,
+  "batchIndex": 4,
+  "chunkIds": [
+    "corpus-systems-design-source-054dda302408#5"
+  ],
+  "charLimit": 700,
+  "estimatedInputTokens": 678,
+  "splitDepth": 0,
+  "result": {
+    "people": [],
+    "concepts": [
+      {
+        "label": "concept study",
+        "summary": "Idea generation & evaluation.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-source-054dda302408#5",
+            "sourceId": "corpus-systems-design-source-054dda302408",
+            "chunkIndex": 5,
+            "note": "Defines concept study."
+          }
+        ]
+      },
+      {
+        "label": "ideation",
+        "summary": "Mental process for generating ideas.",
+        "provenance": [
+          {
+            "chunkId": "corpus-systems-design-source-054dda302408#5",
+            "sourceId": "corpus-systems-design-source-054dda302408",
+            "chunkIndex": 5,
+            "note": "Describes ideation."
+          }
+        ]
+      }
+    ],
+    "claims": [],
+    "texts": [],
+    "objections": [],
+    "relationships": []
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "id": "computation-systems-and-scientific-modeling",
+  "slug": "computation-systems-and-scientific-modeling",
+  "title": "Computation, systems, and scientific modeling",
+  "shortTitle": "Computation/modeling",
+  "family": "Computation/modeling family",
+  "stance": "central scientific tool",
+  "centralClaim": "Simulation, information, feedback, and computation become central tools for science.",
+  "whyItMatters": "This family organizes source-backed claims about build a reviewable intellectual-lineage atlas draft for scientific lineages from the selected source brief. emphasize handoffs, methods, revolutions, and influence chains. for admin review.",
+  "contributors": [
+    {
+      "id": "person-alan-turing",
+      "name": "Alan Turing",
+      "role": "source contributor",
+      "reason": "formalized computation, mathematical biology",
+      "texts": [
+        {
+          "id": "source-evidence-for-alan-turing",
+          "title": "Source evidence for Alan Turing",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#8",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#8",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 8
+        }
+      ]
+    },
+    {
+      "id": "person-norbert-wiener",
+      "name": "Norbert Wiener",
+      "role": "source contributor",
+      "reason": "developed cybernetics",
+      "texts": [
+        {
+          "id": "source-evidence-for-norbert-wiener",
+          "title": "Source evidence for Norbert Wiener",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#8",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#8",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 8
+        }
+      ]
+    },
+    {
+      "id": "person-john-von-neumann",
+      "name": "John von Neumann",
+      "role": "source contributor",
+      "reason": "computation, game theory, automata",
+      "texts": [
+        {
+          "id": "source-evidence-for-john-von-neumann",
+          "title": "Source evidence for John von Neumann",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#8",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#8",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 8
+        }
+      ]
+    },
+    {
+      "id": "person-claude-shannon",
+      "name": "Claude Shannon",
+      "role": "source contributor",
+      "reason": "information theory",
+      "texts": [
+        {
+          "id": "source-evidence-for-claude-shannon",
+          "title": "Source evidence for Claude Shannon",
+          "kind": "other",
+          "provenance": [
+            {
+              "chunkId": "stem-scientists-scientific-lineages#8",
+              "sourceId": "stem-scientists-scientific-lineages",
+              "chunkIndex": 8
+            }
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "chunkId": "stem-scientists-scientific-lineages#8",
+          "sourceId": "stem-scientists-scientific-lineages",
+          "chunkIndex": 8
+        }
+      ]
+    }
+  ],
+  "objections": [
+    "The source packet requires review before treating Computation, systems, and scientific modeling as a complete family."
+  ],
+  "relatedGroupIds": [
+    "mathematical-astronomy-and-mechanics",
+    "experimental-electricity-and-field-physics",
+    "chemistry-elements-and-molecular-order"
+  ],
+  "keywords": [
+    "computation",
+    "cybernetics",
+    "computation,",
+    "systems,",
+    "scientific",
+    "modeling"
+  ],
+  "provenance": [
+    {
+      "chunkId": "stem-scientists-scientific-lineages#8",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 8
+    },
+    {
+      "chunkId": "stem-scientists-scientific-lineages#0",
+      "sourceId": "stem-scientists-scientific-lineages",
+      "chunkIndex": 0,
+      "note": "deterministic fallback source support"
+    }
+  ]
+}
