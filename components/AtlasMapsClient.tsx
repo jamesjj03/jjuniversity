@@ -259,7 +259,6 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
                                                 <p>Select a node or open a family below.</p>
                                               </div>
                                               <svg className="atlasMapsWeb" viewBox="0 0 680 380" role="group" aria-label={`${map.title} relation web`}>
-                                                <title>{map.title} relation web</title>
                                                 <line className="atlasMapsAxis" x1="68" y1="190" x2="612" y2="190" />
                                                 <line className="atlasMapsAxis" x1="340" y1="54" x2="340" y2="326" />
                                                 <circle className="atlasMapsCore" cx="340" cy="190" r="58" />
