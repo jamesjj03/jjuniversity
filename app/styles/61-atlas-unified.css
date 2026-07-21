@@ -1,0 +1,700 @@
+/* Atlas public navigator: one nested disclosure surface from territory to theory. */
+.atlasMapsPage {
+  width:min(1240px, calc(100vw - 32px));
+  margin:0 auto;
+  padding:clamp(18px, 3vw, 34px) 0 72px;
+  display:grid;
+  gap:18px;
+}
+
+.atlasMapsHeader {
+  min-height:190px;
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:28px;
+  align-items:end;
+  border:0;
+  border-bottom:1px solid color-mix(in srgb, var(--gold) 24%, transparent);
+  border-radius:0;
+  padding:clamp(34px, 6vw, 76px) 0 24px;
+  background:
+    radial-gradient(circle at 42% 4%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 45%),
+    linear-gradient(180deg, color-mix(in srgb, var(--panel) 32%, transparent), transparent 74%);
+  box-shadow:none;
+}
+
+.atlasMapsHeader h1 {
+  margin:0;
+  color:white;
+  font-size:clamp(62px, 11vw, 118px);
+  font-weight:950;
+  line-height:.84;
+  letter-spacing:-.055em;
+}
+
+.atlasMapsHeader .pageTagline {
+  max-width:720px;
+  margin:14px 0 0;
+  color:var(--muted);
+  font-size:clamp(1rem, 1.7vw, 1.2rem);
+  line-height:1.55;
+}
+
+.atlasMapsKicker {
+  margin:0 0 7px;
+  color:var(--gold);
+  font-size:.7rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.atlasMapsHeaderStats {
+  min-width:286px;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:1px;
+  margin:0;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+  border-radius:10px;
+  background:color-mix(in srgb, var(--gold) 16%, transparent);
+}
+
+.atlasMapsHeaderStats div {
+  min-width:0;
+  padding:12px;
+  background:color-mix(in srgb, var(--panel) 92%, transparent);
+}
+
+.atlasMapsHeaderStats dt,
+.atlasMapsMapFacts dt {
+  color:var(--muted);
+  font-size:.62rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.atlasMapsHeaderStats dd,
+.atlasMapsMapFacts dd {
+  margin:5px 0 0;
+  color:white;
+  font-size:1rem;
+  font-weight:900;
+  line-height:1.1;
+}
+
+.atlasMapsExplorer {
+  overflow:hidden;
+  border:1px solid color-mix(in srgb, var(--gold) 28%, transparent);
+  border-radius:14px;
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--jju-blue, #5a8fcf) 5%, transparent), transparent 34%),
+    color-mix(in srgb, var(--panel) 86%, transparent);
+  box-shadow:0 24px 64px rgba(0, 0, 0, .22);
+}
+
+.atlasMapsExplorerHeader {
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  align-items:end;
+  padding:clamp(18px, 3vw, 30px);
+  border-bottom:1px solid color-mix(in srgb, var(--gold) 18%, transparent);
+}
+
+.atlasMapsExplorerHeader h2,
+.atlasMapsOverview h2,
+.atlasMapsQueuedState h2 {
+  margin:0;
+  color:white;
+  font-size:clamp(1.55rem, 2.5vw, 2.3rem);
+  line-height:1;
+  letter-spacing:-.025em;
+}
+
+.atlasMapsExplorerHeader > div > p:last-child,
+.atlasMapsSectionHeading > p {
+  max-width:640px;
+  margin:9px 0 0;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.atlasMapsCollapseAll {
+  flex:0 0 auto;
+  border:1px solid color-mix(in srgb, var(--gold) 34%, transparent);
+  border-radius:999px;
+  padding:9px 13px;
+  background:color-mix(in srgb, var(--panel2) 68%, transparent);
+  color:var(--text);
+  font:inherit;
+  font-size:.75rem;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.atlasMapsCollapseAll:hover:not(:disabled),
+.atlasMapsCollapseAll:focus-visible {
+  border-color:var(--gold);
+  color:white;
+}
+
+.atlasMapsCollapseAll:disabled {
+  opacity:.38;
+  cursor:default;
+}
+
+.atlasMapsTree {
+  display:grid;
+}
+
+.atlasMapsTreeNode {
+  min-width:0;
+}
+
+.atlasMapsTreeNode + .atlasMapsTreeNode {
+  border-top:1px solid color-mix(in srgb, var(--gold) 13%, transparent);
+}
+
+.atlasMapsTreeNode.active {
+  background:color-mix(in srgb, var(--gold) 3.5%, transparent);
+}
+
+.atlasMapsDisclosure {
+  width:100%;
+  display:grid;
+  grid-template-columns:32px 42px minmax(0, 1fr) auto;
+  gap:12px;
+  align-items:center;
+  border:0;
+  padding:17px clamp(14px, 2.5vw, 28px);
+  background:transparent;
+  color:var(--text);
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+
+.atlasMapsDisclosure:hover,
+.atlasMapsDisclosure:focus-visible {
+  outline:none;
+  background:color-mix(in srgb, var(--gold) 7%, transparent);
+}
+
+.atlasMapsDisclosure:focus-visible .atlasMapsDisclosureIcon {
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+}
+
+.atlasMapsDisclosureIcon {
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border:1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  border-radius:50%;
+  background:color-mix(in srgb, var(--panel2) 72%, transparent);
+  color:var(--gold);
+  font-size:1.15rem;
+  font-weight:500;
+  line-height:1;
+}
+
+.atlasMapsTreeNode.active > .atlasMapsDisclosure .atlasMapsDisclosureIcon,
+.atlasMapsFamily.active > .atlasMapsDisclosure .atlasMapsDisclosureIcon {
+  border-color:color-mix(in srgb, var(--gold) 72%, transparent);
+  background:color-mix(in srgb, var(--gold) 16%, var(--panel));
+  color:#ffe8ad;
+}
+
+.atlasMapsNodeIndex {
+  color:color-mix(in srgb, var(--muted) 68%, transparent);
+  font-family:var(--font-mono, ui-monospace, monospace);
+  font-size:.68rem;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.atlasMapsDisclosureCopy {
+  min-width:0;
+  display:grid;
+  gap:4px;
+}
+
+.atlasMapsDisclosureCopy small {
+  color:var(--gold);
+  font-size:.62rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+}
+
+.atlasMapsDisclosureCopy strong {
+  color:white;
+  font-size:1.12rem;
+  line-height:1.15;
+}
+
+.atlasMapsTerritoryDisclosure .atlasMapsDisclosureCopy strong {
+  font-size:clamp(1.35rem, 2vw, 1.8rem);
+}
+
+.atlasMapsDisclosureCopy > span {
+  max-width:850px;
+  color:var(--muted);
+  font-size:.86rem;
+  line-height:1.45;
+}
+
+.atlasMapsTreeChildren {
+  margin:0 clamp(12px, 2.5vw, 28px) 20px 42px;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb, var(--gold) 16%, transparent);
+  border-left:2px solid color-mix(in srgb, var(--gold) 38%, transparent);
+  border-radius:0 10px 10px 0;
+  background:color-mix(in srgb, var(--bg) 46%, transparent);
+  animation:atlasMapsReveal .2s ease both;
+}
+
+.atlasMapsMapLayer {
+  margin-left:34px;
+  margin-right:16px;
+  margin-bottom:16px;
+}
+
+.atlasMapsBranchDisclosure {
+  padding-block:14px;
+}
+
+.atlasMapsMapDisclosure {
+  padding-block:13px;
+}
+
+.atlasMapsStatus {
+  align-self:start;
+  border:1px solid currentColor;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:.62rem;
+  font-style:normal;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.atlasMapsStatus.live {
+  color:#79df93;
+  background:rgba(121, 223, 147, .08);
+}
+
+.atlasMapsStatus.queued {
+  color:#d6b25e;
+  background:rgba(214, 178, 94, .08);
+}
+
+.atlasMapsMapBody {
+  display:grid;
+  gap:14px;
+  padding:0 clamp(12px, 2vw, 20px) 20px;
+  animation:atlasMapsReveal .24s ease both;
+}
+
+.atlasMapsOverview {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(180px, 250px);
+  gap:18px;
+  align-items:end;
+  border:1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+  border-radius:10px;
+  padding:clamp(16px, 2.5vw, 24px);
+  background:
+    linear-gradient(120deg, color-mix(in srgb, var(--jju-blue, #5a8fcf) 10%, transparent), transparent 46%),
+    color-mix(in srgb, var(--panel2) 52%, transparent);
+}
+
+.atlasMapsOverviewText {
+  display:grid;
+  gap:8px;
+}
+
+.atlasMapsOverviewText p:last-child {
+  max-width:760px;
+  margin:0;
+  color:var(--muted);
+  line-height:1.58;
+}
+
+.atlasMapsMapFacts {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:8px;
+  margin:0;
+}
+
+.atlasMapsMapFacts div {
+  min-width:0;
+  border:1px solid color-mix(in srgb, var(--gold) 17%, transparent);
+  border-radius:8px;
+  padding:11px;
+  background:color-mix(in srgb, var(--panel) 74%, transparent);
+}
+
+.atlasMapsMapFacts dd {
+  font-size:1.25rem;
+}
+
+.atlasMapsSectionHeading {
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:end;
+}
+
+.atlasMapsSectionHeading h3 {
+  margin:0;
+  color:white;
+  font-size:clamp(1.25rem, 2vw, 1.7rem);
+  line-height:1.08;
+}
+
+.atlasMapsSectionHeading > p {
+  max-width:460px;
+  margin:0;
+  font-size:.82rem;
+  text-align:right;
+}
+
+.atlasMapsWebPanel,
+.atlasMapsFamilies {
+  display:grid;
+  gap:14px;
+  border:1px solid color-mix(in srgb, var(--gold) 17%, transparent);
+  border-radius:10px;
+  padding:clamp(14px, 2vw, 20px);
+  background:color-mix(in srgb, var(--panel2) 42%, transparent);
+}
+
+.atlasMapsWebPanel {
+  min-height:0;
+  overflow:visible;
+}
+
+.atlasMapsWeb {
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:300px;
+  max-height:380px;
+  overflow:visible;
+  border-radius:8px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .026) 0 1px, transparent 1px 52px),
+    repeating-linear-gradient(90deg, rgba(214, 178, 94, .024) 0 1px, transparent 1px 64px),
+    color-mix(in srgb, var(--bg) 88%, #0b1420);
+}
+
+.atlasMapsAxis {
+  stroke:color-mix(in srgb, var(--gold) 17%, transparent);
+  stroke-width:1;
+}
+
+.atlasMapsCore {
+  fill:color-mix(in srgb, var(--gold) 13%, transparent);
+  stroke:color-mix(in srgb, var(--gold) 44%, transparent);
+  stroke-width:1.5;
+}
+
+.atlasMapsCoreText,
+.atlasMapsCoreSubtext,
+.atlasMapsWebNode text {
+  text-anchor:middle;
+  fill:white;
+  font-weight:900;
+  font-size:.82rem;
+  pointer-events:none;
+}
+
+.atlasMapsCoreSubtext {
+  fill:var(--muted);
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.atlasMapsRelationLine {
+  stroke:rgba(154, 191, 255, .22);
+  stroke-width:1.4;
+  transition:stroke .16s ease, stroke-width .16s ease;
+}
+
+.atlasMapsRelationLine.active {
+  stroke:color-mix(in srgb, var(--gold) 86%, white 4%);
+  stroke-width:2.6;
+}
+
+.atlasMapsWebNode {
+  cursor:pointer;
+  outline:none;
+}
+
+.atlasMapsWebNode circle {
+  fill:rgba(18, 24, 28, .96);
+  stroke:rgba(255, 255, 255, .24);
+  stroke-width:1.4;
+  transition:fill .16s ease, stroke .16s ease, stroke-width .16s ease;
+}
+
+.atlasMapsWebNode:hover circle,
+.atlasMapsWebNode:focus-visible circle,
+.atlasMapsWebNode.active circle {
+  fill:color-mix(in srgb, var(--gold) 20%, #111820);
+  stroke:color-mix(in srgb, var(--gold) 88%, white 4%);
+  stroke-width:2.5;
+}
+
+.atlasMapsWebNode text {
+  fill:#f5efe4;
+  font-size:.64rem;
+}
+
+.atlasMapsFamilyList {
+  display:grid;
+  gap:8px;
+}
+
+.atlasMapsFamily {
+  overflow:hidden;
+  border:1px solid color-mix(in srgb, var(--gold) 16%, transparent);
+  border-radius:9px;
+  background:color-mix(in srgb, var(--panel) 58%, transparent);
+}
+
+.atlasMapsFamily.active {
+  border-color:color-mix(in srgb, var(--gold) 48%, transparent);
+  background:
+    linear-gradient(120deg, color-mix(in srgb, var(--gold) 7%, transparent), transparent 38%),
+    color-mix(in srgb, var(--panel) 72%, transparent);
+}
+
+.atlasMapsFamilyDisclosure {
+  padding:14px 16px;
+}
+
+.atlasMapsFamilyDetail {
+  display:grid;
+  gap:18px;
+  margin:0 16px 16px 86px;
+  padding-top:16px;
+  border-top:1px solid color-mix(in srgb, var(--gold) 16%, transparent);
+  animation:atlasMapsReveal .2s ease both;
+}
+
+.atlasMapsClaimGrid {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:10px;
+}
+
+.atlasMapsClaimGrid section,
+.atlasMapsContributorList article,
+.atlasMapsRelationNotes article {
+  border:1px solid color-mix(in srgb, var(--gold) 14%, transparent);
+  border-radius:8px;
+  padding:12px;
+  background:color-mix(in srgb, var(--panel2) 44%, transparent);
+}
+
+.atlasMapsFamilyDetail h4 {
+  margin:0;
+  color:var(--gold);
+  font-size:.7rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+}
+
+.atlasMapsClaimGrid p,
+.atlasMapsDetailBlock p,
+.atlasMapsRelationNotes p {
+  margin:7px 0 0;
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.atlasMapsDetailBlock {
+  display:grid;
+  gap:9px;
+  border:0;
+  padding:0;
+}
+
+.atlasMapsContributorList {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+  gap:8px;
+}
+
+.atlasMapsContributorList strong {
+  display:block;
+  color:white;
+}
+
+.atlasMapsContributorList span,
+.atlasMapsContributorList small,
+.atlasMapsRelationNotes span {
+  display:block;
+  margin-top:4px;
+  color:var(--gold);
+  font-size:.68rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.atlasMapsContributorList p {
+  margin:7px 0;
+  font-size:.86rem;
+}
+
+.atlasMapsContributorList small {
+  color:var(--muted);
+  line-height:1.45;
+  text-transform:none;
+  letter-spacing:0;
+}
+
+.atlasMapsObjectionList {
+  display:grid;
+  gap:7px;
+  margin:0;
+  padding-left:20px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.atlasMapsRelationNotes {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:8px;
+}
+
+.atlasMapsRelatedList {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.atlasMapsRelatedList button {
+  width:auto;
+  border:1px solid color-mix(in srgb, var(--gold) 26%, transparent);
+  border-radius:999px;
+  padding:7px 10px;
+  background:color-mix(in srgb, var(--panel2) 58%, transparent);
+  color:var(--text);
+  font:inherit;
+  font-size:.75rem;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.atlasMapsRelatedList button:hover,
+.atlasMapsRelatedList button:focus-visible {
+  border-color:var(--gold);
+  color:white;
+}
+
+.atlasMapsQueuedState {
+  min-height:240px;
+  display:grid;
+  gap:10px;
+  align-content:center;
+  border:1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+  border-radius:10px;
+  padding:clamp(18px, 3vw, 30px);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--jju-blue, #5a8fcf) 9%, transparent), transparent),
+    color-mix(in srgb, var(--panel2) 44%, transparent);
+}
+
+.atlasMapsQueuedState p {
+  max-width:760px;
+  margin:0;
+  color:var(--muted);
+  line-height:1.58;
+}
+
+@keyframes atlasMapsReveal {
+  from { opacity:0; transform:translateY(-5px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .atlasMapsPage {
+    width:min(100%, calc(100vw - 20px));
+    padding-top:8px;
+  }
+
+  .atlasMapsHeader {
+    min-height:150px;
+    grid-template-columns:1fr;
+    padding-top:34px;
+  }
+
+  .atlasMapsHeaderStats {
+    min-width:0;
+    width:100%;
+  }
+
+  .atlasMapsExplorerHeader,
+  .atlasMapsSectionHeading {
+    align-items:start;
+    flex-direction:column;
+  }
+
+  .atlasMapsSectionHeading > p {
+    text-align:left;
+  }
+
+  .atlasMapsDisclosure {
+    grid-template-columns:30px minmax(0, 1fr) auto;
+    gap:10px;
+    padding:14px 12px;
+  }
+
+  .atlasMapsNodeIndex {
+    display:none;
+  }
+
+  .atlasMapsTreeChildren,
+  .atlasMapsMapLayer {
+    margin-right:8px;
+    margin-left:14px;
+  }
+
+  .atlasMapsMapBody {
+    padding-inline:8px;
+  }
+
+  .atlasMapsOverview,
+  .atlasMapsClaimGrid {
+    grid-template-columns:1fr;
+  }
+
+  .atlasMapsFamilyDetail {
+    margin-left:16px;
+  }
+
+  .atlasMapsWeb {
+    min-height:250px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlasMapsTreeChildren,
+  .atlasMapsMapBody,
+  .atlasMapsFamilyDetail {
+    animation:none;
+  }
+}
