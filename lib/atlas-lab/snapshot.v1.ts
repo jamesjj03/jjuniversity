@@ -775,6 +775,10 @@ const nodes: AtlasNode[] = [
       transition: "Heat loss and buoyancy drove long-term deformation, spreading, subduction, and plate motion.",
       newlyPossible: ["continental cycles", "mountain building", "material exchange between surface and interior"],
     },
+    structure: {
+      parts: ["lithospheric plates", "plate boundaries", "asthenospheric mantle"],
+      systems: ["spreading ridges", "subduction zones", "continental drift"],
+    },
     visual: { side: "left", depth: 1, emphasis: "secondary" },
   },
   {

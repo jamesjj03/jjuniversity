@@ -9,9 +9,9 @@ import { assertAtlasLabSnapshot } from "@/lib/atlas-lab/validate";
 assertAtlasLabSnapshot(atlasLabSnapshot);
 
 export const metadata: Metadata = {
-  title: "Atlas V2 Lab",
+  title: "Atlas — Visual Map of Formation",
   description:
-    "An interactive developmental map of how simpler structures and processes made new forms of reality possible.",
+    "Explore one continuous visual map from the early universe to the networked present.",
   alternates: {
     canonical: "/atlas/lab",
   },
