@@ -437,7 +437,7 @@
   width: var(--v2-shell);
   min-height: 0;
   margin-inline: auto;
-  padding: clamp(72px, 8vw, 120px) 0 32px;
+  padding: clamp(64px, 7vw, 104px) 0 20px;
   text-align: center;
 }
 
@@ -473,7 +473,7 @@
 }
 
 .heroLead {
-  margin-top: 28px;
+  margin-top: 24px;
   margin-bottom: 0;
   color: var(--v2-ink);
   font-size: clamp(21px, 2.5vw, 30px);
@@ -481,7 +481,7 @@
 }
 
 .heroGold {
-  margin-top: 5px;
+  margin-top: 12px;
   margin-bottom: 0;
   color: var(--v2-gold-bright);
   font-family: var(--v2-display);
@@ -491,7 +491,7 @@
 
 .heroBody {
   max-width: 710px;
-  margin-top: 18px;
+  margin-top: 16px;
   margin-bottom: 0;
   color: var(--v2-muted);
   font-size: 18px;
@@ -511,7 +511,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-top: 30px;
+  margin-top: 24px;
 }
 
 .heroCoverStage {
@@ -575,7 +575,7 @@
 .starterSection,
 .shelvesSection,
 .fiveSection {
-  padding-top: 32px;
+  padding-top: 24px;
 }
 
 .starterCard {
@@ -773,7 +773,7 @@
 
 .catalogMode {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 6px;
   margin-bottom: 20px;
 }
@@ -1001,14 +1001,15 @@
 }
 
 .bookCard {
+  --cover-accent: var(--v2-gold);
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid var(--v2-line);
+  border: 1px solid color-mix(in srgb, var(--cover-accent) 22%, var(--v2-line));
   border-radius: 8px;
   background:
-    radial-gradient(circle at 15% 0, color-mix(in srgb, var(--v2-gold) 8%, transparent), transparent 35%),
+    radial-gradient(circle at 15% 0, color-mix(in srgb, var(--cover-accent) 12%, transparent), transparent 38%),
     linear-gradient(155deg, var(--v2-panel-raised), var(--v2-panel));
   box-shadow: 0 18px 40px color-mix(in srgb, var(--v2-shadow) 62%, transparent), inset 0 1px color-mix(in srgb, var(--v2-ink) 7%, transparent);
   transition: border-color 150ms ease, transform 150ms ease;
@@ -1024,8 +1025,8 @@
   justify-items: center;
   padding: 26px 24px 22px;
   background:
-    radial-gradient(circle at 50% 24%, color-mix(in srgb, var(--v2-gold) 14%, transparent), transparent 58%),
-    color-mix(in srgb, var(--v2-bg-deep) 64%, transparent);
+    radial-gradient(circle at 50% 22%, color-mix(in srgb, var(--cover-accent) 34%, transparent), transparent 60%),
+    linear-gradient(155deg, color-mix(in srgb, var(--cover-accent) 11%, var(--v2-bg-deep)), color-mix(in srgb, var(--v2-bg-deep) 92%, var(--cover-accent)));
 }
 
 .bookCoverFrame {
@@ -1046,6 +1047,7 @@
   min-width: 0;
   padding: 22px 24px 25px;
   border-top: 1px solid var(--v2-line);
+  box-shadow: inset 0 2px color-mix(in srgb, var(--cover-accent) 18%, transparent);
 }
 
 .bookCardTopline {
@@ -1096,7 +1098,7 @@
   margin: 14px 0 0;
   color: var(--v2-ink) !important;
   font-family: var(--v2-display);
-  font-size: clamp(24px, 2.5vw, 33px);
+  font-size: clamp(23px, 2.2vw, 30px);
   font-weight: 850;
   letter-spacing: -0.035em;
   line-height: 1.02;
@@ -1126,7 +1128,7 @@
   font-size: 14px;
   line-height: 1.55;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
 }
 
 .bookCardMeta {
@@ -1144,19 +1146,6 @@
   background: color-mix(in srgb, var(--v2-bg-deep) 46%, transparent);
   font-size: 11px;
   font-weight: 750;
-}
-
-.cardDetailLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  width: max-content;
-  min-height: 44px;
-  margin-top: auto;
-  padding-top: 19px;
-  color: var(--v2-gold-bright) !important;
-  font-size: 13px;
-  font-weight: 850;
 }
 
 .loadMoreRow {
@@ -4070,12 +4059,20 @@
   .siteFooter > div {
     display: grid;
     justify-items: center;
-    min-height: 220px;
-    padding: 34px 0;
+    justify-content: center;
+    gap: 12px;
+    min-height: 0;
+    padding: 24px 0 20px;
+  }
+
+  .footerBrand {
+    justify-content: center;
   }
 
   .siteFooter nav {
+    width: 100%;
     justify-content: center;
+    gap: 4px 16px;
   }
 
   .pageHeaderCentered {
@@ -4104,7 +4101,7 @@
   .homeHero {
     width: var(--v2-shell);
     min-height: auto;
-    padding: 64px 0 24px;
+    padding: 46px 0 8px;
   }
 
   .homeHero h1 {
@@ -4113,6 +4110,10 @@
 
   .heroLead {
     font-size: 21px;
+  }
+
+  .heroGold {
+    font-size: 22px;
   }
 
   .heroBody {
@@ -4150,7 +4151,7 @@
   .shelvesSection,
   .fiveSection,
   .relatedSection {
-    padding-top: 40px;
+    padding-top: 24px;
   }
 
   .starterCard {
@@ -4302,13 +4303,18 @@
     -webkit-line-clamp: 2;
   }
 
-  .bookDescription,
-  .cardDetailLink {
-    display: none;
+  .bookDescription {
+    display: -webkit-box;
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
   }
 
   .bookCardMeta {
-    margin-top: 12px;
+    margin-top: auto;
+    padding-top: 12px;
   }
 
   .bookCardMeta span {
@@ -4316,10 +4322,6 @@
     padding: 0;
     background: none;
     font-size: 10px;
-  }
-
-  .bookCardMeta span:nth-child(n + 2) {
-    display: none;
   }
 
   .bookPage {
@@ -4606,6 +4608,21 @@
     padding: 34px 0 62px;
   }
 
+  .printHeader {
+    margin-bottom: 24px;
+    padding-top: 22px;
+  }
+
+  .printHeader .printHeaderLogo {
+    width: 34px;
+    height: 38px;
+    margin-bottom: 5px;
+  }
+
+  .printHeader h1 {
+    font-size: clamp(44px, 12vw, 52px);
+  }
+
   .printIntro {
     padding: 40px 22px;
   }
@@ -4618,6 +4635,10 @@
   .printVolumeSection,
   .printIncludedSection {
     padding-top: 52px;
+  }
+
+  .printCatalogDirect {
+    padding-top: 0;
   }
 
   .printProductGrid,

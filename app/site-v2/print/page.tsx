@@ -34,7 +34,7 @@ export default async function SiteV2PrintPage() {
 
   return (
     <div className={styles.printPage}>
-      <header className={styles.pageHeaderCentered}>
+      <header className={`${styles.pageHeaderCentered} ${styles.printHeader}`}>
         <SiteV2Logo className={styles.printHeaderLogo} />
         <h1>Print</h1>
       </header>

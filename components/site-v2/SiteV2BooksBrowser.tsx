@@ -114,6 +114,7 @@ export default function SiteV2BooksBrowser({
   const restoreScrollY = useRef<number | null>(null);
   const lastScrollY = useRef(0);
   const leavingCatalog = useRef(false);
+  const filterDisclosureRef = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {
     const saved = resetSession ? null : readCatalogSession();
@@ -304,6 +305,10 @@ export default function SiteV2BooksBrowser({
     const nextHref = `${pathname}${search ? `?${search}` : ""}${window.location.hash}`;
     const currentHref = `${window.location.pathname}${window.location.search}${window.location.hash}`;
     if (nextHref !== currentHref) router.replace(nextHref, { scroll: false });
+    if (filterDisclosureRef.current) {
+      filterDisclosureRef.current.open = false;
+      filterDisclosureRef.current.querySelector<HTMLElement>("summary")?.focus();
+    }
   }
 
   function resetInvalidSelections(nextMode: CatalogMode, nextAvailability: AvailabilityFilter) {
@@ -365,7 +370,7 @@ export default function SiteV2BooksBrowser({
             placeholder="Search books, subjects, or questions"
           />
         </label>
-        <details className={styles.filterDisclosure}>
+        <details className={styles.filterDisclosure} ref={filterDisclosureRef}>
           <summary>Filters</summary>
           <div className={styles.filterGrid}>
             {visibleCollections.length > 0 && (

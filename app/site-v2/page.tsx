@@ -43,14 +43,12 @@ export default async function SiteV2HomePage() {
         <div className={styles.heroGlow} aria-hidden="true" />
         <div className={styles.homeHeroCopy}>
           <h1>JJ University</h1>
-          <p className={styles.heroLead}>I spent the last year trying to figure out how everything works.</p>
-          <p className={styles.heroGold}>This is the result.</p>
-          <p className={styles.heroBody}>Hundreds of short books on science, history, religion, psychology, power, money, and everything in between.</p>
-          <p className={styles.heroFree}>All free.</p>
+          <p className={styles.heroLead}>A free library for figuring things out.</p>
+          <p className={styles.heroBody}>Hundreds of short books on science, history, religion, psychology, power, money, and the systems underneath everyday life.</p>
+          <p className={styles.heroGold}>Start anywhere. All free.</p>
           <div className={styles.heroActions}>
             <Link className={styles.primaryButton} href="/books">Browse the books</Link>
             <SiteV2ContinueLink />
-            <Link className={styles.textButton} href="/about">What this is</Link>
           </div>
         </div>
       </section>

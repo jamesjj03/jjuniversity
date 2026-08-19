@@ -17,7 +17,7 @@ export default function SiteV2ContactPage() {
     <article className={`${styles.aboutPage} siteV2ContactPage`}>
       <header className={styles.pageHeaderCentered}>
         <h1>Contact</h1>
-        <p>Questions, errors, book issues, narrator stuff, weird ideas, or general Yo WTF messages go here.</p>
+        <p>Questions, errors, book issues, narrator stuff, weird ideas, or general “yo, wtf?” messages go here.</p>
       </header>
 
       <div className={styles.aboutSections}>

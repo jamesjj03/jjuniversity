@@ -47,7 +47,7 @@ export default function SiteV2AboutPage() {
           </div>
           <div className={styles.aboutRowBody}>
             <p>This started less like a traditional author project and more like a personal knowledge system that turned into a library.</p>
-            <p>I use AI during research and drafting. I choose the topics and decide how deep each one needs to go. It helps me gather material and get a first version moving. Then I rewrite, rearrange, cut, and keep messing with it until it sounds like me.</p>
+            <p>I use AI during research and drafting. I choose the topics and decide how deep each one needs to go. It helps me gather material and get a first version moving. Then I rewrite, rearrange, cut, and keep working until it&apos;s ready to ship.</p>
             <p>Some books are further along than others. I&apos;m going back through the catalog now to fix weak sections, check facts, and improve the structure. That work isn&apos;t finished.</p>
           </div>
         </section>

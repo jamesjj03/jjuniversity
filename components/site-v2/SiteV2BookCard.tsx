@@ -8,10 +8,10 @@ import styles from "./SiteV2.module.css";
 
 export default function SiteV2BookCard({ book, priority = false }: { book: PublishedBook; priority?: boolean }) {
   return (
-    <article className={styles.bookCard}>
+    <article className={styles.bookCard} data-book-card>
       <Link className={styles.bookCoverLink} href={`/books/${book.slug}`} aria-label={`See details for ${book.title}`}>
         <span className={styles.bookCoverFrame}>
-          <SiteV2Cover src={siteV2CoverSrc(book)} fallbackSrc={coverFallbackSrc(book)} alt={`${book.title} cover`} priority={priority} />
+          <SiteV2Cover src={siteV2CoverSrc(book)} fallbackSrc={coverFallbackSrc(book)} alt={`${book.title} cover`} priority={priority} palette />
         </span>
       </Link>
 
@@ -30,7 +30,6 @@ export default function SiteV2BookCard({ book, priority = false }: { book: Publi
           <span>{formatBookLength(book)}</span>
           {book.chapterCount > 0 && <span>{book.chapterCount} chapters</span>}
         </div>
-        <Link className={styles.cardDetailLink} href={`/books/${book.slug}`}>See book details <span aria-hidden="true">→</span></Link>
       </div>
     </article>
   );

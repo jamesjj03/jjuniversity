@@ -21,7 +21,7 @@ function saturation(value: number[]) {
 }
 
 export function applyCoverPalette(image: HTMLImageElement) {
-  const card = image.closest<HTMLElement>(".bookCard");
+  const card = image.closest<HTMLElement>("[data-book-card], .bookCard");
   if (!card || card.dataset.paletteReady === "true" || !image.naturalWidth || !image.naturalHeight) return;
 
   try {
