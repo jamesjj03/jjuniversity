@@ -47,4 +47,17 @@ next-env.d.ts
 /supabase/.temp/
 /tmp/*.log
 /tmp/pdfs/
+/tmp/pdf-tools/
 /tmp/arena-candidates/
+/tmp/manuscript-bold-removal/
+/tmp/manuscript-quality-audit/
+/tmp/manuscript-case-review/
+/tmp/taxonomy-review/
+
+# local audits, generated previews, and unrelated workspace helpers
+/tmp/
+/output/
+/outputs/
+/acx-contact-roster-work/
+/e.textContent.trim())]
+/window.__dragQA.*

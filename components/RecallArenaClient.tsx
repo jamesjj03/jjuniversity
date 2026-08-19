@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, KeyboardEvent, MouseEvent } from "react";
 import type { RecallMode, RecallPack, RecallShape, RecallTarget } from "@/lib/recall";
 
@@ -26,6 +26,12 @@ type CursorPrompt = {
   visible: boolean;
   x: number;
   y: number;
+};
+
+type RecallArenaClientProps = {
+  packs: RecallPack[];
+  variant?: "default" | "site-v2";
+  factoryHref?: string | null;
 };
 
 const MODE_LABELS: Record<RecallMode, string> = {
@@ -145,7 +151,12 @@ function renderTargetShape(
   return <ellipse key={target.id} cx={shape.cx} cy={shape.cy} rx={shape.rx} ry={shape.ry} {...shared} />;
 }
 
-export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
+export default function RecallArenaClient({
+  packs,
+  variant = "default",
+  factoryHref = "/admin/arena",
+}: RecallArenaClientProps) {
+  const PageRoot = variant === "site-v2" ? "div" : "main";
   const [phase, setPhase] = useState<Phase>("hub");
   const [selectedCategory, setSelectedCategory] = useState<ArenaCategoryId>("anatomy");
   const [activePackId, setActivePackId] = useState(packs[0]?.id || "");
@@ -160,6 +171,10 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
   const [roundWrongPicks, setRoundWrongPicks] = useState<string[]>([]);
   const [result, setResult] = useState<PickResult>({ kind: "idle" });
   const [cursorPrompt, setCursorPrompt] = useState<CursorPrompt>({ visible: false, x: 0, y: 0 });
+  const hubHeadingRef = useRef<HTMLHeadingElement>(null);
+  const promptFocusRef = useRef<HTMLDivElement>(null);
+  const completeHeadingRef = useRef<HTMLHeadingElement>(null);
+  const previousPhaseRef = useRef<Phase>(phase);
 
   const selectedCategoryData = ARENA_CATEGORIES.find(category => category.id === selectedCategory) || ARENA_CATEGORIES[0];
   const anatomyPacks = useMemo(
@@ -192,6 +207,20 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
     }, 1000);
 
     return () => window.clearInterval(timer);
+  }, [phase]);
+
+  useEffect(() => {
+    const previousPhase = previousPhaseRef.current;
+    previousPhaseRef.current = phase;
+    if (previousPhase === phase) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      if (phase === "playing") promptFocusRef.current?.focus();
+      else if (phase === "complete") completeHeadingRef.current?.focus();
+      else hubHeadingRef.current?.focus();
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [phase]);
 
   useEffect(() => {
@@ -292,16 +321,17 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
   }
 
   return (
-    <main className={`page aboutPage recallPage recallPhase-${phase}`}>
+    <PageRoot className={`page aboutPage recallPage recallPhase-${phase}${variant === "site-v2" ? " siteV2LabsPage" : ""}`}>
       {phase === "hub" && (
         <section className="recallLibraryShell">
           <header className="recallLibraryTop">
             <div>
-              <h1>Arena</h1>
+              <h1 ref={hubHeadingRef} tabIndex={-1}>{variant === "site-v2" ? "Labs" : "Arena"}</h1>
+              {variant === "site-v2" && <p>Short visual drills for recognition and recall.</p>}
             </div>
             <div className="recallLibraryActions" aria-label="Arena actions">
-              <span>{anatomyPacks.length} ready / 10 categories</span>
-              <Link className="btn secondary" href="/admin/arena" prefetch={false}>Factory</Link>
+              <span>{anatomyPacks.length} ready / {ARENA_CATEGORIES.length} categories</span>
+              {factoryHref && <Link className="btn secondary" href={factoryHref} prefetch={false}>Factory</Link>}
             </div>
           </header>
 
@@ -309,6 +339,7 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
             <aside className="recallCategoryRail" aria-label="Arena categories">
               {ARENA_CATEGORIES.map(category => (
                 <button
+                  aria-pressed={selectedCategory === category.id}
                   className={selectedCategory === category.id ? "active" : ""}
                   key={category.id}
                   type="button"
@@ -375,7 +406,7 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
           <article className="aboutStory aboutEssay">
             <section className="aboutIntroBlock">
               <p className="kicker">Run Complete</p>
-              <h2>{accuracy}% accuracy.</h2>
+              <h2 ref={completeHeadingRef} tabIndex={-1}>{accuracy}% accuracy.</h2>
               <p>{formatElapsed(elapsedSeconds)}. {missTotal ? `${missTotal} misses are waiting in Review.` : "Clean run."}</p>
               <div className="buttonRow recallDoneActions">
                 <button className="btn primary" type="button" onClick={() => startGame("find", activePack.id)}>Run Chaos Again</button>
@@ -397,7 +428,7 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
             }}>
               Packs
             </button>
-            <div className="recallPromptBar">
+            <div ref={promptFocusRef} className="recallPromptBar" role="status" aria-live="polite" aria-atomic="true" tabIndex={-1}>
               <span>{MODE_LABELS[mode]}</span>
               <strong>{mode === "function" ? prompt : `Click ${prompt}`}</strong>
             </div>
@@ -410,7 +441,7 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
 
           <div className="recallModeRail" aria-label="Modes">
             {activePack.modes.map(item => (
-              <button className={mode === item ? "active" : ""} key={item} type="button" onClick={() => startGame(item, activePack.id)}>
+              <button aria-pressed={mode === item} className={mode === item ? "active" : ""} key={item} type="button" onClick={() => startGame(item, activePack.id)}>
                 <strong>{MODE_LABELS[item]}</strong>
                 <span>{MODE_DESCRIPTIONS[item]}</span>
               </button>
@@ -468,7 +499,7 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
             )}
           </div>
 
-          <footer className={`recallGameBottom ${result.kind}`}>
+          <footer className={`recallGameBottom ${result.kind}`} role="status" aria-live="polite" aria-atomic="true">
             <div>
               <strong>
                 {result.kind === "correct" && "Correct"}
@@ -481,12 +512,12 @@ export default function RecallArenaClient({ packs }: { packs: RecallPack[] }) {
                 {result.kind === "idle" && MODE_DESCRIPTIONS[mode]}
               </span>
             </div>
-            <div className="recallProgressTrack" aria-hidden="true"><i style={{ width: `${progress}%` }} /></div>
+            <div className="recallProgressTrack" role="progressbar" aria-label="Drill progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress}><i style={{ width: `${progress}%` }} /></div>
             <button type="button" onClick={restartCurrentMode}>Restart</button>
           </footer>
         </section>
       )}
 
-    </main>
+    </PageRoot>
   );
 }

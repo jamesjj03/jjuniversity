@@ -14,6 +14,10 @@ const pageCountOverride = numberArg("--page-count");
 const books = readJson("public/books.json").map(normalizeBook).filter(book => book.id);
 const manifest = readJson("public/book-content/manifest.json");
 const products = readJson("public/print-products.json").map(normalizeProduct);
+const approvedBrandMark = readFileSync(
+  resolve(root, "public", "branding", "jju", "jju-mark-gold.svg"),
+  "utf8",
+).replace(/<\?xml[\s\S]*?\?>/i, "").trim();
 const requestedProduct = products.find(item => item.slug === requestedSlug);
 
 if (!requestedProduct) {
@@ -74,8 +78,8 @@ function renderInterior(printProduct, productBooks) {
     sections: bodySections(payload.content.sections, payload.book),
   }));
 
-  const totalWords = productBooks.reduce((sum, book) => sum + book.wordCount, 0);
-  const totalSections = bookPayloads.reduce((sum, payload) => sum + payload.sections.length, 0);
+  const copyrightYear = printProduct.copyrightYear || new Date().getFullYear();
+  const isbn = printProduct.isbn.replace(/[^0-9X]/gi, "");
 
   return `<!doctype html>
 <html lang="en">
@@ -305,11 +309,6 @@ function renderInterior(printProduct, productBooks) {
 </head>
 <body>
   <section class="titleLeaf">
-    <p class="kicker">JJ University</p>
-    <h1>${escapeHtml(printProduct.title)}</h1>
-  </section>
-
-  <section class="titleLeaf pageBreak">
     <p class="kicker">${escapeHtml(printProduct.kicker)}</p>
     <h1>${escapeHtml(printProduct.title)}</h1>
     <p class="subtitle">${escapeHtml(printProduct.subtitle || printProduct.description || "")}</p>
@@ -318,11 +317,14 @@ function renderInterior(printProduct, productBooks) {
   </section>
 
   <section class="legalPage pageBreak">
-    <p><strong>${escapeHtml(printProduct.title)}</strong></p>
-    <p>Copyright ${new Date().getFullYear()} James Johnson. All rights reserved.</p>
-    <p>This direct-to-reader print prototype is generated from the JJ University digital library. The online editions remain free to read at JJUniversity.com.</p>
-    <p>No ISBN is assigned to this direct edition. Internal SKU: ${escapeHtml(printProduct.sku || printProduct.slug)}.</p>
-    <p>Generated ${new Date().toISOString().slice(0, 10)}. ${productBooks.length} included books. ${totalWords.toLocaleString()} source words. ${totalSections} body sections.</p>
+    <p><strong>${escapeHtml(printProduct.title)}</strong>${printProduct.subtitle ? `<br>${escapeHtml(printProduct.subtitle)}` : ""}<br>James Johnson</p>
+    <p>Copyright © ${copyrightYear} James Johnson.<br>All rights reserved.</p>
+    <p>Published by JJ University.<br>JJUniversity.com</p>
+    <p>No part of this publication may be reproduced, distributed, or transmitted in any form without prior written permission, except for brief quotations and other uses permitted by law.</p>
+    <p>This publication is intended for general educational purposes. It is not medical, legal, financial, or other professional advice.</p>
+    <p>JJ University uses a human-directed editorial process that includes AI-assisted research and early drafting. James Johnson selects each subject, directs the structure and scope, and substantially revises and edits the final work.</p>
+    <p>Names, brands, and trademarks belong to their respective owners and are used for identification, commentary, and educational discussion.</p>
+    <p>First JJ University print edition, ${copyrightYear}.<br>${isbn ? `ISBN ${escapeHtml(isbn)}<br>` : ""}Internal SKU: ${escapeHtml(printProduct.sku || printProduct.slug)}.</p>
   </section>
 
   <section class="volumeNote pageBreak">
@@ -568,25 +570,15 @@ function renderCoverWrap(printProduct, productBooks, interiorPageCount) {
       padding-left: .18in;
     }
 
-    .qr {
-      width: .82in;
-      height: .82in;
-      display: grid;
-      place-items: center;
-      color: ${theme.background};
-      background: #fff8eb;
-      font-size: 7pt;
-      font-weight: 900;
-      line-height: 1.1;
-      text-align: center;
-      text-transform: uppercase;
+    .brandMark {
+      display: block;
+      width: .62in;
+      height: auto;
     }
 
-    .trimGuide {
-      position: absolute;
-      inset: ${bleed}in;
-      border: 1px dashed rgba(255,255,255,.18);
-      pointer-events: none;
+    .backMark {
+      width: .54in;
+      margin-top: .06in;
     }
   </style>
 </head>
@@ -600,7 +592,7 @@ function renderCoverWrap(printProduct, productBooks, interiorPageCount) {
         ${productBooks.map(book => `<li>${escapeHtml(book.title)}</li>`).join("\n")}
       </ul>
       <p>Read the full digital library free at JJUniversity.com.</p>
-      <div class="qr">JJU<br>Library</div>
+      <div class="brandMark backMark">${approvedBrandMark}</div>
     </section>
 
     <section class="spine">
@@ -608,6 +600,7 @@ function renderCoverWrap(printProduct, productBooks, interiorPageCount) {
     </section>
 
     <section class="panel front">
+      <div class="brandMark">${approvedBrandMark}</div>
       <p class="kicker">JJ University</p>
       <h1>${escapeHtml(titleParts.main)}</h1>
       <div class="volume">${escapeHtml(titleParts.volume)}</div>
@@ -617,7 +610,6 @@ function renderCoverWrap(printProduct, productBooks, interiorPageCount) {
       <p class="author">James Johnson</p>
     </section>
 
-    <div class="trimGuide" aria-hidden="true"></div>
   </main>
 </body>
 </html>`;
@@ -822,6 +814,8 @@ function normalizeProduct(raw) {
       mood: raw.coverTheme?.mood || "JJ University print edition",
     },
     includedLine: String(raw.includedLine || "").trim(),
+    copyrightYear: Number(raw.copyrightYear || 0) || null,
+    isbn: String(raw.isbn || "").trim(),
     bookIds: Array.isArray(raw.bookIds) ? raw.bookIds.map(bookId => String(bookId).toLowerCase()) : [],
   };
 }

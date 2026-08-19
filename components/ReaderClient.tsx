@@ -1,9 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseClient";
 import { coverWebpSrc } from "@/lib/cover";
+import { bookIdAliasFamily, canonicalBookId } from "@/lib/bookAliases";
+import {
+  DEFAULT_PREFERENCES_V2,
+  PREFERENCES_EVENT,
+  READER_FONT_OPTIONS,
+  READER_SIZE_OPTIONS,
+  READER_SPACING_OPTIONS,
+  READER_THEME_OPTIONS,
+  READER_WIDTH_OPTIONS,
+  readPreferencesV2,
+  writePreferencesV2,
+  type PreferencesV2,
+} from "@/lib/preferencesV2";
 
 type BookContent = {
   id: string;
@@ -30,13 +43,30 @@ type Section = {
   wordCount?: number;
 };
 
-type Preferences = {
-  readerTheme?: "dark" | "paper" | "light" | "night" | "sepia";
-  readerSize?: "small" | "medium" | "large" | "xlarge";
-  readerWidth?: "narrow" | "focused" | "wide" | "full";
-  readerFont?: "dyslexic" | "serif" | "book" | "journal" | "classic";
-  readerSpacing?: "tight" | "normal" | "loose";
-  saveProgress?: boolean;
+type BookAuditSource = {
+  url: string;
+  title: string;
+  publisher?: string;
+};
+
+type BookAuditReceipt = {
+  claimId: string;
+  sectionId: string;
+  sectionTitle: string;
+  verdict: "supported" | "contradicted" | "outdated" | "contested";
+  sources: BookAuditSource[];
+};
+
+type BookAuditSummary = {
+  status: "not_started" | "in_progress" | "verified";
+  verifiedClaimCount: number;
+  receipts: BookAuditReceipt[];
+};
+
+type ReaderSectionEntry = {
+  section: Section;
+  displayKind: string;
+  chapterNumber: number | null;
 };
 
 type SavedQuote = {
@@ -47,6 +77,12 @@ type SavedQuote = {
   sectionTitle: string;
   text: string;
   savedAt: string;
+};
+
+type PendingQuoteSelection = {
+  bookId: string;
+  sectionId: string;
+  text: string;
 };
 
 type ReaderBookmarkRow = {
@@ -83,7 +119,6 @@ type ReadingHistoryItem = {
   updatedAt: string;
 };
 
-const PREFS_KEY = "jju.preferences";
 const PROGRESS_KEY = "jju.readerProgress";
 const READ_KEY = "jju.readBooks";
 const READ_EVENTS_KEY = "jju.readingEvents";
@@ -94,33 +129,59 @@ const AUTO_COMPLETE_SECONDS = 60;
 const BOOKMARKS_KEY = "jju.readerBookmarks";
 const NOTES_KEY = "jju.readerNotes";
 const QUOTES_KEY = "jju.readerQuotes";
+const READER_THEME_LABELS: Record<PreferencesV2["readerTheme"], string> = {
+  paper: "Paper",
+  light: "Light",
+  night: "Night",
+};
+const READER_FONT_LABELS: Record<PreferencesV2["readerFont"], string> = {
+  literata: "Literata",
+  lexend: "Lexend",
+  bitter: "Bitter",
+};
+const READER_SIZE_LABELS: Record<PreferencesV2["readerSize"], string> = {
+  comfortable: "Comfortable",
+  large: "Large",
+  xlarge: "Extra large",
+};
+const READER_SIZE_PIXELS: Record<PreferencesV2["readerSize"], number> = {
+  comfortable: 21,
+  large: 24,
+  xlarge: 28,
+};
+const READER_SPACING_LABELS: Record<PreferencesV2["readerSpacing"], string> = {
+  standard: "Standard",
+  relaxed: "Relaxed",
+  open: "Open",
+};
+const READER_WIDTH_LABELS: Record<PreferencesV2["readerWidth"], string> = {
+  focused: "Focused",
+  standard: "Standard",
+  wide: "Wide",
+};
 
 function getBookParam() {
   if (typeof window === "undefined") return "";
   return new URLSearchParams(window.location.search).get("book") || "";
 }
 
-function readPrefs(): Preferences {
-  try {
-    const saved = JSON.parse(localStorage.getItem(PREFS_KEY) || "{}");
-    if (saved.readerFont === "sans" || saved.readerFont === "mono") saved.readerFont = "dyslexic";
-    return {
-      readerTheme: "paper",
-      readerSize: "large",
-      readerWidth: "full",
-      readerFont: "book",
-      readerSpacing: "normal",
-      ...saved,
-    };
-  } catch {
-    return { readerTheme: "paper", readerSize: "large", readerWidth: "full", readerFont: "book", readerSpacing: "normal" };
-  }
+function consumeRestartRequest() {
+  if (typeof window === "undefined") return false;
+  const url = new URL(window.location.href);
+  if (url.searchParams.get("restart") !== "1") return false;
+  url.searchParams.delete("restart");
+  window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  return true;
 }
 
 function readProgress(id: string, requestedId: string) {
   try {
-    const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}");
-    return Number(progress[id] ?? progress[requestedId] ?? 0);
+    const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}") as Record<string, unknown>;
+    const canonicalId = canonicalBookId(id);
+    return Object.entries(progress).reduce((highest, [storedId, value]) => {
+      if (storedId !== requestedId && canonicalBookId(storedId) !== canonicalId) return highest;
+      return Math.max(highest, Number(value) || 0);
+    }, 0);
   } catch {
     return 0;
   }
@@ -129,7 +190,10 @@ function readProgress(id: string, requestedId: string) {
 function readActualSeconds(id: string) {
   try {
     const all = JSON.parse(localStorage.getItem(ACTUAL_TIME_KEY) || "{}") as Record<string, number>;
-    return Number(all[id] || 0);
+    const canonicalId = canonicalBookId(id);
+    return Object.entries(all).reduce((highest, [storedId, value]) => (
+      canonicalBookId(storedId) === canonicalId ? Math.max(highest, Number(value) || 0) : highest
+    ), 0);
   } catch {
     return 0;
   }
@@ -138,7 +202,11 @@ function readActualSeconds(id: string) {
 function saveActualSeconds(id: string, seconds: number) {
   try {
     const all = JSON.parse(localStorage.getItem(ACTUAL_TIME_KEY) || "{}") as Record<string, number>;
-    all[id] = seconds;
+    const canonicalId = canonicalBookId(id);
+    for (const storedId of Object.keys(all)) {
+      if (storedId !== canonicalId && canonicalBookId(storedId) === canonicalId) delete all[storedId];
+    }
+    all[canonicalId] = seconds;
     localStorage.setItem(ACTUAL_TIME_KEY, JSON.stringify(all));
   } catch {
     return;
@@ -225,9 +293,10 @@ function readerQuoteRow(userId: string, quote: SavedQuote) {
 function saveReadingHistory(item: ReadingHistoryItem) {
   try {
     const all = readRecord<ReadingHistoryItem[]>(HISTORY_KEY, []);
+    const canonicalId = canonicalBookId(item.bookId);
     const next = [
-      item,
-      ...all.filter(entry => entry.bookId !== item.bookId && entry.requestedId !== item.requestedId),
+      { ...item, bookId: canonicalId },
+      ...all.filter(entry => canonicalBookId(entry.bookId) !== canonicalId && entry.requestedId !== item.requestedId),
     ].slice(0, 24);
     localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
     window.dispatchEvent(new Event("jju-reading-history"));
@@ -236,15 +305,11 @@ function saveReadingHistory(item: ReadingHistoryItem) {
   }
 }
 
-function defaultReaderPanelsOpen() {
-  if (typeof window === "undefined") return true;
-  return !window.matchMedia("(max-width: 1180px)").matches;
-}
-
 function readCompletedSet() {
   if (typeof window === "undefined") return new Set<string>();
   try {
-    return new Set<string>(JSON.parse(localStorage.getItem(READ_KEY) || "[]"));
+    const stored = JSON.parse(localStorage.getItem(READ_KEY) || "[]") as unknown;
+    return new Set(Array.isArray(stored) ? stored.map(id => canonicalBookId(String(id))) : []);
   } catch {
     return new Set<string>();
   }
@@ -307,29 +372,43 @@ function titleSubtitle(section: Section | undefined, bookTitle: string) {
   return text;
 }
 
+function isTableOfContentsSection(section: Section) {
+  const rawKind = safeKind(section.kind);
+  const title = section.title.trim().toLowerCase();
+  if (/^chapter\b/i.test(section.title)) return false;
+  if (title === "contents" || title === "table of contents") return true;
+  if (/<nav\b[^>]*(?:epub:type=["']toc["']|id=["']toc["'])/i.test(section.html)) return true;
+  return rawKind === "toc";
+}
+
 function inferSectionKind(section: Section, visibleIndex: number, bookTitle: string) {
   const rawKind = safeKind(section.kind);
   const title = section.title.trim().toLowerCase();
   const text = plainText(section.html).toLowerCase();
   const normalizedBookTitle = bookTitle.trim().toLowerCase();
 
-  if (rawKind === "toc" || title === "contents" || title === "table of contents") return "toc";
-  if (visibleIndex === 0) return "title";
+  if (isTableOfContentsSection(section)) return "toc";
+  // The imported EPUB kind is occasionally wrong. Numbered chapter titles are
+  // the one convention that is consistent across the current book corpus.
+  if (/^chapter\b/i.test(section.title)) return "chapter";
   if (/^dedication$/.test(title)) return "dedication";
-  if (/^(prologue|preface|foreword|introduction|epilogue|afterword)$/.test(title)) return "prologue";
+  if (/^prologue$/.test(title)) return "prologue";
+  if (/^preface$/.test(title)) return "preface";
+  if (/^foreword$/.test(title)) return "foreword";
+  if (/^introduction$/.test(title)) return "introduction";
+  if (/^epilogue$/.test(title)) return "epilogue";
+  if (/^afterword$/.test(title)) return "afterword";
   if (/acknowledg(e)?ments?/.test(title)) return "acknowledgments";
   if (/about( the)? author/.test(title)) return "about";
   if (/copyright/.test(title)) return "copyright";
-  if (/^chapter\b/i.test(section.title)) return "chapter";
-  if (["title", "dedication", "prologue", "acknowledgments", "about", "copyright", "backmatter"].includes(rawKind)) return rawKind;
+  if (["title", "dedication", "prologue", "preface", "foreword", "introduction", "epilogue", "afterword", "acknowledgments", "about", "copyright", "backmatter"].includes(rawKind)) return rawKind;
 
-  const looksLikeTitlePage = visibleIndex === 0
-    || (!!normalizedBookTitle && title === normalizedBookTitle)
+  const looksLikeTitlePage = (!!normalizedBookTitle && title === normalizedBookTitle)
     || (!!normalizedBookTitle && text.startsWith(normalizedBookTitle) && text.includes("james johnson"));
 
   if (looksLikeTitlePage) return "title";
-  if (rawKind === "chapter") return "chapter";
-  return "default";
+  if (visibleIndex === 0 && text.split(/\s+/).length < 80 && /\bby\s+(?:james johnson|jj)\b/.test(text)) return "title";
+  return "section";
 }
 
 function cleanSectionHtml(html: string) {
@@ -339,6 +418,26 @@ function cleanSectionHtml(html: string) {
     .replace(/<p\b[^>]*>\s*(?:<br\s*\/?\s*>)?\s*<\/p>/gi, "");
 }
 
+function sanitizeReaderHtml(html: string) {
+  if (typeof DOMParser === "undefined") return html;
+  const document = new DOMParser().parseFromString(html, "text/html");
+  document.querySelectorAll("script, style, iframe, object, embed, form, input, button, textarea, select, link, meta, base").forEach(node => node.remove());
+  document.querySelectorAll("*").forEach(node => {
+    for (const attribute of [...node.attributes]) {
+      const name = attribute.name.toLowerCase();
+      const value = attribute.value.trim().toLowerCase();
+      if (name.startsWith("on") || name === "srcdoc" || ((name === "href" || name === "src") && value.startsWith("javascript:"))) {
+        node.removeAttribute(attribute.name);
+      }
+    }
+  });
+  document.querySelectorAll("a[href]").forEach(link => {
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
+  });
+  return document.body.innerHTML;
+}
+
 function htmlHasOwnHeading(html: string, displayKind: string) {
   if (displayKind === "title") return true;
   return /<(h1|h2|h3)\b/i.test(html) || /class=["'][^"']*(bordered-title|chapter-title|titled-section|page-title)[^"']*["']/i.test(html);
@@ -346,15 +445,51 @@ function htmlHasOwnHeading(html: string, displayKind: string) {
 
 function headerLabel(displayKind: string) {
   if (displayKind === "title") return "Title page";
+  if (displayKind === "dedication") return "Dedication";
   if (displayKind === "prologue") return "Prologue";
+  if (displayKind === "preface") return "Preface";
+  if (displayKind === "foreword") return "Foreword";
+  if (displayKind === "introduction") return "Introduction";
+  if (displayKind === "epilogue") return "Epilogue";
+  if (displayKind === "afterword") return "Afterword";
+  if (displayKind === "frontmatter") return "Front matter";
   if (displayKind === "acknowledgments") return "Acknowledgments";
   if (displayKind === "backmatter") return "Back matter";
-  return displayKind.replace(/-/g, " ");
+  if (displayKind === "about") return "About the author";
+  if (displayKind === "copyright") return "Copyright";
+  if (displayKind === "chapter") return "Chapter";
+  return "Section";
+}
+
+function contentsMarker(entry: ReaderSectionEntry) {
+  if (entry.chapterNumber) return String(entry.chapterNumber).padStart(2, "0");
+
+  const title = entry.section.title.toLowerCase();
+  if (entry.displayKind === "title") return "Title";
+  if (entry.displayKind === "dedication") return "Ded";
+  if (entry.displayKind === "prologue") return "Pro";
+  if (entry.displayKind === "preface") return "Pref";
+  if (entry.displayKind === "foreword") return "Fore";
+  if (entry.displayKind === "introduction") return "Intro";
+  if (entry.displayKind === "epilogue") return "Epi";
+  if (entry.displayKind === "afterword") return "After";
+  if (entry.displayKind === "acknowledgments") return "Acks";
+  if (entry.displayKind === "about") return "About";
+  if (entry.displayKind === "copyright") return "Copy";
+  if (title.includes("appendix")) return "App";
+  if (title.includes("glossary")) return "Gloss";
+  if (title.includes("bibliograph") || title.includes("sources")) return "Sources";
+  if (title.includes("notes")) return "Notes";
+  if (title.includes("index")) return "Index";
+  if (entry.displayKind === "frontmatter") return "Front";
+  if (entry.displayKind === "backmatter") return "Back";
+  return "Sec";
 }
 
 function titleCoverHtml(bookTitle: string, subtitle: string, coverSrc: string) {
+  const titleClass = bookTitle.trim().length <= 18 ? " shortTitle" : "";
   return `
-    <div class="titleCoverPage">
+    <div class="titleCoverPage${titleClass}">
       <img class="titleCoverImage" src="${escapeHtml(coverSrc)}" alt="" />
       <div class="titleCoverText">
         <p class="titleCoverKicker">JJ University</p>
@@ -366,29 +501,25 @@ function titleCoverHtml(bookTitle: string, subtitle: string, coverSrc: string) {
   `;
 }
 
-function readerStyle(preferences: Preferences) {
-  const theme = preferences.readerTheme || "paper";
-  const size = preferences.readerSize || "large";
-  const width = preferences.readerWidth || "full";
-  const font = preferences.readerFont || "book";
-  const spacing = preferences.readerSpacing || "normal";
+function readerStyle(preferences: PreferencesV2) {
+  const theme = preferences.readerTheme;
+  const size = preferences.readerSize;
+  const width = preferences.readerWidth;
+  const font = preferences.readerFont;
+  const spacing = preferences.readerSpacing;
   const colors = {
-    dark: { bg: "#151515", page: "#191816", text: "#f5f1e8", muted: "#c7bda8", heading: "#fff", link: "#d6b25e", rule: "rgba(214,178,94,.34)" },
     night: { bg: "#080b10", page: "#0d1118", text: "#dbe7f6", muted: "#9fb1c7", heading: "#fff", link: "#87bfff", rule: "rgba(135,191,255,.32)" },
     paper: { bg: "#efe4cf", page: "#f7eddc", text: "#251d14", muted: "#715f4b", heading: "#140f09", link: "#8a5d13", rule: "rgba(138,93,19,.25)" },
-    sepia: { bg: "#e5d2b2", page: "#efe0c6", text: "#2c2117", muted: "#705946", heading: "#120d09", link: "#795817", rule: "rgba(121,88,23,.26)" },
     light: { bg: "#f4f2ed", page: "#fbfaf6", text: "#1d1d1d", muted: "#606060", heading: "#050505", link: "#7b540f", rule: "rgba(123,84,15,.24)" },
   }[theme];
-  const fontSize = { small: 16, medium: 18, large: 21, xlarge: 24 }[size];
-  const lineHeight = { tight: 1.55, normal: 1.72, loose: 1.95 }[spacing];
+  const fontSize = { comfortable: 21, large: 24, xlarge: 28 }[size];
+  const lineHeight = { standard: 1.6, relaxed: 1.72, open: 1.9 }[spacing];
   const fontFamily = {
-    dyslexic: "Verdana, Tahoma, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    book: "'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif",
-    journal: "'Trebuchet MS', Verdana, Tahoma, sans-serif",
-    classic: "'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+    literata: "'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif",
+    lexend: "'Trebuchet MS', Arial, sans-serif",
+    bitter: "Rockwell, 'Courier New', Georgia, serif",
   }[font];
-  const maxWidth = { narrow: "620px", focused: "760px", wide: "940px", full: "1120px" }[width];
+  const maxWidth = { focused: "58ch", standard: "66ch", wide: "76ch" }[width];
 
   return `
     html, body { margin: 0; min-height: 100%; background: ${colors.bg}; color: ${colors.text}; }
@@ -400,14 +531,21 @@ function readerStyle(preferences: Preferences) {
     .sectionKicker { margin: 0 0 7px; color: ${colors.muted}; font: 700 11px/1.2 Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
     .sectionTitle { margin: 0; color: ${colors.heading}; font-size: clamp(1.7rem, 5vw, 3.15rem); line-height: 1.04; }
     .kind-title, .kind-dedication { display: grid; align-content: center; text-align: center; min-height: calc(100vh - 240px); }
-    .kind-chapter .sectionHeader, .kind-prologue .sectionHeader, .kind-acknowledgments .sectionHeader, .kind-copyright .sectionHeader, .kind-about .sectionHeader, .kind-backmatter .sectionHeader { text-align: center; }
+    .kind-chapter .sectionHeader, .kind-prologue .sectionHeader, .kind-preface .sectionHeader, .kind-foreword .sectionHeader, .kind-introduction .sectionHeader, .kind-epilogue .sectionHeader, .kind-afterword .sectionHeader, .kind-frontmatter .sectionHeader, .kind-section .sectionHeader, .kind-acknowledgments .sectionHeader, .kind-copyright .sectionHeader, .kind-about .sectionHeader, .kind-backmatter .sectionHeader { text-align: center; }
     .kind-chapter .readerContent > h1:first-child, .kind-chapter .readerContent > h2:first-child, .kind-chapter .readerContent > h3:first-child,
     .kind-prologue .readerContent > h1:first-child, .kind-prologue .readerContent > h2:first-child, .kind-prologue .readerContent > h3:first-child,
+    .kind-preface .readerContent > h1:first-child, .kind-preface .readerContent > h2:first-child, .kind-preface .readerContent > h3:first-child,
+    .kind-foreword .readerContent > h1:first-child, .kind-foreword .readerContent > h2:first-child, .kind-foreword .readerContent > h3:first-child,
+    .kind-introduction .readerContent > h1:first-child, .kind-introduction .readerContent > h2:first-child, .kind-introduction .readerContent > h3:first-child,
+    .kind-epilogue .readerContent > h1:first-child, .kind-epilogue .readerContent > h2:first-child, .kind-epilogue .readerContent > h3:first-child,
+    .kind-afterword .readerContent > h1:first-child, .kind-afterword .readerContent > h2:first-child, .kind-afterword .readerContent > h3:first-child,
+    .kind-frontmatter .readerContent > h1:first-child, .kind-frontmatter .readerContent > h2:first-child, .kind-frontmatter .readerContent > h3:first-child,
+    .kind-section .readerContent > h1:first-child, .kind-section .readerContent > h2:first-child, .kind-section .readerContent > h3:first-child,
     .kind-acknowledgments .readerContent > h1:first-child, .kind-acknowledgments .readerContent > h2:first-child, .kind-acknowledgments .readerContent > h3:first-child,
     .kind-copyright .readerContent > h1:first-child, .kind-copyright .readerContent > h2:first-child, .kind-copyright .readerContent > h3:first-child,
     .kind-about .readerContent > h1:first-child, .kind-about .readerContent > h2:first-child, .kind-about .readerContent > h3:first-child,
     .kind-backmatter .readerContent > h1:first-child, .kind-backmatter .readerContent > h2:first-child, .kind-backmatter .readerContent > h3:first-child { text-align: center; }
-    .kind-prologue, .kind-acknowledgments, .kind-copyright, .kind-about, .kind-backmatter { text-align: left; }
+    .kind-prologue, .kind-preface, .kind-foreword, .kind-introduction, .kind-epilogue, .kind-afterword, .kind-frontmatter, .kind-section, .kind-acknowledgments, .kind-copyright, .kind-about, .kind-backmatter { text-align: left; }
     .kind-title .readerContent, .kind-dedication .readerContent { max-width: 820px; margin: 0 auto; }
     .readerDoc.kind-title { min-height: 0; padding: clamp(22px, 4vw, 48px); }
     .kind-title .readerContent { max-width: 980px; width: 100%; }
@@ -429,7 +567,7 @@ function readerStyle(preferences: Preferences) {
     .kind-dedication .sectionHeader { border: 0; margin-bottom: 22px; padding-bottom: 0; }
     .kind-dedication .sectionKicker { display: none; }
     .kind-dedication .sectionTitle { font-size: clamp(2.2rem, 7vw, 4.6rem); }
-    .kind-chapter, .kind-prologue { padding-top: clamp(24px, 4vw, 52px); }
+    .kind-chapter, .kind-prologue, .kind-preface, .kind-foreword, .kind-introduction, .kind-epilogue, .kind-afterword, .kind-frontmatter, .kind-section { padding-top: clamp(24px, 4vw, 52px); }
     .chapter-title, .titled-section { margin-top: 0; }
     .chapter-title-page-padding, .titled-section-page-padding, .separator, .br { display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
     h1, h2, h3 { color: ${colors.heading}; line-height: 1.15; margin: 1.25em 0 .65em; }
@@ -442,6 +580,11 @@ function readerStyle(preferences: Preferences) {
     blockquote { border-left: 3px solid ${colors.rule}; margin: 1.4em 0; padding-left: 1em; color: ${colors.muted}; }
     .bordered-title { border: 1px solid ${colors.rule}; display: inline-block; padding: .25em .45em; margin-top: 0; }
     .subtitle { color: ${colors.muted}; margin-top: .7em; }
+    @media (max-width: 1080px) {
+      html, body { min-height: 0; }
+      .readerDoc, .kind-title, .kind-dedication, .titleCoverPage { min-height: 0; }
+      .titleCoverImage { max-height: none; }
+    }
     @media (max-width: 720px) {
       .titleCoverPage { grid-template-columns: 1fr; text-align: center; justify-items: center; }
       .titleCoverImage { max-width: 260px; }
@@ -449,10 +592,38 @@ function readerStyle(preferences: Preferences) {
   `;
 }
 
-export default function ReaderClient() {
+export default function ReaderClient({
+  bookQuery,
+  libraryHref = "/library",
+  libraryLabel = "Library",
+  autoOpenDesktopPanels = true,
+  contentSource = "live",
+  embedded = false,
+  variant = "default",
+}: {
+  bookQuery?: string;
+  libraryHref?: string;
+  libraryLabel?: string;
+  autoOpenDesktopPanels?: boolean;
+  contentSource?: "live" | "file";
+  embedded?: boolean;
+  variant?: "default" | "site-v2";
+} = {}) {
+  const PageRoot = embedded ? "div" : "main";
   const viewerRef = useRef<HTMLIFrameElement | null>(null);
+  const inlineDocumentRef = useRef<HTMLElement | null>(null);
+  const fullscreenRootRef = useRef<HTMLElement | null>(null);
   const shellRef = useRef<HTMLElement | null>(null);
+  const toolsTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const toolsPanelRef = useRef<HTMLElement | null>(null);
+  const sizeMenuRef = useRef<HTMLDetailsElement | null>(null);
+  const pendingQuoteSelectionRef = useRef<PendingQuoteSelection | null>(null);
+  const pageScrollIntentRef = useRef<"none" | "top" | "smart">("none");
   const touchStart = useRef<number | null>(null);
+  const viewerResizeObserverRef = useRef<ResizeObserver | null>(null);
+  const chapterPanelId = useId();
+  const studyPanelId = useId();
+  const settingsPanelId = useId();
   const [requestedId, setRequestedId] = useState("");
   const [bookId, setBookId] = useState("");
   const [bookCoverSrc, setBookCoverSrc] = useState("");
@@ -462,15 +633,17 @@ export default function ReaderClient() {
   const [status, setStatus] = useState("Loading book content...");
   const [error, setError] = useState("");
   const [sections, setSections] = useState<Section[]>([]);
+  const [audit, setAudit] = useState<BookAuditSummary | null>(null);
   const [sectionIndex, setSectionIndex] = useState(0);
-  const [preferences, setPreferences] = useState<Preferences>(() => typeof window === "undefined" ? {} : readPrefs());
+  const [preferences, setPreferences] = useState<PreferencesV2>({ ...DEFAULT_PREFERENCES_V2 });
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [userId, setUserId] = useState("");
   const [cloudSyncReady, setCloudSyncReady] = useState(false);
   const [actualSeconds, setActualSeconds] = useState(0);
-  const [chapterDrawerOpen, setChapterDrawerOpen] = useState(defaultReaderPanelsOpen);
-  const [studyPanelOpen, setStudyPanelOpen] = useState(defaultReaderPanelsOpen);
-  const [focusMode, setFocusMode] = useState(false);
+  const [chapterDrawerOpen, setChapterDrawerOpen] = useState(false);
+  const [studyPanelOpen, setStudyPanelOpen] = useState(false);
+  const [fullscreenActive, setFullscreenActive] = useState(false);
+  const [fullscreenFallbackActive, setFullscreenFallbackActive] = useState(false);
   const noteSaveTimer = useRef<number | null>(null);
   const [bookmarks, setBookmarks] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
@@ -484,25 +657,130 @@ export default function ReaderClient() {
     if (typeof window === "undefined") return [];
     return readRecord<SavedQuote[]>(QUOTES_KEY, []);
   });
+  const [pendingQuoteText, setPendingQuoteText] = useState("");
   const [readerMessage, setReaderMessage] = useState("");
   const [completedBooks, setCompletedBooks] = useState<Set<string>>(() => readCompletedSet());
+  const compactReader = variant === "site-v2";
 
-  const visibleSections = useMemo(() => {
-    const bodySections = sections.filter(section => inferSectionKind(section, 0, title) !== "toc");
-    return bodySections.length ? bodySections : sections;
+  const sectionEntries = useMemo<ReaderSectionEntry[]>(() => {
+    const readableSections = sections.filter(section => !isTableOfContentsSection(section));
+    const source = readableSections.length ? readableSections : sections;
+    const rawKinds = source.map((item, index) => inferSectionKind(item, index, title));
+    const firstChapterIndex = rawKinds.indexOf("chapter");
+    const lastChapterIndex = rawKinds.lastIndexOf("chapter");
+
+    return source.map((item, index) => {
+      let displayKind = rawKinds[index];
+      if (displayKind === "section" && firstChapterIndex >= 0) {
+        if (index < firstChapterIndex) displayKind = "frontmatter";
+        if (index > lastChapterIndex) displayKind = "backmatter";
+      }
+      const chapterNumber = displayKind === "chapter"
+        ? rawKinds.slice(0, index + 1).filter(kind => kind === "chapter").length
+        : null;
+      return {
+        section: item,
+        displayKind,
+        chapterNumber,
+      };
+    });
   }, [sections, title]);
 
+  const visibleSections = useMemo(() => sectionEntries.map(item => item.section), [sectionEntries]);
+  const chapterCount = useMemo(() => sectionEntries.filter(item => item.displayKind === "chapter").length, [sectionEntries]);
+  const sectionEntry = sectionEntries[sectionIndex];
   const section = visibleSections[sectionIndex];
-  const displayKind = section ? inferSectionKind(section, sectionIndex, title) : "default";
-  const progressPercent = visibleSections.length ? Math.round(((sectionIndex + 1) / visibleSections.length) * 100) : 0;
+  const displayKind = sectionEntry?.displayKind || "section";
+  const completedChapterCount = chapterCount
+    ? sectionEntries.slice(0, sectionIndex + 1).filter(item => item.displayKind === "chapter").length
+    : 0;
+  const progressPercent = chapterCount
+    ? Math.round((completedChapterCount / chapterCount) * 100)
+    : visibleSections.length > 1
+      ? Math.round((sectionIndex / (visibleSections.length - 1)) * 100)
+      : 0;
+  const pageProgressPercent = visibleSections.length > 1
+    ? Math.round((sectionIndex / (visibleSections.length - 1)) * 100)
+    : 0;
   const estimatedMinutes = visibleSections.length ? estimateMinutes(visibleSections) : 0;
-  const remainingSections = visibleSections.slice(sectionIndex + 1);
+  const remainingSections = chapterCount
+    ? sectionEntries.slice(sectionIndex + 1).filter(item => item.displayKind === "chapter").map(item => item.section)
+    : visibleSections.slice(sectionIndex + 1);
   const remainingMinutes = remainingSections.reduce((sum, item) => sum + sectionMinutes(item), 0);
+  const lastReadingSectionIndex = chapterCount
+    ? sectionEntries.map(item => item.displayKind).lastIndexOf("chapter")
+    : Math.max(0, visibleSections.length - 1);
+  const hasReachedReadingEnd = visibleSections.length > 0 && sectionIndex >= lastReadingSectionIndex;
   const currentSectionKey = bookId && section ? `${bookId}::${section.id}` : "";
   const currentNote = currentSectionKey ? notes[currentSectionKey] || "" : "";
   const isBookmarked = currentSectionKey ? bookmarks.has(currentSectionKey) : false;
-  const chapterQuotes = section ? quotes.filter(item => item.bookId === bookId && item.sectionId === section.id).slice(0, 4) : [];
-  const bookQuotes = quotes.filter(item => item.bookId === bookId);
+  const isCurrentBookComplete = completedBooks.has(canonicalBookId(bookId));
+  const canonicalCurrentBookId = canonicalBookId(bookId);
+  const chapterQuotes = section ? quotes.filter(item => canonicalBookId(item.bookId) === canonicalCurrentBookId && item.sectionId === section.id) : [];
+  const bookQuotes = quotes.filter(item => canonicalBookId(item.bookId) === canonicalCurrentBookId);
+  const savedBookSections = useMemo(() => {
+    const bookmarkKeys = [...bookmarks];
+    const noteKeys = Object.keys(notes);
+
+    return sectionEntries.flatMap((entry, index) => {
+      const sectionId = entry.section.id;
+      const bookmarkKey = bookmarkKeys.find(key => {
+        const parsed = parseSectionKey(key);
+        return parsed?.sectionId === sectionId && canonicalBookId(parsed.bookId) === canonicalCurrentBookId;
+      });
+      const noteKey = noteKeys.find(key => {
+        const parsed = parseSectionKey(key);
+        return parsed?.sectionId === sectionId && canonicalBookId(parsed.bookId) === canonicalCurrentBookId;
+      });
+      const sectionQuotes = quotes.filter(item => canonicalBookId(item.bookId) === canonicalCurrentBookId && item.sectionId === sectionId);
+      if (!bookmarkKey && !noteKey && !sectionQuotes.length) return [];
+
+      return [{
+        entry,
+        index,
+        bookmarkKey: bookmarkKey || "",
+        noteKey: noteKey || "",
+        note: noteKey ? notes[noteKey] || "" : "",
+        quotes: sectionQuotes,
+      }];
+    });
+  }, [bookmarks, canonicalCurrentBookId, notes, quotes, sectionEntries]);
+  const savedBookBookmarkCount = savedBookSections.filter(item => item.bookmarkKey).length;
+  const savedBookNoteCount = savedBookSections.filter(item => item.noteKey).length;
+  const savedBookQuoteCount = savedBookSections.reduce((sum, item) => sum + item.quotes.length, 0);
+
+  const captureQuoteSelection = useCallback(() => {
+    if (!compactReader || !bookId || !section || typeof window === "undefined") return null;
+    const readerDocument = inlineDocumentRef.current;
+    const selection = window.getSelection();
+    if (!readerDocument || !selection || selection.isCollapsed || selection.rangeCount === 0) return null;
+    if (!selection.anchorNode || !selection.focusNode) return null;
+    if (!readerDocument.contains(selection.anchorNode) || !readerDocument.contains(selection.focusNode)) return null;
+
+    const text = selection.toString().trim().slice(0, 900);
+    if (!text) return null;
+    const pending = { bookId, sectionId: section.id, text } satisfies PendingQuoteSelection;
+    pendingQuoteSelectionRef.current = pending;
+    setPendingQuoteText(text);
+    return pending;
+  }, [bookId, compactReader, section]);
+
+  const jumpToSection = useCallback((index: number, scrollIntent: "none" | "top" | "smart" = "top") => {
+    const lastIndex = visibleSections.length - 1;
+    if (lastIndex < 0) return;
+    pendingQuoteSelectionRef.current = null;
+    setPendingQuoteText("");
+    pageScrollIntentRef.current = scrollIntent;
+    setSectionIndex(Math.max(0, Math.min(lastIndex, index)));
+  }, [visibleSections.length]);
+
+  const prevSection = useCallback((scrollIntent: "none" | "top" | "smart" = "top") => {
+    jumpToSection(sectionIndex - 1, scrollIntent);
+  }, [jumpToSection, sectionIndex]);
+
+  const nextSection = useCallback((scrollIntent: "none" | "top" | "smart" = "top") => {
+    jumpToSection(sectionIndex + 1, scrollIntent);
+  }, [jumpToSection, sectionIndex]);
 
   async function syncBookmarkToCloud(key: string, saved: boolean) {
     if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
@@ -532,37 +810,92 @@ export default function ReaderClient() {
     await supabase.from("reader_quotes").upsert(readerQuoteRow(userId, quote), { onConflict: "user_id,id" });
   }
 
-  function handleReaderKey(event: KeyboardEvent) {
+  const handleReaderKey = useCallback((event: KeyboardEvent) => {
     if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+    if (event.key === "Escape") {
+      if (chapterDrawerOpen || settingsOpen || studyPanelOpen || fullscreenFallbackActive) event.preventDefault();
+      setChapterDrawerOpen(false);
+      setSettingsOpen(false);
+      setStudyPanelOpen(false);
+      setFullscreenFallbackActive(false);
+      sizeMenuRef.current?.removeAttribute("open");
+      return;
+    }
+    if (chapterDrawerOpen || settingsOpen || studyPanelOpen) return;
+    if (sizeMenuRef.current?.open) return;
     const target = event.target as HTMLElement | null;
-    if (["INPUT", "SELECT", "TEXTAREA", "BUTTON"].includes(target?.tagName || "")) return;
-    if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+    if (target?.closest('input, select, textarea, [contenteditable="true"]')) return;
+    if (event.key === "ArrowRight" && sectionIndex < visibleSections.length - 1) {
       event.preventDefault();
-      nextSection();
+      nextSection("smart");
     }
-    if (["ArrowLeft", "PageUp"].includes(event.key)) {
+    if (event.key === "ArrowLeft" && sectionIndex > 0) {
       event.preventDefault();
-      prevSection();
+      prevSection("smart");
     }
-  }
+  }, [chapterDrawerOpen, fullscreenFallbackActive, nextSection, prevSection, sectionIndex, settingsOpen, studyPanelOpen, visibleSections.length]);
+
+  const syncViewerHeight = useCallback(() => {
+    const frame = viewerRef.current;
+    if (!frame || typeof window === "undefined") return;
+    const useNaturalPageScroll = compactReader && window.matchMedia("(max-width: 1080px)").matches;
+    if (!useNaturalPageScroll) {
+      frame.style.removeProperty("height");
+      return;
+    }
+
+    const frameDocument = frame.contentDocument;
+    if (!frameDocument) return;
+    window.requestAnimationFrame(() => {
+      const height = Math.max(
+        frameDocument.documentElement?.scrollHeight || 0,
+        frameDocument.body?.scrollHeight || 0,
+      );
+      if (height > 0) frame.style.height = `${Math.ceil(height)}px`;
+    });
+  }, [compactReader]);
 
   function bindViewerKeys() {
+    viewerResizeObserverRef.current?.disconnect();
     const frameWindow = viewerRef.current?.contentWindow;
-    if (frameWindow) frameWindow.onkeydown = handleReaderKey;
+    frameWindow?.addEventListener("keydown", handleReaderKey);
+    syncViewerHeight();
+
+    const frameDocument = frameWindow?.document;
+    if (frameDocument && typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver(syncViewerHeight);
+      observer.observe(frameDocument.documentElement);
+      if (frameDocument.body) observer.observe(frameDocument.body);
+      viewerResizeObserverRef.current = observer;
+    }
+    void frameDocument?.fonts?.ready.then(syncViewerHeight);
+    frameDocument?.querySelectorAll("img").forEach(image => image.addEventListener("load", syncViewerHeight, { once: true }));
   }
 
-  function patchPreferences(patch: Partial<Preferences>) {
-    const next = { ...readPrefs(), ...preferences, ...patch };
+  function patchPreferences(patch: Partial<PreferencesV2>) {
+    const next = writePreferencesV2({ ...readPreferencesV2(), ...preferences, ...patch });
     setPreferences(next);
-    localStorage.setItem(PREFS_KEY, JSON.stringify(next));
-    window.dispatchEvent(new Event("jju-preferences"));
   }
 
-  async function load() {
+  function toggleChapterDrawer() {
+    setSettingsOpen(false);
+    sizeMenuRef.current?.removeAttribute("open");
+    setChapterDrawerOpen(open => !open);
+  }
+
+  function toggleTools() {
+    if (!settingsOpen) captureQuoteSelection();
+    setChapterDrawerOpen(false);
+    sizeMenuRef.current?.removeAttribute("open");
+    setSettingsOpen(open => !open);
+  }
+
+  const load = useCallback(async () => {
     try {
       setError("");
       setStatus("Loading book content...");
-      const id = getBookParam();
+      const id = String(bookQuery || getBookParam()).trim();
+      const restartRequested = consumeRestartRequest();
       setRequestedId(id);
       if (!id) {
         setTitle("No book selected");
@@ -571,40 +904,84 @@ export default function ReaderClient() {
         return;
       }
 
-      const [item, bookList] = await Promise.all([
-        fetch(`/api/book/${encodeURIComponent(id)}`, { cache: "no-store" }).then(async response => {
-          const data = await response.json().catch(() => ({}));
-          if (!response.ok) throw new Error(data.error || "Book content unavailable.");
-          return data as BookContent;
-        }),
-        fetch("/api/books", { cache: "no-store" }).then(response => response.json()).catch(() => []),
-      ]);
+      const bookListPromise = contentSource === "live"
+        ? fetch("/api/books", { cache: "no-store" })
+          .then(response => response.json())
+          .catch(() => [])
+        : null;
+      const sourceQuery = contentSource === "file" ? "?source=file" : "";
+      const item = await fetch(`/api/book/${encodeURIComponent(id)}${sourceQuery}`, { cache: "no-store" }).then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "Book content unavailable.");
+        return data as BookContent;
+      });
 
       const nextSections = [...(item.sections || [])].sort((a, b) => Number(a.index || 0) - Number(b.index || 0));
-      const bodySections = nextSections.filter((nextSection, index) => inferSectionKind(nextSection, index, item.title || id) !== "toc");
+      const bodySections = nextSections.filter(nextSection => !isTableOfContentsSection(nextSection));
       const readableCount = bodySections.length || nextSections.length;
       if (!readableCount) throw new Error(`No readable sections found for "${id}".`);
 
       const canonicalId = item.id || id;
-      const books = Array.isArray(bookList) ? bookList : bookList?.books || [];
-      const meta = books.find((book: BookMeta) => String(book.id || "").toLowerCase() === canonicalId.toLowerCase())
-        || books.find((book: BookMeta) => String(book.id || "").toLowerCase() === id.toLowerCase())
-        || { id: canonicalId };
+      setAudit(null);
+      const rememberPlace = readPreferencesV2().saveProgress;
       setBookId(canonicalId);
-      setBookCoverSrc(coverWebpSrc(meta, canonicalId));
+      setBookCoverSrc(coverWebpSrc({ id: canonicalId }, canonicalId));
       setSubtitle(titleSubtitle(bodySections[0] || nextSections[0], item.title || canonicalId));
-      setActualSeconds(readActualSeconds(canonicalId));
+      setActualSeconds(rememberPlace ? readActualSeconds(canonicalId) : 0);
       setTitle(item.title || canonicalId);
       setCreator(item.creator || "");
       setSections(nextSections);
-      setSectionIndex(Math.min(Math.max(0, readProgress(canonicalId, id)), readableCount - 1));
+      pendingQuoteSelectionRef.current = null;
+      setPendingQuoteText("");
+      setSectionIndex(restartRequested || !rememberPlace ? 0 : Math.min(Math.max(0, readProgress(canonicalId, id)), readableCount - 1));
       setStatus("Reading");
+
+      void fetch(`/api/book/${encodeURIComponent(canonicalId)}/audit`, { cache: "no-store" })
+        .then(response => response.ok ? response.json() : null)
+        .then(data => setAudit(data as BookAuditSummary | null))
+        .catch(() => setAudit(null));
+
+      void bookListPromise?.then(bookList => {
+        const books = Array.isArray(bookList) ? bookList : bookList?.books || [];
+        const meta = books.find((book: BookMeta) => String(book.id || "").toLowerCase() === canonicalId.toLowerCase())
+          || books.find((book: BookMeta) => String(book.id || "").toLowerCase() === id.toLowerCase())
+          || { id: canonicalId };
+        setBookCoverSrc(coverWebpSrc(meta, canonicalId));
+      });
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Book content unavailable.");
       setStatus("Unavailable");
       setSections([]);
     }
-  }
+  }, [bookQuery, contentSource]);
+
+  useEffect(() => {
+    if (!autoOpenDesktopPanels) return;
+    const frame = window.requestAnimationFrame(() => {
+      const panelsOpen = !window.matchMedia("(max-width: 1180px)").matches;
+      setChapterDrawerOpen(panelsOpen);
+      setStudyPanelOpen(panelsOpen);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [autoOpenDesktopPanels]);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setFullscreenActive(document.fullscreenElement === fullscreenRootRef.current);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
+  useEffect(() => {
+    if (!fullscreenFallbackActive) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [fullscreenFallbackActive]);
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
@@ -612,20 +989,41 @@ export default function ReaderClient() {
     }, 0);
 
     return () => window.clearTimeout(timeout);
-  }, []);
+  }, [load]);
 
   useEffect(() => {
     function handlePreferences() {
-      setPreferences(readPrefs());
+      setPreferences(readPreferencesV2());
     }
 
+    const timeout = window.setTimeout(handlePreferences, 0);
+    window.addEventListener(PREFERENCES_EVENT, handlePreferences);
     window.addEventListener("jju-preferences", handlePreferences);
     window.addEventListener("storage", handlePreferences);
     return () => {
+      window.clearTimeout(timeout);
+      window.removeEventListener(PREFERENCES_EVENT, handlePreferences);
       window.removeEventListener("jju-preferences", handlePreferences);
       window.removeEventListener("storage", handlePreferences);
     };
   }, []);
+
+  useEffect(() => {
+    if (!compactReader) return;
+    const bodyStyle = document.body.style;
+    const previousOverflowX = bodyStyle.getPropertyValue("overflow-x");
+    const previousOverflowXPriority = bodyStyle.getPropertyPriority("overflow-x");
+    const previousOverflowY = bodyStyle.getPropertyValue("overflow-y");
+    const previousOverflowYPriority = bodyStyle.getPropertyPriority("overflow-y");
+    bodyStyle.setProperty("overflow-x", "visible", "important");
+    bodyStyle.setProperty("overflow-y", "visible", "important");
+    return () => {
+      if (previousOverflowX) bodyStyle.setProperty("overflow-x", previousOverflowX, previousOverflowXPriority);
+      else bodyStyle.removeProperty("overflow-x");
+      if (previousOverflowY) bodyStyle.setProperty("overflow-y", previousOverflowY, previousOverflowYPriority);
+      else bodyStyle.removeProperty("overflow-y");
+    };
+  }, [compactReader]);
 
   useEffect(() => {
     if (!hasSupabaseConfig()) return;
@@ -653,25 +1051,57 @@ export default function ReaderClient() {
   useEffect(() => {
     window.addEventListener("keydown", handleReaderKey);
     return () => window.removeEventListener("keydown", handleReaderKey);
-  });
+  }, [handleReaderKey]);
+
+  useEffect(() => {
+    if (!compactReader || !settingsOpen) return;
+
+    function closeToolsFromOutside(event: PointerEvent) {
+      const target = event.target as Node | null;
+      if (!target || toolsPanelRef.current?.contains(target) || toolsTriggerRef.current?.contains(target)) return;
+      setSettingsOpen(false);
+    }
+
+    document.addEventListener("pointerdown", closeToolsFromOutside);
+    return () => document.removeEventListener("pointerdown", closeToolsFromOutside);
+  }, [compactReader, settingsOpen]);
+
+  useEffect(() => {
+    if (!compactReader) return;
+
+    function closeTextFromOutside(event: PointerEvent) {
+      const menu = sizeMenuRef.current;
+      const target = event.target as Node | null;
+      if (!menu?.open || !target || menu.contains(target)) return;
+      menu.removeAttribute("open");
+    }
+
+    document.addEventListener("pointerdown", closeTextFromOutside);
+    return () => document.removeEventListener("pointerdown", closeTextFromOutside);
+  }, [compactReader]);
 
   useEffect(() => {
     if (!bookId || !visibleSections.length || preferences.saveProgress === false) return;
 
     try {
-      const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}");
-      progress[bookId] = sectionIndex;
-      if (requestedId && requestedId !== bookId) progress[requestedId] = sectionIndex;
+      const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}") as Record<string, number>;
+      const canonicalId = canonicalBookId(bookId);
+      for (const storedId of Object.keys(progress)) {
+        if (storedId !== canonicalId && canonicalBookId(storedId) === canonicalId) delete progress[storedId];
+      }
+      progress[canonicalId] = sectionIndex;
+      if (requestedId && requestedId !== canonicalId) delete progress[requestedId];
       localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
 
-      if (sectionIndex === visibleSections.length - 1 && actualSeconds >= AUTO_COMPLETE_SECONDS) {
-        const readBefore = new Set<string>(JSON.parse(localStorage.getItem(READ_KEY) || "[]"));
+      if (hasReachedReadingEnd && actualSeconds >= AUTO_COMPLETE_SECONDS) {
+        const storedRead = JSON.parse(localStorage.getItem(READ_KEY) || "[]") as unknown;
+        const readBefore = new Set(Array.isArray(storedRead) ? storedRead.map(id => canonicalBookId(String(id))) : []);
         const read = new Set(readBefore);
-        read.add(bookId);
-        if (requestedId) read.add(requestedId);
+        const wasAlreadyComplete = readBefore.has(canonicalId);
+        read.add(canonicalId);
         localStorage.setItem(READ_KEY, JSON.stringify([...read].sort()));
 
-        if (!readBefore.has(bookId)) {
+        if (!wasAlreadyComplete) {
           const events = Array.isArray(JSON.parse(localStorage.getItem(READ_EVENTS_KEY) || "[]"))
             ? JSON.parse(localStorage.getItem(READ_EVENTS_KEY) || "[]")
             : [];
@@ -684,7 +1114,7 @@ export default function ReaderClient() {
     } catch {
       return;
     }
-  }, [actualSeconds, bookId, requestedId, sectionIndex, visibleSections.length, preferences.saveProgress]);
+  }, [actualSeconds, bookId, hasReachedReadingEnd, requestedId, sectionIndex, visibleSections.length, preferences.saveProgress]);
 
   useEffect(() => {
     const refreshCompleted = () => setCompletedBooks(readCompletedSet());
@@ -697,8 +1127,39 @@ export default function ReaderClient() {
   }, []);
 
   useEffect(() => {
-    viewerRef.current?.contentWindow?.scrollTo(0, 0);
-  }, [section?.id]);
+    if (!compactReader) {
+      viewerRef.current?.contentWindow?.scrollTo(0, 0);
+      return;
+    }
+
+    const intent = pageScrollIntentRef.current;
+    pageScrollIntentRef.current = "none";
+    if (intent === "none") return;
+
+    const frame = window.requestAnimationFrame(() => {
+      const documentNode = inlineDocumentRef.current;
+      if (!documentNode) return;
+      if (intent === "smart") {
+        const top = documentNode.getBoundingClientRect().top;
+        if (top >= 0 && top <= 260) return;
+      }
+      documentNode.scrollIntoView({ block: "start", behavior: "auto" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [compactReader, section?.id]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1080px)");
+    const refreshHeight = () => syncViewerHeight();
+    media.addEventListener("change", refreshHeight);
+    window.addEventListener("resize", refreshHeight);
+    return () => {
+      media.removeEventListener("change", refreshHeight);
+      window.removeEventListener("resize", refreshHeight);
+      viewerResizeObserverRef.current?.disconnect();
+    };
+  }, [syncViewerHeight]);
 
   useEffect(() => {
     if (!bookId || status !== "Reading") return;
@@ -706,16 +1167,16 @@ export default function ReaderClient() {
       if (document.visibilityState !== "visible" || !document.hasFocus()) return;
       setActualSeconds(current => {
         const next = current + 1;
-        saveActualSeconds(bookId, next);
+        if (preferences.saveProgress !== false) saveActualSeconds(bookId, next);
         return next;
       });
     }, 1000);
 
     return () => window.clearInterval(interval);
-  }, [bookId, status]);
+  }, [bookId, preferences.saveProgress, status]);
 
   useEffect(() => {
-    if (!bookId || status !== "Reading" || actualSeconds < OPEN_HISTORY_SECONDS) return;
+    if (!bookId || status !== "Reading" || actualSeconds < OPEN_HISTORY_SECONDS || preferences.saveProgress === false) return;
     saveReadingHistory({
       bookId,
       requestedId,
@@ -725,11 +1186,11 @@ export default function ReaderClient() {
       actualSeconds,
       updatedAt: new Date().toISOString(),
     });
-  }, [actualSeconds, bookId, requestedId, section?.title, sectionIndex, status, title]);
+  }, [actualSeconds, bookId, preferences.saveProgress, requestedId, section?.title, sectionIndex, status, title]);
 
   useEffect(() => {
-    if (!userId || !cloudSyncReady || !bookId || !visibleSections.length) return;
-    if (actualSeconds % 20 !== 0 && sectionIndex !== visibleSections.length - 1) return;
+    if (!userId || !cloudSyncReady || !bookId || !visibleSections.length || preferences.saveProgress === false) return;
+    if (actualSeconds % 20 !== 0 && !hasReachedReadingEnd) return;
 
     const supabase = createSupabaseBrowserClient();
     const now = new Date().toISOString();
@@ -745,14 +1206,14 @@ export default function ReaderClient() {
       updated_at: now,
     }, { onConflict: "user_id,book_id" });
 
-    if (sectionIndex === visibleSections.length - 1 && actualSeconds >= AUTO_COMPLETE_SECONDS) {
+    if (hasReachedReadingEnd && actualSeconds >= AUTO_COMPLETE_SECONDS) {
       void supabase.from("completed_books").upsert({
         user_id: userId,
         book_id: bookId,
         completed_at: now,
       }, { onConflict: "user_id,book_id" });
     }
-  }, [actualSeconds, bookId, cloudSyncReady, estimatedMinutes, progressPercent, sectionIndex, userId, visibleSections.length]);
+  }, [actualSeconds, bookId, cloudSyncReady, estimatedMinutes, hasReachedReadingEnd, preferences.saveProgress, progressPercent, sectionIndex, userId, visibleSections.length]);
 
   useEffect(() => {
     if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
@@ -838,7 +1299,10 @@ export default function ReaderClient() {
     };
   }, [bookId, cloudSyncReady, userId, visibleSections]);
 
-  const cleanedHtml = section ? cleanSectionHtml(section.html) : "";
+  const cleanedHtml = section ? sanitizeReaderHtml(cleanSectionHtml(section.html)) : "";
+  const sectionAuditReceipts = section && audit?.status === "verified"
+    ? audit.receipts.filter(receipt => receipt.sectionId === section.id)
+    : [];
   const renderedHtml = displayKind === "title" && bookCoverSrc ? titleCoverHtml(title, subtitle, bookCoverSrc) : cleanedHtml;
   const showHeader = section && !["title", "dedication"].includes(displayKind) ? !htmlHasOwnHeading(cleanedHtml, displayKind) : false;
   const srcDoc = section
@@ -857,16 +1321,9 @@ export default function ReaderClient() {
       </html>`
     : "";
 
-  function prevSection() {
-    setSectionIndex(index => Math.max(0, index - 1));
-  }
-
-  function nextSection() {
-    setSectionIndex(index => Math.min(visibleSections.length - 1, index + 1));
-  }
-
-  function jumpToSection(index: number) {
-    setSectionIndex(Math.max(0, Math.min(visibleSections.length - 1, index)));
+  function chooseSection(index: number) {
+    jumpToSection(index);
+    if (compactReader) setChapterDrawerOpen(false);
   }
 
   function toggleBookmark() {
@@ -904,7 +1361,12 @@ export default function ReaderClient() {
 
   function saveQuote() {
     if (!section || !bookId) return;
-    const selected = viewerRef.current?.contentWindow?.getSelection()?.toString().trim() || "";
+    const liveSelection = compactReader ? captureQuoteSelection() : null;
+    const pendingSelection = liveSelection || pendingQuoteSelectionRef.current;
+    const selectedText = compactReader ? null : viewerRef.current?.contentWindow?.getSelection();
+    const selected = compactReader
+      ? (pendingSelection?.bookId === bookId && pendingSelection.sectionId === section.id ? pendingSelection.text : "")
+      : selectedText?.toString().trim() || "";
     if (!selected) {
       setReaderMessage("Highlight text inside the page first.");
       return;
@@ -924,20 +1386,29 @@ export default function ReaderClient() {
       return next;
     });
     void syncQuoteToCloud(quote);
+    pendingQuoteSelectionRef.current = null;
+    setPendingQuoteText("");
     setReaderMessage("Quote saved.");
   }
 
-  function toggleBookComplete() {
+  async function toggleBookComplete() {
     if (!bookId) return;
     try {
-      const read = new Set<string>(JSON.parse(localStorage.getItem(READ_KEY) || "[]"));
-      const alreadyComplete = read.has(bookId) || (requestedId ? read.has(requestedId) : false);
+      const storedRead = JSON.parse(localStorage.getItem(READ_KEY) || "[]") as unknown;
+      const read = new Set(Array.isArray(storedRead) ? storedRead.map(id => canonicalBookId(String(id))) : []);
+      const canonicalId = canonicalBookId(bookId);
+      const alreadyComplete = read.has(canonicalId);
       if (alreadyComplete) {
-        read.delete(bookId);
-        if (requestedId) read.delete(requestedId);
+        read.delete(canonicalId);
+        const progress = readRecord<Record<string, number>>(PROGRESS_KEY, {});
+        for (const storedId of Object.keys(progress)) {
+          if (canonicalBookId(storedId) === canonicalId) delete progress[storedId];
+        }
+        if (requestedId) delete progress[requestedId];
+        writeRecord(PROGRESS_KEY, progress);
+        setSectionIndex(0);
       } else {
-        read.add(bookId);
-        if (requestedId) read.add(requestedId);
+        read.add(canonicalId);
       }
       localStorage.setItem(READ_KEY, JSON.stringify([...read].sort()));
       setCompletedBooks(read);
@@ -950,6 +1421,35 @@ export default function ReaderClient() {
       }
       window.dispatchEvent(new Event("jju-account"));
       setReaderMessage(alreadyComplete ? "Book marked incomplete." : "Book marked complete.");
+
+      if (userId && cloudSyncReady && hasSupabaseConfig()) {
+        const supabase = createSupabaseBrowserClient();
+        if (alreadyComplete) {
+          const now = new Date().toISOString();
+          const cloudBookIds = [...new Set([...bookIdAliasFamily(canonicalId), requestedId].filter(Boolean))];
+          const aliasCloudBookIds = cloudBookIds.filter(id => id !== canonicalId);
+          const [completionResult, progressResult, aliasProgressResult] = await Promise.all([
+            supabase.from("completed_books").delete().eq("user_id", userId).in("book_id", cloudBookIds),
+            supabase.from("reading_progress").update({
+              section_index: 0,
+              progress_percent: 0,
+              last_read_at: now,
+              updated_at: now,
+            }).eq("user_id", userId).eq("book_id", canonicalId),
+            aliasCloudBookIds.length
+              ? supabase.from("reading_progress").delete().eq("user_id", userId).in("book_id", aliasCloudBookIds)
+              : Promise.resolve(null),
+          ]);
+          if (completionResult.error || progressResult.error || aliasProgressResult?.error) setReaderMessage("Saved on this device, but account sync failed.");
+        } else {
+          const result = await supabase.from("completed_books").upsert({
+            user_id: userId,
+            book_id: canonicalId,
+            completed_at: new Date().toISOString(),
+          }, { onConflict: "user_id,book_id" });
+          if (result.error) setReaderMessage("Saved on this device, but account sync failed.");
+        }
+      }
     } catch {
       setReaderMessage("Could not update completion.");
     }
@@ -960,135 +1460,249 @@ export default function ReaderClient() {
     const delta = clientX - touchStart.current;
     touchStart.current = null;
     if (Math.abs(delta) < 54) return;
-    if (delta < 0) nextSection();
-    else prevSection();
+    if (delta < 0 && sectionIndex < visibleSections.length - 1) nextSection("smart");
+    if (delta > 0 && sectionIndex > 0) prevSection("smart");
   }
 
   async function toggleFullscreen() {
-    const node = shellRef.current;
+    const node = fullscreenRootRef.current;
     if (!node) return;
-    if (document.fullscreenElement) await document.exitFullscreen().catch(() => undefined);
-    else await node.requestFullscreen?.().catch(() => undefined);
+    if (fullscreenFallbackActive) {
+      setFullscreenFallbackActive(false);
+    } else if (document.fullscreenElement) {
+      await document.exitFullscreen().catch(() => undefined);
+    } else if (typeof node.requestFullscreen === "function") {
+      try {
+        await node.requestFullscreen();
+      } catch {
+        if (compactReader) setFullscreenFallbackActive(true);
+      }
+    } else if (compactReader) {
+      setFullscreenFallbackActive(true);
+    }
+    setSettingsOpen(false);
+    setChapterDrawerOpen(false);
+    sizeMenuRef.current?.removeAttribute("open");
   }
 
   return (
-    <main className={`page readerPage readerPageV2 ${focusMode ? "readerFocusMode" : ""}`}>
-      {focusMode && (
-        <button className="readerFocusExit" onClick={() => setFocusMode(false)} aria-label="Exit focus mode">
-          Exit Focus
-        </button>
-      )}
-
-      <section className="readerCommandBar">
-        <Link className="btn secondary" href="/library">Library</Link>
+    <PageRoot
+      ref={node => { fullscreenRootRef.current = node; }}
+      className={`page readerPage readerPageV2 ${compactReader ? "siteV2Reader" : ""} ${fullscreenFallbackActive ? "readerFullscreenFallback" : ""}`}
+      data-reader-theme={compactReader ? preferences.readerTheme : undefined}
+    >
+      <div className={compactReader ? "readerStickyChrome" : undefined} style={compactReader ? undefined : { display: "contents" }}>
+      <section className={`readerCommandBar ${compactReader ? "readerCommandBarCompact" : ""}`}>
+        <Link className={`btn secondary ${compactReader ? "readerBackLink" : ""}`} href={libraryHref} aria-label={compactReader ? `Back to ${libraryLabel}` : undefined}>
+          {compactReader && <span aria-hidden="true">←</span>}
+          <span className={compactReader ? "readerBackText" : undefined}>{compactReader ? `Back to ${libraryLabel}` : libraryLabel}</span>
+        </Link>
         <div className="readerTitleBlock">
           <p className="kicker">{status}{creator ? ` / ${creator}` : ""}</p>
           <h1>{title}</h1>
-          <span>{section ? section.title : "Choose a book to start reading."}</span>
+          {!compactReader && <span>{section ? section.title : "Choose a book to start reading."}</span>}
         </div>
-        <div className="readerTopActions">
-          <button className="readerToolBtn" onClick={() => setChapterDrawerOpen(open => !open)} aria-label="Toggle chapter list">Chapters</button>
-          <button className="readerToolBtn" onClick={() => setStudyPanelOpen(open => !open)} aria-label="Toggle study panel">Study</button>
-          <button className="readerToolBtn" onClick={() => setFocusMode(open => !open)} aria-label="Toggle focus mode">Focus</button>
-          <button className="readerToolBtn iconTool" onClick={toggleFullscreen} aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
-          <button className="readerToolBtn primaryTool" onClick={() => setSettingsOpen(open => !open)} aria-label="Reader settings">Aa</button>
-        </div>
+        {compactReader ? (
+          <div className="readerTopActions readerCompactActions">
+            <button className="readerToolBtn" type="button" onClick={toggleChapterDrawer} aria-expanded={chapterDrawerOpen} aria-controls={chapterPanelId}>Contents</button>
+            <details
+              ref={sizeMenuRef}
+              className="readerTextMenu"
+              onToggle={event => {
+                if (!event.currentTarget.open) return;
+                setChapterDrawerOpen(false);
+                setSettingsOpen(false);
+              }}
+            >
+              <summary>Text</summary>
+              <div className="readerTextPopover" aria-label="Reading text settings">
+                <strong>Reading text</strong>
+                <label>
+                  <span>Appearance</span>
+                  <select value={preferences.readerTheme} onChange={event => patchPreferences({ readerTheme: event.target.value as PreferencesV2["readerTheme"] })}>
+                    {READER_THEME_OPTIONS.map(readerTheme => <option key={readerTheme} value={readerTheme}>{READER_THEME_LABELS[readerTheme]}</option>)}
+                  </select>
+                </label>
+                <label>
+                  <span>Typeface</span>
+                  <select value={preferences.readerFont} onChange={event => patchPreferences({ readerFont: event.target.value as PreferencesV2["readerFont"] })}>
+                    {READER_FONT_OPTIONS.map(readerFont => <option key={readerFont} value={readerFont}>{READER_FONT_LABELS[readerFont]}</option>)}
+                  </select>
+                </label>
+                <label>
+                  <span>Size</span>
+                  <select value={preferences.readerSize} onChange={event => patchPreferences({ readerSize: event.target.value as PreferencesV2["readerSize"] })}>
+                    {READER_SIZE_OPTIONS.map(readerSize => <option key={readerSize} value={readerSize}>{READER_SIZE_LABELS[readerSize]} ({READER_SIZE_PIXELS[readerSize]}px)</option>)}
+                  </select>
+                </label>
+                <label>
+                  <span>Spacing</span>
+                  <select value={preferences.readerSpacing} onChange={event => patchPreferences({ readerSpacing: event.target.value as PreferencesV2["readerSpacing"] })}>
+                    {READER_SPACING_OPTIONS.map(readerSpacing => <option key={readerSpacing} value={readerSpacing}>{READER_SPACING_LABELS[readerSpacing]}</option>)}
+                  </select>
+                </label>
+                <label>
+                  <span>Width</span>
+                  <select value={preferences.readerWidth} onChange={event => patchPreferences({ readerWidth: event.target.value as PreferencesV2["readerWidth"] })}>
+                    {READER_WIDTH_OPTIONS.map(readerWidth => <option key={readerWidth} value={readerWidth}>{READER_WIDTH_LABELS[readerWidth]}</option>)}
+                  </select>
+                </label>
+              </div>
+            </details>
+            <button ref={toolsTriggerRef} className="readerToolBtn primaryTool" type="button" onPointerDown={() => { captureQuoteSelection(); }} onClick={toggleTools} aria-expanded={settingsOpen} aria-controls={settingsPanelId}>Save</button>
+            <button className="readerToolBtn readerFullscreenButton" type="button" onClick={toggleFullscreen} aria-label={fullscreenActive || fullscreenFallbackActive ? "Exit full screen" : "Enter full screen"} aria-pressed={fullscreenActive || fullscreenFallbackActive}>
+              {fullscreenActive || fullscreenFallbackActive ? "Exit" : "Full screen"}
+            </button>
+            {settingsOpen && (
+              <section ref={toolsPanelRef} id={settingsPanelId} className="readerSavePopover" aria-label="Save this page">
+                <header>
+                  <div>
+                    <span>Save</span>
+                    <strong>{section?.title || "This page"}</strong>
+                  </div>
+                  <button type="button" onClick={() => setSettingsOpen(false)} aria-label="Close save menu">Close</button>
+                </header>
+                <div className="readerSaveActions">
+                  <button type="button" aria-pressed={isBookmarked} onClick={toggleBookmark}>{isBookmarked ? "Remove bookmark" : "Bookmark this page"}</button>
+                  <button type="button" onClick={saveQuote}>Save selected quote</button>
+                </div>
+                {pendingQuoteText && (
+                  <p className="readerPendingQuote" aria-live="polite">
+                    <span>Selected quote ready</span>
+                    <q>{pendingQuoteText.length > 180 ? `${pendingQuoteText.slice(0, 177)}...` : pendingQuoteText}</q>
+                  </p>
+                )}
+                <label className="readerSaveNote">
+                  <span>Note for this page</span>
+                  <textarea aria-label="Private note for this page" value={currentNote} onChange={event => saveNote(event.target.value)} placeholder="Add a private note..." />
+                </label>
+                <details className="readerSavedListDisclosure">
+                  <summary>
+                    <span>Saved in this book</span>
+                    <small>{savedBookBookmarkCount + savedBookNoteCount + savedBookQuoteCount}</small>
+                  </summary>
+                  <div className="readerSavedPageList">
+                    {savedBookSections.length ? savedBookSections.map(saved => (
+                      <button key={saved.entry.section.id} type="button" onClick={() => {
+                        setSettingsOpen(false);
+                        jumpToSection(saved.index, "top");
+                      }}>
+                        <span>{contentsMarker(saved.entry)}</span>
+                        <strong>{saved.entry.section.title}</strong>
+                        <small>
+                          {[
+                            saved.bookmarkKey ? "bookmark" : "",
+                            saved.noteKey ? "note" : "",
+                            saved.quotes.length ? `${saved.quotes.length} ${saved.quotes.length === 1 ? "quote" : "quotes"}` : "",
+                          ].filter(Boolean).join(" · ")}
+                        </small>
+                      </button>
+                    )) : <p>Nothing saved in this book yet.</p>}
+                  </div>
+                </details>
+              </section>
+            )}
+          </div>
+        ) : (
+          <div className="readerTopActions">
+            <button className="readerToolBtn" type="button" onClick={() => setChapterDrawerOpen(open => !open)} aria-expanded={chapterDrawerOpen} aria-controls={chapterPanelId}>Contents</button>
+            <button className="readerToolBtn" type="button" onClick={() => setStudyPanelOpen(open => !open)} aria-expanded={studyPanelOpen} aria-controls={studyPanelId}>Study</button>
+            <button className="readerToolBtn iconTool" type="button" onClick={toggleFullscreen} aria-label="Toggle fullscreen" aria-pressed={fullscreenActive} title="Fullscreen">⛶</button>
+            <button className="readerToolBtn primaryTool" type="button" onClick={() => setSettingsOpen(open => !open)} aria-label="Reader settings" aria-expanded={settingsOpen} aria-controls={settingsPanelId}>Aa</button>
+          </div>
+        )}
       </section>
 
-      {readerMessage && <div className="readerToast">{readerMessage}</div>}
+      {readerMessage && <div className="readerToast" role="status" aria-live="polite" aria-atomic="true">{readerMessage}</div>}
 
-      {!!visibleSections.length && (
+      {!!visibleSections.length && (compactReader ? (
+        <section className="readerProgressCompact" aria-label="Reading progress">
+          <div className="readerProgressTrack" role="progressbar" aria-label="Reading progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pageProgressPercent}>
+            <span style={{ width: `${pageProgressPercent}%` }} />
+          </div>
+          <span>{pageProgressPercent}% complete</span>
+          <span>{remainingMinutes ? `About ${remainingMinutes} minutes left` : "Last page"}</span>
+        </section>
+      ) : (
         <section className="readerProgressPanel readerProgressPanelV2">
           <div>
             <strong>{progressPercent}%</strong>
             <span>progress</span>
           </div>
-          <div className="readerProgressTrack" aria-label={`Reading progress ${progressPercent}%`}>
+          <div
+            className="readerProgressTrack"
+            role="progressbar"
+            aria-label="Reading progress"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={progressPercent}
+          >
             <span style={{ width: `${progressPercent}%` }} />
           </div>
           <small>{secondsLabel(actualSeconds)} read</small>
           <small>~{remainingMinutes}m left</small>
         </section>
-      )}
+      ))}
 
-      {settingsOpen && (
-        <section className="readerSettingsPanel readerSettingsPanelV2" aria-label="Reader settings">
+      {compactReader && !!visibleSections.length && (
+        <nav className="readerPageNavigation readerPageNavigationTop" aria-label="Page navigation above the text">
+          <button className="readerPageEdge" type="button" onClick={() => jumpToSection(0, "smart")} disabled={sectionIndex === 0}>First</button>
+          <button type="button" onClick={() => prevSection("smart")} disabled={sectionIndex === 0}>Previous page</button>
+          <span aria-live="polite">Page {sectionIndex + 1} of {visibleSections.length}</span>
+          <button type="button" onClick={() => nextSection("smart")} disabled={sectionIndex === visibleSections.length - 1}>Next page</button>
+          <button className="readerPageEdge" type="button" onClick={() => jumpToSection(visibleSections.length - 1, "smart")} disabled={sectionIndex === visibleSections.length - 1}>Last</button>
+        </nav>
+      )}
+      </div>
+
+      {!compactReader && settingsOpen ? (
+        <section id={settingsPanelId} className="readerSettingsPanel readerSettingsPanelV2" aria-label="Reader settings">
           <div className="readerSettingsHeader">
             <strong>Reader Settings</strong>
-            <button onClick={() => setSettingsOpen(false)} aria-label="Close reader settings">x</button>
+            <button type="button" onClick={() => setSettingsOpen(false)} aria-label="Close reader settings">x</button>
           </div>
-          <label>
-            <span>Theme</span>
-            <select className="select" value={preferences.readerTheme || "paper"} onChange={event => patchPreferences({ readerTheme: event.target.value as Preferences["readerTheme"] })}>
-              <option value="paper">Paper</option>
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-              <option value="night">Night</option>
-              <option value="sepia">Sepia</option>
-            </select>
-          </label>
-          <label>
-            <span>Font</span>
-            <select className="select" value={preferences.readerFont || "book"} onChange={event => patchPreferences({ readerFont: event.target.value as Preferences["readerFont"] })}>
-              <option value="book">Book</option>
-              <option value="serif">Serif</option>
-              <option value="classic">Classic</option>
-              <option value="journal">Journal</option>
-              <option value="dyslexic">Readable</option>
-            </select>
-          </label>
-          <label>
-            <span>Size</span>
-            <select className="select" value={preferences.readerSize || "large"} onChange={event => patchPreferences({ readerSize: event.target.value as Preferences["readerSize"] })}>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-              <option value="xlarge">Extra Large</option>
-            </select>
-          </label>
-          <label>
-            <span>Spacing</span>
-            <select className="select" value={preferences.readerSpacing || "normal"} onChange={event => patchPreferences({ readerSpacing: event.target.value as Preferences["readerSpacing"] })}>
-              <option value="tight">Tight</option>
-              <option value="normal">Normal</option>
-              <option value="loose">Loose</option>
-            </select>
-          </label>
-          <label>
-            <span>Width</span>
-            <select className="select" value={preferences.readerWidth || "full"} onChange={event => patchPreferences({ readerWidth: event.target.value as Preferences["readerWidth"] })}>
-              <option value="narrow">Narrow</option>
-              <option value="focused">Focused</option>
-              <option value="wide">Wide</option>
-              <option value="full">Full</option>
-            </select>
-          </label>
-          <label className="toggleLine">
-            <input type="checkbox" checked={preferences.saveProgress !== false} onChange={event => patchPreferences({ saveProgress: event.target.checked })} />
-            Save progress on this device
-          </label>
+          <label><span>Theme</span><select className="select" value={preferences.readerTheme} onChange={event => patchPreferences({ readerTheme: event.target.value as PreferencesV2["readerTheme"] })}>{READER_THEME_OPTIONS.map(readerTheme => <option key={readerTheme} value={readerTheme}>{READER_THEME_LABELS[readerTheme]}</option>)}</select></label>
+          <label><span>Font</span><select className="select" value={preferences.readerFont} onChange={event => patchPreferences({ readerFont: event.target.value as PreferencesV2["readerFont"] })}>{READER_FONT_OPTIONS.map(readerFont => <option key={readerFont} value={readerFont}>{READER_FONT_LABELS[readerFont]}</option>)}</select></label>
+          <label><span>Size</span><select className="select" value={preferences.readerSize} onChange={event => patchPreferences({ readerSize: event.target.value as PreferencesV2["readerSize"] })}>{READER_SIZE_OPTIONS.map(readerSize => <option key={readerSize} value={readerSize}>{READER_SIZE_LABELS[readerSize]} ({READER_SIZE_PIXELS[readerSize]}px)</option>)}</select></label>
+          <label><span>Spacing</span><select className="select" value={preferences.readerSpacing} onChange={event => patchPreferences({ readerSpacing: event.target.value as PreferencesV2["readerSpacing"] })}>{READER_SPACING_OPTIONS.map(readerSpacing => <option key={readerSpacing} value={readerSpacing}>{READER_SPACING_LABELS[readerSpacing]}</option>)}</select></label>
+          <label><span>Width</span><select className="select" value={preferences.readerWidth} onChange={event => patchPreferences({ readerWidth: event.target.value as PreferencesV2["readerWidth"] })}>{READER_WIDTH_OPTIONS.map(readerWidth => <option key={readerWidth} value={readerWidth}>{READER_WIDTH_LABELS[readerWidth]}</option>)}</select></label>
+          <label className="toggleLine"><input type="checkbox" checked={preferences.saveProgress} onChange={event => patchPreferences({ saveProgress: event.target.checked })} />Remember my place on this device</label>
         </section>
-      )}
+      ) : null}
 
-      <section className={`readerWorkbenchV2 ${chapterDrawerOpen ? "" : "chaptersClosed"} ${studyPanelOpen ? "" : "studyClosed"}`}>
-        <aside className="readerChapterRail" aria-label="Book chapters">
+      <section className={`readerWorkbenchV2 ${compactReader ? "readerCompactWorkbench studyClosed" : ""} ${chapterDrawerOpen ? "" : "chaptersClosed"} ${studyPanelOpen ? "" : "studyClosed"}`}>
+        {compactReader && chapterDrawerOpen && (
+          <button className="readerDrawerBackdrop" type="button" aria-label="Close chapters" onClick={() => setChapterDrawerOpen(false)} />
+        )}
+        {(!compactReader || chapterDrawerOpen) && <aside
+          id={chapterPanelId}
+          className="readerChapterRail"
+          aria-label="Book contents"
+          role={compactReader ? "dialog" : undefined}
+          aria-modal={compactReader ? "true" : undefined}
+        >
           <div className="readerRailHeader">
-            <p className="kicker">Chapters</p>
-            <strong>{visibleSections.length}</strong>
+            <div className="readerRailSummary">
+              <p className="kicker">Contents</p>
+              <strong>{visibleSections.length} sections</strong>
+              {chapterCount > 0 && <span>{chapterCount} chapters</span>}
+            </div>
+            {compactReader && <button className="readerRailClose" type="button" onClick={() => setChapterDrawerOpen(false)}>Close</button>}
           </div>
           <div className="readerChapterList">
-            {visibleSections.map((item, index) => {
+            {sectionEntries.map((entry, index) => {
+              const item = entry.section;
               const key = `${bookId}::${item.id}`;
               return (
-                <button className={index === sectionIndex ? "active" : ""} key={item.id} onClick={() => jumpToSection(index)}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
+                <button className={index === sectionIndex ? "active" : ""} key={item.id} onClick={() => chooseSection(index)}>
+                  <span aria-hidden="true">{contentsMarker(entry)}</span>
                   <strong>{item.title}</strong>
-                  <small>{sectionMinutes(item)}m{bookmarks.has(key) ? " / saved" : ""}</small>
+                  <small>{headerLabel(entry.displayKind)} · {sectionMinutes(item)}m{bookmarks.has(key) ? " · saved" : ""}</small>
                 </button>
               );
             })}
           </div>
-        </aside>
+        </aside>}
 
         <section
           ref={shellRef}
@@ -1096,21 +1710,60 @@ export default function ReaderClient() {
           onTouchStart={event => { touchStart.current = event.changedTouches[0]?.clientX ?? null; }}
           onTouchEnd={event => touchEnd(event.changedTouches[0]?.clientX ?? 0)}
         >
-          <div className={`readerStageTop ${["title", "dedication"].includes(displayKind) ? "quietStageTop" : ""}`}>
-            {!["title", "dedication"].includes(displayKind) && (
+          {!compactReader && (
+            <div className={`readerStageTop ${["title", "dedication"].includes(displayKind) ? "quietStageTop" : ""}`}>
+              {!["title", "dedication"].includes(displayKind) && (
               <div>
                 <p className="kicker">{section ? headerLabel(displayKind) : "Reader"}</p>
                 <strong>{section?.title || title}</strong>
               </div>
-            )}
-          </div>
-
-          <div className="readerFrameWrap readerFrameWrapV2">
-            <div className="readerFloatingNav" aria-label="Page navigation">
-              <button className="readerNavBtn" onClick={prevSection} disabled={sectionIndex === 0} aria-label="Previous section"><span aria-hidden="true">‹</span></button>
-              <button className="readerNavBtn" onClick={nextSection} disabled={!visibleSections.length || sectionIndex === visibleSections.length - 1} aria-label="Next section"><span aria-hidden="true">›</span></button>
+              )}
             </div>
-            <iframe ref={viewerRef} className="viewer viewerV2" srcDoc={srcDoc} sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" title={section?.title || title} onLoad={bindViewerKeys}></iframe>
+          )}
+
+          <div className={`readerFrameWrap readerFrameWrapV2 ${compactReader ? "readerInlineSurface" : ""}`} data-reader-theme={compactReader ? preferences.readerTheme : undefined}>
+            {!compactReader && (
+              <div className="readerFloatingNav" aria-label="Page navigation">
+                <button className="readerNavBtn" onClick={() => prevSection("top")} disabled={sectionIndex === 0} aria-label="Previous section"><span aria-hidden="true">‹</span></button>
+                <button className="readerNavBtn" onClick={() => nextSection("top")} disabled={!visibleSections.length || sectionIndex === visibleSections.length - 1} aria-label="Next section"><span aria-hidden="true">›</span></button>
+              </div>
+            )}
+            {compactReader ? (
+              section && (
+                <article
+                  ref={inlineDocumentRef}
+                  className={`readerInlineDocument readerSection kind-${displayKind}`}
+                  data-reader-font={preferences.readerFont}
+                  data-reader-size={preferences.readerSize}
+                  data-reader-spacing={preferences.readerSpacing}
+                  data-reader-width={preferences.readerWidth}
+                  aria-label={section.title || title}
+                  onPointerUp={() => { captureQuoteSelection(); }}
+                  onKeyUp={() => { captureQuoteSelection(); }}
+                >
+                  {showHeader && (
+                    <header className="sectionHeader">
+                      <p className="sectionKicker">{headerLabel(displayKind)}</p>
+                      <h1 className="sectionTitle">{section.title}</h1>
+                    </header>
+                  )}
+                  <div className="readerContent" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+                  {sectionAuditReceipts.length > 0 && (
+                    <section className="readerEvidenceCard" aria-label="Verified sources for this section">
+                      <h2>Verified sources</h2>
+                      <p>{sectionAuditReceipts.length} factual claim{sectionAuditReceipts.length === 1 ? "" : "s"} in this section have evidence receipts.</p>
+                      <ul>
+                        {sectionAuditReceipts.flatMap(receipt => receipt.sources).slice(0, 8).map((source, index) => (
+                          <li key={`${source.url}:${index}`}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>{source.publisher && <small>{source.publisher}</small>}</li>
+                        ))}
+                      </ul>
+                    </section>
+                  )}
+                </article>
+              )
+            ) : (
+              <iframe ref={viewerRef} className="viewer viewerV2" srcDoc={srcDoc} sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" title={section?.title || title} onLoad={bindViewerKeys}></iframe>
+            )}
 
             {error && (
               <div className="card readerUnavailable">
@@ -1118,23 +1771,33 @@ export default function ReaderClient() {
                 <p>{error}</p>
                 <div className="buttonRow">
                   <button className="btn primary" onClick={load}>Try Again</button>
-                  <Link className="btn secondary" href="/library">Back To Library</Link>
+                  <Link className="btn secondary" href={libraryHref}>Back to {libraryLabel}</Link>
                 </div>
               </div>
             )}
           </div>
 
-          <div className="readerBottomBar">
-            <button onClick={toggleBookmark}>{isBookmarked ? "★ Saved" : "☆ Bookmark"}</button>
-            <button onClick={saveQuote}>“” Quote</button>
-            <button onClick={toggleBookComplete}>{completedBooks.has(bookId) ? "✓ Read" : "✓ Complete"}</button>
-          </div>
+          {compactReader ? (
+            <nav className="readerPageNavigation readerPageNavigationBottom" aria-label="Page navigation below the text">
+              <button className="readerPageEdge" type="button" onClick={() => jumpToSection(0, "top")} disabled={sectionIndex === 0}>First</button>
+              <button type="button" onClick={() => prevSection("top")} disabled={sectionIndex === 0}>Previous page</button>
+              <span aria-live="polite">Page {sectionIndex + 1} of {visibleSections.length}</span>
+              <button type="button" onClick={() => nextSection("top")} disabled={sectionIndex === visibleSections.length - 1}>Next page</button>
+              <button className="readerPageEdge" type="button" onClick={() => jumpToSection(visibleSections.length - 1, "top")} disabled={sectionIndex === visibleSections.length - 1}>Last</button>
+            </nav>
+          ) : (
+            <div className="readerBottomBar">
+              <button type="button" aria-pressed={isBookmarked} onClick={toggleBookmark}>{isBookmarked ? "★ Saved" : "☆ Bookmark"}</button>
+              <button type="button" onClick={saveQuote}>“” Quote</button>
+              <button type="button" aria-pressed={isCurrentBookComplete} onClick={() => void toggleBookComplete()}>{isCurrentBookComplete ? "✓ Read" : "✓ Complete"}</button>
+            </div>
+          )}
         </section>
 
-        <aside className="readerStudyPanel" aria-label="Study panel">
+        {!compactReader && <aside id={studyPanelId} className="readerStudyPanel" aria-label="Study panel">
           <section className="readerStudyCard">
             <p className="kicker">Section Note</p>
-            <textarea value={currentNote} onChange={event => saveNote(event.target.value)} placeholder="Add a private note for this section..." />
+            <textarea aria-label="Private note for this section" value={currentNote} onChange={event => saveNote(event.target.value)} placeholder="Add a private note for this section..." />
           </section>
 
           <section className="readerStudyCard">
@@ -1150,8 +1813,8 @@ export default function ReaderClient() {
               )}
             </div>
           </section>
-        </aside>
+        </aside>}
       </section>
-    </main>
+    </PageRoot>
   );
 }

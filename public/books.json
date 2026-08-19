@@ -1536,7 +1536,6 @@
     "tags": [
       "American History",
       "American Politics",
-      "American Presidents",
       "Biography"
     ],
     "status": "ready",
@@ -2973,7 +2972,6 @@
     "bookFile": "Disney.epub",
     "tags": [
       "American History",
-      "Biography",
       "Business & Economics",
       "Capitalism & Corporations",
       "Consumer Culture"
@@ -3811,7 +3809,6 @@
     "tags": [
       "20th Century",
       "American History",
-      "Biography",
       "Capitalism & Corporations",
       "Consumer Culture",
       "Technology & Innovation"
@@ -4285,7 +4282,6 @@
     "bookFile": "Germany.epub",
     "tags": [
       "20th Century",
-      "Authoritarianism & Dictatorship",
       "Cold War",
       "European History",
       "War & Conflict",
@@ -5937,10 +5933,9 @@
     "coverFile": "Jackass.jpg",
     "bookFile": "Jackass.epub",
     "tags": [
-      "Biography",
+      "20th Century",
       "Consumer Culture",
-      "Digital Culture & Technology",
-      "Psychology & Human Behavior"
+      "Cultural History"
     ],
     "status": "ready",
     "description": "A tribute to the Jackass crew that explores how a band of daredevils turned pain into entertainment, friendship into tragedy, and stupidity into cultural phenomenon.",
@@ -5973,12 +5968,11 @@
     "coverFile": "Jackson.jpg",
     "bookFile": "Jackson.epub",
     "tags": [
-      "20th Century",
       "American History",
+      "American Politics",
+      "American Presidents",
       "Biography",
-      "Propaganda & Social Control",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Government & Politics"
     ],
     "status": "ready",
     "description": "The seventh president of the United States stares out from history with a look that says, I dared you to forget me.",
@@ -6007,7 +6001,7 @@
     "bookFile": "Japan.epub",
     "tags": [
       "Asian History",
-      "Authoritarianism & Dictatorship",
+      "Cultural History",
       "Military History",
       "War & Conflict",
       "World War II"
@@ -6529,9 +6523,9 @@
     "bookFile": "Kaiser.epub",
     "tags": [
       "20th Century",
-      "Authoritarianism & Dictatorship",
       "Biography",
       "European History",
+      "Government & Politics",
       "World War I"
     ],
     "status": "ready",
@@ -9229,8 +9223,6 @@
     "coverFile": "Psychology.jpg",
     "bookFile": "Psychology.epub",
     "tags": [
-      "20th Century",
-      "Biography",
       "Psychology & Human Behavior",
       "Science History"
     ],
@@ -9391,7 +9383,6 @@
     "bookFile": "Quantum.epub",
     "tags": [
       "20th Century",
-      "Biography",
       "Physics & Cosmology",
       "Science History"
     ],
@@ -10159,7 +10150,6 @@
     "bookFile": "Scientology.epub",
     "tags": [
       "20th Century",
-      "Biography",
       "Business & Economics",
       "Cults & Extremism",
       "Religion & Spirituality"
@@ -11500,7 +11490,6 @@
     "bookFile": "tsar.epub",
     "tags": [
       "Authoritarianism & Dictatorship",
-      "Biography",
       "Cold War",
       "Political Theory",
       "Russian History"
@@ -11543,7 +11532,6 @@
     "tags": [
       "20th Century",
       "Authoritarianism & Dictatorship",
-      "Biography",
       "Psychology & Human Behavior",
       "World War II"
     ],
@@ -11924,7 +11912,6 @@
     "bookFile": "Warrens.epub",
     "tags": [
       "20th Century",
-      "Biography",
       "Conspiracy & Cover-ups",
       "Psychology & Human Behavior",
       "Religion & Spirituality"
@@ -12335,12 +12322,8 @@
     "title": "Unbound",
     "description": "The ones who stared at the ceiling wondering what else was out there and what was in here.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
-      "Cultural History",
       "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Spirituality & Mysticism"
     ],
     "status": "ready",
     "bookFile": "Astral.epub",
@@ -12365,12 +12348,10 @@
     "title": "Chakras",
     "description": "Your body is a bioelectric miracle: nerves firing, signals surging, systems syncing like a symphony under your skin.",
     "tags": [
-      "20th Century",
-      "Biography",
-      "Consumer Culture",
-      "Propaganda & Social Control",
+      "Eastern Philosophy & Religion",
       "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Religion & Spirituality",
+      "Spirituality & Mysticism"
     ],
     "status": "ready",
     "bookFile": "Chakras.epub",
@@ -12395,12 +12376,10 @@
     "title": "In Crust We Trust",
     "description": "To every delivery driver, burnt crust, and cardboard box that whispered, “It’s going to be okay.” This book is for you.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
+      "Business & Economics",
       "Consumer Culture",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Cultural History",
+      "Food & Culture"
     ],
     "status": "ready",
     "bookFile": "Crust.epub",
@@ -12455,11 +12434,8 @@
     "title": "Quantum Fields",
     "description": "And for the ones who never gave up asking what this world is really made of.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality",
+      "Physics & Cosmology",
+      "Science & Mathematics",
       "Science History"
     ],
     "status": "ready",
@@ -12485,12 +12461,11 @@
     "title": "Insert Coin",
     "description": "The Game Was the Reward THE GAME WAS THE REWARD BEFORE THE SEASON passes.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
+      "Business & Economics",
       "Consumer Culture",
-      "Propaganda & Social Control",
-      "Psychology & Human Behavior"
+      "Cultural History",
+      "Digital Culture & Technology",
+      "Technology & Innovation"
     ],
     "status": "ready",
     "bookFile": "Games.epub",
@@ -12545,12 +12520,10 @@
     "title": "King, Uncut",
     "description": "by JJ Dedication For those who were taught a dream but never told the cost.",
     "tags": [
-      "20th Century",
       "American History",
       "Biography",
-      "Propaganda & Social Control",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Civil Rights & Social Justice",
+      "Social Movements"
     ],
     "status": "ready",
     "bookFile": "King.epub",
@@ -12575,12 +12548,10 @@
     "title": "Liberated Legends",
     "description": "Prologue – The Curtain Rises PROLOGUE – THE CURTAIN RISES YOU DON’T STUMBLE into a Freddie Mercury.",
     "tags": [
-      "20th Century",
-      "American History",
+      "Art & Music History",
       "Biography",
       "Cultural History",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Social Movements"
     ],
     "status": "ready",
     "bookFile": "Liberated.epub",
@@ -12605,12 +12576,8 @@
     "title": "Looped",
     "description": "(Here’s a hint: it already is.) Prologue PROLOGUE LET’S GET SOMETHING straight — this isn’t a movie review.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
-      "Cultural History",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Philosophy",
+      "Psychology & Human Behavior"
     ],
     "status": "ready",
     "bookFile": "Looped.epub",
@@ -12635,12 +12602,12 @@
     "title": "Nicotine",
     "description": "Prologue: The Buzz PROLOGUE: THE BUZZ YOU NEVER FORGET the first hit.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
+      "Addiction & Substance Use",
+      "Biology & Medicine",
+      "Capitalism & Corporations",
+      "Consumer Culture",
       "Cultural History",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Public Health"
     ],
     "status": "ready",
     "bookFile": "Nicotine.epub",
@@ -12665,12 +12632,8 @@
     "title": "What Are the Odds?",
     "description": "Dedication Chapter One - The Coin Isn’t Fair Chapter Two - The Dice Are Loaded Chapter Three - Weather, Death, and Why Forecasts Sound Like Guesses Chapter Four - What Are the Odds You’re Alive?",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
-      "Propaganda & Social Control",
       "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Science & Mathematics"
     ],
     "status": "ready",
     "bookFile": "Odds.epub",
@@ -12695,12 +12658,10 @@
     "title": "Off the Books",
     "description": "This isn’t some offshore thriller or seedy backroom cash drop.",
     "tags": [
-      "American History",
-      "Biography",
+      "Business & Economics",
       "Capitalism & Corporations",
-      "Consumer Culture",
-      "Propaganda & Social Control",
-      "Psychology & Human Behavior"
+      "Conspiracy & Cover-ups",
+      "Political Economy"
     ],
     "status": "ready",
     "bookFile": "Off.epub",
@@ -12725,12 +12686,9 @@
     "title": "No Capes, Just Feelings",
     "description": "The House That Emotion Built THE HOUSE THAT EMOTION BUILT BEFORE WE HAD words for anxiety or self-worth, we had Pixar.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
-      "Propaganda & Social Control",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Art & Music History",
+      "Cultural History",
+      "Psychology & Human Behavior"
     ],
     "status": "ready",
     "bookFile": "Pixar.epub",
@@ -12755,12 +12713,9 @@
     "title": "You're What?",
     "description": "The Survival Guide to Pregnancy, Babies, and What the Hell Happens Now by James Johnson Dedication To anyone who's ever stared at two pink lines and thought, &#34;Oh, sh*t.&#34; You're not alone.",
     "tags": [
-      "20th Century",
-      "Biography",
-      "Cultural History",
-      "Propaganda & Social Control",
+      "Biology & Medicine",
       "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Public Health"
     ],
     "status": "ready",
     "bookFile": "Pregnancy.epub",
@@ -12785,12 +12740,11 @@
     "title": "Imperium Romanum",
     "description": "And to the ones who still believe fire can be reborn from ash.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
-      "Propaganda & Social Control",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Ancient Civilizations",
+      "Ancient Rome",
+      "Government & Politics",
+      "Military History",
+      "War & Conflict"
     ],
     "status": "ready",
     "bookFile": "Rome.epub",
@@ -12815,12 +12769,9 @@
     "title": "Science Simplified",
     "description": "Every single thing you can see, touch, smell, or hear is made possible because of energy.",
     "tags": [
-      "20th Century",
-      "Biography",
-      "Cultural History",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality",
-      "Science History"
+      "Biology & Medicine",
+      "Physics & Cosmology",
+      "Science & Mathematics"
     ],
     "status": "ready",
     "bookFile": "SciSim.epub",
@@ -12845,12 +12796,10 @@
     "title": "Van Gogh",
     "description": "A year to the day before, his parents had lost a stillborn child they also named Vincent.",
     "tags": [
-      "20th Century",
-      "American History",
+      "Art & Music History",
       "Biography",
-      "Cultural History",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "European History",
+      "Psychology & Human Behavior"
     ],
     "status": "ready",
     "bookFile": "Van.epub",
@@ -12875,12 +12824,10 @@
     "title": "Vibe Check",
     "description": "It started with some funky little dude probably humming into a log.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Biography",
+      "Art & Music History",
       "Cultural History",
-      "Psychology & Human Behavior",
-      "Religion & Spirituality"
+      "Digital Culture & Technology",
+      "Psychology & Human Behavior"
     ],
     "status": "ready",
     "bookFile": "Vibes.epub",
@@ -12905,11 +12852,8 @@
     "title": "What the Watchtower Actually Says",
     "description": "IT STARTED IN 1879 with a man named Charles Taze Russell and a magazine called the Zion’s Watch Tower and Herald of Christ’s Presence.",
     "tags": [
-      "20th Century",
-      "American History",
-      "Ancient Civilizations",
-      "Biography",
-      "Psychology & Human Behavior",
+      "Christianity",
+      "Cults & Extremism",
       "Religion & Spirituality"
     ],
     "status": "ready",
@@ -12935,11 +12879,10 @@
     "title": "The Witch Trials",
     "description": "In ancient villages, across Europe and beyond, magic wasn’t about broomsticks or bubbling cauldrons.",
     "tags": [
-      "20th Century",
       "American History",
-      "Biography",
+      "Cultural History",
+      "European History",
       "Propaganda & Social Control",
-      "Psychology & Human Behavior",
       "Religion & Spirituality"
     ],
     "status": "ready",

@@ -7,7 +7,7 @@ import { getStripe, hasStripeConfig } from "@/lib/stripe";
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => ({})) as { productSlug?: string };
+  const body = await request.json().catch(() => ({})) as { productSlug?: string; returnPath?: string };
   const product = getPrintProduct(String(body.productSlug || ""));
 
   if (!product) {
@@ -32,8 +32,12 @@ export async function POST(request: Request) {
 
   const stripe = getStripe();
   const supabase = createSupabaseAdminClient();
-  const successUrl = `${SITE_URL}/print/${product.slug}?checkout=success&session_id={CHECKOUT_SESSION_ID}`;
-  const cancelUrl = `${SITE_URL}/print/${product.slug}?checkout=cancelled`;
+  const requestedReturnPath = String(body.returnPath || "");
+  const returnPath = /^\/site-v2\/print(?:\/[a-z0-9-]+)?$/i.test(requestedReturnPath)
+    ? requestedReturnPath
+    : `/print/${product.slug}`;
+  const successUrl = `${SITE_URL}${returnPath}?checkout=success&session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl = `${SITE_URL}${returnPath}?checkout=cancelled`;
   const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = product.stripePriceId
     ? { price: product.stripePriceId, quantity: 1 }
     : {

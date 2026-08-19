@@ -3,6 +3,9 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseClient";
+import { readPreferencesV2 } from "@/lib/preferencesV2";
+import { canonicalBookId } from "@/lib/bookAliases";
+import { safeAuthReturnPath } from "@/lib/authReturnPath";
 
 type Book = {
   id: string;
@@ -24,6 +27,7 @@ type CloudProgress = {
   book_id: string;
   section_index: number;
   actual_seconds?: number | null;
+  last_read_at?: string | null;
 };
 
 type CloudCompletedBook = {
@@ -38,6 +42,22 @@ type SavedQuote = {
   sectionTitle: string;
   text: string;
   savedAt: string;
+};
+
+type ReadingHistoryItem = {
+  bookId: string;
+  requestedId?: string;
+  title?: string;
+  sectionIndex?: number;
+  sectionTitle?: string;
+  actualSeconds?: number;
+  updatedAt?: string;
+};
+
+type AccountClientProps = {
+  variant?: "default" | "site-v2";
+  returnPath?: string;
+  initialMessage?: string;
 };
 
 const ACCOUNT_KEY = "jju.account";
@@ -56,6 +76,16 @@ function readJson<T>(key: string, fallback: T): T {
   } catch {
     return fallback;
   }
+}
+
+function canonicalizeNumericRecord(record: Record<string, number>) {
+  const result: Record<string, number> = {};
+  for (const [storedId, value] of Object.entries(record)) {
+    const canonicalId = canonicalBookId(storedId);
+    if (!canonicalId) continue;
+    result[canonicalId] = Math.max(result[canonicalId] || 0, Number(value) || 0);
+  }
+  return result;
 }
 
 function readLocalAccount(): LocalAccount | null {
@@ -106,17 +136,21 @@ function clearLocalReadingMemory() {
   window.dispatchEvent(new Event("jju-reading-history"));
 }
 
-function authCallbackMessage() {
-  if (typeof window === "undefined") return "";
-  const params = new URLSearchParams(window.location.search);
-  const authStatus = params.get("auth");
-  if (!authStatus) return "";
-  if (authStatus === "confirmed") return "Email verified. Cloud sync is ready.";
-  if (authStatus === "missing-code") return "Verification link was missing its login code. Request a fresh email.";
-  return params.get("message") || "Verification failed. Request a fresh email and try again.";
+function firstSupabaseError(results: unknown[]) {
+  for (const result of results) {
+    if (!result || typeof result !== "object" || !("error" in result)) continue;
+    const error = (result as { error?: { message?: string } | null }).error;
+    if (error) return error.message || "A cloud reading-data request failed.";
+  }
+  return "";
 }
 
-export default function AccountClient() {
+export default function AccountClient({
+  variant = "default",
+  returnPath = "/account",
+  initialMessage = "",
+}: AccountClientProps = {}) {
+  const PageRoot = variant === "site-v2" ? "div" : "main";
   const supabase = useMemo(() => hasSupabaseConfig() ? createSupabaseBrowserClient() : null, []);
   const [books, setBooks] = useState<Book[]>([]);
   const [user, setUser] = useState<User | null>(null);
@@ -130,21 +164,31 @@ export default function AccountClient() {
   const [, setEvents] = useState<ReadEvent[]>([]);
   const [cloudProgress, setCloudProgress] = useState<CloudProgress[]>([]);
   const [cloudCompleted, setCloudCompleted] = useState<CloudCompletedBook[]>([]);
-  const [message, setMessage] = useState(authCallbackMessage);
+  const [message, setMessage] = useState(initialMessage);
   const [busy, setBusy] = useState(false);
   const [deleteArmed, setDeleteArmed] = useState(false);
 
   const syncLocalToCloud = useCallback(async (nextUser: User) => {
-    if (!supabase) return;
+    if (!supabase || !isVerified(nextUser)) return;
 
-    const localRead = readJson<string[]>(READ_KEY, []);
-    const localProgress = readJson<Record<string, number>>(PROGRESS_KEY, {});
-    const localActualSeconds = readJson<Record<string, number>>(ACTUAL_TIME_KEY, {});
+    const rememberPlace = readPreferencesV2().saveProgress;
+    const localRead = [...new Set(readJson<string[]>(READ_KEY, []).map(canonicalBookId))];
+    const localProgress = canonicalizeNumericRecord(readJson<Record<string, number>>(PROGRESS_KEY, {}));
+    const localActualSeconds = canonicalizeNumericRecord(readJson<Record<string, number>>(ACTUAL_TIME_KEY, {}));
     const localBookmarks = readJson<string[]>(BOOKMARKS_KEY, []);
     const localNotes = readJson<Record<string, string>>(NOTES_KEY, {});
     const localQuotes = readJson<SavedQuote[]>(QUOTES_KEY, []);
+    const localHistory = readJson<ReadingHistoryItem[]>(HISTORY_KEY, []);
+    const historyByBook = new Map<string, ReadingHistoryItem>();
+    for (const item of localHistory) {
+      if (!item.bookId) continue;
+      const canonicalId = canonicalBookId(item.bookId);
+      const current = historyByBook.get(canonicalId);
+      if (current?.updatedAt && Date.parse(current.updatedAt) >= Date.parse(item.updatedAt || "")) continue;
+      historyByBook.set(canonicalId, { ...item, bookId: canonicalId });
+    }
     const now = new Date().toISOString();
-    const progressRows = Object.entries({ ...localProgress, ...localActualSeconds })
+    const progressRows = (rememberPlace ? Object.entries({ ...localProgress, ...localActualSeconds }) : [])
       .map(([bookId]) => {
         const sectionIndex = Number(localProgress[bookId] || 0);
         const actualSeconds = Number(localActualSeconds[bookId] || 0);
@@ -154,8 +198,8 @@ export default function AccountClient() {
           book_id: bookId,
           section_index: sectionIndex,
           actual_seconds: actualSeconds,
-          last_read_at: now,
-          updated_at: now,
+          last_read_at: historyByBook.get(bookId)?.updatedAt || now,
+          updated_at: historyByBook.get(bookId)?.updatedAt || now,
         };
       })
       .filter((row): row is {
@@ -229,7 +273,7 @@ export default function AccountClient() {
         saved_at: quote.savedAt || now,
       }));
 
-    await Promise.all([
+    const syncResults = await Promise.all([
       progressRows.length
         ? supabase.from("reading_progress").upsert(progressRows, { onConflict: "user_id,book_id" })
         : Promise.resolve(),
@@ -246,18 +290,19 @@ export default function AccountClient() {
         ? supabase.from("reader_quotes").upsert(quoteRows, { onConflict: "user_id,id" })
         : Promise.resolve(),
     ]);
+    const syncError = firstSupabaseError(syncResults);
+    if (syncError) throw new Error(syncError);
   }, [supabase]);
 
   const loadCloud = useCallback(async (nextUser: User) => {
     if (!supabase) return;
+    const rememberPlace = readPreferencesV2().saveProgress;
     writeLocalAccount({
       name: String(nextUser.user_metadata?.display_name || nextUser.email || "JJU Reader"),
       email: nextUser.email || "",
     });
-    await syncLocalToCloud(nextUser);
-
     const [progressResult, completedResult] = await Promise.all([
-      supabase.from("reading_progress").select("book_id,section_index,actual_seconds"),
+      supabase.from("reading_progress").select("book_id,section_index,actual_seconds,last_read_at"),
       supabase.from("completed_books").select("book_id"),
     ]);
 
@@ -266,10 +311,138 @@ export default function AccountClient() {
       return;
     }
 
+    const [bookmarkResult, noteResult, quoteResult] = await Promise.all([
+      supabase.from("reader_bookmarks").select("key,book_id,section_id"),
+      supabase.from("reader_notes").select("key,book_id,section_id,note,updated_at"),
+      supabase.from("reader_quotes").select("id,book_id,book_title,section_id,section_title,text,saved_at"),
+    ]);
+    const readingToolsError = firstSupabaseError([bookmarkResult, noteResult, quoteResult]);
+
+    const localProgress = canonicalizeNumericRecord(readJson<Record<string, number>>(PROGRESS_KEY, {}));
+    const localActualSeconds = canonicalizeNumericRecord(readJson<Record<string, number>>(ACTUAL_TIME_KEY, {}));
+    const remoteProgress = progressResult.data || [];
+    const remoteProgressByBook = new Map<string, CloudProgress>();
+    for (const item of remoteProgress) {
+      const canonicalId = canonicalBookId(item.book_id);
+      const current = remoteProgressByBook.get(canonicalId);
+      const currentDate = Date.parse(current?.last_read_at || "");
+      const itemDate = Date.parse(item.last_read_at || "");
+      remoteProgressByBook.set(canonicalId, {
+        book_id: canonicalId,
+        section_index: Math.max(Number(current?.section_index || 0), Number(item.section_index || 0)),
+        actual_seconds: Math.max(Number(current?.actual_seconds || 0), Number(item.actual_seconds || 0)),
+        last_read_at: itemDate > currentDate ? item.last_read_at : current?.last_read_at || item.last_read_at,
+      });
+    }
+    const normalizedRemoteProgress = [...remoteProgressByBook.values()];
+    const progressIds = new Set([
+      ...Object.keys(localProgress),
+      ...Object.keys(localActualSeconds),
+      ...(rememberPlace ? remoteProgressByBook.keys() : []),
+    ]);
+    const mergedProgress: Record<string, number> = {};
+    const mergedActualSeconds: Record<string, number> = {};
+    for (const bookId of progressIds) {
+      const remote = remoteProgressByBook.get(bookId);
+      const sectionIndex = Math.max(Number(localProgress[bookId] || 0), Number(remote?.section_index || 0));
+      const actualSeconds = Math.max(Number(localActualSeconds[bookId] || 0), Number(remote?.actual_seconds || 0));
+      if (sectionIndex) mergedProgress[bookId] = sectionIndex;
+      if (actualSeconds) mergedActualSeconds[bookId] = actualSeconds;
+    }
+
+    const mergedCompleted = new Set([
+      ...readJson<string[]>(READ_KEY, []),
+      ...(completedResult.data || []).map(item => item.book_id),
+    ].filter(Boolean).map(canonicalBookId));
+    const localBookmarks = readJson<string[]>(BOOKMARKS_KEY, []);
+    const mergedBookmarks = new Set([
+      ...localBookmarks,
+      ...((bookmarkResult.data || []).map(item => item.key)),
+    ].filter(Boolean));
+    const localNotes = readJson<Record<string, string>>(NOTES_KEY, {});
+    const mergedNotes = { ...localNotes };
+    for (const note of noteResult.data || []) {
+      if (!mergedNotes[note.key] && note.note) mergedNotes[note.key] = note.note;
+    }
+    const localQuotes = readJson<SavedQuote[]>(QUOTES_KEY, []);
+    const remoteQuotes = (quoteResult.data || []).map(quote => ({
+      id: quote.id,
+      bookId: quote.book_id,
+      bookTitle: quote.book_title || "",
+      sectionId: quote.section_id,
+      sectionTitle: quote.section_title || "",
+      text: quote.text,
+      savedAt: quote.saved_at,
+    }));
+    const mergedQuotes = [...new Map([...remoteQuotes, ...localQuotes].map(quote => [quote.id, quote])).values()]
+      .filter(quote => quote.id && quote.bookId && quote.sectionId && quote.text)
+      .sort((a, b) => Date.parse(b.savedAt || "") - Date.parse(a.savedAt || ""))
+      .slice(0, 500);
+    const historyByBook = new Map<string, ReadingHistoryItem>();
+    for (const item of readJson<ReadingHistoryItem[]>(HISTORY_KEY, [])) {
+      if (!item.bookId) continue;
+      const canonicalId = canonicalBookId(item.bookId);
+      const current = historyByBook.get(canonicalId);
+      if (current?.updatedAt && Date.parse(current.updatedAt) >= Date.parse(item.updatedAt || "")) continue;
+      historyByBook.set(canonicalId, { ...item, bookId: canonicalId });
+    }
+    if (rememberPlace) {
+      for (const item of normalizedRemoteProgress) {
+        if (!item.book_id || !item.last_read_at) continue;
+        const local = historyByBook.get(item.book_id);
+        if (local?.updatedAt && Date.parse(local.updatedAt) >= Date.parse(item.last_read_at)) continue;
+        historyByBook.set(item.book_id, {
+          bookId: item.book_id,
+          title: local?.title || "",
+          sectionIndex: mergedProgress[item.book_id] || Number(item.section_index || 0),
+          sectionTitle: local?.sectionTitle || "",
+          actualSeconds: mergedActualSeconds[item.book_id] || Number(item.actual_seconds || 0),
+          updatedAt: item.last_read_at,
+        });
+      }
+    }
+    const mergedHistory = [...historyByBook.values()]
+      .sort((a, b) => Date.parse(b.updatedAt || "") - Date.parse(a.updatedAt || ""))
+      .slice(0, 24);
+
+    try {
+      if (rememberPlace) {
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(mergedProgress));
+        localStorage.setItem(ACTUAL_TIME_KEY, JSON.stringify(mergedActualSeconds));
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(mergedHistory));
+      }
+      localStorage.setItem(READ_KEY, JSON.stringify([...mergedCompleted].sort()));
+      localStorage.setItem(BOOKMARKS_KEY, JSON.stringify([...mergedBookmarks].sort()));
+      localStorage.setItem(NOTES_KEY, JSON.stringify(mergedNotes));
+      localStorage.setItem(QUOTES_KEY, JSON.stringify(mergedQuotes));
+      window.dispatchEvent(new Event("jju-account"));
+      window.dispatchEvent(new Event("jju-reading-history"));
+    } catch {
+      // Keep cloud data available even if this browser has disabled storage.
+    }
+
+    if (isVerified(nextUser)) {
+      try {
+        await syncLocalToCloud(nextUser);
+      } catch {
+        setMessage("Your local reading data is safe, but cloud sync did not finish. Try signing in again shortly.");
+      }
+    }
+
+    if (readingToolsError) {
+      setMessage("Your account loaded, but one of the cloud reading tools could not sync. Your local data is still safe.");
+    }
+
     setDisplayName(String(nextUser.user_metadata?.display_name || ""));
     setEmail(nextUser.email || "");
-    setCloudProgress(progressResult.data || []);
-    setCloudCompleted(completedResult.data || []);
+    setCloudProgress(rememberPlace
+      ? [...progressIds].map(bookId => ({
+        book_id: bookId,
+        section_index: mergedProgress[bookId] || 0,
+        actual_seconds: mergedActualSeconds[bookId] || 0,
+      }))
+      : normalizedRemoteProgress);
+    setCloudCompleted([...mergedCompleted].map(bookId => ({ book_id: bookId })));
   }, [supabase, syncLocalToCloud]);
 
   useEffect(() => {
@@ -282,8 +455,8 @@ export default function AccountClient() {
       const local = readLocalAccount();
       setDisplayName(current => current || local?.name || "");
       setEmail(current => current || local?.email || "");
-      setReadBooks(new Set(readJson<string[]>(READ_KEY, [])));
-      setProgress(readJson<Record<string, number>>(PROGRESS_KEY, {}));
+      setReadBooks(new Set(readJson<string[]>(READ_KEY, []).map(canonicalBookId)));
+      setProgress(canonicalizeNumericRecord(readJson<Record<string, number>>(PROGRESS_KEY, {})));
       setEvents(readJson<ReadEvent[]>(READ_EVENTS_KEY, []));
     };
 
@@ -325,7 +498,17 @@ export default function AccountClient() {
   const localMinutesRead = [...readBooks].reduce((sum, id) => sum + Number(bookMap.get(id)?.readingMinutes || 0), 0);
   const cloudActualMinutes = Math.round(cloudProgress.reduce((sum, item) => sum + Number(item.actual_seconds || 0), 0) / 60);
   const readingMinutes = cloudActualMinutes || localMinutesRead;
-  const authRedirectUrl = typeof window === "undefined" ? "" : `${window.location.origin}/auth/callback`;
+  const callbackReturnPath = safeAuthReturnPath(
+    returnPath,
+    variant === "site-v2" ? "/site-v2/account" : "/account",
+    typeof window === "undefined" ? undefined : window.location.origin,
+  );
+  const authRedirectUrl = typeof window === "undefined"
+    ? ""
+    : `${window.location.origin}/auth/callback${variant === "site-v2" ? `?next=${encodeURIComponent(callbackReturnPath)}` : ""}`;
+  const passwordResetRedirectUrl = typeof window === "undefined"
+    ? ""
+    : `${window.location.origin}/auth/callback?next=${encodeURIComponent(callbackReturnPath)}`;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -369,7 +552,7 @@ export default function AccountClient() {
         } else if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
           setMessage("That email may already have an account. Try signing in or send a password reset.");
         } else {
-          setMessage("Account created. If email confirmation is required, use the verification link before cloud sync turns on.");
+          setMessage("Check your email to verify the account. Cloud sync will turn on after verification.");
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({
@@ -427,7 +610,7 @@ export default function AccountClient() {
     }
     setBusy(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: `${window.location.origin}/auth/callback?next=/account`,
+      redirectTo: passwordResetRedirectUrl,
     });
     setBusy(false);
     setMessage(error ? error.message : "Password reset email sent.");
@@ -460,8 +643,9 @@ export default function AccountClient() {
   async function clearReadingData() {
     setDeleteArmed(false);
     setBusy(true);
+    let cloudClearError = "";
     if (supabase && user) {
-      await Promise.all([
+      const clearResults = await Promise.all([
         supabase.from("reading_progress").delete().eq("user_id", user.id),
         supabase.from("completed_books").delete().eq("user_id", user.id),
         supabase.from("reading_sessions").delete().eq("user_id", user.id),
@@ -469,6 +653,7 @@ export default function AccountClient() {
         supabase.from("reader_notes").delete().eq("user_id", user.id),
         supabase.from("reader_quotes").delete().eq("user_id", user.id),
       ]);
+      cloudClearError = firstSupabaseError(clearResults);
       setCloudProgress([]);
       setCloudCompleted([]);
     }
@@ -477,7 +662,11 @@ export default function AccountClient() {
     setProgress({});
     setEvents([]);
     setBusy(false);
-    setMessage(user ? "Reading data cleared on this device and account." : "Local reading data cleared.");
+    setMessage(cloudClearError
+      ? "Reading data was cleared on this device, but the account copy could not be fully cleared. Try again shortly."
+      : user
+        ? "Reading data cleared on this device and account."
+        : "Local reading data cleared.");
   }
 
   async function deleteAccount() {
@@ -514,7 +703,7 @@ export default function AccountClient() {
   }
 
   return (
-    <main className="page accountPage accountPageClean">
+    <PageRoot className={`page accountPage accountPageClean${variant === "site-v2" ? " siteV2AccountPage" : ""}`}>
       <section className="accountHero accountHeroClean">
         <h1>Account</h1>
       </section>
@@ -527,7 +716,11 @@ export default function AccountClient() {
             <form className="accountForm" onSubmit={submitAuth}>
               <div className="accountModuleHeader">
                 <h2>{mode === "sign-up" ? "Create account" : "Sign in"}</h2>
-                <p>{supabase ? "Use an account when cloud sync is ready. Local reading memory works either way." : "Supabase is not configured yet. Reading memory is saved locally on this device."}</p>
+                <p>{supabase
+                  ? variant === "site-v2"
+                    ? "You don't need an account to read or save your progress. Sign in to sync it across devices."
+                    : "Use an account when cloud sync is ready. Local reading memory works either way."
+                  : "Supabase is not configured yet. Reading memory is saved locally on this device."}</p>
               </div>
 
               {mode === "sign-up" && (
@@ -611,6 +804,6 @@ export default function AccountClient() {
           <button className="resetBtn" disabled={busy} type="button" onClick={clearReadingData}>Clear Reading Data</button>
         </section>
       </section>
-    </main>
+    </PageRoot>
   );
 }

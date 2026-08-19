@@ -1,0 +1,14 @@
+.readerEvidenceCard {
+  margin: 1.25rem auto 0;
+  max-width: min(100%, 48rem);
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  background: color-mix(in srgb, currentColor 4%, transparent);
+}
+
+.readerEvidenceCard h2 { margin: .1rem 0 .35rem; font: 700 1rem/1.3 inherit; }
+.readerEvidenceCard p { margin: 0 0 .7rem; font-size: .9rem; opacity: .82; }
+.readerEvidenceCard ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .45rem; }
+.readerEvidenceCard a { text-underline-offset: 3px; }
+.readerEvidenceCard small { display: block; margin-top: .08rem; opacity: .68; }

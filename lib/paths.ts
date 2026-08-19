@@ -17,6 +17,7 @@ export type PathBook = {
 export type ReadingPath = {
   id: string;
   title: string;
+  aliases?: string[];
   kind?: string;
   type?: "series" | "degree" | "path" | "tagPath" | "survey" | "deep-dive" | "biographical" | "chronological" | "thematic";
   level: "starter" | "intermediate" | "advanced";
@@ -30,6 +31,7 @@ export type ReadingPath = {
 export type PathsFile = {
   generated?: string;
   generatedAt?: string;
+  correctionsAppliedAt?: string;
   counts?: Record<string, unknown>;
   series: ReadingPath[];
   paths: ReadingPath[];
@@ -177,6 +179,7 @@ export function cleanPathsFile(value: unknown): PathsFile {
     return {
       id: String(record.id || slug(title) || `${forceType || "path"}-${index + 1}`).trim().toLowerCase(),
       title,
+      aliases: Array.isArray(record.aliases) ? record.aliases.map(item => slug(String(item))).filter(Boolean) : [],
       kind: String(record.kind || forceType || type).trim(),
       type,
       level,
@@ -198,6 +201,7 @@ export function cleanPathsFile(value: unknown): PathsFile {
   return {
     generated: String(data.generated || data.generatedAt || new Date().toISOString()),
     generatedAt: String(data.generatedAt || data.generated || new Date().toISOString()),
+    correctionsAppliedAt: data.correctionsAppliedAt ? String(data.correctionsAppliedAt) : undefined,
     counts: data.counts && typeof data.counts === "object" ? data.counts as Record<string, unknown> : undefined,
     series: cleanCollection(data.series, "series"),
     paths: cleanCollection(data.paths),

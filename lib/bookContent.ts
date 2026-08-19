@@ -183,6 +183,11 @@ export async function readBookContent(idOrFile: string): Promise<ResolvedBookCon
   const live = await readSupabaseBookContent(idOrFile);
   if (live) return live;
 
+  return readFileBookContent(idOrFile);
+}
+
+export async function readFileBookContent(idOrFile: string): Promise<ResolvedBookContent> {
+
   const resolved = await resolveBookContentFile(idOrFile);
   const raw = JSON.parse(await readFile(bookContentPath(resolved.fileName), "utf8"));
   const fallbackId = resolved.fileName.replace(/\.json$/i, "");

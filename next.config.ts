@@ -4,6 +4,19 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://nzlmnbppynj
 const supabaseHost = new URL(supabaseUrl).hostname;
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["127.0.0.1"],
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/book-content/:path*",
+          destination: "/api/book-content-unavailable",
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   images: {
     remotePatterns: [
       {

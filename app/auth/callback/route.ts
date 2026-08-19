@@ -1,17 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-
-function safeNextPath(value: string | null) {
-  if (!value || !value.startsWith("/") || value.startsWith("//")) return "/account";
-  return value;
-}
+import { safeAuthReturnPath } from "@/lib/authReturnPath";
 
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
   const authError = requestUrl.searchParams.get("error_description") || requestUrl.searchParams.get("error");
-  const next = safeNextPath(requestUrl.searchParams.get("next"));
+  const next = safeAuthReturnPath(requestUrl.searchParams.get("next"), "/account", requestUrl.origin);
 
   if (authError) {
     const redirect = new URL(next, requestUrl.origin);

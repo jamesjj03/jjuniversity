@@ -1,12 +1,15 @@
 {
   "generated": "2026-06-15T20:30:13.156Z",
   "generatedAt": "2026-06-15T20:30:13.156Z",
+  "correctionsAppliedAt": "2026-08-18T21:58:18.038Z",
   "counts": {
     "books": 333,
-    "series": 17,
+    "series": 19,
     "paths": 5,
     "tagPaths": 0,
-    "recommendedSections": 0
+    "recommendedSections": 0,
+    "collectionAssignments": 228,
+    "collectionBooks": 228
   },
   "series": [
     {
@@ -77,7 +80,7 @@
         "Psychology & Human Behavior",
         "Technology & Innovation"
       ],
-      "bookCount": 13,
+      "bookCount": 12,
       "books": [
         {
           "id": "franklin",
@@ -138,11 +141,6 @@
           "id": "jung",
           "order": 12,
           "note": ""
-        },
-        {
-          "id": "descartes",
-          "order": 13,
-          "note": ""
         }
       ],
       "deleted": false
@@ -161,7 +159,7 @@
         "Ancient Civilizations",
         "Authoritarianism & Dictatorship"
       ],
-      "bookCount": 10,
+      "bookCount": 8,
       "books": [
         {
           "id": "ramses",
@@ -202,16 +200,6 @@
           "id": "napoleon",
           "order": 8,
           "note": ""
-        },
-        {
-          "id": "mansu",
-          "order": 9,
-          "note": ""
-        },
-        {
-          "id": "wu",
-          "order": 10,
-          "note": ""
         }
       ],
       "deleted": false
@@ -230,7 +218,7 @@
         "20th Century",
         "War & Conflict"
       ],
-      "bookCount": 9,
+      "bookCount": 6,
       "books": [
         {
           "id": "adolf",
@@ -258,23 +246,8 @@
           "note": ""
         },
         {
-          "id": "lenin",
-          "order": 6,
-          "note": ""
-        },
-        {
-          "id": "kaiser",
-          "order": 7,
-          "note": ""
-        },
-        {
           "id": "nero",
-          "order": 8,
-          "note": ""
-        },
-        {
-          "id": "northkorea",
-          "order": 9,
+          "order": 6,
           "note": ""
         }
       ],
@@ -321,17 +294,17 @@
           "note": ""
         },
         {
-          "id": "joan",
+          "id": "haile",
           "order": 6,
           "note": ""
         },
         {
-          "id": "haile",
+          "id": "woke",
           "order": 7,
           "note": ""
         },
         {
-          "id": "woke",
+          "id": "tmk",
           "order": 8,
           "note": ""
         }
@@ -351,7 +324,7 @@
         "Revolution & Social Change",
         "Social Movements"
       ],
-      "bookCount": 7,
+      "bookCount": 8,
       "books": [
         {
           "id": "luther",
@@ -384,8 +357,13 @@
           "note": ""
         },
         {
-          "id": "columbus",
+          "id": "lenin",
           "order": 7,
+          "note": ""
+        },
+        {
+          "id": "joan",
+          "order": 8,
           "note": ""
         }
       ],
@@ -393,11 +371,11 @@
     },
     {
       "id": "world-religions",
-      "title": "World Religions",
+      "title": "The Belief Map",
       "kind": "series",
       "type": "series",
       "level": "intermediate",
-      "description": "Religious histories, movements, traditions, and belief systems outside the scripture guide series.",
+      "description": "Religious histories, movements, traditions, and the different maps people have used to explain existence.",
       "tags": [
         "World Religions",
         "Religion & Spirituality",
@@ -483,15 +461,18 @@
           "note": ""
         }
       ],
-      "deleted": false
+      "deleted": false,
+      "aliases": [
+        "world-religions"
+      ]
     },
     {
       "id": "the-philosophers",
-      "title": "The Philosophers",
+      "title": "The Questioners",
       "kind": "series",
       "type": "series",
       "level": "intermediate",
-      "description": "The core philosophy shelf: ancient questions, modern doubt, ethics, mind, meaning, and reality.",
+      "description": "Questions about ethics, mind, meaning, and reality, along with the people who refused easy answers.",
       "tags": [
         "Philosophy",
         "Biography",
@@ -536,22 +517,26 @@
           "note": ""
         },
         {
-          "id": "machi",
+          "id": "agency",
           "order": 8,
           "note": ""
         },
         {
-          "id": "agency",
+          "id": "materialism",
           "order": 9,
           "note": ""
         },
         {
-          "id": "materialism",
+          "id": "descartes",
           "order": 10,
           "note": ""
         }
       ],
-      "deleted": false
+      "deleted": false,
+      "aliases": [
+        "the-philosophers",
+        "the-great-questions"
+      ]
     },
     {
       "id": "red-white-and-bruised",
@@ -567,7 +552,7 @@
         "Propaganda & Social Control",
         "Civil Rights & Social Justice"
       ],
-      "bookCount": 16,
+      "bookCount": 13,
       "books": [
         {
           "id": "1776",
@@ -575,81 +560,171 @@
           "note": ""
         },
         {
-          "id": "lobbied",
+          "id": "columbus",
           "order": 2,
           "note": ""
         },
         {
-          "id": "campus",
+          "id": "lobbied",
           "order": 3,
           "note": ""
         },
         {
-          "id": "cia",
+          "id": "campus",
           "order": 4,
           "note": ""
         },
         {
-          "id": "fbi",
+          "id": "mkultra",
           "order": 5,
           "note": ""
         },
         {
-          "id": "nsa",
+          "id": "coups",
           "order": 6,
           "note": ""
         },
         {
-          "id": "mkultra",
+          "id": "race",
           "order": 7,
           "note": ""
         },
         {
-          "id": "coups",
+          "id": "rvb",
           "order": 8,
           "note": ""
         },
         {
-          "id": "race",
+          "id": "rewrite",
           "order": 9,
           "note": ""
         },
         {
-          "id": "rvb",
+          "id": "georgism",
           "order": 10,
           "note": ""
         },
         {
-          "id": "rewrite",
+          "id": "elections",
           "order": 11,
           "note": ""
         },
         {
-          "id": "odd",
+          "id": "electoral",
           "order": 12,
           "note": ""
         },
         {
-          "id": "georgism",
-          "order": 13,
-          "note": ""
-        },
-        {
-          "id": "elections",
-          "order": 14,
-          "note": ""
-        },
-        {
-          "id": "electoral",
-          "order": 15,
-          "note": ""
-        },
-        {
           "id": "jesse",
-          "order": 16,
+          "order": 13,
           "note": ""
         }
       ],
+      "deleted": false
+    },
+    {
+      "id": "eyes-everywhere",
+      "title": "Eyes Everywhere",
+      "description": "The intelligence agencies built to watch, infiltrate, investigate, and operate beyond public view.",
+      "tags": [
+        "Espionage & Intelligence",
+        "Government & Politics",
+        "Conspiracy & Cover-ups"
+      ],
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "books": [
+        {
+          "id": "cia",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "fbi",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "nsa",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "mossad",
+          "order": 4,
+          "note": ""
+        }
+      ],
+      "bookCount": 4,
+      "deleted": false
+    },
+    {
+      "id": "the-mapmakers",
+      "title": "The Mapmakers",
+      "description": "Country and civilization portraits about how places are built, governed, remembered, and understood from the inside.",
+      "tags": [
+        "World History",
+        "Government & Politics",
+        "Cultural History",
+        "Geography"
+      ],
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
+      "books": [
+        {
+          "id": "borders",
+          "order": 1,
+          "note": ""
+        },
+        {
+          "id": "egypt",
+          "order": 2,
+          "note": ""
+        },
+        {
+          "id": "rome",
+          "order": 3,
+          "note": ""
+        },
+        {
+          "id": "germany",
+          "order": 4,
+          "note": ""
+        },
+        {
+          "id": "japan",
+          "order": 5,
+          "note": ""
+        },
+        {
+          "id": "insidechina",
+          "order": 6,
+          "note": ""
+        },
+        {
+          "id": "northkorea",
+          "order": 7,
+          "note": ""
+        },
+        {
+          "id": "cuba",
+          "order": 8,
+          "note": ""
+        },
+        {
+          "id": "saudi",
+          "order": 9,
+          "note": ""
+        },
+        {
+          "id": "antarctica",
+          "order": 10,
+          "note": ""
+        }
+      ],
+      "bookCount": 10,
       "deleted": false
     },
     {
@@ -666,7 +741,7 @@
         "Political Economy",
         "Propaganda & Social Control"
       ],
-      "bookCount": 14,
+      "bookCount": 16,
       "books": [
         {
           "id": "gig",
@@ -737,6 +812,16 @@
           "id": "schooled",
           "order": 14,
           "note": ""
+        },
+        {
+          "id": "dollar",
+          "order": 15,
+          "note": ""
+        },
+        {
+          "id": "insideasylum",
+          "order": 16,
+          "note": ""
         }
       ],
       "deleted": false
@@ -755,7 +840,7 @@
         "Psychology & Human Behavior",
         "Political Economy"
       ],
-      "bookCount": 6,
+      "bookCount": 7,
       "books": [
         {
           "id": "pantheon",
@@ -786,6 +871,11 @@
           "id": "condition",
           "order": 6,
           "note": ""
+        },
+        {
+          "id": "presidents",
+          "order": 7,
+          "note": ""
         }
       ],
       "deleted": false
@@ -803,46 +893,36 @@
         "Cultural History",
         "Consumer Culture"
       ],
-      "bookCount": 8,
+      "bookCount": 6,
       "books": [
         {
-          "id": "music",
+          "id": "kanye",
           "order": 1,
           "note": ""
         },
         {
-          "id": "kanye",
+          "id": "lennon",
           "order": 2,
           "note": ""
         },
         {
-          "id": "lennon",
+          "id": "mozart",
           "order": 3,
           "note": ""
         },
         {
-          "id": "mozart",
+          "id": "mike",
           "order": 4,
           "note": ""
         },
         {
-          "id": "mike",
+          "id": "taylor",
           "order": 5,
           "note": ""
         },
         {
-          "id": "taylor",
-          "order": 6,
-          "note": ""
-        },
-        {
-          "id": "lee",
-          "order": 7,
-          "note": ""
-        },
-        {
           "id": "vibes",
-          "order": 8,
+          "order": 6,
           "note": ""
         }
       ],
@@ -884,32 +964,32 @@
           "note": ""
         },
         {
-          "id": "vangogh",
+          "id": "van",
           "order": 5,
           "note": ""
         },
         {
-          "id": "van",
+          "id": "theboys",
           "order": 6,
           "note": ""
         },
         {
-          "id": "theboys",
+          "id": "houdini",
           "order": 7,
           "note": ""
         },
         {
-          "id": "houdini",
+          "id": "orwell",
           "order": 8,
           "note": ""
         },
         {
-          "id": "orwell",
+          "id": "color",
           "order": 9,
           "note": ""
         },
         {
-          "id": "color",
+          "id": "lee",
           "order": 10,
           "note": ""
         }
@@ -929,7 +1009,7 @@
         "Consumer Culture",
         "Food & Culture"
       ],
-      "bookCount": 11,
+      "bookCount": 7,
       "books": [
         {
           "id": "nike",
@@ -962,28 +1042,8 @@
           "note": ""
         },
         {
-          "id": "caffeine",
+          "id": "purdue",
           "order": 7,
-          "note": ""
-        },
-        {
-          "id": "casinos",
-          "order": 8,
-          "note": ""
-        },
-        {
-          "id": "lunchtime",
-          "order": 9,
-          "note": ""
-        },
-        {
-          "id": "biochemical",
-          "order": 10,
-          "note": ""
-        },
-        {
-          "id": "dollar",
-          "order": 11,
           "note": ""
         }
       ],
@@ -1003,81 +1063,61 @@
         "Physics & Cosmology",
         "Cognitive Science & Neuroscience"
       ],
-      "bookCount": 15,
+      "bookCount": 11,
       "books": [
         {
-          "id": "dopamine",
+          "id": "goo",
           "order": 1,
           "note": ""
         },
         {
-          "id": "goo",
+          "id": "hardest",
           "order": 2,
           "note": ""
         },
         {
-          "id": "hardest",
+          "id": "cancer",
           "order": 3,
           "note": ""
         },
         {
-          "id": "cancer",
+          "id": "nuclear",
           "order": 4,
           "note": ""
         },
         {
-          "id": "nuclear",
+          "id": "burgers",
           "order": 5,
           "note": ""
         },
         {
-          "id": "burgers",
+          "id": "bang",
           "order": 6,
           "note": ""
         },
         {
-          "id": "brain",
+          "id": "relativity",
           "order": 7,
           "note": ""
         },
         {
-          "id": "bang",
+          "id": "bees",
           "order": 8,
           "note": ""
         },
         {
-          "id": "relativity",
+          "id": "plants",
           "order": 9,
           "note": ""
         },
         {
-          "id": "bees",
+          "id": "sleep",
           "order": 10,
           "note": ""
         },
         {
-          "id": "plants",
-          "order": 11,
-          "note": ""
-        },
-        {
-          "id": "sleep",
-          "order": 12,
-          "note": ""
-        },
-        {
-          "id": "prenancy",
-          "order": 13,
-          "note": ""
-        },
-        {
           "id": "pregnancy",
-          "order": 14,
-          "note": ""
-        },
-        {
-          "id": "foreskin",
-          "order": 15,
+          "order": 11,
           "note": ""
         }
       ],
@@ -1096,7 +1136,7 @@
         "Social Movements",
         "Cognitive Science & Neuroscience"
       ],
-      "bookCount": 11,
+      "bookCount": 10,
       "books": [
         {
           "id": "imagination",
@@ -1124,33 +1164,28 @@
           "note": ""
         },
         {
-          "id": "fortitude",
+          "id": "heroes",
           "order": 6,
           "note": ""
         },
         {
-          "id": "heroes",
+          "id": "intelligence",
           "order": 7,
           "note": ""
         },
         {
-          "id": "insideasylum",
+          "id": "soaps",
           "order": 8,
           "note": ""
         },
         {
-          "id": "intelligence",
+          "id": "sitcoms",
           "order": 9,
           "note": ""
         },
         {
-          "id": "soaps",
+          "id": "foreskin",
           "order": 10,
-          "note": ""
-        },
-        {
-          "id": "sitcoms",
-          "order": 11,
           "note": ""
         }
       ],
@@ -1158,18 +1193,18 @@
     },
     {
       "id": "high-society",
-      "title": "High Society",
+      "title": "Hits and Hooks",
       "kind": "series",
       "type": "series",
       "level": "intermediate",
-      "description": "Addiction, substances, vice, medicalized dependency, dopamine loops, and the industries around them.",
+      "description": "Addiction, substances, dopamine loops, engineered cravings, and the products built to keep people coming back.",
       "tags": [
         "Addiction & Substance Use",
         "Consumer Culture",
         "Psychology & Human Behavior",
         "Capitalism & Corporations"
       ],
-      "bookCount": 10,
+      "bookCount": 9,
       "books": [
         {
           "id": "addiction",
@@ -1187,42 +1222,40 @@
           "note": ""
         },
         {
-          "id": "nic",
+          "id": "dietpop",
           "order": 4,
           "note": ""
         },
         {
-          "id": "nictrap",
+          "id": "weed",
           "order": 5,
           "note": ""
         },
         {
-          "id": "purdue",
+          "id": "drugs",
           "order": 6,
           "note": ""
         },
         {
-          "id": "dietpop",
+          "id": "caffeine",
           "order": 7,
           "note": ""
         },
         {
-          "id": "weed",
+          "id": "biochemical",
           "order": 8,
           "note": ""
         },
         {
-          "id": "drugs",
+          "id": "dopamine",
           "order": 9,
-          "note": ""
-        },
-        {
-          "id": "tmk",
-          "order": 10,
           "note": ""
         }
       ],
-      "deleted": false
+      "deleted": false,
+      "aliases": [
+        "high-society"
+      ]
     }
   ],
   "paths": [
@@ -1315,11 +1348,6 @@
           "id": "science",
           "order": 16,
           "note": ""
-        },
-        {
-          "id": "sociology",
-          "order": 17,
-          "note": ""
         }
       ],
       "deleted": false
@@ -1332,7 +1360,7 @@
       "level": "intermediate",
       "description": "Direct guides through major scriptures and influential texts, focused on what the texts actually communicate rather than vague cultural assumptions.",
       "tags": [],
-      "bookCount": 9,
+      "bookCount": 10,
       "books": [
         {
           "id": "bible",
@@ -1453,7 +1481,7 @@
       "level": "intermediate",
       "description": "The American presidency as biography, myth, power, and political system.",
       "tags": [],
-      "bookCount": 13,
+      "bookCount": 11,
       "books": [
         {
           "id": "fdr",
@@ -1496,23 +1524,18 @@
           "note": ""
         },
         {
-          "id": "presidents",
+          "id": "reagan",
           "order": 9,
           "note": ""
         },
         {
-          "id": "reagan",
+          "id": "teddy",
           "order": 10,
           "note": ""
         },
         {
-          "id": "teddy",
-          "order": 11,
-          "note": ""
-        },
-        {
           "id": "jackson",
-          "order": 12,
+          "order": 11,
           "note": ""
         }
       ],
@@ -1526,7 +1549,7 @@
       "level": "intermediate",
       "description": "The cultural history of holidays, rituals, seasonal myths, and the stories people repeat every year.",
       "tags": [],
-      "bookCount": 3,
+      "bookCount": 5,
       "books": [
         {
           "id": "halloween",

@@ -1,0 +1,11 @@
+/tmp/
+/output/
+/outputs/
+/acx-contact-roster-work/
+/generated/
+/tools/gold-cleaner/gold-output/
+/.vercel/
+.env*
+*.log
+/e.textContent.trim())]
+/window.__dragQA.*

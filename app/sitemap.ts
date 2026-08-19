@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
   const staticPages = [
     "/",
-    "/library",
+    "/books",
     "/about",
     "/contact",
     "/print",

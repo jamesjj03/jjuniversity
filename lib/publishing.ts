@@ -1,10 +1,13 @@
-import { readBookContent, type BookContentSection } from "@/lib/bookContent";
+import { readBookContent, readFileBookContent, type BookContentSection } from "@/lib/bookContent";
 import { PRIMARY_CATEGORIES } from "@/lib/taxonomy";
 import rawBooks from "@/public/books.json";
 import rawManifest from "@/public/book-content/manifest.json";
 import rawPaths from "@/public/paths.json";
 import rawPrintProducts from "@/public/print-products.json";
 import { readBooksFromSupabase } from "@/lib/bookCatalog";
+import { canonicalBookId, LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
+
+export { LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://jjuniversity.com").replace(/\/$/, "");
 
@@ -71,6 +74,7 @@ export type PublishedBook = {
 export type PublishedSeries = {
   id: string;
   slug: string;
+  slugAliases: string[];
   title: string;
   description: string;
   level: string;
@@ -124,6 +128,7 @@ export type PrintProductPageCount = {
 type ReadingPath = {
   id?: string;
   title?: string;
+  aliases?: string[];
   description?: string;
   level?: string;
   tags?: string[];
@@ -295,48 +300,123 @@ export async function getBookByIdLive(id: string) {
 }
 
 export function getRelatedBooks(book: PublishedBook, limit = 6) {
-  const explicit = book.similar
-    .map(id => getBookById(id))
-    .filter((item): item is PublishedBook => Boolean(item && isPublicBook(item)));
-  const explicitIds = new Set(explicit.map(item => item.id));
-  const tagSet = new Set(book.tags);
-  const inferred = getPublicBooks()
-    .filter(item => item.id !== book.id && !explicitIds.has(item.id))
-    .map(item => ({
-      book: item,
-      score: item.tags.reduce((sum, tag) => sum + (tagSet.has(tag) ? 1 : 0), 0) + (item.primaryCategory === book.primaryCategory ? 1 : 0),
-    }))
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.book.title.localeCompare(b.book.title))
-    .map(item => item.book);
-
-  return [...explicit, ...inferred].slice(0, limit);
+  return rankRelatedBooks(book, getPublicBooks(), getCollections(), limit);
 }
 
 export async function getRelatedBooksLive(book: PublishedBook, limit = 6) {
-  const publicBooks = await getPublicBooksLive();
-  const byId = new Map(publicBooks.map(item => [item.id, item]));
-  const explicit = book.similar
-    .map(id => byId.get(id))
-    .filter((item): item is PublishedBook => Boolean(item && isPublicBook(item)));
-  const explicitIds = new Set(explicit.map(item => item.id));
-  const tagSet = new Set(book.tags);
-  const inferred = publicBooks
-    .filter(item => item.id !== book.id && !explicitIds.has(item.id))
-    .map(item => ({
-      book: item,
-      score: item.tags.reduce((sum, tag) => sum + (tagSet.has(tag) ? 1 : 0), 0) + (item.primaryCategory === book.primaryCategory ? 1 : 0),
-    }))
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.book.title.localeCompare(b.book.title))
-    .map(item => item.book);
+  const [publicBooks, collections] = await Promise.all([getPublicBooksLive(), getCollectionsLive()]);
+  return rankRelatedBooks(book, publicBooks, collections, limit);
+}
 
-  return [...explicit, ...inferred].slice(0, limit);
+function rankRelatedBooks(source: PublishedBook, candidates: PublishedBook[], collections: PublishedSeries[], limit: number) {
+  const readyCandidates = candidates.filter(item => (
+    item.id !== source.id
+    && item.status === "ready"
+    && isPublicBook(item)
+  ));
+  const explicitRank = new Map(source.similar.map((id, index) => [canonicalBookId(id), index]));
+  const sourceTags = new Set(source.tags);
+  const sourceCollections = new Set(collections.filter(item => item.bookIds.includes(source.id)).map(item => item.id));
+  const tagFrequency = new Map<string, number>();
+
+  for (const candidate of readyCandidates) {
+    for (const tag of new Set(candidate.tags)) {
+      tagFrequency.set(tag, (tagFrequency.get(tag) || 0) + 1);
+    }
+  }
+
+  return readyCandidates
+    .map(item => {
+      const sharedCollections = collections.filter(collection => (
+        sourceCollections.has(collection.id) && collection.bookIds.includes(item.id)
+      )).length;
+      const sharedTagNames = item.tags.filter(tag => sourceTags.has(tag));
+      const sharedTags = sharedTagNames.length;
+      const tagScore = sharedTagNames.reduce((score, tag) => (
+        score + 1 + Math.log((readyCandidates.length + 1) / ((tagFrequency.get(tag) || 0) + 1))
+      ), 0);
+      const explicitIndex = explicitRank.get(item.id);
+      const explicit = explicitIndex !== undefined;
+      const reciprocal = item.similar.some(id => canonicalBookId(id) === source.id);
+      const readingGap = source.readingMinutes && item.readingMinutes
+        ? Math.abs(source.readingMinutes - item.readingMinutes) / Math.max(source.readingMinutes, item.readingMinutes)
+        : 1;
+      const chapterGap = source.chapterCount && item.chapterCount
+        ? Math.abs(source.chapterCount - item.chapterCount) / Math.max(source.chapterCount, item.chapterCount)
+        : 1;
+      const hasSemanticConnection = sharedTags > 0 || sharedCollections > 0 || explicit || reciprocal;
+      const score = hasSemanticConnection
+        ? tagScore * 10
+          + (sharedTags / Math.max(1, source.tags.length)) * 12
+          + sharedCollections * 8
+          + (item.primaryCategory === source.primaryCategory ? 2 : 0)
+          + (reciprocal ? 7 : 0)
+          + (explicit ? 3 + (1 / (explicitIndex + 1)) : 0)
+          + (readingGap <= 0.25 ? 1.5 : 0)
+          + (chapterGap <= 0.25 ? 1 : 0)
+        : 0;
+
+      return {
+        item,
+        score,
+        sharedCollections,
+        sharedTags,
+        tieBreak: deterministicPairRank(source.id, item.id),
+      };
+    })
+    .filter(result => result.score > 0)
+    .sort((a, b) => (
+      b.score - a.score
+      || b.sharedCollections - a.sharedCollections
+      || b.sharedTags - a.sharedTags
+      || a.tieBreak - b.tieBreak
+      || a.item.title.localeCompare(b.item.title)
+    ))
+    .slice(0, Math.max(0, limit))
+    .map(result => result.item);
+}
+
+function deterministicPairRank(sourceId: string, candidateId: string) {
+  const value = `${sourceId}|${candidateId}`;
+  let hash = 2166136261;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
 }
 
 export function getAllSeries() {
   const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
   const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
+  return normalizeStaticSeriesItems(items);
+}
+
+export function getEditorialSeries() {
+  const paths = rawPaths as { series?: ReadingPath[] };
+  return normalizeStaticSeriesItems(paths.series || []);
+}
+
+export function getReadingPaths() {
+  const paths = rawPaths as { paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
+  const items = [...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
+  return normalizeStaticSeriesItems(items);
+}
+
+/**
+ * The public catalog calls these Collections.  A collection can be a thematic
+ * shelf or a deliberately ordered guide, but the browser should not make a
+ * reader learn two different names for the same kind of discovery tool.
+ * The source groups stay intact so dedicated collection pages can retain
+ * their authored order and progress behavior.
+ */
+export function getCollections() {
+  const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
+  const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
+  return normalizeStaticSeriesItems(items);
+}
+
+function normalizeStaticSeriesItems(items: ReadingPath[]) {
   const seen = new Set<string>();
   return items
     .filter(item => !item.deleted && item.id && item.title && Array.isArray(item.books) && item.books.length)
@@ -364,10 +444,26 @@ export async function getAllSeriesLive() {
     });
 }
 
+export async function getCollectionsLive() {
+  const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
+  const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
+  const seen = new Set<string>();
+  const allBooks = await getAllBooksLive();
+  const bookIds = new Set(allBooks.map(book => book.id));
+  return items
+    .filter(item => !item.deleted && item.id && item.title && Array.isArray(item.books) && item.books.length)
+    .map(item => normalizeSeries(item))
+    .filter(series => {
+      if (seen.has(series.slug)) return false;
+      seen.add(series.slug);
+      return series.bookIds.some(id => bookIds.has(id));
+    });
+}
+
 export function getSeriesBySlug(seriesSlug: string) {
   const clean = slugify(seriesSlug);
   return getAllSeries().find(series => {
-    if (series.slug === clean || series.id === clean) return true;
+    if (series.slug === clean || series.id === clean || series.slugAliases.includes(clean)) return true;
     if (clean === "101" && series.id.includes("101")) return true;
     return false;
   });
@@ -376,7 +472,7 @@ export function getSeriesBySlug(seriesSlug: string) {
 export async function getSeriesBySlugLive(seriesSlug: string) {
   const clean = slugify(seriesSlug);
   return (await getAllSeriesLive()).find(series => {
-    if (series.slug === clean || series.id === clean) return true;
+    if (series.slug === clean || series.id === clean || series.slugAliases.includes(clean)) return true;
     if (clean === "101" && series.id.includes("101")) return true;
     return false;
   });
@@ -491,22 +587,34 @@ export function printPriceLabel(product: PrintProduct) {
   return `$${(product.targetPriceCents / 100).toFixed(2)} target + shipping`;
 }
 
-export async function getBookSample(book: PublishedBook) {
+export async function getBookSample(book: PublishedBook, options: { preferFile?: boolean } = {}) {
+  if (book.status !== "ready") {
+    return {
+      toc: [],
+      chapterCount: book.chapterCount,
+      excerpt: cleanExcerpt(book.description),
+      contentWordCount: book.wordCount,
+    };
+  }
+
   try {
-    const resolved = await readBookContent(book.id);
+    const resolved = await (options.preferFile ? readFileBookContent(book.id) : readBookContent(book.id));
     const sections = resolved.book.sections;
     const contentSections = sections.filter(isContentSection);
+    const chapterSections = sections.filter(isChapterSection);
     const excerptSource = contentSections.find(section => section.text && section.text.length > 300)
       || sections.find(section => section.text && section.text.length > 300);
 
     return {
-      toc: contentSections.slice(0, 12).map(section => section.title).filter(Boolean),
+      toc: chapterSections.map(section => section.title).filter(Boolean),
+      chapterCount: chapterSections.length || book.chapterCount,
       excerpt: cleanExcerpt(excerptSource?.text || book.description),
       contentWordCount: resolved.book.wordCount || book.wordCount,
     };
   } catch {
     return {
       toc: [],
+      chapterCount: book.chapterCount,
       excerpt: cleanExcerpt(book.description),
       contentWordCount: book.wordCount,
     };
@@ -531,7 +639,12 @@ function normalizeBook(raw: RawBook): PublishedBook {
     slugify(String(manifest?.slug || "")),
     slugify(String(raw.title || "")),
     ...(Array.isArray(raw.slugAliases) ? raw.slugAliases.map(alias => slugify(String(alias))) : []),
+    ...Object.entries(LEGACY_BOOK_ID_ALIASES)
+      .filter(([, canonicalId]) => canonicalId === id)
+      .map(([legacyId]) => slugify(legacyId)),
   ].filter(alias => alias && alias !== slug))];
+
+  const rawVisibility = String(raw.visibility || "main").trim().toLowerCase();
 
   return {
     id,
@@ -550,7 +663,7 @@ function normalizeBook(raw: RawBook): PublishedBook {
     readingLabel: String(raw.readingLabel || "").trim(),
     chapterCount: Number(raw.chapterCount || manifest?.sectionCount || 0),
     similar: Array.isArray(raw.similar) ? raw.similar.map(item => String(item).trim().toLowerCase()).filter(Boolean) : [],
-    visibility: raw.archive || String(raw.visibility || "main").toLowerCase() === "archive" ? "archive" : "main",
+    visibility: raw.archive || rawVisibility === "archive" ? "archive" : rawVisibility,
     archiveCategory: String(raw.archiveCategory || raw.category || "").trim(),
     primaryCategory,
     slugAliases,
@@ -561,10 +674,13 @@ function normalizeSeries(item: ReadingPath): PublishedSeries {
   const id = slugify(String(item.id || item.title || ""));
   const title = String(item.title || id).trim();
   const is101 = id.includes("101") || /\b101\b/.test(title);
+  const authoredAliases = Array.isArray(item.aliases) ? item.aliases.map(alias => slugify(String(alias))).filter(Boolean) : [];
+  const slug = is101 ? "101" : authoredAliases.length ? slugify(title) : id || slugify(title);
   return {
     id,
-    slug: is101 ? "101" : id || slugify(title),
-    title: is101 ? "JJ University 101" : title,
+    slug,
+    slugAliases: [...new Set([id, ...authoredAliases].filter(alias => alias && alias !== slug))],
+    title,
     description: String(item.description || `A JJ University reading sequence around ${title}.`).trim(),
     level: String(item.level || "starter").trim(),
     tags: Array.isArray(item.tags) ? item.tags.map(String).filter(Boolean) : [],
@@ -586,7 +702,17 @@ function primaryCategoryFor(tags: string[]) {
 }
 
 function isPublicBook(book: PublishedBook) {
-  return book.status !== "hidden" && book.status !== "unavailable";
+  return isPublicCatalogRecord(book);
+}
+
+export function isPublicCatalogRecord(book: { id?: string | null; status?: string | null; visibility?: string | null }) {
+  const id = String(book.id || "").trim().toLowerCase();
+  const status = String(book.status || "ready").trim().toLowerCase();
+  const visibility = String(book.visibility || "main").trim().toLowerCase();
+  return Boolean(id)
+    && (status === "ready" || status === "coming-soon")
+    && (visibility === "main" || visibility === "archive")
+    && !LEGACY_BOOK_ID_ALIASES[id];
 }
 
 function isContentSection(section: BookContentSection) {
@@ -595,6 +721,10 @@ function isContentSection(section: BookContentSection) {
   if (kind === "toc" || kind === "dedication") return false;
   if (/copyright|acknowledg|about the author|contents/.test(title)) return false;
   return Boolean(section.text && section.text.length > 120);
+}
+
+function isChapterSection(section: BookContentSection) {
+  return /^chapter\b/i.test(String(section.title || "").trim());
 }
 
 function cleanExcerpt(text: string) {

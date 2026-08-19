@@ -2,17 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
-
-function safeNextPath(value: string | null) {
-  if (!value || !value.startsWith("/") || value.startsWith("//")) return "/account";
-  return value;
-}
+import { safeAuthReturnPath } from "@/lib/authReturnPath";
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const tokenHash = requestUrl.searchParams.get("token_hash");
   const type = requestUrl.searchParams.get("type") as EmailOtpType | null;
-  const next = safeNextPath(requestUrl.searchParams.get("next"));
+  const next = safeAuthReturnPath(requestUrl.searchParams.get("next"), "/account", requestUrl.origin);
   const redirect = new URL(next, requestUrl.origin);
 
   if (!tokenHash || !type) {

@@ -1,4 +1,10 @@
 import "./globals.css";
+import "@fontsource-variable/bricolage-grotesque/wght.css";
+import "@fontsource/atkinson-hyperlegible/400.css";
+import "@fontsource/atkinson-hyperlegible/700.css";
+import "@fontsource-variable/bitter/wght.css";
+import "@fontsource-variable/lexend/wght.css";
+import "@fontsource-variable/literata/wght.css";
 import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,6 +17,7 @@ import SiteFooter from "@/components/SiteFooter";
 import type { Metadata } from "next";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo";
 import { absoluteUrl, SITE_URL } from "@/lib/publishing";
+import { PREFERENCES_PREPAINT_SCRIPT } from "@/lib/preferencesV2";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -23,13 +30,18 @@ export const metadata: Metadata = {
   authors: [{ name: "James Johnson" }],
   creator: "James Johnson",
   publisher: SITE_NAME,
-  alternates: {
-    canonical: "/",
-  },
   icons: {
-    icon: "/branding/jju-logo.png",
-    shortcut: "/branding/jju-logo.png",
-    apple: "/branding/jju-logo.png",
+    icon: {
+      url: "/branding/jju/app-icons/jju-app-icon-192.png",
+      type: "image/png",
+      sizes: "192x192",
+    },
+    shortcut: "/branding/jju/jju-favicon.ico",
+    apple: {
+      url: "/branding/jju/app-icons/jju-apple-touch-icon-180.png",
+      type: "image/png",
+      sizes: "180x180",
+    },
   },
   openGraph: {
     title: SITE_NAME,
@@ -48,24 +60,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const themeScript = `
-    try {
-      var prefs = JSON.parse(localStorage.getItem("jju.preferences") || "{}");
-      var theme = prefs.siteTheme || "dark";
-      if (theme === "light" || theme === "sepia") theme = "manuscript";
-      if (theme === "forest") theme = "carbon";
-      document.documentElement.dataset.siteTheme = theme;
-      document.documentElement.dataset.siteScheme = theme === "manuscript" ? "light" : "dark";
-      document.documentElement.dataset.siteAccent = prefs.siteAccent || "gold";
-      document.documentElement.dataset.siteIntensity = prefs.siteIntensity || "standard";
-      document.documentElement.dataset.siteBackground = prefs.siteBackground || "grid";
-    } catch {}
-  `;
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <Script id="jju-theme" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <Script
+          id="jju-theme"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: PREFERENCES_PREPAINT_SCRIPT }}
+        />
       </head>
       <body>
         <PreferencesProvider />

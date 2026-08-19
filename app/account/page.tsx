@@ -1,15 +1,17 @@
-import AccountClient from "@/components/AccountClient";
 import type { Metadata } from "next";
+import SiteV2AccountPage, { metadata as siteV2Metadata } from "@/app/site-v2/account/page";
+import SiteV2Shell from "@/components/site-v2/SiteV2Shell";
 
-export const metadata: Metadata = {
-  title: "Account",
-  description: "Manage JJ University reader account settings.",
-  robots: {
-    index: false,
-    follow: true,
-  },
+type Props = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default function AccountPage() {
-  return <AccountClient />;
+export const metadata: Metadata = siteV2Metadata;
+
+export default function AccountPage(props: Props) {
+  return (
+    <SiteV2Shell>
+      <SiteV2AccountPage {...props} />
+    </SiteV2Shell>
+  );
 }

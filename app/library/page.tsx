@@ -1,13 +1,17 @@
-import LibraryClient from "@/components/LibraryClient";
-import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/seo";
+import { permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Library",
-  description: "Browse the full JJ University library of free short books across science, history, religion, psychology, power, money, and more.",
-  path: "/library",
-});
+export default async function LibraryPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const incoming = await searchParams;
+  const query = new URLSearchParams();
 
-export default function LibraryPage() {
-  return <LibraryClient />;
+  Object.entries(incoming).forEach(([key, value]) => {
+    if (Array.isArray(value)) value.forEach(item => query.append(key, item));
+    else if (value !== undefined) query.set(key, value);
+  });
+
+  permanentRedirect(`/books${query.size ? `?${query.toString()}` : ""}`);
 }

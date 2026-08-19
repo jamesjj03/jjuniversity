@@ -12,6 +12,7 @@ type Selection = {
 
 type AtlasMapsClientProps = {
   data: AtlasMapsData;
+  variant?: "default" | "site-v2";
 };
 
 function firstBranch(territory: AtlasTerritory | undefined) {
@@ -79,7 +80,8 @@ function DisclosureIcon({ open }: { open: boolean }) {
   return <span className="atlasMapsDisclosureIcon" aria-hidden="true">{open ? "−" : "+"}</span>;
 }
 
-export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
+export default function AtlasMapsClient({ data, variant = "default" }: AtlasMapsClientProps) {
+  const PageRoot = variant === "site-v2" ? "div" : "main";
   const [selection, setSelection] = useState<Selection>(() => initialSelection(data));
 
   const selectedTerritory = data.territories.find(territory => territory.id === selection.territoryId);
@@ -129,13 +131,15 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
   }
 
   return (
-    <main className="atlasMapsPage page">
+    <PageRoot className={`atlasMapsPage page${variant === "site-v2" ? " siteV2AtlasPage" : ""}`}>
       <section className="atlasMapsHeader" aria-labelledby="atlas-title">
         <div>
           <p className="atlasMapsKicker">Knowledge maps</p>
           <h1 id="atlas-title">Atlas</h1>
           <p className="pageTagline">
-            One expanding route through fields, theories, people, and schools—organized by shape instead of alphabet.
+            {variant === "site-v2"
+              ? "Follow the connections between fields, theories, people, and schools."
+              : "One expanding route through fields, theories, people, and schools—organized by shape instead of alphabet."}
           </p>
         </div>
         <dl className="atlasMapsHeaderStats" aria-label="Atlas coverage">
@@ -439,6 +443,6 @@ export default function AtlasMapsClient({ data }: AtlasMapsClientProps) {
           })}
         </div>
       </section>
-    </main>
+    </PageRoot>
   );
 }

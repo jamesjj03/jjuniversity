@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { PREFERENCES_EVENT, readPreferencesV2 } from "@/lib/preferencesV2";
 
 type ReadingHistoryItem = {
   bookId: string;
@@ -21,6 +22,10 @@ export default function ContinueReadingLink() {
   useEffect(() => {
     const refresh = () => {
       try {
+        if (!readPreferencesV2().saveProgress) {
+          setItems([]);
+          return;
+        }
         const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]") as ReadingHistoryItem[];
         setItems(Array.isArray(history) ? history.filter(item => item.bookId).slice(0, 5) : []);
       } catch {
@@ -30,6 +35,7 @@ export default function ContinueReadingLink() {
     refresh();
     window.addEventListener("storage", refresh);
     window.addEventListener("jju-reading-history", refresh);
+    window.addEventListener(PREFERENCES_EVENT, refresh);
     const closeOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) ref.current.open = false;
     };
@@ -37,6 +43,7 @@ export default function ContinueReadingLink() {
     return () => {
       window.removeEventListener("storage", refresh);
       window.removeEventListener("jju-reading-history", refresh);
+      window.removeEventListener(PREFERENCES_EVENT, refresh);
       document.removeEventListener("click", closeOutside);
     };
   }, []);

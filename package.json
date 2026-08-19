@@ -46,6 +46,11 @@
     "atlas:inventory": "npm run atlas:inventory:build && npm run atlas:inventory:normalize && npm run atlas:inventory:validate && npm run atlas:inventory:duplicates"
   },
   "dependencies": {
+    "@fontsource-variable/bitter": "^5.2.5",
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/lexend": "^5.2.5",
+    "@fontsource-variable/literata": "^5.2.5",
+    "@fontsource/atkinson-hyperlegible": "^5.3.0",
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.106.2",
     "@vercel/analytics": "^2.0.1",

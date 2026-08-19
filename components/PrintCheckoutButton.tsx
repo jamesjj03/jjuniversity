@@ -5,9 +5,10 @@ import { useState } from "react";
 type Props = {
   productSlug: string;
   salesStatus: string;
+  returnPath?: string;
 };
 
-export default function PrintCheckoutButton({ productSlug, salesStatus }: Props) {
+export default function PrintCheckoutButton({ productSlug, salesStatus, returnPath }: Props) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const checkoutLive = salesStatus === "checkout-live";
@@ -21,7 +22,7 @@ export default function PrintCheckoutButton({ productSlug, salesStatus }: Props)
       const response = await fetch("/api/print/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productSlug }),
+        body: JSON.stringify({ productSlug, returnPath }),
       });
       const data = await response.json().catch(() => ({}));
 

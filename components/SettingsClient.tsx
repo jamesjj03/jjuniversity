@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { SITE_V2_SAVED_KEY } from "@/lib/siteV2";
 
 const STORAGE_KEY = "jju.preferences";
 const PROGRESS_KEY = "jju.readerProgress";
@@ -19,14 +20,19 @@ type Preferences = {
   saveProgress: boolean;
 };
 
+type SettingsClientProps = {
+  variant?: "default" | "site-v2";
+  validSavedBookIds?: string[];
+};
+
 const DEFAULTS: Preferences = {
   siteTheme: "dark",
   siteAccent: "gold",
   siteIntensity: "standard",
   siteBackground: "grid",
   readerTheme: "paper",
-  readerSize: "large",
-  readerWidth: "full",
+  readerSize: "medium",
+  readerWidth: "focused",
   readerFont: "book",
   readerSpacing: "normal",
   saveProgress: true,
@@ -59,11 +65,16 @@ function readPreferences(): Preferences {
 }
 
 function savePreferences(preferences: Preferences) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
-  window.dispatchEvent(new Event("jju-preferences"));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+    window.dispatchEvent(new Event("jju-preferences"));
+  } catch {
+    return;
+  }
 }
 
-export default function SettingsClient() {
+export default function SettingsClient({ variant = "default", validSavedBookIds }: SettingsClientProps = {}) {
+  const PageRoot = variant === "site-v2" ? "div" : "main";
   const [preferences, setPreferences] = useState<Preferences>(DEFAULTS);
   const [readCount, setReadCount] = useState(0);
   const [progressCount, setProgressCount] = useState(0);
@@ -71,14 +82,37 @@ export default function SettingsClient() {
   useEffect(() => {
     setPreferences(readPreferences());
 
-    try {
-      setReadCount(JSON.parse(localStorage.getItem(READ_KEY) || "[]").length);
-      setProgressCount(Object.keys(JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}")).length);
-    } catch {
-      setReadCount(0);
-      setProgressCount(0);
-    }
-  }, []);
+    const refreshCounts = () => {
+      try {
+        const readIds = JSON.parse(localStorage.getItem(READ_KEY) || "[]") as unknown;
+        setReadCount(new Set(Array.isArray(readIds) ? readIds.map(String) : []).size);
+
+        if (variant === "site-v2") {
+          const validIds = new Set(validSavedBookIds || []);
+          const savedIds = JSON.parse(localStorage.getItem(SITE_V2_SAVED_KEY) || "[]") as unknown;
+          const visibleSavedIds = Array.isArray(savedIds)
+            ? savedIds.map(String).filter(id => validIds.has(id))
+            : [];
+          setProgressCount(new Set(visibleSavedIds).size);
+        } else {
+          const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}") as unknown;
+          setProgressCount(progress && typeof progress === "object" ? Object.keys(progress).length : 0);
+        }
+      } catch {
+        setReadCount(0);
+        setProgressCount(0);
+      }
+    };
+
+    refreshCounts();
+    window.addEventListener("storage", refreshCounts);
+    if (variant === "site-v2") window.addEventListener("jju-saved-books", refreshCounts);
+
+    return () => {
+      window.removeEventListener("storage", refreshCounts);
+      if (variant === "site-v2") window.removeEventListener("jju-saved-books", refreshCounts);
+    };
+  }, [validSavedBookIds, variant]);
 
   const themeOptions = useMemo(() => [
     { value: "dark", label: "Classic" },
@@ -121,12 +155,16 @@ export default function SettingsClient() {
   function clearReadingData() {
     localStorage.removeItem(PROGRESS_KEY);
     localStorage.removeItem(READ_KEY);
+    if (variant === "site-v2") {
+      localStorage.removeItem(SITE_V2_SAVED_KEY);
+      window.dispatchEvent(new Event("jju-saved-books"));
+    }
     setReadCount(0);
     setProgressCount(0);
   }
 
   return (
-    <main className="page settingsPage">
+    <PageRoot className={`page settingsPage${variant === "site-v2" ? " siteV2SettingsPage" : ""}`}>
       <section className="settingsHero">
         <h1>Settings</h1>
       </section>
@@ -134,15 +172,17 @@ export default function SettingsClient() {
       <section className="settingsGrid">
         <div className="settingsPanel">
           <h2>Site</h2>
-          <label>
+          <label aria-hidden="true">
             <span>Theme</span>
           </label>
-          <div className="segmentedControl" aria-label="Site theme">
+          <div className="segmentedControl" role="group" aria-label="Site theme">
             {themeOptions.map(option => (
               <button
+                aria-pressed={preferences.siteTheme === option.value}
                 className={preferences.siteTheme === option.value ? "active" : ""}
                 data-theme-choice={option.value}
                 key={option.value}
+                type="button"
                 onClick={() => {
                   const siteTheme = option.value as Preferences["siteTheme"];
                   patch({ siteTheme, siteAccent: DEFAULT_THEME_ACCENTS[siteTheme] });
@@ -153,15 +193,17 @@ export default function SettingsClient() {
             ))}
           </div>
 
-          <label>
+          <label aria-hidden="true">
             <span>Accent</span>
           </label>
-          <div className="segmentedControl colorControl" aria-label="Site accent">
+          <div className="segmentedControl colorControl" role="group" aria-label="Site accent">
             {accentOptions.map(option => (
               <button
+                aria-pressed={preferences.siteAccent === option.value}
                 className={preferences.siteAccent === option.value ? "active" : ""}
                 data-accent-choice={option.value}
                 key={option.value}
+                type="button"
                 onClick={() => patch({ siteAccent: option.value as Preferences["siteAccent"] })}
               >
                 {option.label}
@@ -200,21 +242,21 @@ export default function SettingsClient() {
           <label>
             <span>Font</span>
             <select className="select" value={preferences.readerFont} onChange={event => patch({ readerFont: event.target.value as Preferences["readerFont"] })}>
-              <option value="book">Book</option>
+              <option value="book">Atkinson</option>
               <option value="serif">Serif</option>
               <option value="classic">Classic</option>
               <option value="journal">Journal</option>
-              <option value="dyslexic">Readable</option>
+              <option value="dyslexic">Verdana</option>
             </select>
           </label>
 
           <label>
             <span>Text size</span>
             <select className="select" value={preferences.readerSize} onChange={event => patch({ readerSize: event.target.value as Preferences["readerSize"] })}>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-              <option value="xlarge">Extra Large</option>
+              <option value="small">Compact (18px)</option>
+              <option value="medium">Comfortable (21px)</option>
+              <option value="large">Large (24px)</option>
+              <option value="xlarge">Extra large (27px)</option>
             </select>
           </label>
 
@@ -252,6 +294,6 @@ export default function SettingsClient() {
           <button className="resetBtn" onClick={clearReadingData}>Clear Reading Data</button>
         </div>
       </section>
-    </main>
+    </PageRoot>
   );
 }

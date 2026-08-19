@@ -1,15 +1,13 @@
-import SettingsClient from "@/components/SettingsClient";
 import type { Metadata } from "next";
+import SiteV2SettingsPage, { metadata as siteV2Metadata } from "@/app/site-v2/settings/page";
+import SiteV2Shell from "@/components/site-v2/SiteV2Shell";
 
-export const metadata: Metadata = {
-  title: "Reader Settings",
-  description: "Manage JJ University reader preferences.",
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
+export const metadata: Metadata = siteV2Metadata;
 
 export default function SettingsPage() {
-  return <SettingsClient />;
+  return (
+    <SiteV2Shell>
+      <SiteV2SettingsPage />
+    </SiteV2Shell>
+  );
 }
