@@ -1,14 +1,15 @@
 /**
  * Public catalog taxonomy authority.
  *
- * Shelves are the seven broad, single-choice homes used for the primary
+ * Shelves are seven broad, overlapping discovery lenses used for the primary
  * catalog rail. Topics are the narrower, many-to-many filters. Collections
- * are deliberately not represented here.
+ * are deliberately not represented here; they are the optional zero-or-one
+ * editorial group used for print and authored series.
  *
  * This layer is explicit so the public catalog does not turn manuscript
  * keyword matches into editorial claims. The legacy `tags` array remains
  * available to old routes, while Site V2 applies the reviewed corrections
- * below and one reviewed primary shelf per ready main-catalog book.
+ * below. A book may appear on every broad Shelf that genuinely fits.
  */
 
 import { PRIMARY_CATEGORIES } from "@/lib/taxonomy";
@@ -83,12 +84,13 @@ export const SITE_V2_SHELF_BOOK_IDS: Record<SiteV2ShelfId, readonly string[]> = 
   ],
 };
 
-export const SITE_V2_SHELF_BY_BOOK: Readonly<Record<string, SiteV2ShelfId>> = Object.freeze(
-  Object.fromEntries(
-    Object.entries(SITE_V2_SHELF_BOOK_IDS).flatMap(([shelfId, ids]) =>
-      ids.map(id => [id, shelfId as SiteV2ShelfId]),
-    ),
-  ),
+export const SITE_V2_SHELF_IDS_BY_BOOK: Readonly<Record<string, readonly SiteV2ShelfId[]>> = Object.freeze(
+  Object.entries(SITE_V2_SHELF_BOOK_IDS).reduce<Record<string, SiteV2ShelfId[]>>((result, [shelfId, ids]) => {
+    ids.forEach(id => {
+      result[id] = [...(result[id] || []), shelfId as SiteV2ShelfId];
+    });
+    return result;
+  }, {}),
 );
 
 /**

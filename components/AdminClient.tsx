@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { PRIMARY_CATEGORIES, TAG_TO_PRIMARY } from "@/lib/taxonomy";
 import AdminReaderEditor from "@/components/AdminReaderEditor";
@@ -38,6 +39,7 @@ type PathBook = {
 type ReadingPath = {
   id: string;
   title: string;
+  aliases?: string[];
   kind?: string;
   type: "series" | "degree" | "path" | "tagPath" | "survey" | "deep-dive" | "biographical" | "chronological" | "thematic";
   level: "starter" | "intermediate" | "advanced";
@@ -691,6 +693,7 @@ export default function AdminClient() {
           </div>
         </div>
         <div className="adminActions">
+          <Link className="resetBtn" href="/admin/editorial">Editorial Reviews</Link>
           <button className="resetBtn" disabled={busy} onClick={() => chooseAdminView(adminView === "add" ? "editor" : "add")}>
             {adminView === "add" ? "Back to Books" : "New Book"}
           </button>

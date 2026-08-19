@@ -1,6 +1,6 @@
 import type { PublishedBook } from "@/lib/publishing";
 import {
-  SITE_V2_SHELF_BY_BOOK,
+  SITE_V2_SHELF_IDS_BY_BOOK,
   siteV2TopicsForBook,
   type SiteV2ShelfId,
 } from "@/lib/siteV2Taxonomy";
@@ -172,17 +172,11 @@ export function isSiteV2ShelfId(value: string): value is SiteV2ShelfId {
 }
 
 export function siteV2ShelvesForBook(book: Pick<PublishedBook, "id" | "tags">) {
-  const approvedShelfId = SITE_V2_SHELF_BY_BOOK[book.id];
-  if (approvedShelfId) {
-    const approvedShelf = SITE_V2_SHELVES.find(shelf => shelf.id === approvedShelfId);
-    return approvedShelf ? [approvedShelf] : [];
-  }
-
-  // Records outside the reviewed ready/main catalog get one conservative
-  // fallback instead of being advertised in every shelf their tags touch.
+  const reviewedShelfIds = new Set<SiteV2ShelfId>(SITE_V2_SHELF_IDS_BY_BOOK[book.id] || []);
   const topics = new Set(siteV2TopicsForBook(book));
-  const fallback = SITE_V2_SHELVES.find(shelf => shelf.tags.some(tag => topics.has(tag)));
-  return fallback ? [fallback] : [];
+  return SITE_V2_SHELVES.filter(shelf => (
+    reviewedShelfIds.has(shelf.id) || shelf.tags.some(tag => topics.has(tag))
+  ));
 }
 
 function siteV2ShelfForBook(book: Pick<PublishedBook, "id" | "tags" | "primaryCategory">) {
@@ -206,11 +200,19 @@ function siteV2ShelfForBook(book: Pick<PublishedBook, "id" | "tags" | "primaryCa
 }
 
 export function siteV2ShelfLabel(book: Pick<PublishedBook, "id" | "tags" | "primaryCategory">) {
-  return siteV2ShelfForBook(book)?.name || book.primaryCategory || "Books";
+  const shelves = siteV2ShelvesForBook(book);
+  const lead = siteV2ShelfForBook(book);
+  if (!lead) return book.primaryCategory || "Books";
+  const additional = Math.max(0, shelves.length - 1);
+  return additional ? `${lead.name} +${additional} more` : lead.name;
 }
 
 export function siteV2ShelfShortLabel(book: Pick<PublishedBook, "id" | "tags" | "primaryCategory">) {
-  return siteV2ShelfForBook(book)?.shortName || book.primaryCategory || "Books";
+  const shelves = siteV2ShelvesForBook(book);
+  const lead = siteV2ShelfForBook(book);
+  if (!lead) return book.primaryCategory || "Books";
+  const additional = Math.max(0, shelves.length - 1);
+  return additional ? `${lead.shortName} +${additional}` : lead.shortName;
 }
 
 export function formatBookLength(book: Pick<PublishedBook, "readingLabel" | "readingMinutes">) {

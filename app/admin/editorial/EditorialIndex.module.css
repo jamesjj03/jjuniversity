@@ -1,0 +1,146 @@
+.page {
+  min-height: 100vh;
+  padding: 48px clamp(18px, 5vw, 76px) 72px;
+  color: #f4ecdc;
+  background: #0d100f;
+}
+
+.header,
+.tools {
+  width: min(1180px, 100%);
+  margin-inline: auto;
+}
+
+.header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid #35332b;
+}
+
+.header p {
+  margin: 0 0 7px;
+  color: #d5a94f;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(40px, 7vw, 72px);
+  line-height: .96;
+}
+
+.header span {
+  display: block;
+  max-width: 720px;
+  margin-top: 14px;
+  color: #bdb4a2;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.header > a,
+.tools article > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid #5b4a2c;
+  border-radius: 6px;
+  color: #f4ecdc;
+  background: #151714;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.tools {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding-top: 24px;
+}
+
+.tools article {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  min-height: 310px;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid #403a2e;
+  border-radius: 8px;
+  background: #171914;
+}
+
+.tools h2 {
+  margin: 25px 0 10px;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1;
+}
+
+.tools p {
+  max-width: 54ch;
+  margin: 0 0 26px;
+  color: #bdb4a2;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.tools article > a {
+  margin-top: auto;
+}
+
+.tools article > a {
+  color: #17130b;
+  background: #d5a94f;
+  border-color: #d5a94f;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d9c8a7;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.status span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #72b987;
+  box-shadow: 0 0 0 4px rgba(114, 185, 135, .12);
+}
+
+.status.localStatus span {
+  background: #d5a94f;
+  box-shadow: 0 0 0 4px rgba(213, 169, 79, .12);
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 30px 16px 54px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .tools {
+    grid-template-columns: 1fr;
+  }
+
+  .tools article {
+    min-height: 280px;
+  }
+}
