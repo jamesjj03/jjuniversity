@@ -5,9 +5,26 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   email text,
   display_name text not null default 'JJU Reader',
+  role text not null default 'reader' check (role in ('reader', 'admin')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.profiles add column if not exists role text not null default 'reader';
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'profiles_role_check'
+      and conrelid = 'public.profiles'::regclass
+  ) then
+    alter table public.profiles
+    add constraint profiles_role_check check (role in ('reader', 'admin'));
+  end if;
+end;
+$$;
 
 create table if not exists public.reading_progress (
   user_id uuid not null references auth.users(id) on delete cascade,
@@ -57,18 +74,21 @@ alter table public.reading_sessions enable row level security;
 drop policy if exists "profiles_select_own" on public.profiles;
 create policy "profiles_select_own"
 on public.profiles for select
+to authenticated
 using (auth.uid() = id);
 
 drop policy if exists "profiles_insert_own" on public.profiles;
 create policy "profiles_insert_own"
 on public.profiles for insert
-with check (auth.uid() = id);
+to authenticated
+with check (auth.uid() = id and role = 'reader');
 
 drop policy if exists "profiles_update_own" on public.profiles;
 create policy "profiles_update_own"
 on public.profiles for update
-using (auth.uid() = id)
-with check (auth.uid() = id);
+to authenticated
+using (auth.uid() = id and role = 'reader')
+with check (auth.uid() = id and role = 'reader');
 
 drop policy if exists "reading_progress_all_own" on public.reading_progress;
 create policy "reading_progress_all_own"

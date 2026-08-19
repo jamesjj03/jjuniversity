@@ -17,6 +17,10 @@ import {
   writePreferencesV2,
 } from "@/lib/preferencesV2";
 import { SITE_V2_SAVED_KEY } from "@/lib/siteV2";
+import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseClient";
+import { clearSiteV2SavedBooksEverywhere } from "./useSiteV2SavedBooks";
+import { COMPLETION_SYNC_KEY } from "@/lib/readingCompletion";
+import { prepareReaderDataScope } from "@/lib/readerDataOwnership";
 import styles from "./SiteV2.module.css";
 
 const PROGRESS_KEY = "jju.readerProgress";
@@ -31,7 +35,7 @@ const COMPATIBILITY_PREFERENCES_EVENT = "jju-preferences";
 const SAVED_BOOKS_EVENT = "jju-saved-books";
 const READING_HISTORY_EVENT = "jju-reading-history";
 
-const PROGRESS_KEYS = [PROGRESS_KEY, READ_KEY, READ_EVENTS_KEY, ACTUAL_TIME_KEY, HISTORY_KEY] as const;
+const PROGRESS_KEYS = [PROGRESS_KEY, READ_KEY, READ_EVENTS_KEY, COMPLETION_SYNC_KEY, ACTUAL_TIME_KEY, HISTORY_KEY] as const;
 const READER_ARTIFACT_KEYS = [BOOKMARKS_KEY, NOTES_KEY, QUOTES_KEY] as const;
 
 type ClearAction = "progress" | "saved" | "all";
@@ -155,26 +159,50 @@ export default function SiteV2SettingsClient({ bookIdentityMap, validBookIds }: 
     setPendingAction(current => current === action ? null : action);
   }
 
-  function confirmClear(action: ClearAction) {
+  async function confirmClear(action: ClearAction) {
+    setAnnouncement("Clearing reading data...");
+    let cloudError = "";
+    const supabase = hasSupabaseConfig() ? createSupabaseBrowserClient() : null;
+    const authResult = supabase ? await supabase.auth.getUser() : null;
+    const cloudUser = authResult?.data.user?.email_confirmed_at ? authResult.data.user : null;
+    if (cloudUser) prepareReaderDataScope(cloudUser.id, cloudUser.email || "");
+
     if (action === "progress" || action === "all") {
       PROGRESS_KEYS.forEach(key => window.localStorage.removeItem(key));
     }
     if (action === "saved" || action === "all") {
-      window.localStorage.removeItem(SITE_V2_SAVED_KEY);
+      try {
+        await clearSiteV2SavedBooksEverywhere();
+      } catch (error) {
+        cloudError = error instanceof Error ? error.message : "Saved Books account sync failed.";
+      }
     }
     if (action === "all") {
       READER_ARTIFACT_KEYS.forEach(key => window.localStorage.removeItem(key));
     }
 
+    if ((action === "progress" || action === "all") && supabase && cloudUser) {
+        const tables = action === "all"
+          ? ["reading_progress", "reading_sessions", "reader_bookmarks", "reader_notes", "reader_quotes"]
+          : ["reading_progress", "reading_sessions"];
+        const results = await Promise.all([
+          supabase.rpc("clear_completed_books", { expected_user_id: cloudUser.id }),
+          ...tables.map(table => supabase.from(table).delete().eq("user_id", cloudUser.id)),
+        ]);
+        const failed = results.find(result => result.error)?.error;
+        if (failed) cloudError = cloudError || failed.message;
+    }
+
     dispatchReadingEvents({ saved: action === "saved" || action === "all" });
     refresh();
     setPendingAction(null);
-    setAnnouncement(
-      action === "progress"
-        ? "Progress and reading history cleared."
+    setAnnouncement(cloudError
+      ? "Cleared on this device, but the account copy could not be fully cleared. Try again when you are online."
+      : action === "progress"
+        ? "Progress cleared here and from the current account. A device that stayed offline may need one more clear after it reconnects."
         : action === "saved"
           ? "Saved Books cleared."
-          : "All local reading data cleared. Your account wasn't changed.",
+          : "Cleared here and from the current account. A device that stayed offline may need one more clear after it reconnects.",
     );
   }
 
@@ -303,7 +331,7 @@ export default function SiteV2SettingsClient({ bookIdentityMap, validBookIds }: 
           <div className={styles.clearActions}>
             <ClearActionRow
               action="progress"
-              description="Removes your place, completed status, reading events, time, and recent history from this browser."
+               description="Removes your place, completed status, reading events, time, and recent history from this device and your signed-in account."
               isPending={pendingAction === "progress"}
               label="Clear progress and history"
               onCancel={() => setPendingAction(null)}
@@ -312,7 +340,7 @@ export default function SiteV2SettingsClient({ bookIdentityMap, validBookIds }: 
             />
             <ClearActionRow
               action="saved"
-              description="Removes every book from Saved Books on this device."
+               description="Removes every book from Saved Books on this device and your signed-in account."
               isPending={pendingAction === "saved"}
               label="Clear Saved Books"
               onCancel={() => setPendingAction(null)}
@@ -321,7 +349,7 @@ export default function SiteV2SettingsClient({ bookIdentityMap, validBookIds }: 
             />
             <ClearActionRow
               action="all"
-              description="Removes progress, history, saved books, bookmarks, notes, and quotes from this browser. Your account and sign-in stay untouched."
+               description="Removes progress, history, saved books, bookmarks, notes, and quotes from this device and your signed-in account. Your account and sign-in stay untouched."
               isPending={pendingAction === "all"}
               label="Clear all local reading data"
               onCancel={() => setPendingAction(null)}

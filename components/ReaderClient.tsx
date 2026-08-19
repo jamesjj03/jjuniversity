@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import type { User } from "@supabase/supabase-js";
 import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseClient";
 import { coverWebpSrc } from "@/lib/cover";
 import { bookIdAliasFamily, canonicalBookId } from "@/lib/bookAliases";
@@ -17,6 +18,18 @@ import {
   writePreferencesV2,
   type PreferencesV2,
 } from "@/lib/preferencesV2";
+import {
+  completionEntryIsNewer,
+  completionSet,
+  readCompletionState,
+  updateCompletionState,
+  writeCompletionState,
+} from "@/lib/readingCompletion";
+import {
+  currentReaderDataOwner,
+  prepareReaderDataScope,
+  readerDataBelongsTo,
+} from "@/lib/readerDataOwnership";
 
 type BookContent = {
   id: string;
@@ -120,7 +133,6 @@ type ReadingHistoryItem = {
 };
 
 const PROGRESS_KEY = "jju.readerProgress";
-const READ_KEY = "jju.readBooks";
 const READ_EVENTS_KEY = "jju.readingEvents";
 const ACTUAL_TIME_KEY = "jju.actualReadingSeconds";
 const HISTORY_KEY = "jju.readingHistory";
@@ -133,6 +145,13 @@ const READER_THEME_LABELS: Record<PreferencesV2["readerTheme"], string> = {
   paper: "Paper",
   light: "Light",
   night: "Night",
+};
+
+type ReaderCloudProgressRow = {
+  book_id: string;
+  section_index: number | null;
+  actual_seconds: number | null;
+  last_read_at: string | null;
 };
 const READER_FONT_LABELS: Record<PreferencesV2["readerFont"], string> = {
   literata: "Literata",
@@ -306,13 +325,7 @@ function saveReadingHistory(item: ReadingHistoryItem) {
 }
 
 function readCompletedSet() {
-  if (typeof window === "undefined") return new Set<string>();
-  try {
-    const stored = JSON.parse(localStorage.getItem(READ_KEY) || "[]") as unknown;
-    return new Set(Array.isArray(stored) ? stored.map(id => canonicalBookId(String(id))) : []);
-  } catch {
-    return new Set<string>();
-  }
+  return completionSet();
 }
 
 function secondsLabel(seconds: number) {
@@ -619,6 +632,11 @@ export default function ReaderClient({
   const sizeMenuRef = useRef<HTMLDetailsElement | null>(null);
   const pendingQuoteSelectionRef = useRef<PendingQuoteSelection | null>(null);
   const pageScrollIntentRef = useRef<"none" | "top" | "smart">("none");
+  const restartRequestedRef = useRef(false);
+  const cloudHydrationRetryRef = useRef(0);
+  const pendingCompletionCloudSyncRef = useRef(false);
+  const completionMarkedAtSecondRef = useRef<number | null>(null);
+  const activeReaderAccountRef = useRef("");
   const touchStart = useRef<number | null>(null);
   const viewerResizeObserverRef = useRef<ResizeObserver | null>(null);
   const chapterPanelId = useId();
@@ -639,6 +657,8 @@ export default function ReaderClient({
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [userId, setUserId] = useState("");
   const [cloudSyncReady, setCloudSyncReady] = useState(false);
+  const [cloudProgressHydrated, setCloudProgressHydrated] = useState(false);
+  const [cloudSyncAttempt, setCloudSyncAttempt] = useState(0);
   const [actualSeconds, setActualSeconds] = useState(0);
   const [chapterDrawerOpen, setChapterDrawerOpen] = useState(false);
   const [studyPanelOpen, setStudyPanelOpen] = useState(false);
@@ -768,11 +788,23 @@ export default function ReaderClient({
   const jumpToSection = useCallback((index: number, scrollIntent: "none" | "top" | "smart" = "top") => {
     const lastIndex = visibleSections.length - 1;
     if (lastIndex < 0) return;
+    const nextIndex = Math.max(0, Math.min(lastIndex, index));
     pendingQuoteSelectionRef.current = null;
     setPendingQuoteText("");
     pageScrollIntentRef.current = scrollIntent;
-    setSectionIndex(Math.max(0, Math.min(lastIndex, index)));
-  }, [visibleSections.length]);
+    setSectionIndex(nextIndex);
+    if (bookId && preferences.saveProgress !== false) {
+      saveReadingHistory({
+        bookId,
+        requestedId,
+        title,
+        sectionIndex: nextIndex,
+        sectionTitle: visibleSections[nextIndex]?.title,
+        actualSeconds,
+        updatedAt: new Date().toISOString(),
+      });
+    }
+  }, [actualSeconds, bookId, preferences.saveProgress, requestedId, title, visibleSections]);
 
   const prevSection = useCallback((scrollIntent: "none" | "top" | "smart" = "top") => {
     jumpToSection(sectionIndex - 1, scrollIntent);
@@ -783,31 +815,48 @@ export default function ReaderClient({
   }, [jumpToSection, sectionIndex]);
 
   async function syncBookmarkToCloud(key: string, saved: boolean) {
-    if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return;
     const supabase = createSupabaseBrowserClient();
-    if (!saved) {
-      await supabase.from("reader_bookmarks").delete().eq("user_id", userId).eq("key", key);
-      return;
+    try {
+      if (!saved) {
+        const result = await supabase.from("reader_bookmarks").delete().eq("user_id", userId).eq("key", key);
+        if (result.error) throw result.error;
+        return;
+      }
+      const row = readerBookmarkRow(userId, key, bookId, visibleSections);
+      if (row) {
+        const result = await supabase.from("reader_bookmarks").upsert(row, { onConflict: "user_id,key" });
+        if (result.error) throw result.error;
+      }
+    } catch {
+      setReaderMessage("Bookmark saved here, but account sync needs another try.");
     }
-    const row = readerBookmarkRow(userId, key, bookId, visibleSections);
-    if (row) await supabase.from("reader_bookmarks").upsert(row, { onConflict: "user_id,key" });
   }
 
   async function syncNoteToCloud(key: string, value: string) {
-    if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return;
     const supabase = createSupabaseBrowserClient();
-    if (!value.trim()) {
-      await supabase.from("reader_notes").delete().eq("user_id", userId).eq("key", key);
-      return;
+    try {
+      if (!value.trim()) {
+        const result = await supabase.from("reader_notes").delete().eq("user_id", userId).eq("key", key);
+        if (result.error) throw result.error;
+        return;
+      }
+      const row = readerNoteRow(userId, key, value);
+      if (row) {
+        const result = await supabase.from("reader_notes").upsert(row, { onConflict: "user_id,key" });
+        if (result.error) throw result.error;
+      }
+    } catch {
+      setReaderMessage("Note saved here, but account sync needs another try.");
     }
-    const row = readerNoteRow(userId, key, value);
-    if (row) await supabase.from("reader_notes").upsert(row, { onConflict: "user_id,key" });
   }
 
   async function syncQuoteToCloud(quote: SavedQuote) {
-    if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return;
     const supabase = createSupabaseBrowserClient();
-    await supabase.from("reader_quotes").upsert(readerQuoteRow(userId, quote), { onConflict: "user_id,id" });
+    const result = await supabase.from("reader_quotes").upsert(readerQuoteRow(userId, quote), { onConflict: "user_id,id" });
+    if (result.error) setReaderMessage("Quote saved here, but account sync needs another try.");
   }
 
   const handleReaderKey = useCallback((event: KeyboardEvent) => {
@@ -896,6 +945,11 @@ export default function ReaderClient({
       setStatus("Loading book content...");
       const id = String(bookQuery || getBookParam()).trim();
       const restartRequested = consumeRestartRequest();
+      restartRequestedRef.current = restartRequested;
+      cloudHydrationRetryRef.current = 0;
+      pendingCompletionCloudSyncRef.current = false;
+      completionMarkedAtSecondRef.current = null;
+      setCloudProgressHydrated(false);
       setRequestedId(id);
       if (!id) {
         setTitle("No book selected");
@@ -975,6 +1029,119 @@ export default function ReaderClient({
   }, []);
 
   useEffect(() => {
+    const retry = () => {
+      cloudHydrationRetryRef.current = 0;
+      setCloudSyncAttempt(attempt => attempt + 1);
+    };
+    window.addEventListener("online", retry);
+    return () => window.removeEventListener("online", retry);
+  }, []);
+
+  useEffect(() => {
+    if (!userId || !cloudSyncReady || !bookId || !visibleSections.length || !hasSupabaseConfig()) return;
+    prepareReaderDataScope(userId);
+    let cancelled = false;
+    let retryTimeout: number | null = null;
+
+    async function hydrateCloudProgress() {
+      const supabase = createSupabaseBrowserClient();
+      const canonicalId = canonicalBookId(bookId);
+      const cloudBookIds = [...new Set([...bookIdAliasFamily(canonicalId), requestedId].filter(Boolean))];
+      const [progressResult, completionResult] = await Promise.all([
+        supabase.from("reading_progress")
+          .select("book_id,section_index,actual_seconds,last_read_at")
+          .eq("user_id", userId)
+          .in("book_id", cloudBookIds),
+        supabase.from("completed_books")
+          .select("book_id,is_completed,completed_at,state_changed_at,updated_at")
+          .eq("user_id", userId)
+          .in("book_id", cloudBookIds),
+      ]);
+      if (progressResult.error) throw progressResult.error;
+      if (completionResult.error) throw completionResult.error;
+      if (cancelled || !readerDataBelongsTo(userId)) return;
+
+      const localCompletionState = readCompletionState();
+      const localCompletion = localCompletionState[canonicalId];
+      const remoteCompletion = (completionResult.data || []).reduce<{ completed: boolean; updatedAt: string } | null>((latest, row) => {
+        const candidate = {
+          completed: row.is_completed !== false,
+          updatedAt: row.state_changed_at || row.updated_at || row.completed_at || "",
+        };
+        return !latest || completionEntryIsNewer(candidate, latest) ? candidate : latest;
+      }, null);
+      if (remoteCompletion && (!localCompletion || completionEntryIsNewer(remoteCompletion, localCompletion))) {
+        localCompletionState[canonicalId] = remoteCompletion;
+        writeCompletionState(localCompletionState);
+      } else if (localCompletion && (!remoteCompletion || completionEntryIsNewer(localCompletion, remoteCompletion))) {
+        const completionSync = await supabase.from("completed_books").upsert({
+          user_id: userId,
+          book_id: canonicalId,
+          is_completed: localCompletion.completed,
+          completed_at: localCompletion.updatedAt || new Date().toISOString(),
+          state_changed_at: localCompletion.updatedAt || new Date().toISOString(),
+        }, { onConflict: "user_id,book_id" });
+        if (completionSync.error) throw completionSync.error;
+      }
+      setCompletedBooks(completionSet(localCompletionState));
+      window.dispatchEvent(new Event("jju-account"));
+
+      if (preferences.saveProgress !== false && !restartRequestedRef.current) {
+        const remote = ((progressResult.data || []) as ReaderCloudProgressRow[]).reduce<ReaderCloudProgressRow | null>((latest, row) => (
+          !latest || Date.parse(row.last_read_at || "") > Date.parse(latest.last_read_at || "") ? row : latest
+        ), null);
+        if (remote) {
+          const history = readRecord<ReadingHistoryItem[]>(HISTORY_KEY, [])
+            .filter(item => canonicalBookId(item.bookId) === canonicalId)
+            .sort((a, b) => Date.parse(b.updatedAt || "") - Date.parse(a.updatedAt || ""))[0];
+          const remoteIsNewer = Date.parse(remote.last_read_at || "") > Date.parse(history?.updatedAt || "");
+          const mergedSeconds = Math.max(readActualSeconds(canonicalId), Number(remote.actual_seconds || 0));
+          saveActualSeconds(canonicalId, mergedSeconds);
+          setActualSeconds(mergedSeconds);
+          if (remoteIsNewer) {
+            const nextIndex = Math.min(Math.max(0, Number(remote.section_index || 0)), visibleSections.length - 1);
+            const progress = readRecord<Record<string, number>>(PROGRESS_KEY, {});
+            for (const storedId of Object.keys(progress)) {
+              if (storedId !== canonicalId && canonicalBookId(storedId) === canonicalId) delete progress[storedId];
+            }
+            progress[canonicalId] = nextIndex;
+            writeRecord(PROGRESS_KEY, progress);
+            setSectionIndex(nextIndex);
+            saveReadingHistory({
+              bookId: canonicalId,
+              requestedId,
+              title,
+              sectionIndex: nextIndex,
+              sectionTitle: visibleSections[nextIndex]?.title,
+              actualSeconds: mergedSeconds,
+              updatedAt: remote.last_read_at || new Date().toISOString(),
+            });
+          }
+        }
+      }
+
+      cloudHydrationRetryRef.current = 0;
+      setCloudProgressHydrated(true);
+    }
+
+    void hydrateCloudProgress().catch(() => {
+      if (cancelled) return;
+      setReaderMessage("Account sync is temporarily unavailable. Your place is safe on this device.");
+      if (cloudHydrationRetryRef.current < 2) {
+        cloudHydrationRetryRef.current += 1;
+        retryTimeout = window.setTimeout(
+          () => setCloudSyncAttempt(attempt => attempt + 1),
+          3000 * cloudHydrationRetryRef.current,
+        );
+      }
+    });
+    return () => {
+      cancelled = true;
+      if (retryTimeout !== null) window.clearTimeout(retryTimeout);
+    };
+  }, [bookId, cloudSyncAttempt, cloudSyncReady, preferences.saveProgress, requestedId, title, userId, visibleSections]);
+
+  useEffect(() => {
     if (!fullscreenFallbackActive) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -1028,18 +1195,45 @@ export default function ReaderClient({
   useEffect(() => {
     if (!hasSupabaseConfig()) return;
     const supabase = createSupabaseBrowserClient();
+    let cancelled = false;
+    let authEventRevision = 0;
 
+    function applyAuthenticatedUser(nextUser: User | null) {
+      const verified = Boolean(nextUser?.email_confirmed_at);
+      if (verified && nextUser) {
+        const scope = prepareReaderDataScope(nextUser.id, nextUser.email || "");
+        const previousAccount = activeReaderAccountRef.current || currentReaderDataOwner();
+        if (scope === "account-switched" || (previousAccount && previousAccount !== nextUser.id)) {
+          setSectionIndex(0);
+          setActualSeconds(0);
+          setCompletedBooks(new Set());
+          setBookmarks(new Set());
+          setNotes({});
+          setQuotes([]);
+          pendingQuoteSelectionRef.current = null;
+          setPendingQuoteText("");
+        }
+        activeReaderAccountRef.current = nextUser.id;
+      }
+      setCloudProgressHydrated(false);
+      setUserId(nextUser?.id || "");
+      setCloudSyncReady(verified);
+    }
+
+    activeReaderAccountRef.current = currentReaderDataOwner();
     supabase.auth.getUser().then(({ data }) => {
-      setUserId(data.user?.id || "");
-      setCloudSyncReady(Boolean(data.user?.email_confirmed_at));
+      if (!cancelled && authEventRevision === 0) applyAuthenticatedUser(data.user);
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUserId(session?.user?.id || "");
-      setCloudSyncReady(Boolean(session?.user?.email_confirmed_at));
+      authEventRevision += 1;
+      applyAuthenticatedUser(session?.user || null);
     });
 
-    return () => listener.subscription.unsubscribe();
+    return () => {
+      cancelled = true;
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -1081,35 +1275,34 @@ export default function ReaderClient({
   }, [compactReader]);
 
   useEffect(() => {
-    if (!bookId || !visibleSections.length || preferences.saveProgress === false) return;
+    if (!bookId || !visibleSections.length) return;
 
     try {
-      const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}") as Record<string, number>;
       const canonicalId = canonicalBookId(bookId);
-      for (const storedId of Object.keys(progress)) {
-        if (storedId !== canonicalId && canonicalBookId(storedId) === canonicalId) delete progress[storedId];
+      if (preferences.saveProgress !== false) {
+        const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}") as Record<string, number>;
+        for (const storedId of Object.keys(progress)) {
+          if (storedId !== canonicalId && canonicalBookId(storedId) === canonicalId) delete progress[storedId];
+        }
+        progress[canonicalId] = sectionIndex;
+        if (requestedId && requestedId !== canonicalId) delete progress[requestedId];
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
       }
-      progress[canonicalId] = sectionIndex;
-      if (requestedId && requestedId !== canonicalId) delete progress[requestedId];
-      localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
 
       if (hasReachedReadingEnd && actualSeconds >= AUTO_COMPLETE_SECONDS) {
-        const storedRead = JSON.parse(localStorage.getItem(READ_KEY) || "[]") as unknown;
-        const readBefore = new Set(Array.isArray(storedRead) ? storedRead.map(id => canonicalBookId(String(id))) : []);
-        const read = new Set(readBefore);
+        const readBefore = readCompletedSet();
         const wasAlreadyComplete = readBefore.has(canonicalId);
-        read.add(canonicalId);
-        localStorage.setItem(READ_KEY, JSON.stringify([...read].sort()));
-
         if (!wasAlreadyComplete) {
+          updateCompletionState(canonicalId, true);
+          pendingCompletionCloudSyncRef.current = true;
+          completionMarkedAtSecondRef.current = actualSeconds;
           const events = Array.isArray(JSON.parse(localStorage.getItem(READ_EVENTS_KEY) || "[]"))
             ? JSON.parse(localStorage.getItem(READ_EVENTS_KEY) || "[]")
             : [];
           events.push({ bookId, finishedAt: new Date().toISOString() });
           localStorage.setItem(READ_EVENTS_KEY, JSON.stringify(events.slice(-500)));
+          window.dispatchEvent(new Event("jju-account"));
         }
-
-        window.dispatchEvent(new Event("jju-account"));
       }
     } catch {
       return;
@@ -1189,34 +1382,56 @@ export default function ReaderClient({
   }, [actualSeconds, bookId, preferences.saveProgress, requestedId, section?.title, sectionIndex, status, title]);
 
   useEffect(() => {
-    if (!userId || !cloudSyncReady || !bookId || !visibleSections.length || preferences.saveProgress === false) return;
-    if (actualSeconds % 20 !== 0 && !hasReachedReadingEnd) return;
+    if (!userId || !cloudSyncReady || !cloudProgressHydrated || !bookId || !visibleSections.length) return;
+    if (!readerDataBelongsTo(userId)) return;
+    const shouldSyncCompletion = pendingCompletionCloudSyncRef.current
+      && hasReachedReadingEnd
+      && actualSeconds >= AUTO_COMPLETE_SECONDS;
+    const wasJustCompleted = shouldSyncCompletion && completionMarkedAtSecondRef.current === actualSeconds;
+    const shouldSyncProgress = preferences.saveProgress !== false && actualSeconds % 20 === 0;
+    if (!shouldSyncProgress && !wasJustCompleted) return;
 
     const supabase = createSupabaseBrowserClient();
     const now = new Date().toISOString();
-    void supabase.from("reading_progress").upsert({
-      user_id: userId,
-      book_id: bookId,
-      section_index: sectionIndex,
-      section_count: visibleSections.length,
-      progress_percent: progressPercent,
-      estimated_minutes: estimatedMinutes,
-      actual_seconds: actualSeconds,
-      last_read_at: now,
-      updated_at: now,
-    }, { onConflict: "user_id,book_id" });
+    void (async () => {
+      if (shouldSyncProgress) {
+        const progressResult = await supabase.from("reading_progress").upsert({
+          user_id: userId,
+          book_id: canonicalBookId(bookId),
+          section_index: sectionIndex,
+          section_count: visibleSections.length,
+          progress_percent: progressPercent,
+          estimated_minutes: estimatedMinutes,
+          actual_seconds: actualSeconds,
+          last_read_at: now,
+          updated_at: now,
+        }, { onConflict: "user_id,book_id" });
+        if (progressResult.error) {
+          setReaderMessage("Saved on this device. Account sync will retry automatically.");
+          return;
+        }
+      }
 
-    if (hasReachedReadingEnd && actualSeconds >= AUTO_COMPLETE_SECONDS) {
-      void supabase.from("completed_books").upsert({
+      if (!shouldSyncCompletion) return;
+      const completionResult = await supabase.from("completed_books").upsert({
         user_id: userId,
-        book_id: bookId,
+        book_id: canonicalBookId(bookId),
+        is_completed: true,
         completed_at: now,
+        state_changed_at: now,
       }, { onConflict: "user_id,book_id" });
-    }
-  }, [actualSeconds, bookId, cloudSyncReady, estimatedMinutes, hasReachedReadingEnd, preferences.saveProgress, progressPercent, sectionIndex, userId, visibleSections.length]);
+      if (completionResult.error) {
+        setReaderMessage("Finished on this device. Account sync will retry automatically.");
+        return;
+      }
+      pendingCompletionCloudSyncRef.current = false;
+      completionMarkedAtSecondRef.current = null;
+    })();
+  }, [actualSeconds, bookId, cloudProgressHydrated, cloudSyncReady, estimatedMinutes, hasReachedReadingEnd, preferences.saveProgress, progressPercent, sectionIndex, userId, visibleSections.length]);
 
   useEffect(() => {
     if (!userId || !cloudSyncReady || !hasSupabaseConfig()) return;
+    prepareReaderDataScope(userId);
     let cancelled = false;
 
     async function syncReaderMemory() {
@@ -1226,45 +1441,48 @@ export default function ReaderClient({
       const localQuotes = readRecord<SavedQuote[]>(QUOTES_KEY, []);
       const now = new Date().toISOString();
 
-      const bookmarkRows = localBookmarkKeys
-        .map(key => readerBookmarkRow(userId, key, bookId, visibleSections))
-        .filter((row): row is NonNullable<ReturnType<typeof readerBookmarkRow>> => Boolean(row));
-      const noteRows = Object.entries(localNotes)
-        .filter(([, value]) => value.trim())
-        .map(([key, value]) => readerNoteRow(userId, key, value))
-        .filter((row): row is NonNullable<ReturnType<typeof readerNoteRow>> => Boolean(row));
-      const quoteRows = localQuotes.map(quote => readerQuoteRow(userId, quote));
-
-      await Promise.all([
-        bookmarkRows.length
-          ? supabase.from("reader_bookmarks").upsert(bookmarkRows, { onConflict: "user_id,key" })
-          : Promise.resolve(),
-        noteRows.length
-          ? supabase.from("reader_notes").upsert(noteRows, { onConflict: "user_id,key" })
-          : Promise.resolve(),
-        quoteRows.length
-          ? supabase.from("reader_quotes").upsert(quoteRows, { onConflict: "user_id,id" })
-          : Promise.resolve(),
-      ]);
-
       const [cloudBookmarks, cloudNotes, cloudQuotes] = await Promise.all([
         supabase.from("reader_bookmarks").select("key,book_id,section_id,section_title"),
         supabase.from("reader_notes").select("key,book_id,section_id,note"),
         supabase.from("reader_quotes").select("id,book_id,book_title,section_id,section_title,text,saved_at"),
       ]);
+      const cloudError = cloudBookmarks.error || cloudNotes.error || cloudQuotes.error;
+      if (cloudError) throw cloudError;
 
-      if (cancelled) return;
+      if (cancelled || !readerDataBelongsTo(userId)) return;
+
+      const cloudBookmarkKeys = new Set((cloudBookmarks.data || []).map(row => row.key));
+      const cloudNoteKeys = new Set((cloudNotes.data || []).map(row => row.key));
+      const cloudQuoteIds = new Set((cloudQuotes.data || []).map(row => row.id));
+      const bookmarkRows = localBookmarkKeys
+        .filter(key => !cloudBookmarkKeys.has(key))
+        .map(key => readerBookmarkRow(userId, key, bookId, visibleSections))
+        .filter((row): row is NonNullable<ReturnType<typeof readerBookmarkRow>> => Boolean(row));
+      const noteRows = Object.entries(localNotes)
+        .filter(([key, value]) => value.trim() && !cloudNoteKeys.has(key))
+        .map(([key, value]) => readerNoteRow(userId, key, value))
+        .filter((row): row is NonNullable<ReturnType<typeof readerNoteRow>> => Boolean(row));
+      const quoteRows = localQuotes
+        .filter(quote => !cloudQuoteIds.has(quote.id))
+        .map(quote => readerQuoteRow(userId, quote));
+      const uploadResults = await Promise.all([
+        bookmarkRows.length ? supabase.from("reader_bookmarks").upsert(bookmarkRows, { onConflict: "user_id,key" }) : Promise.resolve(null),
+        noteRows.length ? supabase.from("reader_notes").upsert(noteRows, { onConflict: "user_id,key" }) : Promise.resolve(null),
+        quoteRows.length ? supabase.from("reader_quotes").upsert(quoteRows, { onConflict: "user_id,id" }) : Promise.resolve(null),
+      ]);
+      const uploadError = uploadResults.find(result => result?.error)?.error;
+      if (uploadError) throw uploadError;
+      if (cancelled || !readerDataBelongsTo(userId)) return;
 
       const mergedBookmarkKeys = new Set(localBookmarkKeys);
       ((cloudBookmarks.data || []) as ReaderBookmarkRow[]).forEach(row => {
         if (row.key) mergedBookmarkKeys.add(row.key);
       });
 
-      const mergedNotes: Record<string, string> = {};
+      const mergedNotes: Record<string, string> = { ...localNotes };
       ((cloudNotes.data || []) as ReaderNoteRow[]).forEach(row => {
         if (row.key && row.note) mergedNotes[row.key] = row.note;
       });
-      Object.assign(mergedNotes, localNotes);
 
       const quoteMap = new Map<string, SavedQuote>();
       ((cloudQuotes.data || []) as ReaderQuoteRow[]).forEach(row => {
@@ -1292,12 +1510,14 @@ export default function ReaderClient({
       writeRecord(QUOTES_KEY, nextQuotes);
     }
 
-    void syncReaderMemory();
+    void syncReaderMemory().catch(() => {
+      if (!cancelled) setReaderMessage("Reader tools are saved here, but account sync needs another try.");
+    });
 
     return () => {
       cancelled = true;
     };
-  }, [bookId, cloudSyncReady, userId, visibleSections]);
+  }, [bookId, cloudSyncAttempt, cloudSyncReady, userId, visibleSections]);
 
   const cleanedHtml = section ? sanitizeReaderHtml(cleanSectionHtml(section.html)) : "";
   const sectionAuditReceipts = section && audit?.status === "verified"
@@ -1394,12 +1614,11 @@ export default function ReaderClient({
   async function toggleBookComplete() {
     if (!bookId) return;
     try {
-      const storedRead = JSON.parse(localStorage.getItem(READ_KEY) || "[]") as unknown;
-      const read = new Set(Array.isArray(storedRead) ? storedRead.map(id => canonicalBookId(String(id))) : []);
       const canonicalId = canonicalBookId(bookId);
+      const read = readCompletedSet();
       const alreadyComplete = read.has(canonicalId);
       if (alreadyComplete) {
-        read.delete(canonicalId);
+        updateCompletionState(canonicalId, false);
         const progress = readRecord<Record<string, number>>(PROGRESS_KEY, {});
         for (const storedId of Object.keys(progress)) {
           if (canonicalBookId(storedId) === canonicalId) delete progress[storedId];
@@ -1408,10 +1627,9 @@ export default function ReaderClient({
         writeRecord(PROGRESS_KEY, progress);
         setSectionIndex(0);
       } else {
-        read.add(canonicalId);
+        updateCompletionState(canonicalId, true);
       }
-      localStorage.setItem(READ_KEY, JSON.stringify([...read].sort()));
-      setCompletedBooks(read);
+      setCompletedBooks(readCompletedSet());
       if (!alreadyComplete) {
         const events = Array.isArray(JSON.parse(localStorage.getItem(READ_EVENTS_KEY) || "[]"))
           ? JSON.parse(localStorage.getItem(READ_EVENTS_KEY) || "[]")
@@ -1422,14 +1640,20 @@ export default function ReaderClient({
       window.dispatchEvent(new Event("jju-account"));
       setReaderMessage(alreadyComplete ? "Book marked incomplete." : "Book marked complete.");
 
-      if (userId && cloudSyncReady && hasSupabaseConfig()) {
+      if (userId && cloudSyncReady && hasSupabaseConfig() && readerDataBelongsTo(userId)) {
         const supabase = createSupabaseBrowserClient();
         if (alreadyComplete) {
           const now = new Date().toISOString();
           const cloudBookIds = [...new Set([...bookIdAliasFamily(canonicalId), requestedId].filter(Boolean))];
           const aliasCloudBookIds = cloudBookIds.filter(id => id !== canonicalId);
           const [completionResult, progressResult, aliasProgressResult] = await Promise.all([
-            supabase.from("completed_books").delete().eq("user_id", userId).in("book_id", cloudBookIds),
+            supabase.from("completed_books").upsert({
+              user_id: userId,
+              book_id: canonicalId,
+              is_completed: false,
+              completed_at: now,
+              state_changed_at: now,
+            }, { onConflict: "user_id,book_id" }),
             supabase.from("reading_progress").update({
               section_index: 0,
               progress_percent: 0,
@@ -1445,7 +1669,9 @@ export default function ReaderClient({
           const result = await supabase.from("completed_books").upsert({
             user_id: userId,
             book_id: canonicalId,
+            is_completed: true,
             completed_at: new Date().toISOString(),
+            state_changed_at: new Date().toISOString(),
           }, { onConflict: "user_id,book_id" });
           if (result.error) setReaderMessage("Saved on this device, but account sync failed.");
         }

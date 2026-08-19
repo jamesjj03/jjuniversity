@@ -49,7 +49,7 @@ using (
   exists (
     select 1 from public.book_catalog
     where book_catalog.id = book_content_live.book_id
-      and book_catalog.status not in ('hidden', 'unavailable')
+      and book_catalog.status = 'ready'
       and book_catalog.visibility <> 'private'
   )
 );

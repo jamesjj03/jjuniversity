@@ -1228,6 +1228,12 @@
   text-transform: uppercase;
 }
 
+.savedSummary small {
+  margin-top: 5px;
+  color: var(--v2-muted);
+  font-size: 12px;
+}
+
 .aboutPage {
   width: var(--v2-shell);
 }

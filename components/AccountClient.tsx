@@ -6,6 +6,25 @@ import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseCl
 import { readPreferencesV2 } from "@/lib/preferencesV2";
 import { canonicalBookId } from "@/lib/bookAliases";
 import { safeAuthReturnPath } from "@/lib/authReturnPath";
+import {
+  clearSiteV2SavedBooksEverywhere,
+  retrySavedBooksSync,
+  SITE_V2_SAVED_SYNC_KEY,
+} from "@/components/site-v2/useSiteV2SavedBooks";
+import { SITE_V2_SAVED_KEY } from "@/lib/siteV2";
+import {
+  COMPLETION_SYNC_KEY,
+  completionEntryIsNewer,
+  completionSet,
+  readCompletionState,
+  writeCompletionState,
+  type CompletionState,
+} from "@/lib/readingCompletion";
+import {
+  prepareReaderDataScope,
+  readerDataBelongsTo,
+  removeReaderDataOwner,
+} from "@/lib/readerDataOwnership";
 
 type Book = {
   id: string;
@@ -32,16 +51,10 @@ type CloudProgress = {
 
 type CloudCompletedBook = {
   book_id: string;
-};
-
-type SavedQuote = {
-  id: string;
-  bookId: string;
-  bookTitle: string;
-  sectionId: string;
-  sectionTitle: string;
-  text: string;
-  savedAt: string;
+  is_completed?: boolean | null;
+  completed_at?: string | null;
+  state_changed_at?: string | null;
+  updated_at?: string | null;
 };
 
 type ReadingHistoryItem = {
@@ -114,26 +127,21 @@ function isVerified(user: User | null) {
   return Boolean(user?.email_confirmed_at);
 }
 
-function parseSectionKey(key: string) {
-  const divider = key.indexOf("::");
-  if (divider <= 0) return null;
-  const bookId = key.slice(0, divider);
-  const sectionId = key.slice(divider + 2);
-  if (!bookId || !sectionId) return null;
-  return { bookId, sectionId };
-}
-
 function clearLocalReadingMemory() {
   localStorage.removeItem(READ_KEY);
   localStorage.removeItem(PROGRESS_KEY);
   localStorage.removeItem(READ_EVENTS_KEY);
+  localStorage.removeItem(COMPLETION_SYNC_KEY);
   localStorage.removeItem(ACTUAL_TIME_KEY);
   localStorage.removeItem(HISTORY_KEY);
   localStorage.removeItem(BOOKMARKS_KEY);
   localStorage.removeItem(NOTES_KEY);
   localStorage.removeItem(QUOTES_KEY);
+  localStorage.removeItem(SITE_V2_SAVED_KEY);
+  localStorage.removeItem(SITE_V2_SAVED_SYNC_KEY);
   window.dispatchEvent(new Event("jju-account"));
   window.dispatchEvent(new Event("jju-reading-history"));
+  window.dispatchEvent(new Event("jju-saved-books"));
 }
 
 function firstSupabaseError(results: unknown[]) {
@@ -170,14 +178,12 @@ export default function AccountClient({
 
   const syncLocalToCloud = useCallback(async (nextUser: User) => {
     if (!supabase || !isVerified(nextUser)) return;
+    prepareReaderDataScope(nextUser.id, nextUser.email || "");
 
     const rememberPlace = readPreferencesV2().saveProgress;
-    const localRead = [...new Set(readJson<string[]>(READ_KEY, []).map(canonicalBookId))];
+    const localCompletionState = readCompletionState();
     const localProgress = canonicalizeNumericRecord(readJson<Record<string, number>>(PROGRESS_KEY, {}));
     const localActualSeconds = canonicalizeNumericRecord(readJson<Record<string, number>>(ACTUAL_TIME_KEY, {}));
-    const localBookmarks = readJson<string[]>(BOOKMARKS_KEY, []);
-    const localNotes = readJson<Record<string, string>>(NOTES_KEY, {});
-    const localQuotes = readJson<SavedQuote[]>(QUOTES_KEY, []);
     const localHistory = readJson<ReadingHistoryItem[]>(HISTORY_KEY, []);
     const historyByBook = new Map<string, ReadingHistoryItem>();
     for (const item of localHistory) {
@@ -210,84 +216,21 @@ export default function AccountClient({
         last_read_at: string;
         updated_at: string;
       } => Boolean(row));
-    const completedRows = localRead
-      .filter(Boolean)
-      .map(bookId => ({
+    const completedRows = Object.entries(localCompletionState)
+      .filter(([bookId]) => Boolean(bookId))
+      .map(([bookId, entry]) => ({
         user_id: nextUser.id,
         book_id: bookId,
-        completed_at: now,
+        is_completed: entry.completed,
+        completed_at: entry.updatedAt || now,
+        state_changed_at: entry.updatedAt || now,
       }));
-    const bookmarkRows = localBookmarks
-      .map(key => {
-        const parsed = parseSectionKey(key);
-        if (!parsed) return null;
-        return {
-          user_id: nextUser.id,
-          key,
-          book_id: parsed.bookId,
-          section_id: parsed.sectionId,
-          section_title: "",
-          updated_at: now,
-        };
-      })
-      .filter((row): row is {
-        user_id: string;
-        key: string;
-        book_id: string;
-        section_id: string;
-        section_title: string;
-        updated_at: string;
-      } => Boolean(row));
-    const noteRows = Object.entries(localNotes)
-      .filter(([, note]) => note.trim())
-      .map(([key, note]) => {
-        const parsed = parseSectionKey(key);
-        if (!parsed) return null;
-        return {
-          user_id: nextUser.id,
-          key,
-          book_id: parsed.bookId,
-          section_id: parsed.sectionId,
-          note,
-          updated_at: now,
-        };
-      })
-      .filter((row): row is {
-        user_id: string;
-        key: string;
-        book_id: string;
-        section_id: string;
-        note: string;
-        updated_at: string;
-      } => Boolean(row));
-    const quoteRows = localQuotes
-      .filter(quote => quote.id && quote.bookId && quote.sectionId && quote.text)
-      .map(quote => ({
-        user_id: nextUser.id,
-        id: quote.id,
-        book_id: quote.bookId,
-        book_title: quote.bookTitle || "",
-        section_id: quote.sectionId,
-        section_title: quote.sectionTitle || "",
-        text: quote.text,
-        saved_at: quote.savedAt || now,
-      }));
-
     const syncResults = await Promise.all([
       progressRows.length
         ? supabase.from("reading_progress").upsert(progressRows, { onConflict: "user_id,book_id" })
         : Promise.resolve(),
       completedRows.length
         ? supabase.from("completed_books").upsert(completedRows, { onConflict: "user_id,book_id" })
-        : Promise.resolve(),
-      bookmarkRows.length
-        ? supabase.from("reader_bookmarks").upsert(bookmarkRows, { onConflict: "user_id,key" })
-        : Promise.resolve(),
-      noteRows.length
-        ? supabase.from("reader_notes").upsert(noteRows, { onConflict: "user_id,key" })
-        : Promise.resolve(),
-      quoteRows.length
-        ? supabase.from("reader_quotes").upsert(quoteRows, { onConflict: "user_id,id" })
         : Promise.resolve(),
     ]);
     const syncError = firstSupabaseError(syncResults);
@@ -296,27 +239,22 @@ export default function AccountClient({
 
   const loadCloud = useCallback(async (nextUser: User) => {
     if (!supabase) return;
+    prepareReaderDataScope(nextUser.id, nextUser.email || "");
     const rememberPlace = readPreferencesV2().saveProgress;
-    writeLocalAccount({
-      name: String(nextUser.user_metadata?.display_name || nextUser.email || "JJU Reader"),
-      email: nextUser.email || "",
-    });
-    const [progressResult, completedResult] = await Promise.all([
+    const [profileResult, progressResult, completedResult] = await Promise.all([
+      supabase.from("profiles").select("display_name,email").eq("id", nextUser.id).maybeSingle(),
       supabase.from("reading_progress").select("book_id,section_index,actual_seconds,last_read_at"),
-      supabase.from("completed_books").select("book_id"),
+      supabase.from("completed_books").select("book_id,is_completed,completed_at,state_changed_at,updated_at"),
     ]);
+    if (!readerDataBelongsTo(nextUser.id)) return;
+
+    const profileName = String(profileResult.data?.display_name || nextUser.user_metadata?.display_name || nextUser.email || "JJU Reader");
+    writeLocalAccount({ name: profileName, email: nextUser.email || "" });
 
     if (progressResult.error || completedResult.error) {
       setMessage("Supabase account tables are not set up yet.");
       return;
     }
-
-    const [bookmarkResult, noteResult, quoteResult] = await Promise.all([
-      supabase.from("reader_bookmarks").select("key,book_id,section_id"),
-      supabase.from("reader_notes").select("key,book_id,section_id,note,updated_at"),
-      supabase.from("reader_quotes").select("id,book_id,book_title,section_id,section_title,text,saved_at"),
-    ]);
-    const readingToolsError = firstSupabaseError([bookmarkResult, noteResult, quoteResult]);
 
     const localProgress = canonicalizeNumericRecord(readJson<Record<string, number>>(PROGRESS_KEY, {}));
     const localActualSeconds = canonicalizeNumericRecord(readJson<Record<string, number>>(ACTUAL_TIME_KEY, {}));
@@ -329,7 +267,7 @@ export default function AccountClient({
       const itemDate = Date.parse(item.last_read_at || "");
       remoteProgressByBook.set(canonicalId, {
         book_id: canonicalId,
-        section_index: Math.max(Number(current?.section_index || 0), Number(item.section_index || 0)),
+        section_index: itemDate > currentDate ? Number(item.section_index || 0) : Number(current?.section_index || item.section_index || 0),
         actual_seconds: Math.max(Number(current?.actual_seconds || 0), Number(item.actual_seconds || 0)),
         last_read_at: itemDate > currentDate ? item.last_read_at : current?.last_read_at || item.last_read_at,
       });
@@ -342,42 +280,39 @@ export default function AccountClient({
     ]);
     const mergedProgress: Record<string, number> = {};
     const mergedActualSeconds: Record<string, number> = {};
+    const localHistoryByBook = new Map<string, ReadingHistoryItem>();
+    for (const item of readJson<ReadingHistoryItem[]>(HISTORY_KEY, [])) {
+      if (!item.bookId) continue;
+      const canonicalId = canonicalBookId(item.bookId);
+      const current = localHistoryByBook.get(canonicalId);
+      if (!current?.updatedAt || Date.parse(item.updatedAt || "") > Date.parse(current.updatedAt)) {
+        localHistoryByBook.set(canonicalId, { ...item, bookId: canonicalId });
+      }
+    }
     for (const bookId of progressIds) {
       const remote = remoteProgressByBook.get(bookId);
-      const sectionIndex = Math.max(Number(localProgress[bookId] || 0), Number(remote?.section_index || 0));
+      const localHistory = localHistoryByBook.get(bookId);
+      const remoteIsNewer = Date.parse(remote?.last_read_at || "") > Date.parse(localHistory?.updatedAt || "");
+      const sectionIndex = remoteIsNewer
+        ? Number(remote?.section_index || 0)
+        : Number(localProgress[bookId] ?? remote?.section_index ?? 0);
       const actualSeconds = Math.max(Number(localActualSeconds[bookId] || 0), Number(remote?.actual_seconds || 0));
       if (sectionIndex) mergedProgress[bookId] = sectionIndex;
       if (actualSeconds) mergedActualSeconds[bookId] = actualSeconds;
     }
 
-    const mergedCompleted = new Set([
-      ...readJson<string[]>(READ_KEY, []),
-      ...(completedResult.data || []).map(item => item.book_id),
-    ].filter(Boolean).map(canonicalBookId));
-    const localBookmarks = readJson<string[]>(BOOKMARKS_KEY, []);
-    const mergedBookmarks = new Set([
-      ...localBookmarks,
-      ...((bookmarkResult.data || []).map(item => item.key)),
-    ].filter(Boolean));
-    const localNotes = readJson<Record<string, string>>(NOTES_KEY, {});
-    const mergedNotes = { ...localNotes };
-    for (const note of noteResult.data || []) {
-      if (!mergedNotes[note.key] && note.note) mergedNotes[note.key] = note.note;
+    const mergedCompletionState: CompletionState = { ...readCompletionState() };
+    for (const item of (completedResult.data || []) as CloudCompletedBook[]) {
+      const canonicalId = canonicalBookId(item.book_id);
+      if (!canonicalId) continue;
+      const candidate = {
+        completed: item.is_completed !== false,
+        updatedAt: item.state_changed_at || item.updated_at || item.completed_at || "",
+      };
+      const current = mergedCompletionState[canonicalId];
+      if (!current || completionEntryIsNewer(candidate, current)) mergedCompletionState[canonicalId] = candidate;
     }
-    const localQuotes = readJson<SavedQuote[]>(QUOTES_KEY, []);
-    const remoteQuotes = (quoteResult.data || []).map(quote => ({
-      id: quote.id,
-      bookId: quote.book_id,
-      bookTitle: quote.book_title || "",
-      sectionId: quote.section_id,
-      sectionTitle: quote.section_title || "",
-      text: quote.text,
-      savedAt: quote.saved_at,
-    }));
-    const mergedQuotes = [...new Map([...remoteQuotes, ...localQuotes].map(quote => [quote.id, quote])).values()]
-      .filter(quote => quote.id && quote.bookId && quote.sectionId && quote.text)
-      .sort((a, b) => Date.parse(b.savedAt || "") - Date.parse(a.savedAt || ""))
-      .slice(0, 500);
+    const mergedCompleted = completionSet(mergedCompletionState);
     const historyByBook = new Map<string, ReadingHistoryItem>();
     for (const item of readJson<ReadingHistoryItem[]>(HISTORY_KEY, [])) {
       if (!item.bookId) continue;
@@ -411,10 +346,7 @@ export default function AccountClient({
         localStorage.setItem(ACTUAL_TIME_KEY, JSON.stringify(mergedActualSeconds));
         localStorage.setItem(HISTORY_KEY, JSON.stringify(mergedHistory));
       }
-      localStorage.setItem(READ_KEY, JSON.stringify([...mergedCompleted].sort()));
-      localStorage.setItem(BOOKMARKS_KEY, JSON.stringify([...mergedBookmarks].sort()));
-      localStorage.setItem(NOTES_KEY, JSON.stringify(mergedNotes));
-      localStorage.setItem(QUOTES_KEY, JSON.stringify(mergedQuotes));
+      writeCompletionState(mergedCompletionState);
       window.dispatchEvent(new Event("jju-account"));
       window.dispatchEvent(new Event("jju-reading-history"));
     } catch {
@@ -428,12 +360,9 @@ export default function AccountClient({
         setMessage("Your local reading data is safe, but cloud sync did not finish. Try signing in again shortly.");
       }
     }
+    if (!readerDataBelongsTo(nextUser.id)) return;
 
-    if (readingToolsError) {
-      setMessage("Your account loaded, but one of the cloud reading tools could not sync. Your local data is still safe.");
-    }
-
-    setDisplayName(String(nextUser.user_metadata?.display_name || ""));
+    setDisplayName(profileName);
     setEmail(nextUser.email || "");
     setCloudProgress(rememberPlace
       ? [...progressIds].map(bookId => ({
@@ -443,6 +372,7 @@ export default function AccountClient({
       }))
       : normalizedRemoteProgress);
     setCloudCompleted([...mergedCompleted].map(bookId => ({ book_id: bookId })));
+    retrySavedBooksSync();
   }, [supabase, syncLocalToCloud]);
 
   useEffect(() => {
@@ -455,7 +385,7 @@ export default function AccountClient({
       const local = readLocalAccount();
       setDisplayName(current => current || local?.name || "");
       setEmail(current => current || local?.email || "");
-      setReadBooks(new Set(readJson<string[]>(READ_KEY, []).map(canonicalBookId)));
+       setReadBooks(completionSet());
       setProgress(canonicalizeNumericRecord(readJson<Record<string, number>>(PROGRESS_KEY, {})));
       setEvents(readJson<ReadEvent[]>(READ_EVENTS_KEY, []));
     };
@@ -594,8 +524,22 @@ export default function AccountClient({
     const nextName = displayName.trim() || "JJU Reader";
     setDeleteArmed(false);
     setBusy(true);
-    const { error } = await supabase.auth.updateUser({ data: { display_name: nextName } });
+    const [authResult, initialProfileResult] = await Promise.all([
+      supabase.auth.updateUser({ data: { display_name: nextName } }),
+      supabase.from("profiles").update({
+        email: user.email || "",
+        display_name: nextName,
+      }).eq("id", user.id).select("id"),
+    ]);
+    const profileResult = !initialProfileResult.error && !initialProfileResult.data?.length
+      ? await supabase.from("profiles").insert({
+        id: user.id,
+        email: user.email || "",
+        display_name: nextName,
+      })
+      : initialProfileResult;
     setBusy(false);
+    const error = authResult.error || profileResult.error;
     if (error) setMessage(error.message);
     else {
       writeLocalAccount({ name: nextName, email: user.email || "" });
@@ -645,15 +589,20 @@ export default function AccountClient({
     setBusy(true);
     let cloudClearError = "";
     if (supabase && user) {
+      try {
+        await clearSiteV2SavedBooksEverywhere();
+      } catch {
+        cloudClearError = "Saved Books could not be cleared from the account.";
+      }
       const clearResults = await Promise.all([
+        supabase.rpc("clear_completed_books", { expected_user_id: user.id }),
         supabase.from("reading_progress").delete().eq("user_id", user.id),
-        supabase.from("completed_books").delete().eq("user_id", user.id),
         supabase.from("reading_sessions").delete().eq("user_id", user.id),
         supabase.from("reader_bookmarks").delete().eq("user_id", user.id),
         supabase.from("reader_notes").delete().eq("user_id", user.id),
         supabase.from("reader_quotes").delete().eq("user_id", user.id),
       ]);
-      cloudClearError = firstSupabaseError(clearResults);
+      cloudClearError = cloudClearError || firstSupabaseError(clearResults);
       setCloudProgress([]);
       setCloudCompleted([]);
     }
@@ -665,7 +614,7 @@ export default function AccountClient({
     setMessage(cloudClearError
       ? "Reading data was cleared on this device, but the account copy could not be fully cleared. Try again shortly."
       : user
-        ? "Reading data cleared on this device and account."
+        ? "Cleared here and from the current account. A device that stayed offline may need one more clear after it reconnects."
         : "Local reading data cleared.");
   }
 
@@ -680,13 +629,18 @@ export default function AccountClient({
     setBusy(true);
     setMessage("");
     try {
-      const response = await fetch("/api/account/delete", { method: "DELETE" });
+      const response = await fetch("/api/account/delete", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ expectedUserId: user.id }),
+      });
       const payload = await response.json().catch(() => ({})) as { error?: string };
       if (!response.ok) throw new Error(payload.error || "Could not delete account.");
 
       await supabase.auth.signOut().catch(() => undefined);
       writeLocalAccount(null);
       clearLocalReadingMemory();
+      removeReaderDataOwner();
       setReadBooks(new Set());
       setProgress({});
       setEvents([]);

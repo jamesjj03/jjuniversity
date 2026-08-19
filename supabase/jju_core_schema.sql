@@ -286,6 +286,13 @@ alter table public.saved_paths enable row level security;
 alter table public.reading_sessions enable row level security;
 alter table public.app_settings enable row level security;
 
+-- Remove policy names created by the older account-only schema. PostgreSQL
+-- combines permissive policies with OR, so leaving the old insert/update
+-- policies in place would weaken the role='reader' checks below.
+drop policy if exists "profiles_select_own" on public.profiles;
+drop policy if exists "profiles_insert_own" on public.profiles;
+drop policy if exists "profiles_update_own" on public.profiles;
+
 drop policy if exists "profiles_select_own_or_admin" on public.profiles;
 create policy "profiles_select_own_or_admin"
 on public.profiles for select
