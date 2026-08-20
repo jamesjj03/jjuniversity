@@ -665,6 +665,7 @@ export default function ReaderClient({
   const [fullscreenActive, setFullscreenActive] = useState(false);
   const [fullscreenFallbackActive, setFullscreenFallbackActive] = useState(false);
   const noteSaveTimer = useRef<number | null>(null);
+  const pendingNoteKeyRef = useRef("");
   const [bookmarks, setBookmarks] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
     return new Set(readRecord<string[]>(BOOKMARKS_KEY, []));
@@ -857,6 +858,17 @@ export default function ReaderClient({
     const supabase = createSupabaseBrowserClient();
     const result = await supabase.from("reader_quotes").upsert(readerQuoteRow(userId, quote), { onConflict: "user_id,id" });
     if (result.error) setReaderMessage("Quote saved here, but account sync needs another try.");
+  }
+
+  async function deleteQuoteFromCloud(quoteId: string) {
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return;
+    const supabase = createSupabaseBrowserClient();
+    try {
+      const result = await supabase.from("reader_quotes").delete().eq("user_id", userId).eq("id", quoteId);
+      if (result.error) throw result.error;
+    } catch {
+      setReaderMessage("Quote removed here, but account sync needs another try.");
+    }
   }
 
   const handleReaderKey = useCallback((event: KeyboardEvent) => {
@@ -1574,7 +1586,10 @@ export default function ReaderClient({
       return next;
     });
     if (noteSaveTimer.current !== null) window.clearTimeout(noteSaveTimer.current);
+    pendingNoteKeyRef.current = key;
     noteSaveTimer.current = window.setTimeout(() => {
+      noteSaveTimer.current = null;
+      pendingNoteKeyRef.current = "";
       void syncNoteToCloud(key, value);
     }, 600);
   }
@@ -1609,6 +1624,73 @@ export default function ReaderClient({
     pendingQuoteSelectionRef.current = null;
     setPendingQuoteText("");
     setReaderMessage("Quote saved.");
+  }
+
+  function removeSavedBookmark(key: string) {
+    if (!key) return;
+    setBookmarks(current => {
+      if (!current.has(key)) return current;
+      const next = new Set(current);
+      next.delete(key);
+      writeRecord(BOOKMARKS_KEY, [...next].sort());
+      return next;
+    });
+    void syncBookmarkToCloud(key, false);
+    setReaderMessage("Bookmark removed.");
+  }
+
+  function removeSavedNote(key: string) {
+    if (!key) return;
+    if (pendingNoteKeyRef.current === key && noteSaveTimer.current !== null) {
+      window.clearTimeout(noteSaveTimer.current);
+      noteSaveTimer.current = null;
+      pendingNoteKeyRef.current = "";
+    }
+    setNotes(current => {
+      if (!(key in current)) return current;
+      const next = { ...current };
+      delete next[key];
+      writeRecord(NOTES_KEY, next);
+      return next;
+    });
+    void syncNoteToCloud(key, "");
+    setReaderMessage("Note removed.");
+  }
+
+  function removeSavedQuote(quoteId: string) {
+    if (!quoteId) return;
+    setQuotes(current => {
+      const next = current.filter(item => item.id !== quoteId);
+      if (next.length === current.length) return current;
+      writeRecord(QUOTES_KEY, next);
+      return next;
+    });
+    void deleteQuoteFromCloud(quoteId);
+    setReaderMessage("Quote removed.");
+  }
+
+  async function copySavedQuote(text: string) {
+    let copyField: HTMLTextAreaElement | null = null;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        copyField = document.createElement("textarea");
+        copyField.value = text;
+        copyField.setAttribute("readonly", "");
+        copyField.style.position = "fixed";
+        copyField.style.opacity = "0";
+        document.body.appendChild(copyField);
+        copyField.select();
+        const copied = document.execCommand("copy");
+        if (!copied) throw new Error("Copy command failed");
+      }
+      setReaderMessage("Quote copied.");
+    } catch {
+      setReaderMessage("Copy did not work. Select the quote text and copy it manually.");
+    } finally {
+      copyField?.remove();
+    }
   }
 
   async function toggleBookComplete() {
@@ -1809,20 +1891,54 @@ export default function ReaderClient({
                   </summary>
                   <div className="readerSavedPageList">
                     {savedBookSections.length ? savedBookSections.map(saved => (
-                      <button key={saved.entry.section.id} type="button" onClick={() => {
-                        setSettingsOpen(false);
-                        jumpToSection(saved.index, "top");
-                      }}>
-                        <span>{contentsMarker(saved.entry)}</span>
-                        <strong>{saved.entry.section.title}</strong>
-                        <small>
-                          {[
-                            saved.bookmarkKey ? "bookmark" : "",
-                            saved.noteKey ? "note" : "",
-                            saved.quotes.length ? `${saved.quotes.length} ${saved.quotes.length === 1 ? "quote" : "quotes"}` : "",
-                          ].filter(Boolean).join(" · ")}
-                        </small>
-                      </button>
+                      <section key={saved.entry.section.id} className="readerSavedPageCard" aria-label={`Saved items for ${saved.entry.section.title}`}>
+                        <header className="readerSavedPageHeader">
+                          <div className="readerSavedPageHeading">
+                            <span>{contentsMarker(saved.entry)}</span>
+                            <div>
+                              <strong>{saved.entry.section.title}</strong>
+                              <small>
+                                {[
+                                  saved.bookmarkKey ? "bookmark" : "",
+                                  saved.noteKey ? "note" : "",
+                                  saved.quotes.length ? `${saved.quotes.length} ${saved.quotes.length === 1 ? "quote" : "quotes"}` : "",
+                                ].filter(Boolean).join(" · ")}
+                              </small>
+                            </div>
+                          </div>
+                          <button type="button" onClick={() => {
+                            setSettingsOpen(false);
+                            jumpToSection(saved.index, "top");
+                          }}>Open page</button>
+                        </header>
+                        {saved.bookmarkKey && (
+                          <div className="readerSavedItem readerSavedBookmarkItem">
+                            <span>Bookmark saved</span>
+                            <button type="button" onClick={() => removeSavedBookmark(saved.bookmarkKey)}>Remove bookmark</button>
+                          </div>
+                        )}
+                        {saved.noteKey && (
+                          <div className="readerSavedItem">
+                            <div className="readerSavedItemText">
+                              <span>Note</span>
+                              <p>{saved.note}</p>
+                            </div>
+                            <button type="button" onClick={() => removeSavedNote(saved.noteKey)}>Remove note</button>
+                          </div>
+                        )}
+                        {saved.quotes.map(quote => (
+                          <div key={quote.id} className="readerSavedItem readerSavedQuoteItem">
+                            <div className="readerSavedItemText">
+                              <span>Quote</span>
+                              <blockquote>{quote.text}</blockquote>
+                            </div>
+                            <div className="readerSavedQuoteActions">
+                              <button type="button" onClick={() => void copySavedQuote(quote.text)}>Copy</button>
+                              <button type="button" onClick={() => removeSavedQuote(quote.id)}>Remove</button>
+                            </div>
+                          </div>
+                        ))}
+                      </section>
                     )) : <p>Nothing saved in this book yet.</p>}
                   </div>
                 </details>
