@@ -666,6 +666,9 @@ export default function ReaderClient({
   const [fullscreenFallbackActive, setFullscreenFallbackActive] = useState(false);
   const noteSaveTimer = useRef<number | null>(null);
   const pendingNoteKeyRef = useRef("");
+  const readerMemoryRevisionRef = useRef(0);
+  const readerMemoryCloudQueueRef = useRef<Promise<void>>(Promise.resolve());
+  const readerMemoryRetryScheduledRef = useRef(false);
   const [bookmarks, setBookmarks] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
     return new Set(readRecord<string[]>(BOOKMARKS_KEY, []));
@@ -682,6 +685,29 @@ export default function ReaderClient({
   const [readerMessage, setReaderMessage] = useState("");
   const [completedBooks, setCompletedBooks] = useState<Set<string>>(() => readCompletedSet());
   const compactReader = variant === "site-v2";
+
+  const queueReaderMemoryCloudTask = useCallback((task: () => Promise<void>) => {
+    const queued = readerMemoryCloudQueueRef.current.then(task, task);
+    readerMemoryCloudQueueRef.current = queued.catch(() => undefined);
+    return queued;
+  }, []);
+
+  const markReaderMemoryMutation = useCallback(() => {
+    const revision = readerMemoryRevisionRef.current + 1;
+    readerMemoryRevisionRef.current = revision;
+    return revision;
+  }, []);
+
+  const queueReaderMemoryMutation = useCallback((revision: number, task: () => Promise<boolean>) => {
+    void queueReaderMemoryCloudTask(async () => {
+      const synced = await task();
+      if (!synced || readerMemoryRevisionRef.current !== revision || !readerDataBelongsTo(userId)) return;
+      if (noteSaveTimer.current !== null) return;
+      if (readerMemoryRetryScheduledRef.current) return;
+      readerMemoryRetryScheduledRef.current = true;
+      setCloudSyncAttempt(attempt => attempt + 1);
+    }).catch(() => undefined);
+  }, [queueReaderMemoryCloudTask, userId]);
 
   const sectionEntries = useMemo<ReaderSectionEntry[]>(() => {
     const readableSections = sections.filter(section => !isTableOfContentsSection(section));
@@ -816,58 +842,68 @@ export default function ReaderClient({
   }, [jumpToSection, sectionIndex]);
 
   async function syncBookmarkToCloud(key: string, saved: boolean) {
-    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return;
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return false;
     const supabase = createSupabaseBrowserClient();
     try {
       if (!saved) {
         const result = await supabase.from("reader_bookmarks").delete().eq("user_id", userId).eq("key", key);
         if (result.error) throw result.error;
-        return;
+        return true;
       }
       const row = readerBookmarkRow(userId, key, bookId, visibleSections);
-      if (row) {
-        const result = await supabase.from("reader_bookmarks").upsert(row, { onConflict: "user_id,key" });
-        if (result.error) throw result.error;
-      }
+      if (!row) return false;
+      const result = await supabase.from("reader_bookmarks").upsert(row, { onConflict: "user_id,key" });
+      if (result.error) throw result.error;
+      return true;
     } catch {
       setReaderMessage("Bookmark saved here, but account sync needs another try.");
+      return false;
     }
   }
 
   async function syncNoteToCloud(key: string, value: string) {
-    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return;
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return false;
     const supabase = createSupabaseBrowserClient();
     try {
       if (!value.trim()) {
         const result = await supabase.from("reader_notes").delete().eq("user_id", userId).eq("key", key);
         if (result.error) throw result.error;
-        return;
+        return true;
       }
       const row = readerNoteRow(userId, key, value);
-      if (row) {
-        const result = await supabase.from("reader_notes").upsert(row, { onConflict: "user_id,key" });
-        if (result.error) throw result.error;
-      }
+      if (!row) return false;
+      const result = await supabase.from("reader_notes").upsert(row, { onConflict: "user_id,key" });
+      if (result.error) throw result.error;
+      return true;
     } catch {
       setReaderMessage("Note saved here, but account sync needs another try.");
+      return false;
     }
   }
 
   async function syncQuoteToCloud(quote: SavedQuote) {
-    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return;
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return false;
     const supabase = createSupabaseBrowserClient();
-    const result = await supabase.from("reader_quotes").upsert(readerQuoteRow(userId, quote), { onConflict: "user_id,id" });
-    if (result.error) setReaderMessage("Quote saved here, but account sync needs another try.");
+    try {
+      const result = await supabase.from("reader_quotes").upsert(readerQuoteRow(userId, quote), { onConflict: "user_id,id" });
+      if (result.error) throw result.error;
+      return true;
+    } catch {
+      setReaderMessage("Quote saved here, but account sync needs another try.");
+      return false;
+    }
   }
 
   async function deleteQuoteFromCloud(quoteId: string) {
-    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return;
+    if (!userId || !cloudSyncReady || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return false;
     const supabase = createSupabaseBrowserClient();
     try {
       const result = await supabase.from("reader_quotes").delete().eq("user_id", userId).eq("id", quoteId);
       if (result.error) throw result.error;
+      return true;
     } catch {
       setReaderMessage("Quote removed here, but account sync needs another try.");
+      return false;
     }
   }
 
@@ -1215,6 +1251,13 @@ export default function ReaderClient({
       if (verified && nextUser) {
         const scope = prepareReaderDataScope(nextUser.id, nextUser.email || "");
         const previousAccount = activeReaderAccountRef.current || currentReaderDataOwner();
+        if (activeReaderAccountRef.current !== nextUser.id) {
+          if (noteSaveTimer.current !== null) window.clearTimeout(noteSaveTimer.current);
+          noteSaveTimer.current = null;
+          pendingNoteKeyRef.current = "";
+          readerMemoryRevisionRef.current = 0;
+          readerMemoryRetryScheduledRef.current = false;
+        }
         if (scope === "account-switched" || (previousAccount && previousAccount !== nextUser.id)) {
           setSectionIndex(0);
           setActualSeconds(0);
@@ -1447,7 +1490,11 @@ export default function ReaderClient({
     let cancelled = false;
 
     async function syncReaderMemory() {
+      if (cancelled || !readerDataBelongsTo(userId)) return;
+      if (noteSaveTimer.current !== null) return;
+      readerMemoryRetryScheduledRef.current = false;
       const supabase = createSupabaseBrowserClient();
+      const startingRevision = readerMemoryRevisionRef.current;
       const localBookmarkKeys = readRecord<string[]>(BOOKMARKS_KEY, []);
       const localNotes = readRecord<Record<string, string>>(NOTES_KEY, {});
       const localQuotes = readRecord<SavedQuote[]>(QUOTES_KEY, []);
@@ -1462,6 +1509,7 @@ export default function ReaderClient({
       if (cloudError) throw cloudError;
 
       if (cancelled || !readerDataBelongsTo(userId)) return;
+      if (readerMemoryRevisionRef.current !== startingRevision) return;
 
       const cloudBookmarkKeys = new Set((cloudBookmarks.data || []).map(row => row.key));
       const cloudNoteKeys = new Set((cloudNotes.data || []).map(row => row.key));
@@ -1485,6 +1533,7 @@ export default function ReaderClient({
       const uploadError = uploadResults.find(result => result?.error)?.error;
       if (uploadError) throw uploadError;
       if (cancelled || !readerDataBelongsTo(userId)) return;
+      if (readerMemoryRevisionRef.current !== startingRevision) return;
 
       const mergedBookmarkKeys = new Set(localBookmarkKeys);
       ((cloudBookmarks.data || []) as ReaderBookmarkRow[]).forEach(row => {
@@ -1522,14 +1571,14 @@ export default function ReaderClient({
       writeRecord(QUOTES_KEY, nextQuotes);
     }
 
-    void syncReaderMemory().catch(() => {
+    void queueReaderMemoryCloudTask(syncReaderMemory).catch(() => {
       if (!cancelled) setReaderMessage("Reader tools are saved here, but account sync needs another try.");
     });
 
     return () => {
       cancelled = true;
     };
-  }, [bookId, cloudSyncAttempt, cloudSyncReady, userId, visibleSections]);
+  }, [bookId, cloudSyncAttempt, cloudSyncReady, queueReaderMemoryCloudTask, userId, visibleSections]);
 
   const cleanedHtml = section ? sanitizeReaderHtml(cleanSectionHtml(section.html)) : "";
   const sectionAuditReceipts = section && audit?.status === "verified"
@@ -1561,6 +1610,7 @@ export default function ReaderClient({
   function toggleBookmark() {
     if (!currentSectionKey) return;
     const shouldSave = !bookmarks.has(currentSectionKey);
+    const revision = markReaderMemoryMutation();
     setBookmarks(current => {
       const next = new Set(current);
       if (next.has(currentSectionKey)) {
@@ -1573,12 +1623,13 @@ export default function ReaderClient({
       writeRecord(BOOKMARKS_KEY, [...next].sort());
       return next;
     });
-    void syncBookmarkToCloud(currentSectionKey, shouldSave);
+    queueReaderMemoryMutation(revision, () => syncBookmarkToCloud(currentSectionKey, shouldSave));
   }
 
   function saveNote(value: string) {
     if (!currentSectionKey) return;
     const key = currentSectionKey;
+    markReaderMemoryMutation();
     setNotes(current => {
       const next = { ...current, [key]: value };
       if (!value.trim()) delete next[key];
@@ -1590,7 +1641,8 @@ export default function ReaderClient({
     noteSaveTimer.current = window.setTimeout(() => {
       noteSaveTimer.current = null;
       pendingNoteKeyRef.current = "";
-      void syncNoteToCloud(key, value);
+      const revision = markReaderMemoryMutation();
+      queueReaderMemoryMutation(revision, () => syncNoteToCloud(key, value));
     }, 600);
   }
 
@@ -1615,12 +1667,13 @@ export default function ReaderClient({
       text: selected.slice(0, 900),
       savedAt: new Date().toISOString(),
     };
+    const revision = markReaderMemoryMutation();
     setQuotes(current => {
       const next = [quote, ...current].slice(0, 500);
       writeRecord(QUOTES_KEY, next);
       return next;
     });
-    void syncQuoteToCloud(quote);
+    queueReaderMemoryMutation(revision, () => syncQuoteToCloud(quote));
     pendingQuoteSelectionRef.current = null;
     setPendingQuoteText("");
     setReaderMessage("Quote saved.");
@@ -1628,6 +1681,7 @@ export default function ReaderClient({
 
   function removeSavedBookmark(key: string) {
     if (!key) return;
+    const revision = markReaderMemoryMutation();
     setBookmarks(current => {
       if (!current.has(key)) return current;
       const next = new Set(current);
@@ -1635,7 +1689,7 @@ export default function ReaderClient({
       writeRecord(BOOKMARKS_KEY, [...next].sort());
       return next;
     });
-    void syncBookmarkToCloud(key, false);
+    queueReaderMemoryMutation(revision, () => syncBookmarkToCloud(key, false));
     setReaderMessage("Bookmark removed.");
   }
 
@@ -1646,6 +1700,7 @@ export default function ReaderClient({
       noteSaveTimer.current = null;
       pendingNoteKeyRef.current = "";
     }
+    const revision = markReaderMemoryMutation();
     setNotes(current => {
       if (!(key in current)) return current;
       const next = { ...current };
@@ -1653,19 +1708,20 @@ export default function ReaderClient({
       writeRecord(NOTES_KEY, next);
       return next;
     });
-    void syncNoteToCloud(key, "");
+    queueReaderMemoryMutation(revision, () => syncNoteToCloud(key, ""));
     setReaderMessage("Note removed.");
   }
 
   function removeSavedQuote(quoteId: string) {
     if (!quoteId) return;
+    const revision = markReaderMemoryMutation();
     setQuotes(current => {
       const next = current.filter(item => item.id !== quoteId);
       if (next.length === current.length) return current;
       writeRecord(QUOTES_KEY, next);
       return next;
     });
-    void deleteQuoteFromCloud(quoteId);
+    queueReaderMemoryMutation(revision, () => deleteQuoteFromCloud(quoteId));
     setReaderMessage("Quote removed.");
   }
 
