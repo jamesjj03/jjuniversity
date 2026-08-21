@@ -1,4 +1,5 @@
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
+import { AdminVersionConflictError } from "@/lib/adminVersionedJson";
 
 export type CatalogBook = {
   id: string;
@@ -152,6 +153,30 @@ export function bookToCatalogRow(book: Record<string, unknown>) {
 }
 
 export async function readBooksFromSupabase() {
+  const snapshot = await readBookCatalogSnapshot();
+  return snapshot?.books ?? null;
+}
+
+function isMissingRevisionTable(error: unknown) {
+  const record = error && typeof error === "object" ? error as Record<string, unknown> : {};
+  const code = String(record.code || "");
+  const message = String(record.message || "");
+  return code === "42P01"
+    || code === "PGRST205"
+    || /relation .*jju_admin_document_revisions.* does not exist/i.test(message)
+    || /could not find .*jju_admin_document_revisions/i.test(message);
+}
+
+function isMissingAdminCatalogRpc(error: unknown) {
+  const record = error && typeof error === "object" ? error as Record<string, unknown> : {};
+  const code = String(record.code || "");
+  const message = String(record.message || "");
+  return code === "42883"
+    || code === "PGRST202"
+    || /jju_admin_(save_book_catalog|create_book_draft)/i.test(message) && /not find|does not exist/i.test(message);
+}
+
+export async function readBookCatalogSnapshot() {
   if (!hasSupabaseAdminConfig()) return null;
 
   const supabase = createSupabaseAdminClient();
@@ -165,37 +190,99 @@ export async function readBooksFromSupabase() {
     throw new Error(result.error.message);
   }
 
-  return (result.data || []).map(row => catalogRowToBook(row as CatalogRow));
+  const books = (result.data || []).map(row => catalogRowToBook(row as CatalogRow));
+  const revisionResult = await supabase
+    .from("jju_admin_document_revisions")
+    .select("revision")
+    .eq("document_key", "book_catalog")
+    .limit(1);
+  if (revisionResult.error) {
+    if (isMissingRevisionTable(revisionResult.error)) return { books, revision: null as string | null };
+    throw new Error(revisionResult.error.message);
+  }
+  const revision = String(revisionResult.data?.[0]?.revision || "").trim() || null;
+  return { books, revision };
 }
 
-export async function saveBooksToSupabase(books: Array<Record<string, unknown>>) {
+export async function saveBooksToSupabase(
+  books: Array<Record<string, unknown>>,
+  options: { expectedRevision: string | null },
+) {
   if (!hasSupabaseAdminConfig()) return { saved: false };
 
   const supabase = createSupabaseAdminClient();
   const rows = books.map(bookToCatalogRow);
-  const result = await supabase
-    .from("book_catalog")
-    .upsert(rows, { onConflict: "id" });
+  if (!options.expectedRevision) {
+    return {
+      saved: false,
+      setupRequired: true,
+      error: "Supabase catalog editing is locked until supabase/jju_admin_catalog_cas_2026_08_21.sql is applied.",
+    };
+  }
+  const atomicResult = await supabase.rpc("jju_admin_save_book_catalog", {
+    p_expected_revision: options.expectedRevision,
+    p_books: rows,
+  });
+  if (atomicResult.error) {
+    if (String(atomicResult.error.code || "") === "40001") throw new AdminVersionConflictError();
+    return {
+      saved: false,
+      setupRequired: isMissingAdminCatalogRpc(atomicResult.error),
+      error: isMissingAdminCatalogRpc(atomicResult.error)
+        ? "Supabase catalog editing is locked until supabase/jju_admin_catalog_cas_2026_08_21.sql is applied."
+        : atomicResult.error.message,
+    };
+  }
+  const revision = String(atomicResult.data || "").trim();
+  if (!revision) return { saved: false, error: "Atomic Supabase catalog save returned no revision." };
+  return { saved: true, books: rows.map(row => catalogRowToBook(row)), revision };
+}
 
+export async function createBookDraftInSupabase({
+  book,
+  content,
+  fileName,
+  publicPath,
+  message,
+  expectedRevision,
+}: {
+  book: Record<string, unknown>;
+  content: Record<string, unknown>;
+  fileName: string;
+  publicPath: string;
+  message: string;
+  expectedRevision: string | null;
+}) {
+  if (!hasSupabaseAdminConfig()) return { saved: false };
+  if (!expectedRevision) {
+    return {
+      saved: false,
+      setupRequired: true,
+      error: "Supabase draft creation is locked until supabase/jju_admin_catalog_cas_2026_08_21.sql is applied.",
+    };
+  }
+  const supabase = createSupabaseAdminClient();
+  const result = await supabase.rpc("jju_admin_create_book_draft", {
+    p_expected_revision: expectedRevision,
+    p_book: bookToCatalogRow(book),
+    p_content: content,
+    p_content_file: fileName,
+    p_content_path: publicPath,
+    p_message: message,
+  });
   if (result.error) {
-    return isMissingSupabaseCatalogTable(result.error)
-      ? { saved: false, tableMissing: true }
-      : { saved: false, error: result.error.message };
+    if (String(result.error.code || "") === "40001") throw new AdminVersionConflictError();
+    return {
+      saved: false,
+      setupRequired: isMissingAdminCatalogRpc(result.error),
+      error: isMissingAdminCatalogRpc(result.error)
+        ? "Supabase draft creation is locked until supabase/jju_admin_catalog_cas_2026_08_21.sql is applied."
+        : result.error.message,
+    };
   }
-
-  const aliases = rows.flatMap(row => row.slug_aliases.map(alias => ({
-    alias,
-    book_id: row.id,
-  })));
-
-  if (aliases.length) {
-    const aliasResult = await supabase
-      .from("book_slug_aliases")
-      .upsert(aliases, { onConflict: "alias" });
-    if (aliasResult.error && !isMissingSupabaseCatalogTable(aliasResult.error)) {
-      return { saved: false, error: aliasResult.error.message };
-    }
-  }
-
-  return { saved: true, books: rows.map(row => catalogRowToBook(row)) };
+  const data = result.data && typeof result.data === "object" ? result.data as Record<string, unknown> : {};
+  const revision = String(data.revision || "").trim();
+  const contentVersion = Number(data.contentVersion || 0);
+  if (!revision || !contentVersion) return { saved: false, error: "Atomic Supabase draft creation returned an invalid result." };
+  return { saved: true, revision, contentVersion };
 }

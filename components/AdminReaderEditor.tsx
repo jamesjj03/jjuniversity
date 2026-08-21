@@ -30,6 +30,7 @@ type ContentBook = {
 
 type Props = {
   book: Book;
+  onDirtyChange?: (dirty: boolean) => void;
 };
 
 const SECTION_KINDS = ["chapter", "title", "dedication", "toc", "acknowledgments", "about", "copyright", "backmatter", "default"];
@@ -60,9 +61,11 @@ function readerStyle() {
   `;
 }
 
-export default function AdminReaderEditor({ book }: Props) {
+export default function AdminReaderEditor({ book, onDirtyChange }: Props) {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const injectedHtmlRef = useRef("");
+  const dirtyCallbackRef = useRef(onDirtyChange);
+  const bookTitleRef = useRef(book.title);
   const [sections, setSections] = useState<Section[]>([]);
   const [sectionId, setSectionId] = useState("");
   const [html, setHtml] = useState("");
@@ -76,14 +79,36 @@ export default function AdminReaderEditor({ book }: Props) {
   const [busy, setBusy] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [message, setMessage] = useState("");
+  const [loadError, setLoadError] = useState("");
+  const [contentVersion, setContentVersion] = useState("");
 
   const section = useMemo(() => sections.find(item => item.id === sectionId) || sections[0], [sectionId, sections]);
+
+  useEffect(() => {
+    dirtyCallbackRef.current = onDirtyChange;
+  }, [onDirtyChange]);
+
+  useEffect(() => {
+    bookTitleRef.current = book.title;
+  }, [book.title]);
+
+  useEffect(() => {
+    onDirtyChange?.(dirty);
+  }, [dirty, onDirtyChange]);
+
+  useEffect(() => () => dirtyCallbackRef.current?.(false), []);
 
   useEffect(() => {
     let cancelled = false;
     queueMicrotask(() => {
       if (cancelled) return;
       setBusy(true);
+      setLoadError("");
+      setSections([]);
+      setSectionId("");
+      setHtml("");
+      setContentVersion("");
+      setDirty(false);
       setMessage("Loading JSON content editor...");
     });
 
@@ -91,6 +116,8 @@ export default function AdminReaderEditor({ book }: Props) {
       .then(async response => {
         const data = await response.json() as ContentBook & { error?: string };
         if (!response.ok) throw new Error(data.error || "Could not load book content.");
+        const nextVersion = response.headers.get("etag");
+        if (!nextVersion) throw new Error("The manuscript source returned no version. Editing is locked until it is reloaded safely.");
         if (cancelled) return;
         const nextSections = Array.isArray(data.sections) ? data.sections.sort((a, b) => a.index - b.index) : [];
         const first = nextSections[0];
@@ -99,15 +126,25 @@ export default function AdminReaderEditor({ book }: Props) {
         setHtml(first?.html || "");
         setSectionTitle(first?.title || "");
         setSectionKind(first?.kind || "chapter");
-        setContentTitle(data.title || book.title);
+        setContentTitle(data.title || bookTitleRef.current);
         setContentCreator(data.creator || "");
         setContentDescription(data.description || "");
         setContentFile(data.contentFile || "");
+        setContentVersion(nextVersion);
         setDirty(false);
         setMessage(`${nextSections.length} sections ready${data.contentFile ? ` from ${data.contentFile}` : ""}${data.contentSource ? ` (${data.contentSource})` : ""}.`);
       })
       .catch(error => {
-        if (!cancelled) setMessage(error instanceof Error ? error.message : "Could not load book content.");
+        if (!cancelled) {
+          const nextMessage = error instanceof Error ? error.message : "Could not load book content.";
+          setLoadError(nextMessage);
+          setMessage(nextMessage);
+          setSections([]);
+          setSectionId("");
+          setHtml("");
+          setContentVersion("");
+          setDirty(false);
+        }
       })
       .finally(() => {
         if (!cancelled) setBusy(false);
@@ -116,7 +153,7 @@ export default function AdminReaderEditor({ book }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [book.id, book.title]);
+  }, [book.id]);
 
   useEffect(() => {
     const node = editorRef.current;
@@ -126,6 +163,11 @@ export default function AdminReaderEditor({ book }: Props) {
   }, [html, section?.id]);
 
   function chooseSection(id: string) {
+    if (id === section?.id) return;
+    if (dirty) {
+      setMessage("Save this manuscript before switching sections.");
+      return;
+    }
     const next = sections.find(item => item.id === id);
     setSectionId(id);
     setHtml(next?.html || "");
@@ -135,8 +177,7 @@ export default function AdminReaderEditor({ book }: Props) {
   }
 
   function syncFromEditor() {
-    const nextHtml = editorRef.current?.innerHTML || "";
-    setDirty(nextHtml !== section?.html || sectionTitle !== section?.title || sectionKind !== (section?.kind || "chapter"));
+    setDirty(true);
   }
 
   function currentHtml() {
@@ -161,6 +202,10 @@ export default function AdminReaderEditor({ book }: Props) {
   }
 
   function addSection() {
+    if (dirty) {
+      setMessage("Save this manuscript before adding another section.");
+      return;
+    }
     const nextIndex = sections.length;
     const nextId = `section-${String(nextIndex + 1).padStart(3, "0")}-${Date.now().toString(36)}`;
     const nextSection: Section = {
@@ -184,6 +229,10 @@ export default function AdminReaderEditor({ book }: Props) {
 
   function deleteSection() {
     if (!section || sections.length <= 1) return;
+    if (dirty) {
+      setMessage("Save this manuscript before deleting a section.");
+      return;
+    }
     const nextSections = sections
       .filter(item => item.id !== section.id)
       .map((item, index) => ({ ...item, index }));
@@ -214,7 +263,10 @@ export default function AdminReaderEditor({ book }: Props) {
   }
 
   async function saveSection() {
-    if (!section) return;
+    if (!section || !contentVersion) {
+      setMessage("Reload this manuscript before saving; its source version is missing.");
+      return;
+    }
     const nextHtml = currentHtml();
     setBusy(true);
     setMessage("Saving JSON content...");
@@ -222,7 +274,10 @@ export default function AdminReaderEditor({ book }: Props) {
     try {
       const response = await fetch(`/api/admin/content/${encodeURIComponent(book.id)}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "If-Match": contentVersion,
+        },
         body: JSON.stringify({
           sectionId: section.id,
           html: nextHtml,
@@ -239,6 +294,8 @@ export default function AdminReaderEditor({ book }: Props) {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Save failed.");
+      const nextVersion = response.headers.get("etag");
+      if (!nextVersion) throw new Error("The manuscript saved but returned no new source version. Reload before making another edit.");
       const nextSections = Array.isArray(data.sections) ? data.sections.sort((a: Section, b: Section) => a.index - b.index) : sections;
       setSections(nextSections);
       const nextSection = nextSections.find((item: Section) => item.id === section.id);
@@ -249,6 +306,7 @@ export default function AdminReaderEditor({ book }: Props) {
       setContentCreator(data.creator || contentCreator);
       setContentDescription(data.description || contentDescription);
       setContentFile(data.contentFile || contentFile);
+      setContentVersion(nextVersion);
       setDirty(false);
       setMessage(data.commit ? `Saved live through GitHub: ${data.commit}` : data.note || "Saved JSON content locally.");
     } catch (error) {
@@ -259,7 +317,7 @@ export default function AdminReaderEditor({ book }: Props) {
   }
 
   return (
-    <section className="adminPanel adminReaderPanel">
+    <section className="adminPanel adminReaderPanel" aria-busy={busy}>
       <style>{readerStyle()}</style>
       <div className="pathBuilderTop">
         <div>
@@ -269,15 +327,16 @@ export default function AdminReaderEditor({ book }: Props) {
           {contentFile && <p className="modelStatus ready">Source: public/book-content/{contentFile}</p>}
         </div>
         <div className="adminActions">
-          <button className="resetBtn" onClick={() => setEditMode(value => !value)}>{editMode ? "Preview" : "Edit"}</button>
-          <button className="resetBtn" disabled={busy} onClick={addSection}>Add Section</button>
-          <button className="resetBtn" disabled={busy || !section || sections.length <= 1} onClick={deleteSection}>Delete Section</button>
-          <button className="formBtn" disabled={busy || !section || !dirty} onClick={saveSection}>{busy ? "Saving..." : dirty ? "Save JSON" : "Saved"}</button>
+          <button className="resetBtn" disabled={busy || Boolean(loadError)} onClick={() => setEditMode(value => !value)}>{editMode ? "Preview" : "Edit"}</button>
+          <button className="resetBtn" disabled={busy || Boolean(loadError)} onClick={addSection}>Add Section</button>
+          <button className="resetBtn" disabled={busy || Boolean(loadError) || !section || sections.length <= 1} onClick={deleteSection}>Delete Section</button>
+          <button id="admin-manuscript-save" className="formBtn" disabled={busy || Boolean(loadError) || !contentVersion || !section || !dirty} onClick={saveSection}>{busy ? "Saving..." : dirty ? "Save Manuscript" : "Manuscript Saved"}</button>
         </div>
       </div>
 
       {message && <div className="adminNotice">{message}</div>}
 
+      <fieldset className="adminReaderFields" disabled={busy || Boolean(loadError)} aria-busy={busy}>
       <section className="contentMetaGrid">
         <label>
           <span>Content title</span>
@@ -334,12 +393,13 @@ export default function AdminReaderEditor({ book }: Props) {
           <div
             ref={editorRef}
             className="adminReaderDoc"
-            contentEditable={editMode}
+            contentEditable={editMode && !busy && !loadError}
             suppressContentEditableWarning
             onInput={syncFromEditor}
           />
         </div>
       </div>
+      </fieldset>
     </section>
   );
 }

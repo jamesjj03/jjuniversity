@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { PRIMARY_CATEGORIES, TAG_TO_PRIMARY } from "@/lib/taxonomy";
 import AdminReaderEditor from "@/components/AdminReaderEditor";
 import { coverFallbackSrc, coverWebpSrc } from "@/lib/cover";
@@ -9,6 +8,7 @@ import CoverImage from "@/components/CoverImage";
 import FiberAdminEditor from "@/components/FiberAdminEditor";
 import { DEFAULT_FIBER_CONFIG, FiberConfig, normalizeFiberConfig } from "@/lib/fiberConfig";
 import AtlasClient from "@/components/AtlasClient";
+import { useAdminUnsavedChanges } from "@/components/AdminUnsavedChanges";
 
 type Book = {
   id: string;
@@ -53,6 +53,7 @@ type ReadingPath = {
 type PathsFile = {
   generated: string;
   generatedAt?: string;
+  correctionsAppliedAt?: string;
   counts?: Record<string, unknown>;
   series: ReadingPath[];
   paths: ReadingPath[];
@@ -118,14 +119,25 @@ const DEFAULT_BOOK_DRAFT: BookDraft = {
   archiveCategory: "Unsorted Archive",
 };
 
-type AdminView = "add" | "editor" | "tagger" | "paths" | "content" | "atlas" | "site" | "fiber";
+type AdminView = "add" | "editor" | "paths" | "atlas" | "site" | "fiber";
+type AdminResource = "books" | "paths" | "site" | "fiber";
+type LoadStatus = "loading" | "ready" | "error";
+type LoadState = Record<AdminResource, { status: LoadStatus; error: string }>;
+type ResourceVersions = Record<AdminResource, string>;
+
+const INITIAL_LOAD_STATE: LoadState = {
+  books: { status: "loading", error: "" },
+  paths: { status: "loading", error: "" },
+  site: { status: "loading", error: "" },
+  fiber: { status: "loading", error: "" },
+};
 
 const ADMIN_VIEWS: Array<{ id: AdminView; label: string; description: string }> = [
-  { id: "editor", label: "Books", description: "Metadata, shelves, tags, and content." },
-  { id: "paths", label: "Series", description: "Series order and book lists." },
-  { id: "atlas", label: "Atlas", description: "Knowledge graph and quality queues." },
-  { id: "site", label: "Site", description: "Featured series and newest order." },
-  { id: "fiber", label: "Fiber", description: "Private quote page settings." },
+  { id: "editor", label: "Books", description: "Metadata, shelves, tags, and content" },
+  { id: "paths", label: "Series", description: "Order and book lists" },
+  { id: "site", label: "Homepage", description: "Featured and newest" },
+  { id: "atlas", label: "Atlas quick", description: "Visibility and inventory" },
+  { id: "fiber", label: "Fiber", description: "Private quote page" },
 ];
 
 function normalize(book: Partial<Book>): Book {
@@ -155,8 +167,10 @@ function normalizePath(item: Partial<ReadingPath>, fallbackType: ReadingPath["ty
   const title = String(item.title || item.id || "Untitled path").trim();
   const type = item.type || fallbackType;
   return {
+    ...item,
     id: String(item.id || title.toLowerCase().replace(/[^a-z0-9]+/g, "-")).trim().toLowerCase(),
     title,
+    aliases: Array.isArray(item.aliases) ? item.aliases.map(String).filter(Boolean) : [],
     kind: String(item.kind || type).trim(),
     type,
     level: item.level || "intermediate",
@@ -164,9 +178,10 @@ function normalizePath(item: Partial<ReadingPath>, fallbackType: ReadingPath["ty
     tags: Array.isArray(item.tags) ? item.tags.map(String).filter(Boolean) : [],
     bookCount: Number(item.bookCount || item.books?.length || 0),
     books: Array.isArray(item.books) ? item.books.map((book, index) => ({
+      ...book,
       id: String(book.id || "").trim().toLowerCase(),
       order: Number(book.order || index + 1),
-      note: "",
+      note: String(book.note || ""),
     })).filter(book => book.id) : [],
     deleted: Boolean(item.deleted),
   };
@@ -174,8 +189,10 @@ function normalizePath(item: Partial<ReadingPath>, fallbackType: ReadingPath["ty
 
 function normalizePathsFile(data: Partial<PathsFile> | null | undefined): PathsFile {
   return {
+    ...data,
     generated: String(data?.generated || data?.generatedAt || new Date().toISOString()),
     generatedAt: data?.generatedAt || data?.generated,
+    correctionsAppliedAt: data?.correctionsAppliedAt,
     counts: data?.counts,
     series: Array.isArray(data?.series) ? data.series.map(item => normalizePath(item, "series")) : [],
     paths: Array.isArray(data?.paths) ? data.paths.map(item => normalizePath(item)) : [],
@@ -242,6 +259,7 @@ function legacyCoverFor(book: Partial<Book> | undefined, fallbackId = "") {
 }
 
 export default function AdminClient() {
+  const { setUnsaved } = useAdminUnsavedChanges();
   const [books, setBooks] = useState<Book[]>([]);
   const [pathsFile, setPathsFile] = useState<PathsFile>({ generated: "", series: [], paths: [] });
   const [site, setSite] = useState<SiteConfig>(DEFAULT_SITE);
@@ -255,6 +273,7 @@ export default function AdminClient() {
   const [selectedPathId, setSelectedPathId] = useState("");
   const [selectedPathIds, setSelectedPathIds] = useState<string[]>([]);
   const [bookPickerOpen, setBookPickerOpen] = useState(false);
+  const [libraryPickerOpen, setLibraryPickerOpen] = useState(false);
   const [adminView, setAdminView] = useState<AdminView>("editor");
   const [activeTag, setActiveTag] = useState("All");
   const [activeCategory, setActiveCategory] = useState("All");
@@ -265,37 +284,105 @@ export default function AdminClient() {
   const [pathsDirty, setPathsDirty] = useState(false);
   const [siteDirty, setSiteDirty] = useState(false);
   const [fiberDirty, setFiberDirty] = useState(false);
+  const [bookDraftDirty, setBookDraftDirty] = useState(false);
+  const [manuscriptDirty, setManuscriptDirty] = useState(false);
+  const [loadState, setLoadState] = useState<LoadState>(INITIAL_LOAD_STATE);
+  const [resourceVersions, setResourceVersions] = useState<ResourceVersions>({ books: "", paths: "", site: "", fiber: "" });
+  const libraryPickerTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const libraryPickerCloseRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    fetch("/api/admin/books")
-      .then(response => response.json())
-      .then(data => {
-        const arr = Array.isArray(data) ? data : data.books || [];
-        const normalized = arr.map(normalize);
-        setBooks(normalized);
-        setSelectedId(normalized[0]?.id || "");
-      })
-      .catch(() => setMessage("Could not load library metadata."));
+    let cancelled = false;
 
-    fetch("/api/admin/paths")
-      .then(response => response.json())
-      .then(data => {
-        const normalized = normalizePathsFile(data);
-        setPathsFile(normalized);
-        setSelectedPathId(normalized.paths[0]?.id || normalized.tagPaths?.[0]?.id || normalized.recommendedReading?.[0]?.id || "");
-      })
-      .catch(() => setMessage("Could not load paths.json."));
+    async function loadResource(resource: AdminResource, url: string, apply: (data: unknown) => void) {
+      try {
+        const response = await fetch(url);
+        const data = await response.json().catch(() => null) as { error?: string } | null;
+        if (!response.ok) throw new Error(data?.error || `${resource} returned ${response.status}.`);
+        if (data === null) throw new Error(`${resource} returned an unreadable response.`);
+        const version = response.headers.get("etag");
+        if (!version) throw new Error(`${resource} returned no editable version. Reloading cannot be made safe.`);
+        if (!Array.isArray(data) && typeof data === "object" && typeof data.error === "string" && data.error) {
+          throw new Error(data.error);
+        }
+        if (cancelled) return;
+        apply(data);
+        setResourceVersions(current => ({ ...current, [resource]: version }));
+        setLoadState(current => ({ ...current, [resource]: { status: "ready", error: "" } }));
+      } catch (error) {
+        if (cancelled) return;
+        const detail = error instanceof Error ? error.message : `Could not load ${resource}.`;
+        setLoadState(current => ({ ...current, [resource]: { status: "error", error: detail } }));
+        setMessage(`Workshop is locked because ${resource} did not load: ${detail}`);
+      }
+    }
 
-    fetch("/api/admin/site")
-      .then(response => response.json())
-      .then(data => setSite(normalizeSiteConfig(data)))
-      .catch(() => setMessage("Could not load site settings."));
+    void loadResource("books", "/api/admin/books", data => {
+      const payload = data as { books?: unknown } | unknown[];
+      const arr = Array.isArray(payload) ? payload : payload.books;
+      if (!Array.isArray(arr) || !arr.length) throw new Error("Books response did not include a nonempty catalog array.");
+      const rawIds = arr.map(item => item && typeof item === "object" ? String((item as Partial<Book>).id || "").trim().toLowerCase() : "");
+      if (rawIds.some(id => !id) || new Set(rawIds).size !== rawIds.length) throw new Error("Books response has missing or duplicate ids.");
+      const normalized = arr.map(item => normalize(item as Partial<Book>));
+      setBooks(normalized);
+      setSelectedId(normalized[0]?.id || "");
+    });
 
-    fetch("/api/admin/fiber")
-      .then(response => response.json())
-      .then(data => setFiber(normalizeFiberConfig(data)))
-      .catch(() => setMessage("Could not load fiber settings."));
+    void loadResource("paths", "/api/admin/paths", data => {
+      const raw = data as Partial<PathsFile>;
+      if (!data || typeof data !== "object" || !Array.isArray(raw.series) || !Array.isArray(raw.paths)) {
+        throw new Error("Paths response did not include the expected configuration.");
+      }
+      const rawGroups = [...raw.series, ...raw.paths, ...(raw.tagPaths || []), ...(raw.recommendedReading || [])];
+      if (!rawGroups.length || rawGroups.some(group => !group?.id || !group?.title || !Array.isArray(group.books) || !group.books.length)) {
+        throw new Error("Paths response is empty or contains an invalid group.");
+      }
+      const normalized = normalizePathsFile(raw);
+      setPathsFile(normalized);
+      setSelectedPathId(normalized.paths[0]?.id || normalized.tagPaths?.[0]?.id || normalized.recommendedReading?.[0]?.id || "");
+    });
+
+    void loadResource("site", "/api/admin/site", data => {
+      const raw = data as Partial<SiteConfig>;
+      if (!data || typeof data !== "object" || !Array.isArray(raw.homeCards) || !raw.homeCards.length || !raw.library
+        || !Array.isArray(raw.library.featuredPathIds) || !Array.isArray(raw.library.newestIds)
+        || typeof raw.atlas?.visible !== "boolean" || typeof raw.fiber?.visible !== "boolean") {
+        throw new Error("Site response did not include the expected configuration.");
+      }
+      setSite(normalizeSiteConfig(raw));
+    });
+
+    void loadResource("fiber", "/api/admin/fiber", data => {
+      const raw = data as Partial<FiberConfig>;
+      if (!data || typeof data !== "object" || !raw.theme || !raw.sections || !raw.hero || !raw.contact || !raw.quote
+        || !Array.isArray(raw.quote.plans) || !raw.quote.plans.length || !raw.faq || !Array.isArray(raw.faq.items)) {
+        throw new Error("Fiber response did not include the expected configuration.");
+      }
+      setFiber(normalizeFiberConfig(data as FiberConfig));
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
+  useEffect(() => {
+    setUnsaved("books-workspace", dirty || pathsDirty || siteDirty || fiberDirty);
+  }, [dirty, fiberDirty, pathsDirty, setUnsaved, siteDirty]);
+
+  useEffect(() => {
+    setUnsaved("book-manuscript", manuscriptDirty);
+  }, [manuscriptDirty, setUnsaved]);
+
+  useEffect(() => {
+    setUnsaved("new-book-draft", bookDraftDirty);
+  }, [bookDraftDirty, setUnsaved]);
+
+  useEffect(() => () => {
+    setUnsaved("books-workspace", false);
+    setUnsaved("book-manuscript", false);
+    setUnsaved("new-book-draft", false);
+  }, [setUnsaved]);
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
@@ -347,13 +434,19 @@ export default function AdminClient() {
     });
   }, [allPathItems, pathQuery]);
   const selected = books.find(book => book.id === selectedId) || visible[0] || books[0];
+  const mobileBookOptions = selected && !visible.some(book => book.id === selected.id) ? [selected, ...visible] : visible;
   const selectedPath = allPathItems.find(item => item.id === selectedPathId) || allPathItems[0];
+  const loadFailures = (Object.entries(loadState) as Array<[AdminResource, LoadState[AdminResource]]>)
+    .filter(([, state]) => state.status === "error");
+  const workspaceReady = Object.values(loadState).every(state => state.status === "ready");
+  const workspaceLoading = Object.values(loadState).some(state => state.status === "loading");
+  const workspaceDirty = dirty || pathsDirty || siteDirty || fiberDirty;
   const stats = {
     total: books.length,
     untitled: books.filter(book => book.title.toLowerCase() === book.id.toLowerCase()).length,
     untagged: books.filter(book => !book.tags.length).length,
     archive: books.filter(book => book.visibility === "archive").length,
-    changed: dirty || pathsDirty || siteDirty || fiberDirty ? "Yes" : "No",
+    changed: workspaceDirty || manuscriptDirty || bookDraftDirty ? "Yes" : "No",
   };
 
   const tagGroups = useMemo(() => {
@@ -380,42 +473,102 @@ export default function AdminClient() {
   }, [books, pickerQuery, pickerTag, selectedPath]);
 
   function patchBook(id: string, patch: Partial<Book>) {
+    if (!workspaceReady || busy) return;
     setDirty(true);
     setBooks(current => current.map(book => book.id === id ? normalize({ ...book, ...patch }) : book));
   }
 
   function chooseAdminView(view: AdminView) {
+    if (view === "add" && dirty) {
+      setMessage("Save the current book metadata before creating another book.");
+      return;
+    }
+    if (view !== "editor" && manuscriptDirty && !window.confirm("This manuscript has unsaved changes. Leave the editor and discard them?")) return;
+    closeLibraryPicker(false);
+    if (view !== "editor") setManuscriptDirty(false);
     setAdminView(view);
   }
 
+  const closeLibraryPicker = useCallback((returnFocus = true) => {
+    setLibraryPickerOpen(false);
+    if (returnFocus) window.requestAnimationFrame(() => libraryPickerTriggerRef.current?.focus());
+  }, []);
+
+  function openLibraryPicker() {
+    setLibraryPickerOpen(true);
+  }
+
+  function chooseBook(bookId: string, closePicker = false) {
+    if (bookId === selected?.id) {
+      if (closePicker) closeLibraryPicker();
+      return;
+    }
+    if (manuscriptDirty && !window.confirm("This manuscript has unsaved changes. Switch books and discard them?")) return;
+    setManuscriptDirty(false);
+    setSelectedId(bookId);
+    if (closePicker) closeLibraryPicker();
+  }
+
+  useEffect(() => {
+    if (!libraryPickerOpen) return;
+    window.requestAnimationFrame(() => libraryPickerCloseRef.current?.focus());
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      closeLibraryPicker();
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [closeLibraryPicker, libraryPickerOpen]);
+
   function patchBookDraft(patch: Partial<BookDraft>) {
+    if (!workspaceReady || busy) return;
+    setBookDraftDirty(true);
     setBookDraft(current => ({ ...current, ...patch }));
   }
 
+  function clearBookDraft() {
+    setBookDraft(DEFAULT_BOOK_DRAFT);
+    setBookDraftDirty(false);
+  }
+
   function patchFiber(next: FiberConfig) {
+    if (!workspaceReady || busy) return;
     setFiberDirty(true);
     setFiber(normalizeFiberConfig(next));
   }
 
   async function submitBookDraft(draft: BookDraftPayload, successMessage: string) {
+    if (!workspaceReady || busy) {
+      setMessage("Workshop data must finish loading successfully before creating a book.");
+      return;
+    }
+    if (dirty) {
+      setMessage("Save the current book metadata before creating another book. Nothing was created.");
+      return;
+    }
     setBusy(true);
     setMessage("Creating book draft...");
 
     try {
       const response = await fetch("/api/admin/book-draft", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "If-Match": resourceVersions.books },
         body: JSON.stringify(draft),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Book draft creation failed.");
+      const nextVersion = response.headers.get("etag");
+      if (!nextVersion) throw new Error("Book creation returned no catalog version. Reload before making another change.");
       const nextBooks = (data.books || books).map(normalize);
       setBooks(nextBooks);
+      setResourceVersions(current => ({ ...current, books: nextVersion }));
       setSelectedId(String(data.book?.id || ""));
       setQuery(String(data.book?.id || data.book?.title || ""));
       setBookDraft(DEFAULT_BOOK_DRAFT);
+      setBookDraftDirty(false);
       setDirty(false);
-      setAdminView("content");
+      setAdminView("editor");
       setMessage(data.note || successMessage || `Created ${data.book?.title || "book draft"}. Opened the content editor.`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Book draft creation failed.");
@@ -425,6 +578,10 @@ export default function AdminClient() {
   }
 
   async function createBlankBook() {
+    if (bookDraftDirty) {
+      setMessage("Clear the filled new-book draft before starting a blank book so pasted text is not discarded.");
+      return;
+    }
     await submitBookDraft({
       quick: true,
       creator: bookDraft.creator || DEFAULT_BOOK_DRAFT.creator,
@@ -547,7 +704,7 @@ export default function AdminClient() {
   }
 
   function updatePathBooks(pathId: string, books: PathBook[]) {
-    patchPath(pathId, { books: books.map((book, index) => ({ ...book, note: "", order: index + 1 })) });
+    patchPath(pathId, { books: books.map((book, index) => ({ ...book, note: String(book.note || ""), order: index + 1 })) });
   }
 
   function addPathBook(bookId: string) {
@@ -615,34 +772,47 @@ export default function AdminClient() {
   }
 
   async function saveAll(exportBooks = false) {
+    if (!workspaceReady || busy) {
+      setMessage("Save and export stay locked until every Workshop resource loads successfully.");
+      return;
+    }
     setBusy(true);
     setMessage("Saving admin changes...");
     const saved: string[] = [];
 
     try {
-      if (dirty || exportBooks) {
+      if (dirty) {
         const response = await fetch("/api/admin/books", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "If-Match": resourceVersions.books },
           body: JSON.stringify({ books, message: "Update JJU library metadata" }),
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error || "Book save failed.");
+        const nextVersion = response.headers.get("etag");
+        if (!nextVersion) throw new Error("Book save returned no version. Reload before saving again.");
         setBooks((data.books || books).map(normalize));
+        setResourceVersions(current => ({ ...current, books: nextVersion }));
         setDirty(false);
         if (exportBooks) downloadJson(data.books || books);
         saved.push("books");
+      } else if (exportBooks) {
+        downloadJson(books);
+        saved.push("books export");
       }
 
       if (pathsDirty) {
         const response = await fetch("/api/admin/paths", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "If-Match": resourceVersions.paths },
           body: JSON.stringify({ paths: pathsFile, message: "Update JJU reading paths" }),
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error || "Path save failed.");
+        const nextVersion = response.headers.get("etag");
+        if (!nextVersion) throw new Error("Path save returned no version. Reload before saving again.");
         setPathsFile(normalizePathsFile(data.paths));
+        setResourceVersions(current => ({ ...current, paths: nextVersion }));
         setPathsDirty(false);
         saved.push("paths");
       }
@@ -650,12 +820,15 @@ export default function AdminClient() {
       if (siteDirty) {
         const response = await fetch("/api/admin/site", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "If-Match": resourceVersions.site },
           body: JSON.stringify({ site, message: "Update JJU site settings" }),
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error || "Site settings save failed.");
+        const nextVersion = response.headers.get("etag");
+        if (!nextVersion) throw new Error("Site save returned no version. Reload before saving again.");
         setSite(normalizeSiteConfig(data.site));
+        setResourceVersions(current => ({ ...current, site: nextVersion }));
         setSiteDirty(false);
         saved.push("site");
       }
@@ -663,12 +836,15 @@ export default function AdminClient() {
       if (fiberDirty) {
         const response = await fetch("/api/admin/fiber", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "If-Match": resourceVersions.fiber },
           body: JSON.stringify({ fiber, message: "Update JJU fiber page settings" }),
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error || "Fiber settings save failed.");
+        const nextVersion = response.headers.get("etag");
+        if (!nextVersion) throw new Error("Fiber save returned no version. Reload before saving again.");
         setFiber(normalizeFiberConfig(data.fiber));
+        setResourceVersions(current => ({ ...current, fiber: nextVersion }));
         setFiberDirty(false);
         saved.push("fiber");
       }
@@ -682,29 +858,49 @@ export default function AdminClient() {
   }
 
   return (
-    <main className={`page adminPage ${adminView}AdminView`}>
+    <main
+      className={`page adminPage ${adminView}AdminView`}
+      aria-busy={busy || workspaceLoading}
+      inert={busy ? true : undefined}
+    >
       <section className="adminHero">
         <div>
-          <p className="kicker">JJU Admin</p>
-          <h1>Admin Studio</h1>
+          <p className="kicker">Library desk</p>
+          <h1>Books &amp; publishing</h1>
           <div className="adminPulse" aria-label="Admin snapshot">
             <span><strong>{stats.total}</strong> books</span>
             <span><strong>{stats.changed}</strong> unsaved</span>
           </div>
         </div>
         <div className="adminActions">
-          <Link className="resetBtn" href="/admin/editorial">Editorial Reviews</Link>
-          <button className="resetBtn" disabled={busy} onClick={() => chooseAdminView(adminView === "add" ? "editor" : "add")}>
+          <button className="resetBtn" disabled={busy || !workspaceReady} onClick={() => chooseAdminView(adminView === "add" ? "editor" : "add")}>
             {adminView === "add" ? "Back to Books" : "New Book"}
           </button>
-          <button className="formBtn saveEverythingBtn" disabled={busy || (!dirty && !pathsDirty && !siteDirty && !fiberDirty)} onClick={() => saveAll(false)}>
-            {busy ? "Saving..." : dirty || pathsDirty || siteDirty || fiberDirty ? "Save Changes" : "Saved"}
+          <button className="formBtn saveEverythingBtn" disabled={busy || !workspaceReady || !workspaceDirty} onClick={() => saveAll(false)}>
+            {busy ? "Saving..." : workspaceDirty ? "Save Changes" : "Saved"}
           </button>
-          <button className="resetBtn" disabled={busy} onClick={() => saveAll(true)}>Export Books</button>
+          <button className="resetBtn" disabled={busy || !workspaceReady} onClick={() => saveAll(true)}>Export Books</button>
         </div>
       </section>
 
       {message && <div className="adminNotice">{message}</div>}
+
+      {!workspaceReady && (
+        <section className="adminPanel adminLoadGate" role={loadFailures.length ? "alert" : "status"}>
+          <p className="kicker">Protected loading gate</p>
+          <h2>{loadFailures.length ? "Editing is locked" : "Loading Workshop data"}</h2>
+          {loadFailures.length ? (
+            <>
+              <p>No editor, save, or export control is using fallback data. Reload after the protected resources are available.</p>
+              <ul>
+                {loadFailures.map(([resource, state]) => <li key={resource}><strong>{resource}</strong>: {state.error}</li>)}
+              </ul>
+            </>
+          ) : (
+            <p>Books, series, site settings, and Fiber configuration must all arrive before editing opens.</p>
+          )}
+        </section>
+      )}
 
       <nav className="adminSectionTabs" aria-label="Admin sections">
         {ADMIN_VIEWS.map(view => (
@@ -714,6 +910,8 @@ export default function AdminClient() {
           </button>
         ))}
       </nav>
+
+      {workspaceReady && <>
 
       {adminView === "add" && <section className="adminPanel addBookPanel">
         <div className="pathBuilderTop">
@@ -730,7 +928,7 @@ export default function AdminClient() {
             <h3>Blank book shell</h3>
             <p>No EPUB, no cover conversion, no filename wrangling.</p>
           </div>
-          <button className="newBookButton" disabled={busy} onClick={createBlankBook} type="button">
+            <button className="newBookButton" disabled={busy || bookDraftDirty} onClick={createBlankBook} type="button">
             {busy ? "Creating..." : "New Book"}
           </button>
         </section>
@@ -802,7 +1000,7 @@ export default function AdminClient() {
 
           <div className="adminActions">
             <button className="formBtn" disabled={busy} type="submit">{busy ? "Creating..." : "Create From Details"}</button>
-            <button className="resetBtn" disabled={busy} type="button" onClick={() => setBookDraft(DEFAULT_BOOK_DRAFT)}>Clear</button>
+            <button className="resetBtn" disabled={busy} type="button" onClick={clearBookDraft}>Clear</button>
           </div>
         </form>
       </section>}
@@ -1053,12 +1251,32 @@ export default function AdminClient() {
             <option>Archive</option>
           </select>
         </label>
+        <button
+          ref={libraryPickerTriggerRef}
+          className="adminMobilePickerButton"
+          type="button"
+          aria-expanded={libraryPickerOpen}
+          aria-controls="admin-library-picker"
+          onClick={openLibraryPicker}
+        >
+          Browse {visible.length} {visible.length === 1 ? "book" : "books"}
+        </button>
       </section>}
 
       {adminView === "editor" && <section className="adminGrid">
-        <aside className="adminBookCards">
+        <aside
+          id="admin-library-picker"
+          className={libraryPickerOpen ? "adminBookCards adminBookCardsMobileOpen" : "adminBookCards"}
+          role={libraryPickerOpen ? "dialog" : undefined}
+          aria-modal={libraryPickerOpen ? "true" : undefined}
+          aria-labelledby={libraryPickerOpen ? "admin-library-picker-title" : undefined}
+        >
+          <div className="adminMobilePickerHeader">
+            <strong id="admin-library-picker-title">Choose a book</strong>
+            <button ref={libraryPickerCloseRef} className="resetBtn" type="button" onClick={() => closeLibraryPicker()}>Done</button>
+          </div>
           {visible.map(book => (
-            <button className={book.id === selected?.id ? "active adminBookCard" : "adminBookCard"} key={book.id} onClick={() => setSelectedId(book.id)}>
+            <button className={book.id === selected?.id ? "active adminBookCard" : "adminBookCard"} key={book.id} onClick={() => chooseBook(book.id, true)}>
               <CoverImage src={coverFor(book)} fallbackSrc={legacyCoverFor(book)} alt="" width={58} height={87} sizes="58px" />
               <span>
                 <strong>{book.title}</strong>
@@ -1070,6 +1288,12 @@ export default function AdminClient() {
 
         {selected && (
           <div className="adminBookWorkspace">
+          <label className="adminMobileBookSelect">
+            <span>Editing</span>
+            <select className="select" value={selected.id} onChange={event => chooseBook(event.target.value)}>
+              {mobileBookOptions.map(book => <option key={book.id} value={book.id}>{book.title}{visible.some(item => item.id === book.id) ? "" : " (current; filtered out)"}</option>)}
+            </select>
+          </label>
           <section className="adminPanel editorPanel">
             <div className="editorTop">
               <CoverImage src={coverFor(selected)} fallbackSrc={legacyCoverFor(selected)} alt={selected.title} width={120} height={180} sizes="120px" />
@@ -1223,10 +1447,25 @@ export default function AdminClient() {
               ))}
             </div>
           </section>
-          <AdminReaderEditor book={selected} />
+          <AdminReaderEditor book={selected} onDirtyChange={setManuscriptDirty} />
           </div>
         )}
       </section>}
+      </>}
+
+      {workspaceReady && (workspaceDirty || manuscriptDirty) && (
+        <div className="adminMobileSaveDock" role="status" aria-live="polite">
+          <span>{manuscriptDirty ? "Manuscript has its own save" : "Workspace changes waiting"}</span>
+          <div className="adminMobileSaveActions">
+            {workspaceDirty && <button className="formBtn" disabled={busy} onClick={() => saveAll(false)}>
+              {busy ? "Saving..." : "Save workspace"}
+            </button>}
+            {manuscriptDirty && <button className="formBtn" disabled={busy} onClick={() => document.getElementById("admin-manuscript-save")?.click()}>
+              Save manuscript
+            </button>}
+          </div>
+        </div>
+      )}
     </main>
   );
 }

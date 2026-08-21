@@ -1,9 +1,10 @@
-import { readdir, readFile, writeFile } from "fs/promises";
+import { readdir } from "fs/promises";
 import path from "path";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-import { readBooksFromSupabase, saveBooksToSupabase } from "@/lib/bookCatalog";
+import { readBookCatalogSnapshot, saveBooksToSupabase } from "@/lib/bookCatalog";
 import { listLiveBookContentIds } from "@/lib/bookContent";
+import { readGithubJson, readLocalJson, writeGithubJson, writeLocalJson } from "@/lib/adminVersionedJson";
 
 type BookRecord = Record<string, unknown>;
 
@@ -13,63 +14,28 @@ function contentIdFor(book: BookRecord) {
   return fileStem || id;
 }
 
-async function saveToGithub(content: string, message: string) {
-  const token = process.env.GITHUB_TOKEN;
-  const repo = process.env.GITHUB_REPO;
-  const branch = process.env.GITHUB_BRANCH || "main";
-
-  if (!token || !repo) return null;
-
-  const apiUrl = `https://api.github.com/repos/${repo}/contents/public/books.json?ref=${encodeURIComponent(branch)}`;
-  const current = await fetch(apiUrl, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
-
-  if (!current.ok) throw new Error("Could not read books.json from GitHub.");
-  const currentData = await current.json();
-
-  const updated = await fetch(`https://api.github.com/repos/${repo}/contents/public/books.json`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-    body: JSON.stringify({
-      message,
-      branch,
-      sha: currentData.sha,
-      content: Buffer.from(content, "utf8").toString("base64"),
-    }),
-  });
-
-  if (!updated.ok) {
-    const error = await updated.json().catch(() => ({}));
-    throw new Error(error.message || "GitHub save failed.");
-  }
-
-  return updated.json();
-}
-
 async function readBooks() {
-  const supabaseBooks = await readBooksFromSupabase().catch(() => null);
-  if (supabaseBooks) return { books: supabaseBooks as BookRecord[], source: "supabase" as const };
+  const supabase = await readBookCatalogSnapshot();
+  if (supabase) return { books: supabase.books as BookRecord[], source: "supabase" as const, revision: supabase.revision };
 
-  const booksPath = path.join(process.cwd(), "public", "books.json");
-  const data = JSON.parse(await readFile(booksPath, "utf8"));
-  return { books: (Array.isArray(data) ? data : data.books || []) as BookRecord[], source: "file" as const };
+  const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "books.json");
+  const github = await readGithubJson("public/books.json");
+  if (github) {
+    const value = github.value as { books?: unknown };
+    return { books: (Array.isArray(value) ? value : value.books || []) as BookRecord[], source: "github" as const, version: github.version };
+  }
+  const local = await readLocalJson(booksPath);
+  const value = local.value as { books?: unknown };
+  return { books: (Array.isArray(value) ? value : value.books || []) as BookRecord[], source: "file" as const, version: local.version };
 }
 
 export async function POST() {
   try {
-    const booksPath = path.join(process.cwd(), "public", "books.json");
-    const contentDir = path.join(process.cwd(), "public", "book-content");
-    const { books, source } = await readBooks();
+    const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "books.json");
+    const contentDir = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "book-content");
+    const loaded = await readBooks();
+    const { books, source } = loaded;
+    if (!books.length) throw new Error("Availability update is locked because the catalog source is empty.");
     const liveContentIds = await listLiveBookContentIds();
     const files = new Set((await readdir(contentDir)).filter(file => file.toLowerCase().endsWith(".json")).map(file => file.toLowerCase()));
 
@@ -93,8 +59,9 @@ export async function POST() {
     });
 
     const content = `${JSON.stringify(updated, null, 2)}\n`;
-    const supabaseSave = await saveBooksToSupabase(updated);
-    if (supabaseSave.saved) {
+    if (source === "supabase") {
+      const supabaseSave = await saveBooksToSupabase(updated, { expectedRevision: loaded.revision });
+      if (!supabaseSave.saved) throw new Error(supabaseSave.error || "Supabase did not save availability.");
       revalidatePath("/library");
       revalidatePath("/sitemap.xml");
       return NextResponse.json({
@@ -106,34 +73,28 @@ export async function POST() {
         note: "Saved availability to Supabase.",
       });
     }
-
-    if (supabaseSave.error && !supabaseSave.tableMissing) {
-      throw new Error(supabaseSave.error);
+    if (source === "github") {
+      const github = await writeGithubJson("public/books.json", content, "Update JJU book availability", loaded.version);
+      if (!github) throw new Error("GitHub availability saving is not configured.");
+      return NextResponse.json({
+        books: updated,
+        comingSoon,
+        ready,
+        source,
+        target: "github",
+        commit: github.data.commit?.html_url,
+      });
     }
 
-    let localSaved = false;
-    let localError = "";
-    try {
-      await writeFile(booksPath, content, "utf8");
-      localSaved = true;
-    } catch (error) {
-      localError = error instanceof Error ? error.message : "Local books.json save failed.";
-    }
-
-    const github = await saveToGithub(content, "Update JJU book availability");
-
-    if (!localSaved && !github) {
-      throw new Error(localError || "Could not save availability locally, and GitHub saving is not configured.");
-    }
+    await writeLocalJson(booksPath, content, loaded.version);
 
     return NextResponse.json({
       books: updated,
       comingSoon,
       ready,
       source,
-      target: github ? "github" : "local",
-      commit: github?.commit?.html_url,
-      note: github ? undefined : "Saved locally. Add GITHUB_TOKEN and GITHUB_REPO to save live through GitHub.",
+      target: "local",
+      note: "Saved locally. Add GITHUB_TOKEN and GITHUB_REPO to save live through GitHub.",
     });
   } catch (error) {
     return NextResponse.json(

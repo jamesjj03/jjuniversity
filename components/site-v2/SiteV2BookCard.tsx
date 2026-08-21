@@ -7,6 +7,9 @@ import SiteV2SaveButton from "./SiteV2SaveButton";
 import styles from "./SiteV2.module.css";
 
 export default function SiteV2BookCard({ book, priority = false }: { book: PublishedBook; priority?: boolean }) {
+  const description = siteV2Description(book);
+  const readingLength = formatBookLength(book);
+
   return (
     <article className={styles.bookCard} data-book-card>
       <Link className={styles.bookCoverLink} href={`/books/${book.slug}`} aria-label={`See details for ${book.title}`}>
@@ -21,14 +24,20 @@ export default function SiteV2BookCard({ book, priority = false }: { book: Publi
             <span className={styles.bookShelfLong}>{siteV2ShelfLabel(book)}</span>
             <span className={styles.bookShelfShort}>{siteV2ShelfShortLabel(book)}</span>
           </span>
-          <SiteV2SaveButton bookId={book.id} compact />
         </div>
         <h2><Link href={`/books/${book.slug}`}>{book.title}</Link></h2>
         {book.subtitle && <p className={styles.bookSubtitle}>{book.subtitle}</p>}
-        {siteV2Description(book) && <p className={styles.bookDescription}>{siteV2Description(book)}</p>}
-        <div className={styles.bookCardMeta}>
-          <span>{formatBookLength(book)}</span>
-          {book.chapterCount > 0 && <span>{book.chapterCount} chapters</span>}
+        {description && (
+          <p className={`${styles.bookDescription} ${book.subtitle ? styles.bookDescriptionWithSubtitle : ""}`}>
+            {description}
+          </p>
+        )}
+        <div className={styles.bookCardFooter}>
+          <div className={styles.bookCardMeta} role="group" aria-label={`${readingLength}${book.chapterCount > 0 ? `, ${book.chapterCount} chapters` : ""}`}>
+            <span>{readingLength}</span>
+            {book.chapterCount > 0 && <span>{book.chapterCount} chapters</span>}
+          </div>
+          <SiteV2SaveButton bookId={book.id} compact />
         </div>
       </div>
     </article>

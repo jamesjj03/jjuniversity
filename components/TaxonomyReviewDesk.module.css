@@ -273,6 +273,95 @@
   background: rgba(129, 39, 57, 0.13);
 }
 
+.topicHealth {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(190px, auto);
+  gap: 18px;
+  align-items: center;
+  margin-top: 10px;
+  padding: 14px 16px;
+  border: 1px solid rgba(227, 159, 49, 0.36);
+  border-radius: 14px;
+  background: rgba(130, 79, 12, 0.16);
+}
+
+.topicHealth > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.topicHealth > div:first-child > strong {
+  font-size: 1rem;
+}
+
+.topicHealth > div:first-child > span {
+  max-width: 720px;
+  color: var(--desk-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.topicHealthMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.topicHealthMetrics span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 6px 8px;
+  color: var(--desk-muted);
+  border: 1px solid var(--desk-line);
+  border-radius: 999px;
+  background: rgba(9, 9, 8, 0.36);
+  font-size: 0.68rem;
+}
+
+.topicHealthMetrics strong {
+  color: #ffe2a6;
+  font-size: 0.78rem;
+}
+
+.topicHealth details {
+  min-width: 190px;
+}
+
+.topicHealth summary {
+  padding: 10px 12px;
+  border: 1px solid var(--desk-line);
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.topicHealthList {
+  display: grid;
+  gap: 5px;
+  max-height: 290px;
+  margin-top: 7px;
+  overflow: auto;
+}
+
+.topicHealthList button {
+  display: grid;
+  gap: 3px;
+  padding: 9px 10px;
+  text-align: left;
+  border: 1px solid var(--desk-line);
+  border-radius: 8px;
+  background: #0d0d0b;
+  cursor: pointer;
+}
+
+.topicHealthList span {
+  color: var(--desk-muted);
+  font-size: 0.66rem;
+}
+
 .overlapAudit > div,
 .overlapAuditAlert > div {
   display: grid;
@@ -1002,13 +1091,19 @@
   }
 
   .overlapAudit,
-  .overlapAuditAlert {
+  .overlapAuditAlert,
+  .topicHealth {
     grid-template-columns: 1fr;
   }
 
   .overlapAudit details,
-  .overlapAuditAlert details {
+  .overlapAuditAlert details,
+  .topicHealth details {
     min-width: 0;
+  }
+
+  .topicHealthMetrics {
+    justify-content: flex-start;
   }
 
   .summaryGrid {

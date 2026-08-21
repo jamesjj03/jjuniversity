@@ -1,7 +1,14 @@
-import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
-import { NextResponse } from "next/server";
-import { prepareBookContentForSave, readBookContent, saveLiveBookContentToSupabase, type BookContent } from "@/lib/bookContent";
+import { prepareBookContentForSave, saveLiveBookContentToSupabase, type BookContent } from "@/lib/bookContent";
+import {
+  adminErrorResponse,
+  assertAdminVersion,
+  expectedAdminVersion,
+  versionedJson,
+  writeGithubJson,
+  writeLocalJson,
+} from "@/lib/adminVersionedJson";
+import { readAdminBookContent, versionAfterContentWrite } from "@/lib/adminBookContent";
 import { bookUrl, getPublicBooksLive } from "@/lib/publishing";
 import { getBookSectionRoutes } from "@/lib/bookSectionRoutes";
 
@@ -13,49 +20,6 @@ type SaveBody = {
   book?: Partial<BookContent>;
   message?: string;
 };
-
-async function saveJsonToGithub(repoPath: string, content: string, message: string) {
-  const token = process.env.GITHUB_TOKEN;
-  const repo = process.env.GITHUB_REPO;
-  const branch = process.env.GITHUB_BRANCH || "main";
-
-  if (!token || !repo) return null;
-
-  const apiUrl = `https://api.github.com/repos/${repo}/contents/${repoPath}?ref=${encodeURIComponent(branch)}`;
-  const current = await fetch(apiUrl, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
-
-  if (!current.ok) throw new Error(`Could not read ${repoPath} from GitHub.`);
-  const currentData = await current.json();
-
-  const updated = await fetch(`https://api.github.com/repos/${repo}/contents/${repoPath}`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-    body: JSON.stringify({
-      message,
-      branch,
-      sha: currentData.sha,
-      content: Buffer.from(content, "utf8").toString("base64"),
-    }),
-  });
-
-  if (!updated.ok) {
-    const error = await updated.json().catch(() => ({}));
-    throw new Error(error.message || "GitHub content save failed.");
-  }
-
-  return updated.json();
-}
 
 async function revalidateBookPages(bookId: string) {
   try {
@@ -80,19 +44,16 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const { book, fileName, publicPath, source } = await readBookContent(id);
+    const { book, fileName, publicPath, source, version } = await readAdminBookContent(id);
 
-    return NextResponse.json({
+    return versionedJson({
       ...book,
       contentFile: fileName,
       contentPath: publicPath,
-      contentSource: source || "file",
-    });
+      contentSource: source,
+    }, version);
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Could not load book content." },
-      { status: 404 },
-    );
+    return adminErrorResponse(error, "Could not load book content.");
   }
 }
 
@@ -102,8 +63,11 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
+    const expectedVersion = expectedAdminVersion(request);
     const body = await request.json().catch(() => ({})) as SaveBody;
-    const { book, fileName, publicPath, absolutePath } = await readBookContent(id);
+    const current = await readAdminBookContent(id);
+    assertAdminVersion(expectedVersion, current.version);
+    const { book, fileName, publicPath, absolutePath } = current;
     const bodySections = Array.isArray(body.book?.sections) ? body.book.sections : null;
     const nextBook = prepareBookContentForSave({
       ...book,
@@ -121,17 +85,20 @@ export async function POST(
     });
     const content = `${JSON.stringify(nextBook, null, 2)}\n`;
     const message = body.message || `Update ${nextBook.title || nextBook.id} content (${new Date().toISOString().slice(0, 10)})`;
-    const supabaseSave = await saveLiveBookContentToSupabase({
-      book: nextBook,
-      fileName,
-      publicPath,
-      message,
-    });
-
-    if (supabaseSave.saved) {
+    if (current.source === "supabase" || current.supabaseAvailable) {
+      const supabaseSave = await saveLiveBookContentToSupabase({
+        book: nextBook,
+        fileName,
+        publicPath,
+        message,
+        expectedVersion: current.source === "supabase" ? current.writeVersion : "supabase:0",
+      });
+      if (!supabaseSave.saved) {
+        throw new Error(supabaseSave.error || "Live manuscript storage became unavailable while saving. Reload before trying again.");
+      }
+      const nextVersion = `supabase:${Math.max(1, Number(supabaseSave.versionNumber || 1))}`;
       await revalidateBookPages(nextBook.id);
-
-      return NextResponse.json({
+      return versionedJson({
         saved: true,
         target: "supabase",
         versionNumber: supabaseSave.versionNumber,
@@ -139,46 +106,34 @@ export async function POST(
         contentFile: fileName,
         contentPath: publicPath,
         ...nextBook,
-      });
+      }, nextVersion);
     }
 
-    if (supabaseSave.error && !supabaseSave.tableMissing) {
-      throw new Error(supabaseSave.error);
+    if (current.source === "github") {
+      const github = await writeGithubJson(publicPath, content, message, current.writeVersion);
+      if (!github) throw new Error("GitHub manuscript saving is not configured.");
+      await revalidateBookPages(nextBook.id);
+      return versionedJson({
+        saved: true,
+        target: "github",
+        commit: github.data?.commit?.html_url,
+        contentFile: fileName,
+        contentPath: publicPath,
+        ...nextBook,
+      }, versionAfterContentWrite(current, github.version));
     }
 
-    let localSaved = false;
-    let localError = "";
-
-    try {
-      await writeFile(absolutePath, content, "utf8");
-      localSaved = true;
-    } catch (error) {
-      localError = error instanceof Error ? error.message : "Local content save failed.";
-    }
-
-    const github = await saveJsonToGithub(publicPath, content, message);
-
-    if (!localSaved && !github) {
-      throw new Error(
-        localError.includes("EROFS")
-          ? "This deployment is read-only, so book content edits must save through GitHub. Add GITHUB_TOKEN and GITHUB_REPO in the hosting environment."
-          : localError || "Could not save book content.",
-      );
-    }
-
-    return NextResponse.json({
+    const local = await writeLocalJson(absolutePath, content, current.writeVersion);
+    await revalidateBookPages(nextBook.id);
+    return versionedJson({
       saved: true,
-      target: github ? "github" : "local",
-      commit: github?.commit?.html_url,
-      note: github ? undefined : "Saved locally. Add GITHUB_TOKEN and GITHUB_REPO to save live through GitHub.",
+      target: "local",
+      note: "Saved locally. Add GitHub configuration before using this editor on a read-only deployment.",
       contentFile: fileName,
       contentPath: publicPath,
       ...nextBook,
-    });
+    }, versionAfterContentWrite(current, local.version));
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Could not save book content." },
-      { status: 500 },
-    );
+    return adminErrorResponse(error, "Could not save book content.");
   }
 }

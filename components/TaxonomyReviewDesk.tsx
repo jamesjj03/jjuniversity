@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { GuardedAdminLink, useAdminUnsavedChanges } from "@/components/AdminUnsavedChanges";
 import {
   canonicalizeTaxonomyReviewDraft,
   taxonomyGroupId,
@@ -29,6 +29,7 @@ const HISTORY_LIMIT = 80;
 const LOCAL_DRAFT_KEY = "jju.taxonomyReview.v2";
 
 export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt, catalogChanged, localFileSaveAvailable }: Props) {
+  const { setUnsaved } = useAdminUnsavedChanges();
   const [draft, setDraft] = useState(initialDraft);
   const draftRef = useRef(draft);
   const [history, setHistory] = useState<TaxonomyReviewDraft[]>([]);
@@ -47,6 +48,8 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [newGroupName, setNewGroupName] = useState("");
   const [saving, setSaving] = useState(false);
+  const savingRef = useRef(false);
+  const revisionRef = useRef(0);
   const [notice, setNotice] = useState("");
   const [browserDraftReady, setBrowserDraftReady] = useState(false);
   const dragIdsRef = useRef<string[]>([]);
@@ -58,6 +61,7 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
   const collectionAssignments = useMemo(() => buildAssignments(draft.collections), [draft.collections]);
   const collectionStats = useMemo(() => assignmentStats(books, draft.collections, collectionAssignments), [books, collectionAssignments, draft.collections]);
   const modeStats = useMemo(() => assignmentStats(books, groups, assignments), [assignments, books, groups]);
+  const topicHealth = useMemo(() => taxonomyGroupHealth(draft.topics, books.length), [books.length, draft.topics]);
   const collectionOverlaps = useMemo(() => books
     .map(book => ({ book, groupIds: collectionAssignments.get(book.id) || [] }))
     .filter(item => item.groupIds.length > 1), [books, collectionAssignments]);
@@ -101,6 +105,7 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
   }, [browserDraftReady, dirty, draft]);
 
   const commit = useCallback((transform: (current: TaxonomyReviewDraft) => TaxonomyReviewDraft) => {
+    if (savingRef.current) return;
     const current = draftRef.current;
     const next = transform(current);
     if (next === current) return;
@@ -110,12 +115,14 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
     setHistory(nextHistory);
     setFuture([]);
     draftRef.current = next;
+    revisionRef.current += 1;
     setDraft(next);
     setDirty(true);
     setNotice("");
   }, []);
 
   const undo = useCallback(() => {
+    if (savingRef.current) return;
     const previous = historyRef.current.at(-1);
     if (!previous) return;
     const current = draftRef.current;
@@ -124,6 +131,7 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
     historyRef.current = nextHistory;
     futureRef.current = nextFuture;
     draftRef.current = previous;
+    revisionRef.current += 1;
     setHistory(nextHistory);
     setFuture(nextFuture);
     setDraft(previous);
@@ -131,6 +139,7 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
   }, []);
 
   const redo = useCallback(() => {
+    if (savingRef.current) return;
     const next = futureRef.current[0];
     if (!next) return;
     const current = draftRef.current;
@@ -139,6 +148,7 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
     historyRef.current = nextHistory;
     futureRef.current = nextFuture;
     draftRef.current = next;
+    revisionRef.current += 1;
     setHistory(nextHistory);
     setFuture(nextFuture);
     setDraft(next);
@@ -159,11 +169,10 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
   }, [redo, undo]);
 
   useEffect(() => {
-    if (!dirty) return;
-    const onBeforeUnload = (event: BeforeUnloadEvent) => event.preventDefault();
-    window.addEventListener("beforeunload", onBeforeUnload);
-    return () => window.removeEventListener("beforeunload", onBeforeUnload);
-  }, [dirty]);
+    setUnsaved("taxonomy-review", dirty);
+  }, [dirty, setUnsaved]);
+
+  useEffect(() => () => setUnsaved("taxonomy-review", false), [setUnsaved]);
 
   const filteredBooks = useMemo(() => {
     const search = query.trim().toLowerCase();
@@ -309,10 +318,13 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
   }
 
   async function saveDraft() {
+    if (savingRef.current) return;
+    savingRef.current = true;
     setSaving(true);
     setNotice("");
+    const savingRevision = revisionRef.current;
+    const canonical = canonicalizeTaxonomyReviewDraft(draftRef.current);
     try {
-      const canonical = canonicalizeTaxonomyReviewDraft(draftRef.current);
       const response = await fetch("/api/admin/taxonomy-review", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -320,6 +332,13 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "The draft could not be saved.");
+      if (revisionRef.current !== savingRevision) {
+        setSavedAt(payload.savedAt);
+        setDirty(true);
+        window.localStorage.setItem(LOCAL_DRAFT_KEY, JSON.stringify({ savedAt: new Date().toISOString(), draft: draftRef.current }));
+        setNotice("The save finished, but newer edits remain in this browser and still need saving.");
+        return;
+      }
       draftRef.current = payload.draft;
       setDraft(payload.draft);
       setSavedAt(payload.savedAt);
@@ -329,6 +348,7 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "The draft could not be saved.");
     } finally {
+      savingRef.current = false;
       setSaving(false);
     }
   }
@@ -362,18 +382,18 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
   }
 
   return (
-    <main className={styles.page}>
+    <main className={styles.page} aria-busy={saving} inert={saving ? true : undefined}>
       <header className={styles.hero}>
         <div>
-          <Link className={styles.backLink} href="/admin">Back to Admin</Link>
+          <GuardedAdminLink className={styles.backLink} href="/admin">Back to Admin</GuardedAdminLink>
           <p className={styles.eyebrow}>Editorial workspace</p>
           <h1>Collection &amp; Taxonomy Desk</h1>
           <p className={styles.intro}>Build the print-ready Collections by cover, then review broad Shelves and specific Topics as separate, overlapping discovery layers.</p>
         </div>
         <div className={styles.primaryActions}>
-          <button type="button" className={styles.quietButton} onClick={undo} disabled={!history.length}>Undo</button>
-          <button type="button" className={styles.quietButton} onClick={redo} disabled={!future.length}>Redo</button>
-          <button type="button" className={styles.exportButton} onClick={exportDraft}>Export JSON</button>
+          <button type="button" className={styles.quietButton} onClick={undo} disabled={saving || !history.length}>Undo</button>
+          <button type="button" className={styles.quietButton} onClick={redo} disabled={saving || !future.length}>Redo</button>
+          <button type="button" className={styles.exportButton} onClick={exportDraft} disabled={saving}>Export JSON</button>
           {localFileSaveAvailable && (
             <button type="button" className={styles.saveButton} onClick={saveDraft} disabled={saving || !dirty}>
               {saving ? "Saving..." : dirty ? "Save local draft" : "Draft saved"}
@@ -417,6 +437,37 @@ export default function TaxonomyReviewDesk({ books, initialDraft, initialSavedAt
           <strong>Topics</strong><span>Specific overlap is allowed</span>
         </button>
       </nav>
+
+      {mode === "topics" && (
+        <section className={styles.topicHealth} aria-label="Topic filter health">
+          <div>
+            <p className={styles.eyebrow}>Public filter health</p>
+            <strong>{topicHealth.flagged.length ? `${topicHealth.flagged.length} labels need a decision` : "Every Topic has a useful public range"}</strong>
+            <span>Nothing changes automatically. Empty and one-or-two-book filters tend to feel broken; labels covering more than a quarter of the library stop feeling specific.</span>
+          </div>
+          <div className={styles.topicHealthMetrics} aria-label="Topic health counts">
+            <span><strong>{topicHealth.empty.length}</strong> empty</span>
+            <span><strong>{topicHealth.tiny.length}</strong> with 1–2 books</span>
+            <span><strong>{topicHealth.broad.length}</strong> too broad</span>
+          </div>
+          {topicHealth.flagged.length > 0 && (
+            <details>
+              <summary>Review flagged labels</summary>
+              <div className={styles.topicHealthList}>
+                {topicHealth.flagged.map(item => (
+                  <button type="button" key={item.group.id} onClick={() => {
+                    setActiveGroupId(item.group.id);
+                    setGroupQuery(item.group.name);
+                  }}>
+                    <strong>{item.group.name}</strong>
+                    <span>{item.group.bookIds.length} {item.group.bookIds.length === 1 ? "book" : "books"} · {item.reason}</span>
+                  </button>
+                ))}
+              </div>
+            </details>
+          )}
+        </section>
+      )}
 
       <section className={collectionOverlaps.length ? styles.overlapAuditAlert : styles.overlapAudit} aria-label="Collection overlap audit">
         <div>
@@ -737,6 +788,23 @@ function assignmentStats(
     overlap: membershipCounts.filter(count => count > 1).length,
     maxMemberships: Math.max(0, ...membershipCounts),
     largestGroup: Math.max(0, ...groups.map(group => group.bookIds.length)),
+  };
+}
+
+function taxonomyGroupHealth(groups: TaxonomyReviewGroup[], bookCount: number) {
+  const empty = groups.filter(group => group.bookIds.length === 0);
+  const tiny = groups.filter(group => group.bookIds.length > 0 && group.bookIds.length <= 2);
+  const broadThreshold = Math.max(40, Math.ceil(bookCount * 0.25));
+  const broad = groups.filter(group => group.bookIds.length > broadThreshold);
+  return {
+    empty,
+    tiny,
+    broad,
+    flagged: [
+      ...empty.map(group => ({ group, reason: "empty" })),
+      ...tiny.map(group => ({ group, reason: "too small for a useful public filter" })),
+      ...broad.map(group => ({ group, reason: `covers more than 25% of the library` })),
+    ].sort((left, right) => left.group.bookIds.length - right.group.bookIds.length || left.group.name.localeCompare(right.group.name)),
   };
 }
 

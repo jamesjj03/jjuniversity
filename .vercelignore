@@ -9,3 +9,4 @@
 *.log
 /e.textContent.trim())]
 /window.__dragQA.*
+/workshop/

@@ -1,6 +1,7 @@
 import { readFile } from "fs/promises";
 import path from "path";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
+import { AdminVersionConflictError, assertAdminVersion } from "@/lib/adminVersionedJson";
 
 export type BookContentSection = {
   id: string;
@@ -285,11 +286,13 @@ export async function saveLiveBookContentToSupabase({
   fileName,
   publicPath,
   message,
+  expectedVersion,
 }: {
   book: BookContent;
   fileName: string;
   publicPath: string;
   message: string;
+  expectedVersion?: string;
 }): Promise<SaveSupabaseBookContentResult> {
   if (!hasSupabaseAdminConfig()) return { saved: false };
 
@@ -312,6 +315,9 @@ export async function saveLiveBookContentToSupabase({
       word_count?: number | null;
       edit_message?: string | null;
     }) | undefined;
+    if (expectedVersion) {
+      assertAdminVersion(expectedVersion, `supabase:${Math.max(0, Number(existing?.version_number || 0))}`);
+    }
     const nextVersion = Math.max(1, Number(existing?.version_number || 0) + 1);
     const now = new Date().toISOString();
 
@@ -337,44 +343,57 @@ export async function saveLiveBookContentToSupabase({
       }
     }
 
-    const liveResult = await supabase
-      .from("book_content_live")
-      .upsert({
-        book_id: book.id,
-        version_number: nextVersion,
-        title: book.title,
-        creator: book.creator || "",
-        description: book.description || "",
-        content_file: fileName,
-        content_path: publicPath,
-        section_count: Number(book.sectionCount || book.sections.length),
-        word_count: Number(book.wordCount || 0),
-        content: book,
-        edit_message: message,
-        updated_at: now,
-      }, { onConflict: "book_id" });
+    const livePayload = {
+      book_id: book.id,
+      version_number: nextVersion,
+      title: book.title,
+      creator: book.creator || "",
+      description: book.description || "",
+      content_file: fileName,
+      content_path: publicPath,
+      section_count: Number(book.sectionCount || book.sections.length),
+      word_count: Number(book.wordCount || 0),
+      content: book,
+      edit_message: message,
+      updated_at: now,
+    };
+    let liveResult;
+    if (expectedVersion && existing) {
+      let update = supabase
+        .from("book_content_live")
+        .update(livePayload)
+        .eq("book_id", book.id);
+      update = existing.version_number == null
+        ? update.is("version_number", null)
+        : update.eq("version_number", Number(existing.version_number));
+      liveResult = await update.select("book_id,version_number");
+    } else if (expectedVersion) {
+      liveResult = await supabase
+        .from("book_content_live")
+        .insert(livePayload)
+        .select("book_id,version_number");
+    } else {
+      liveResult = await supabase
+        .from("book_content_live")
+        .upsert(livePayload, { onConflict: "book_id" })
+        .select("book_id,version_number");
+    }
 
     if (liveResult.error) {
+      if (expectedVersion && String(liveResult.error.code || "") === "23505") {
+        throw new AdminVersionConflictError();
+      }
       return isMissingSupabaseTable(liveResult.error)
         ? { saved: false, tableMissing: true }
         : { saved: false, error: liveResult.error.message };
     }
-
-    await supabase
-      .from("book_catalog")
-      .update({
-        title: book.title,
-        description: book.description || "",
-        content_key: fileStem(fileName),
-        book_file: fileName,
-        word_count: Number(book.wordCount || 0),
-        chapter_count: Number(book.sectionCount || book.sections.length),
-        updated_at: now,
-      })
-      .eq("id", book.id);
+    if (expectedVersion && (liveResult.data || []).length !== 1) {
+      throw new AdminVersionConflictError();
+    }
 
     return { saved: true, versionNumber: nextVersion };
   } catch (error) {
+    if (error instanceof AdminVersionConflictError) throw error;
     return { saved: false, error: error instanceof Error ? error.message : "Supabase content save failed." };
   }
 }

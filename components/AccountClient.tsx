@@ -491,6 +491,10 @@ export default function AccountClient({
         });
         if (error) throw error;
         setPassword("");
+        if (callbackReturnPath !== "/account" && callbackReturnPath !== "/site-v2/account") {
+          window.location.assign(callbackReturnPath);
+          return;
+        }
         setMessage("Signed in.");
       }
     } catch (error) {

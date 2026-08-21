@@ -1,6 +1,14 @@
-import { readFile, writeFile } from "fs/promises";
+import { writeFile } from "fs/promises";
 import path from "path";
-import { NextResponse } from "next/server";
+import {
+  adminErrorResponse,
+  expectedAdminVersion,
+  readGithubJson,
+  readLocalJson,
+  versionedJson,
+  writeGithubJson,
+  writeLocalJson,
+} from "@/lib/adminVersionedJson";
 
 type SiteConfig = {
   homeCards?: unknown;
@@ -75,92 +83,70 @@ function cleanConfig(value: SiteConfig | null | undefined) {
   };
 }
 
-async function saveToGithub(content: string, message: string) {
-  const token = process.env.GITHUB_TOKEN;
-  const repo = process.env.GITHUB_REPO;
-  const branch = process.env.GITHUB_BRANCH || "main";
-
-  if (!token || !repo) return null;
-
-  const apiUrl = `https://api.github.com/repos/${repo}/contents/public/site.json?ref=${encodeURIComponent(branch)}`;
-  const current = await fetch(apiUrl, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
+function assertRawSite(value: unknown): SiteConfig {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Site settings source is not an object.");
+  const data = value as Record<string, unknown>;
+  const library = data.library as Record<string, unknown> | undefined;
+  const atlas = data.atlas as Record<string, unknown> | undefined;
+  const fiber = data.fiber as Record<string, unknown> | undefined;
+  if (!Array.isArray(data.homeCards) || !data.homeCards.length) throw new Error("Site settings must include homepage cards.");
+  data.homeCards.forEach((card, index) => {
+    const record = card && typeof card === "object" ? card as Record<string, unknown> : null;
+    if (!record || !String(record.id || "").trim() || !String(record.displayTitle || record.title || "").trim() || !String(record.why || record.description || "").trim()) {
+      throw new Error(`Homepage card ${index + 1} is invalid.`);
+    }
   });
-
-  const currentData = current.ok ? await current.json() : null;
-
-  const updated = await fetch(`https://api.github.com/repos/${repo}/contents/public/site.json`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-    body: JSON.stringify({
-      message,
-      branch,
-      sha: currentData?.sha,
-      content: Buffer.from(content, "utf8").toString("base64"),
-    }),
-  });
-
-  if (!updated.ok) {
-    const error = await updated.json().catch(() => ({}));
-    throw new Error(error.message || "GitHub save failed.");
+  if (!library || typeof library !== "object" || !Array.isArray(library.featuredPathIds) || !Array.isArray(library.newestIds)) {
+    throw new Error("Site settings must include both library arrays.");
   }
-
-  return updated.json();
+  if (!atlas || typeof atlas.visible !== "boolean" || !fiber || typeof fiber.visible !== "boolean") {
+    throw new Error("Site settings must include Atlas and Fiber visibility flags.");
+  }
+  if (!data.social || typeof data.social !== "object" || typeof (data.social as Record<string, unknown>).instagramUrl !== "string") {
+    throw new Error("Site settings must include the Instagram URL.");
+  }
+  return value as SiteConfig;
 }
 
 export async function GET() {
   try {
     const sitePath = path.join(process.cwd(), "public", "site.json");
-    const config = cleanConfig(JSON.parse(await readFile(sitePath, "utf8")));
-    return NextResponse.json(config);
-  } catch {
-    return NextResponse.json(DEFAULT_SITE);
+    const github = await readGithubJson("public/site.json");
+    if (github) return versionedJson(cleanConfig(assertRawSite(github.value)), github.version);
+    const local = await readLocalJson(sitePath);
+    return versionedJson(cleanConfig(assertRawSite(local.value)), local.version);
+  } catch (error) {
+    return adminErrorResponse(error, "Could not load site settings.");
   }
 }
 
 export async function POST(request: Request) {
   try {
+    const expectedVersion = expectedAdminVersion(request);
     const body = await request.json().catch(() => ({}));
-    const config = cleanConfig(body.site || body);
+    const config = cleanConfig(assertRawSite(body.site || body));
     const content = `${JSON.stringify(config, null, 2)}\n`;
     const sitePath = path.join(process.cwd(), "public", "site.json");
     const message = body.message || `Update JJU site settings (${new Date().toISOString().slice(0, 10)})`;
 
-    let localSaved = false;
-    let localError = "";
-    try {
-      await writeFile(sitePath, content, "utf8");
-      localSaved = true;
-    } catch (error) {
-      localError = error instanceof Error ? error.message : "Local site.json save failed.";
+    const github = await writeGithubJson("public/site.json", content, message, expectedVersion);
+    if (github) {
+      try {
+        await writeFile(sitePath, content, "utf8");
+      } catch {
+        // Deployment files may be read-only; GitHub is the canonical successful write.
+      }
+      return versionedJson({ saved: true, target: "github", site: config }, github.version);
     }
 
-    const github = await saveToGithub(content, message);
-
-    if (!localSaved && !github) {
-      throw new Error(localError || "Could not save site.json locally, and GitHub saving is not configured.");
-    }
-
-    return NextResponse.json({
+    const local = await writeLocalJson(sitePath, content, expectedVersion);
+    return versionedJson({
       saved: true,
-      target: github ? "github" : "local",
+      target: "local",
       site: config,
-      commit: github?.commit?.html_url,
-      note: github ? undefined : "Saved locally. Add GITHUB_TOKEN and GITHUB_REPO to save live through GitHub.",
-    });
+      note: "Saved locally. Add GITHUB_TOKEN and GITHUB_REPO to save live through GitHub.",
+    }, local.version);
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Could not save site settings." },
-      { status: 500 },
-    );
+    return adminErrorResponse(error, "Could not save site settings.");
   }
 }

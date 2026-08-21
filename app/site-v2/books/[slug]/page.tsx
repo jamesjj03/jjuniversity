@@ -2,10 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import SiteV2Cover from "@/components/site-v2/SiteV2Cover";
-import SiteV2ReadingAction from "@/components/site-v2/SiteV2ReadingAction";
+import SiteV2BookAccess from "@/components/site-v2/SiteV2BookAccess";
 import SiteV2RelatedBooks from "@/components/site-v2/SiteV2RelatedBooks";
-import SiteV2SaveButton from "@/components/site-v2/SiteV2SaveButton";
 import styles from "@/components/site-v2/SiteV2.module.css";
+import { getPublishedAudioEditionForBook } from "@/lib/audioCatalog";
 import { coverFallbackSrc } from "@/lib/cover";
 import {
   bookUrl,
@@ -45,10 +45,11 @@ export default async function SiteV2BookPage({ params }: Props) {
   const book = await getBookBySlugLive(slug);
   if (!book) notFound();
 
-  const [sample, related, allSeries] = await Promise.all([
+  const [sample, related, allSeries, audioEdition] = await Promise.all([
     getBookSample(book),
     getRelatedBooksLive(book, 16),
     getCollectionsLive(),
+    getPublishedAudioEditionForBook(book.id),
   ]);
   const series = allSeries.filter(item => item.bookIds.includes(book.id));
   const printProduct = getPrintProductsForBook(book.id)[0];
@@ -104,14 +105,15 @@ export default async function SiteV2BookPage({ params }: Props) {
           <div className={styles.bookMetaGrid} aria-label="Book details">
             <div><strong>{formatBookLength(book)}</strong><span>Reading time</span></div>
             <div><strong>{sample.chapterCount || book.chapterCount || "Open"}</strong><span>Chapters</span></div>
-            <div><strong>{book.creator || "James Johnson"}</strong><span>Author</span></div>
           </div>
 
-          <div className={styles.bookActions}>
-            <SiteV2ReadingAction bookId={book.id} bookSlug={book.slug} status={book.status} />
-            <SiteV2SaveButton bookId={book.id} />
-            {printProduct && <Link className={styles.textButton} href={`/print/${printProduct.slug}`}>Print edition</Link>}
-          </div>
+          <SiteV2BookAccess
+            bookId={book.id}
+            bookSlug={book.slug}
+            status={book.status}
+            audioEdition={audioEdition}
+            printSlug={printProduct?.slug}
+          />
           <p className={styles.progressNote}>Reading progress can be saved on this device. Account tools are available if you sign in.</p>
         </div>
       </section>

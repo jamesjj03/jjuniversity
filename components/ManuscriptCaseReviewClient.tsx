@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { GuardedAdminLink } from "@/components/AdminUnsavedChanges";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import styles from "./ManuscriptCaseReview.module.css";
@@ -229,7 +229,7 @@ export default function ManuscriptCaseReviewClient() {
           <p>Review the first words of each manuscript section. Decisions are saved locally. Nothing on this page edits a book.</p>
         </div>
         <div className={styles.headerLinks}>
-          <Link href="/admin/editorial">Editorial reviews</Link>
+          <GuardedAdminLink href="/admin/editorial">Editorial reviews</GuardedAdminLink>
           <a href="/api/admin/manuscript-case?download=1">Download decisions</a>
         </div>
       </header>

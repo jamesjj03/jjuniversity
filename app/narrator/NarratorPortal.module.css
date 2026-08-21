@@ -1,0 +1,279 @@
+:global(body):has(.portal) {
+  margin: 0;
+  background: #0d1118 !important;
+}
+
+:global(body):has(.portal) > :global(.siteHeader),
+:global(body):has(.portal) > :global(.siteFooter) {
+  display: none !important;
+}
+
+.portal,
+.portal * {
+  box-sizing: border-box;
+}
+
+.portal {
+  min-height: 100vh;
+  padding: 28px;
+  color: #f3eddf;
+  background:
+    radial-gradient(circle at 70% 0%, rgba(212, 162, 76, .12), transparent 30rem),
+    linear-gradient(180deg, #111824, #0d1118 56%, #090c11);
+  font-family: "Atkinson Hyperlegible", Arial, sans-serif;
+}
+
+.shell {
+  width: min(100%, 1100px);
+  margin-inline: auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(212, 162, 76, .25);
+}
+
+.brand {
+  display: grid;
+  gap: 2px;
+}
+
+.brand strong {
+  font-family: "Bricolage Grotesque Variable", Arial, sans-serif;
+  font-size: 22px;
+}
+
+.brand span,
+.signout,
+.muted,
+.help {
+  color: #aba79f;
+}
+
+.signout {
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgba(212, 162, 76, .3);
+  border-radius: 8px;
+}
+
+.intro {
+  padding: 52px 0 30px;
+}
+
+.intro p:first-child {
+  margin: 0;
+  color: #d4a24c;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.intro h1 {
+  margin: 8px 0 0;
+  font-family: "Bricolage Grotesque Variable", Arial, sans-serif;
+  font-size: clamp(40px, 7vw, 68px);
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+
+.intro .muted {
+  max-width: 650px;
+  margin: 16px 0 0;
+  font-size: 17px;
+}
+
+.notice {
+  margin-bottom: 22px;
+  padding: 14px 16px;
+  border: 1px solid rgba(212, 162, 76, .38);
+  border-radius: 8px;
+  color: #f3eddf;
+  background: rgba(212, 162, 76, .09);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.panel {
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid rgba(212, 162, 76, .22);
+  border-radius: 10px;
+  background: linear-gradient(150deg, #202733, #151b24);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, .35);
+}
+
+.panel h2 {
+  margin: 0;
+  font-family: "Bricolage Grotesque Variable", Arial, sans-serif;
+  font-size: 28px;
+}
+
+.assignmentList {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.assignment {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid rgba(212, 162, 76, .18);
+  border-radius: 8px;
+  background: rgba(7, 10, 15, .4);
+}
+
+.assignment[data-selected="true"] {
+  border-color: #d4a24c;
+}
+
+.assignmentHeader {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.assignmentHeader h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.status {
+  flex: 0 0 auto;
+  color: #d4a24c;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.brief,
+.submissionLine,
+.empty {
+  margin: 0;
+  color: #bbb6ad;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.assignmentActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.assignmentActions button,
+.assignmentActions a,
+.form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 15px;
+  border: 1px solid rgba(212, 162, 76, .42);
+  border-radius: 8px;
+  color: #f3eddf;
+  background: #10151d;
+  font-weight: 800;
+}
+
+.assignmentActions .primary,
+.form .primary {
+  color: #141414;
+  background: #d4a24c;
+}
+
+.assignmentActions button:disabled,
+.form button:disabled {
+  cursor: default;
+  opacity: .48;
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.form label {
+  display: grid;
+  gap: 7px;
+  color: #d5d0c6;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.form input,
+.form select,
+.form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid rgba(212, 162, 76, .28);
+  border-radius: 7px;
+  color: #f3eddf;
+  background: #090d13;
+  font: inherit;
+}
+
+.form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.fileHelp,
+.help {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.submissions {
+  display: grid;
+  gap: 7px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(212, 162, 76, .15);
+}
+
+@media (max-width: 800px) {
+  .portal {
+    padding: 18px 14px 40px;
+  }
+
+  .topbar {
+    align-items: start;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 20px 16px;
+  }
+
+  .assignmentHeader {
+    display: grid;
+  }
+
+  .assignmentActions,
+  .assignmentActions button,
+  .assignmentActions a,
+  .form button {
+    width: 100%;
+  }
+}

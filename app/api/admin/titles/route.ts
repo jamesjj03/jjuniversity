@@ -1,9 +1,9 @@
-import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-import { readBooksFromSupabase, saveBooksToSupabase } from "@/lib/bookCatalog";
-import { readBookContent } from "@/lib/bookContent";
+import { readBookCatalogSnapshot, saveBooksToSupabase } from "@/lib/bookCatalog";
+import { readAdminBookContent } from "@/lib/adminBookContent";
+import { readGithubJson, readLocalJson, writeGithubJson, writeLocalJson } from "@/lib/adminVersionedJson";
 
 type BookRecord = {
   id: string;
@@ -19,12 +19,18 @@ function contentIdFor(book: BookRecord) {
 }
 
 async function readBooks() {
-  const supabaseBooks = await readBooksFromSupabase().catch(() => null);
-  if (supabaseBooks) return { books: supabaseBooks as BookRecord[], source: "supabase" as const };
+  const supabase = await readBookCatalogSnapshot();
+  if (supabase) return { books: supabase.books as BookRecord[], source: "supabase" as const, revision: supabase.revision };
 
   const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "books.json");
-  const data = JSON.parse(await readFile(booksPath, "utf8"));
-  return { books: (Array.isArray(data) ? data : data.books || []) as BookRecord[], source: "file" as const };
+  const github = await readGithubJson("public/books.json");
+  if (github) {
+    const value = github.value as { books?: unknown };
+    return { books: (Array.isArray(value) ? value : value.books || []) as BookRecord[], source: "github" as const, version: github.version };
+  }
+  const local = await readLocalJson(booksPath);
+  const value = local.value as { books?: unknown };
+  return { books: (Array.isArray(value) ? value : value.books || []) as BookRecord[], source: "file" as const, version: local.version };
 }
 
 export async function POST(request: Request) {
@@ -32,14 +38,16 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => ({}));
     const shouldUpdate = Boolean(body.update);
     const ids = Array.isArray(body.ids) ? new Set(body.ids.map((id: unknown) => String(id).toLowerCase())) : null;
-    const { books, source } = await readBooks();
+    const loaded = await readBooks();
+    const { books, source } = loaded;
+    if (!books.length) throw new Error("Catalog title scan is locked because its source is empty.");
     const targets = ids ? books.filter(book => ids.has(String(book.id).toLowerCase())) : books;
     const results = [];
     let target = "";
 
     for (const book of targets) {
       try {
-        const { book: content } = await readBookContent(contentIdFor(book));
+        const { book: content } = await readAdminBookContent(contentIdFor(book));
         const title = content.title || book.title || book.id;
         const oldTitle = book.title || book.id;
         const changed = title.trim() !== oldTitle.trim();
@@ -57,15 +65,20 @@ export async function POST(request: Request) {
     }
 
     if (shouldUpdate) {
-      const supabaseSave = await saveBooksToSupabase(books as unknown as Array<Record<string, unknown>>);
-      if (supabaseSave.saved) {
+      const content = `${JSON.stringify(books, null, 2)}\n`;
+      if (source === "supabase") {
+        const supabaseSave = await saveBooksToSupabase(books as unknown as Array<Record<string, unknown>>, { expectedRevision: loaded.revision });
+        if (!supabaseSave.saved) throw new Error(supabaseSave.error || "Supabase did not save the title updates.");
         revalidatePath("/library");
         revalidatePath("/sitemap.xml");
         target = "supabase";
+      } else if (source === "github") {
+        const github = await writeGithubJson("public/books.json", content, "Update JJU titles from manuscript content", loaded.version);
+        if (!github) throw new Error("GitHub title saving is not configured.");
+        target = "github";
       } else {
-        if (supabaseSave.error && !supabaseSave.tableMissing) throw new Error(supabaseSave.error);
         const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "books.json");
-        await writeFile(booksPath, `${JSON.stringify(books, null, 2)}\n`, "utf8");
+        await writeLocalJson(booksPath, content, loaded.version);
         target = "file";
       }
     }

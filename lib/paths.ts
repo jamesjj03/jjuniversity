@@ -191,7 +191,7 @@ export function cleanPathsFile(value: unknown): PathsFile {
         return {
           id: String(bookRecord.id || "").trim().toLowerCase(),
           order: Number(bookRecord.order || bookIndex + 1),
-          note: "",
+          note: String(bookRecord.note || ""),
         };
       }).filter(book => book.id) : [],
       deleted: Boolean(record.deleted),

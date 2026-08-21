@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { decodeBasicCredentials } from "@/lib/basicAuth";
 
 const ADMIN_PATHS = ["/admin", "/api/admin", "/fiber-qr"];
 
@@ -52,10 +53,9 @@ export function proxy(request: NextRequest) {
   const auth = request.headers.get("authorization");
   if (!auth?.startsWith("Basic ")) return unauthorized();
 
-  const decoded = atob(auth.slice("Basic ".length));
-  const separator = decoded.indexOf(":");
-  const username = separator >= 0 ? decoded.slice(0, separator) : "";
-  const provided = separator >= 0 ? decoded.slice(separator + 1) : decoded;
+  const credentials = decodeBasicCredentials(auth);
+  if (!credentials) return unauthorized();
+  const { username, password: provided } = credentials;
   const requiredUser = process.env.ADMIN_USERNAME;
 
   if (requiredUser && username !== requiredUser) return unauthorized();

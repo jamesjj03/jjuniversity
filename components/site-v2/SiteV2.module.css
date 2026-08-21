@@ -95,11 +95,20 @@
 }
 
 :global(html[data-site-scheme="light"]) .siteV2Route {
+  --theme-top: #e7dcc7;
+  --theme-bottom: #cdbb9d;
+  --v2-bg: #ddd0b9;
+  --v2-bg-deep: #cdbb9d;
+  --v2-panel: #ebe0cb;
+  --v2-panel-raised: #f1e8d7;
+  --v2-ink: #2b241b;
+  --v2-muted: #665b4b;
   --v2-ink-dark: #17191d;
   --v2-gold: #76510c;
   --v2-gold-bright: #76510c;
   --v2-gold-fill: var(--gold, #d6a84f);
-  --v2-shadow: rgba(70, 47, 18, 0.18);
+  --v2-line: rgba(90, 67, 31, 0.24);
+  --v2-shadow: rgba(70, 47, 18, 0.15);
 }
 
 .siteV2Route a {
@@ -1002,6 +1011,8 @@
 
 .bookCard {
   --cover-accent: var(--v2-gold);
+  --cover-panel: color-mix(in srgb, var(--v2-bg-deep) 82%, #091018 18%);
+  --cover-panel-2: color-mix(in srgb, var(--v2-panel) 38%, #08101a 62%);
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: 0;
@@ -1026,7 +1037,7 @@
   padding: 26px 24px 22px;
   background:
     radial-gradient(circle at 50% 22%, color-mix(in srgb, var(--cover-accent) 34%, transparent), transparent 60%),
-    linear-gradient(155deg, color-mix(in srgb, var(--cover-accent) 11%, var(--v2-bg-deep)), color-mix(in srgb, var(--v2-bg-deep) 92%, var(--cover-accent)));
+    linear-gradient(155deg, var(--cover-panel-2), var(--cover-panel));
 }
 
 .bookCoverFrame {
@@ -1045,7 +1056,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 22px 24px 25px;
+  padding: 18px 24px 0;
   border-top: 1px solid var(--v2-line);
   box-shadow: inset 0 2px color-mix(in srgb, var(--cover-accent) 18%, transparent);
 }
@@ -1053,8 +1064,7 @@
 .bookCardTopline {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  min-height: 18px;
 }
 
 .bookCardTopline > span {
@@ -1095,13 +1105,13 @@
 }
 
 .bookCardBody h2 {
-  margin: 14px 0 0;
+  margin: 9px 0 0;
   color: var(--v2-ink) !important;
   font-family: var(--v2-display);
-  font-size: clamp(23px, 2.2vw, 30px);
+  font-size: clamp(22px, 1.8vw, 28px);
   font-weight: 850;
   letter-spacing: -0.035em;
-  line-height: 1.02;
+  line-height: 1.06;
 }
 
 .bookCardBody h2 a {
@@ -1128,24 +1138,47 @@
   font-size: 14px;
   line-height: 1.55;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
+}
+
+.bookCardFooter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  margin: auto -24px 0;
+  padding-top: 20px;
 }
 
 .bookCardMeta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 17px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
 }
 
 .bookCardMeta span {
-  padding: 5px 8px;
-  border: 1px solid var(--v2-line);
-  border-radius: 5px;
+  display: grid;
+  min-height: 58px;
+  place-items: center;
+  padding: 8px;
+  border-top: 1px solid var(--v2-line);
+  border-right: 1px solid var(--v2-line);
   color: var(--v2-paper-deep);
-  background: color-mix(in srgb, var(--v2-bg-deep) 46%, transparent);
+  background: color-mix(in srgb, var(--v2-bg-deep) 34%, transparent);
   font-size: 11px;
   font-weight: 750;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.bookCardFooter .cardSaveButton {
+  width: auto;
+  min-width: 88px;
+  min-height: 58px;
+  padding-inline: 12px;
+  border: 0;
+  border-top: 1px solid var(--v2-line);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--cover-accent) 9%, var(--v2-panel));
 }
 
 .loadMoreRow {
@@ -2194,7 +2227,7 @@
 
 .bookMetaGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 9px;
   margin-top: 28px;
 }
@@ -4259,7 +4292,7 @@
   }
 
   .bookCardBody {
-    padding: 12px 11px 14px;
+    padding: 12px 11px 0;
   }
 
   .bookCardTopline {
@@ -4318,16 +4351,35 @@
     -webkit-line-clamp: 3;
   }
 
-  .bookCardMeta {
-    margin-top: auto;
+  .bookDescriptionWithSubtitle {
+    -webkit-line-clamp: 2;
+  }
+
+  .bookCardFooter {
+    margin-inline: -11px;
     padding-top: 12px;
   }
 
-  .bookCardMeta span {
-    border: 0;
+  .bookCardMeta {
+    margin: 0;
     padding: 0;
-    background: none;
-    font-size: 10px;
+  }
+
+  .bookCardMeta span {
+    min-height: 52px;
+    padding: 5px 3px;
+    border-top: 1px solid var(--v2-line);
+    border-right: 1px solid var(--v2-line);
+    background: color-mix(in srgb, var(--v2-bg-deep) 34%, transparent);
+    font-size: 9px;
+  }
+
+  .bookCardFooter .cardSaveButton {
+    width: 48px;
+    min-width: 48px;
+    min-height: 52px;
+    padding-inline: 0;
+    border-top: 1px solid var(--v2-line);
   }
 
   .bookPage {

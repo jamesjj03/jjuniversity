@@ -22,6 +22,7 @@ import {
   textToLines,
 } from "@/lib/atlasAdmin";
 import type { AtlasMapSpec } from "@/lib/atlasMaps";
+import { getAdminHref } from "@/lib/adminPath";
 
 export type AtlasDraftImportActionState = {
   ok: boolean;
@@ -358,17 +359,17 @@ function numberValue(formData: FormData, key: string, fallback: number) {
 function refreshAtlas(mapId: string, saved: string): never {
   revalidatePath("/admin/atlas");
   revalidatePath("/atlas");
-  redirect(`/admin/atlas?map=${encodeURIComponent(mapId)}&saved=${encodeURIComponent(saved)}`);
+  redirect(getAdminHref(`/admin/atlas?map=${encodeURIComponent(mapId)}&saved=${encodeURIComponent(saved)}`));
 }
 
 function refreshAtlasFactory(saved: string): never {
   revalidatePath("/admin/atlas");
-  redirect(`/admin/atlas?saved=${encodeURIComponent(saved)}`);
+  redirect(getAdminHref(`/admin/atlas?saved=${encodeURIComponent(saved)}`));
 }
 
 function refreshAtlasCategory(mapId: string, referenceMapId: string, saved: string): never {
   revalidatePath("/admin/atlas");
   revalidatePath("/atlas");
   const referencePart = referenceMapId ? `&reference=${encodeURIComponent(referenceMapId)}` : "";
-  redirect(`/admin/atlas?map=${encodeURIComponent(mapId)}${referencePart}&saved=${encodeURIComponent(saved)}`);
+  redirect(getAdminHref(`/admin/atlas?map=${encodeURIComponent(mapId)}${referencePart}&saved=${encodeURIComponent(saved)}`));
 }

@@ -41,6 +41,7 @@ import {
 } from "@/app/admin/atlas/actions";
 import type { AtlasProvenanceRef } from "@/lib/atlasMaps";
 import type { AtlasCorpusCandidateSet, AtlasSourceSufficiency } from "@/lib/atlasCorpusBridge";
+import { getAdminHref } from "@/lib/adminPath";
 
 type AtlasAdminPageProps = {
   searchParams: Promise<{
@@ -109,7 +110,7 @@ export default async function AtlasAdminPage({ searchParams }: AtlasAdminPagePro
           <h1>Atlas Review</h1>
         </div>
         <div className="atlasAdminHeroActions">
-          <Link className="btn secondary" href="/admin">Admin</Link>
+          <Link className="btn secondary" href={getAdminHref("/admin")}>Admin</Link>
           <Link className="btn secondary" href="/atlas">Public Atlas</Link>
         </div>
       </section>
@@ -152,7 +153,7 @@ export default async function AtlasAdminPage({ searchParams }: AtlasAdminPagePro
               {state.maps.map(map => (
                 <Link
                   className={map.id === selectedMap?.id ? "active atlasAdminMapRow" : "atlasAdminMapRow"}
-                  href={`/admin/atlas?map=${encodeURIComponent(map.id)}`}
+                  href={getAdminHref(`/admin/atlas?map=${encodeURIComponent(map.id)}`)}
                   key={map.id}
                   prefetch={false}
                 >

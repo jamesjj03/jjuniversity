@@ -1,8 +1,18 @@
-import { readFile, writeFile } from "fs/promises";
+import { writeFile } from "fs/promises";
 import path from "path";
 import { revalidatePath } from "next/cache";
-import { NextResponse } from "next/server";
-import { readBooksFromSupabase, saveBooksToSupabase } from "@/lib/bookCatalog";
+import { readBookCatalogSnapshot, saveBooksToSupabase } from "@/lib/bookCatalog";
+import {
+  adminErrorResponse,
+  assertAdminVersion,
+  expectedAdminVersion,
+  readGithubJson,
+  readLocalJson,
+  versionedJson,
+  versionForBookCatalog,
+  writeGithubJson,
+  writeLocalJson,
+} from "@/lib/adminVersionedJson";
 
 type SaveBody = {
   books?: unknown;
@@ -11,13 +21,17 @@ type SaveBody = {
 
 function assertBooks(value: unknown) {
   if (!Array.isArray(value)) throw new Error("Expected a books array.");
+  if (!value.length) throw new Error("Refusing to load or save an empty JJU catalog.");
 
+  const seen = new Set<string>();
   return value.map((book, index) => {
     if (!book || typeof book !== "object") throw new Error(`Book ${index + 1} is not valid.`);
     const record = book as Record<string, unknown>;
     const id = String(record.id || "").trim().toLowerCase();
     const title = String(record.title || id || "Untitled").trim();
     if (!id) throw new Error(`Book ${index + 1} is missing an id.`);
+    if (seen.has(id)) throw new Error(`Duplicate book id: ${id}.`);
+    seen.add(id);
     delete record.goldCandidate;
     delete record.gold;
 
@@ -37,116 +51,109 @@ function assertBooks(value: unknown) {
   });
 }
 
-async function saveToGithub(content: string, message: string) {
-  const token = process.env.GITHUB_TOKEN;
-  const repo = process.env.GITHUB_REPO;
-  const branch = process.env.GITHUB_BRANCH || "main";
-
-  if (!token || !repo) return null;
-
-  const apiUrl = `https://api.github.com/repos/${repo}/contents/public/books.json?ref=${encodeURIComponent(branch)}`;
-  const current = await fetch(apiUrl, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
-
-  if (!current.ok) throw new Error("Could not read books.json from GitHub.");
-  const currentData = await current.json();
-
-  const updated = await fetch(`https://api.github.com/repos/${repo}/contents/public/books.json`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-    body: JSON.stringify({
-      message,
-      branch,
-      sha: currentData.sha,
-      content: Buffer.from(content, "utf8").toString("base64"),
-    }),
-  });
-
-  if (!updated.ok) {
-    const error = await updated.json().catch(() => ({}));
-    throw new Error(error.message || "GitHub save failed.");
+function rawBooks(value: unknown, minimumCount = 1) {
+  const books = Array.isArray(value)
+    ? value
+    : value && typeof value === "object" && Array.isArray((value as { books?: unknown }).books)
+      ? (value as { books: unknown[] }).books
+      : null;
+  if (!books?.length || books.length < minimumCount) {
+    throw new Error(`Books source is malformed or incomplete (${books?.length || 0}/${minimumCount} expected).`);
   }
+  const ids = new Set<string>();
+  books.forEach((book, index) => {
+    const id = book && typeof book === "object" ? String((book as Record<string, unknown>).id || "").trim().toLowerCase() : "";
+    if (!id) {
+      throw new Error(`Book ${index + 1} is missing a valid id.`);
+    }
+    if (ids.has(id)) throw new Error(`Books source contains duplicate id: ${id}.`);
+    ids.add(id);
+  });
+  return books;
+}
 
-  return updated.json();
+function supabaseCatalogVersion(books: unknown[], revision: string | null) {
+  return versionForBookCatalog(books, revision ? `supabase-catalog:${revision}` : "supabase-unversioned");
 }
 
 export async function GET() {
   try {
-    const supabaseBooks = await readBooksFromSupabase();
-    if (supabaseBooks) return NextResponse.json({ books: supabaseBooks, source: "supabase" });
-
     const booksPath = path.join(process.cwd(), "public", "books.json");
-    const books = JSON.parse(await readFile(booksPath, "utf8"));
-    return NextResponse.json({ books: Array.isArray(books) ? books : books.books || [], source: "file" });
+    const local = await readLocalJson(booksPath);
+    const baselineBooks = rawBooks(local.value);
+    const supabaseSnapshot = await readBookCatalogSnapshot();
+    if (supabaseSnapshot !== null) {
+      const books = rawBooks(supabaseSnapshot.books, baselineBooks.length);
+      return versionedJson({ books, source: "supabase" }, supabaseCatalogVersion(books, supabaseSnapshot.revision));
+    }
+
+    const github = await readGithubJson("public/books.json");
+    if (github) return versionedJson({ books: rawBooks(github.value, baselineBooks.length), source: "github" }, github.version);
+
+    return versionedJson({ books: baselineBooks, source: "file" }, local.version);
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Could not load books.json." },
-      { status: 500 },
-    );
+    return adminErrorResponse(error, "Could not load books.json.");
   }
 }
 
 export async function POST(request: Request) {
   try {
+    const expectedVersion = expectedAdminVersion(request);
     const body = await request.json().catch(() => ({})) as SaveBody;
     const books = assertBooks(body.books);
     const content = `${JSON.stringify(books, null, 2)}\n`;
     const booksPath = path.join(process.cwd(), "public", "books.json");
     const message = body.message || `Update JJU library metadata (${new Date().toISOString().slice(0, 10)})`;
-    const supabaseSave = await saveBooksToSupabase(books);
+    const currentSupabase = await readBookCatalogSnapshot();
 
-    if (supabaseSave.saved) {
+    if (currentSupabase !== null) {
+      const currentBooks = rawBooks(currentSupabase.books);
+      if (books.length < currentBooks.length) throw new Error("Refusing to replace the current catalog with a truncated book list.");
+      assertAdminVersion(expectedVersion, supabaseCatalogVersion(currentBooks, currentSupabase.revision));
+      const supabaseSave = await saveBooksToSupabase(books, { expectedRevision: currentSupabase.revision });
+      if (!supabaseSave.saved) throw new Error(supabaseSave.error || "Supabase did not save the catalog.");
       revalidatePath("/library");
       revalidatePath("/sitemap.xml");
 
-      return NextResponse.json({
+      const savedBooks = supabaseSave.books || books;
+      return versionedJson({
         saved: true,
         target: "supabase",
-        books: supabaseSave.books || books,
+        books: savedBooks,
         note: "Saved library metadata to Supabase.",
-      });
+      }, supabaseCatalogVersion(savedBooks, supabaseSave.revision || null));
     }
 
-    if (supabaseSave.error && !supabaseSave.tableMissing) {
-      throw new Error(supabaseSave.error);
+    const currentGithub = await readGithubJson("public/books.json");
+    if (currentGithub) {
+      const currentBooks = rawBooks(currentGithub.value);
+      if (books.length < currentBooks.length) throw new Error("Refusing to replace the current catalog with a truncated book list.");
+      const github = await writeGithubJson("public/books.json", content, message, expectedVersion);
+      if (!github) throw new Error("GitHub catalog saving is not configured.");
+      try {
+        await writeFile(booksPath, content, "utf8");
+      } catch {
+        // Deployment files may be read-only; GitHub is the canonical successful write.
+      }
+      return versionedJson({
+        saved: true,
+        target: "github",
+        books,
+        note: "Saved library metadata to GitHub.",
+      }, github.version);
     }
 
-    let localSaved = false;
-    let localError = "";
-    try {
-      await writeFile(booksPath, content, "utf8");
-      localSaved = true;
-    } catch (error) {
-      localError = error instanceof Error ? error.message : "Local books.json save failed.";
-    }
-
-    const github = await saveToGithub(content, message);
-
-    if (!localSaved && !github) {
-      throw new Error(localError || "Could not save books.json locally, and GitHub saving is not configured.");
-    }
-
-    return NextResponse.json({
+    const currentLocal = await readLocalJson(booksPath);
+    const currentBooks = rawBooks(currentLocal.value);
+    if (books.length < currentBooks.length) throw new Error("Refusing to replace the current catalog with a truncated book list.");
+    const local = await writeLocalJson(booksPath, content, expectedVersion);
+    return versionedJson({
       saved: true,
-      target: github ? "github" : "local",
+      target: "local",
       books,
-      commit: github?.commit?.html_url,
-      note: github ? undefined : "Saved locally. Add GITHUB_TOKEN and GITHUB_REPO to save live through GitHub.",
-    });
+      note: "Saved locally. Add GITHUB_TOKEN and GITHUB_REPO to save live through GitHub.",
+    }, local.version);
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Could not save books.json." },
-      { status: 500 },
-    );
+    return adminErrorResponse(error, "Could not save books.json.");
   }
 }

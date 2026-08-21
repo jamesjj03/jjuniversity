@@ -1,4 +1,5 @@
 import RecallArenaClient from "@/components/RecallArenaClient";
+import { getAdminHref } from "@/lib/adminPath";
 import { getRecallPacks } from "@/lib/recall";
 
 export const metadata = {
@@ -8,5 +9,5 @@ export const metadata = {
 
 export default async function ArenaPage() {
   const packs = await getRecallPacks(["brain-lateral-source-v1"]);
-  return <RecallArenaClient packs={packs} />;
+  return <RecallArenaClient packs={packs} factoryHref={getAdminHref("/admin/arena")} />;
 }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import ManuscriptCaseReviewClient from "@/components/ManuscriptCaseReviewClient";
 import styles from "@/components/ManuscriptCaseReview.module.css";
 import { getCaseReviewAvailability, type CaseReviewAvailability } from "@/lib/manuscriptCaseReview";
+import { getAdminHref } from "@/lib/adminPath";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -34,8 +35,8 @@ function UnavailableReview({ availability }: { availability: CaseReviewAvailabil
           <p>Review decisions remain separate from manuscripts and the public catalog.</p>
         </div>
         <div className={styles.headerLinks}>
-          <Link href="/admin/editorial">Editorial reviews</Link>
-          <Link href="/admin/taxonomy-review">Collections &amp; Taxonomy</Link>
+          <Link href={getAdminHref("/admin/editorial")}>Editorial reviews</Link>
+          <Link href={getAdminHref("/admin/taxonomy-review")}>Collections &amp; Taxonomy</Link>
         </div>
       </header>
 
@@ -51,8 +52,8 @@ function UnavailableReview({ availability }: { availability: CaseReviewAvailabil
             : "No manuscript or decision file was changed. Restore or regenerate the local manuscript quality audit, then reload this page."}
         </p>
         <div className={styles.unavailableActions}>
-          <Link href="/admin/taxonomy-review">Open Collections &amp; Taxonomy</Link>
-          <Link href="/admin">Back to Admin</Link>
+          <Link href={getAdminHref("/admin/taxonomy-review")}>Open Collections &amp; Taxonomy</Link>
+          <Link href={getAdminHref("/admin")}>Back to Admin</Link>
         </div>
       </section>
     </main>
