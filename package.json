@@ -14,6 +14,7 @@
     "supabase:backfill-content": "node scripts/backfill-book-content-live.mjs",
     "supabase:upload-covers": "node scripts/upload-covers-to-supabase.mjs",
     "print:paperback": "node scripts/generate-paperback.mjs",
+    "print:legal-proofs": "node scripts/generate-101-print-proof.mjs --legal-proofs-only",
     "print:disclaimers": "node scripts/audit-print-disclaimers.mjs",
     "print:set-assets": "node scripts/set-print-product-assets.mjs",
     "print:upload": "node scripts/upload-paperbacks-to-supabase.mjs",

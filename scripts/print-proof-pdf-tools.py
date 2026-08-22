@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import io
 import json
 import math
@@ -16,10 +17,13 @@ from PIL import Image, ImageDraw, ImageFont
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import ArrayObject, ByteStringObject, NameObject
 from reportlab.lib.pagesizes import landscape
+from reportlab.lib.colors import HexColor
+from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
+from reportlab.platypus import KeepTogether, Paragraph, SimpleDocTemplate
 
 
 INCH = 72.0
@@ -28,7 +32,15 @@ FONT_DIR = Path(os.environ.get("WINDIR", r"C:\Windows")) / "Fonts"
 FONT_REGULAR = FONT_DIR / "arial.ttf"
 FONT_BOLD = FONT_DIR / "arialbd.ttf"
 FONT_BLACK = FONT_DIR / "ariblk.ttf"
+FONT_SERIF = FONT_DIR / "times.ttf"
+FONT_SERIF_BOLD = FONT_DIR / "timesbd.ttf"
+FONT_SERIF_ITALIC = FONT_DIR / "timesi.ttf"
 pdfmetrics.registerFont(TTFont("JJUArial", str(FONT_REGULAR)))
+pdfmetrics.registerFont(TTFont("JJUArialBold", str(FONT_BOLD)))
+pdfmetrics.registerFont(TTFont("JJUTimes", str(FONT_SERIF)))
+pdfmetrics.registerFont(TTFont("JJUTimesBold", str(FONT_SERIF_BOLD)))
+pdfmetrics.registerFont(TTFont("JJUTimesItalic", str(FONT_SERIF_ITALIC)))
+pdfmetrics.registerFontFamily("JJUTimes", normal="JJUTimes", bold="JJUTimesBold", italic="JJUTimesItalic", boldItalic="JJUTimesBold")
 
 
 def font(path: Path, size_px: int) -> ImageFont.FreeTypeFont:
@@ -68,6 +80,80 @@ def audit_pages(pdf_path: Path) -> dict[str, object]:
         "sparseNarrativePages": [item for item in pages if not item["clean"] and 0 < item["characters"] < 180],
         "pages": pages,
     }
+
+
+def generate_legal_proof(spec_path: Path) -> None:
+    spec = json.loads(spec_path.read_text(encoding="utf-8"))
+    output = Path(spec["output"])
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    body_color = HexColor("#403b34")
+    heading_color = HexColor("#171511")
+    muted_color = HexColor("#655f56")
+    heading_style = ParagraphStyle(
+        "LegalHeading",
+        fontName="JJUArialBold",
+        fontSize=19,
+        leading=19,
+        textColor=heading_color,
+        spaceAfter=0.12 * INCH,
+    )
+    title_style = ParagraphStyle(
+        "LegalTitle",
+        fontName="JJUTimes",
+        fontSize=8.45,
+        leading=10.985,
+        textColor=body_color,
+        spaceAfter=0.09 * INCH,
+    )
+    body_style = ParagraphStyle(
+        "LegalBody",
+        fontName="JJUTimes",
+        fontSize=8.15,
+        leading=10.269,
+        textColor=body_color,
+        spaceAfter=0.055 * INCH,
+    )
+    notice_style = ParagraphStyle(
+        "LegalNotice",
+        parent=body_style,
+        fontName="JJUTimesItalic",
+        textColor=muted_color,
+        spaceBefore=0.035 * INCH,
+        spaceAfter=0.065 * INCH,
+    )
+
+    subject = html.escape(str(spec["subject"]))
+    volume = html.escape(str(spec["volume"]))
+    series = html.escape(str(spec["series"]))
+    year = int(spec["copyrightYear"])
+    story = [
+        Paragraph("Copyright and Disclaimer", heading_style),
+        Paragraph(f"<b>{subject}</b><br/>{volume} of {series}<br/>James Johnson", title_style),
+        Paragraph(f"Copyright © {year} James Johnson. All rights reserved.<br/>Published by JJ University. JJUniversity.com", body_style),
+        Paragraph("No part of this publication may be reproduced, distributed, or transmitted without prior written permission, except for brief quotations and other uses permitted by law.", body_style),
+        Paragraph("JJ University books use a human-directed process that can include AI-assisted research and early drafting. James Johnson selects the subjects, directs the structure and scope, and substantially revises and edits the work.", body_style),
+        Paragraph(f"First JJ University print proof, {year}. Not for sale.", body_style),
+        Paragraph("The following notes apply where relevant to portions of this volume.", notice_style),
+    ]
+    for block in spec.get("blocks", []):
+        heading = html.escape(str(block.get("heading", "")).rstrip("."))
+        text = html.escape(" ".join(str(item).strip() for item in block.get("paragraphs", []) if str(item).strip()))
+        story.append(KeepTogether([Paragraph(f'<font name="JJUArialBold" size="8">{heading}.</font> {text}', body_style)]))
+
+    document = SimpleDocTemplate(
+        str(output),
+        pagesize=(6 * INCH, 9 * INCH),
+        leftMargin=0.62 * INCH,
+        rightMargin=0.95 * INCH,
+        topMargin=0.70 * INCH,
+        bottomMargin=0.72 * INCH,
+        title=str(spec["title"]),
+        author="James Johnson",
+        subject="One-page copyright and disclaimer proof; not for sale",
+        pageCompression=1,
+    )
+    document.build(story)
 
 
 def deterministic_id(seed: bytes) -> ArrayObject:
@@ -370,6 +456,8 @@ def main() -> None:
     marker_parser.add_argument("pdf")
     audit_parser = sub.add_parser("audit")
     audit_parser.add_argument("pdf")
+    legal_parser = sub.add_parser("legal-proof")
+    legal_parser.add_argument("spec")
     normalize_parser = sub.add_parser("normalize")
     normalize_parser.add_argument("source")
     normalize_parser.add_argument("output")
@@ -385,6 +473,8 @@ def main() -> None:
         print(json.dumps(read_markers(Path(args.pdf))))
     elif args.command == "audit":
         print(json.dumps(audit_pages(Path(args.pdf))))
+    elif args.command == "legal-proof":
+        generate_legal_proof(Path(args.spec))
     elif args.command == "normalize":
         normalize_with_folios(Path(args.source), Path(args.output), args.title)
     elif args.command == "covers":

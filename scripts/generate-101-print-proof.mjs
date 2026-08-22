@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -13,12 +13,14 @@ import {
 const root = process.cwd();
 const tempRoot = resolve(root, "tmp", "pdfs", "jju-101-proof");
 const outputRoot = resolve(root, "output", "pdf");
+const publicProofRoot = resolve(root, "public", "print-proofs");
 const productPath = resolve(root, "public", "print-products.json");
 const booksPath = resolve(root, "public", "books.json");
 const manifestPath = resolve(root, "public", "book-content", "manifest.json");
 const toolsPath = resolve(root, "scripts", "print-proof-pdf-tools.py");
 const generatorPath = resolve(root, "scripts", "generate-101-print-proof.mjs");
 const disclaimerModulePath = resolve(root, "scripts", "print-disclaimer-system.mjs");
+const legalProofsOnly = process.argv.includes("--legal-proofs-only");
 const books = readJson(booksPath).map(normalizeBook);
 const products = readJson(productPath).filter(item => item.slug === "101-volume-1" || item.slug === "101-volume-2");
 const contentManifest = readJson(manifestPath);
@@ -63,6 +65,7 @@ const PRODUCT_METADATA = {
 
 mkdirSync(tempRoot, { recursive: true });
 mkdirSync(outputRoot, { recursive: true });
+mkdirSync(publicProofRoot, { recursive: true });
 loadLocalEnv(".env.local");
 loadLocalEnv(".env");
 
@@ -83,6 +86,25 @@ for (const product of products) {
   });
   assertDescriptions(payloads);
   const disclaimerPlan = resolvePrintProductDisclaimerPlan(product, productBooks);
+
+  const legalProofSpec = resolve(tempRoot, `${product.slug}-copyright-disclaimer.json`);
+  const legalProofPdf = resolve(outputRoot, `JJ-University-101-${metadata.volume.replace("Volume ", "Volume-")}-copyright-disclaimer-one-page-proof.pdf`);
+  const publicLegalProofPdf = resolve(publicProofRoot, `${product.slug}-copyright-disclaimer-proof-not-for-sale.pdf`);
+  writeFileSync(legalProofSpec, `${JSON.stringify({
+    output: legalProofPdf,
+    title: `${metadata.series} ${metadata.volume} Copyright and Disclaimer`,
+    subject: metadata.subject,
+    volume: metadata.volume,
+    series: metadata.series,
+    copyrightYear: 2026,
+    blocks: disclaimerPlan.blocks,
+  }, null, 2)}\n`, "utf8");
+  runPython(["legal-proof", legalProofSpec]);
+  const legalProofAudit = readPageAudit(legalProofPdf);
+  if (legalProofAudit.pageCount !== 1) fail(`${product.slug} copyright and disclaimer proof must be exactly one page.`);
+  copyFileSync(legalProofPdf, publicLegalProofPdf);
+  outputs.push(outputRecord(publicLegalProofPdf, { kind: "copyright-disclaimer-proof", product: product.slug, pages: 1, widthIn: 6, heightIn: 9 }));
+  if (legalProofsOnly) continue;
 
   const rawPdf = resolve(tempRoot, `${product.slug}-raw.pdf`);
   const draftPdf = resolve(tempRoot, `${product.slug}-draft.pdf`);
@@ -121,6 +143,11 @@ for (const product of products) {
   const dimensions = await fetchCoverDimensions(finalMarkers.pageCount);
   volumeResults.push({ product, metadata, payloads, disclaimerPlan, finalPdf, pageCount: finalMarkers.pageCount, pageMap: finalMarkers.books, cleanPages: finalMarkers.cleanPages, pageAudit, dimensions });
   outputs.push(outputRecord(finalPdf, { kind: "interior", product: product.slug, pages: finalMarkers.pageCount, widthIn: 6, heightIn: 9 }));
+}
+
+if (legalProofsOnly) {
+  console.log(JSON.stringify({ status: "proof-only-not-for-sale", outputs }, null, 2));
+  process.exit(0);
 }
 
 const coverPayload = { covers: [] };
@@ -279,13 +306,17 @@ function renderInterior(product, metadata, payloads, { pads, pageMap, includeEnd
 </head>
 <body>
   <section class="titleLeaf cleanPage"><span class="proofMarker">PAGETYPE:CLEAN</span><p class="series">${escapeHtml(metadata.series)}</p><h1>${escapeHtml(metadata.subject)}</h1><p class="volume">${escapeHtml(metadata.volume)}</p><div class="goldRule"></div><p class="author">James Johnson</p></section>
-  <section class="legal cleanPage page"><span class="proofMarker">PAGETYPE:CLEAN</span><h2>Copyright and Disclaimer</h2><p class="legalTitle"><strong>${escapeHtml(metadata.subject)}</strong><br>${escapeHtml(metadata.volume)} of ${escapeHtml(metadata.series)}<br>James Johnson</p><p>Copyright (c) ${copyrightYear} James Johnson. All rights reserved.<br>Published by JJ University. JJUniversity.com</p><p>No part of this publication may be reproduced, distributed, or transmitted without prior written permission, except for brief quotations and other uses permitted by law.</p><p>JJ University books use a human-directed process that can include AI-assisted research and early drafting. James Johnson selects the subjects, directs the structure and scope, and substantially revises and edits the work.</p><p>First JJ University print proof, ${copyrightYear}. Not for sale.</p><p class="noticeLead">The following notes apply where relevant to portions of this volume.</p>${renderDisclaimerBlocks(disclaimerPlan.blocks)}</section>
+  <section class="legal cleanPage page"><span class="proofMarker">PAGETYPE:CLEAN</span>${renderLegalPageContent(metadata, disclaimerPlan, copyrightYear)}</section>
   <section class="toc cleanPage page"><span class="proofMarker">PAGETYPE:CLEAN</span><h2>Contents</h2><ol>${payloads.map(({ book }, index) => `<li><span class="n">${String(index + 1).padStart(2, "0")}</span><span class="work"><strong>${escapeHtml(book.title)}</strong></span><span class="p">${String(pageMap[book.id] || "000").padStart(3, "0")}</span></li>`).join("")}</ol></section>
   ${payloads.map((payload, index) => renderBook(payload, index + 1, pads.has(payload.book.id))).join("\n")}
   <section class="about page"><h2>About JJ University</h2><p>JJ University is a free digital library of short books about science, history, religion, psychology, power, money, and the systems underneath ordinary life.</p><p>Read the complete digital library free at JJUniversity.com.</p></section>
   ${includeEndBlank ? `<section class="blank cleanPage page"><span class="proofMarker">PAGETYPE:CLEAN</span></section>` : ""}
 </body>
 </html>`;
+}
+
+function renderLegalPageContent(metadata, disclaimerPlan, copyrightYear) {
+  return `<h2>Copyright and Disclaimer</h2><p class="legalTitle"><strong>${escapeHtml(metadata.subject)}</strong><br>${escapeHtml(metadata.volume)} of ${escapeHtml(metadata.series)}<br>James Johnson</p><p>Copyright &copy; ${copyrightYear} James Johnson. All rights reserved.<br>Published by JJ University. JJUniversity.com</p><p>No part of this publication may be reproduced, distributed, or transmitted without prior written permission, except for brief quotations and other uses permitted by law.</p><p>JJ University books use a human-directed process that can include AI-assisted research and early drafting. James Johnson selects the subjects, directs the structure and scope, and substantially revises and edits the work.</p><p>First JJ University print proof, ${copyrightYear}. Not for sale.</p><p class="noticeLead">The following notes apply where relevant to portions of this volume.</p>${renderDisclaimerBlocks(disclaimerPlan.blocks)}`;
 }
 
 function renderDisclaimerBlocks(blocks) {
@@ -410,15 +441,25 @@ function renderPdf(htmlPath, pdfPath) {
   if (result.status !== 0 || !outputReady) fail(`Chrome PDF generation failed for ${htmlPath}.`);
 }
 
-function waitForPdf(pdfPath, timeoutMs = 20000) {
+function waitForPdf(pdfPath, timeoutMs = 30000, stableMs = 1200) {
   const deadline = Date.now() + timeoutMs;
   const pause = new Int32Array(new SharedArrayBuffer(4));
+  let stableFingerprint = "";
+  let stableSince = 0;
   while (Date.now() < deadline) {
     if (existsSync(pdfPath)) {
       const bytes = readFileSync(pdfPath);
       const header = bytes.subarray(0, 5).toString("ascii");
       const tail = bytes.subarray(Math.max(0, bytes.length - 1024)).toString("ascii");
-      if (header === "%PDF-" && tail.includes("%%EOF")) return true;
+      if (header === "%PDF-" && tail.includes("%%EOF")) {
+        const fingerprint = `${bytes.length}:${createHash("sha256").update(bytes).digest("hex")}`;
+        if (fingerprint !== stableFingerprint) {
+          stableFingerprint = fingerprint;
+          stableSince = Date.now();
+        } else if (Date.now() - stableSince >= stableMs) {
+          return true;
+        }
+      }
     }
     Atomics.wait(pause, 0, 0, 100);
   }
