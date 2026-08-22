@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "reviewScope": "Current JJ University 101 proof candidates only. These assignments record a review of extracted copyright/disclaimer sections, not a completed full-manuscript legal or factual review.",
+  "books": {
+    "math": {
+      "profileIds": [
+        "interpretation-and-disagreement"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "calculus": {
+      "profileIds": [
+        "interpretation-and-disagreement"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "science": {
+      "profileIds": [
+        "science-and-technical-safety",
+        "interpretation-and-disagreement"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "physics": {
+      "profileIds": [
+        "science-and-technical-safety",
+        "interpretation-and-disagreement",
+        "satire-and-dramatization"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "quantum": {
+      "profileIds": [
+        "science-and-technical-safety",
+        "interpretation-and-disagreement"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "chemistry": {
+      "profileIds": [
+        "science-and-technical-safety"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "electricity": {
+      "profileIds": [
+        "science-and-technical-safety",
+        "interpretation-and-disagreement"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "biology": {
+      "profileIds": [
+        "science-and-technical-safety",
+        "interpretation-and-disagreement"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "anatomy": {
+      "profileIds": [
+        "health-and-mental-health",
+        "interpretation-and-disagreement"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "psychology": {
+      "profileIds": [
+        "health-and-mental-health",
+        "interpretation-and-disagreement"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "philosophy": {
+      "profileIds": [
+        "interpretation-and-disagreement",
+        "satire-and-dramatization"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "ethics": {
+      "profileIds": [
+        "interpretation-and-disagreement",
+        "third-party-materials"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "history": {
+      "profileIds": [
+        "interpretation-and-disagreement",
+        "third-party-materials"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "religion": {
+      "profileIds": [
+        "interpretation-and-disagreement",
+        "religion-and-spirituality"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "government": {
+      "profileIds": [
+        "interpretation-and-disagreement",
+        "legal-and-financial"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    },
+    "economics": {
+      "profileIds": [
+        "interpretation-and-disagreement",
+        "legal-and-financial"
+      ],
+      "reviewStatus": "profiled-for-proof"
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "lastEditorialReview": "2026-08-21",
+  "profiles": [
+    {
+      "id": "editorial-accuracy",
+      "heading": "Errors, updates, and corrections",
+      "coversSignals": [
+        "accuracy"
+      ],
+      "paragraphs": [
+        "JJ University is a fast-moving, evolving publishing project. Factual, chronological, attribution, interpretive, or typographical errors may remain, and information can become outdated. Documented corrections may be submitted at JJUniversity.com/contact and incorporated in later editions."
+      ]
+    },
+    {
+      "id": "general-education",
+      "heading": "Educational scope",
+      "coversSignals": [
+        "general-education"
+      ],
+      "paragraphs": [
+        "This volume is for general education and commentary. It is not individualized instruction or professional advice."
+      ]
+    },
+    {
+      "id": "science-and-technical-safety",
+      "heading": "Science and technical safety",
+      "coversSignals": [
+        "science-technical-safety"
+      ],
+      "paragraphs": [
+        "Scientific and technical descriptions are explanations, not operating instructions. Do not rely on this volume for hazardous, laboratory, electrical, engineering, or health-related activity."
+      ]
+    },
+    {
+      "id": "health-and-mental-health",
+      "heading": "Health and mental health",
+      "coversSignals": [
+        "health-mental-health"
+      ],
+      "paragraphs": [
+        "Discussion of anatomy, health, psychology, drugs, or mental health does not provide diagnosis, treatment, or medical or mental-health advice. Consult a qualified professional for personal decisions."
+      ]
+    },
+    {
+      "id": "legal-and-financial",
+      "heading": "Legal and financial topics",
+      "coversSignals": [
+        "legal-financial"
+      ],
+      "paragraphs": [
+        "Discussion of law, government, economics, markets, gambling, taxes, or money is educational, not legal, financial, tax, or investment advice. Laws, policies, and market conditions change."
+      ]
+    },
+    {
+      "id": "independent-commentary",
+      "heading": "Independence and identification",
+      "coversSignals": [
+        "affiliation-trademark",
+        "public-person-commentary"
+      ],
+      "paragraphs": [
+        "JJ University and James Johnson are independent and are not affiliated with, authorized by, endorsed by, or speaking for any person or entity discussed. Names and trademarks identify subjects of commentary and remain with their owners."
+      ]
+    },
+    {
+      "id": "interpretation-and-disagreement",
+      "heading": "Interpretation",
+      "coversSignals": [
+        "historical-interpretive"
+      ],
+      "paragraphs": [
+        "Accounts of history, religion, philosophy, ethics, politics, and public institutions are the author's synthesis and interpretation. Sources, participants, scholars, and readers may reasonably disagree about evidence, terminology, emphasis, and conclusions."
+      ]
+    },
+    {
+      "id": "religion-and-spirituality",
+      "heading": "Religion and spirituality",
+      "coversSignals": [
+        "religion-spirituality"
+      ],
+      "paragraphs": [
+        "Discussion of religion, beliefs, rituals, and spiritual claims is historical and cultural commentary, not doctrine or spiritual counsel. No faith or religious institution is represented or endorsed unless expressly stated."
+      ]
+    },
+    {
+      "id": "third-party-materials",
+      "heading": "Third-party material",
+      "coversSignals": [
+        "third-party-materials"
+      ],
+      "paragraphs": [
+        "Quoted or referenced third-party material remains with its owners. This notice neither establishes fair use nor replaces permission where permission is required."
+      ]
+    },
+    {
+      "id": "satire-and-dramatization",
+      "heading": "Satire and dramatization",
+      "coversSignals": [
+        "satire-fiction-dramatization"
+      ],
+      "paragraphs": [
+        "Some passages may use satire, parody, fictionalization, composite scenes, or dramatized dialogue. Unless identified as a quotation, dialogue and interior thoughts are not verbatim statements by real people."
+      ]
+    },
+    {
+      "id": "substances-and-risky-activity",
+      "heading": "Substances and risky activity",
+      "coversSignals": [
+        "substances-risky-activity"
+      ],
+      "paragraphs": [
+        "Discussion of drugs, alcohol, weapons, crime, or other risky activity is descriptive, not encouragement of illegal, unsafe, or self-destructive conduct. Follow applicable law and seek qualified help when health or safety is at risk."
+      ]
+    },
+    {
+      "id": "living-person-or-active-entity",
+      "heading": "Living people and active organizations",
+      "coversSignals": [
+        "living-person-active-entity"
+      ],
+      "paragraphs": [
+        "This independent commentary is not authorized by the people or organizations discussed. Read statements about living people and active organizations with their cited context, publication date, and distinction between documented fact, attributed allegation, and author interpretation."
+      ]
+    },
+    {
+      "id": "memoir-firsthand-account",
+      "heading": "Memoir and firsthand account",
+      "coversSignals": [
+        "memoir-firsthand-account"
+      ],
+      "paragraphs": [
+        "Firsthand passages reflect the author's memory and perspective. Memory is partial, and other participants may remember events differently. Changed names or identifying details are disclosed where used."
+      ]
+    },
+    {
+      "id": "fiction-composite-privacy",
+      "heading": "Fiction, composites, and privacy",
+      "coversSignals": [
+        "fiction-composite-privacy"
+      ],
+      "paragraphs": [
+        "Where a work is identified as fiction, its characters and events are imaginative. Disclosed composites or changed identifying details serve narrative clarity or privacy and are not factual identification of a particular person."
+      ]
+    }
+  ]
+}

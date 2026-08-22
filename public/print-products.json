@@ -12,6 +12,19 @@
     "status": "coming-soon",
     "printStatus": "files-generated",
     "salesStatus": "not-for-sale",
+    "disclaimerProfileIds": [
+      "editorial-accuracy",
+      "general-education",
+      "independent-commentary"
+    ],
+    "publicationReview": {
+      "status": "required-before-sale",
+      "requiredChecks": [
+        "full-manuscript-factual-review",
+        "source-quotation-and-rights-review",
+        "final-cover-and-metadata-review"
+      ]
+    },
     "podPackageId": "",
     "publicInteriorUrl": "https://nzlmnbppynjmutuukmbt.supabase.co/storage/v1/object/public/paperbacks/101-volume-1/interior.pdf",
     "publicCoverUrl": "https://nzlmnbppynjmutuukmbt.supabase.co/storage/v1/object/public/paperbacks/101-volume-1/cover-wrap.pdf",
@@ -55,6 +68,19 @@
     "status": "coming-soon",
     "printStatus": "files-generated",
     "salesStatus": "not-for-sale",
+    "disclaimerProfileIds": [
+      "editorial-accuracy",
+      "general-education",
+      "independent-commentary"
+    ],
+    "publicationReview": {
+      "status": "required-before-sale",
+      "requiredChecks": [
+        "full-manuscript-factual-review",
+        "source-quotation-and-rights-review",
+        "final-cover-and-metadata-review"
+      ]
+    },
     "podPackageId": "",
     "publicInteriorUrl": "https://nzlmnbppynjmutuukmbt.supabase.co/storage/v1/object/public/paperbacks/101-volume-2/interior.pdf",
     "publicCoverUrl": "https://nzlmnbppynjmutuukmbt.supabase.co/storage/v1/object/public/paperbacks/101-volume-2/cover-wrap.pdf",
@@ -98,6 +124,17 @@
     "status": "coming-soon",
     "printStatus": "files-generated",
     "salesStatus": "not-for-sale",
+    "disclaimerProfileIds": [
+      "editorial-accuracy",
+      "general-education",
+      "independent-commentary"
+    ],
+    "publicationReview": {
+      "status": "required-before-sale",
+      "requiredChecks": [
+        "component-volume-publication-approval"
+      ]
+    },
     "podPackageId": "",
     "publicInteriorUrl": "",
     "publicCoverUrl": "",

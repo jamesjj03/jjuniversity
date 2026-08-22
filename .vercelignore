@@ -10,3 +10,6 @@
 /e.textContent.trim())]
 /window.__dragQA.*
 /workshop/
+/app/redesign-lab/
+/components/redesign-lab/
+/public/fonts/reader/

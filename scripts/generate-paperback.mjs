@@ -1,7 +1,9 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
+import { resolvePrintProductDisclaimerPlan } from "./print-disclaimer-system.mjs";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
@@ -80,6 +82,7 @@ function renderInterior(printProduct, productBooks) {
 
   const copyrightYear = printProduct.copyrightYear || new Date().getFullYear();
   const isbn = printProduct.isbn.replace(/[^0-9X]/gi, "");
+  const disclaimerPlan = resolvePrintProductDisclaimerPlan(printProduct, productBooks);
 
   return `<!doctype html>
 <html lang="en">
@@ -194,10 +197,30 @@ function renderInterior(printProduct, productBooks) {
     }
 
     .legalPage {
-      display: grid;
-      align-content: end;
       color: #4d4034;
-      font-size: 9.5pt;
+      font-size: 8.15pt;
+      line-height: 1.26;
+    }
+
+    .legalPage h2 {
+      margin-bottom: 0.12in;
+    }
+
+    .legalPage p {
+      margin-bottom: 0.055in;
+      font-size: 8.15pt;
+      line-height: 1.26;
+    }
+
+    .disclaimerBlock {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .disclaimerBlock strong {
+      color: #231d17;
+      font-family: Arial, sans-serif;
+      font-size: 8pt;
     }
 
     .tocPage ol {
@@ -317,14 +340,15 @@ function renderInterior(printProduct, productBooks) {
   </section>
 
   <section class="legalPage pageBreak">
+    <h2>Copyright and Disclaimer</h2>
     <p><strong>${escapeHtml(printProduct.title)}</strong>${printProduct.subtitle ? `<br>${escapeHtml(printProduct.subtitle)}` : ""}<br>James Johnson</p>
     <p>Copyright © ${copyrightYear} James Johnson.<br>All rights reserved.</p>
     <p>Published by JJ University.<br>JJUniversity.com</p>
     <p>No part of this publication may be reproduced, distributed, or transmitted in any form without prior written permission, except for brief quotations and other uses permitted by law.</p>
-    <p>This publication is intended for general educational purposes. It is not medical, legal, financial, or other professional advice.</p>
-    <p>JJ University uses a human-directed editorial process that includes AI-assisted research and early drafting. James Johnson selects each subject, directs the structure and scope, and substantially revises and edits the final work.</p>
-    <p>Names, brands, and trademarks belong to their respective owners and are used for identification, commentary, and educational discussion.</p>
+    <p>JJ University books use a human-directed process that can include AI-assisted research and early drafting. James Johnson selects the subjects, directs the structure and scope, and substantially revises and edits the work.</p>
     <p>First JJ University print edition, ${copyrightYear}.<br>${isbn ? `ISBN ${escapeHtml(isbn)}<br>` : ""}Internal SKU: ${escapeHtml(printProduct.sku || printProduct.slug)}.</p>
+    <p><em>The following notes apply where relevant to portions of this volume.</em></p>
+    ${renderDisclaimerBlocks(disclaimerPlan.blocks)}
   </section>
 
   <section class="volumeNote pageBreak">
@@ -338,6 +362,10 @@ function renderInterior(printProduct, productBooks) {
   ${renderBackMatter(printProduct, productBooks)}
 </body>
 </html>`;
+}
+
+function renderDisclaimerBlocks(blocks) {
+  return blocks.map(block => `<p class="disclaimerBlock"><strong>${escapeHtml(block.heading)}.</strong> ${escapeHtml(block.paragraphs.join(" "))}</p>`).join("\n");
 }
 
 function renderToc(bookPayloads) {
@@ -799,6 +827,8 @@ function normalizeProduct(raw) {
     status: String(raw.status || "coming-soon").trim(),
     printStatus: String(raw.printStatus || "draft").trim(),
     salesStatus: String(raw.salesStatus || "not-for-sale").trim(),
+    disclaimerProfileIds: Array.isArray(raw.disclaimerProfileIds) ? raw.disclaimerProfileIds.map(value => String(value || "").trim()).filter(Boolean) : [],
+    publicationReview: raw.publicationReview && typeof raw.publicationReview === "object" ? raw.publicationReview : {},
     componentProductSlugs: Array.isArray(raw.componentProductSlugs) ? raw.componentProductSlugs.map(slugify) : [],
     format: {
       trimSize: raw.format?.trimSize || "6x9",
@@ -872,17 +902,50 @@ function renderPdf(htmlPath, pdfPath) {
     fail("Could not find Chrome. Re-run with --html-only or set CHROME_PATH.");
   }
 
+  if (existsSync(pdfPath)) rmSync(pdfPath);
+  const profileDirectory = mkdtempSync(join(tmpdir(), "jju-print-"));
+
   const result = spawnSync(chromePath, [
     "--headless=new",
+    "--no-sandbox",
     "--disable-gpu",
+    "--disable-gpu-sandbox",
+    "--disable-software-rasterizer",
+    "--disable-gpu-compositing",
+    "--no-first-run",
+    `--user-data-dir=${profileDirectory}`,
     "--no-pdf-header-footer",
     `--print-to-pdf=${pdfPath}`,
     pathToFileURL(htmlPath).href,
   ], { stdio: "inherit" });
 
-  if (result.status !== 0) {
+  const outputReady = waitForPdf(pdfPath);
+  try {
+    rmSync(profileDirectory, { recursive: true, force: true });
+  } catch {
+    // A detached browser helper can briefly retain its isolated temp profile.
+  }
+
+  if (result.status !== 0 || !outputReady) {
     fail(`Chrome PDF generation failed for ${htmlPath} with exit code ${result.status}.`);
   }
+}
+
+function waitForPdf(pdfPath, timeoutMs = 20000) {
+  const deadline = Date.now() + timeoutMs;
+  const pause = new Int32Array(new SharedArrayBuffer(4));
+
+  while (Date.now() < deadline) {
+    if (existsSync(pdfPath)) {
+      const bytes = readFileSync(pdfPath);
+      const header = bytes.subarray(0, 5).toString("ascii");
+      const tail = bytes.subarray(Math.max(0, bytes.length - 1024)).toString("ascii");
+      if (header === "%PDF-" && tail.includes("%%EOF")) return true;
+    }
+    Atomics.wait(pause, 0, 0, 100);
+  }
+
+  return false;
 }
 
 function normalizeTitle(value) {

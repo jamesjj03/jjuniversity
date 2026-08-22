@@ -1,6 +1,7 @@
 # JJ University audiobook and narrator foundation
 
 Date: 2026-08-20
+Updated: 2026-08-21
 
 Status: implemented in code as a disabled-safe foundation. The SQL has not been applied and no live Supabase data or Storage buckets were changed.
 
@@ -10,12 +11,13 @@ Status: implemented in code as a disabled-safe foundation. The SQL has not been 
 - Ordered track metadata and a private streaming boundary.
 - A book action component that supports Read, Listen, Print, and Save without showing Listen for incomplete data.
 - A native audiobook page and single-player track list.
-- A private narrator desk with assignment acceptance, chapter-track uploads, submission history, and a submit-for-review action.
+- A private, phone-first narrator desk with assignment acceptance, a server-authored expected-page checklist, local preview, private listen-back, versioned replacement, narrator-visible feedback, and a submit-for-review action that stays locked until every required track is ready.
 - Server-verified, short-lived signed upload tokens. Narrators never receive the service-role key or direct access to another narrator's files.
 - Transactional database functions for accepting assignments, preparing uploads, and submitting work for review. Narrator accounts have read-only table access; they cannot insert or update submission records directly. The completion transaction is callable only by the server's service role after the route verifies the real Storage object.
 - Narrator reads are column-scoped as well as row-scoped. Internal assignment notes and submission review notes are withheld from direct narrator queries until a deliberate feedback surface exists.
 - Active narrator profiles are locked for each mutation transaction, preventing a concurrent pause/closure from racing past the authorization check.
-- Retry-safe upload preparation. The browser creates one idempotency key per file attempt, and a retry returns the same private submission instead of creating a duplicate.
+- Retry-safe upload preparation. The browser creates one idempotency key per unchanged file/track/note attempt, and a retry returns the same private submission instead of creating a duplicate.
+- Reader-aligned track identity. Narrators choose an expected track; the server derives its position and title from that edition rather than trusting hand-entered metadata.
 - Private intake and final-audio buckets in the reviewed SQL draft.
 
 ## Deliberate launch gates
@@ -60,7 +62,7 @@ Supabase notes that signed URLs stay valid until expiration and that generating 
 
 1. Review and apply `supabase/jju_audio_foundation_2026_08_20.sql` in a non-production check first.
 2. Upgrade Supabase to Pro before bulk audio arrives.
-3. Create one real narrator account, narrator profile, edition, and assignment.
+3. Create one real narrator account, narrator profile, edition, Reader-aligned expected-track plan, and assignment. Pin the edition to the approved manuscript version and content hash.
 4. Enable only `JJU_NARRATOR_PORTAL_ENABLED` and test acceptance, upload, retry, and submission on phone and desktop.
 5. Review the uploaded source, create delivery MP3/M4A tracks, and insert them in the final private bucket.
 6. Mark the edition and its tracks published.
@@ -74,4 +76,4 @@ Supabase notes that signed URLs stay valid until expiration and that generating 
 - Codec and container inspection. MIME type and byte size are enforced now; actual audio validity remains an explicit review gate before publication.
 - Resumable TUS upload UI.
 - Narrator contracts, rates, tax forms, or payouts.
-- Admin controls for inviting narrators and promoting intake files to published tracks; those belong in the admin redesign.
+- Admin controls for inviting narrators, generating the expected-track rows from a reviewed Reader manifest, and promoting intake files to published tracks; those belong in the admin redesign.

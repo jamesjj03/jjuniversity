@@ -4,11 +4,22 @@ import { createSupabaseRequestClient } from "@/lib/supabaseServer";
 
 export type NarratorSubmissionView = {
   id: string;
+  audioTrackId: string;
   trackPosition: number;
   trackTitle: string;
   fileName: string;
   status: string;
   uploadedAt: string;
+  narratorFeedback: string;
+};
+
+export type NarratorTrackView = {
+  id: string;
+  position: number;
+  sectionKey: string;
+  title: string;
+  required: boolean;
+  latestSubmission: NarratorSubmissionView | null;
 };
 
 export type NarratorAssignmentView = {
@@ -20,6 +31,7 @@ export type NarratorAssignmentView = {
   status: string;
   dueAt: string;
   brief: string;
+  tracks: NarratorTrackView[];
   submissions: NarratorSubmissionView[];
 };
 
@@ -70,24 +82,31 @@ export async function getNarratorPortalData(userId: string): Promise<NarratorPor
   const assignments = (assignmentResult.data || []) as Row[];
   const editionIds = assignments.map(row => String(row.edition_id || "")).filter(Boolean);
 
-  const [editionResult, submissionResult] = await Promise.all([
+  const [editionResult, trackResult, submissionResult] = await Promise.all([
     editionIds.length
       ? supabase
         .from("audio_editions")
         .select("id,book_id")
         .in("id", editionIds)
       : Promise.resolve({ data: [], error: null }),
+    editionIds.length
+      ? supabase
+        .from("audio_tracks")
+        .select("id,edition_id,position,section_key,title,required_for_submission")
+        .in("edition_id", editionIds)
+        .order("position", { ascending: true })
+      : Promise.resolve({ data: [], error: null }),
     assignments.length
       ? supabase
         .from("narrator_submissions")
-        .select("id,assignment_id,track_position,track_title,original_file_name,upload_status,uploaded_at")
+        .select("id,assignment_id,audio_track_id,track_position,track_title,original_file_name,upload_status,uploaded_at,narrator_feedback")
         .in("assignment_id", assignments.map(row => String(row.id)))
         .order("created_at", { ascending: false })
       : Promise.resolve({ data: [], error: null }),
   ]);
 
-  if (editionResult.error || submissionResult.error) {
-    const error = editionResult.error || submissionResult.error;
+  if (editionResult.error || trackResult.error || submissionResult.error) {
+    const error = editionResult.error || trackResult.error || submissionResult.error;
     if (missingTable(error)) return null;
     throw new Error(error?.message || "Could not load narrator assignments.");
   }
@@ -102,19 +121,42 @@ export async function getNarratorPortalData(userId: string): Promise<NarratorPor
   const editionById = new Map(editions.map(row => [String(row.id), row]));
   const bookById = new Map(((bookResult.data || []) as Row[]).map(row => [String(row.id), row]));
   const submissionsByAssignment = new Map<string, NarratorSubmissionView[]>();
+  const latestSubmissionByAssignmentTrack = new Map<string, NarratorSubmissionView>();
+  const latestHistoricalSubmissionByAssignmentTrack = new Map<string, NarratorSubmissionView>();
 
   for (const row of (submissionResult.data || []) as Row[]) {
     const assignmentId = String(row.assignment_id || "");
+    const audioTrackId = String(row.audio_track_id || "");
     const list = submissionsByAssignment.get(assignmentId) || [];
-    list.push({
+    const submission = {
       id: String(row.id || ""),
+      audioTrackId,
       trackPosition: Number(row.track_position || 0),
       trackTitle: String(row.track_title || ""),
       fileName: String(row.original_file_name || ""),
       status: String(row.upload_status || ""),
       uploadedAt: String(row.uploaded_at || ""),
-    });
+      narratorFeedback: String(row.narrator_feedback || ""),
+    };
+    list.push(submission);
     submissionsByAssignment.set(assignmentId, list);
+    const assignmentTrackKey = `${assignmentId}:${audioTrackId}`;
+    if (audioTrackId) {
+      if (!latestHistoricalSubmissionByAssignmentTrack.has(assignmentTrackKey)) {
+        latestHistoricalSubmissionByAssignmentTrack.set(assignmentTrackKey, submission);
+      }
+      if (submission.status !== "superseded" && !latestSubmissionByAssignmentTrack.has(assignmentTrackKey)) {
+        latestSubmissionByAssignmentTrack.set(assignmentTrackKey, submission);
+      }
+    }
+  }
+
+  const tracksByEdition = new Map<string, Row[]>();
+  for (const row of (trackResult.data || []) as Row[]) {
+    const editionId = String(row.edition_id || "");
+    const list = tracksByEdition.get(editionId) || [];
+    list.push(row);
+    tracksByEdition.set(editionId, list);
   }
 
   return {
@@ -135,6 +177,19 @@ export async function getNarratorPortalData(userId: string): Promise<NarratorPor
         status: String(row.status || "offered"),
         dueAt: String(row.due_at || ""),
         brief: String(row.narrator_brief || ""),
+        tracks: (tracksByEdition.get(editionId) || []).map(track => {
+          const audioTrackId = String(track.id || "");
+          return {
+            id: audioTrackId,
+            position: Number(track.position || 0),
+            sectionKey: String(track.section_key || ""),
+            title: String(track.title || ""),
+            required: track.required_for_submission !== false,
+            latestSubmission: latestSubmissionByAssignmentTrack.get(`${id}:${audioTrackId}`)
+              || latestHistoricalSubmissionByAssignmentTrack.get(`${id}:${audioTrackId}`)
+              || null,
+          };
+        }),
         submissions: submissionsByAssignment.get(id) || [],
       };
     }),

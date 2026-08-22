@@ -17,13 +17,26 @@ const ALLOWED_MIME_TYPES = new Set([
   "audio/x-wav",
   "audio/flac",
 ]);
+const GENERIC_MIME_TYPES = new Set([
+  "",
+  "application/octet-stream",
+  "application/x-octet-stream",
+  "application/unknown",
+  "binary/octet-stream",
+]);
+const MIME_BY_EXTENSION: Record<string, string> = {
+  ".flac": "audio/flac",
+  ".m4a": "audio/mp4",
+  ".mp3": "audio/mpeg",
+  ".wav": "audio/wav",
+  ".wave": "audio/wav",
+};
 
 type UploadRequest = {
   action?: unknown;
   assignmentId?: unknown;
+  audioTrackId?: unknown;
   idempotencyKey?: unknown;
-  trackPosition?: unknown;
-  trackTitle?: unknown;
   fileName?: unknown;
   fileSize?: unknown;
   mimeType?: unknown;
@@ -69,6 +82,15 @@ function safeFileName(value: unknown) {
     .replace(/^-+|-+$/g, "")
     .slice(-120);
   return cleaned || "audio.mp3";
+}
+
+function normalizeMimeType(value: unknown, fileName: string) {
+  const supplied = String(value || "").split(";", 1)[0].trim().toLowerCase();
+  if (ALLOWED_MIME_TYPES.has(supplied)) return supplied;
+  if (!GENERIC_MIME_TYPES.has(supplied)) return "";
+
+  const extensionMatch = /(?:\.[a-z0-9]+)$/i.exec(fileName);
+  return extensionMatch ? MIME_BY_EXTENSION[extensionMatch[0].toLowerCase()] || "" : "";
 }
 
 function asRecord(value: unknown): JsonRecord | null {
@@ -131,7 +153,7 @@ export async function POST(request: Request) {
 
     const submissionResult = await supabase
       .from("narrator_submissions")
-      .select("id,assignment_id,narrator_user_id,storage_bucket,storage_path,file_size_bytes,upload_status")
+      .select("id,assignment_id,narrator_user_id,audio_track_id,storage_bucket,storage_path,file_size_bytes,upload_status")
       .eq("id", submissionId)
       .eq("narrator_user_id", user.id)
       .in("upload_status", ["awaiting-upload", "uploaded"])
@@ -141,6 +163,10 @@ export async function POST(request: Request) {
     }
 
     const assignmentId = String(submissionResult.data.assignment_id || "");
+    const audioTrackId = String(submissionResult.data.audio_track_id || "");
+    if (!UUID_PATTERN.test(audioTrackId)) {
+      return response({ error: "Submission track is invalid." }, 409);
+    }
     const [profileResult, assignmentResult] = await Promise.all([
       supabase
         .from("narrator_profiles")
@@ -189,6 +215,7 @@ export async function POST(request: Request) {
     }
     if (String(completed.submission_id || "") !== submissionId
       || String(completed.assignment_id || "") !== assignmentId
+      || String(completed.audio_track_id || "") !== audioTrackId
       || String(completed.status || "") !== "uploaded") {
       return response({ error: "The upload returned an unexpected state." }, 409);
     }
@@ -196,6 +223,7 @@ export async function POST(request: Request) {
     return response({
       ok: true,
       submissionId,
+      audioTrackId,
       replayed: completed.replayed === true,
     }, 200);
   }
@@ -203,26 +231,23 @@ export async function POST(request: Request) {
   if (action !== "create") return response({ error: "Invalid upload action." }, 400);
 
   const assignmentId = String(body.assignmentId || "");
+  const audioTrackId = String(body.audioTrackId || "");
   const idempotencyKey = String(body.idempotencyKey || "");
-  const trackPosition = Number(body.trackPosition || 0);
-  const trackTitle = cleanText(body.trackTitle, 160);
   const originalFileName = safeFileName(body.fileName);
   const fileSize = Number(body.fileSize || 0);
-  const mimeType = String(body.mimeType || "").toLowerCase();
+  const mimeType = normalizeMimeType(body.mimeType, originalFileName);
   const narratorNote = cleanText(body.narratorNote, 1000);
 
   if (!UUID_PATTERN.test(assignmentId)) return response({ error: "Choose an assignment." }, 400);
+  if (!UUID_PATTERN.test(audioTrackId)) return response({ error: "Choose a track from this assignment." }, 400);
   if (!UUID_PATTERN.test(idempotencyKey)) return response({ error: "Could not identify this upload attempt." }, 400);
-  if (!Number.isInteger(trackPosition) || trackPosition < 1 || trackPosition > 999) return response({ error: "Use a valid track number." }, 400);
-  if (!trackTitle) return response({ error: "Add a track title." }, 400);
   if (!Number.isInteger(fileSize) || fileSize < 1 || fileSize > MAX_FILE_SIZE) return response({ error: "Each track must be 50 MB or smaller." }, 400);
   if (!ALLOWED_MIME_TYPES.has(mimeType)) return response({ error: "Use an MP3, M4A, WAV, or FLAC audio file." }, 400);
 
   const preparedResult = await supabase.rpc("narrator_prepare_submission", {
     p_assignment_id: assignmentId,
+    p_audio_track_id: audioTrackId,
     p_idempotency_key: idempotencyKey,
-    p_track_position: trackPosition,
-    p_track_title: trackTitle,
     p_original_file_name: originalFileName,
     p_mime_type: mimeType,
     p_file_size_bytes: fileSize,
@@ -235,6 +260,7 @@ export async function POST(request: Request) {
 
   const submissionId = String(prepared.submission_id || "");
   const returnedAssignmentId = String(prepared.assignment_id || "");
+  const returnedAudioTrackId = String(prepared.audio_track_id || "");
   const storageBucket = String(prepared.storage_bucket || "");
   const storagePath = String(prepared.storage_path || "");
   const uploadStatus = String(prepared.upload_status || "");
@@ -242,6 +268,7 @@ export async function POST(request: Request) {
   const pathParts = splitStoragePath(storagePath, expectedPrefix);
   if (!UUID_PATTERN.test(submissionId)
     || returnedAssignmentId !== assignmentId
+    || returnedAudioTrackId !== audioTrackId
     || storageBucket !== INTAKE_BUCKET
     || !pathParts
     || !["awaiting-upload", "uploaded"].includes(uploadStatus)) {
@@ -251,8 +278,10 @@ export async function POST(request: Request) {
   if (uploadStatus === "uploaded") {
     return response({
       submissionId,
+      audioTrackId,
       bucket: INTAKE_BUCKET,
       path: storagePath,
+      mimeType,
       alreadyComplete: true,
     }, 200);
   }
@@ -266,8 +295,10 @@ export async function POST(request: Request) {
     }
     return response({
       submissionId,
+      audioTrackId,
       bucket: INTAKE_BUCKET,
       path: storagePath,
+      mimeType,
       objectPresent: true,
     }, 200);
   }
@@ -281,8 +312,10 @@ export async function POST(request: Request) {
 
   return response({
     submissionId,
+    audioTrackId,
     bucket: INTAKE_BUCKET,
     path: storagePath,
+    mimeType,
     token: signedResult.data.token,
   }, 201);
 }
