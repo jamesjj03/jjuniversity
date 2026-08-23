@@ -6,6 +6,7 @@ import "@fontsource-variable/bitter/wght.css";
 import "@fontsource-variable/lexend/wght.css";
 import "@fontsource-variable/literata/wght.css";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <SiteFooter />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -138,6 +138,10 @@ const ACTUAL_TIME_KEY = "jju.actualReadingSeconds";
 const HISTORY_KEY = "jju.readingHistory";
 const OPEN_HISTORY_SECONDS = 15;
 const AUTO_COMPLETE_SECONDS = 60;
+const ENGAGED_MINUTE_SECONDS = 60;
+const QUALIFIED_READ_SECONDS = 120;
+const ENGAGEMENT_IDLE_TIMEOUT_MS = 90_000;
+const QUALIFIED_SCROLL_DEPTH = 0.5;
 const BOOKMARKS_KEY = "jju.readerBookmarks";
 const NOTES_KEY = "jju.readerNotes";
 const QUOTES_KEY = "jju.readerQuotes";
@@ -637,6 +641,14 @@ export default function ReaderClient({
   const pendingCompletionCloudSyncRef = useRef(false);
   const completionMarkedAtSecondRef = useRef<number | null>(null);
   const activeReaderAccountRef = useRef("");
+  const lastReaderInteractionAtRef = useRef(0);
+  const engagedSessionSecondsRef = useRef(0);
+  const engagedMinutesQueuedRef = useRef(0);
+  const qualifiedReadQueuedRef = useRef(false);
+  const visitedSectionIndexesRef = useRef<Set<number>>(new Set());
+  const maxReaderScrollDepthRef = useRef(0);
+  const readingSessionStartedAtRef = useRef(0);
+  const readingAnalyticsQueueRef = useRef<Promise<void>>(Promise.resolve());
   const touchStart = useRef<number | null>(null);
   const viewerResizeObserverRef = useRef<ResizeObserver | null>(null);
   const chapterPanelId = useId();
@@ -796,6 +808,75 @@ export default function ReaderClient({
   const savedBookNoteCount = savedBookSections.filter(item => item.noteKey).length;
   const savedBookQuoteCount = savedBookSections.reduce((sum, item) => sum + item.quotes.length, 0);
 
+  const markReaderEngagement = useCallback(() => {
+    lastReaderInteractionAtRef.current = performance.now();
+
+    let depth = 0;
+    if (compactReader) {
+      const documentNode = inlineDocumentRef.current;
+      if (documentNode) {
+        const rect = documentNode.getBoundingClientRect();
+        const scrollRange = rect.height - window.innerHeight;
+        depth = scrollRange <= 0 ? 1 : Math.max(0, Math.min(1, -rect.top / scrollRange));
+      }
+    } else {
+      const frameWindow = viewerRef.current?.contentWindow;
+      const frameDocument = frameWindow?.document;
+      if (frameWindow && frameDocument) {
+        const documentHeight = Math.max(
+          frameDocument.documentElement?.scrollHeight || 0,
+          frameDocument.body?.scrollHeight || 0,
+        );
+        const scrollRange = documentHeight - frameWindow.innerHeight;
+        depth = scrollRange <= 0 ? 1 : Math.max(0, Math.min(1, frameWindow.scrollY / scrollRange));
+      }
+    }
+
+    maxReaderScrollDepthRef.current = Math.max(maxReaderScrollDepthRef.current, depth);
+  }, [compactReader]);
+
+  const readerSurfaceIsVisible = useCallback(() => {
+    const surface = compactReader ? inlineDocumentRef.current : viewerRef.current;
+    if (!surface) return false;
+    const rect = surface.getBoundingClientRect();
+    const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+    const referenceHeight = Math.max(1, Math.min(rect.height, window.innerHeight));
+    return visibleHeight / referenceHeight >= 0.5;
+  }, [compactReader]);
+
+  const queueReadingAnalyticsRow = useCallback((
+    seconds: number,
+    source: "reader_engaged_minute" | "qualified_read",
+    startedAtMs: number,
+    endedAtMs: number,
+  ) => {
+    if (!userId || !cloudSyncReady || !bookId || !hasSupabaseConfig() || !readerDataBelongsTo(userId)) return false;
+
+    const analyticsUserId = userId;
+    const analyticsBookId = canonicalBookId(bookId);
+    const queued = readingAnalyticsQueueRef.current.then(async () => {
+      if (!readerDataBelongsTo(analyticsUserId)) return;
+      const supabase = createSupabaseBrowserClient();
+      const result = await supabase.from("reading_sessions").insert({
+        user_id: analyticsUserId,
+        book_id: analyticsBookId,
+        seconds,
+        started_at: new Date(startedAtMs).toISOString(),
+        ended_at: new Date(endedAtMs).toISOString(),
+        source,
+      });
+      if (result.error) {
+        console.warn(JSON.stringify({
+          level: "warn",
+          message: "Reading analytics sync failed",
+          code: result.error.code,
+        }));
+      }
+    });
+    readingAnalyticsQueueRef.current = queued.catch(() => undefined);
+    return true;
+  }, [bookId, cloudSyncReady, userId]);
+
   const captureQuoteSelection = useCallback(() => {
     if (!compactReader || !bookId || !section || typeof window === "undefined") return null;
     const readerDocument = inlineDocumentRef.current;
@@ -816,6 +897,8 @@ export default function ReaderClient({
     const lastIndex = visibleSections.length - 1;
     if (lastIndex < 0) return;
     const nextIndex = Math.max(0, Math.min(lastIndex, index));
+    markReaderEngagement();
+    visitedSectionIndexesRef.current.add(nextIndex);
     pendingQuoteSelectionRef.current = null;
     setPendingQuoteText("");
     pageScrollIntentRef.current = scrollIntent;
@@ -831,7 +914,7 @@ export default function ReaderClient({
         updatedAt: new Date().toISOString(),
       });
     }
-  }, [actualSeconds, bookId, preferences.saveProgress, requestedId, title, visibleSections]);
+  }, [actualSeconds, bookId, markReaderEngagement, preferences.saveProgress, requestedId, title, visibleSections]);
 
   const prevSection = useCallback((scrollIntent: "none" | "top" | "smart" = "top") => {
     jumpToSection(sectionIndex - 1, scrollIntent);
@@ -909,6 +992,7 @@ export default function ReaderClient({
 
   const handleReaderKey = useCallback((event: KeyboardEvent) => {
     if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+    markReaderEngagement();
     if (event.key === "Escape") {
       if (chapterDrawerOpen || settingsOpen || studyPanelOpen || fullscreenFallbackActive) event.preventDefault();
       setChapterDrawerOpen(false);
@@ -930,7 +1014,7 @@ export default function ReaderClient({
       event.preventDefault();
       prevSection("smart");
     }
-  }, [chapterDrawerOpen, fullscreenFallbackActive, nextSection, prevSection, sectionIndex, settingsOpen, studyPanelOpen, visibleSections.length]);
+  }, [chapterDrawerOpen, fullscreenFallbackActive, markReaderEngagement, nextSection, prevSection, sectionIndex, settingsOpen, studyPanelOpen, visibleSections.length]);
 
   const syncViewerHeight = useCallback(() => {
     const frame = viewerRef.current;
@@ -955,7 +1039,16 @@ export default function ReaderClient({
   function bindViewerKeys() {
     viewerResizeObserverRef.current?.disconnect();
     const frameWindow = viewerRef.current?.contentWindow;
+    frameWindow?.removeEventListener("keydown", handleReaderKey);
+    frameWindow?.removeEventListener("pointerdown", markReaderEngagement);
+    frameWindow?.removeEventListener("wheel", markReaderEngagement);
+    frameWindow?.removeEventListener("touchmove", markReaderEngagement);
+    frameWindow?.removeEventListener("scroll", markReaderEngagement);
     frameWindow?.addEventListener("keydown", handleReaderKey);
+    frameWindow?.addEventListener("pointerdown", markReaderEngagement, { passive: true });
+    frameWindow?.addEventListener("wheel", markReaderEngagement, { passive: true });
+    frameWindow?.addEventListener("touchmove", markReaderEngagement, { passive: true });
+    frameWindow?.addEventListener("scroll", markReaderEngagement, { passive: true });
     syncViewerHeight();
 
     const frameDocument = frameWindow?.document;
@@ -1411,8 +1504,72 @@ export default function ReaderClient({
 
   useEffect(() => {
     if (!bookId || status !== "Reading") return;
+    engagedSessionSecondsRef.current = 0;
+    engagedMinutesQueuedRef.current = 0;
+    qualifiedReadQueuedRef.current = false;
+    visitedSectionIndexesRef.current = new Set();
+    maxReaderScrollDepthRef.current = 0;
+    readingSessionStartedAtRef.current = Date.now();
+    markReaderEngagement();
+  }, [bookId, markReaderEngagement, status, userId]);
+
+  useEffect(() => {
+    const readerRoot = shellRef.current;
+    if (!readerRoot || !bookId || status !== "Reading") return;
+    const markInteraction = () => markReaderEngagement();
+
+    readerRoot.addEventListener("pointerdown", markInteraction, { passive: true });
+    readerRoot.addEventListener("wheel", markInteraction, { passive: true });
+    readerRoot.addEventListener("touchmove", markInteraction, { passive: true });
+    window.addEventListener("scroll", markInteraction, { passive: true, capture: true });
+
+    return () => {
+      readerRoot.removeEventListener("pointerdown", markInteraction);
+      readerRoot.removeEventListener("wheel", markInteraction);
+      readerRoot.removeEventListener("touchmove", markInteraction);
+      window.removeEventListener("scroll", markInteraction, true);
+    };
+  }, [bookId, markReaderEngagement, status]);
+
+  useEffect(() => {
+    if (!bookId || status !== "Reading") return;
     const interval = window.setInterval(() => {
       if (document.visibilityState !== "visible" || !document.hasFocus()) return;
+      if (!readerSurfaceIsVisible()) return;
+      if (performance.now() - lastReaderInteractionAtRef.current > ENGAGEMENT_IDLE_TIMEOUT_MS) return;
+
+      engagedSessionSecondsRef.current += 1;
+      visitedSectionIndexesRef.current.add(sectionIndex);
+      const sessionSeconds = engagedSessionSecondsRef.current;
+      const completedMinutes = Math.floor(sessionSeconds / ENGAGED_MINUTE_SECONDS);
+      const now = Date.now();
+
+      while (engagedMinutesQueuedRef.current < completedMinutes) {
+        const queued = queueReadingAnalyticsRow(
+          ENGAGED_MINUTE_SECONDS,
+          "reader_engaged_minute",
+          readingSessionStartedAtRef.current,
+          now,
+        );
+        if (!queued) break;
+        engagedMinutesQueuedRef.current += 1;
+      }
+
+      const isQualified = sessionSeconds >= QUALIFIED_READ_SECONDS
+        && (
+          visitedSectionIndexesRef.current.size >= 2
+          || (visibleSections.length === 1 && maxReaderScrollDepthRef.current >= QUALIFIED_SCROLL_DEPTH)
+        );
+      if (isQualified && !qualifiedReadQueuedRef.current) {
+        const queued = queueReadingAnalyticsRow(
+          0,
+          "qualified_read",
+          readingSessionStartedAtRef.current,
+          now,
+        );
+        if (queued) qualifiedReadQueuedRef.current = true;
+      }
+
       setActualSeconds(current => {
         const next = current + 1;
         if (preferences.saveProgress !== false) saveActualSeconds(bookId, next);
@@ -1421,7 +1578,7 @@ export default function ReaderClient({
     }, 1000);
 
     return () => window.clearInterval(interval);
-  }, [bookId, preferences.saveProgress, status]);
+  }, [bookId, preferences.saveProgress, queueReadingAnalyticsRow, readerSurfaceIsVisible, sectionIndex, status, visibleSections.length]);
 
   useEffect(() => {
     if (!bookId || status !== "Reading" || actualSeconds < OPEN_HISTORY_SECONDS || preferences.saveProgress === false) return;
