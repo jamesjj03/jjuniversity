@@ -4,7 +4,11 @@ import { notFound } from "next/navigation";
 import AudioEditionPlayer from "@/components/audio/AudioEditionPlayer";
 import audioStyles from "@/components/audio/AudioEditionPlayer.module.css";
 import SiteV2Cover from "@/components/site-v2/SiteV2Cover";
-import { getPublishedAudioEditionForBook } from "@/lib/audioCatalog";
+import {
+  applyAudioCandidatePreview,
+  getAudioCandidatePreviewKey,
+  getPublishedAudioEditionForBook,
+} from "@/lib/audioCatalog";
 import { coverFallbackSrc } from "@/lib/cover";
 import { getBookBySlugLive } from "@/lib/publishing";
 import { siteV2CoverSrc } from "@/lib/siteV2";
@@ -36,6 +40,8 @@ export default async function SiteV2ListenPage({ params }: Props) {
 
   const edition = await getPublishedAudioEditionForBook(book.id);
   if (!edition) notFound();
+  const candidatePreviewKey = getAudioCandidatePreviewKey(book.id, edition.id);
+  const playerEdition = applyAudioCandidatePreview(edition, candidatePreviewKey);
   const description = edition.description.trim();
   const narratorLine = `Narrated by ${edition.narratorName}`.trim().toLowerCase();
   const showDescription = description.replace(/[.!?]+$/, "").trim().toLowerCase() !== narratorLine;
@@ -60,7 +66,11 @@ export default async function SiteV2ListenPage({ params }: Props) {
           <h1>{book.title}</h1>
           <p className={audioStyles.narrator}>Narrated by {edition.narratorName}</p>
           {description && showDescription && <p className={audioStyles.description}>{description}</p>}
-          <AudioEditionPlayer edition={edition} bookSlug={book.slug} />
+          <AudioEditionPlayer
+            edition={playerEdition}
+            bookSlug={book.slug}
+            candidatePreviewKey={candidatePreviewKey}
+          />
         </div>
       </section>
     </article>

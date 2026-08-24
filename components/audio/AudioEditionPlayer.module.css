@@ -76,6 +76,13 @@
   background: color-mix(in srgb, var(--v2-bg-deep, #090d13) 72%, transparent);
 }
 
+.candidateNotice {
+  margin: 0 0 16px;
+  color: var(--v2-muted, #b9b2a5);
+  font-size: 12px;
+  letter-spacing: .02em;
+}
+
 .nowPlaying {
   display: flex;
   align-items: baseline;

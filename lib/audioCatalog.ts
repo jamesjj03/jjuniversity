@@ -27,7 +27,14 @@ export type PublishedAudioEdition = {
 export type AudioStreamRecord = {
   editionId: string;
   trackId: string;
+  bookId: string;
+  trackPosition: number;
   accessModel: AudioAccessModel;
+  storageBucket: string;
+  storagePath: string;
+};
+
+export type AudioStorageTarget = {
   storageBucket: string;
   storagePath: string;
 };
@@ -62,10 +69,77 @@ type StreamBookRow = {
 
 const AUDIO_EDITION_SELECT = "id,book_id,narrator_name,language_code,description,access_model,total_seconds,status";
 const AUDIO_TRACK_PUBLIC_SELECT = "id,edition_id,position,title,duration_seconds,status";
-const AUDIO_TRACK_STREAM_SELECT = "id,edition_id,storage_bucket,storage_path,status";
+const AUDIO_TRACK_STREAM_SELECT = "id,edition_id,position,storage_bucket,storage_path,status";
+const TACOS_BOOK_ID = "tacos";
+const TACOS_AUDIO_EDITION_ID = "4b93d2dc-72a4-4bac-ab7e-b6ddb192ba46";
+export const TACOS_AUDIO_CANDIDATE_PREVIEW_KEY = "danny-email-2025-08-15";
+const TACOS_AUDIO_CANDIDATE_TOTAL_SECONDS = 1249;
+const TACOS_AUDIO_CANDIDATES = new Map<number, { durationSeconds: number; storagePath: string }>([
+  [10, {
+    durationSeconds: 138,
+    storagePath: "everything-i-touch-turns-to-tacos/standard/10-0a69afb8a56a0b6e.mp3",
+  }],
+  [13, {
+    durationSeconds: 23,
+    storagePath: "everything-i-touch-turns-to-tacos/standard/13-b0646c8581ffc3e4.mp3",
+  }],
+  [16, {
+    durationSeconds: 45,
+    storagePath: "everything-i-touch-turns-to-tacos/standard/16-5981f85def7c4f7c.mp3",
+  }],
+]);
 
 export function audioCatalogEnabled() {
   return process.env.JJU_AUDIO_CATALOG_ENABLED === "1";
+}
+
+export function getAudioCandidatePreviewKey(bookId: string, editionId: string) {
+  if (
+    !audioCatalogEnabled()
+    || process.env.VERCEL_ENV !== "preview"
+    || bookId.trim().toLowerCase() !== TACOS_BOOK_ID
+    || editionId.trim().toLowerCase() !== TACOS_AUDIO_EDITION_ID
+  ) return null;
+  return TACOS_AUDIO_CANDIDATE_PREVIEW_KEY;
+}
+
+export function applyAudioCandidatePreview(
+  edition: PublishedAudioEdition,
+  candidateKey: string | null,
+): PublishedAudioEdition {
+  if (
+    candidateKey !== TACOS_AUDIO_CANDIDATE_PREVIEW_KEY
+    || edition.bookId.trim().toLowerCase() !== TACOS_BOOK_ID
+    || edition.id.trim().toLowerCase() !== TACOS_AUDIO_EDITION_ID
+  ) {
+    return edition;
+  }
+  return {
+    ...edition,
+    totalSeconds: TACOS_AUDIO_CANDIDATE_TOTAL_SECONDS,
+    tracks: edition.tracks.map(track => {
+      const candidate = TACOS_AUDIO_CANDIDATES.get(track.position);
+      return candidate ? { ...track, durationSeconds: candidate.durationSeconds } : track;
+    }),
+  };
+}
+
+export function resolveAudioStorageTarget(
+  record: AudioStreamRecord,
+  candidateKey: string | null,
+): AudioStorageTarget | null {
+  if (!candidateKey) {
+    return { storageBucket: record.storageBucket, storagePath: record.storagePath };
+  }
+  if (
+    candidateKey !== getAudioCandidatePreviewKey(record.bookId, record.editionId)
+    || record.storageBucket !== "audiobooks"
+  ) return null;
+  const candidate = TACOS_AUDIO_CANDIDATES.get(record.trackPosition);
+  return {
+    storageBucket: record.storageBucket,
+    storagePath: candidate?.storagePath || record.storagePath,
+  };
 }
 
 function isMissingAudioTable(error: unknown) {
@@ -197,6 +271,7 @@ export async function getAudioStreamRecord(editionId: string, trackId: string): 
   const canonicalBookId = String(book?.id || "").trim().toLowerCase();
   if (
     !track?.id
+    || Number(track.position || 0) <= 0
     || !track.storage_bucket
     || !track.storage_path
     || !canonicalBookId
@@ -209,6 +284,8 @@ export async function getAudioStreamRecord(editionId: string, trackId: string): 
   return {
     editionId: edition.id,
     trackId: track.id,
+    bookId: edition.book_id,
+    trackPosition: Number(track.position || 0),
     accessModel: accessModel(edition.access_model),
     storageBucket: track.storage_bucket,
     storagePath: track.storage_path,

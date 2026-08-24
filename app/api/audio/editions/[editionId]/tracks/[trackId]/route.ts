@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAudioStreamRecord } from "@/lib/audioCatalog";
+import { getAudioStreamRecord, resolveAudioStorageTarget } from "@/lib/audioCatalog";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
 import { createSupabaseRequestClient, hasSupabaseServerConfig } from "@/lib/supabaseServer";
 
@@ -23,7 +23,7 @@ function unavailable(status = 404) {
     },
   );
 }
-export async function GET(_request: Request, { params }: Context) {
+export async function GET(request: Request, { params }: Context) {
   const { editionId, trackId } = await params;
   if (!UUID_PATTERN.test(editionId) || !UUID_PATTERN.test(trackId)) return unavailable();
 
@@ -42,10 +42,14 @@ export async function GET(_request: Request, { params }: Context) {
     if (error || !data.user?.email_confirmed_at) return unavailable(401);
   }
 
+  const candidateKey = new URL(request.url).searchParams.get("candidate")?.trim() || null;
+  const storageTarget = resolveAudioStorageTarget(record, candidateKey);
+  if (!storageTarget) return unavailable();
+
   const admin = createSupabaseAdminClient();
   const signed = await admin.storage
-    .from(record.storageBucket)
-    .createSignedUrl(record.storagePath, 15 * 60);
+    .from(storageTarget.storageBucket)
+    .createSignedUrl(storageTarget.storagePath, 15 * 60);
 
   if (signed.error || !signed.data?.signedUrl) return unavailable();
 

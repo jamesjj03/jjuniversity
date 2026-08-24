@@ -18,9 +18,11 @@ function formatDuration(seconds: number) {
 export default function AudioEditionPlayer({
   edition,
   bookSlug,
+  candidatePreviewKey,
 }: {
   edition: PublishedAudioEdition;
   bookSlug: string;
+  candidatePreviewKey?: string | null;
 }) {
   const [trackIndex, setTrackIndex] = useState(0);
   const [accountReady, setAccountReady] = useState(edition.accessModel === "free");
@@ -63,17 +65,20 @@ export default function AudioEditionPlayer({
 
   return (
     <section className={styles.player} aria-label="Audiobook player">
+      {candidatePreviewKey ? (
+        <p className={styles.candidateNotice}>Private listening proof · Danny&apos;s recovered email masters</p>
+      ) : null}
       <div className={styles.nowPlaying} aria-live="polite">
         <span>Now playing</span>
         <strong>{track.title}</strong>
       </div>
 
       <audio
-        key={track.id}
+        key={`${track.id}:${candidatePreviewKey || "published"}`}
         className={styles.audio}
         controls
         preload="metadata"
-        src={`/api/audio/editions/${encodeURIComponent(edition.id)}/tracks/${encodeURIComponent(track.id)}`}
+        src={`/api/audio/editions/${encodeURIComponent(edition.id)}/tracks/${encodeURIComponent(track.id)}${candidatePreviewKey ? `?candidate=${encodeURIComponent(candidatePreviewKey)}` : ""}`}
         onEnded={() => {
           if (trackIndex < edition.tracks.length - 1) chooseTrack(trackIndex + 1);
         }}

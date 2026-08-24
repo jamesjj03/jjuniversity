@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from "node:crypto";
 import { existsSync, readFileSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { isAbsolute, join, relative, resolve } from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
 const projectRoot = process.cwd();
@@ -22,11 +22,17 @@ const EXPECTED_LIVE_CONTENT_VERSION = 1;
 const EXPECTED_LIVE_CONTENT_SHA256 = "6603471a78d74ff63cae6b527b4bd10365724d67bf40c597a28614f67ea6923c";
 const EXPECTED_ORDERED_MANIFEST_SHA256 = "b6db4f1ab150bb63f801bf3fca0e8f62558fd5428163e0c2944f37c062ccb4be";
 const EXPECTED_LOCAL_SOURCE_SHA256 = "6a6495d8bb7690e2e7c2afc7ff46a944a760d9b3f19c95378812f254d662d76c";
-const EXPECTED_TOTAL_BYTES = 49_834_256;
-const EXPECTED_TOTAL_SECONDS = 1246.875408;
+const EXPECTED_TOTAL_BYTES = 49_916_732;
+const EXPECTED_TOTAL_SECONDS = 1248.9396120816327;
+const EXPECTED_PREVIOUS_TOTAL_BYTES = 49_834_256;
+const EXPECTED_PREVIOUS_TOTAL_SECONDS = 1246.875408;
+const PREVIEW_ROTATION_POSITIONS = new Set([10, 13, 16]);
 const EXPECTED_REPLACEMENTS = new Map([
+  [10, "0a69afb8a56a0b6e5f842306720778a275bc10d73b127b937b89daee6bfb808c"],
+  [13, "b0646c8581ffc3e40a02ac851f592181e95f49b551c269282835d757a2c93ace"],
   [14, "7901a1061488af6ef74321bc0806ece9ea62de0aa5073522d8e3cd846394fd6f"],
   [15, "5da4628032f08ac964fe9f774968fc190be74f22de5697b6b93173cd06e7966e"],
+  [16, "5981f85def7c4f7cb278cdd5611a3f5ab583d2818f3e7b96ca1f853f2b61f6a9"],
 ]);
 
 const EDITION_SELECT = [
@@ -42,6 +48,7 @@ const EDITION_SELECT = [
   "description",
   "total_seconds",
   "published_at",
+  "updated_at",
 ].join(",");
 const TRACK_SELECT = [
   "id",
@@ -58,6 +65,7 @@ const TRACK_SELECT = [
   "sha256",
   "status",
   "published_at",
+  "updated_at",
 ].join(",");
 
 await main().catch(error => {
@@ -71,9 +79,11 @@ async function main() {
     printHelp();
     return;
   }
-  const unknownArgs = [...args].filter(arg => arg !== "--apply");
+  const unknownArgs = [...args].filter(arg => !["--apply", "--stage-preview"].includes(arg));
   assert(!unknownArgs.length, `Unknown argument(s): ${unknownArgs.join(", ")}`);
   const apply = args.has("--apply");
+  const stagePreview = args.has("--stage-preview");
+  assert(!(apply && stagePreview), "Choose either --stage-preview or --apply, not both.");
 
   loadLocalEnv();
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -81,7 +91,7 @@ async function main() {
   assert(supabaseUrl && serviceRoleKey, "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local.");
 
   const localPlan = buildLocalPlan();
-  printLocalSummary(localPlan, apply);
+  printLocalSummary(localPlan, stagePreview ? "stage-preview" : apply ? "apply" : "dry-run");
 
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: {
@@ -94,16 +104,21 @@ async function main() {
   await validatePrivateBucket(supabase, localPlan);
 
   const initialDatabase = await readDatabaseState(supabase, localPlan);
-  validateDatabaseState(initialDatabase, localPlan, { allowMissing: true });
+  const databaseInspection = inspectDatabaseForPreviewRotation(initialDatabase, localPlan);
+  if (databaseInspection.kind === "missing") {
+    validateDatabaseState(initialDatabase, localPlan, { allowMissing: true });
+  } else {
+    const currentPlan = planForDatabaseInspection(localPlan, databaseInspection);
+    const currentObjects = await inspectStorageObjects(supabase, currentPlan);
+    assert(currentObjects.every(item => item.present), "An object referenced by the current Tacos database state is missing or changed.");
+  }
 
   const initialObjects = await inspectStorageObjects(supabase, localPlan);
   const missingObjects = initialObjects.filter(item => !item.present);
-  if (initialDatabase.edition?.status === "published" && missingObjects.length) {
-    fail("The existing edition is published but one or more private objects are missing. Move it back to QA before any repair.");
-  }
 
   console.log(`Live checks passed: Reader version ${EXPECTED_LIVE_CONTENT_VERSION}, 16 canonical tracks, private bucket.`);
-  console.log(`Storage: ${initialObjects.length - missingObjects.length} exact object(s) present; ${missingObjects.length} upload(s) needed.`);
+  console.log(`Database candidate state: ${databaseInspection.kind}.`);
+  console.log(`Desired Storage set: ${initialObjects.length - missingObjects.length} exact object(s) present; ${missingObjects.length} upload(s) needed.`);
   if (localPlan.releaseBlockers.length) {
     console.log(`Release gate: BLOCKED (${localPlan.releaseBlockers.length} unresolved intake check(s)).`);
     localPlan.releaseBlockers.forEach(blocker => console.log(`- ${blocker}`));
@@ -111,17 +126,46 @@ async function main() {
     console.log("Release gate: ready for publication.");
   }
 
-  if (!apply) {
+  if (!apply && !stagePreview) {
     console.log("Dry run complete. No database row, Storage object, feature flag, or deployment was changed.");
     if (localPlan.releaseBlockers.length) {
-      console.log("Apply remains disabled until the ignored intake manifest records resolved version and mastering approval.");
+      console.log("Publication remains disabled until the ignored intake manifest records mastering approval and explicit publication approval.");
+      if (databaseInspection.kind !== "desired") {
+        console.log("The recovered email candidates can be staged privately with: npm run audio:ingest:tacos -- --stage-preview");
+      }
+    } else if (databaseInspection.kind !== "missing" && databaseInspection.kind !== "desired") {
+      console.log("The existing published rows still require a separately reviewed exact-CAS candidate promotion before --apply.");
     } else {
       console.log("Apply only this sealed pilot with: npm run audio:ingest:tacos -- --apply");
     }
     return;
   }
 
+  if (stagePreview) {
+    assert(databaseInspection.kind !== "missing", "Preview staging requires the already-published sealed Tacos pilot.");
+    assert(initialDatabase.edition?.status === "published", "Preview staging requires the already-published sealed Tacos pilot.");
+    assert(
+      initialDatabase.tracks.every(row => row.status === "published" && row.published_at),
+      "Preview staging requires all 16 baseline tracks to remain published with publication timestamps.",
+    );
+    await uploadMissingObjects(supabase, localPlan, missingObjects);
+    const verifiedObjects = await inspectStorageObjects(supabase, localPlan);
+    assert(verifiedObjects.every(item => item.present), "Not every corrected private audio object was verified after upload.");
+    const unchangedDatabase = await readDatabaseState(supabase, localPlan);
+    assert(stableJson(unchangedDatabase) === stableJson(initialDatabase), "audio_editions or audio_tracks rows changed while Storage-only preview candidates were staged.");
+    const preservedObjects = await inspectStorageObjects(supabase, localPlan.previousPlan);
+    assert(preservedObjects.every(item => item.present), "A prior private candidate object disappeared during additive staging.");
+
+    console.log("Staged Danny's corrected tracks 10, 13, and 16 as verified private Storage candidates.");
+    console.log("Published database rows and prior private objects were preserved; Vercel flags, deployments, and narrator data were not touched.");
+    return;
+  }
+
   assert(!localPlan.releaseBlockers.length, `Publication blocked: ${localPlan.releaseBlockers.join("; ")}`);
+  assert(
+    databaseInspection.kind === "missing" || databaseInspection.kind === "desired",
+    "An existing prior published candidate requires a separately reviewed exact-CAS promotion before publication; Storage-only staging does not change database rows.",
+  );
 
   await uploadMissingObjects(supabase, localPlan, missingObjects);
   const verifiedObjects = await inspectStorageObjects(supabase, localPlan);
@@ -191,9 +235,12 @@ function buildLocalPlan() {
   assertPositions(originalTracks, "intake tracks");
 
   const replacementList = Array.isArray(manifest.replacementCandidates) ? manifest.replacementCandidates : [];
-  assert(replacementList.length === 2, `Expected exactly two corrected email replacements; found ${replacementList.length}.`);
+  assert(replacementList.length === 5, `Expected exactly five corrected email replacements; found ${replacementList.length}.`);
   const replacements = new Map(replacementList.map(item => [Number(item.position), item]));
-  assert([...replacements.keys()].sort((a, b) => a - b).join(",") === "14,15", "Only positions 14 and 15 may use email replacements.");
+  assert(
+    [...replacements.keys()].sort((a, b) => a - b).join(",") === "10,13,14,15,16",
+    "Only positions 10, 13, 14, 15, and 16 may use recovered email replacements.",
+  );
 
   const tracks = originalTracks.map((original, index) => {
     const position = index + 1;
@@ -206,40 +253,27 @@ function buildLocalPlan() {
     const candidate = replacement || original;
     if (replacement) {
       assert(normalizeHash(replacement.sha256) === EXPECTED_REPLACEMENTS.get(position), `Corrected email track ${position} hash changed.`);
-      assert(/canonical-content-aligned/i.test(String(replacement.mappingStatus || "")), `Corrected email track ${position} is not marked content-aligned.`);
-      assert(/reject/i.test(String(original.mappingStatus || "")), `The bad ZIP track ${position} is not sealed as rejected.`);
+      assert(
+        /canonical-content-aligned|program-aligned/i.test(String(replacement.mappingStatus || "")),
+        `Corrected email track ${position} is not marked content-aligned.`,
+      );
+      if ([14, 15].includes(position)) {
+        assert(/reject/i.test(String(original.mappingStatus || "")), `The bad ZIP track ${position} is not sealed as rejected.`);
+      } else {
+        assert(!/reject|wrong-content/i.test(String(original.mappingStatus || "")), `The prior archive track ${position} is marked unusable.`);
+      }
     } else {
       assert(!/reject|wrong-content/i.test(String(original.mappingStatus || "")), `Position ${position} is marked as rejected or wrong content.`);
     }
+    return materializeTrack(candidate, canonical, position);
+  });
 
-    const relativePath = String(candidate.relativePath || `extracted-tracks/${candidate.fileName || ""}`);
-    assert(relativePath && !relativePath.includes(".."), `Unsafe local path for position ${position}.`);
-    const localPath = join(intakeRoot, ...relativePath.split("/"));
-    assert(existsSync(localPath), `Missing candidate file for position ${position}: ${relativePath}`);
-    const bytes = readFileSync(localPath);
-    const observedBytes = statSync(localPath).size;
-    const expectedBytes = Number(candidate.bytes || 0);
-    const expectedHash = normalizeHash(candidate.sha256);
-    assert(observedBytes === expectedBytes, `Position ${position} byte count changed (${observedBytes} != ${expectedBytes}).`);
-    assert(sha256(bytes) === expectedHash, `Position ${position} SHA-256 changed.`);
-    assert(expectedBytes > 0 && expectedBytes <= 52_428_800, `Position ${position} is outside the 50 MB Storage limit.`);
-
-    const publicTitle = position === 16 ? "Closing Credits & Copyright" : canonical.title;
-    const storagePath = `${BOOK_SLUG}/${EDITION_KEY}/${String(position).padStart(2, "0")}-${expectedHash.slice(0, 16)}.mp3`;
-    return {
-      position,
-      canonicalTitle: canonical.title,
-      title: publicTitle,
-      sectionKey: canonical.sectionKey,
-      localPath,
-      relativePath,
-      fileName: String(candidate.fileName || ""),
-      bytes: expectedBytes,
-      sha256: expectedHash,
-      durationSecondsExact: Number(candidate.durationSeconds || 0),
-      durationSeconds: Math.round(Number(candidate.durationSeconds || 0)),
-      storagePath,
-    };
+  const previousTracks = originalTracks.map((original, index) => {
+    const position = index + 1;
+    const canonical = orderedSections[index];
+    const previousCandidate = [14, 15].includes(position) ? replacements.get(position) : original;
+    assert(previousCandidate, `Missing prior sealed candidate for position ${position}.`);
+    return materializeTrack(previousCandidate, canonical, position);
   });
 
   assert(new Set(tracks.map(track => track.sha256)).size === tracks.length, "The candidate publication set contains duplicate audio content hashes.");
@@ -247,6 +281,18 @@ function buildLocalPlan() {
   const totalSeconds = tracks.reduce((sum, track) => sum + track.durationSecondsExact, 0);
   assert(totalBytes === EXPECTED_TOTAL_BYTES, `Candidate byte total changed (${totalBytes} != ${EXPECTED_TOTAL_BYTES}).`);
   assert(Math.abs(totalSeconds - EXPECTED_TOTAL_SECONDS) < 0.000_001, `Candidate duration changed (${totalSeconds} != ${EXPECTED_TOTAL_SECONDS}).`);
+
+  assert(new Set(previousTracks.map(track => track.sha256)).size === previousTracks.length, "The prior sealed set contains duplicate audio content hashes.");
+  const previousTotalBytes = previousTracks.reduce((sum, track) => sum + track.bytes, 0);
+  const previousTotalSeconds = previousTracks.reduce((sum, track) => sum + track.durationSecondsExact, 0);
+  assert(
+    previousTotalBytes === EXPECTED_PREVIOUS_TOTAL_BYTES,
+    `Prior candidate byte total changed (${previousTotalBytes} != ${EXPECTED_PREVIOUS_TOTAL_BYTES}).`,
+  );
+  assert(
+    Math.abs(previousTotalSeconds - EXPECTED_PREVIOUS_TOTAL_SECONDS) < 0.000_001,
+    `Prior candidate duration changed (${previousTotalSeconds} != ${EXPECTED_PREVIOUS_TOTAL_SECONDS}).`,
+  );
 
   return {
     tracks,
@@ -256,6 +302,53 @@ function buildLocalPlan() {
     localContent,
     orderedSections,
     releaseBlockers,
+    previousPlan: {
+      tracks: previousTracks,
+      totalBytes: previousTotalBytes,
+      totalSeconds: previousTotalSeconds,
+      totalSecondsRounded: Math.round(previousTotalSeconds),
+      localContent,
+      orderedSections,
+      releaseBlockers,
+    },
+  };
+}
+
+function materializeTrack(candidate, canonical, position) {
+  const relativePath = String(candidate.relativePath || `extracted-tracks/${candidate.fileName || ""}`);
+  assert(relativePath && !isAbsolute(relativePath), `Unsafe local path for position ${position}.`);
+  const localPath = resolve(intakeRoot, ...relativePath.split("/"));
+  const containmentPath = relative(resolve(intakeRoot), localPath);
+  assert(
+    containmentPath && !isAbsolute(containmentPath) && !containmentPath.split(/[\\/]+/).includes(".."),
+    `Candidate path escapes the intake root for position ${position}.`,
+  );
+  assert(existsSync(localPath), `Missing candidate file for position ${position}: ${relativePath}`);
+  const bytes = readFileSync(localPath);
+  const observedBytes = statSync(localPath).size;
+  const expectedBytes = Number(candidate.bytes || 0);
+  const expectedHash = normalizeHash(candidate.sha256);
+  assert(observedBytes === expectedBytes, `Position ${position} byte count changed (${observedBytes} != ${expectedBytes}).`);
+  assert(sha256(bytes) === expectedHash, `Position ${position} SHA-256 changed.`);
+  assert(expectedBytes > 0 && expectedBytes <= 52_428_800, `Position ${position} is outside the 50 MB Storage limit.`);
+
+  const publicTitle = position === 16 ? "Closing Credits & Copyright" : canonical.title;
+  const storagePath = `${BOOK_SLUG}/${EDITION_KEY}/${String(position).padStart(2, "0")}-${expectedHash.slice(0, 16)}.mp3`;
+  const durationSecondsExact = Number(candidate.durationSeconds || 0);
+  assert(Number.isFinite(durationSecondsExact) && durationSecondsExact > 0, `Position ${position} has an invalid duration.`);
+  return {
+    position,
+    canonicalTitle: canonical.title,
+    title: publicTitle,
+    sectionKey: canonical.sectionKey,
+    localPath,
+    relativePath,
+    fileName: String(candidate.fileName || ""),
+    bytes: expectedBytes,
+    sha256: expectedHash,
+    durationSecondsExact,
+    durationSeconds: Math.round(durationSecondsExact),
+    storagePath,
   };
 }
 
@@ -377,6 +470,86 @@ function validateDatabaseState(state, localPlan, { allowMissing, requirePublishe
     assert(state.tracks.length === localPlan.tracks.length, `Expected 16 database tracks; found ${state.tracks.length}.`);
     assert(observedPositions.size === localPlan.tracks.length, "One or more canonical database tracks are missing.");
   }
+}
+
+function inspectDatabaseForPreviewRotation(state, localPlan) {
+  if (!state.edition) {
+    assert(!state.tracks.length, "Track rows exist without their expected edition.");
+    return { kind: "missing", trackStates: new Map() };
+  }
+
+  const desiredEdition = editionCore(localPlan);
+  for (const [key, value] of Object.entries(desiredEdition)) {
+    if (key === "total_seconds") continue;
+    assert(compareValue(state.edition[key], value), `Existing edition field "${key}" does not match the sealed Tacos plan.`);
+  }
+  assert(["qa", "published"].includes(state.edition.status), `Existing edition has unsupported status "${state.edition.status}".`);
+  assert(
+    [localPlan.previousPlan.totalSecondsRounded, localPlan.totalSecondsRounded].includes(Number(state.edition.total_seconds)),
+    `Existing edition total_seconds is outside the sealed prior/desired states (${state.edition.total_seconds}).`,
+  );
+  assert(state.tracks.length === localPlan.tracks.length, `Expected 16 database tracks; found ${state.tracks.length}.`);
+
+  const desiredByPosition = new Map(localPlan.tracks.map(track => [track.position, track]));
+  const previousByPosition = new Map(localPlan.previousPlan.tracks.map(track => [track.position, track]));
+  const trackStates = new Map();
+  const observedPositions = new Set();
+  for (const row of state.tracks) {
+    const position = Number(row.position);
+    assert(desiredByPosition.has(position), `Unexpected track position ${position} exists in the standard Tacos edition.`);
+    assert(!observedPositions.has(position), `Duplicate database track position ${position}.`);
+    observedPositions.add(position);
+
+    const desired = desiredByPosition.get(position);
+    if (!PREVIEW_ROTATION_POSITIONS.has(position)) {
+      validateTrackRow(row, state.edition.id, desired, false);
+      trackStates.set(position, "desired");
+      continue;
+    }
+
+    if (trackRowMatches(row, state.edition.id, desired)) {
+      trackStates.set(position, "desired");
+      continue;
+    }
+    const previous = previousByPosition.get(position);
+    assert(
+      previous && trackRowMatches(row, state.edition.id, previous),
+      `Database track ${position} matches neither the prior sealed candidate nor Danny's recovered email candidate.`,
+    );
+    trackStates.set(position, "previous");
+  }
+  assert(observedPositions.size === localPlan.tracks.length, "One or more canonical database tracks are missing.");
+
+  const rotationStates = [...PREVIEW_ROTATION_POSITIONS].map(position => trackStates.get(position));
+  const allDesired = rotationStates.every(value => value === "desired")
+    && Number(state.edition.total_seconds) === localPlan.totalSecondsRounded;
+  const allPrevious = rotationStates.every(value => value === "previous")
+    && Number(state.edition.total_seconds) === localPlan.previousPlan.totalSecondsRounded;
+  return {
+    kind: allDesired ? "desired" : allPrevious ? "previous" : "mixed-exact",
+    trackStates,
+  };
+}
+
+function trackRowMatches(row, editionId, expected) {
+  try {
+    validateTrackRow(row, editionId, expected, false);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function planForDatabaseInspection(localPlan, inspection) {
+  const previousByPosition = new Map(localPlan.previousPlan.tracks.map(track => [track.position, track]));
+  return {
+    ...localPlan,
+    tracks: localPlan.tracks.map(track => (
+      inspection.trackStates.get(track.position) === "previous"
+        ? previousByPosition.get(track.position)
+        : track
+    )),
+  };
 }
 
 function validateTrackRow(row, editionId, expected, requirePublished) {
@@ -701,10 +874,11 @@ function formatDuration(seconds) {
   return `${minutes}:${String(remainder).padStart(2, "0")}`;
 }
 
-function printLocalSummary(localPlan, apply) {
-  console.log(`${apply ? "Apply" : "Dry run"}: sealed Tacos-only audio pilot.`);
+function printLocalSummary(localPlan, mode) {
+  const label = mode === "apply" ? "Apply" : mode === "stage-preview" ? "Storage-only preview stage" : "Dry run";
+  console.log(`${label}: sealed Tacos-only audio pilot.`);
   console.log(`Local candidate: ${localPlan.tracks.length} tracks, ${formatBytes(localPlan.totalBytes)}, ${formatDuration(localPlan.totalSeconds)}.`);
-  console.log("Corrections: email track 14 = Acknowledgements; email track 15 = About the Author.");
+  console.log("Recovered email masters: 10 adds its spoken chapter opening; 13 and 16 add Danny's final spacing; 14 and 15 fix content mapping.");
   console.log("Track 16 public title: Closing Credits & Copyright.");
 }
 
@@ -714,8 +888,11 @@ function printHelp() {
   console.log("Dry-run local, live Reader, database, bucket, and existing-object checks:");
   console.log("  npm run audio:ingest:tacos");
   console.log("");
-  console.log("Upload and publish only after the intake manifest passes every release gate:");
+  console.log("Upload and hash-verify new private candidates without changing audio_editions or audio_tracks rows:");
+  console.log("  npm run audio:ingest:tacos -- --stage-preview");
+  console.log("");
+  console.log("Complete publication only after every release gate and any required exact-CAS candidate promotion:");
   console.log("  npm run audio:ingest:tacos -- --apply");
   console.log("");
-  console.log("This script never changes Vercel flags, deployments, or narrator portal data.");
+  console.log("This script never changes Vercel flags, deployments, or narrator portal data; --stage-preview never changes audio_editions or audio_tracks rows.");
 }
