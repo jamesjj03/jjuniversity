@@ -87,30 +87,31 @@ def generate_legal_proof(spec_path: Path) -> None:
     output = Path(spec["output"])
     output.parent.mkdir(parents=True, exist_ok=True)
 
-    body_color = HexColor("#403b34")
-    heading_color = HexColor("#171511")
-    muted_color = HexColor("#655f56")
-    heading_style = ParagraphStyle(
-        "LegalHeading",
-        fontName="JJUArialBold",
-        fontSize=19,
-        leading=19,
-        textColor=heading_color,
-        spaceAfter=0.12 * INCH,
-    )
-    title_style = ParagraphStyle(
-        "LegalTitle",
+    body_color = HexColor("#2c2924")
+    muted_color = HexColor("#5c554c")
+    subject_style = ParagraphStyle(
+        "LegalSubject",
         fontName="JJUTimes",
-        fontSize=8.45,
-        leading=10.985,
+        fontSize=12.5,
+        leading=14.5,
         textColor=body_color,
-        spaceAfter=0.09 * INCH,
+        alignment=1,
+        spaceAfter=0.015 * INCH,
+    )
+    identity_style = ParagraphStyle(
+        "LegalIdentity",
+        fontName="JJUTimes",
+        fontSize=8.5,
+        leading=10.7,
+        textColor=body_color,
+        alignment=1,
+        spaceAfter=0.14 * INCH,
     )
     body_style = ParagraphStyle(
         "LegalBody",
         fontName="JJUTimes",
-        fontSize=8.15,
-        leading=10.269,
+        fontSize=8.5,
+        leading=10.7,
         textColor=body_color,
         spaceAfter=0.055 * INCH,
     )
@@ -128,8 +129,8 @@ def generate_legal_proof(spec_path: Path) -> None:
     series = html.escape(str(spec["series"]))
     year = int(spec["copyrightYear"])
     story = [
-        Paragraph("Copyright and Disclaimer", heading_style),
-        Paragraph(f"<b>{subject}</b><br/>{volume} of {series}<br/>James Johnson", title_style),
+        Paragraph(subject, subject_style),
+        Paragraph(f'{volume} of {series}<br/><font name="JJUTimesItalic">James Johnson</font>', identity_style),
         Paragraph(f"Copyright © {year} James Johnson. All rights reserved.<br/>Published by JJ University. JJUniversity.com", body_style),
         Paragraph("No part of this publication may be reproduced, distributed, or transmitted without prior written permission, except for brief quotations and other uses permitted by law.", body_style),
         Paragraph("JJ University books use a human-directed process that can include AI-assisted research and early drafting. James Johnson selects the subjects, directs the structure and scope, and substantially revises and edits the work.", body_style),
@@ -139,7 +140,7 @@ def generate_legal_proof(spec_path: Path) -> None:
     for block in spec.get("blocks", []):
         heading = html.escape(str(block.get("heading", "")).rstrip("."))
         text = html.escape(" ".join(str(item).strip() for item in block.get("paragraphs", []) if str(item).strip()))
-        story.append(KeepTogether([Paragraph(f'<font name="JJUArialBold" size="8">{heading}.</font> {text}', body_style)]))
+        story.append(KeepTogether([Paragraph(f'<font name="JJUTimesItalic">{heading}.</font> {text}', body_style)]))
 
     document = SimpleDocTemplate(
         str(output),

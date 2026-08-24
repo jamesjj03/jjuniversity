@@ -264,13 +264,15 @@ function renderInterior(product, metadata, payloads, { pads, pageMap, includeEnd
   .titleLeaf .volume { margin: .22in 0 .60in; font: 700 11pt/1.2 Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
   .goldRule { width: .82in; height: 2px; margin-bottom: .18in; background: #8d6b2d; }
   .author { font: 700 9pt/1.2 Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
-  .legal { min-height: 7.58in; padding-top: .04in; color: #403b34; font-size: 8.15pt; line-height: 1.26; }
-  .legal h2 { margin: 0 0 .12in; color: #171511; font: 700 19pt/1 Arial, sans-serif; letter-spacing: -.02em; }
+  .legal { min-height: 7.58in; padding-top: .04in; color: #2c2924; font-size: 8.5pt; line-height: 1.259; }
   .legal p { margin-bottom: .055in; }
-  .legal .legalTitle { margin-bottom: .09in; font-size: 8.45pt; line-height: 1.30; }
-  .legal .noticeLead { margin: .09in 0 .065in; color: #655f56; font-style: italic; }
+  .legal .legalIdentity { margin: 0 0 .14in; text-align: center; }
+  .legal .legalSubject { display: block; margin-bottom: .015in; font-size: 12.5pt; line-height: 14.5pt; }
+  .legal .legalMeta { display: block; font-size: 8.5pt; line-height: 10.7pt; }
+  .legal .legalAuthor { font-style: italic; }
+  .legal .noticeLead { margin: .09in 0 .065in; color: #5c554c; font-style: italic; }
   .disclaimerBlock { break-inside: avoid; page-break-inside: avoid; }
-  .disclaimerBlock strong { color: #171511; font-family: Arial, sans-serif; font-size: 8pt; }
+  .disclaimerBlock em { color: #2c2924; font-family: Georgia, "Times New Roman", serif; font-style: italic; }
   .toc { min-height: 7.58in; padding-top: .05in; }
   .toc h2, .about h2 { margin: 0 0 .32in; font: 700 24pt/1 Arial, sans-serif; letter-spacing: -.025em; }
   .toc ol { margin: 0; padding: 0; list-style: none; }
@@ -316,11 +318,11 @@ function renderInterior(product, metadata, payloads, { pads, pageMap, includeEnd
 }
 
 function renderLegalPageContent(metadata, disclaimerPlan, copyrightYear) {
-  return `<h2>Copyright and Disclaimer</h2><p class="legalTitle"><strong>${escapeHtml(metadata.subject)}</strong><br>${escapeHtml(metadata.volume)} of ${escapeHtml(metadata.series)}<br>James Johnson</p><p>Copyright &copy; ${copyrightYear} James Johnson. All rights reserved.<br>Published by JJ University. JJUniversity.com</p><p>No part of this publication may be reproduced, distributed, or transmitted without prior written permission, except for brief quotations and other uses permitted by law.</p><p>JJ University books use a human-directed process that can include AI-assisted research and early drafting. James Johnson selects the subjects, directs the structure and scope, and substantially revises and edits the work.</p><p>First JJ University print proof, ${copyrightYear}. Not for sale.</p><p class="noticeLead">The following notes apply where relevant to portions of this volume.</p>${renderDisclaimerBlocks(disclaimerPlan.blocks)}`;
+  return `<p class="legalIdentity"><span class="legalSubject">${escapeHtml(metadata.subject)}</span><span class="legalMeta">${escapeHtml(metadata.volume)} of ${escapeHtml(metadata.series)}<br><span class="legalAuthor">James Johnson</span></span></p><p>Copyright &copy; ${copyrightYear} James Johnson. All rights reserved.<br>Published by JJ University. JJUniversity.com</p><p>No part of this publication may be reproduced, distributed, or transmitted without prior written permission, except for brief quotations and other uses permitted by law.</p><p>JJ University books use a human-directed process that can include AI-assisted research and early drafting. James Johnson selects the subjects, directs the structure and scope, and substantially revises and edits the work.</p><p>First JJ University print proof, ${copyrightYear}. Not for sale.</p><p class="noticeLead">The following notes apply where relevant to portions of this volume.</p>${renderDisclaimerBlocks(disclaimerPlan.blocks)}`;
 }
 
 function renderDisclaimerBlocks(blocks) {
-  return blocks.map(block => `<p class="disclaimerBlock"><strong>${escapeHtml(block.heading)}.</strong> ${escapeHtml(block.paragraphs.join(" "))}</p>`).join("");
+  return blocks.map(block => `<p class="disclaimerBlock"><em>${escapeHtml(block.heading)}.</em> ${escapeHtml(block.paragraphs.join(" "))}</p>`).join("");
 }
 
 function renderBook({ book, sections, description }, position, addPad) {
