@@ -638,6 +638,13 @@
     overflow-x: auto;
   }
 
+  .shell :global(.pathBuilderTop button),
+  .shell :global(.adminReaderFields .resetBtn),
+  .shell :global(.adminFormatToolbar button) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
   .shell :global(.adminReaderDoc) {
     min-height: 62vh;
     padding: 24px 18px !important;

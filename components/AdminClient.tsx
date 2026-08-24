@@ -119,7 +119,7 @@ const DEFAULT_BOOK_DRAFT: BookDraft = {
   archiveCategory: "Unsorted Archive",
 };
 
-type AdminView = "add" | "editor" | "paths" | "atlas" | "site" | "fiber";
+export type AdminView = "add" | "editor" | "paths" | "atlas" | "site" | "fiber";
 type AdminResource = "books" | "paths" | "site" | "fiber";
 type LoadStatus = "loading" | "ready" | "error";
 type LoadState = Record<AdminResource, { status: LoadStatus; error: string }>;
@@ -258,7 +258,7 @@ function legacyCoverFor(book: Partial<Book> | undefined, fallbackId = "") {
   return coverFallbackSrc(book, fallbackId);
 }
 
-export default function AdminClient() {
+export default function AdminClient({ initialView = "editor" }: { initialView?: AdminView }) {
   const { setUnsaved } = useAdminUnsavedChanges();
   const [books, setBooks] = useState<Book[]>([]);
   const [pathsFile, setPathsFile] = useState<PathsFile>({ generated: "", series: [], paths: [] });
@@ -274,7 +274,7 @@ export default function AdminClient() {
   const [selectedPathIds, setSelectedPathIds] = useState<string[]>([]);
   const [bookPickerOpen, setBookPickerOpen] = useState(false);
   const [libraryPickerOpen, setLibraryPickerOpen] = useState(false);
-  const [adminView, setAdminView] = useState<AdminView>("editor");
+  const [adminView, setAdminView] = useState<AdminView>(initialView);
   const [activeTag, setActiveTag] = useState("All");
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeVisibility, setActiveVisibility] = useState("All");

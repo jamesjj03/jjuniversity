@@ -11,14 +11,15 @@ type WorkspaceLink = {
   shortLabel: string;
   description: string;
   match?: "exact" | "prefix";
+  relatedHrefs?: string[];
 };
 
 const WORKSPACE_LINKS: WorkspaceLink[] = [
-  { href: "/admin", label: "Books", shortLabel: "Books", description: "Write, edit, and publish", match: "exact" },
-  { href: "/admin/taxonomy-review", label: "Collections", shortLabel: "Sort", description: "Collections, shelves, and topics" },
-  { href: "/admin/manuscript-case", label: "Manuscripts", shortLabel: "Cases", description: "Editorial review queues" },
-  { href: "/admin/atlas", label: "Atlas", shortLabel: "Atlas", description: "Maps, evidence, and review" },
-  { href: "/admin/arena", label: "Arena", shortLabel: "Arena", description: "Visual source decisions" },
+  { href: "/admin", label: "Home", shortLabel: "Home", description: "What needs attention", match: "exact" },
+  { href: "/admin/books", label: "Books", shortLabel: "Books", description: "Find a book, then work" },
+  { href: "/admin/organize", label: "Organize", shortLabel: "Sort", description: "Collections, shelves, and series", relatedHrefs: ["/admin/taxonomy-review"] },
+  { href: "/admin/reviews", label: "Reviews", shortLabel: "Review", description: "Editorial and evidence queues", relatedHrefs: ["/admin/manuscript-case", "/admin/editorial", "/admin/atlas", "/admin/arena"] },
+  { href: "/admin/more", label: "More", shortLabel: "More", description: "Site tools and legacy workspace", relatedHrefs: ["/admin/legacy"] },
 ];
 
 function isActive(pathname: string, item: WorkspaceLink) {
@@ -46,7 +47,8 @@ export default function AdminWorkspaceNav() {
       <nav className={styles.workspaceNav} aria-label="Workshop areas">
         {WORKSPACE_LINKS.map(item => {
           const resolved = resolveAdminHref(item.href);
-          const active = hydrated && isActive(pathname, { ...item, href: resolved });
+          const activeHrefs = [resolved, ...(item.relatedHrefs || []).map(resolveAdminHref)];
+          const active = hydrated && activeHrefs.some(href => isActive(pathname, { ...item, href }));
           return (
             <GuardedAdminLink
               key={item.href}
@@ -66,7 +68,7 @@ export default function AdminWorkspaceNav() {
       </nav>
 
       <div className={styles.sidebarFooter}>
-        <GuardedAdminLink href="/admin/editorial">Editorial overview</GuardedAdminLink>
+        <GuardedAdminLink href="/admin/legacy">Open legacy workspace</GuardedAdminLink>
         <GuardedAdminLink href="/">Open public site</GuardedAdminLink>
       </div>
     </aside>

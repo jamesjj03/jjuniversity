@@ -13,12 +13,12 @@ import {
   useState,
 } from "react";
 
-type DirtyMap = Record<string, boolean>;
+type DirtyMap = Record<string, { dirty: boolean; label: string }>;
 
 type AdminUnsavedContextValue = {
   adminBasePath: string;
   hasUnsavedChanges: boolean;
-  setUnsaved: (source: string, dirty: boolean) => void;
+  setUnsaved: (source: string, dirty: boolean, label?: string) => void;
   confirmNavigation: () => boolean;
   resolveAdminHref: (href: string) => string;
 };
@@ -40,19 +40,29 @@ export function AdminUnsavedChangesProvider({
   const router = useRouter();
   const [dirtyBySource, setDirtyBySource] = useState<DirtyMap>({});
   const [popGuardToken] = useState(() => `jju-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`);
-  const hasUnsavedChanges = Object.values(dirtyBySource).some(Boolean);
+  const dirtyLabels = Object.values(dirtyBySource).filter(entry => entry.dirty).map(entry => entry.label);
+  const hasUnsavedChanges = dirtyLabels.length > 0;
+  const warning = dirtyLabels.length
+    ? `You have unsaved changes in ${dirtyLabels.join(", ")}. Leave this page and discard them?`
+    : "You have unsaved Workshop changes. Leave this page and discard them?";
 
-  const setUnsaved = useCallback((source: string, dirty: boolean) => {
+  const setUnsaved = useCallback((source: string, dirty: boolean, label = "this Workshop page") => {
     setDirtyBySource(current => {
-      if (Boolean(current[source]) === dirty) return current;
-      return { ...current, [source]: dirty };
+      if (!dirty) {
+        if (!current[source]) return current;
+        const next = { ...current };
+        delete next[source];
+        return next;
+      }
+      if (current[source]?.dirty && current[source]?.label === label) return current;
+      return { ...current, [source]: { dirty: true, label } };
     });
   }, []);
 
   const confirmNavigation = useCallback(() => {
     if (!hasUnsavedChanges) return true;
-    return window.confirm("You have unsaved Workshop changes. Leave this page and discard them?");
-  }, [hasUnsavedChanges]);
+    return window.confirm(warning);
+  }, [hasUnsavedChanges, warning]);
 
   const resolveHref = useCallback((href: string) => resolveAdminHref(href, adminBasePath), [adminBasePath]);
 
@@ -81,7 +91,7 @@ export function AdminUnsavedChangesProvider({
         return;
       }
       if (!active) return;
-      if (!window.confirm("You have unsaved Workshop changes. Leave this page and discard them?")) {
+      if (!window.confirm(warning)) {
         const state = history.state && typeof history.state === "object" ? history.state : {};
         history.pushState({ ...state, [markerKey]: popGuardToken }, "", window.location.href);
         return;
@@ -102,7 +112,7 @@ export function AdminUnsavedChangesProvider({
         history.replaceState(nextState, "", window.location.href);
       }
     };
-  }, [hasUnsavedChanges, popGuardToken]);
+  }, [hasUnsavedChanges, popGuardToken, warning]);
 
   useEffect(() => {
     function guardWorkshopLinks(event: globalThis.MouseEvent) {
