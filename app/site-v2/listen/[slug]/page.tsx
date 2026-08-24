@@ -36,6 +36,9 @@ export default async function SiteV2ListenPage({ params }: Props) {
 
   const edition = await getPublishedAudioEditionForBook(book.id);
   if (!edition) notFound();
+  const description = edition.description.trim();
+  const narratorLine = `Narrated by ${edition.narratorName}`.trim().toLowerCase();
+  const showDescription = description.replace(/[.!?]+$/, "").trim().toLowerCase() !== narratorLine;
 
   return (
     <article className={audioStyles.page}>
@@ -56,7 +59,7 @@ export default async function SiteV2ListenPage({ params }: Props) {
           <p className={audioStyles.eyebrow}>Audiobook</p>
           <h1>{book.title}</h1>
           <p className={audioStyles.narrator}>Narrated by {edition.narratorName}</p>
-          {edition.description && <p className={audioStyles.description}>{edition.description}</p>}
+          {description && showDescription && <p className={audioStyles.description}>{description}</p>}
           <AudioEditionPlayer edition={edition} bookSlug={book.slug} />
         </div>
       </section>

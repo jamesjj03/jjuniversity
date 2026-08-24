@@ -19,6 +19,7 @@
     "print:set-assets": "node scripts/set-print-product-assets.mjs",
     "print:upload": "node scripts/upload-paperbacks-to-supabase.mjs",
     "audio:manifest": "node scripts/build-audio-track-manifest.mjs",
+    "audio:ingest:tacos": "node scripts/ingest-tacos-audio-pilot.mjs",
     "arena:discover-wikimedia": "node scripts/arena-discover-wikimedia.mjs",
     "arena:import-wikimedia": "node scripts/arena-import-wikimedia.mjs",
     "arena:promote-candidate": "node scripts/arena-promote-candidate.mjs",
