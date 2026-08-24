@@ -131,9 +131,25 @@ export async function readLocalJson<T = unknown>(filePath: string): Promise<{ va
   return { value: JSON.parse(content) as T, content, version: versionForContent(content) };
 }
 
+const localJsonWriteQueues = new Map<string, Promise<void>>();
+
 export async function writeLocalJson(filePath: string, content: string, expectedVersion: string) {
-  const current = await readFile(filePath, "utf8");
-  assertAdminVersion(expectedVersion, versionForContent(current));
-  await writeFile(filePath, content, "utf8");
-  return { version: versionForContent(content) };
+  const previous = localJsonWriteQueues.get(filePath) || Promise.resolve();
+  let release = () => {};
+  const turn = new Promise<void>(resolve => {
+    release = resolve;
+  });
+  const queued = previous.catch(() => {}).then(() => turn);
+  localJsonWriteQueues.set(filePath, queued);
+  await previous.catch(() => {});
+
+  try {
+    const current = await readFile(filePath, "utf8");
+    assertAdminVersion(expectedVersion, versionForContent(current));
+    await writeFile(filePath, content, "utf8");
+    return { version: versionForContent(content) };
+  } finally {
+    release();
+    if (localJsonWriteQueues.get(filePath) === queued) localJsonWriteQueues.delete(filePath);
+  }
 }

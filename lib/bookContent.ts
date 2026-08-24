@@ -399,6 +399,9 @@ export async function saveLiveBookContentToSupabase({
 }
 
 export function prepareBookContentForSave(book: BookContent): BookContent {
+  if (!Array.isArray(book.sections) || book.sections.length === 0) {
+    throw new Error("A manuscript must keep at least one section.");
+  }
   const sections = [...book.sections]
     .sort((a, b) => a.index - b.index)
     .map((section, index) => {

@@ -40,8 +40,8 @@ export default async function WorkshopBooksPage({ searchParams }: { searchParams
       <header className={styles.pageHeader}>
         <div>
           <p className={styles.eyebrow}>Workshop library</p>
-          <h1>Books</h1>
-          <p className={styles.intro}>Find the book first, then work inside that book. Search and filters stay in the address so returning from an edit restores the same list.</p>
+          <h1>Find a book</h1>
+          <p className={styles.intro}>Type a title or open a recent book. Every result goes straight into the full manuscript.</p>
         </div>
         <div className={styles.headerActions}>
           <GuardedAdminLink className={styles.primaryButton} href="/admin/books/new">New book</GuardedAdminLink>

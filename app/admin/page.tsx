@@ -1,8 +1,12 @@
 import Link from "next/link";
+import WorkshopBookLibrary from "@/components/workshop/WorkshopBookLibrary";
+import ReadingAnalyticsSummary from "@/components/workshop/ReadingAnalyticsSummary";
 import { readAdminBookCatalog } from "@/lib/adminBookCatalog";
 import { getAdminHref } from "@/lib/adminPath";
+import { readReadingAnalytics } from "@/lib/readingAnalytics";
 import { normalizeWorkshopBook, type WorkshopBook } from "@/lib/workshopBooks";
 import styles from "./WorkshopCore.module.css";
+import { catalogSourceLabel } from "./books/_routeState";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +21,7 @@ async function loadDashboard(): Promise<DashboardData> {
     const catalog = await readAdminBookCatalog();
     return {
       books: catalog.books.map(normalizeWorkshopBook),
-      source: catalog.source,
+      source: catalogSourceLabel(catalog.source),
       error: "",
     };
   } catch (error) {
@@ -34,7 +38,10 @@ function count(books: WorkshopBook[], status: string) {
 }
 
 export default async function AdminPage() {
-  const data = await loadDashboard();
+  const [data, reading] = await Promise.all([
+    loadDashboard(),
+    readReadingAnalytics(),
+  ]);
   const hidden = count(data.books, "hidden");
   const review = count(data.books, "needs-review");
   const comingSoon = count(data.books, "coming-soon");
@@ -44,11 +51,11 @@ export default async function AdminPage() {
       <header className={styles.pageHeader}>
         <div>
           <p className={styles.eyebrow}>JJU Workshop</p>
-          <h1>What do you want to work on?</h1>
-          <p className={styles.intro}>Start with a job, not a control panel. Books open into their own saved, deep-linked workspace.</p>
+          <h1>Open a book and start working.</h1>
+          <p className={styles.intro}>Search here, tap once, and the whole manuscript opens. No catalog wall and no separate manuscript step.</p>
         </div>
         <div className={styles.headerActions}>
-          <Link className={styles.secondaryButton} href={getAdminHref("/admin/books")}>Find a book</Link>
+          <Link className={styles.primaryButton} href={getAdminHref("/admin/books/new")}>New book</Link>
           <Link className={styles.quietButton} href="/">View site</Link>
         </div>
       </header>
@@ -68,17 +75,21 @@ export default async function AdminPage() {
         </section>
       )}
 
+      <ReadingAnalyticsSummary result={reading} />
+
+      {!data.error && (
+        <WorkshopBookLibrary
+          books={data.books}
+          compact
+          source={data.source}
+        />
+      )}
+
       <section className={styles.actionGrid} aria-label="Workshop actions">
-        <Link className={styles.actionCard} href={getAdminHref("/admin/books")}>
-          <span className={styles.cardKicker}>Books</span>
-          <h2>Find and edit a book</h2>
-          <p>Search by title, series, tag, or ID. Open one book directly into Overview or Manuscript.</p>
-          <strong>Open the library →</strong>
-        </Link>
         <Link className={styles.actionCard} href={getAdminHref("/admin/books/new")}>
           <span className={styles.cardKicker}>New draft</span>
           <h2>Start a book</h2>
-          <p>Create a hidden catalog entry and its manuscript together, then continue in that book’s workspace.</p>
+          <p>Create a hidden catalog entry and its manuscript together.</p>
           <strong>Create a hidden draft →</strong>
         </Link>
         <Link className={styles.actionCard} href={getAdminHref("/admin/books?status=needs-review")}>
@@ -93,9 +104,13 @@ export default async function AdminPage() {
           <p>Work on how books are grouped without mixing that job into title, manuscript, or publishing edits.</p>
           <strong>Open organizing tools →</strong>
         </Link>
+        <Link className={styles.actionCard} href={getAdminHref("/admin/more")}>
+          <span className={styles.cardKicker}>Site</span>
+          <h2>Homepage and other tools</h2>
+          <p>Open publishing, Fiber, Atlas, and the temporary legacy fallback.</p>
+          <strong>Open site tools →</strong>
+        </Link>
       </section>
-
-      {!data.error && <p className={styles.intro}>Catalog source: {data.source}. Saves still use the source’s exact loaded version.</p>}
     </main>
   );
 }

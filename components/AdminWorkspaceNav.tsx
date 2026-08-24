@@ -16,7 +16,8 @@ type WorkspaceLink = {
 
 const WORKSPACE_LINKS: WorkspaceLink[] = [
   { href: "/admin", label: "Home", shortLabel: "Home", description: "What needs attention", match: "exact" },
-  { href: "/admin/books", label: "Books", shortLabel: "Books", description: "Find a book, then work" },
+  { href: "/admin/books", label: "Write", shortLabel: "Write", description: "Find a book and edit it" },
+  { href: "/admin/reading", label: "Reading", shortLabel: "Reads", description: "Signed-in reading activity" },
   { href: "/admin/organize", label: "Organize", shortLabel: "Sort", description: "Collections, shelves, and series", relatedHrefs: ["/admin/taxonomy-review"] },
   { href: "/admin/reviews", label: "Reviews", shortLabel: "Review", description: "Editorial and evidence queues", relatedHrefs: ["/admin/manuscript-case", "/admin/editorial", "/admin/atlas", "/admin/arena"] },
   { href: "/admin/more", label: "More", shortLabel: "More", description: "Site tools and legacy workspace", relatedHrefs: ["/admin/legacy"] },
