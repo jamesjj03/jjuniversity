@@ -129,7 +129,7 @@ async function main() {
   if (!apply && !stagePreview) {
     console.log("Dry run complete. No database row, Storage object, feature flag, or deployment was changed.");
     if (localPlan.releaseBlockers.length) {
-      console.log("Publication remains disabled until the ignored intake manifest records mastering approval and explicit publication approval.");
+      console.log("Publication remains disabled until the ignored intake manifest records human listening approval and explicit publication approval.");
       if (databaseInspection.kind !== "desired") {
         console.log("The recovered email candidates can be staged privately with: npm run audio:ingest:tacos -- --stage-preview");
       }
@@ -210,6 +210,9 @@ function buildLocalPlan() {
   }
   if (String(manifest.technical?.waveformMasteringQa || "") !== "pass") {
     releaseBlockers.push(`waveform/mastering QA is "${String(manifest.technical?.waveformMasteringQa || "missing")}", not "pass"`);
+  }
+  if (String(manifest.technical?.humanListenApproval || "") !== "approved") {
+    releaseBlockers.push(`human listening approval is "${String(manifest.technical?.humanListenApproval || "missing")}", not "approved"`);
   }
   const unresolvedVersions = (Array.isArray(manifest.emailVersionEvidence) ? manifest.emailVersionEvidence : [])
     .filter(item => /confirm|pending|unresolved/i.test(String(item?.status || "")))
