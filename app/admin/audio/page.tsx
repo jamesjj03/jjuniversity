@@ -64,10 +64,12 @@ export default async function AudioReviewPage() {
       </header>
 
       <section className={styles.releaseBanner} aria-labelledby="audio-release-state">
-        <span className={styles.releaseBadge}>QA · Not published</span>
+        <span className={styles.releaseBadge}>{review.humanListenApproved ? "QA approved · Not published" : "Technical QA pass · Human listen not verified"}</span>
         <div>
-          <h2 id="audio-release-state">Technical pass is complete. Human listening is not.</h2>
-          <p>The files are staged for private review. This page does not grant publication approval or enable production audio.</p>
+          <h2 id="audio-release-state">{review.humanListenApproved ? "The exact 16-track proof passed both checks." : "The exact 16-track package passed its technical checks."}</h2>
+          <p>{review.humanListenApproved
+            ? "James completed the listening proof on August 25, 2026. That approval is recorded separately from rights, master-file, and publication approval."
+            : "The saved human approval no longer matches this exact sealed package. Listen again before treating it as approved; rights, master-file, and publication approval remain separate."}</p>
         </div>
       </section>
 
@@ -79,8 +81,8 @@ export default async function AudioReviewPage() {
         </article>
         <article className={styles.metric}>
           <span>Human listening</span>
-          <strong>{review.humanCheckCount} pending</strong>
-          <small>Across {review.flaggedTrackCount} flagged tracks</small>
+          <strong>{review.humanListenApproved ? "Approved" : `${review.humanCheckCount} pending`}</strong>
+          <small>{review.humanReviewedCheckCount} targeted checks heard across {review.flaggedTrackCount} tracks</small>
         </article>
         <article className={styles.metric}>
           <span>Package</span>
@@ -107,9 +109,11 @@ export default async function AudioReviewPage() {
       <section className={styles.panel} aria-labelledby="human-flags-heading">
         <header className={styles.panelHeader}>
           <div>
-            <span className={styles.pendingBadge}>{review.humanCheckCount} checks pending</span>
-            <h2 id="human-flags-heading">Human listen list</h2>
-            <p>These are targeted moments, not automatic failures. Listen and decide by ear.</p>
+            <span className={styles.passBadge}>{review.humanListenApproved ? `Approved by ${review.humanListenApprovedBy}` : "Human approval not verified"}</span>
+            <h2 id="human-flags-heading">{review.humanListenApproved ? "Human listen complete" : "Human listen needs another pass"}</h2>
+            <p>{review.humanListenApproved
+              ? "These were the targeted moments checked by ear. They remain visible as the audit trail, not as unresolved defects."
+              : "These are the targeted moments to check by ear before a new exact-package approval can be recorded."}</p>
           </div>
           {review.previewAvailable ? (
             <GuardedAdminLink className={styles.compactListenLink} href={LISTEN_HREF} prefetch={false}>Listen now</GuardedAdminLink>

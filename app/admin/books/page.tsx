@@ -41,7 +41,7 @@ export default async function WorkshopBooksPage({ searchParams }: { searchParams
         <div>
           <p className={styles.eyebrow}>Workshop library</p>
           <h1>Find a book</h1>
-          <p className={styles.intro}>Type a title or open a recent book. Every result goes straight into the full manuscript.</p>
+          <p className={styles.intro}>Search, filter, sort, or browse the whole catalog. Every result goes straight into the full manuscript.</p>
         </div>
         <div className={styles.headerActions}>
           <GuardedAdminLink className={styles.primaryButton} href="/admin/books/new">New book</GuardedAdminLink>
@@ -51,8 +51,10 @@ export default async function WorkshopBooksPage({ searchParams }: { searchParams
 
       <WorkshopBookLibrary
         books={books}
+        initialBrowseAll={firstSearchValue(query.browse) === "all"}
         initialPlacement={firstSearchValue(query.placement)}
         initialQuery={firstSearchValue(query.q)}
+        initialSort={firstSearchValue(query.sort)}
         initialStatus={firstSearchValue(query.status)}
         source={catalogSourceLabel(catalog.source)}
       />

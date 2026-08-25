@@ -2,61 +2,47 @@
   padding-bottom: 150px;
 }
 
-.stopBanner {
-  display: grid;
-  grid-template-columns: 54px minmax(0, 1fr);
+.printStatus {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 17px;
   margin-bottom: 26px;
-  padding: 18px 20px;
-  border: 2px solid #ff8b82;
-  border-radius: 16px;
-  background:
-    linear-gradient(135deg, rgba(126, 23, 23, 0.46), rgba(45, 10, 10, 0.76)),
-    #190a0a;
-  box-shadow: 0 18px 55px rgba(120, 0, 0, 0.2);
-  color: #fff4ef;
+  padding: 15px 18px;
+  border: 1px solid rgba(215, 183, 101, 0.36);
+  border-radius: 13px;
+  background: rgba(215, 183, 101, 0.07);
+  color: var(--workshop-cream);
 }
 
-.stopMark {
-  width: 54px;
-  height: 54px;
-  display: grid;
-  place-items: center;
-  border: 2px solid currentColor;
-  border-radius: 999px;
-  font-size: 1.5rem;
-  font-weight: 900;
-}
-
-.stopBanner p,
-.stopBanner h1,
-.stopBanner strong {
+.printStatus p,
+.printStatus h1,
+.printStatus strong {
   margin: 0;
 }
 
-.stopBanner p {
-  color: #ffc3bb;
+.printStatus p {
+  color: var(--workshop-gold);
   font-size: 0.69rem;
   font-weight: 820;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
-.stopBanner h1 {
+.printStatus h1 {
   margin-top: 2px;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
   line-height: 0.98;
   letter-spacing: -0.025em;
 }
 
-.stopBanner strong {
-  display: block;
-  margin-top: 6px;
-  color: #ffd8d2;
+.printStatus strong {
+  max-width: 54ch;
+  color: var(--workshop-muted);
   font-size: 0.82rem;
   line-height: 1.45;
+  text-align: right;
 }
 
 .snapshotStamp {
@@ -83,13 +69,15 @@
 
 .releaseBlocker,
 .productSection,
-.reviewSection {
+.reviewSection,
+.decisionGuide {
   margin-top: 30px;
 }
 
 .releaseBlocker,
 .integrityPanel,
-.noActionPanel {
+.noActionPanel,
+.decisionGuide {
   padding: clamp(18px, 3vw, 27px);
   border: 1px solid var(--workshop-rule);
   border-radius: 18px;
@@ -98,6 +86,101 @@
 
 .releaseBlocker {
   border-color: rgba(232, 124, 111, 0.42);
+}
+
+.decisionGuide {
+  border-color: rgba(215, 183, 101, 0.38);
+  background:
+    linear-gradient(135deg, rgba(215, 183, 101, 0.075), transparent 38%),
+    var(--workshop-panel);
+}
+
+.recommendedBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #f0d991;
+  background: rgba(215, 183, 101, 0.12);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.guideGrid article {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.guideGrid article > span {
+  color: var(--workshop-gold);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.guideGrid h3 {
+  margin: 7px 0 0;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 570;
+}
+
+.guideGrid p,
+.guideDetails p {
+  color: var(--workshop-muted);
+  font-size: 0.78rem;
+  line-height: 1.52;
+}
+
+.guideDetails {
+  margin-top: 11px;
+  padding: 4px 15px 14px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.guideDetails summary {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  color: var(--workshop-cream);
+  font-size: 0.82rem;
+  font-weight: 780;
+  cursor: pointer;
+}
+
+.guideDetails nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.guideDetails a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  color: var(--workshop-cream);
+  font-size: 0.75rem;
+  font-weight: 750;
 }
 
 .sectionHeading {
@@ -772,21 +855,22 @@
   box-shadow: 0 7px 14px rgba(0, 0, 0, 0.22);
 }
 
-.coverSwatch[data-direction="system"] {
+.coverSwatch[data-direction="archive"] {
   background:
-    linear-gradient(90deg, transparent 0 46%, #d7a640 46% 49%, transparent 49%),
-    radial-gradient(circle at 72% 24%, #254e6d, transparent 34%),
-    #071527;
+    radial-gradient(circle at 58% 55%, transparent 0 18%, rgba(26, 23, 18, 0.58) 19% 21%, transparent 22%),
+    linear-gradient(180deg, #171713 0 33%, #e7dbc3 33% 100%);
 }
 
-.coverSwatch[data-direction="index"] {
+.coverSwatch[data-direction="library"] {
   background:
-    linear-gradient(90deg, #b68a36 0 8%, transparent 8%),
-    linear-gradient(160deg, #f0ebdc, #d6ccae);
+    linear-gradient(90deg, transparent 0 7%, #c8993f 7% 9%, transparent 9% 91%, #c8993f 91% 93%, transparent 93%),
+    linear-gradient(160deg, #18352f, #3a2430);
 }
 
-.coverSwatch[data-direction="split"] {
-  background: linear-gradient(90deg, #153451 0 50%, #6f2633 50% 100%);
+.coverSwatch[data-direction="field-index"] {
+  background:
+    linear-gradient(180deg, #5f816e 0 22%, transparent 22%),
+    linear-gradient(160deg, #f3efe6, #ddd5c8);
 }
 
 .noteField {
@@ -873,6 +957,10 @@
 }
 
 @media (max-width: 1080px) {
+  .guideGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .productGrid {
     grid-template-columns: 1fr;
   }
@@ -925,26 +1013,21 @@
     padding-bottom: 118px;
   }
 
-  .stopBanner {
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 12px;
+  .printStatus {
+    display: grid;
+    gap: 8px;
     margin-bottom: 20px;
     padding: 14px;
     border-radius: 13px;
   }
 
-  .stopMark {
-    width: 42px;
-    height: 42px;
-    font-size: 1.15rem;
-  }
-
-  .stopBanner h1 {
+  .printStatus h1 {
     font-size: 1.75rem;
   }
 
-  .stopBanner strong {
+  .printStatus strong {
     font-size: 0.74rem;
+    text-align: left;
   }
 
   .snapshotStamp {
@@ -973,12 +1056,17 @@
 
   .releaseBlocker,
   .integrityPanel,
-  .noActionPanel {
+  .noActionPanel,
+  .decisionGuide {
     padding: 16px;
     border-radius: 14px;
   }
 
   .sourceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .guideGrid {
     grid-template-columns: 1fr;
   }
 

@@ -389,38 +389,89 @@ def generate_cover(spec: dict, output: Path) -> None:
     pdf.save()
 
 
-def miniature(draw: ImageDraw.ImageDraw, bounds: tuple[int, int, int, int], spec: dict, style: str) -> None:
+def paste_cover_art(image: Image.Image, bounds: tuple[int, int, int, int], art_path: str) -> None:
     x0, y0, x1, y1 = bounds
-    front_geometry(draw, bounds, spec["volume"], style)
+    with Image.open(art_path) as source:
+        art = source.convert("RGB")
+    target_w = x1 - x0
+    target_h = y1 - y0
+    scale = max(target_w / art.width, target_h / art.height)
+    resized = art.resize((round(art.width * scale), round(art.height * scale)), Image.Resampling.LANCZOS)
+    left = max(0, (resized.width - target_w) // 2)
+    top = max(0, (resized.height - target_h) // 2)
+    image.paste(resized.crop((left, top, left + target_w, top + target_h)), (x0, y0))
+
+
+def miniature(image: Image.Image, bounds: tuple[int, int, int, int], spec: dict, style: str) -> None:
+    draw = ImageDraw.Draw(image)
+    x0, y0, x1, y1 = bounds
     ink = "#0d1117"
     cream = "#f7f5f1"
     gold = "#d4a24c"
-    primary = ink if style == "index" else cream
-    pad = int((x1-x0)*.08)
-    draw.text((x0+pad, y0+pad), "JJ UNIVERSITY 101", font=font(FONT_BOLD, 24), fill=gold)
-    title_width = int((x1-x0)*.43) if style == "split" else x1-x0-2*pad
-    title_font = fit_font(draw, spec["subject"].upper(), title_width, 62, FONT_BLACK)
-    lines = spec["subject"].upper().split(" ")
-    y = y0 + int((y1-y0)*.52)
-    draw_lines(draw, lines, x0+pad, y, title_font, primary, spacing=.94)
-    if style == "split":
-        band_top = y1 - int((y1-y0)*.10)
-        draw.rectangle((x0, band_top, x1, y1), fill=gold)
-        draw.text((x0+pad, y1-pad//2), f"{spec['volume'].upper()}  |  JAMES JOHNSON", font=font(FONT_BOLD, 20), fill=ink, anchor="ls")
-    else:
-        draw.text((x0+pad, y1-pad), f"{spec['volume'].upper()}  |  JAMES JOHNSON", font=font(FONT_BOLD, 22), fill=gold, anchor="ls")
+    rust = "#9d4d25"
+    width = x1 - x0
+    height = y1 - y0
+    pad = int(width * .075)
+
+    if style == "archive":
+        paste_cover_art(image, bounds, spec["artPath"])
+        draw = ImageDraw.Draw(image)
+        draw.text((x0 + pad, y0 + pad), "101", font=font(FONT_SERIF_BOLD, int(height * .105)), fill=cream)
+        draw.text((x0 + pad, y0 + int(height * .17)), "HOW WE FIGURED IT OUT", font=font(FONT_BOLD, int(height * .022)), fill=gold)
+        title_font = fit_font(draw, spec["subject"].upper(), width - 2 * pad, int(height * .066), FONT_BLACK)
+        title_y = y1 - int(height * .205)
+        draw_lines(draw, spec["subject"].upper().split(" "), x0 + pad, title_y, title_font, ink, spacing=.9)
+        draw.text((x0 + pad, y1 - pad), f"{spec['volume'].upper()}  /  JAMES JOHNSON", font=font(FONT_BOLD, int(height * .020)), fill=rust, anchor="ls")
+        return
+
+    if style == "library":
+        cloth = "#18352f" if "Natural" in spec["subject"] else "#3a2430"
+        cloth_line = "#24453d" if "Natural" in spec["subject"] else "#4a2f3c"
+        draw.rectangle(bounds, fill=cloth)
+        for offset in range(x0, x1, 7):
+            draw.line((offset, y0, offset, y1), fill=cloth_line, width=1)
+        border = int(width * .045)
+        draw.rectangle((x0 + border, y0 + border, x1 - border, y1 - border), outline=gold, width=3)
+        draw.text((x0 + width // 2, y0 + int(height * .105)), "101", font=font(FONT_SERIF_BOLD, int(height * .12)), fill=gold, anchor="mm")
+        draw.text((x0 + width // 2, y0 + int(height * .18)), "HOW WE FIGURED IT OUT", font=font(FONT_BOLD, int(height * .019)), fill=cream, anchor="mm")
+        panel = (x0 + int(width * .12), y0 + int(height * .39), x1 - int(width * .12), y0 + int(height * .67))
+        draw.rectangle(panel, fill="#f1eadc", outline=gold, width=3)
+        title_font = fit_font(draw, spec["subject"].upper(), int(width * .68), int(height * .052), FONT_SERIF_BOLD)
+        title_lines = spec["subject"].upper().split(" ")
+        line_height = int(title_font.size * .95)
+        start_y = panel[1] + ((panel[3] - panel[1]) - line_height * len(title_lines)) // 2
+        draw_lines(draw, title_lines, x0 + width // 2, start_y, title_font, ink, spacing=.95, anchor="ma")
+        draw.text((x0 + width // 2, y1 - int(height * .095)), spec["volume"].upper(), font=font(FONT_BOLD, int(height * .020)), fill=gold, anchor="mm")
+        draw.text((x0 + width // 2, y1 - int(height * .052)), "JAMES JOHNSON", font=font(FONT_BOLD, int(height * .019)), fill=cream, anchor="mm")
+        return
+
+    draw.rectangle(bounds, fill="#f3efe6")
+    band = "#b76535" if "Human" in spec["subject"] else "#587b67"
+    draw.rectangle((x0, y0, x1, y0 + int(height * .115)), fill=band)
+    draw.rectangle((x0 + pad, y0 + int(height * .155), x1 - pad, y1 - pad), outline="#b9b0a2", width=2)
+    draw.text((x0 + pad, y0 + int(height * .065)), "101", font=font(FONT_SERIF_BOLD, int(height * .066)), fill=cream, anchor="lm")
+    draw.text((x1 - pad, y0 + int(height * .065)), spec["volume"].upper(), font=font(FONT_BOLD, int(height * .018)), fill=cream, anchor="rm")
+    draw.text((x0 + pad, y0 + int(height * .205)), "HOW WE FIGURED IT OUT", font=font(FONT_BOLD, int(height * .019)), fill=band)
+    title_font = fit_font(draw, spec["subject"].upper(), width - 2 * pad, int(height * .072), FONT_BLACK)
+    draw_lines(draw, spec["subject"].upper().split(" "), x0 + pad, y0 + int(height * .31), title_font, ink, spacing=.92)
+    draw.text((x0 + pad, y0 + int(height * .59)), "REFERENCE COLLECTION", font=font(FONT_BOLD, int(height * .019)), fill=band)
+    draw.line((x0 + pad, y0 + int(height * .63), x1 - pad, y0 + int(height * .63)), fill="#b9b0a2", width=2)
+    draw.text((x0 + pad, y0 + int(height * .71)), "01", font=font(FONT_SERIF_BOLD, int(height * .11)), fill="#c9c1b5")
+    draw.text((x0 + pad, y1 - pad), "JAMES JOHNSON", font=font(FONT_BOLD, int(height * .020)), fill=ink, anchor="ls")
 
 
-def generate_concepts(specs: list[dict], output: Path) -> None:
+def generate_concepts(specs: list[dict], output: Path, preview_dir: Path | None = None) -> None:
     page_w, page_h = 16, 9
     styles = [
-        ("SYSTEM", "Dark field, gold rule, subject geometry", "The most direct continuation of the website brand."),
-        ("INDEX", "Cream field, serial tab, oversized type", "More academic and tactile without looking institutional."),
-        ("SPLIT", "Two-tone field, mirrored volume system", "Makes the two-volume set read as one designed object."),
+        ("ARCHIVE", "Illustrated reference plates with a shared visual grammar", "The most distinctive direction: collectible, curious, and specific to each volume."),
+        ("LIBRARY", "Clothbound encyclopedia system with a repeatable title label", "The strongest shelf system for long-running Collections and future volumes."),
+        ("FIELD INDEX", "Modern academic catalog with a color-coded subject band", "The cleanest evolution of Index, with the corrected 101 hierarchy."),
     ]
     output.parent.mkdir(parents=True, exist_ok=True)
+    if preview_dir:
+        preview_dir.mkdir(parents=True, exist_ok=True)
     pdf = canvas.Canvas(str(output), pagesize=landscape((page_h*INCH, page_w*INCH)), pageCompression=1, invariant=1, initialFontName="JJUArial")
-    pdf.setTitle("JJ University 101 cover directions")
+    pdf.setTitle("101: How We Figured It Out cover directions")
     pdf.setAuthor("JJ University")
     for style, subtitle, note in styles:
         canvas_img = Image.new("RGB", (2400, 1350), "#ece9e2")
@@ -429,15 +480,20 @@ def generate_concepts(specs: list[dict], output: Path) -> None:
         draw.text((112, 165), subtitle, font=font(FONT_REGULAR, 28), fill="#3e444b")
         mini_h = 960
         mini_w = int(mini_h * (2/3))
-        miniature(draw, (180, 280, 180+mini_w, 280+mini_h), specs[0], style.lower())
-        miniature(draw, (1580, 280, 1580+mini_w, 280+mini_h), specs[1], style.lower())
+        style_key = style.lower().replace(" ", "-")
+        miniature(canvas_img, (180, 280, 180+mini_w, 280+mini_h), specs[0], style_key)
+        miniature(canvas_img, (1580, 280, 1580+mini_w, 280+mini_h), specs[1], style_key)
         center_x = 1200
         note_font = font(FONT_REGULAR, 25)
         note_y = 650
         for line in wrap_text(draw, note, note_font, 620):
             draw.text((center_x, note_y), line, font=note_font, fill="#3e444b", anchor="mm")
             note_y += 38
-        tradeoff = "Tradeoff: the split system uses a deliberately smaller title." if style == "SPLIT" else "Typography and geometry only. No generated illustration."
+        tradeoff = {
+            "ARCHIVE": "Uses subject-specific generated artwork beneath exact, deterministic typography.",
+            "LIBRARY": "Best spine consistency; deliberately restrained on the front.",
+            "FIELD INDEX": "Fastest to extend and easiest to recognize at thumbnail size.",
+        }[style]
         trade_font = font(FONT_BOLD, 21)
         for line in wrap_text(draw, tradeoff, trade_font, 620):
             draw.text((center_x, note_y + 26), line, font=trade_font, fill="#b27e27", anchor="mm")
@@ -445,6 +501,13 @@ def generate_concepts(specs: list[dict], output: Path) -> None:
         stream = io.BytesIO()
         canvas_img.save(stream, format="PNG", optimize=True)
         stream.seek(0)
+        if preview_dir:
+            preview_name = {
+                "ARCHIVE": "cover-board-archive.png",
+                "LIBRARY": "cover-board-library.png",
+                "FIELD INDEX": "cover-board-field-index.png",
+            }[style]
+            canvas_img.resize((1920, 1080), Image.Resampling.LANCZOS).save(preview_dir / preview_name, format="PNG", optimize=True)
         pdf.drawImage(ImageReader(stream), 0, 0, width=16*INCH, height=9*INCH)
         pdf.showPage()
     pdf.save()
@@ -484,7 +547,8 @@ def main() -> None:
             generate_cover(item, Path(item["output"]))
     elif args.command == "concepts":
         payload = json.loads(Path(args.spec).read_text(encoding="utf-8"))
-        generate_concepts(payload["volumes"], Path(args.output))
+        preview_dir = Path(payload["previewDir"]) if payload.get("previewDir") else None
+        generate_concepts(payload["volumes"], Path(args.output), preview_dir)
 
 
 if __name__ == "__main__":

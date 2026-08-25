@@ -10,6 +10,7 @@ import {
   normalizeLuluShippingAddress,
   shouldAutoSubmitLuluJobs,
 } from "@/lib/lulu";
+import { getPrintCheckoutReadiness } from "@/lib/printCheckoutSafety";
 import { getPrintProduct } from "@/lib/publishing";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
 import { getStripe, hasStripeConfig, stripeWebhookSecret } from "@/lib/stripe";
@@ -95,8 +96,10 @@ async function resolveLuluFulfillmentState({
 }) {
   const autoSubmit = shouldAutoSubmitLuluJobs();
   const config = getLuluConfigStatus();
+  const checkoutReadiness = getPrintCheckoutReadiness(product);
   const missing = [
     ...config.missing,
+    ...checkoutReadiness.missing,
     ...(product ? getLuluReadiness(product).missing : ["print_product"]),
     ...missingLuluShippingAddressFields(shippingAddress),
   ];
@@ -109,6 +112,7 @@ async function resolveLuluFulfillmentState({
         autoSubmit,
         missing,
         configured: config.configured,
+        checkoutReadiness,
       },
     };
   }
@@ -121,6 +125,7 @@ async function resolveLuluFulfillmentState({
         autoSubmit,
         missing: email ? missing : [...missing, "customer_email"],
         configured: config.configured,
+        checkoutReadiness,
       },
     };
   }
@@ -142,6 +147,7 @@ async function resolveLuluFulfillmentState({
       metadata: {
         autoSubmit,
         missing: [],
+        checkoutReadiness,
         response,
       },
     };
@@ -152,6 +158,7 @@ async function resolveLuluFulfillmentState({
       metadata: {
         autoSubmit,
         missing,
+        checkoutReadiness,
         error: error instanceof Error ? error.message : "Unknown Lulu submission error.",
       },
     };

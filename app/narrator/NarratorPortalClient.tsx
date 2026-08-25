@@ -11,6 +11,8 @@ const OPEN_UPLOAD_STATUSES = new Set(["accepted", "recording", "changes-requeste
 const READY_SUBMISSION_STATUSES = new Set(["uploaded", "in-review", "approved", "complete", "completed"]);
 const LISTENABLE_SUBMISSION_STATUSES = new Set(["uploaded", "in-review", "changes-requested", "approved", "superseded", "complete", "completed"]);
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
+const UPLOAD_ATTEMPT_STORAGE_KEY = "jju.narratorUploadAttempts.v1";
+const UPLOAD_ATTEMPT_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 
 type PortalSubmission = NarratorAssignmentView["submissions"][number] & {
   audioTrackId: string;
@@ -37,14 +39,137 @@ type TrackNotice = {
   trackId: string;
   phase: UploadPhase;
   text: string;
+  loaded?: number;
+  total?: number;
 };
+
+type UploadAttempt = {
+  fingerprint: string;
+  idempotencyKey: string;
+  savedAt: number;
+};
+
+type StoredUploadAttempts = Record<string, UploadAttempt>;
 
 function humanStatus(value: string) {
   return value.replace(/-/g, " ");
 }
 
-function pageLabel(position: number) {
-  return `Page ${String(position).padStart(2, "0")}`;
+function sectionTitle(track: PortalTrack) {
+  return track.title.trim() || "Untitled section";
+}
+
+function sectionKeyLabel(track: PortalTrack) {
+  return track.sectionKey.trim() || "No section key";
+}
+
+function sectionNumber(position: number) {
+  return String(position).padStart(2, "0");
+}
+
+function uploadAttemptSlot(assignmentId: string, trackId: string) {
+  return `${assignmentId}:${trackId}`;
+}
+
+function readUploadAttempts(): StoredUploadAttempts {
+  if (typeof window === "undefined") return {};
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(UPLOAD_ATTEMPT_STORAGE_KEY) || "{}") as StoredUploadAttempts;
+    const cutoff = Date.now() - UPLOAD_ATTEMPT_MAX_AGE_MS;
+    return Object.fromEntries(Object.entries(parsed).filter(([, attempt]) => (
+      attempt
+      && typeof attempt.fingerprint === "string"
+      && typeof attempt.idempotencyKey === "string"
+      && Number(attempt.savedAt) >= cutoff
+    )));
+  } catch {
+    return {};
+  }
+}
+
+function persistUploadAttempt(assignmentId: string, trackId: string, fingerprint: string) {
+  const attempts = readUploadAttempts();
+  const slot = uploadAttemptSlot(assignmentId, trackId);
+  const existing = attempts[slot];
+  const attempt = existing?.fingerprint === fingerprint
+    ? existing
+    : { fingerprint, idempotencyKey: crypto.randomUUID(), savedAt: Date.now() };
+  attempts[slot] = { ...attempt, savedAt: Date.now() };
+  try {
+    window.localStorage.setItem(UPLOAD_ATTEMPT_STORAGE_KEY, JSON.stringify(attempts));
+  } catch {
+    // The in-memory attempt below still prevents duplicate taps in this session.
+  }
+  return attempts[slot];
+}
+
+function forgetUploadAttempt(assignmentId: string, trackId: string) {
+  const attempts = readUploadAttempts();
+  delete attempts[uploadAttemptSlot(assignmentId, trackId)];
+  try {
+    window.localStorage.setItem(UPLOAD_ATTEMPT_STORAGE_KEY, JSON.stringify(attempts));
+  } catch {
+    // Storage may be unavailable in private browsing; the completed server state remains authoritative.
+  }
+}
+
+async function uploadSignedFileWithProgress({
+  bucket,
+  path,
+  token,
+  file,
+  onProgress,
+}: {
+  bucket: string;
+  path: string;
+  token: string;
+  file: File;
+  onProgress: (loaded: number, total: number) => void;
+}) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "";
+  if (!supabaseUrl || !publishableKey) throw new Error("Private uploads are not configured on this site.");
+
+  const supabase = createSupabaseBrowserClient();
+  const { data, error } = await supabase.auth.getSession();
+  if (error || !data.session?.access_token) throw new Error("Your sign-in expired. Sign in again, then retry this file.");
+
+  const encodedPath = [bucket, ...path.split("/")].map(part => encodeURIComponent(part)).join("/");
+  const uploadUrl = new URL(`/storage/v1/object/upload/sign/${encodedPath}`, supabaseUrl);
+  uploadUrl.searchParams.set("token", token);
+  const body = new FormData();
+  body.append("cacheControl", "3600");
+  body.append("", file);
+
+  await new Promise<void>((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open("PUT", uploadUrl.toString());
+    request.setRequestHeader("apikey", publishableKey);
+    request.setRequestHeader("Authorization", `Bearer ${data.session.access_token}`);
+    request.setRequestHeader("x-upsert", "false");
+    request.upload.addEventListener("progress", event => {
+      const total = event.lengthComputable && event.total > 0 ? event.total : file.size;
+      onProgress(Math.min(event.loaded, total), total);
+    });
+    request.addEventListener("load", () => {
+      if (request.status >= 200 && request.status < 300) {
+        onProgress(file.size, file.size);
+        resolve();
+        return;
+      }
+      let detail = "";
+      try {
+        const payload = JSON.parse(request.responseText || "{}") as { message?: string; error?: string };
+        detail = payload.message || payload.error || "";
+      } catch {
+        detail = "";
+      }
+      reject(new Error(detail || `Private upload failed (${request.status}).`));
+    });
+    request.addEventListener("error", () => reject(new Error("The connection dropped during upload. Choose the same file and retry.")));
+    request.addEventListener("abort", () => reject(new Error("The upload was stopped. Choose the same file and retry.")));
+    request.send(body);
+  });
 }
 
 function isSubmissionReady(submission: PortalSubmission | null) {
@@ -93,6 +218,10 @@ function displayFileSize(bytes: number) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+function displayTransferSize(bytes: number) {
+  return bytes > 0 ? displayFileSize(bytes) : "0 KB";
+}
+
 export default function NarratorPortalClient({ initialData }: { initialData: NarratorPortalData }) {
   const router = useRouter();
   const initialAssignments = initialData.assignments as PortalAssignment[];
@@ -107,9 +236,12 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
   const [trackNotice, setTrackNotice] = useState<TrackNotice | null>(null);
   const [message, setMessage] = useState("");
   const [listeningSubmissionId, setListeningSubmissionId] = useState("");
-  const uploadAttemptRef = useRef<{ signature: string; idempotencyKey: string } | null>(null);
+  const uploadAttemptRef = useRef<UploadAttempt | null>(null);
+  const uploadInFlightRef = useRef(false);
   const fileInputRefs = useRef(new Map<string, HTMLInputElement>());
   const recordButtonRefs = useRef(new Map<string, HTMLButtonElement>());
+  const queueButtonRefs = useRef(new Map<string, HTMLButtonElement>());
+  const recordingPanelRef = useRef<HTMLElement | null>(null);
   const uploadButtonRef = useRef<HTMLButtonElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const selected = assignments.find(item => item.id === selectedId) || null;
@@ -129,6 +261,22 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     && selectedProgress.total > 0
     && selectedProgress.ready === selectedProgress.total,
   );
+  const orderedTracks = useMemo(
+    () => selected ? [...selected.tracks].sort((a, b) => a.position - b.position) : [],
+    [selected],
+  );
+  const firstMissingTrack = orderedTracks.find(track => track.required && !isSubmissionReady(track.latestSubmission))
+    || orderedTracks.find(track => !isSubmissionReady(track.latestSubmission))
+    || orderedTracks[0]
+    || null;
+  const focusedTrack = orderedTracks.find(track => track.id === activeTrackId) || firstMissingTrack;
+  const focusedTrackId = focusedTrack?.id || "";
+  const focusedSubmission = focusedTrack?.latestSubmission || null;
+  const focusedReady = isSubmissionReady(focusedSubmission);
+  const focusedMutable = Boolean(selected && canMutate && OPEN_UPLOAD_STATUSES.has(selected.status));
+  const focusedListening = Boolean(focusedSubmission && listeningSubmissionId === focusedSubmission.id);
+  const focusedNotice = focusedTrack && trackNotice?.trackId === focusedTrack.id ? trackNotice : null;
+  const remainingRequired = Math.max(0, selectedProgress.total - selectedProgress.ready);
   const previewUrl = useMemo(() => file ? URL.createObjectURL(file) : "", [file]);
 
   useEffect(() => {
@@ -136,6 +284,20 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
       if (previewUrl) URL.revokeObjectURL(previewUrl);
     };
   }, [previewUrl]);
+
+  useEffect(() => {
+    if (!focusedTrackId) return;
+    const frame = window.requestAnimationFrame(() => {
+      const button = queueButtonRefs.current.get(focusedTrackId);
+      const queue = button?.closest("ol");
+      if (!button || !queue) return;
+      const queueRect = queue.getBoundingClientRect();
+      const buttonRect = button.getBoundingClientRect();
+      const left = queue.scrollLeft + buttonRect.left - queueRect.left - (queue.clientWidth - button.clientWidth) / 2;
+      queue.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [focusedTrackId]);
 
   function clearSelectedFile(trackId?: string) {
     if (trackId) {
@@ -148,6 +310,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
   }
 
   function chooseAssignment(assignmentId: string) {
+    if (uploadInFlightRef.current || actionBusy) return;
     if (assignmentId === selectedId) return;
     clearSelectedFile(activeTrackId);
     setActiveTrackId("");
@@ -155,9 +318,21 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     setListeningSubmissionId("");
     setMessage("");
     setSelectedId(assignmentId);
+    window.setTimeout(() => recordingPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+  }
+
+  function focusTrack(track: PortalTrack) {
+    if (uploadInFlightRef.current || actionBusy) return;
+    if (track.id === focusedTrack?.id) return;
+    clearSelectedFile(activeTrackId);
+    setActiveTrackId(track.id);
+    setTrackNotice(null);
+    setListeningSubmissionId("");
+    window.setTimeout(() => recordingPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
   }
 
   async function updateAssignment(assignment: PortalAssignment, action: "accept" | "submit") {
+    if (uploadInFlightRef.current) return;
     if (!canMutate) {
       setMessage("This narrator account is read-only right now.");
       return;
@@ -165,7 +340,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     if (action === "submit") {
       const progress = progressFor(assignment);
       if (!progress.total || progress.ready !== progress.total) {
-        setMessage("Finish every required page before submitting the book.");
+        setMessage("Finish every required section before submitting the book.");
         return;
       }
     }
@@ -183,7 +358,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
       setAssignments(current => current.map(item => item.id === assignment.id ? { ...item, status } : item));
       setSelectedId(assignment.id);
       setMessage(action === "accept"
-        ? "Assignment accepted. Start with the first page that needs a recording."
+        ? "Assignment accepted. Start with the first section that needs a recording."
         : "Book submitted to JJ for review. Your recordings are now read-only.");
 
       if (action === "accept") {
@@ -237,6 +412,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
   }
 
   async function uploadTrack(assignment: PortalAssignment, track: PortalTrack) {
+    if (uploadInFlightRef.current) return;
     if (!canMutate) {
       setMessage("This narrator account is read-only right now.");
       return;
@@ -249,19 +425,19 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     const selectedFile = file;
     const narratorNote = note.trim();
     const mimeType = normalizedMimeType(selectedFile);
-    const signature = JSON.stringify([
+    const fingerprint = JSON.stringify([
       assignment.id,
       track.id,
       selectedFile.name,
       selectedFile.size,
       mimeType,
       selectedFile.lastModified,
-      narratorNote,
     ]);
-    if (uploadAttemptRef.current?.signature !== signature) {
-      uploadAttemptRef.current = { signature, idempotencyKey: crypto.randomUUID() };
+    if (uploadAttemptRef.current?.fingerprint !== fingerprint) {
+      uploadAttemptRef.current = persistUploadAttempt(assignment.id, track.id, fingerprint);
     }
     const idempotencyKey = uploadAttemptRef.current.idempotencyKey;
+    uploadInFlightRef.current = true;
     setMessage("");
     setTrackNotice({ trackId: track.id, phase: "preparing", text: "Preparing a private upload…" });
 
@@ -296,12 +472,32 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
 
       if (!prepared.alreadyComplete && !prepared.objectPresent) {
         if (!prepared.token) throw new Error("Could not prepare that upload.");
-        setTrackNotice({ trackId: track.id, phase: "uploading", text: `Uploading ${selectedFile.name}… Keep this page open.` });
-        const supabase = createSupabaseBrowserClient();
-        const uploadResult = await supabase.storage
-          .from(prepared.bucket)
-          .uploadToSignedUrl(prepared.path, prepared.token, selectedFile, { contentType: prepared.mimeType || mimeType });
-        if (uploadResult.error) throw uploadResult.error;
+        setTrackNotice({
+          trackId: track.id,
+          phase: "uploading",
+          text: `Uploading ${selectedFile.name}… Keep this page open.`,
+          loaded: 0,
+          total: selectedFile.size,
+        });
+        let lastPercent = -1;
+        await uploadSignedFileWithProgress({
+          bucket: prepared.bucket,
+          path: prepared.path,
+          token: prepared.token,
+          file: selectedFile,
+          onProgress: (loaded, total) => {
+            const percent = total > 0 ? Math.floor((loaded / total) * 100) : 0;
+            if (percent === lastPercent) return;
+            lastPercent = percent;
+            setTrackNotice({
+              trackId: track.id,
+              phase: "uploading",
+              text: `Uploading ${selectedFile.name}… Keep this page open.`,
+              loaded,
+              total,
+            });
+          },
+        });
       }
 
       if (!prepared.alreadyComplete) {
@@ -343,11 +539,12 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
       ];
       const nextMissing = searchOrder.find(item => item.required && !isSubmissionReady(item.latestSubmission));
 
+      forgetUploadAttempt(assignment.id, track.id);
       clearSelectedFile(track.id);
-      setTrackNotice({ trackId: track.id, phase: "done", text: `${pageLabel(track.position)} is uploaded and ready.` });
+      setTrackNotice({ trackId: track.id, phase: "done", text: `${sectionTitle(track)} is uploaded and ready.` });
       if (nextMissing) {
         setActiveTrackId(nextMissing.id);
-        setMessage(`Nice. Next up: ${pageLabel(nextMissing.position)}, ${nextMissing.title}.`);
+        setMessage(`Nice. Next up: ${sectionTitle(nextMissing)} (${sectionKeyLabel(nextMissing)}).`);
         window.setTimeout(() => {
           const button = recordButtonRefs.current.get(nextMissing.id);
           button?.focus();
@@ -355,7 +552,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
         }, 0);
       } else {
         setActiveTrackId("");
-        setMessage("Every required page is ready. Submit the book whenever you’re happy with it.");
+        setMessage("Every required section is ready. Submit the book whenever you’re happy with it.");
         window.setTimeout(() => submitButtonRef.current?.focus(), 0);
       }
     } catch (error) {
@@ -364,6 +561,8 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
         phase: "error",
         text: error instanceof Error ? error.message : "The recording could not be uploaded. Retry the same file.",
       });
+    } finally {
+      uploadInFlightRef.current = false;
     }
   }
 
@@ -388,7 +587,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
         <section className={styles.intro}>
           <p>Narrator desk</p>
           <h1>Hey, {initialData.displayName}.</h1>
-          <p className={styles.muted}>Pick a book, record its pages in order, and listen back before you send anything.</p>
+          <p className={styles.muted}>Pick a book, record its Reader sections in order, and listen back before you send anything.</p>
         </section>
 
         {message && <div className={styles.notice} role="status" aria-live="polite">{message}</div>}
@@ -417,6 +616,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
                       <button
                         className={styles.assignmentSelect}
                         type="button"
+                        disabled={busy}
                         aria-current={selectedAssignment ? "true" : undefined}
                         onClick={() => chooseAssignment(assignment.id)}
                       >
@@ -434,7 +634,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
                             {canMutate && assignment.status === "offered" && (
                               <button className={styles.primary} type="button" disabled={busy} onClick={() => updateAssignment(assignment, "accept")}>Accept assignment</button>
                             )}
-                            <Link href={`/books/${assignment.bookSlug}`} target="_blank" rel="noreferrer">Open the book</Link>
+                            <Link href={`/reader?book=${encodeURIComponent(assignment.bookSlug || assignment.bookId)}`} target="_blank" rel="noreferrer">Open in Reader</Link>
                           </div>
                         </div>
                       )}
@@ -445,16 +645,16 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
             )}
           </section>
 
-          <section className={`${styles.panel} ${styles.recordingPanel}`} aria-labelledby="narrator-recording-heading">
+          <section ref={recordingPanelRef} className={`${styles.panel} ${styles.recordingPanel}`} aria-labelledby="narrator-recording-heading">
             <div className={styles.panelHeading}>
               <div>
                 <p className={styles.eyebrow}>Step 2</p>
-                <h2 id="narrator-recording-heading">Record the pages</h2>
+                <h2 id="narrator-recording-heading">Record the sections</h2>
               </div>
             </div>
 
             {!selected ? (
-              <p className={styles.empty}>Choose an assigned book to see its pages.</p>
+              <p className={styles.empty}>Choose an assigned book to see its section queue.</p>
             ) : (
               <>
                 <div className={styles.progressCard}>
@@ -478,165 +678,213 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
                     )}
                   </div>
                 ) : !selected.tracks.length ? (
-                  <p className={styles.empty}>JJ hasn’t prepared the page checklist for this book yet.</p>
+                  <p className={styles.empty}>JJ hasn’t prepared the section checklist for this book yet.</p>
                 ) : (
-                  <ol className={styles.trackList}>
-                    {[...selected.tracks].sort((a, b) => a.position - b.position).map(track => {
-                      const submission = track.latestSubmission;
-                      const ready = isSubmissionReady(submission);
-                      const active = track.id === activeTrackId;
-                      const rowNotice = trackNotice?.trackId === track.id ? trackNotice : null;
-                      const mutable = canMutate && OPEN_UPLOAD_STATUSES.has(selected.status);
-                      const listening = Boolean(submission && listeningSubmissionId === submission.id);
-                      return (
-                        <li className={styles.track} data-active={active} data-ready={ready} key={track.id}>
-                          <div className={styles.trackTopline}>
-                            <div className={styles.trackIdentity}>
-                              <span className={styles.pageNumber}>{pageLabel(track.position)}</span>
-                              <h3>{track.title}</h3>
-                              {!track.required && <span className={styles.optional}>Optional</span>}
-                            </div>
-                            <span className={styles.trackStatus} data-ready={ready}>{trackStatus(track)}</span>
+                  <div className={styles.sectionWorkspace}>
+                    <div className={styles.queueHeader}>
+                      <div>
+                        <p className={styles.eyebrow}>Section queue</p>
+                        <strong>{remainingRequired ? `${remainingRequired} required left` : "Required sections ready"}</strong>
+                      </div>
+                      <Link
+                        className={styles.readerLink}
+                        href={`/reader?book=${encodeURIComponent(selected.bookSlug || selected.bookId)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Open book in Reader
+                      </Link>
+                    </div>
+
+                    <ol className={styles.sectionQueue} aria-label={`Sections for ${selected.bookTitle}`}>
+                      {orderedTracks.map(track => {
+                        const ready = isSubmissionReady(track.latestSubmission);
+                        const current = track.id === focusedTrack?.id;
+                        return (
+                          <li key={track.id}>
+                            <button
+                              ref={element => {
+                                if (element) queueButtonRefs.current.set(track.id, element);
+                                else queueButtonRefs.current.delete(track.id);
+                              }}
+                              type="button"
+                              disabled={busy}
+                              data-active={current}
+                              data-ready={ready}
+                              aria-current={current ? "step" : undefined}
+                              onClick={() => focusTrack(track)}
+                            >
+                              <span className={styles.queueNumber}>{sectionNumber(track.position)}</span>
+                              <span className={styles.queueCopy}>
+                                <strong>{sectionTitle(track)}</strong>
+                                <code>{sectionKeyLabel(track)}</code>
+                              </span>
+                              <span className={styles.queueState}>{ready ? "Ready" : track.required ? "Needed" : "Optional"}</span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ol>
+
+                    {focusedTrack && (
+                      <article className={styles.track} data-active="true" data-ready={focusedReady}>
+                        <div className={styles.trackTopline}>
+                          <div className={styles.trackIdentity}>
+                            <span className={styles.sectionPosition}>Section {sectionNumber(focusedTrack.position)}</span>
+                            <h3>{sectionTitle(focusedTrack)}</h3>
+                            <code className={styles.sectionKey}>{sectionKeyLabel(focusedTrack)}</code>
+                            {!focusedTrack.required && <span className={styles.optional}>Optional</span>}
                           </div>
+                          <span className={styles.trackStatus} data-ready={focusedReady}>{trackStatus(focusedTrack)}</span>
+                        </div>
 
-                          {submission?.narratorFeedback && (
-                            <div className={styles.feedback}>
-                              <strong>Note from JJ</strong>
-                              <p>{submission.narratorFeedback}</p>
-                            </div>
-                          )}
-
-                          <div className={styles.trackActions}>
-                            {mutable && (
-                              <>
-                                <input
-                                  ref={element => {
-                                    if (element) fileInputRefs.current.set(track.id, element);
-                                    else fileInputRefs.current.delete(track.id);
-                                  }}
-                                  className={styles.visuallyHidden}
-                                  id={`narrator-file-${track.id}`}
-                                  type="file"
-                                  accept="audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/x-wav,audio/flac,.mp3,.m4a,.wav,.wave,.flac"
-                                  disabled={busy}
-                                  onChange={event => fileChanged(track, event)}
-                                />
-                                <button
-                                  ref={element => {
-                                    if (element) recordButtonRefs.current.set(track.id, element);
-                                    else recordButtonRefs.current.delete(track.id);
-                                  }}
-                                  className={submission ? styles.secondary : styles.primary}
-                                  type="button"
-                                  disabled={busy}
-                                  aria-label={`${submission ? "Replace" : "Add"} recording for ${pageLabel(track.position)}, ${track.title}`}
-                                  onClick={() => chooseFile(track)}
-                                >
-                                  {submission ? "Replace recording" : "Add recording"}
-                                </button>
-                              </>
-                            )}
-                            {isSubmissionListenable(submission) && submission && (
-                              <button
-                                className={styles.secondary}
-                                type="button"
-                                aria-expanded={listening}
-                                aria-controls={`listen-${submission.id}`}
-                                onClick={() => setListeningSubmissionId(current => current === submission.id ? "" : submission.id)}
-                              >
-                                {listening ? "Close player" : "Listen back"}
-                              </button>
-                            )}
+                        {focusedSubmission?.narratorFeedback && (
+                          <div className={styles.feedback}>
+                            <strong>Note from JJ</strong>
+                            <p>{focusedSubmission.narratorFeedback}</p>
                           </div>
+                        )}
 
-                          {listening && submission && (
-                            <div className={styles.listenBack} id={`listen-${submission.id}`}>
-                              <p>Private uploaded recording</p>
-                              <audio
-                                controls
-                                preload="none"
-                                src={`/api/narrator/submissions/${encodeURIComponent(submission.id)}/audio`}
-                                aria-label={`Private recording for ${pageLabel(track.position)}, ${track.title}`}
-                                onError={() => setTrackNotice({ trackId: track.id, phase: "error", text: "That recording couldn’t be loaded. Try Listen back again." })}
-                              >
-                                Your browser does not support audio playback.
-                              </audio>
-                            </div>
+                        <div className={styles.trackActions}>
+                          {isSubmissionListenable(focusedSubmission) && focusedSubmission && (
+                            <button
+                              className={styles.listenButton}
+                              type="button"
+                              aria-expanded={focusedListening}
+                              aria-controls={`listen-${focusedSubmission.id}`}
+                              onClick={() => setListeningSubmissionId(current => current === focusedSubmission.id ? "" : focusedSubmission.id)}
+                            >
+                              {focusedListening ? "Close listen-back" : "Listen back to upload"}
+                            </button>
                           )}
-
-                          {active && file && (
-                            <div className={styles.uploadComposer}>
-                              <div className={styles.fileSummary}>
-                                <div>
-                                  <strong>{file.name}</strong>
-                                  <span>{displayFileSize(file.size)}</span>
-                                </div>
-                                <button type="button" disabled={busy} onClick={() => {
-                                  clearSelectedFile(track.id);
-                                  setTrackNotice(null);
-                                  recordButtonRefs.current.get(track.id)?.focus();
-                                }}>Choose a different file</button>
-                              </div>
-                              {previewUrl && (
-                                <div className={styles.localPreview}>
-                                  <p>Listen before uploading</p>
-                                  <audio
-                                    controls
-                                    preload="metadata"
-                                    src={previewUrl}
-                                    aria-label={`Preview selected recording for ${pageLabel(track.position)}, ${track.title}`}
-                                  >
-                                    Your browser does not support audio playback.
-                                  </audio>
-                                </div>
-                              )}
-                              <label className={styles.noteField}>
-                                Note for JJ <span>(optional)</span>
-                                <textarea
-                                  value={note}
-                                  disabled={busy}
-                                  maxLength={1000}
-                                  placeholder="Anything JJ should know about this take?"
-                                  onChange={event => {
-                                    setNote(event.target.value);
-                                    uploadAttemptRef.current = null;
-                                  }}
-                                />
-                              </label>
+                          {focusedMutable && (
+                            <>
+                              <input
+                                ref={element => {
+                                  if (element) fileInputRefs.current.set(focusedTrack.id, element);
+                                  else fileInputRefs.current.delete(focusedTrack.id);
+                                }}
+                                className={styles.visuallyHidden}
+                                id={`narrator-file-${focusedTrack.id}`}
+                                type="file"
+                                accept="audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/x-wav,audio/flac,.mp3,.m4a,.wav,.wave,.flac"
+                                disabled={busy}
+                                onChange={event => fileChanged(focusedTrack, event)}
+                              />
                               <button
-                                ref={uploadButtonRef}
-                                className={styles.primary}
+                                ref={element => {
+                                  if (element) recordButtonRefs.current.set(focusedTrack.id, element);
+                                  else recordButtonRefs.current.delete(focusedTrack.id);
+                                }}
+                                className={focusedSubmission ? styles.secondary : styles.primary}
                                 type="button"
                                 disabled={busy}
-                                onClick={() => uploadTrack(selected, track)}
+                                aria-label={`${focusedSubmission ? "Replace" : "Add"} recording for ${sectionTitle(focusedTrack)}, ${sectionKeyLabel(focusedTrack)}`}
+                                onClick={() => chooseFile(focusedTrack)}
                               >
-                                {uploadBusy ? "Uploading…" : `Upload ${pageLabel(track.position)}`}
+                                {focusedSubmission ? "Replace recording" : "Add recording"}
                               </button>
-                              <p className={styles.fileHelp}>Private upload. MP3, M4A, WAV, or FLAC; 50 MB maximum. Keep this page open until it finishes.</p>
-                            </div>
+                            </>
                           )}
+                        </div>
 
-                          {rowNotice && (
-                            <div
-                              className={styles.trackNotice}
-                              data-phase={rowNotice.phase}
-                              role={rowNotice.phase === "error" ? "alert" : "status"}
-                              aria-live="polite"
+                        {focusedListening && focusedSubmission && (
+                          <div className={styles.listenBack} id={`listen-${focusedSubmission.id}`}>
+                            <p>Private uploaded recording · {sectionKeyLabel(focusedTrack)}</p>
+                            <audio
+                              controls
+                              preload="none"
+                              src={`/api/narrator/submissions/${encodeURIComponent(focusedSubmission.id)}/audio`}
+                              aria-label={`Private recording for ${sectionTitle(focusedTrack)}, ${sectionKeyLabel(focusedTrack)}`}
+                              onError={() => setTrackNotice({ trackId: focusedTrack.id, phase: "error", text: "That recording couldn’t be loaded. Close Listen back, then try again." })}
                             >
-                              {uploadBusy && <span className={styles.activity} aria-hidden="true" />}
-                              <span>{rowNotice.text}</span>
+                              Your browser does not support audio playback.
+                            </audio>
+                          </div>
+                        )}
+
+                        {activeTrackId === focusedTrack.id && file && (
+                          <div className={styles.uploadComposer}>
+                            <div className={styles.fileSummary}>
+                              <div>
+                                <strong>{file.name}</strong>
+                                <span>{displayFileSize(file.size)}</span>
+                              </div>
+                              <button type="button" disabled={busy} onClick={() => {
+                                clearSelectedFile(focusedTrack.id);
+                                setTrackNotice(null);
+                                recordButtonRefs.current.get(focusedTrack.id)?.focus();
+                              }}>Choose a different file</button>
                             </div>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ol>
+                            {previewUrl && (
+                              <div className={styles.localPreview}>
+                                <p>Listen before uploading</p>
+                                <audio
+                                  controls
+                                  preload="metadata"
+                                  src={previewUrl}
+                                  aria-label={`Preview selected recording for ${sectionTitle(focusedTrack)}, ${sectionKeyLabel(focusedTrack)}`}
+                                >
+                                  Your browser does not support audio playback.
+                                </audio>
+                              </div>
+                            )}
+                            <label className={styles.noteField}>
+                              Note for JJ <span>(optional)</span>
+                              <textarea
+                                value={note}
+                                disabled={busy}
+                                maxLength={1000}
+                                placeholder="Anything JJ should know about this take?"
+                                onChange={event => setNote(event.target.value)}
+                              />
+                            </label>
+                            <button
+                              ref={uploadButtonRef}
+                              className={styles.primary}
+                              type="button"
+                              disabled={busy}
+                              onClick={() => uploadTrack(selected, focusedTrack)}
+                            >
+                              {uploadBusy ? "Uploading…" : focusedNotice?.phase === "error" ? "Retry upload" : "Upload this section"}
+                            </button>
+                            <p className={styles.fileHelp}>Private upload. MP3, M4A, WAV, or FLAC; 50 MB maximum. This is not resumable yet. If the connection drops, reselect the same file and retry; the saved attempt prevents a duplicate submission.</p>
+                          </div>
+                        )}
+
+                        {focusedNotice && (
+                          <div
+                            className={styles.trackNotice}
+                            data-phase={focusedNotice.phase}
+                            role={focusedNotice.phase === "error" ? "alert" : "status"}
+                            aria-live="polite"
+                          >
+                            {uploadBusy && <span className={styles.activity} aria-hidden="true" />}
+                            <span>{focusedNotice.text}</span>
+                            {focusedNotice.phase === "uploading" && Number(focusedNotice.total) > 0 && (
+                              <span className={styles.uploadProgress}>
+                                <progress
+                                  max={focusedNotice.total}
+                                  value={focusedNotice.loaded || 0}
+                                  aria-label={`Uploading ${Math.round(((focusedNotice.loaded || 0) / Number(focusedNotice.total)) * 100)} percent`}
+                                />
+                                <span className={styles.uploadBytes} aria-hidden="true">
+                                  {displayTransferSize(focusedNotice.loaded || 0)} / {displayFileSize(Number(focusedNotice.total))}
+                                </span>
+                                <strong aria-hidden="true">{Math.round(((focusedNotice.loaded || 0) / Number(focusedNotice.total)) * 100)}%</strong>
+                              </span>
+                            )}
+                          </div>
+                        )}
+                      </article>
+                    )}
+                  </div>
                 )}
 
                 <div className={styles.submitDock}>
                   <div>
                     <strong>{selectedProgress.ready} of {selectedProgress.total} required ready</strong>
-                    <span>{canSubmitSelected ? "Everything is ready for JJ." : "Finish every required page to submit."}</span>
+                    <span>{canSubmitSelected ? "Everything is ready for JJ." : "Finish every required section to submit."}</span>
                   </div>
                   {canMutate && OPEN_UPLOAD_STATUSES.has(selected.status) ? (
                     <button

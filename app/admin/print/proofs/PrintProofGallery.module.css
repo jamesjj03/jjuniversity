@@ -2,57 +2,42 @@
   padding-bottom: 120px;
 }
 
-.stopBanner {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  align-items: center;
-  gap: 15px;
+.reviewBanner {
   margin-bottom: 26px;
-  padding: 17px 19px;
-  border: 2px solid #ff8b82;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(126, 23, 23, 0.46), rgba(45, 10, 10, 0.76)), #190a0a;
-  color: #fff4ef;
+  padding: 14px 17px;
+  border: 1px solid rgba(215, 183, 101, 0.34);
+  border-radius: 14px;
+  background: rgba(215, 183, 101, 0.065);
 }
 
-.stopBanner > span {
-  width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  border: 2px solid currentColor;
-  border-radius: 999px;
-  font-size: 1.35rem;
-  font-weight: 900;
-}
-
-.stopBanner p,
-.stopTitle,
-.stopBanner strong {
+.reviewBanner p,
+.reviewTitle,
+.reviewBanner span {
   margin: 0;
 }
 
-.stopBanner p {
-  color: #ffc3bb;
+.reviewBanner p {
+  color: #d7b765;
   font-size: 0.68rem;
   font-weight: 820;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
-.stopTitle {
+.reviewTitle {
   margin-top: 2px;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.55rem, 4vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1;
+  color: var(--workshop-cream);
+  font-size: 1.08rem;
+  font-weight: 650;
+  line-height: 1.2;
 }
 
-.stopBanner strong {
+.reviewBanner span {
   display: block;
-  margin-top: 6px;
-  color: #ffd8d2;
-  font-size: 0.8rem;
+  margin-top: 4px;
+  color: var(--workshop-muted);
+  font-size: 0.76rem;
   line-height: 1.45;
 }
 
@@ -291,25 +276,9 @@
     padding-bottom: 92px;
   }
 
-  .stopBanner {
-    grid-template-columns: 40px minmax(0, 1fr);
-    gap: 11px;
+  .reviewBanner {
     padding: 14px;
     border-radius: 13px;
-  }
-
-  .stopBanner > span {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
-  }
-
-  .stopTitle {
-    font-size: 1.45rem;
-  }
-
-  .stopBanner strong {
-    font-size: 0.72rem;
   }
 
   .jumpNav {

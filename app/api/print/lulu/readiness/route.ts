@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getLuluConfigStatus, getLuluReadiness } from "@/lib/lulu";
+import { getPrintCheckoutReadiness } from "@/lib/printCheckoutSafety";
 import { getPrintProduct, PRINT_PRODUCTS } from "@/lib/publishing";
 
 export const runtime = "nodejs";
@@ -21,6 +22,7 @@ export async function GET(request: Request) {
       missingConfig: config.missing,
       product: summarizeProduct(product),
       readiness,
+      checkoutReadiness: getPrintCheckoutReadiness(product),
     });
   }
 
@@ -30,6 +32,7 @@ export async function GET(request: Request) {
     products: PRINT_PRODUCTS.map(product => ({
       ...summarizeProduct(product),
       readiness: getLuluReadiness(product),
+      checkoutReadiness: getPrintCheckoutReadiness(product),
     })),
   });
 }

@@ -30,7 +30,14 @@ function isProtectedTacosPreviewPath(pathname: string) {
 function cleanAdminPath(value: string | undefined) {
   if (!value) return "/admin";
   const path = value.trim().replace(/^\/+/, "").replace(/\/+$/, "");
-  if (!path || path === "api" || path.startsWith("api/")) return "/admin";
+  const firstSegment = path.split("/")[0].toLowerCase();
+  if (
+    !path
+    || !/^[a-z0-9/_-]+$/i.test(path)
+    || path === "api"
+    || path.startsWith("api/")
+    || firstSegment === "_next"
+  ) return "/admin";
   return `/${path}`;
 }
 
@@ -39,6 +46,10 @@ function notFound() {
     status: 404,
     headers: {
       "Cache-Control": "no-store",
+      "Content-Security-Policy": "frame-ancestors 'none'",
+      "Cross-Origin-Resource-Policy": "same-origin",
+      "Referrer-Policy": "no-referrer",
+      "X-Frame-Options": "DENY",
       "X-Robots-Tag": "noindex, nofollow",
     },
   });
@@ -50,9 +61,57 @@ function unauthorized() {
     headers: {
       "WWW-Authenticate": 'Basic realm="JJ University Admin", charset="UTF-8"',
       "Cache-Control": "no-store",
+      "Content-Security-Policy": "frame-ancestors 'none'",
+      "Cross-Origin-Resource-Policy": "same-origin",
+      "Referrer-Policy": "no-referrer",
+      "X-Frame-Options": "DENY",
       "X-Robots-Tag": "noindex, nofollow",
     },
   });
+}
+
+function forbidden() {
+  return new NextResponse("Forbidden.", {
+    status: 403,
+    headers: {
+      "Cache-Control": "no-store",
+      "Content-Security-Policy": "frame-ancestors 'none'",
+      "Cross-Origin-Resource-Policy": "same-origin",
+      "Referrer-Policy": "no-referrer",
+      "X-Frame-Options": "DENY",
+      "X-Robots-Tag": "noindex, nofollow",
+    },
+  });
+}
+
+function isUnsafeMethod(method: string) {
+  return method !== "GET" && method !== "HEAD" && method !== "OPTIONS";
+}
+
+function isInvalidAdminMutationOrigin(request: NextRequest) {
+  if (!isUnsafeMethod(request.method)) return false;
+  if (request.headers.get("sec-fetch-site") === "cross-site") return true;
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  try {
+    const forwardedHost = (request.headers.get("x-forwarded-host") || request.headers.get("host") || "").split(",")[0].trim();
+    const forwardedProto = (request.headers.get("x-forwarded-proto") || request.nextUrl.protocol.replace(/:$/, "")).split(",")[0].trim();
+    if (!forwardedHost || (forwardedProto !== "http" && forwardedProto !== "https")) return true;
+    const requestOrigin = new URL(`${forwardedProto}://${forwardedHost}`).origin;
+    return new URL(origin).origin !== requestOrigin;
+  } catch {
+    return true;
+  }
+}
+
+function protectResponse(response: NextResponse) {
+  response.headers.set("Cache-Control", "private, no-store, max-age=0");
+  response.headers.set("Content-Security-Policy", "frame-ancestors 'none'");
+  response.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+  response.headers.set("Referrer-Policy", "no-referrer");
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive, nosnippet");
+  return response;
 }
 
 export function proxy(request: NextRequest) {
@@ -64,12 +123,10 @@ export function proxy(request: NextRequest) {
 
   if (!isAdminPath(request.nextUrl.pathname) && !isCustomAdminPath && !isProtectedAudioPreview) return NextResponse.next();
   if (adminPath !== "/admin" && isDefaultAdminPath) return notFound();
+  if (isAdminApiPath && isInvalidAdminMutationOrigin(request)) return forbidden();
 
   const password = process.env.ADMIN_PASSWORD;
-  if (!password) {
-    if (process.env.NODE_ENV === "development") return NextResponse.next();
-    return notFound();
-  }
+  if (!password) return notFound();
 
   const auth = request.headers.get("authorization");
   if (!auth?.startsWith("Basic ")) return unauthorized();
@@ -85,13 +142,10 @@ export function proxy(request: NextRequest) {
   if (isCustomAdminPath && !isAdminApiPath && adminPath !== "/admin") {
     const url = request.nextUrl.clone();
     url.pathname = url.pathname.replace(adminPath, "/admin");
-    const response = NextResponse.rewrite(url);
-    response.headers.set("Cache-Control", "no-store");
-    response.headers.set("X-Robots-Tag", "noindex, nofollow");
-    return response;
+    return protectResponse(NextResponse.rewrite(url));
   }
 
-  return NextResponse.next();
+  return protectResponse(NextResponse.next());
 }
 
 export const config = {

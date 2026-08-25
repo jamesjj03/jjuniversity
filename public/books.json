@@ -8721,7 +8721,7 @@
     "id": "pantheon2",
     "title": "Pantheon II: The Lost History Beneath Your Feet",
     "slug": "pantheon-ii-the-lost-history-beneath-your-feet",
-    "series": "The Big Picture",
+    "series": "",
     "coverFile": "Pantheon2.jpg",
     "bookFile": "Pantheon2.epub",
     "tags": [
@@ -8730,7 +8730,7 @@
       "Mythology & Ancient Beliefs",
       "Science History"
     ],
-    "status": "ready",
+    "status": "hidden",
     "description": "Alternative history exploring phantom time theory, the lost Tartarian empire, mud floods, and cataclysmic impacts that supposedly rewrote civilization's timeline.",
     "aiTagged": true,
     "confidence": {
@@ -8749,8 +8749,8 @@
     "chapterCount": 20,
     "hiddenCategories": [],
     "hiddenShelves": [],
-    "visibility": "main",
-    "archive": false,
+    "visibility": "archive",
+    "archive": true,
     "category": "",
     "archiveCategory": "",
     "subtitle": "",

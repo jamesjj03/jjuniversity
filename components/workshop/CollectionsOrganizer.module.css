@@ -490,7 +490,7 @@
   color: var(--workshop-cream);
 }
 
-.mobileCollectionPicker {
+.mobileCollectionRail {
   display: none;
 }
 
@@ -546,6 +546,10 @@
   font-size: 16px;
 }
 
+.mobileCollectionPicker {
+  display: none;
+}
+
 .directoryList {
   display: grid;
   gap: 5px;
@@ -557,6 +561,12 @@
   min-height: 44px;
   padding: 8px 10px;
   font-size: 0.73rem;
+}
+
+.directoryList .dropDirectoryItem {
+  border-color: #e3c36f;
+  background: rgba(215, 183, 101, 0.2);
+  box-shadow: 0 0 0 3px rgba(215, 183, 101, 0.12);
 }
 
 .collectionDetail {
@@ -643,6 +653,143 @@
   text-transform: uppercase;
 }
 
+.blitzLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.orderPanel,
+.catalogPool {
+  min-width: 0;
+}
+
+.orderPanel .memberList,
+.poolList {
+  max-height: min(68vh, 760px);
+  padding: 2px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.catalogPool {
+  position: sticky;
+  top: 84px;
+  max-height: calc(100vh - 112px);
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 13px;
+  background: rgba(8, 11, 8, 0.38);
+}
+
+.catalogPoolHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.catalogPoolHeader h4 {
+  margin: 0;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 560;
+  letter-spacing: -0.025em;
+}
+
+.poolMode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  background: #0d110d;
+}
+
+.poolMode button {
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--workshop-muted);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 740;
+}
+
+.poolMode .activePoolMode {
+  background: rgba(215, 183, 101, 0.16);
+  color: var(--workshop-cream);
+}
+
+.catalogSearch {
+  display: grid;
+  gap: 6px;
+  color: var(--workshop-muted);
+  font-size: 0.7rem;
+  font-weight: 730;
+}
+
+.catalogSearch input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  background: #0d110d;
+  color: var(--workshop-cream);
+  font-size: 16px;
+}
+
+.catalogHelp {
+  margin: 0;
+  color: var(--workshop-muted);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.poolList {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+
+.poolBook {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 44px 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px;
+  padding: 6px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.poolBook .coverFrame {
+  width: 44px;
+}
+
+.poolBook > button:last-child {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 7px 9px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 7px;
+  background: var(--workshop-panel-raised);
+  color: var(--workshop-cream);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 740;
+}
+
 .memberList {
   display: grid;
   gap: 7px;
@@ -654,7 +801,7 @@
 .memberRow {
   min-width: 0;
   display: grid;
-  grid-template-columns: 30px 58px minmax(0, 1fr) auto;
+  grid-template-columns: 44px 58px minmax(0, 1fr) auto;
   align-items: center;
   gap: 11px;
   padding: 9px;
@@ -665,7 +812,112 @@
 }
 
 .uncollectedMember {
-  grid-template-columns: 58px minmax(0, 1fr) auto;
+  grid-template-columns: 44px 58px minmax(0, 1fr) auto;
+}
+
+.dragHandle {
+  width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-content: center;
+  gap: 0;
+  padding: 3px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--workshop-gold);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.dragHandle span {
+  font-size: 1.15rem;
+  line-height: 0.9;
+}
+
+.dragHandle small {
+  color: var(--workshop-muted);
+  font-size: 0.63rem;
+  line-height: 1;
+}
+
+.draggingBook {
+  opacity: 0.46;
+}
+
+.dropBefore,
+.dropAfter {
+  position: relative;
+  border-color: rgba(215, 183, 101, 0.72);
+}
+
+.dropBefore::before,
+.dropAfter::after {
+  position: absolute;
+  right: 6px;
+  left: 6px;
+  height: 3px;
+  border-radius: 999px;
+  background: #e3c36f;
+  content: "";
+}
+
+.dropBefore::before {
+  top: -6px;
+}
+
+.dropAfter::after {
+  bottom: -6px;
+}
+
+.endDropZone {
+  min-height: 44px;
+  display: grid;
+  margin-top: 7px;
+  place-items: center;
+  border: 1px dashed var(--workshop-rule);
+  border-radius: 9px;
+  color: var(--workshop-muted);
+  font-size: 0.69rem;
+}
+
+.activeEndDropZone {
+  border-color: #e3c36f;
+  background: rgba(215, 183, 101, 0.11);
+  color: var(--workshop-cream);
+}
+
+.pointerDragGhost {
+  position: fixed;
+  z-index: 200;
+  max-width: min(280px, 72vw);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(215, 183, 101, 0.75);
+  border-radius: 10px;
+  background: #171c17;
+  color: var(--workshop-cream);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.48);
+  pointer-events: none;
+  transform: translate(14px, 14px);
+}
+
+.pointerDragGhost span {
+  color: var(--workshop-gold);
+}
+
+.pointerDragGhost strong {
+  overflow: hidden;
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .focusedMember {
@@ -1197,6 +1449,15 @@
   .savePanel {
     position: static;
   }
+
+  .blitzLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogPool {
+    position: static;
+    max-height: none;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1312,6 +1573,43 @@
     background: var(--workshop-panel);
   }
 
+  .mobileCollectionRail {
+    display: flex;
+    gap: 7px;
+    margin: -2px -12px 0;
+    padding: 2px 12px 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+  }
+
+  .mobileCollectionRail button {
+    min-width: max-content;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--workshop-rule);
+    border-radius: 999px;
+    background: var(--workshop-panel);
+    color: var(--workshop-muted);
+    cursor: pointer;
+    font-size: 0.73rem;
+    font-weight: 730;
+  }
+
+  .mobileCollectionRail button strong {
+    color: var(--workshop-cream);
+  }
+
+  .mobileCollectionRail .activeCollectionChip,
+  .mobileCollectionRail .dropCollectionChip {
+    border-color: rgba(215, 183, 101, 0.72);
+    background: rgba(215, 183, 101, 0.14);
+    color: var(--workshop-cream);
+  }
+
   .collectionLayout {
     grid-template-columns: 1fr;
   }
@@ -1334,13 +1632,13 @@
   }
 
   .memberRow {
-    grid-template-columns: 28px 56px minmax(0, 1fr);
+    grid-template-columns: 44px 56px minmax(0, 1fr);
     gap: 9px;
     padding: 9px;
   }
 
   .uncollectedMember {
-    grid-template-columns: 56px minmax(0, 1fr);
+    grid-template-columns: 44px 56px minmax(0, 1fr);
   }
 
   .memberRow .coverFrame {
@@ -1360,6 +1658,25 @@
   .orderActions button,
   .singleAction button {
     width: 100%;
+  }
+
+  .orderPanel .memberList,
+  .poolList {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .catalogPoolHeader {
+    display: grid;
+    align-items: stretch;
+  }
+
+  .poolBook {
+    grid-template-columns: 44px 48px minmax(0, 1fr) auto;
+  }
+
+  .poolBook .coverFrame {
+    width: 48px;
   }
 
   .orderCompare {

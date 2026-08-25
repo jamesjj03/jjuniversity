@@ -24,8 +24,8 @@ export type PrintProofPreviewGroup = {
 };
 
 const COVER_DIRECTIONS_SOURCE = {
-  label: "JJ University 101 cover-directions proof",
-  sha256: "2a992a3d09a4fb9d926d23165e6be5008564b11ae05236e5d612dc67154a3cdb",
+  label: "101: How We Figured It Out cover-directions proof v2",
+  sha256: "87fd73afb387ca0afa09dda5b37b64d08a68fe6a59f70a77556d7639767da32e",
 };
 
 const VOLUME_ONE_INTERIOR_SOURCE = {
@@ -75,11 +75,11 @@ export const PRINT_PROOF_PREVIEW_GROUPS: PrintProofPreviewGroup[] = [
   {
     id: "covers",
     title: "Cover directions and real wraps",
-    summary: "Three design boards plus the four package-size System wraps. All are candidates, and none is approved.",
+    summary: "Three corrected design boards plus four older package-size System wraps retained only for construction reference. No direction is approved.",
     assets: [
-      preview("cover-system", "cover-board-system.png", "Direction 1 - System", "Dark field, gold rule, and subject geometry.", COVER_DIRECTIONS_SOURCE, 1, 1920, 1080),
-      preview("cover-index", "cover-board-index.png", "Direction 2 - Index", "Cream field, serial tab, and oversized type.", COVER_DIRECTIONS_SOURCE, 2, 1920, 1080),
-      preview("cover-split", "cover-board-split.png", "Direction 3 - Split", "Two-tone field designed to make both volumes read as a set.", COVER_DIRECTIONS_SOURCE, 3, 1920, 1080),
+      preview("cover-archive", "cover-board-archive.png", "Direction 1 - Archive", "Illustrated reference plates under exact typography, with 101 as the line and each volume carrying its own title.", COVER_DIRECTIONS_SOURCE, 1, 1920, 1080),
+      preview("cover-library", "cover-board-library.png", "Direction 2 - Library", "A clothbound encyclopedia system designed to keep future Collection volumes coherent on a shelf.", COVER_DIRECTIONS_SOURCE, 2, 1920, 1080),
+      preview("cover-field-index", "cover-board-field-index.png", "Direction 3 - Field Index", "A cleaner evolution of Index with the corrected 101: How We Figured It Out hierarchy.", COVER_DIRECTIONS_SOURCE, 3, 1920, 1080),
       preview(
         "v1-paperback-wrap",
         "v1-paperback-wrap.png",

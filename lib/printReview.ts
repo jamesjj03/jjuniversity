@@ -14,7 +14,7 @@ import type {
   PrintReviewSurface,
 } from "@/lib/printReviewTypes";
 
-const CONTRACT_VERSION = "print-review-contract-v1";
+const CONTRACT_VERSION = "print-review-contract-v2";
 const repoRoot = process.cwd();
 
 type RawPrintProduct = {
@@ -473,19 +473,20 @@ export function readPrintReviewSurface(): PrintReviewSurface {
       number: 2,
       title: "Pick a cover direction",
       eyebrow: "Cover",
-      summary: "System, Index, and Split are the three recorded directions. Only System currently has package-wrap metadata.",
+      summary: "Archive, Library, and Field Index replace the incorrectly branded first board. The older System wraps remain construction references only.",
       why: "Cover direction must be chosen before final wrap generation, barcode placement, validation, and a physical proof.",
-      recommended: "System is the lowest-risk continuation of the current JJU brand; choose it only if it feels right when James sees the real wrap proof.",
+      recommended: "Compare Archive and Library first: Archive is more distinctive; Library is the strongest repeatable shelf system. Pick neither unless one actually feels right.",
       evidence: [
-        "System: dark field, gold rule, subject geometry.",
-        "Index: cream field, serial tab, oversized type.",
-        "Split: paired two-tone system for the two-volume object.",
+        "Archive: subject-specific reference plates beneath exact deterministic typography.",
+        "Library: clothbound encyclopedia styling with a repeatable title label and spine logic.",
+        "Field Index: a modern catalog system descended from the strongest part of the previous Index direction.",
+        "All three use 101 as the line, How We Figured It Out as supporting language, and the actual volume title as the primary title.",
         "No cover direction is recorded as approved.",
       ],
       options: [
-        { id: "system", label: "System", help: "Continue the website brand and generate fresh exact-size wraps after the interior is sealed." },
-        { id: "index", label: "Index", help: "Develop the cream, academic direction into real package wraps before approval." },
-        { id: "split", label: "Split", help: "Develop the paired two-volume direction into real package wraps before approval." },
+        { id: "archive", label: "Archive", help: "Develop the illustrated reference-plate system into exact paperback and casewrap proofs." },
+        { id: "library", label: "Library", help: "Develop the clothbound encyclopedia system around shelf consistency and future volumes." },
+        { id: "field-index", label: "Field Index", help: "Develop the corrected academic index system into exact package wraps." },
         { id: "defer", label: "I need to see better proofs", help: "Do not infer a cover choice from the existing concept metadata." },
       ],
     },

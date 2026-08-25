@@ -4,7 +4,7 @@ import SiteV2ContinueLink from "@/components/site-v2/SiteV2ContinueLink";
 import SiteV2Cover from "@/components/site-v2/SiteV2Cover";
 import styles from "@/components/site-v2/SiteV2.module.css";
 import { coverFallbackSrc } from "@/lib/cover";
-import { getPublicBooksLive } from "@/lib/publishing";
+import { getCollectionsLive, getPublicBooksLive } from "@/lib/publishing";
 import { siteV2CoverSrc } from "@/lib/siteV2";
 import { jsonLd, organizationJsonLd, pageMetadata, websiteJsonLd } from "@/lib/seo";
 import siteData from "@/public/site.json";
@@ -26,12 +26,25 @@ type HomeCard = {
 };
 
 export default async function SiteV2HomePage() {
-  const books = await getPublicBooksLive();
+  const [books, collections] = await Promise.all([getPublicBooksLive(), getCollectionsLive()]);
   const available = books.filter(book => book.status === "ready" && book.visibility !== "archive");
+  const availableBookIds = new Set(available.map(book => book.id));
   const byId = new Map(available.map(book => [book.id, book]));
   const homeCards = ((siteData as { homeCards?: HomeCard[] }).homeCards || [])
     .map(item => ({ item, book: byId.get(item.id) }))
     .filter((entry): entry is { item: HomeCard; book: NonNullable<typeof entry.book> } => Boolean(entry.book));
+  const featuredCollectionIds = [
+    "101-the-core-courses",
+    "world-religions",
+    "eyes-everywhere",
+    "the-mapmakers",
+    "the-big-picture",
+    "red-white-and-bruised",
+  ];
+  const collectionById = new Map(collections.map(collection => [collection.id, collection]));
+  const featuredCollections = featuredCollectionIds
+    .map(id => collectionById.get(id))
+    .filter((collection): collection is NonNullable<typeof collection> => Boolean(collection));
 
   return (
     <>
@@ -69,6 +82,25 @@ export default async function SiteV2HomePage() {
               </Link>
             ))}
           </div>
+        </section>
+      )}
+
+      {!!featuredCollections.length && (
+        <section className={styles.shelvesSection}>
+          <div className={styles.sectionHeadingCentered}>
+            <h2>Books that belong together</h2>
+            <p>Collections turn the library into connected reading paths. Start with one idea and keep following it.</p>
+          </div>
+          <div className={styles.shelfGrid}>
+            {featuredCollections.map(collection => (
+              <Link href={`/books?collection=${encodeURIComponent(collection.slug)}&reset=1`} key={collection.id}>
+                <span>{collection.bookIds.filter(id => availableBookIds.has(id)).length} books</span>
+                <strong>{collection.title}</strong>
+                <p>{collection.description}</p>
+              </Link>
+            ))}
+          </div>
+          <Link className={styles.centerTextLink} href="/books">Browse every Collection →</Link>
         </section>
       )}
     </>

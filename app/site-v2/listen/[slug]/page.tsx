@@ -66,13 +66,13 @@ export default async function SiteV2ListenPage({ params }: Props) {
           <h1>{book.title}</h1>
           <p className={audioStyles.narrator}>Narrated by {edition.narratorName}</p>
           {description && showDescription && <p className={audioStyles.description}>{description}</p>}
-          <AudioEditionPlayer
-            edition={playerEdition}
-            bookSlug={book.slug}
-            candidatePreviewKey={candidatePreviewKey}
-          />
         </div>
       </section>
+      <AudioEditionPlayer
+        edition={playerEdition}
+        bookSlug={book.slug}
+        candidatePreviewKey={candidatePreviewKey}
+      />
     </article>
   );
 }

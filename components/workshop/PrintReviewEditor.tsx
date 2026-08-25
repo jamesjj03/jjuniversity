@@ -286,13 +286,12 @@ export default function PrintReviewEditor({ surface }: { surface: PrintReviewSur
 
   return (
     <main className={`${coreStyles.page} ${styles.page}`}>
-      <section className={styles.stopBanner} role="alert" aria-labelledby="print-stop-title">
-        <span className={styles.stopMark} aria-hidden="true">!</span>
+      <section className={styles.printStatus} aria-labelledby="print-stop-title">
         <div>
-          <p>Permanent production gate</p>
-          <h1 id="print-stop-title">NOT FOR SALE</h1>
-          <strong>No approved release · no order placed in the available record · no order control on this page</strong>
+          <p>Current state</p>
+          <h1 id="print-stop-title">Proof planning</h1>
         </div>
+        <strong>Checkout stays locked until one exact physical package and its delivered cost are approved.</strong>
       </section>
 
       <header className={coreStyles.pageHeader}>
@@ -300,7 +299,7 @@ export default function PrintReviewEditor({ surface }: { surface: PrintReviewSur
           <p className={coreStyles.eyebrow}>JJU Workshop · Print</p>
           <h1>Look at every decision that still needs you.</h1>
           <p className={coreStyles.intro}>
-            This is a review desk, not a production console. It compares the conflicting print evidence, keeps your choices on this device, and cannot upload files, call Lulu, charge a card, place an order, or enable a sale.
+            Compare the real proof evidence, choose the physical system, and keep the decisions together. Your draft stays on this device until the final package is ready to build.
           </p>
         </div>
         <div className={styles.snapshotStamp}>
@@ -310,6 +309,53 @@ export default function PrintReviewEditor({ surface }: { surface: PrintReviewSur
           <GuardedAdminLink className={coreStyles.primaryButton} href="/admin/print/proofs">Look at actual proofs</GuardedAdminLink>
         </div>
       </header>
+
+      <section className={styles.decisionGuide} aria-labelledby="print-guide-title">
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={coreStyles.eyebrow}>Recommended starting system</p>
+            <h2 id="print-guide-title">Make the paperback the baseline.</h2>
+            <p>It is the simplest way to lock the interior, spine, cover system, and physical reading feel. Build the matching casewrap only after that proof is right.</p>
+          </div>
+          <span className={styles.recommendedBadge}>Best first move</span>
+        </div>
+        <div className={styles.guideGrid}>
+          <article>
+            <span>Object</span>
+            <h3>6 × 9 US Trade</h3>
+            <p>Black-and-white interior, 60# cream paper, matte cover. Keep 7 × 10 as a later textbook comparison; 8.5 × 11 is too large for these prose-heavy volumes.</p>
+          </article>
+          <article>
+            <span>Bindings</span>
+            <h3>Paperback, then casewrap</h3>
+            <p>Perfect-bound paperback is the economical proof and distribution edition. Casewrap becomes the premium shelf edition after the paperback package is approved.</p>
+          </article>
+          <article>
+            <span>Working price</span>
+            <h3>$39.99 / $49.99</h3>
+            <p>Start discussion at $39.99 paperback and $49.99 casewrap. Use $54.99 casewrap only if JJ University absorbs delivery. Final checkout must use a fresh destination-specific quote.</p>
+          </article>
+          <article>
+            <span>ISBN and barcode</span>
+            <h3>Proof first, identify second</h3>
+            <p>Keep the first proof ISBN-neutral. For global distribution, use owned ISBNs so JJ University remains the publisher; paperback and casewrap each need their own. Add Lulu&apos;s supplied barcode to the exact final wrap.</p>
+          </article>
+        </div>
+        <details className={styles.guideDetails}>
+          <summary>Costs, margins, identifiers, and distribution</summary>
+          <div>
+            <p><strong>Existing manufacturing baselines:</strong> 354 pages cost about $10.84 paperback or $19.53 casewrap; 314 pages cost about $9.84 or $18.53. Shipping, fulfillment, and tax are extra and change by destination.</p>
+            <p><strong>Owned ISBNs:</strong> Bowker currently lists 10 for $295 and 100 for $575. A 100-pack is the sensible scale only if you decide to distribute multiple volumes and formats globally.</p>
+            <p><strong>Distribution:</strong> globally distribute the paperback first. Keep casewrap primarily direct because Lulu&apos;s Amazon channel excludes Lulu hardcovers.</p>
+            <nav aria-label="Official print references">
+              <a href="https://www.lulu.com/print-api/products" target="_blank" rel="noreferrer">Lulu formats</a>
+              <a href="https://help.lulu.com/en/support/solutions/articles/64000255456-global-distribution-the-basics" target="_blank" rel="noreferrer">Global distribution</a>
+              <a href="https://help.lulu.com/en/support/solutions/articles/64000255461-lulu-isbn-agreement" target="_blank" rel="noreferrer">Lulu ISBN terms</a>
+              <a href="https://www.myidentifiers.com/identify-protect-your-book/isbn/buy-isbn" target="_blank" rel="noreferrer">Bowker ISBN pricing</a>
+            </nav>
+          </div>
+        </details>
+      </section>
 
       <section className={styles.releaseBlocker} aria-labelledby="release-blocker-title">
         <div className={styles.sectionHeading}>

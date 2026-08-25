@@ -20,6 +20,10 @@ const manifestPath = resolve(root, "public", "book-content", "manifest.json");
 const toolsPath = resolve(root, "scripts", "print-proof-pdf-tools.py");
 const generatorPath = resolve(root, "scripts", "generate-101-print-proof.mjs");
 const disclaimerModulePath = resolve(root, "scripts", "print-disclaimer-system.mjs");
+const coverArtPaths = {
+  "Volume I": resolve(root, "private", "print-cover-art", "101-natural-world-archive-v1.png"),
+  "Volume II": resolve(root, "private", "print-cover-art", "101-human-world-archive-v1.png"),
+};
 const legalProofsOnly = process.argv.includes("--legal-proofs-only");
 const books = readJson(booksPath).map(normalizeBook);
 const products = readJson(productPath).filter(item => item.slug === "101-volume-1" || item.slug === "101-volume-2");
@@ -46,7 +50,7 @@ const PRINT_DESCRIPTIONS = {
 
 const PRODUCT_METADATA = {
   "101-volume-1": {
-    series: "JJ University 101",
+    series: "101: How We Figured It Out",
     subject: "The Natural World",
     volume: "Volume I",
     shortVolume: "Vol. I",
@@ -54,7 +58,7 @@ const PRODUCT_METADATA = {
     backDescription: "Numbers, matter, energy, and life are presented as one connected sequence, from mathematics and physical law to chemistry, electricity, and biology.",
   },
   "101-volume-2": {
-    series: "JJ University 101",
+    series: "101: How We Figured It Out",
     subject: "The Human World",
     volume: "Volume II",
     shortVolume: "Vol. II",
@@ -175,7 +179,14 @@ for (const cover of coverPayload.covers) {
 }
 
 const conceptSpecPath = resolve(tempRoot, "concept-spec.json");
-writeFileSync(conceptSpecPath, `${JSON.stringify({ volumes: volumeResults.map(result => ({ subject: result.metadata.subject, volume: result.metadata.volume })) }, null, 2)}\n`, "utf8");
+writeFileSync(conceptSpecPath, `${JSON.stringify({
+  volumes: volumeResults.map(result => ({
+    subject: result.metadata.subject,
+    volume: result.metadata.volume,
+    artPath: coverArtPaths[result.metadata.volume],
+  })),
+  previewDir: resolve(root, "private", "print-proof-previews"),
+}, null, 2)}\n`, "utf8");
 const conceptPdf = resolve(outputRoot, "JJ-University-101-cover-directions-proof.pdf");
 runPython(["concepts", conceptSpecPath, conceptPdf]);
 outputs.push(outputRecord(conceptPdf, { kind: "cover-directions", pages: 3, widthIn: 16, heightIn: 9 }));
@@ -194,7 +205,7 @@ const manifest = {
   status: "proof-only-not-for-sale",
   sourceModel: "checked-in public/books.json plus checked-in public/book-content JSON",
   metadataModel: {
-    series: "JJ University 101",
+    series: "101: How We Figured It Out",
     titles: ["The Natural World", "The Human World"],
     volumeDesignations: ["Volume I", "Volume II"],
     author: "James Johnson",
@@ -212,6 +223,7 @@ const manifest = {
     { path: relativePath(disclaimerModulePath), sha256: sha256File(disclaimerModulePath) },
     { path: relativePath(printDisclaimerConfigPath), sha256: sha256File(printDisclaimerConfigPath) },
     { path: relativePath(bookDisclaimerConfigPath), sha256: sha256File(bookDisclaimerConfigPath) },
+    ...Object.values(coverArtPaths).map(artPath => ({ path: relativePath(artPath), sha256: sha256File(artPath) })),
     ...sourceEvidence,
   ],
   volumes: volumeResults.map(result => ({

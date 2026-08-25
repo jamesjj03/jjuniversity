@@ -67,12 +67,11 @@ export default function PrintProofGalleryPage() {
   const proofCount = PRINT_PROOF_PREVIEW_GROUPS.reduce((sum, group) => sum + group.assets.length, 0);
   return (
     <main className={`${coreStyles.page} ${styles.page}`}>
-      <section className={styles.stopBanner} role="note" aria-labelledby="proof-gallery-stop-title">
-        <span aria-hidden="true">!</span>
+      <section className={styles.reviewBanner} role="note" aria-labelledby="proof-gallery-review-title">
         <div>
-          <p>Protected visual review</p>
-          <div className={styles.stopTitle} id="proof-gallery-stop-title">PROOF ONLY - NOT FOR SALE</div>
-          <strong>No source PDF, upload, order, charge, checkout, or sale control is exposed here.</strong>
+          <p>Protected print workspace</p>
+          <div className={styles.reviewTitle} id="proof-gallery-review-title">Cover and interior review</div>
+          <span>Compare the evidence here. Ordering and publishing remain separate.</span>
         </div>
       </section>
 

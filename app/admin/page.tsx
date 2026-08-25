@@ -33,18 +33,11 @@ async function loadDashboard(): Promise<DashboardData> {
   }
 }
 
-function count(books: WorkshopBook[], status: string) {
-  return books.filter(book => book.status === status).length;
-}
-
 export default async function AdminPage() {
   const [data, reading] = await Promise.all([
     loadDashboard(),
     readReadingAnalytics(),
   ]);
-  const hidden = count(data.books, "hidden");
-  const review = count(data.books, "needs-review");
-  const comingSoon = count(data.books, "coming-soon");
 
   return (
     <main className={styles.page}>
@@ -60,18 +53,11 @@ export default async function AdminPage() {
         </div>
       </header>
 
-      {data.error ? (
+      {data.error && (
         <section className={styles.errorPanel} role="alert">
           <h2>The catalog is locked</h2>
           <p>{data.error}</p>
           <p>The rest of the Workshop is still available; no partial catalog data was shown.</p>
-        </section>
-      ) : (
-        <section className={styles.metricGrid} aria-label="Library status">
-          <div className={styles.metric}><span>Total books</span><strong>{data.books.length}</strong></div>
-          <div className={styles.metric}><span>Hidden drafts</span><strong>{hidden}</strong></div>
-          <div className={styles.metric}><span>Needs review</span><strong>{review}</strong></div>
-          <div className={styles.metric}><span>Coming soon</span><strong>{comingSoon}</strong></div>
         </section>
       )}
 
@@ -100,15 +86,27 @@ export default async function AdminPage() {
         </Link>
         <Link className={styles.actionCard} href={getAdminHref("/admin/organize")}>
           <span className={styles.cardKicker}>Organize</span>
-          <h2>Collections and shelves</h2>
-          <p>Work on how books are grouped without mixing that job into title, manuscript, or publishing edits.</p>
-          <strong>Open organizing tools →</strong>
+          <h2>Collections blitz</h2>
+          <p>Drag, add, remove, and reorder books while your memory is moving. Nothing is classified automatically.</p>
+          <strong>Open the speed board →</strong>
+        </Link>
+        <Link className={styles.actionCard} href={getAdminHref("/admin/topics")}>
+          <span className={styles.cardKicker}>Editorial audit</span>
+          <h2>Topics and descriptions</h2>
+          <p>See the empty, tiny, overbroad, repetitive, and “from this to that” problems before deciding what to rewrite.</p>
+          <strong>Open the audit desk →</strong>
         </Link>
         <Link className={styles.actionCard} href={getAdminHref("/admin/print")}>
           <span className={styles.cardKicker}>Proof only</span>
           <h2>Print editor</h2>
           <p>Compare the conflicting proof packages and make the nine decisions required before any paperback order.</p>
           <strong>Open print review →</strong>
+        </Link>
+        <Link className={styles.actionCard} href={getAdminHref("/admin/narrators")}>
+          <span className={styles.cardKicker}>Audiobooks</span>
+          <h2>Narrators</h2>
+          <p>Activate narrator accounts, build Reader-matched track plans, offer books, and review private recordings.</p>
+          <strong>Open narrator control →</strong>
         </Link>
         <Link className={styles.actionCard} href={getAdminHref("/admin/more")}>
           <span className={styles.cardKicker}>Site</span>

@@ -17,6 +17,8 @@ type Props = {
   initialQuery?: string;
   initialStatus?: string;
   initialPlacement?: string;
+  initialSort?: string;
+  initialBrowseAll?: boolean;
   source: string;
   compact?: boolean;
 };
@@ -25,12 +27,15 @@ const RECENT_BOOKS_KEY = "jju.workshop.recent-books.v1";
 const RESULT_STEP = 16;
 const STATUS_OPTIONS = new Set(["all", "ready", "coming-soon", "hidden", "needs-review", "unavailable"]);
 const PLACEMENT_OPTIONS = new Set(["all", "main", "archive"]);
+const SORT_OPTIONS = new Set(["title-asc", "title-desc", "catalog", "status"]);
 
-function canonicalListHref(query: string, status: string, placement: string) {
+function canonicalListHref(query: string, status: string, placement: string, sort: string, browseAll: boolean) {
   const params = new URLSearchParams();
   if (query.trim()) params.set("q", query.trim());
   if (status !== "all") params.set("status", status);
   if (placement !== "all") params.set("placement", placement);
+  if (sort !== "title-asc") params.set("sort", sort);
+  if (browseAll && !query.trim() && status === "all" && placement === "all") params.set("browse", "all");
   const search = params.toString();
   return `/admin/books${search ? `?${search}` : ""}`;
 }
@@ -62,6 +67,8 @@ export default function WorkshopBookLibrary({
   initialQuery = "",
   initialStatus = "all",
   initialPlacement = "all",
+  initialSort = "title-asc",
+  initialBrowseAll = false,
   source,
   compact = false,
 }: Props) {
@@ -70,6 +77,8 @@ export default function WorkshopBookLibrary({
   const [query, setQuery] = useState(initialQuery);
   const [status, setStatus] = useState(STATUS_OPTIONS.has(initialStatus) ? initialStatus : "all");
   const [placement, setPlacement] = useState(PLACEMENT_OPTIONS.has(initialPlacement) ? initialPlacement : "all");
+  const [sort, setSort] = useState(SORT_OPTIONS.has(initialSort) ? initialSort : "title-asc");
+  const [browseAll, setBrowseAll] = useState(initialBrowseAll);
   const [recentIds, setRecentIds] = useState<string[]>([]);
   const [resultLimit, setResultLimit] = useState(RESULT_STEP);
 
@@ -81,17 +90,17 @@ export default function WorkshopBookLibrary({
   useEffect(() => {
     if (compact) return;
     const timer = window.setTimeout(() => {
-      const canonical = canonicalListHref(query, status, placement);
+      const canonical = canonicalListHref(query, status, placement, sort, browseAll);
       const search = canonical.includes("?") ? canonical.slice(canonical.indexOf("?")) : "";
       window.history.replaceState(null, "", `${pathname}${search}`);
     }, 140);
     return () => window.clearTimeout(timer);
-  }, [compact, pathname, placement, query, status]);
+  }, [browseAll, compact, pathname, placement, query, sort, status]);
 
   const matches = useMemo(() => {
     const search = query.trim().toLowerCase();
-    if (!search && status === "all" && placement === "all") return [];
-    return books
+    if (!browseAll && !search && status === "all" && placement === "all") return [];
+    const filtered = books
       .filter(book => {
         if (status !== "all" && book.status !== status) return false;
         if (placement !== "all" && book.visibility !== placement) return false;
@@ -106,19 +115,28 @@ export default function WorkshopBookLibrary({
           ...book.tags,
         ].join(" ").toLowerCase();
         return haystack.includes(search);
-      })
-      .sort((left, right) => {
+      });
+    return filtered.sort((left, right) => {
+      if (search) {
         const leftStarts = left.title.toLowerCase().startsWith(search) ? 0 : 1;
         const rightStarts = right.title.toLowerCase().startsWith(search) ? 0 : 1;
-        return leftStarts - rightStarts || left.title.localeCompare(right.title, "en", { numeric: true, sensitivity: "base" });
-      });
-  }, [books, placement, query, status]);
+        if (leftStarts !== rightStarts) return leftStarts - rightStarts;
+      }
+      if (sort === "catalog") return 0;
+      if (sort === "status") {
+        const statusCompare = workshopBookStatusLabel(left.status).localeCompare(workshopBookStatusLabel(right.status), "en", { sensitivity: "base" });
+        if (statusCompare) return statusCompare;
+      }
+      if (sort === "title-desc") return right.title.localeCompare(left.title, "en", { numeric: true, sensitivity: "base" });
+      return left.title.localeCompare(right.title, "en", { numeric: true, sensitivity: "base" });
+    });
+  }, [books, browseAll, placement, query, sort, status]);
 
   const recentBooks = useMemo(() => recentIds
     .map(id => books.find(book => book.id === id))
     .filter((book): book is WorkshopBook => Boolean(book)), [books, recentIds]);
 
-  const returnHref = canonicalListHref(query, status, placement);
+  const returnHref = canonicalListHref(query, status, placement, sort, browseAll);
   const visibleBooks = matches.slice(0, resultLimit);
   const counts = useMemo(() => ({
     review: books.filter(book => book.status === "needs-review").length,
@@ -173,13 +191,25 @@ export default function WorkshopBookLibrary({
           />
         </label>
         <div className={styles.queueButtons} role="group" aria-label="Quick book queues">
+          <button
+            type="button"
+            aria-pressed={browseAll && status === "all" && placement === "all" && !query.trim()}
+            className={browseAll && status === "all" && placement === "all" && !query.trim() ? styles.activeQueue : ""}
+            onClick={() => {
+              setBrowseAll(current => !current);
+              setQuery("");
+              setStatus("all");
+              setPlacement("all");
+              setResultLimit(RESULT_STEP);
+            }}
+          >Browse all books</button>
           <button type="button" aria-pressed={status === "needs-review"} className={status === "needs-review" ? styles.activeQueue : ""} onClick={() => { setStatus(status === "needs-review" ? "all" : "needs-review"); setResultLimit(RESULT_STEP); }}>Needs review <strong>{counts.review}</strong></button>
           <button type="button" aria-pressed={status === "hidden"} className={status === "hidden" ? styles.activeQueue : ""} onClick={() => { setStatus(status === "hidden" ? "all" : "hidden"); setResultLimit(RESULT_STEP); }}>Hidden drafts <strong>{counts.hidden}</strong></button>
           <button type="button" aria-pressed={status === "coming-soon"} className={status === "coming-soon" ? styles.activeQueue : ""} onClick={() => { setStatus(status === "coming-soon" ? "all" : "coming-soon"); setResultLimit(RESULT_STEP); }}>Coming soon <strong>{counts.comingSoon}</strong></button>
         </div>
         <details className={styles.moreFilters}>
           <summary>More filters</summary>
-          <div>
+            <div>
             <label>
               Publishing state
               <select value={status} onChange={event => { setStatus(event.target.value); setResultLimit(RESULT_STEP); }}>
@@ -199,15 +229,24 @@ export default function WorkshopBookLibrary({
                 <option value="archive">Archive</option>
               </select>
             </label>
+            <label>
+              Sort
+              <select value={sort} onChange={event => { setSort(event.target.value); setResultLimit(RESULT_STEP); }}>
+                <option value="title-asc">Title A–Z</option>
+                <option value="title-desc">Title Z–A</option>
+                <option value="catalog">Catalog order</option>
+                <option value="status">Publishing state</option>
+              </select>
+            </label>
           </div>
         </details>
       </div>
 
-      {!query.trim() && status === "all" && placement === "all" ? (
+      {!browseAll && !query.trim() && status === "all" && placement === "all" ? (
         recentBooks.length ? (
           <div className={styles.recentBlock}>
             <div className={styles.resultHeading}>
-              <div>
+            <div>
                 <span>Continue where you left off</span>
                 <strong>Recent books on this device</strong>
               </div>
@@ -218,14 +257,14 @@ export default function WorkshopBookLibrary({
         ) : (
           <div className={styles.startState}>
             <strong>Type a few letters. Open the manuscript in one tap.</strong>
-            <p>The full catalog stays out of the way until you search or choose a queue.</p>
+            <p>Search directly, choose a queue, or tap Browse all books when you want to wander.</p>
           </div>
         )
       ) : matches.length ? (
         <div className={styles.matchBlock}>
           <div className={styles.resultHeading} aria-live="polite">
             <div>
-              <span>Matches</span>
+              <span>{browseAll && !query.trim() && status === "all" && placement === "all" ? "All books" : "Matches"}</span>
               <strong>{matches.length} book{matches.length === 1 ? "" : "s"}</strong>
             </div>
             <small>{source}</small>
@@ -240,7 +279,7 @@ export default function WorkshopBookLibrary({
       ) : (
         <div className={styles.startState}>
           <strong>No books match that search.</strong>
-          <button type="button" onClick={() => { setQuery(""); setStatus("all"); setPlacement("all"); setResultLimit(RESULT_STEP); }}>Clear search</button>
+          <button type="button" onClick={() => { setQuery(""); setStatus("all"); setPlacement("all"); setBrowseAll(false); setResultLimit(RESULT_STEP); }}>Clear search</button>
         </div>
       )}
     </section>

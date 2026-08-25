@@ -85,6 +85,7 @@ async function readHumanReviewSnapshot() {
     audioTechnicalPassCount: audio?.technicalPassCount || 0,
     audioTotalSeconds: audio?.totalSeconds || 0,
     audioPreviewAvailable: audio?.previewAvailable || false,
+    audioHumanApproved: audio?.humanListenApproved || false,
   };
 }
 
@@ -106,13 +107,15 @@ export default async function ReviewsPage() {
       <section className={styles.priorityGrid} aria-label="Priority human review queues">
         <GuardedAdminLink className={styles.priorityCard} href="/admin/audio" prefetch={false}>
           <div className={styles.cardTop}><span className={styles.priority}>Start here</span><strong>1</strong></div>
-          <p className={styles.kicker}>Audio · QA only</p>
-          <h2>{snapshot.audioAvailable ? "Listen to Tacos" : "Audio review is safely locked"}</h2>
+          <p className={styles.kicker}>Audio · Exact QA record</p>
+          <h2>{snapshot.audioAvailable ? snapshot.audioHumanApproved ? "Tacos listening approved" : "Listen to Tacos" : "Audio review is safely locked"}</h2>
           <p>{snapshot.audioAvailable
-            ? `All ${snapshot.audioTechnicalPassCount} sealed MP3s passed the objective screen. Publication remains blocked until you hear the full edition and check the targeted openings, tails, and room tone.`
+            ? snapshot.audioHumanApproved
+              ? `All ${snapshot.audioTechnicalPassCount} sealed MP3s passed the objective screen and James approved the complete listening proof. Publication remains a separate decision.`
+              : `All ${snapshot.audioTechnicalPassCount} sealed MP3s passed the objective screen. Publication remains blocked until you hear the full edition and check the targeted openings, tails, and room tone.`
             : "The exact private QA package could not be verified, so the Workshop refuses to claim a technical pass or invent a track count."}</p>
           <div className={styles.facts}>
-            {snapshot.audioAvailable ? <><span>{snapshot.audioTrackCount} tracks</span><span>{formatDuration(snapshot.audioTotalSeconds)}</span><span>Human approval pending</span></> : <span>No partial audio shown</span>}
+            {snapshot.audioAvailable ? <><span>{snapshot.audioTrackCount} tracks</span><span>{formatDuration(snapshot.audioTotalSeconds)}</span><span>{snapshot.audioHumanApproved ? "Human listen approved" : "Human approval pending"}</span></> : <span>No partial audio shown</span>}
           </div>
           <strong className={styles.action}>{snapshot.audioAvailable && snapshot.audioPreviewAvailable ? "Open the listening review →" : "Open the locked audio desk →"}</strong>
         </GuardedAdminLink>

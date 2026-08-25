@@ -8,8 +8,8 @@
     "paths": 5,
     "tagPaths": 0,
     "recommendedSections": 0,
-    "collectionAssignments": 228,
-    "collectionBooks": 228
+    "collectionAssignments": 227,
+    "collectionBooks": 227
   },
   "series": [
     {
@@ -371,7 +371,7 @@
     },
     {
       "id": "world-religions",
-      "title": "The Belief Map",
+      "title": "The Divine Archive",
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -840,7 +840,7 @@
         "Psychology & Human Behavior",
         "Political Economy"
       ],
-      "bookCount": 7,
+      "bookCount": 6,
       "books": [
         {
           "id": "pantheon",
@@ -848,33 +848,28 @@
           "note": ""
         },
         {
-          "id": "pantheon2",
+          "id": "thinkers",
           "order": 2,
           "note": ""
         },
         {
-          "id": "thinkers",
+          "id": "cult",
           "order": 3,
           "note": ""
         },
         {
-          "id": "cult",
+          "id": "money",
           "order": 4,
           "note": ""
         },
         {
-          "id": "money",
+          "id": "condition",
           "order": 5,
           "note": ""
         },
         {
-          "id": "condition",
-          "order": 6,
-          "note": ""
-        },
-        {
           "id": "presidents",
-          "order": 7,
+          "order": 6,
           "note": ""
         }
       ],

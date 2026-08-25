@@ -6,6 +6,7 @@ import {
   type AudioStreamRecord,
 } from "@/lib/audioCatalog";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
+import humanApproval from "@/private/audio-review/tacos-human-listen-approval.json";
 
 const TACOS_BOOK_ID = "tacos";
 const TACOS_BOOK_SLUG = "everything-i-touch-turns-to-tacos";
@@ -139,6 +140,10 @@ export type TacosAudioReview = {
   totalSeconds: number;
   technicalPassCount: number;
   humanCheckCount: number;
+  humanReviewedCheckCount: number;
+  humanListenApproved: boolean;
+  humanListenApprovedAt: string;
+  humanListenApprovedBy: string;
   flaggedTrackCount: number;
   previewAvailable: boolean;
 };
@@ -376,6 +381,12 @@ export async function readTacosAudioReview(): Promise<TacosAudioReviewResult> {
       return target?.storageBucket === expected.bucket && target.storagePath === expected.path;
     });
     const humanCheckCount = normalizedTracks.publicTracks.reduce((sum, track) => sum + track.flags.length, 0);
+    const approvalMatchesPackage = humanApproval.editionId === TACOS_EDITION_ID
+      && humanApproval.bookId === TACOS_BOOK_ID
+      && humanApproval.trackCount === EXPECTED_TRACKS
+      && humanApproval.totalBytes === EXPECTED_TOTAL_BYTES
+      && humanApproval.humanListenApproval.status === "approved"
+      && humanApproval.publicationApproval === "not-granted";
 
     return {
       status: "available",
@@ -385,7 +396,11 @@ export async function readTacosAudioReview(): Promise<TacosAudioReviewResult> {
       totalBytes: EXPECTED_TOTAL_BYTES,
       totalSeconds: EXPECTED_TOTAL_SECONDS,
       technicalPassCount: EXPECTED_TRACKS,
-      humanCheckCount,
+      humanCheckCount: approvalMatchesPackage ? 0 : humanCheckCount,
+      humanReviewedCheckCount: approvalMatchesPackage ? humanCheckCount : 0,
+      humanListenApproved: approvalMatchesPackage,
+      humanListenApprovedAt: approvalMatchesPackage ? humanApproval.humanListenApproval.approvedAt : "",
+      humanListenApprovedBy: approvalMatchesPackage ? humanApproval.humanListenApproval.approvedBy : "",
       flaggedTrackCount: normalizedTracks.publicTracks.filter(track => track.flags.length > 0).length,
       previewAvailable: previewTargetsMatch,
     };

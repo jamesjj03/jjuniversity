@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
+import { getPrintCheckoutReadiness } from "@/lib/printCheckoutSafety";
 import { getPrintProduct, SITE_URL } from "@/lib/publishing";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
 import { getStripe, hasStripeConfig } from "@/lib/stripe";
@@ -14,8 +15,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Print product not found." }, { status: 404 });
   }
 
-  if (product.salesStatus !== "checkout-live") {
-    return NextResponse.json({ error: "This paperback is not for sale yet." }, { status: 409 });
+  const checkoutReadiness = getPrintCheckoutReadiness(product);
+  if (!checkoutReadiness.ready) {
+    return NextResponse.json({
+      error: checkoutReadiness.reason,
+      code: checkoutReadiness.code,
+      checkoutReadiness,
+    }, { status: 409 });
   }
 
   if (!hasStripeConfig()) {
@@ -38,24 +44,22 @@ export async function POST(request: Request) {
     : `/print/${product.slug}`;
   const successUrl = `${SITE_URL}${returnPath}?checkout=success&session_id={CHECKOUT_SESSION_ID}`;
   const cancelUrl = `${SITE_URL}${returnPath}?checkout=cancelled`;
-  const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = product.stripePriceId
-    ? { price: product.stripePriceId, quantity: 1 }
-    : {
-      price_data: {
-        currency: "usd",
-        unit_amount: product.targetPriceCents,
-        product_data: {
-          name: product.title,
-          description: product.subtitle || product.description,
-          metadata: {
-            productSlug: product.slug,
-            sku: product.sku,
-            printStatus: product.printStatus,
-          },
+  const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = {
+    price_data: {
+      currency: "usd",
+      unit_amount: checkoutReadiness.chargeAmountCents,
+      product_data: {
+        name: product.title,
+        description: product.subtitle || product.description,
+        metadata: {
+          productSlug: product.slug,
+          sku: product.sku,
+          printStatus: product.printStatus,
         },
       },
-      quantity: 1,
-    };
+    },
+    quantity: 1,
+  };
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
@@ -78,13 +82,15 @@ export async function POST(request: Request) {
   const { error } = await supabase.from("print_orders").insert({
     product_slug: product.slug,
     status: "checkout_created",
-    amount_cents: product.targetPriceCents,
+    amount_cents: checkoutReadiness.chargeAmountCents,
     currency: "usd",
     stripe_checkout_session_id: session.id,
     metadata: {
       sku: product.sku,
       printStatus: product.printStatus,
       checkoutMode: "payment",
+      quoteBindingId: checkoutReadiness.quoteBindingId,
+      checkoutSafeCondition: checkoutReadiness.safeCondition,
     },
   });
 
