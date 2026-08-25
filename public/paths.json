@@ -8,13 +8,14 @@
     "paths": 5,
     "tagPaths": 0,
     "recommendedSections": 0,
-    "collectionAssignments": 228,
-    "collectionBooks": 228
+    "collectionAssignments": 226,
+    "collectionBooks": 226
   },
   "series": [
     {
       "id": "the-architects",
       "title": "The Architects",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -69,6 +70,7 @@
     {
       "id": "the-code-breakers",
       "title": "The Code Breakers",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -148,6 +150,7 @@
     {
       "id": "the-conquerors",
       "title": "The Conquerors",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -207,6 +210,7 @@
     {
       "id": "the-tyrants",
       "title": "The Tyrants",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "advanced",
@@ -256,6 +260,7 @@
     {
       "id": "god-struck",
       "title": "God-struck",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -314,6 +319,7 @@
     {
       "id": "the-disruptors",
       "title": "The Disruptors",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -372,6 +378,9 @@
     {
       "id": "world-religions",
       "title": "The Belief Map",
+      "aliases": [
+        "world-religions"
+      ],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -461,14 +470,15 @@
           "note": ""
         }
       ],
-      "deleted": false,
-      "aliases": [
-        "world-religions"
-      ]
+      "deleted": false
     },
     {
       "id": "the-philosophers",
       "title": "The Questioners",
+      "aliases": [
+        "the-philosophers",
+        "the-great-questions"
+      ],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -479,7 +489,7 @@
         "Political Theory",
         "Psychology & Human Behavior"
       ],
-      "bookCount": 10,
+      "bookCount": 8,
       "books": [
         {
           "id": "socrates",
@@ -517,30 +527,17 @@
           "note": ""
         },
         {
-          "id": "agency",
-          "order": 8,
-          "note": ""
-        },
-        {
-          "id": "materialism",
-          "order": 9,
-          "note": ""
-        },
-        {
           "id": "descartes",
-          "order": 10,
+          "order": 8,
           "note": ""
         }
       ],
-      "deleted": false,
-      "aliases": [
-        "the-philosophers",
-        "the-great-questions"
-      ]
+      "deleted": false
     },
     {
       "id": "red-white-and-bruised",
       "title": "Red, White, and Bruised",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -625,15 +622,17 @@
     {
       "id": "eyes-everywhere",
       "title": "Eyes Everywhere",
+      "aliases": [],
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
       "description": "The intelligence agencies built to watch, infiltrate, investigate, and operate beyond public view.",
       "tags": [
         "Espionage & Intelligence",
         "Government & Politics",
         "Conspiracy & Cover-ups"
       ],
-      "kind": "series",
-      "type": "series",
-      "level": "intermediate",
+      "bookCount": 4,
       "books": [
         {
           "id": "cia",
@@ -656,12 +655,15 @@
           "note": ""
         }
       ],
-      "bookCount": 4,
       "deleted": false
     },
     {
       "id": "the-mapmakers",
       "title": "The Mapmakers",
+      "aliases": [],
+      "kind": "series",
+      "type": "series",
+      "level": "intermediate",
       "description": "Country and civilization portraits about how places are built, governed, remembered, and understood from the inside.",
       "tags": [
         "World History",
@@ -669,9 +671,7 @@
         "Cultural History",
         "Geography"
       ],
-      "kind": "series",
-      "type": "series",
-      "level": "intermediate",
+      "bookCount": 10,
       "books": [
         {
           "id": "borders",
@@ -724,12 +724,12 @@
           "note": ""
         }
       ],
-      "bookCount": 10,
       "deleted": false
     },
     {
       "id": "the-system",
       "title": "The System",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -829,6 +829,7 @@
     {
       "id": "the-big-picture",
       "title": "The Big Picture",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "advanced",
@@ -883,6 +884,7 @@
     {
       "id": "the-noisemakers",
       "title": "The Noisemakers",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "starter",
@@ -931,6 +933,7 @@
     {
       "id": "the-creatives",
       "title": "The Creatives",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "starter",
@@ -999,6 +1002,7 @@
     {
       "id": "business-as-usual",
       "title": "Business as Usual",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -1052,6 +1056,7 @@
     {
       "id": "under-the-hood",
       "title": "Under the Hood",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -1126,6 +1131,7 @@
     {
       "id": "the-social-code",
       "title": "The Social Code",
+      "aliases": [],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -1194,6 +1200,9 @@
     {
       "id": "high-society",
       "title": "Hits and Hooks",
+      "aliases": [
+        "high-society"
+      ],
       "kind": "series",
       "type": "series",
       "level": "intermediate",
@@ -1252,16 +1261,14 @@
           "note": ""
         }
       ],
-      "deleted": false,
-      "aliases": [
-        "high-society"
-      ]
+      "deleted": false
     }
   ],
   "paths": [
     {
       "id": "101-the-core-courses",
       "title": "101: How We Figured It Out",
+      "aliases": [],
       "kind": "path",
       "type": "path",
       "level": "intermediate",
@@ -1355,6 +1362,7 @@
     {
       "id": "what-the-book-actually-says",
       "title": "What the Scripture Actually Says",
+      "aliases": [],
       "kind": "path",
       "type": "path",
       "level": "intermediate",
@@ -1418,6 +1426,7 @@
     {
       "id": "exe-power-as-code",
       "title": ".exe: Power as Code",
+      "aliases": [],
       "kind": "path",
       "type": "path",
       "level": "intermediate",
@@ -1476,6 +1485,7 @@
     {
       "id": "commanders-in-chief",
       "title": "Commanders-in-Chief",
+      "aliases": [],
       "kind": "path",
       "type": "path",
       "level": "intermediate",
@@ -1544,6 +1554,7 @@
     {
       "id": "calendar-chronicles",
       "title": "Calendar Chronicles",
+      "aliases": [],
       "kind": "path",
       "type": "path",
       "level": "intermediate",
