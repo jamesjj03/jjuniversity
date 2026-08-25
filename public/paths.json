@@ -8,8 +8,8 @@
     "paths": 5,
     "tagPaths": 0,
     "recommendedSections": 0,
-    "collectionAssignments": 227,
-    "collectionBooks": 227
+    "collectionAssignments": 225,
+    "collectionBooks": 225
   },
   "series": [
     {
@@ -479,7 +479,7 @@
         "Political Theory",
         "Psychology & Human Behavior"
       ],
-      "bookCount": 10,
+      "bookCount": 8,
       "books": [
         {
           "id": "socrates",
@@ -517,18 +517,8 @@
           "note": ""
         },
         {
-          "id": "agency",
-          "order": 8,
-          "note": ""
-        },
-        {
-          "id": "materialism",
-          "order": 9,
-          "note": ""
-        },
-        {
           "id": "descartes",
-          "order": 10,
+          "order": 8,
           "note": ""
         }
       ],
