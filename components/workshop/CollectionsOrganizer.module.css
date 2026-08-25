@@ -1,0 +1,1419 @@
+.page {
+  width: min(100%, 1220px);
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 48px) clamp(14px, 3vw, 38px) 140px;
+  color: var(--workshop-cream);
+}
+
+.page button,
+.page input,
+.page select {
+  font: inherit;
+}
+
+.page button {
+  min-height: 44px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: var(--workshop-gold);
+  font-size: 0.7rem;
+  font-weight: 780;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.36fr);
+  align-items: end;
+  gap: 30px;
+  margin-bottom: 22px;
+}
+
+.hero h1,
+.sectionHeader h2,
+.recoveryPanel h2,
+.errorPanel h1 {
+  margin: 0;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 560;
+  letter-spacing: -0.035em;
+}
+
+.hero h1 {
+  font-size: clamp(2.35rem, 6vw, 4.8rem);
+  line-height: 0.94;
+}
+
+.hero > div > p:last-child,
+.sectionHeader p,
+.recoveryPanel p,
+.errorPanel p {
+  max-width: 70ch;
+  margin: 13px 0 0;
+  color: var(--workshop-muted);
+  line-height: 1.58;
+}
+
+.versionCard {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+  padding: 15px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 14px;
+  background: var(--workshop-panel);
+}
+
+.versionCard span,
+.versionCard strong {
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+  font-weight: 730;
+}
+
+.versionCard code {
+  overflow: hidden;
+  color: #e9d69d;
+  font-size: 0.68rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.versionCard strong {
+  color: var(--workshop-cream);
+}
+
+.recoveryPanel,
+.safetyNotice,
+.conflictNotice,
+.notice,
+.errorPanel,
+.loading {
+  border: 1px solid rgba(215, 183, 101, 0.34);
+  border-radius: 14px;
+  background: rgba(215, 183, 101, 0.075);
+}
+
+.recoveryPanel {
+  display: grid;
+  gap: 18px;
+  margin: 0 0 16px;
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.recoveryPanel h2 {
+  font-size: clamp(1.55rem, 4vw, 2.3rem);
+}
+
+.recoveryChoices {
+  display: grid;
+  gap: 9px;
+}
+
+.recoveryChoices article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 11px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.recoveryChoices article > div {
+  display: grid;
+  gap: 3px;
+}
+
+.recoveryChoices article > button,
+.discardConfirmation > button {
+  min-width: 0;
+  width: 100%;
+  padding-inline: 10px;
+  white-space: normal;
+}
+
+.discardConfirmation {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid rgba(244, 128, 128, 0.46);
+  border-radius: 9px;
+  background: rgba(138, 38, 38, 0.14);
+}
+
+.discardConfirmation > div {
+  display: grid;
+  gap: 3px;
+}
+
+.recoveryChoices span,
+.safetyNotice span,
+.conflictNotice span {
+  color: var(--workshop-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.safetyNotice,
+.conflictNotice,
+.notice {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding: 13px 15px;
+  color: #eadcad;
+  line-height: 1.45;
+}
+
+.conflictNotice {
+  border-color: rgba(244, 128, 128, 0.52);
+  background: rgba(138, 38, 38, 0.16);
+}
+
+.conflictNotice strong {
+  color: #ffd6d6;
+}
+
+.viewTabs {
+  position: sticky;
+  top: 14px;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 18px;
+  padding: 5px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 14px;
+  background: rgba(15, 19, 15, 0.97);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(18px);
+}
+
+.viewTabs button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--workshop-muted);
+  cursor: pointer;
+  font-size: 0.83rem;
+  font-weight: 740;
+}
+
+.viewTabs button strong {
+  min-width: 24px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: inherit;
+  font-size: 0.7rem;
+}
+
+.viewTabs .activeView {
+  border-color: rgba(215, 183, 101, 0.34);
+  background: var(--workshop-panel-raised);
+  color: var(--workshop-cream);
+}
+
+.needsWorkspace,
+.collectionsWorkspace,
+.reviewWorkspace {
+  display: grid;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid var(--workshop-rule);
+  border-radius: 16px;
+  background: var(--workshop-panel);
+}
+
+.sectionHeader h2 {
+  font-size: clamp(1.65rem, 4vw, 2.7rem);
+}
+
+.issueTotal {
+  flex: 0 0 auto;
+  display: grid;
+  text-align: right;
+}
+
+.issueTotal strong {
+  color: var(--workshop-gold);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 560;
+}
+
+.issueTotal span {
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+}
+
+.queuePicker {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.queuePicker button,
+.directoryList button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 13px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--workshop-muted);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 730;
+  text-align: left;
+}
+
+.queuePicker button strong,
+.directoryList button strong {
+  color: var(--workshop-cream);
+}
+
+.queuePicker .activeQueue,
+.directoryList .activeDirectoryItem {
+  border-color: rgba(215, 183, 101, 0.65);
+  background: rgba(215, 183, 101, 0.11);
+  color: var(--workshop-cream);
+}
+
+.queueIntro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 3px 3px 0;
+  color: var(--workshop-muted);
+  font-size: 0.78rem;
+}
+
+.queueIntro > div {
+  display: grid;
+  gap: 3px;
+}
+
+.queueIntro strong {
+  color: var(--workshop-cream);
+}
+
+.issueCard {
+  min-height: 390px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+  gap: clamp(22px, 4vw, 44px);
+  padding: clamp(22px, 4vw, 42px);
+  border: 1px solid var(--workshop-rule);
+  border-radius: 18px;
+  background: linear-gradient(145deg, var(--workshop-panel-raised), var(--workshop-panel));
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.2);
+}
+
+.issueCopy h3,
+.detailHeader h3,
+.panelTitle h3,
+.savePanel h3,
+.diffPanel h3 {
+  margin: 0;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  font-weight: 560;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+
+.issueCopy > p:not(.eyebrow) {
+  margin: 15px 0 0;
+  color: var(--workshop-muted);
+  line-height: 1.6;
+}
+
+.issueCopy .issueQuestion {
+  color: var(--workshop-cream);
+  font-size: clamp(1.08rem, 2.2vw, 1.35rem);
+  line-height: 1.45;
+}
+
+.recommendation {
+  display: grid;
+  gap: 4px;
+  margin-top: 22px;
+  padding: 14px;
+  border-left: 3px solid var(--workshop-gold);
+  background: rgba(215, 183, 101, 0.07);
+  color: #eadcad;
+  line-height: 1.5;
+}
+
+.recommendation strong {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.issueLinks {
+  align-content: start;
+  display: grid;
+  gap: 9px;
+}
+
+.issueBookLink,
+.issueCollectionLink {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: center;
+  gap: 11px;
+  padding: 9px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 11px;
+  background: rgba(0, 0, 0, 0.18);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.issueCollectionLink {
+  grid-template-columns: 1fr;
+  gap: 3px;
+  padding: 14px;
+}
+
+.issueBookLink > span:last-child,
+.issueCollectionLink {
+  min-width: 0;
+}
+
+.issueBookLink strong,
+.issueBookLink small,
+.issueCollectionLink strong,
+.issueCollectionLink small,
+.issueCollectionLink > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.issueBookLink small,
+.issueCollectionLink small,
+.issueCollectionLink > span {
+  margin-top: 3px;
+  color: var(--workshop-muted);
+  font-size: 0.69rem;
+}
+
+.issueCollectionLink > span {
+  color: var(--workshop-gold);
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.issueBookLink:focus-visible,
+.issueCollectionLink:focus-visible,
+.memberRow:focus-visible {
+  outline: 3px solid rgba(215, 183, 101, 0.75);
+  outline-offset: 3px;
+}
+
+.missingCover {
+  display: grid;
+  width: 52px;
+  aspect-ratio: 2 / 3;
+  place-items: center;
+  border-radius: 5px;
+  background: #090b09;
+  color: var(--workshop-muted);
+}
+
+.issueNav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.issueNav button,
+.showMoreButton {
+  padding: 10px 16px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 10px;
+  background: var(--workshop-panel);
+  color: var(--workshop-cream);
+  cursor: pointer;
+  font-weight: 730;
+}
+
+.issueNav button:disabled,
+.page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.43;
+}
+
+.collectionStats {
+  flex: 0 0 auto;
+  display: grid;
+  gap: 5px;
+  color: var(--workshop-muted);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.collectionStats strong {
+  color: var(--workshop-cream);
+}
+
+.mobileCollectionPicker {
+  display: none;
+}
+
+.collectionLayout {
+  display: grid;
+  grid-template-columns: minmax(235px, 0.35fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.directory,
+.collectionDetail,
+.diagnosticsPanel,
+.savePanel,
+.diffPanel {
+  border: 1px solid var(--workshop-rule);
+  border-radius: 16px;
+  background: var(--workshop-panel);
+}
+
+.directory {
+  position: sticky;
+  top: 83px;
+  max-height: calc(100vh - 116px);
+  display: grid;
+  gap: 12px;
+  padding: 13px;
+  overflow: hidden;
+}
+
+.directory > label,
+.bookSearch,
+.mobileCollectionPicker,
+.placeBookPanel label {
+  display: grid;
+  gap: 7px;
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+  font-weight: 730;
+}
+
+.directory input,
+.bookSearch input,
+.mobileCollectionPicker select,
+.placeBookPanel select {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  background: #0d110d;
+  color: var(--workshop-cream);
+  font-size: 16px;
+}
+
+.directoryList {
+  display: grid;
+  gap: 5px;
+  padding-right: 2px;
+  overflow-y: auto;
+}
+
+.directoryList button {
+  min-height: 44px;
+  padding: 8px 10px;
+  font-size: 0.73rem;
+}
+
+.collectionDetail {
+  min-width: 0;
+  padding: clamp(15px, 2.6vw, 26px);
+}
+
+.detailHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--workshop-rule);
+}
+
+.detailHeader h3 {
+  font-size: clamp(1.65rem, 4vw, 2.6rem);
+}
+
+.detailHeader p:not(.eyebrow) {
+  max-width: 65ch;
+  margin: 9px 0 0;
+  color: var(--workshop-muted);
+  line-height: 1.5;
+}
+
+.primaryButton,
+.secondaryButton,
+.quietButton,
+.dangerButton,
+.authoritativeButton,
+.closeButton {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 750;
+}
+
+.primaryButton,
+.authoritativeButton {
+  border-color: #d7b765;
+  background: #d7b765;
+  color: #17130b;
+}
+
+.secondaryButton {
+  background: var(--workshop-panel-raised);
+  color: var(--workshop-cream);
+}
+
+.quietButton,
+.closeButton {
+  background: transparent;
+  color: var(--workshop-muted);
+}
+
+.dangerButton {
+  border-color: rgba(244, 128, 128, 0.62);
+  background: rgba(138, 38, 38, 0.3);
+  color: #ffe2e2;
+}
+
+.orderNote {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+}
+
+.orderNote strong {
+  color: var(--workshop-cream);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.memberList {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.memberRow {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 30px 58px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 9px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.02);
+  scroll-margin: 130px 0;
+}
+
+.uncollectedMember {
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+}
+
+.focusedMember {
+  border-color: rgba(215, 183, 101, 0.82);
+  background: rgba(215, 183, 101, 0.09);
+  box-shadow: 0 0 0 3px rgba(215, 183, 101, 0.1);
+}
+
+.orderNumber {
+  color: var(--workshop-gold);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+.coverFrame {
+  position: relative;
+  display: block;
+  width: 58px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #080a08;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.26);
+}
+
+.coverFrame img {
+  object-fit: cover;
+}
+
+.issueBookLink .coverFrame {
+  width: 52px;
+}
+
+.memberCopy {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.memberCopy strong {
+  overflow: hidden;
+  color: var(--workshop-cream);
+  font-size: 0.89rem;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.memberCopy span {
+  overflow: hidden;
+  color: var(--workshop-muted);
+  font-size: 0.69rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.orderActions {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 5px;
+}
+
+.orderActions button,
+.singleAction button,
+.sheetBookList button {
+  min-height: 44px;
+  padding: 8px 11px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 8px;
+  background: var(--workshop-panel-raised);
+  color: var(--workshop-cream);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 720;
+}
+
+.orderActions .removeButton {
+  color: #ffc8c8;
+}
+
+.bookSearch {
+  margin-bottom: 12px;
+}
+
+.showMoreButton {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.emptyState,
+.loading {
+  padding: 25px;
+  color: var(--workshop-muted);
+  line-height: 1.55;
+}
+
+.loading {
+  margin-top: 10vh;
+  text-align: center;
+}
+
+.errorPanel {
+  max-width: 660px;
+  margin: 9vh auto 0;
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.errorPanel button {
+  margin-top: 20px;
+  padding: 10px 16px;
+  border: 1px solid #d7b765;
+  border-radius: 9px;
+  background: #d7b765;
+  color: #17130b;
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.reviewGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(270px, 0.65fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.diagnosticsPanel,
+.savePanel,
+.diffPanel {
+  padding: clamp(16px, 2.7vw, 25px);
+}
+
+.panelTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 15px;
+}
+
+.panelTitle h3,
+.savePanel h3,
+.diffPanel h3 {
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+}
+
+.panelTitle > strong,
+.passCount,
+.problemCount {
+  color: var(--workshop-gold);
+  font-size: 0.77rem;
+}
+
+.problemCount {
+  color: #ffb3b3;
+}
+
+.passCount {
+  color: #bde2b0;
+}
+
+.diagnosticList {
+  display: grid;
+  gap: 7px;
+}
+
+.passedDiagnostic,
+.failedDiagnostic {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  padding: 11px;
+  border: 1px solid rgba(132, 178, 111, 0.25);
+  border-radius: 9px;
+  background: rgba(93, 139, 73, 0.07);
+}
+
+.failedDiagnostic {
+  border-color: rgba(244, 128, 128, 0.34);
+  background: rgba(138, 38, 38, 0.1);
+}
+
+.passedDiagnostic > span,
+.failedDiagnostic > span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(132, 178, 111, 0.18);
+  color: #bde2b0;
+  font-weight: 800;
+}
+
+.failedDiagnostic > span {
+  background: rgba(244, 128, 128, 0.17);
+  color: #ffb3b3;
+}
+
+.passedDiagnostic p,
+.failedDiagnostic p {
+  margin: 3px 0 0;
+  color: var(--workshop-muted);
+  font-size: 0.73rem;
+  line-height: 1.45;
+}
+
+.savePanel {
+  position: sticky;
+  top: 84px;
+}
+
+.savePanel > p:not(.eyebrow) {
+  color: var(--workshop-muted);
+  line-height: 1.55;
+}
+
+.savePanel code {
+  overflow-wrap: anywhere;
+  color: #e9d69d;
+  font-size: 0.72rem;
+}
+
+.saveFacts {
+  display: grid;
+  gap: 7px;
+  margin: 18px 0;
+}
+
+.saveFacts span {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+}
+
+.saveFacts strong {
+  color: var(--workshop-cream);
+}
+
+.authoritativeButton {
+  width: 100%;
+  min-height: 50px;
+}
+
+.savePanel small {
+  display: block;
+  margin-top: 10px;
+  color: var(--workshop-muted);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.diffList {
+  display: grid;
+  gap: 9px;
+}
+
+.diffList details {
+  border: 1px solid var(--workshop-rule);
+  border-radius: 11px;
+  background: rgba(0, 0, 0, 0.13);
+}
+
+.diffList summary {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 13px;
+  cursor: pointer;
+  color: var(--workshop-muted);
+  font-size: 0.75rem;
+}
+
+.diffList summary > span:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.diffList summary strong {
+  color: var(--workshop-cream);
+  font-size: 0.9rem;
+}
+
+.diffList summary small {
+  overflow: hidden;
+  color: var(--workshop-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.changeSummary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 13px 12px;
+}
+
+.changeSummary span {
+  padding: 5px 7px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--workshop-muted);
+  font-size: 0.68rem;
+}
+
+.changeSummary .addedChange {
+  color: #bde2b0;
+}
+
+.changeSummary .removedChange {
+  color: #ffb3b3;
+}
+
+.orderCompare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 13px 13px;
+}
+
+.orderCompare > div {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.orderCompare > div > strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--workshop-gold);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.orderCompare ol {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-left: 24px;
+}
+
+.orderCompare li {
+  padding-left: 3px;
+  color: var(--workshop-cream);
+  font-size: 0.75rem;
+}
+
+.orderCompare li small {
+  display: block;
+  color: var(--workshop-muted);
+  font-size: 0.63rem;
+}
+
+.saveDock {
+  position: fixed;
+  z-index: 70;
+  right: max(18px, calc((100vw - 1220px) / 2 + 18px));
+  bottom: 16px;
+  left: max(18px, calc((100vw - 1220px) / 2 + 18px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 11px 10px 15px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 14px;
+  background: rgba(13, 17, 13, 0.98);
+  box-shadow: 0 20px 58px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(18px);
+}
+
+.saveDock > div:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.saveDock > div:first-child strong,
+.saveDock > div:first-child span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.saveDock > div:first-child strong {
+  color: var(--workshop-cream);
+  font-size: 0.78rem;
+}
+
+.saveDock > div:first-child span {
+  color: var(--workshop-muted);
+  font-size: 0.68rem;
+}
+
+.saveDock > div:last-child {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 7px;
+}
+
+.sheetBackdrop {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.68);
+  backdrop-filter: blur(6px);
+}
+
+.addSheet {
+  width: min(720px, 100%);
+  max-height: min(820px, 88dvh);
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  gap: 13px;
+  padding: clamp(16px, 3vw, 24px);
+  overflow: hidden;
+  border: 1px solid rgba(215, 183, 101, 0.42);
+  border-radius: 18px;
+  background: #121712;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.58);
+}
+
+.addSheet > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.addSheet h2 {
+  margin: 0;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.55rem, 4vw, 2.35rem);
+  font-weight: 560;
+}
+
+.sheetHelp,
+.placeBookPanel p {
+  margin: 0;
+  color: var(--workshop-muted);
+  font-size: 0.73rem;
+  line-height: 1.45;
+}
+
+.sheetBookList {
+  min-height: 0;
+  display: grid;
+  gap: 7px;
+  padding-right: 3px;
+  overflow-y: auto;
+}
+
+.sheetBookList article {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.sheetBookList .coverFrame {
+  width: 50px;
+}
+
+.sheetBookList article > div {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.sheetBookList article strong,
+.sheetBookList article span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sheetBookList article span {
+  color: var(--workshop-muted);
+  font-size: 0.68rem;
+}
+
+.placeBookPanel {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  align-items: end;
+  gap: 14px;
+}
+
+.placeBookPanel .coverFrame {
+  grid-row: 1 / span 3;
+  width: 86px;
+}
+
+.placeBookPanel p {
+  grid-column: 2;
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .issueCard,
+  .reviewGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .issueCard {
+    min-height: 0;
+  }
+
+  .issueLinks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .savePanel {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 18px 12px 150px;
+  }
+
+  .hero {
+    gap: 17px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.45rem, 13vw, 3.4rem);
+  }
+
+  .versionCard code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .recoveryChoices article {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .recoveryChoices article > div {
+    grid-column: 1 / -1;
+  }
+
+  .discardConfirmation {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .discardConfirmation > div {
+    grid-column: 1 / -1;
+  }
+
+  .viewTabs {
+    top: calc(62px + env(safe-area-inset-top));
+  }
+
+  .viewTabs button {
+    min-width: 0;
+    display: grid;
+    gap: 3px;
+    padding: 7px 4px;
+  }
+
+  .viewTabs button span {
+    overflow: hidden;
+    font-size: 0.74rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .viewTabs button strong {
+    justify-self: center;
+  }
+
+  .sectionHeader,
+  .detailHeader {
+    display: grid;
+    align-items: stretch;
+  }
+
+  .issueTotal,
+  .collectionStats {
+    text-align: left;
+  }
+
+  .collectionStats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .collectionStats span {
+    display: grid;
+    gap: 2px;
+    padding: 9px;
+    border: 1px solid var(--workshop-rule);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .queuePicker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .queuePicker button:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .queueIntro {
+    align-items: flex-start;
+  }
+
+  .queueIntro > div span {
+    display: none;
+  }
+
+  .issueCard {
+    padding: 20px;
+  }
+
+  .issueLinks {
+    grid-template-columns: 1fr;
+  }
+
+  .mobileCollectionPicker {
+    display: grid;
+    padding: 13px;
+    border: 1px solid var(--workshop-rule);
+    border-radius: 12px;
+    background: var(--workshop-panel);
+  }
+
+  .collectionLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .directory {
+    display: none;
+  }
+
+  .collectionDetail {
+    padding: 13px;
+  }
+
+  .detailHeader .primaryButton,
+  .sectionHeader .secondaryButton {
+    width: 100%;
+  }
+
+  .orderNote {
+    align-items: flex-start;
+  }
+
+  .memberRow {
+    grid-template-columns: 28px 56px minmax(0, 1fr);
+    gap: 9px;
+    padding: 9px;
+  }
+
+  .uncollectedMember {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .memberRow .coverFrame {
+    width: 56px;
+  }
+
+  .orderActions,
+  .singleAction {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .orderActions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .orderActions button,
+  .singleAction button {
+    width: 100%;
+  }
+
+  .orderCompare {
+    grid-template-columns: 1fr;
+  }
+
+  .saveDock {
+    right: 10px;
+    bottom: calc(72px + env(safe-area-inset-bottom));
+    left: 10px;
+    align-items: stretch;
+    padding: 9px;
+  }
+
+  .saveDock > div:first-child {
+    display: none;
+  }
+
+  .saveDock > div:last-child {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(90px, 0.4fr) minmax(0, 1fr);
+  }
+
+  .sheetBackdrop {
+    align-items: end;
+    padding: 0;
+  }
+
+  .addSheet {
+    width: 100%;
+    max-height: 88dvh;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 18px 18px 0 0;
+    padding-bottom: calc(18px + env(safe-area-inset-bottom));
+  }
+
+  .sheetBookList article {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+  }
+
+  .placeBookPanel {
+    grid-template-columns: 70px minmax(0, 1fr);
+  }
+
+  .placeBookPanel .coverFrame {
+    width: 70px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page * {
+    scroll-behavior: auto !important;
+  }
+}

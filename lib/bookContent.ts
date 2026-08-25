@@ -1,7 +1,7 @@
 import { readFile } from "fs/promises";
 import path from "path";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
-import { AdminVersionConflictError, assertAdminVersion } from "@/lib/adminVersionedJson";
+import { AdminVersionConflictError } from "@/lib/adminVersionedJson";
 
 export type BookContentSection = {
   id: string;
@@ -297,101 +297,42 @@ export async function saveLiveBookContentToSupabase({
   if (!hasSupabaseAdminConfig()) return { saved: false };
 
   try {
+    const versionMatch = /^supabase:(\d+)$/.exec(String(expectedVersion || "").trim());
+    if (!versionMatch) {
+      return {
+        saved: false,
+        error: "Live manuscript saving is locked because no exact Supabase version was supplied.",
+      };
+    }
+
     const supabase = createSupabaseAdminClient();
-    const existingResult = await supabase
-      .from("book_content_live")
-      .select("book_id,version_number,title,content_file,content_path,section_count,word_count,content,edit_message,updated_at")
-      .eq("book_id", book.id)
-      .limit(1);
+    const result = await supabase.rpc("jju_admin_save_book_content", {
+      p_expected_version: Number(versionMatch[1]),
+      p_book_id: book.id,
+      p_content: book,
+      p_content_file: fileName,
+      p_content_path: publicPath,
+      p_message: message,
+    });
 
-    if (existingResult.error) {
-      return isMissingSupabaseTable(existingResult.error)
-        ? { saved: false, tableMissing: true }
-        : { saved: false, error: existingResult.error.message };
+    if (result.error) {
+      if (String(result.error.code || "") === "40001") throw new AdminVersionConflictError();
+      const missingRpc = String(result.error.code || "") === "42883"
+        || String(result.error.code || "") === "PGRST202";
+      return {
+        saved: false,
+        tableMissing: missingRpc,
+        error: missingRpc
+          ? "Live manuscript saving is locked until the final Workshop security migration is applied."
+          : result.error.message,
+      };
     }
 
-    const existing = existingResult.data?.[0] as (SupabaseBookContentRow & {
-      section_count?: number | null;
-      word_count?: number | null;
-      edit_message?: string | null;
-    }) | undefined;
-    if (expectedVersion) {
-      assertAdminVersion(expectedVersion, `supabase:${Math.max(0, Number(existing?.version_number || 0))}`);
+    const versionNumber = Number(result.data);
+    if (!Number.isSafeInteger(versionNumber) || versionNumber < 1) {
+      return { saved: false, error: "Atomic manuscript save returned no trustworthy version." };
     }
-    const nextVersion = Math.max(1, Number(existing?.version_number || 0) + 1);
-    const now = new Date().toISOString();
-
-    if (existing?.content) {
-      const historyResult = await supabase
-        .from("book_content_versions")
-        .upsert({
-          book_id: book.id,
-          version_number: Number(existing.version_number || 1),
-          title: String(existing.title || book.title),
-          content_file: String(existing.content_file || fileName),
-          content_path: String(existing.content_path || publicPath),
-          section_count: Number(existing.section_count || 0),
-          word_count: Number(existing.word_count || 0),
-          content: existing.content,
-          edit_message: String(existing.edit_message || "Previous live version"),
-        }, { onConflict: "book_id,version_number" });
-
-      if (historyResult.error) {
-        return isMissingSupabaseTable(historyResult.error)
-          ? { saved: false, tableMissing: true }
-          : { saved: false, error: historyResult.error.message };
-      }
-    }
-
-    const livePayload = {
-      book_id: book.id,
-      version_number: nextVersion,
-      title: book.title,
-      creator: book.creator || "",
-      description: book.description || "",
-      content_file: fileName,
-      content_path: publicPath,
-      section_count: Number(book.sectionCount || book.sections.length),
-      word_count: Number(book.wordCount || 0),
-      content: book,
-      edit_message: message,
-      updated_at: now,
-    };
-    let liveResult;
-    if (expectedVersion && existing) {
-      let update = supabase
-        .from("book_content_live")
-        .update(livePayload)
-        .eq("book_id", book.id);
-      update = existing.version_number == null
-        ? update.is("version_number", null)
-        : update.eq("version_number", Number(existing.version_number));
-      liveResult = await update.select("book_id,version_number");
-    } else if (expectedVersion) {
-      liveResult = await supabase
-        .from("book_content_live")
-        .insert(livePayload)
-        .select("book_id,version_number");
-    } else {
-      liveResult = await supabase
-        .from("book_content_live")
-        .upsert(livePayload, { onConflict: "book_id" })
-        .select("book_id,version_number");
-    }
-
-    if (liveResult.error) {
-      if (expectedVersion && String(liveResult.error.code || "") === "23505") {
-        throw new AdminVersionConflictError();
-      }
-      return isMissingSupabaseTable(liveResult.error)
-        ? { saved: false, tableMissing: true }
-        : { saved: false, error: liveResult.error.message };
-    }
-    if (expectedVersion && (liveResult.data || []).length !== 1) {
-      throw new AdminVersionConflictError();
-    }
-
-    return { saved: true, versionNumber: nextVersion };
+    return { saved: true, versionNumber };
   } catch (error) {
     if (error instanceof AdminVersionConflictError) throw error;
     return { saved: false, error: error instanceof Error ? error.message : "Supabase content save failed." };

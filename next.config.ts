@@ -5,6 +5,9 @@ const supabaseHost = new URL(supabaseUrl).hostname;
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
+  outputFileTracingIncludes: {
+    "/api/admin/print-proof/*": ["./private/print-proof-previews/*.png"],
+  },
   async rewrites() {
     return {
       beforeFiles: [

@@ -845,7 +845,6 @@ export default function ReaderClient({
   }, [compactReader]);
 
   const queueReadingAnalyticsRow = useCallback((
-    seconds: number,
     source: "reader_engaged_minute" | "qualified_read",
     startedAtMs: number,
     endedAtMs: number,
@@ -857,13 +856,11 @@ export default function ReaderClient({
     const queued = readingAnalyticsQueueRef.current.then(async () => {
       if (!readerDataBelongsTo(analyticsUserId)) return;
       const supabase = createSupabaseBrowserClient();
-      const result = await supabase.from("reading_sessions").insert({
-        user_id: analyticsUserId,
-        book_id: analyticsBookId,
-        seconds,
-        started_at: new Date(startedAtMs).toISOString(),
-        ended_at: new Date(endedAtMs).toISOString(),
-        source,
+      const result = await supabase.rpc("record_reading_session", {
+        p_book_id: analyticsBookId,
+        p_source: source,
+        p_started_at: new Date(startedAtMs).toISOString(),
+        p_ended_at: new Date(endedAtMs).toISOString(),
       });
       if (result.error) {
         console.warn(JSON.stringify({
@@ -1546,7 +1543,6 @@ export default function ReaderClient({
 
       while (engagedMinutesQueuedRef.current < completedMinutes) {
         const queued = queueReadingAnalyticsRow(
-          ENGAGED_MINUTE_SECONDS,
           "reader_engaged_minute",
           readingSessionStartedAtRef.current,
           now,
@@ -1562,7 +1558,6 @@ export default function ReaderClient({
         );
       if (isQualified && !qualifiedReadQueuedRef.current) {
         const queued = queueReadingAnalyticsRow(
-          0,
           "qualified_read",
           readingSessionStartedAtRef.current,
           now,

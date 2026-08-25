@@ -134,6 +134,9 @@
 }
 
 .sidebarFooter a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   color: var(--workshop-muted);
   font-size: 0.78rem;
   text-decoration: none;

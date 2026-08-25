@@ -268,7 +268,7 @@
 }
 
 .formatBar button {
-  min-height: 40px;
+  min-height: 44px;
   padding: 7px 11px;
   border: 0;
   border-radius: 8px;
@@ -489,7 +489,7 @@
 
 .sectionLabelField > span {
   padding-left: 8px;
-  color: #776b5c;
+  color: #706456;
   font-size: 0.62rem;
   font-weight: 720;
   letter-spacing: 0.02em;
@@ -652,6 +652,13 @@
 .readBody :global(ol) {
   margin: 1em 0;
   padding-left: 1.5em;
+}
+
+.editableBody :global(nav a),
+.readBody :global(nav a) {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .endAddButton {

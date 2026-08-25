@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import type { NarratorAssignmentView, NarratorPortalData } from "@/lib/narratorPortal";
 import { createSupabaseBrowserClient } from "@/lib/supabaseClient";
@@ -93,6 +94,7 @@ function displayFileSize(bytes: number) {
 }
 
 export default function NarratorPortalClient({ initialData }: { initialData: NarratorPortalData }) {
+  const router = useRouter();
   const initialAssignments = initialData.assignments as PortalAssignment[];
   const [assignments, setAssignments] = useState<PortalAssignment[]>(initialAssignments);
   const [selectedId, setSelectedId] = useState(
@@ -369,7 +371,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     setActionBusy(true);
     const supabase = createSupabaseBrowserClient();
     await supabase.auth.signOut();
-    window.location.assign("/account?next=/narrator");
+    router.push("/account?next=/narrator");
   }
 
   return (

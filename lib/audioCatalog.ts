@@ -93,6 +93,18 @@ export function audioCatalogEnabled() {
   return process.env.JJU_AUDIO_CATALOG_ENABLED === "1";
 }
 
+function tacosQaPreviewBookEnabled(bookId: string) {
+  return audioCatalogEnabled()
+    && process.env.VERCEL_ENV === "preview"
+    && bookId.trim().toLowerCase() === TACOS_BOOK_ID;
+}
+
+function tacosQaPreviewEditionEnabled(editionId: string) {
+  return audioCatalogEnabled()
+    && process.env.VERCEL_ENV === "preview"
+    && editionId.trim().toLowerCase() === TACOS_AUDIO_EDITION_ID;
+}
+
 export function getAudioCandidatePreviewKey(bookId: string, editionId: string) {
   if (
     !audioCatalogEnabled()
@@ -157,10 +169,10 @@ function accessModel(value: unknown): AudioAccessModel {
   return "free";
 }
 
-function normalizeTrack(row: AudioTrackRow): PublishedAudioTrack | null {
+function normalizeTrack(row: AudioTrackRow, requiredStatus: "published" | "qa"): PublishedAudioTrack | null {
   const id = String(row.id || "").trim();
   const position = Number(row.position || 0);
-  if (!id || position <= 0 || String(row.status || "") !== "published") return null;
+  if (!id || position <= 0 || String(row.status || "") !== requiredStatus) return null;
   return {
     id,
     position,
@@ -173,7 +185,8 @@ async function readPublishedAudioEditionForBook(bookId: string): Promise<Publish
   if (!audioCatalogEnabled() || !hasSupabaseAdminConfig()) return null;
 
   const supabase = createSupabaseAdminClient();
-  const editionResult = await supabase
+  const allowTacosQaPreview = tacosQaPreviewBookEnabled(bookId);
+  let editionResult = await supabase
     .from("audio_editions")
     .select(AUDIO_EDITION_SELECT)
     .eq("book_id", bookId)
@@ -188,14 +201,35 @@ async function readPublishedAudioEditionForBook(bookId: string): Promise<Publish
     throw new Error(editionResult.error.message);
   }
 
+  if (!editionResult.data && allowTacosQaPreview) {
+    editionResult = await supabase
+      .from("audio_editions")
+      .select(AUDIO_EDITION_SELECT)
+      .eq("id", TACOS_AUDIO_EDITION_ID)
+      .eq("book_id", TACOS_BOOK_ID)
+      .eq("status", "qa")
+      .in("access_model", ["free", "account"])
+      .maybeSingle();
+    if (editionResult.error) {
+      if (isMissingAudioTable(editionResult.error)) return null;
+      throw new Error(editionResult.error.message);
+    }
+  }
+
   const edition = editionResult.data as AudioEditionRow | null;
   if (!edition?.id || !edition.book_id) return null;
+  const editionStatus = String(edition.status || "");
+  const isTacosQaPreview = editionStatus === "qa"
+    && tacosQaPreviewBookEnabled(edition.book_id)
+    && tacosQaPreviewEditionEnabled(edition.id);
+  if (editionStatus !== "published" && !isTacosQaPreview) return null;
+  const requiredTrackStatus = isTacosQaPreview ? "qa" : "published";
 
   const trackResult = await supabase
     .from("audio_tracks")
     .select(AUDIO_TRACK_PUBLIC_SELECT)
     .eq("edition_id", edition.id)
-    .eq("status", "published")
+    .eq("status", requiredTrackStatus)
     .order("position", { ascending: true });
 
   if (trackResult.error) {
@@ -204,7 +238,7 @@ async function readPublishedAudioEditionForBook(bookId: string): Promise<Publish
   }
 
   const tracks = (trackResult.data || [])
-    .map(row => normalizeTrack(row as AudioTrackRow))
+    .map(row => normalizeTrack(row as AudioTrackRow, requiredTrackStatus))
     .filter((track): track is PublishedAudioTrack => Boolean(track));
 
   // No tracks means no public audiobook. This keeps incomplete database rows
@@ -229,11 +263,12 @@ export async function getAudioStreamRecord(editionId: string, trackId: string): 
   if (!audioCatalogEnabled() || !hasSupabaseAdminConfig()) return null;
 
   const supabase = createSupabaseAdminClient();
+  const allowTacosQaPreview = tacosQaPreviewEditionEnabled(editionId);
   const editionResult = await supabase
     .from("audio_editions")
     .select("id,book_id,access_model,status")
     .eq("id", editionId)
-    .eq("status", "published")
+    .in("status", allowTacosQaPreview ? ["published", "qa"] : ["published"])
     .maybeSingle();
   if (editionResult.error) {
     if (isMissingAudioTable(editionResult.error)) return null;
@@ -242,6 +277,12 @@ export async function getAudioStreamRecord(editionId: string, trackId: string): 
 
   const edition = editionResult.data as AudioEditionRow | null;
   if (!edition?.id || !edition.book_id) return null;
+  const editionStatus = String(edition.status || "");
+  const isTacosQaPreview = editionStatus === "qa"
+    && tacosQaPreviewBookEnabled(edition.book_id)
+    && tacosQaPreviewEditionEnabled(edition.id);
+  if (editionStatus !== "published" && !isTacosQaPreview) return null;
+  const requiredTrackStatus = isTacosQaPreview ? "qa" : "published";
 
   const [trackResult, bookResult] = await Promise.all([
     supabase
@@ -249,7 +290,7 @@ export async function getAudioStreamRecord(editionId: string, trackId: string): 
       .select(AUDIO_TRACK_STREAM_SELECT)
       .eq("id", trackId)
       .eq("edition_id", editionId)
-      .eq("status", "published")
+      .eq("status", requiredTrackStatus)
       .maybeSingle(),
     supabase
       .from("book_catalog")

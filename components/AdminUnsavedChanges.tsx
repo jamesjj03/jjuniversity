@@ -80,12 +80,19 @@ export function AdminUnsavedChangesProvider({
     if (!hasUnsavedChanges) return;
     const markerKey = "__jjuUnsavedGuard";
     const currentState = history.state && typeof history.state === "object" ? history.state : {};
+    const guardedPathAndSearch = `${window.location.pathname}${window.location.search}`;
+    let lastHash = window.location.hash;
     history.pushState({ ...currentState, [markerKey]: popGuardToken }, "", window.location.href);
     let active = true;
     let allowNextPop = false;
     let pendingBack: number | undefined;
 
     function guardHistoryTraversal() {
+      const currentPathAndSearch = `${window.location.pathname}${window.location.search}`;
+      const isSamePageHashTraversal = currentPathAndSearch === guardedPathAndSearch
+        && window.location.hash !== lastHash;
+      lastHash = window.location.hash;
+      if (isSamePageHashTraversal) return;
       if (allowNextPop) {
         allowNextPop = false;
         return;
@@ -121,6 +128,7 @@ export function AdminUnsavedChangesProvider({
       if (!(target instanceof Element)) return;
       const anchor = target.closest("a[href]");
       if (!(anchor instanceof HTMLAnchorElement) || anchor.target === "_blank" || anchor.hasAttribute("download")) return;
+      if (anchor.closest("[data-workshop-static-links]")) return;
 
       const destination = new URL(anchor.href, window.location.href);
       if (destination.origin !== window.location.origin) return;
@@ -129,6 +137,10 @@ export function AdminUnsavedChangesProvider({
       const needsRewrite = rewrittenPath !== destination.pathname;
       const isCurrent = rewritten === `${window.location.pathname}${window.location.search}${window.location.hash}`;
       if (isCurrent) return;
+      const isSamePageHashJump = destination.hash.length > 0
+        && rewrittenPath === window.location.pathname
+        && destination.search === window.location.search;
+      if (isSamePageHashJump) return;
 
       if (!confirmNavigation()) {
         event.preventDefault();

@@ -22,13 +22,16 @@ create or replace function public.jju_admin_save_book_catalog(
 returns text
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 declare
   v_current_revision text;
   v_next_revision text := gen_random_uuid()::text;
 begin
-  if jsonb_typeof(p_books) <> 'array' or jsonb_array_length(p_books) = 0 then
+  if jsonb_typeof(p_books) is distinct from 'array' then
+    raise exception 'Catalog payload must be a non-empty array.' using errcode = '22023';
+  end if;
+  if jsonb_array_length(p_books) = 0 then
     raise exception 'Catalog payload must be a non-empty array.' using errcode = '22023';
   end if;
 
@@ -48,6 +51,21 @@ begin
     from jsonb_array_elements(p_books) as item
   ) then
     raise exception 'Catalog payload contains duplicate book ids.' using errcode = '22023';
+  end if;
+
+  if exists (
+    select 1
+    from (
+      select lower(trim(alias_value)) as alias_key,
+             count(distinct lower(trim(item->>'id'))) as owner_count
+      from jsonb_array_elements(p_books) as item
+      cross join lateral jsonb_array_elements_text(coalesce(item->'slug_aliases', '[]'::jsonb)) as aliases(alias_value)
+      where trim(alias_value) <> ''
+      group by lower(trim(alias_value))
+      having count(distinct lower(trim(item->>'id'))) > 1
+    ) duplicate_alias
+  ) then
+    raise exception 'Catalog payload assigns one slug alias to multiple books.' using errcode = '22023';
   end if;
 
   select revision
@@ -74,6 +92,18 @@ begin
     )
   ) then
     raise exception 'Catalog deletion is not supported by this Workshop save.' using errcode = '22023';
+  end if;
+
+  if exists (
+    select 1
+    from jsonb_array_elements(p_books) as item
+    cross join lateral jsonb_array_elements_text(coalesce(item->'slug_aliases', '[]'::jsonb)) as aliases(alias_value)
+    join public.book_slug_aliases existing_alias
+      on lower(existing_alias.alias) = lower(trim(alias_value))
+    where trim(alias_value) <> ''
+      and existing_alias.book_id <> lower(trim(item->>'id'))
+  ) then
+    raise exception 'A slug alias is already owned by another book.' using errcode = '23505';
   end if;
 
   insert into public.book_catalog (
@@ -117,7 +147,16 @@ begin
     coalesce(item->>'reading_label', ''),
     coalesce((item->>'chapter_count')::integer, 0),
     coalesce(array(select jsonb_array_elements_text(coalesce(item->'tags', '[]'::jsonb))), '{}'::text[]),
-    coalesce(array(select jsonb_array_elements_text(coalesce(item->'slug_aliases', '[]'::jsonb))), '{}'::text[]),
+    coalesce(array(
+      select alias_key
+      from (
+        select lower(trim(alias_value)) alias_key, min(alias_position) first_position
+        from jsonb_array_elements_text(coalesce(item->'slug_aliases', '[]'::jsonb)) with ordinality aliases(alias_value, alias_position)
+        where trim(alias_value) <> ''
+        group by lower(trim(alias_value))
+      ) normalized
+      order by first_position
+    ), '{}'::text[]),
     coalesce(item->'metadata', '{}'::jsonb)
   from jsonb_array_elements(p_books) as item
   on conflict (id) do update set
@@ -141,8 +180,17 @@ begin
     slug_aliases = excluded.slug_aliases,
     metadata = excluded.metadata;
 
+  delete from public.book_slug_aliases existing_alias
+  using jsonb_array_elements(p_books) as item
+  where existing_alias.book_id = lower(trim(item->>'id'))
+    and not exists (
+      select 1
+      from jsonb_array_elements_text(coalesce(item->'slug_aliases', '[]'::jsonb)) aliases(alias_value)
+      where lower(trim(alias_value)) = lower(existing_alias.alias)
+    );
+
   insert into public.book_slug_aliases (alias, book_id)
-  select distinct alias_value, lower(trim(item->>'id'))
+  select distinct lower(trim(alias_value)), lower(trim(item->>'id'))
   from jsonb_array_elements(p_books) as item
   cross join lateral jsonb_array_elements_text(coalesce(item->'slug_aliases', '[]'::jsonb)) as aliases(alias_value)
   where trim(alias_value) <> ''
@@ -168,7 +216,7 @@ create or replace function public.jju_admin_create_book_draft(
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 declare
   v_current_revision text;
@@ -178,11 +226,13 @@ begin
   if v_book_id = '' or trim(coalesce(p_book->>'title', '')) = '' then
     raise exception 'Draft catalog row is missing its id or title.' using errcode = '22023';
   end if;
-  if jsonb_typeof(p_content) <> 'object'
+  if jsonb_typeof(p_content) is distinct from 'object'
      or coalesce(p_content->>'id', '') = ''
      or lower(trim(p_content->>'id')) <> v_book_id
-     or jsonb_typeof(p_content->'sections') <> 'array'
-     or jsonb_array_length(p_content->'sections') = 0 then
+     or jsonb_typeof(p_content->'sections') is distinct from 'array' then
+    raise exception 'Draft content is malformed or empty.' using errcode = '22023';
+  end if;
+  if jsonb_array_length(p_content->'sections') = 0 then
     raise exception 'Draft content is malformed or empty.' using errcode = '22023';
   end if;
 
@@ -200,6 +250,16 @@ begin
   end if;
   if exists (select 1 from public.book_catalog where id = v_book_id) then
     raise exception 'A book with id "%" already exists.', v_book_id using errcode = '23505';
+  end if;
+  if exists (
+    select 1
+    from jsonb_array_elements_text(coalesce(p_book->'slug_aliases', '[]'::jsonb)) as aliases(alias_value)
+    join public.book_slug_aliases existing_alias
+      on lower(existing_alias.alias) = lower(trim(alias_value))
+    where trim(alias_value) <> ''
+      and existing_alias.book_id <> v_book_id
+  ) then
+    raise exception 'A slug alias is already owned by another book.' using errcode = '23505';
   end if;
 
   insert into public.book_catalog (
@@ -226,12 +286,21 @@ begin
     coalesce(p_book->>'reading_label', ''),
     coalesce((p_book->>'chapter_count')::integer, 0),
     coalesce(array(select jsonb_array_elements_text(coalesce(p_book->'tags', '[]'::jsonb))), '{}'::text[]),
-    coalesce(array(select jsonb_array_elements_text(coalesce(p_book->'slug_aliases', '[]'::jsonb))), '{}'::text[]),
+    coalesce(array(
+      select alias_key
+      from (
+        select lower(trim(alias_value)) alias_key, min(alias_position) first_position
+        from jsonb_array_elements_text(coalesce(p_book->'slug_aliases', '[]'::jsonb)) with ordinality aliases(alias_value, alias_position)
+        where trim(alias_value) <> ''
+        group by lower(trim(alias_value))
+      ) normalized
+      order by first_position
+    ), '{}'::text[]),
     coalesce(p_book->'metadata', '{}'::jsonb)
   );
 
   insert into public.book_slug_aliases (alias, book_id)
-  select distinct alias_value, v_book_id
+  select distinct lower(trim(alias_value)), v_book_id
   from jsonb_array_elements_text(coalesce(p_book->'slug_aliases', '[]'::jsonb)) as aliases(alias_value)
   where trim(alias_value) <> ''
   on conflict (alias) do update set book_id = excluded.book_id;

@@ -10,6 +10,7 @@ import {
   useState,
   type ClipboardEvent,
   type FormEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent,
 } from "react";
 import CoverImage from "@/components/CoverImage";
@@ -98,6 +99,69 @@ type SectionBodyProps = {
   onHtmlChange: (sectionId: string, html: string) => void;
 };
 
+const MISSING_LINK_ATTRIBUTE = "__jju_missing__";
+const EPHEMERAL_LINK_SELECTOR = [
+  "[data-workshop-disabled-link]",
+  "[data-workshop-original-tabindex]",
+  "[data-workshop-original-aria-disabled]",
+].join(",");
+const editorsWithInertLinks = new WeakSet<HTMLDivElement>();
+
+function markEmbeddedLink(editor: HTMLDivElement, anchor: HTMLAnchorElement) {
+  editorsWithInertLinks.add(editor);
+  if (!anchor.hasAttribute("data-workshop-disabled-link")) {
+    anchor.setAttribute("data-workshop-original-tabindex", anchor.getAttribute("tabindex") ?? MISSING_LINK_ATTRIBUTE);
+    anchor.setAttribute("data-workshop-original-aria-disabled", anchor.getAttribute("aria-disabled") ?? MISSING_LINK_ATTRIBUTE);
+    anchor.setAttribute("data-workshop-disabled-link", "");
+  }
+  anchor.setAttribute("tabindex", "-1");
+  anchor.setAttribute("aria-disabled", "true");
+}
+
+function markEmbeddedLinks(editor: HTMLDivElement) {
+  const anchors = editor.querySelectorAll<HTMLAnchorElement>("a[href]");
+  const hasEphemeralAttributes = editor.querySelector(EPHEMERAL_LINK_SELECTOR) !== null;
+  if (anchors.length === 0 && !hasEphemeralAttributes) {
+    editorsWithInertLinks.delete(editor);
+    return;
+  }
+  editorsWithInertLinks.add(editor);
+  anchors.forEach(anchor => markEmbeddedLink(editor, anchor));
+}
+
+function markEmbeddedLinksInAddedNode(editor: HTMLDivElement, node: Node) {
+  if (!(node instanceof Element)) return;
+  if (node.matches(EPHEMERAL_LINK_SELECTOR) || node.querySelector(EPHEMERAL_LINK_SELECTOR)) {
+    editorsWithInertLinks.add(editor);
+  }
+  if (node instanceof HTMLAnchorElement && node.hasAttribute("href")) markEmbeddedLink(editor, node);
+  node.querySelectorAll<HTMLAnchorElement>("a[href]").forEach(anchor => markEmbeddedLink(editor, anchor));
+}
+
+function editorHtmlForSave(editor: HTMLDivElement) {
+  if (!editorsWithInertLinks.has(editor)) return editor.innerHTML;
+  const clone = editor.cloneNode(true) as HTMLDivElement;
+  const ephemeralElements = clone.querySelectorAll<HTMLElement>(EPHEMERAL_LINK_SELECTOR);
+  if (ephemeralElements.length === 0) {
+    editorsWithInertLinks.delete(editor);
+    return editor.innerHTML;
+  }
+  ephemeralElements.forEach(element => {
+    if (element instanceof HTMLAnchorElement && element.hasAttribute("data-workshop-disabled-link")) {
+      const originalTabIndex = element.getAttribute("data-workshop-original-tabindex");
+      const originalAriaDisabled = element.getAttribute("data-workshop-original-aria-disabled");
+      if (originalTabIndex === MISSING_LINK_ATTRIBUTE) element.removeAttribute("tabindex");
+      else if (originalTabIndex !== null) element.setAttribute("tabindex", originalTabIndex);
+      if (originalAriaDisabled === MISSING_LINK_ATTRIBUTE) element.removeAttribute("aria-disabled");
+      else if (originalAriaDisabled !== null) element.setAttribute("aria-disabled", originalAriaDisabled);
+    }
+    element.removeAttribute("data-workshop-disabled-link");
+    element.removeAttribute("data-workshop-original-tabindex");
+    element.removeAttribute("data-workshop-original-aria-disabled");
+  });
+  return clone.innerHTML;
+}
+
 const SectionBody = memo(function SectionBody({
   editable,
   epoch,
@@ -116,12 +180,34 @@ const SectionBody = memo(function SectionBody({
     if (!editor) return;
     const forceSync = appliedEpochRef.current !== epoch;
     appliedEpochRef.current = epoch;
-    if ((!forceSync && document.activeElement === editor) || editor.innerHTML === html) return;
-    editor.innerHTML = html;
+    if (!forceSync && document.activeElement === editor) return;
+    if (editorHtmlForSave(editor) !== html) editor.innerHTML = html;
+    markEmbeddedLinks(editor);
   }, [epoch, html]);
 
+  useEffect(() => {
+    const editor = editorRef.current;
+    if (!editor) return;
+    const observer = new MutationObserver(records => {
+      for (const record of records) {
+        if (record.type === "attributes" && record.target instanceof HTMLAnchorElement) {
+          if (record.target.hasAttribute("href")) markEmbeddedLink(editor, record.target);
+          continue;
+        }
+        record.addedNodes.forEach(node => markEmbeddedLinksInAddedNode(editor, node));
+      }
+    });
+    observer.observe(editor, {
+      attributeFilter: ["href"],
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+    return () => observer.disconnect();
+  }, []);
+
   function handleInput(event: FormEvent<HTMLDivElement>) {
-    onHtmlChange(sectionId, event.currentTarget.innerHTML);
+    onHtmlChange(sectionId, editorHtmlForSave(event.currentTarget));
   }
 
   function handlePaste(event: ClipboardEvent<HTMLDivElement>) {
@@ -130,19 +216,39 @@ const SectionBody = memo(function SectionBody({
     document.execCommand("insertText", false, text);
   }
 
+  function handleEmbeddedLink(event: MouseEvent<HTMLDivElement>) {
+    if (event.target instanceof Element && event.target.closest("a[href]")) {
+      event.preventDefault();
+    }
+  }
+
+  function handleEmbeddedLinkKeyDown(event: ReactKeyboardEvent<HTMLDivElement>) {
+    if (
+      (event.key === "Enter" || event.key === " ")
+      && event.target instanceof Element
+      && event.target.closest("a[href]")
+    ) {
+      event.preventDefault();
+    }
+  }
+
   return (
     <div
       ref={editorRef}
       className={editable ? styles.editableBody : styles.readBody}
       contentEditable={editable && !locked}
       data-manuscript-editor={sectionId}
+      data-workshop-static-links
       role={editable ? "textbox" : undefined}
       aria-label={editable ? `Text for ${sectionTitle || "untitled section"}` : undefined}
       aria-multiline={editable ? true : undefined}
       suppressContentEditableWarning
       data-placeholder="Start writing…"
+      onAuxClickCapture={handleEmbeddedLink}
+      onClickCapture={handleEmbeddedLink}
       onFocus={event => onFocusEditor(sectionId, event.currentTarget)}
       onInput={handleInput}
+      onKeyDownCapture={handleEmbeddedLinkKeyDown}
       onPaste={handlePaste}
     />
   );
@@ -960,7 +1066,8 @@ export default function ManuscriptStudio({
     if (!sectionId) return;
     editor.focus();
     document.execCommand(command, false, value);
-    handleHtmlChange(sectionId, editor.innerHTML);
+    handleHtmlChange(sectionId, editorHtmlForSave(editor));
+    markEmbeddedLinks(editor);
   }
 
   function keepSelection(event: MouseEvent<HTMLButtonElement>) {

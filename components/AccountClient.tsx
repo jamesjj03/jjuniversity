@@ -601,10 +601,11 @@ export default function AccountClient({
       const clearResults = await Promise.all([
         supabase.rpc("clear_completed_books", { expected_user_id: user.id }),
         supabase.from("reading_progress").delete().eq("user_id", user.id),
-        supabase.from("reading_sessions").delete().eq("user_id", user.id),
+        supabase.rpc("clear_reading_sessions", { expected_user_id: user.id }),
         supabase.from("reader_bookmarks").delete().eq("user_id", user.id),
         supabase.from("reader_notes").delete().eq("user_id", user.id),
         supabase.from("reader_quotes").delete().eq("user_id", user.id),
+        supabase.rpc("clear_reader_canonicalization_audit", { expected_user_id: user.id }),
       ]);
       cloudClearError = cloudClearError || firstSupabaseError(clearResults);
       setCloudProgress([]);

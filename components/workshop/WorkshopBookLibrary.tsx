@@ -172,7 +172,7 @@ export default function WorkshopBookLibrary({
             autoFocus={!compact}
           />
         </label>
-        <div className={styles.queueButtons} aria-label="Quick book queues">
+        <div className={styles.queueButtons} role="group" aria-label="Quick book queues">
           <button type="button" aria-pressed={status === "needs-review"} className={status === "needs-review" ? styles.activeQueue : ""} onClick={() => { setStatus(status === "needs-review" ? "all" : "needs-review"); setResultLimit(RESULT_STEP); }}>Needs review <strong>{counts.review}</strong></button>
           <button type="button" aria-pressed={status === "hidden"} className={status === "hidden" ? styles.activeQueue : ""} onClick={() => { setStatus(status === "hidden" ? "all" : "hidden"); setResultLimit(RESULT_STEP); }}>Hidden drafts <strong>{counts.hidden}</strong></button>
           <button type="button" aria-pressed={status === "coming-soon"} className={status === "coming-soon" ? styles.activeQueue : ""} onClick={() => { setStatus(status === "coming-soon" ? "all" : "coming-soon"); setResultLimit(RESULT_STEP); }}>Coming soon <strong>{counts.comingSoon}</strong></button>

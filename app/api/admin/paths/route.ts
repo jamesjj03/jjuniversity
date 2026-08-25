@@ -1,8 +1,16 @@
 import { writeFile } from "fs/promises";
 import path from "path";
-import { cleanPathsFile } from "@/lib/paths";
+import { readAdminBookCatalog } from "@/lib/adminBookCatalog";
 import {
+  COLLECTIONS_MEMBERSHIP_EDITOR_SCOPE,
+  rebaseOrganizerMembershipDraft,
+} from "@/lib/collectionsOrganizer";
+import { cleanPathsFile } from "@/lib/paths";
+import type { PathsFile } from "@/lib/paths";
+import {
+  AdminVersionConflictError,
   adminErrorResponse,
+  assertAdminVersion,
   expectedAdminVersion,
   readGithubJson,
   readLocalJson,
@@ -11,7 +19,7 @@ import {
   writeLocalJson,
 } from "@/lib/adminVersionedJson";
 
-function assertRawPaths(value: unknown) {
+function assertRawPaths(value: unknown): PathsFile {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Paths source is not an object.");
   const data = value as Record<string, unknown>;
   if (!Array.isArray(data.series) || !Array.isArray(data.paths)) {
@@ -40,16 +48,36 @@ function assertRawPaths(value: unknown) {
       bookIds.add(bookId);
     });
   });
+  return value as PathsFile;
+}
+
+async function assertCatalogBookIds(value: PathsFile) {
+  const catalog = await readAdminBookCatalog();
+  const catalogIds = new Set(catalog.books.map(book => String(book.id || "").trim().toLowerCase()).filter(Boolean));
+  const data = value as Record<string, unknown>;
+  const groups = [data.series, data.paths, data.tagPaths || [], data.recommendedReading || []].flat() as Array<Record<string, unknown>>;
+  const missing = [...new Set(groups.flatMap(group => (group.books as Array<Record<string, unknown>>)
+    .map(book => String(book.id || "").trim().toLowerCase())
+    .filter(id => id && !catalogIds.has(id))))];
+  if (missing.length) {
+    throw new AdminVersionConflictError(`Collections reference ${missing.length} book id${missing.length === 1 ? "" : "s"} missing from the authoritative catalog: ${missing.slice(0, 8).join(", ")}. Reload before saving.`);
+  }
   return value;
+}
+
+async function readAuthoritativePaths() {
+  const github = await readGithubJson("public/paths.json");
+  if (github) return { paths: assertRawPaths(github.value), version: github.version };
+  const pathsPath = path.join(process.cwd(), "public", "paths.json");
+  const local = await readLocalJson(pathsPath);
+  return { paths: assertRawPaths(local.value), version: local.version };
 }
 
 export async function GET() {
   try {
-    const github = await readGithubJson("public/paths.json");
-    if (github) return versionedJson(cleanPathsFile(assertRawPaths(github.value)), github.version);
-    const pathsPath = path.join(process.cwd(), "public", "paths.json");
-    const local = await readLocalJson(pathsPath);
-    return versionedJson(cleanPathsFile(assertRawPaths(local.value)), local.version);
+    const authoritative = await readAuthoritativePaths();
+    const checked = await assertCatalogBookIds(authoritative.paths);
+    return versionedJson(cleanPathsFile(checked), authoritative.version);
   } catch (error) {
     return adminErrorResponse(error, "Could not load paths.json.");
   }
@@ -59,7 +87,19 @@ export async function POST(request: Request) {
   try {
     const expectedVersion = expectedAdminVersion(request);
     const body = await request.json().catch(() => ({}));
-    const paths = cleanPathsFile(assertRawPaths(body.paths || body));
+    const submitted = assertRawPaths(body.paths || body);
+    let scopedPaths = submitted;
+    if (body.editorScope === COLLECTIONS_MEMBERSHIP_EDITOR_SCOPE) {
+      const authoritative = await readAuthoritativePaths();
+      assertAdminVersion(expectedVersion, authoritative.version);
+      const rebased = rebaseOrganizerMembershipDraft(authoritative.paths, submitted);
+      if (!rebased) {
+        throw new Error("Collections membership save was rejected because its Collection structure did not match the authoritative file.");
+      }
+      scopedPaths = rebased;
+    }
+    const checked = await assertCatalogBookIds(scopedPaths);
+    const paths = cleanPathsFile(checked);
     const content = `${JSON.stringify(paths, null, 2)}\n`;
     const pathsPath = path.join(process.cwd(), "public", "paths.json");
     const message = body.message || `Update JJU reading paths (${new Date().toISOString().slice(0, 10)})`;

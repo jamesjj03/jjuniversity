@@ -134,7 +134,7 @@ async function main() {
         console.log("The recovered email candidates can be staged privately with: npm run audio:ingest:tacos -- --stage-preview");
       }
     } else if (databaseInspection.kind !== "missing" && databaseInspection.kind !== "desired") {
-      console.log("The existing published rows still require a separately reviewed exact-CAS candidate promotion before --apply.");
+      console.log("The existing sealed rows still require a separately reviewed exact-CAS candidate promotion before --apply.");
     } else {
       console.log("Apply only this sealed pilot with: npm run audio:ingest:tacos -- --apply");
     }
@@ -142,11 +142,15 @@ async function main() {
   }
 
   if (stagePreview) {
-    assert(databaseInspection.kind !== "missing", "Preview staging requires the already-published sealed Tacos pilot.");
-    assert(initialDatabase.edition?.status === "published", "Preview staging requires the already-published sealed Tacos pilot.");
+    assert(databaseInspection.kind !== "missing", "Preview staging requires the sealed Tacos pilot database rows.");
+    const baselineStatus = initialDatabase.edition?.status;
+    assert(["qa", "published"].includes(baselineStatus), "Preview staging requires a sealed QA or published Tacos pilot.");
     assert(
-      initialDatabase.tracks.every(row => row.status === "published" && row.published_at),
-      "Preview staging requires all 16 baseline tracks to remain published with publication timestamps.",
+      initialDatabase.tracks.every(row => (
+        row.status === baselineStatus
+        && (baselineStatus === "published" ? Boolean(row.published_at) : !row.published_at)
+      )),
+      "Preview staging requires all 16 baseline tracks to share the edition's exact QA or published state.",
     );
     await uploadMissingObjects(supabase, localPlan, missingObjects);
     const verifiedObjects = await inspectStorageObjects(supabase, localPlan);
@@ -157,7 +161,7 @@ async function main() {
     assert(preservedObjects.every(item => item.present), "A prior private candidate object disappeared during additive staging.");
 
     console.log("Staged Danny's corrected tracks 10, 13, and 16 as verified private Storage candidates.");
-    console.log("Published database rows and prior private objects were preserved; Vercel flags, deployments, and narrator data were not touched.");
+    console.log("Audio database rows and prior private objects were preserved; Vercel flags, deployments, and narrator data were not touched.");
     return;
   }
 

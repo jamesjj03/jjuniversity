@@ -92,17 +92,23 @@ export default async function AdminPage() {
           <p>Create a hidden catalog entry and its manuscript together.</p>
           <strong>Create a hidden draft →</strong>
         </Link>
-        <Link className={styles.actionCard} href={getAdminHref("/admin/books?status=needs-review")}>
-          <span className={styles.cardKicker}>Editorial</span>
-          <h2>Books needing review</h2>
-          <p>{data.error ? "Open the filtered library when the catalog is available." : `${review} book${review === 1 ? "" : "s"} currently marked for review.`}</p>
-          <strong>See the queue →</strong>
+        <Link className={styles.actionCard} href={getAdminHref("/admin/reviews")}>
+          <span className={styles.cardKicker}>Your call</span>
+          <h2>Needs your eyes</h2>
+          <p>Audio listening, print choices, factual review, and editorial calls—gathered into one finite inbox.</p>
+          <strong>See what actually needs you →</strong>
         </Link>
         <Link className={styles.actionCard} href={getAdminHref("/admin/organize")}>
           <span className={styles.cardKicker}>Organize</span>
           <h2>Collections and shelves</h2>
           <p>Work on how books are grouped without mixing that job into title, manuscript, or publishing edits.</p>
           <strong>Open organizing tools →</strong>
+        </Link>
+        <Link className={styles.actionCard} href={getAdminHref("/admin/print")}>
+          <span className={styles.cardKicker}>Proof only</span>
+          <h2>Print editor</h2>
+          <p>Compare the conflicting proof packages and make the nine decisions required before any paperback order.</p>
+          <strong>Open print review →</strong>
         </Link>
         <Link className={styles.actionCard} href={getAdminHref("/admin/more")}>
           <span className={styles.cardKicker}>Site</span>

@@ -182,15 +182,19 @@ export default function SiteV2SettingsClient({ bookIdentityMap, validBookIds }: 
     }
 
     if ((action === "progress" || action === "all") && supabase && cloudUser) {
-        const tables = action === "all"
-          ? ["reading_progress", "reading_sessions", "reader_bookmarks", "reader_notes", "reader_quotes"]
-          : ["reading_progress", "reading_sessions"];
-        const results = await Promise.all([
-          supabase.rpc("clear_completed_books", { expected_user_id: cloudUser.id }),
-          ...tables.map(table => supabase.from(table).delete().eq("user_id", cloudUser.id)),
-        ]);
-        const failed = results.find(result => result.error)?.error;
-        if (failed) cloudError = cloudError || failed.message;
+      const tables = action === "all"
+        ? ["reading_progress", "reader_bookmarks", "reader_notes", "reader_quotes"]
+        : ["reading_progress"];
+      const results = await Promise.all([
+        supabase.rpc("clear_completed_books", { expected_user_id: cloudUser.id }),
+        supabase.rpc("clear_reading_sessions", { expected_user_id: cloudUser.id }),
+        ...(action === "all"
+          ? [supabase.rpc("clear_reader_canonicalization_audit", { expected_user_id: cloudUser.id })]
+          : []),
+        ...tables.map(table => supabase.from(table).delete().eq("user_id", cloudUser.id)),
+      ]);
+      const failed = results.find(result => result.error)?.error;
+      if (failed) cloudError = cloudError || failed.message;
     }
 
     dispatchReadingEvents({ saved: action === "saved" || action === "all" });

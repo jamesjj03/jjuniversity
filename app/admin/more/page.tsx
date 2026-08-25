@@ -22,6 +22,13 @@ export default function MoreWorkshopPage() {
 
       <section className={styles.hubGrid} aria-label="Additional Workshop tools">
         <WorkshopHubCard
+          title="Reading activity"
+          description="See signed-in reader minutes, qualified reads, trends, and per-book activity. Anonymous reading is not counted."
+          status="Signed-in coverage only"
+          action="Open reading analytics"
+          href="/admin/reading"
+        />
+        <WorkshopHubCard
           title="Homepage"
           description="Edit featured and newest selections in the retained full workspace. This legacy editor still loads all of its versioned resources before saving."
           status="Legacy versioned tool"

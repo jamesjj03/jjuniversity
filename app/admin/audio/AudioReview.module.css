@@ -1,0 +1,386 @@
+.page {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 20px 14px 34px;
+  color: var(--workshop-cream);
+}
+
+.pageHeader {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: var(--workshop-gold);
+  font-size: 0.72rem;
+  font-weight: 760;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.pageHeader h1 {
+  max-width: 18ch;
+  margin: 0;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2rem, 10vw, 3.8rem);
+  font-weight: 560;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.intro {
+  max-width: 68ch;
+  margin: 12px 0 0;
+  color: var(--workshop-muted);
+  line-height: 1.6;
+}
+
+.headerActions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.primaryLink,
+.secondaryLink,
+.compactListenLink {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 740;
+  text-align: center;
+  text-decoration: none;
+}
+
+.primaryLink,
+.compactListenLink {
+  border-color: #d7b765;
+  background: #d7b765;
+  color: #17130b;
+}
+
+.secondaryLink {
+  background: var(--workshop-panel-raised);
+  color: var(--workshop-cream);
+}
+
+.releaseBanner,
+.panel,
+.errorPanel,
+.metric {
+  border: 1px solid var(--workshop-rule);
+  border-radius: 15px;
+  background: var(--workshop-panel);
+}
+
+.releaseBanner {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 14px;
+  padding: 18px;
+  border-color: rgba(215, 183, 101, 0.46);
+  background: linear-gradient(135deg, rgba(215, 183, 101, 0.12), rgba(20, 24, 20, 0.92));
+}
+
+.releaseBanner h2,
+.panelHeader h2 {
+  margin: 0;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 580;
+  line-height: 1.12;
+}
+
+.releaseBanner h2 {
+  font-size: 1.4rem;
+}
+
+.releaseBanner p,
+.panelHeader p,
+.errorPanel p {
+  margin: 7px 0 0;
+  color: var(--workshop-muted);
+  line-height: 1.55;
+}
+
+.releaseBadge,
+.passBadge,
+.pendingBadge,
+.technicalBadge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 780;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.releaseBadge {
+  padding: 7px 10px;
+  background: #d7b765;
+  color: #17130b;
+}
+
+.passBadge,
+.technicalBadge {
+  padding: 5px 8px;
+  background: rgba(91, 174, 125, 0.13);
+  color: #a5d9b5;
+}
+
+.pendingBadge {
+  padding: 5px 8px;
+  background: rgba(215, 183, 101, 0.13);
+  color: #e6cd91;
+}
+
+.metricGrid {
+  display: grid;
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
+.metric {
+  min-height: 112px;
+  display: grid;
+  align-content: space-between;
+  gap: 8px;
+  padding: 16px;
+}
+
+.metric > span,
+.metric small,
+.trackMeta,
+.noFlag,
+.previewUnavailable {
+  color: var(--workshop-muted);
+}
+
+.metric > span {
+  font-size: 0.73rem;
+  font-weight: 730;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.metric strong {
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 570;
+}
+
+.metric small {
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+.panel {
+  margin-top: 14px;
+  padding: 18px;
+}
+
+.panelHeader {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panelHeader h2 {
+  margin-top: 7px;
+  font-size: clamp(1.35rem, 6vw, 2rem);
+}
+
+.checkList {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checkList li {
+  position: relative;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--workshop-muted);
+  line-height: 1.5;
+}
+
+.checkList li::before {
+  position: absolute;
+  top: 12px;
+  left: 13px;
+  color: #a5d9b5;
+  content: "✓";
+  font-weight: 800;
+}
+
+.flagList,
+.trackGrid {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flagList li {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 10px;
+  padding: 13px;
+  border: 1px solid rgba(215, 183, 101, 0.2);
+  border-radius: 11px;
+  background: rgba(215, 183, 101, 0.045);
+}
+
+.trackNumber {
+  color: var(--workshop-gold);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.flagList strong {
+  color: var(--workshop-cream);
+}
+
+.flagList p {
+  margin: 7px 0 0;
+  color: var(--workshop-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.flagList b {
+  color: #e6cd91;
+}
+
+.previewUnavailable {
+  display: block;
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.track,
+.flaggedTrack {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.022);
+}
+
+.flaggedTrack {
+  border-color: rgba(215, 183, 101, 0.28);
+}
+
+.trackTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.track > strong,
+.flaggedTrack > strong {
+  overflow-wrap: anywhere;
+  color: var(--workshop-cream);
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.trackMeta,
+.noFlag {
+  font-size: 0.75rem;
+}
+
+.flagChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.flagChips span {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(215, 183, 101, 0.12);
+  color: #e6cd91;
+  font-size: 0.68rem;
+  font-weight: 730;
+}
+
+.errorPanel {
+  padding: 20px;
+  border-color: rgba(208, 102, 83, 0.5);
+}
+
+.errorPanel strong {
+  color: #f0b5a8;
+}
+
+@media (min-width: 640px) {
+  .page {
+    padding: 34px clamp(22px, 4vw, 48px) 48px;
+  }
+
+  .pageHeader {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .headerActions {
+    min-width: 190px;
+  }
+
+  .releaseBanner {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .metricGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .panel {
+    padding: 22px;
+  }
+
+  .panelHeader {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .trackGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .trackGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryLink,
+  .secondaryLink,
+  .compactListenLink {
+    scroll-behavior: auto;
+  }
+}
