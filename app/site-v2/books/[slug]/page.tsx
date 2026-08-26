@@ -8,14 +8,20 @@ import styles from "@/components/site-v2/SiteV2.module.css";
 import { getPublishedAudioEditionForBook } from "@/lib/audioCatalog";
 import { coverFallbackSrc } from "@/lib/cover";
 import {
+  absoluteUrl,
   bookUrl,
   coverUrl,
   getBookBySlugLive,
-  getBookSample,
   getCollectionsLive,
   getPrintProductsForBook,
   getRelatedBooksLive,
+  slugify,
 } from "@/lib/publishing";
+import {
+  getBookSectionIndex,
+  sanitizePublicSectionHtml,
+  sectionHtmlHasMatchingHeading,
+} from "@/lib/bookSectionRoutes";
 import { formatBookLength, siteV2CoverSrc, siteV2Description, siteV2ShelfLabel, siteV2TopicsForBook } from "@/lib/siteV2";
 import { bookJsonLd, breadcrumbJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
@@ -45,8 +51,8 @@ export default async function SiteV2BookPage({ params }: Props) {
   const book = await getBookBySlugLive(slug);
   if (!book) notFound();
 
-  const [sample, related, allSeries, audioEdition] = await Promise.all([
-    getBookSample(book),
+  const [sectionIndex, related, allSeries, audioEdition] = await Promise.all([
+    getBookSectionIndex(book),
     getRelatedBooksLive(book, 16),
     getCollectionsLive(),
     getPublishedAudioEditionForBook(book.id),
@@ -55,6 +61,19 @@ export default async function SiteV2BookPage({ params }: Props) {
   const printProduct = getPrintProductsForBook(book.id)[0];
   const topics = siteV2TopicsForBook(book);
   const bookPath = bookUrl(book);
+  const firstRoutes = sectionIndex.routes.slice(0, 18);
+  const remainingRoutes = sectionIndex.routes.slice(18);
+  const bookSchema = {
+    ...bookJsonLd(book, bookPath),
+    ...(sectionIndex.routes.length ? {
+      hasPart: sectionIndex.routes.map(route => ({
+        "@type": "CreativeWork",
+        name: route.title,
+        url: absoluteUrl(route.path),
+        position: route.index + 1,
+      })),
+    } : {}),
+  };
 
   return (
     <article className={styles.bookPage}>
@@ -62,7 +81,7 @@ export default async function SiteV2BookPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: jsonLd([
-            bookJsonLd(book, bookPath),
+            bookSchema,
             breadcrumbJsonLd([
               { name: "Books", path: "/books" },
               { name: book.title, path: bookPath },
@@ -88,14 +107,16 @@ export default async function SiteV2BookPage({ params }: Props) {
               {topics.length > 0 && (
                 <div>
                   <span>Topics</span>
-                  <p>{topics.join(" · ")}</p>
+                  <p className={styles.collectionLinks}>
+                    {topics.map(topic => <Link href={`/tag/${slugify(topic)}`} key={topic}>{topic}</Link>)}
+                  </p>
                 </div>
               )}
               {series.length > 0 && (
                 <div>
                   <span>Collections</span>
                   <p className={styles.collectionLinks}>
-                    {series.map(item => <Link href={`/books?collection=${item.slug}&reset=1`} key={item.id}>{item.title}</Link>)}
+                    {series.map(item => <Link href={`/series/${item.slug}`} key={item.id}>{item.title}</Link>)}
                   </p>
                 </div>
               )}
@@ -104,7 +125,7 @@ export default async function SiteV2BookPage({ params }: Props) {
 
           <div className={styles.bookMetaGrid} aria-label="Book details">
             <div><strong>{formatBookLength(book)}</strong><span>Reading time</span></div>
-            <div><strong>{sample.chapterCount || book.chapterCount || "Open"}</strong><span>Chapters</span></div>
+            <div><strong>{sectionIndex.routes.length || book.chapterCount || "Open"}</strong><span>Sections</span></div>
           </div>
 
           <SiteV2BookAccess
@@ -122,20 +143,56 @@ export default async function SiteV2BookPage({ params }: Props) {
         <section className={styles.contentsPanel}>
           <div className={styles.contentsHeading}>
             <h2>Chapters</h2>
-            {sample.chapterCount > 0 && <span>{sample.chapterCount} total</span>}
+            {sectionIndex.routes.length > 0 && <span>{sectionIndex.routes.length} total</span>}
           </div>
-          {sample.toc.length ? (
+          {firstRoutes.length ? (
             <ol>
-              {sample.toc.slice(0, 18).map((item, index) => (
-                <li key={`${item}-${index}`}><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>
+              {firstRoutes.map(route => (
+                <li key={route.path}>
+                  <span>{String(route.index + 1).padStart(2, "0")}</span>
+                  <Link href={route.path}>{route.title}</Link>
+                </li>
               ))}
             </ol>
           ) : (
-            <p>Open the reader to see the full chapter list.</p>
+            <p>{book.status === "ready" ? "Open the reader to see the available text." : "This book is coming soon."}</p>
           )}
-          {sample.chapterCount > 18 && <p>{sample.chapterCount - 18} more chapters are available in the reader.</p>}
+          {remainingRoutes.length > 0 && (
+            <details className={styles.moreContents}>
+              <summary>Show {remainingRoutes.length} more sections</summary>
+              <ol>
+                {remainingRoutes.map(route => (
+                  <li key={route.path}>
+                    <span>{String(route.index + 1).padStart(2, "0")}</span>
+                    <Link href={route.path}>{route.title}</Link>
+                  </li>
+                ))}
+              </ol>
+            </details>
+          )}
         </section>
       </section>
+
+      {sectionIndex.extras.length > 0 && (
+        <details className={styles.editionNotes}>
+          <summary>Edition notes and short pages</summary>
+          <div className={styles.editionNotesIntro}>
+            Dedications, notices, acknowledgments, author notes, and short passages from this book.
+          </div>
+          <div className={styles.editionNotesBody}>
+            {sectionIndex.extras.map((section, index) => {
+              const html = sanitizePublicSectionHtml(section.html);
+              const repeatsTitle = sectionHtmlHasMatchingHeading(html, section.title);
+              return (
+                <section className={styles.editionNote} key={section.id || `${section.title}-${index}`}>
+                  {section.title && !repeatsTitle && <h3>{section.title}</h3>}
+                  <div className="bookSectionContent" dangerouslySetInnerHTML={{ __html: html }} />
+                </section>
+              );
+            })}
+          </div>
+        </details>
+      )}
 
       <SiteV2RelatedBooks key={book.id} sourceId={book.id} initialCandidates={related} />
     </article>

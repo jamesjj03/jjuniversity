@@ -3,9 +3,9 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = process.cwd();
-const BOOKS_JSON = path.join(ROOT, "public", "books.json");
+const BOOKS_JSON = path.join(ROOT, "private", "catalog", "books.json");
 const BOOKS_DIR = path.join(ROOT, "public", "books");
-const BOOK_CONTENT_DIR = path.join(ROOT, "public", "book-content");
+const BOOK_CONTENT_DIR = path.join(ROOT, "private", "book-content");
 const BOOK_CONTENT_MANIFEST = path.join(BOOK_CONTENT_DIR, "manifest.json");
 const WORDS_PER_MINUTE = 180;
 const NON_READING_SECTION_KINDS = new Set(["toc", "contents", "title", "dedication", "acknowledgments", "about", "about-author", "copyright", "backmatter"]);

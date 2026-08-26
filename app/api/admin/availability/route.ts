@@ -18,8 +18,8 @@ async function readBooks() {
   const supabase = await readBookCatalogSnapshot();
   if (supabase) return { books: supabase.books as BookRecord[], source: "supabase" as const, revision: supabase.revision };
 
-  const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "books.json");
-  const github = await readGithubJson("public/books.json");
+  const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "catalog", "books.json");
+  const github = await readGithubJson("private/catalog/books.json");
   if (github) {
     const value = github.value as { books?: unknown };
     return { books: (Array.isArray(value) ? value : value.books || []) as BookRecord[], source: "github" as const, version: github.version };
@@ -31,8 +31,8 @@ async function readBooks() {
 
 export async function POST() {
   try {
-    const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "books.json");
-    const contentDir = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "book-content");
+    const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "catalog", "books.json");
+    const contentDir = path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "book-content");
     const loaded = await readBooks();
     const { books, source } = loaded;
     if (!books.length) throw new Error("Availability update is locked because the catalog source is empty.");
@@ -62,6 +62,11 @@ export async function POST() {
     if (source === "supabase") {
       const supabaseSave = await saveBooksToSupabase(updated, { expectedRevision: loaded.revision });
       if (!supabaseSave.saved) throw new Error(supabaseSave.error || "Supabase did not save availability.");
+      revalidatePath("/books");
+      revalidatePath("/books/index");
+      revalidatePath("/books/[slug]", "page");
+      revalidatePath("/books/[slug]/[sectionSlug]", "page");
+      revalidatePath("/site-v2/books/[slug]", "page");
       revalidatePath("/library");
       revalidatePath("/sitemap.xml");
       return NextResponse.json({
@@ -74,7 +79,7 @@ export async function POST() {
       });
     }
     if (source === "github") {
-      const github = await writeGithubJson("public/books.json", content, "Update JJU book availability", loaded.version);
+      const github = await writeGithubJson("private/catalog/books.json", content, "Update JJU book availability", loaded.version);
       if (!github) throw new Error("GitHub availability saving is not configured.");
       return NextResponse.json({
         books: updated,

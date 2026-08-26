@@ -108,7 +108,7 @@ export function cleanBooksForSave(value: unknown, options: { preserveRows?: bool
 }
 
 export async function readAdminBookCatalog(): Promise<AdminBookCatalogSnapshot> {
-  const booksPath = path.join(process.cwd(), "public", "books.json");
+  const booksPath = path.join(process.cwd(), "private", "catalog", "books.json");
   const local = await readLocalJson(booksPath);
   const baselineBooks = rawBooks(local.value);
   const supabaseSnapshot = await readBookCatalogSnapshot();
@@ -121,7 +121,7 @@ export async function readAdminBookCatalog(): Promise<AdminBookCatalogSnapshot> 
     };
   }
 
-  const github = await readGithubJson("public/books.json");
+  const github = await readGithubJson("private/catalog/books.json");
   if (github) {
     return {
       books: rawBooks(github.value, baselineBooks.length),
@@ -141,7 +141,7 @@ export async function saveAdminBookCatalog(
 ): Promise<AdminBookCatalogSave> {
   const books = cleanBooksForSave(value, options);
   const content = `${JSON.stringify(books, null, 2)}\n`;
-  const booksPath = path.join(process.cwd(), "public", "books.json");
+  const booksPath = path.join(process.cwd(), "private", "catalog", "books.json");
   const currentSupabase = await readBookCatalogSnapshot();
 
   if (currentSupabase !== null) {
@@ -160,13 +160,13 @@ export async function saveAdminBookCatalog(
     };
   }
 
-  const currentGithub = await readGithubJson("public/books.json");
+  const currentGithub = await readGithubJson("private/catalog/books.json");
   if (currentGithub) {
     const currentBooks = rawBooks(currentGithub.value);
     assertAdminVersion(expectedVersion, currentGithub.version);
     if (books.length < currentBooks.length) throw new Error("Refusing to replace the current catalog with a truncated book list.");
     assertCurrentBookIdsPreserved(currentBooks, books);
-    const github = await writeGithubJson("public/books.json", content, message, expectedVersion);
+    const github = await writeGithubJson("private/catalog/books.json", content, message, expectedVersion);
     if (!github) throw new Error("GitHub catalog saving is not configured.");
     try {
       await writeFile(booksPath, content, "utf8");
@@ -198,6 +198,10 @@ export async function saveAdminBookCatalog(
 export function revalidateAdminBookCatalog(bookId?: string) {
   revalidatePath("/");
   revalidatePath("/books");
+  revalidatePath("/books/index");
+  revalidatePath("/books/[slug]", "page");
+  revalidatePath("/books/[slug]/[sectionSlug]", "page");
+  revalidatePath("/site-v2/books/[slug]", "page");
   revalidatePath("/library");
   revalidatePath("/sitemap.xml");
   if (bookId) revalidatePath(`/books/${bookId}`);

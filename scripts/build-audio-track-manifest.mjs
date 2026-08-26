@@ -4,7 +4,7 @@ import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const publicRoot = resolve(root, "public");
+const privateRoot = resolve(root, "private");
 
 await main().catch(error => {
   console.error(`Audio manifest failed: ${error instanceof Error ? error.message : String(error)}`);
@@ -13,27 +13,27 @@ await main().catch(error => {
 
 async function main() {
   const selector = parseSelector(process.argv.slice(2));
-  const catalogPath = resolve(publicRoot, "books.json");
-  const contentManifestPath = resolve(publicRoot, "book-content", "manifest.json");
+  const catalogPath = resolve(privateRoot, "catalog", "books.json");
+  const contentManifestPath = resolve(privateRoot, "book-content", "manifest.json");
   const [catalog, contentManifest] = await Promise.all([
-    readJson(catalogPath, "public/books.json"),
-    readJson(contentManifestPath, "public/book-content/manifest.json"),
+    readJson(catalogPath, "private/catalog/books.json"),
+    readJson(contentManifestPath, "private/book-content/manifest.json"),
   ]);
 
-  if (!Array.isArray(catalog)) throw new Error("public/books.json must contain an array.");
+  if (!Array.isArray(catalog)) throw new Error("private/catalog/books.json must contain an array.");
   if (!contentManifest || !Array.isArray(contentManifest.books)) {
-    throw new Error("public/book-content/manifest.json must contain a books array.");
+    throw new Error("private/book-content/manifest.json must contain a books array.");
   }
 
-  assertUniqueBookIds(catalog, "public/books.json");
-  assertUniqueBookIds(contentManifest.books, "public/book-content/manifest.json");
+  assertUniqueBookIds(catalog, "private/catalog/books.json");
+  assertUniqueBookIds(contentManifest.books, "private/book-content/manifest.json");
 
   const { catalogBook, contentEntry } = resolveBook(selector, catalog, contentManifest.books);
   validateResolvedBook(catalogBook, contentEntry);
 
   const manifestRelativePath = requiredString(contentEntry.path, "The content manifest path");
-  const contentPath = resolve(publicRoot, manifestRelativePath);
-  assertPathInside(publicRoot, contentPath);
+  const contentPath = resolve(privateRoot, manifestRelativePath);
+  assertPathInside(privateRoot, contentPath);
   if (!contentPath.toLowerCase().endsWith(".json")) {
     throw new Error(`The canonical content path must be JSON: ${manifestRelativePath}`);
   }

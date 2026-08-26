@@ -13,8 +13,8 @@ const coverOnly = args.includes("--cover-only");
 const interiorOnly = args.includes("--interior-only");
 const pageCountOverride = numberArg("--page-count");
 
-const books = readJson("public/books.json").map(normalizeBook).filter(book => book.id);
-const manifest = readJson("public/book-content/manifest.json");
+const books = readJson("private/catalog/books.json").map(normalizeBook).filter(book => book.id);
+const manifest = readJson("private/book-content/manifest.json");
 const products = readJson("public/print-products.json").map(normalizeProduct);
 const approvedBrandMark = readFileSync(
   resolve(root, "public", "branding", "jju", "jju-mark-gold.svg"),
@@ -792,7 +792,7 @@ function cleanSectionHtml(html) {
 function readBook(book) {
   const contentFile = resolveContentFile(book);
   if (!contentFile) fail(`No content JSON found for ${book.id}.`);
-  return readJson(join("public", "book-content", contentFile));
+  return readJson(join("private", "book-content", contentFile));
 }
 
 function resolveContentFile(book) {

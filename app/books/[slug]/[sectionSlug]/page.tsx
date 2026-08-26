@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import {
   absoluteUrl,
@@ -11,6 +11,8 @@ import {
 import {
   getBookSectionRoute,
   getBookSectionRoutes,
+  normalizeBookSectionSlug,
+  sanitizePublicSectionHtml,
   sectionExcerpt,
 } from "@/lib/bookSectionRoutes";
 import { breadcrumbJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
@@ -50,6 +52,7 @@ export default async function BookSectionPage({ params }: Props) {
 
   const route = await getBookSectionRoute(book, sectionSlug);
   if (!route) notFound();
+  if (normalizeBookSectionSlug(sectionSlug) !== route.sectionSlug) permanentRedirect(route.path);
 
   const routes = await getBookSectionRoutes(book);
   const previous = routes[route.index - 1];
@@ -80,7 +83,7 @@ export default async function BookSectionPage({ params }: Props) {
       description: sectionExcerpt(route.section),
     },
     breadcrumbJsonLd([
-      { name: "Library", path: "/library" },
+      { name: "Books", path: "/books" },
       { name: book.title, path: bookPath },
       { name: route.title, path: route.path },
     ]),
@@ -106,7 +109,7 @@ export default async function BookSectionPage({ params }: Props) {
 
         <div
           className="bookSectionContent"
-          dangerouslySetInnerHTML={{ __html: route.section.html }}
+          dangerouslySetInnerHTML={{ __html: sanitizePublicSectionHtml(route.section.html) }}
         />
 
         <nav className="bookSectionNav" aria-label="Book section navigation">

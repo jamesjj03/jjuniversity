@@ -1,3 +1,5 @@
+import "server-only";
+
 import { readFile } from "fs/promises";
 import path from "path";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
@@ -80,7 +82,7 @@ function isMissingSupabaseTable(error: unknown) {
 }
 
 function bookContentPath(fileName: string) {
-  return path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "book-content", fileName);
+  return path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "book-content", fileName);
 }
 
 export function textFromHtml(html: string) {
@@ -176,7 +178,7 @@ export async function resolveBookContentFile(idOrFile: string): Promise<{ fileNa
   return {
     fileName,
     absolutePath: bookContentPath(fileName),
-    publicPath: `public/book-content/${fileName}`,
+    publicPath: `private/book-content/${fileName}`,
   };
 }
 
@@ -273,7 +275,7 @@ async function readSupabaseBookContent(idOrFile: string): Promise<ResolvedBookCo
       book: normalizeBookContent(row.content, row.book_id),
       fileName,
       absolutePath: bookContentPath(fileName),
-      publicPath: String(row.content_path || `public/book-content/${fileName}`),
+      publicPath: `private/book-content/${fileName}`,
       source: "supabase",
     };
   } catch {

@@ -227,7 +227,10 @@ function buildLocalPlan() {
     releaseBlockers.push(`approved email/archive version is unresolved for track(s) ${unresolvedVersions.join(", ")}`);
   }
 
-  const sourcePath = join(projectRoot, ...String(manifest.book.sourceFile || "").split("/"));
+  const sourceRelativePath = String(manifest.book.sourceFile || "")
+    .replace(/\\/g, "/")
+    .replace(/^public\/book-content\//i, "private/book-content/");
+  const sourcePath = join(projectRoot, ...sourceRelativePath.split("/"));
   assert(existsSync(sourcePath), `Missing local Reader source: ${sourcePath}`);
   const sourceBytes = readFileSync(sourcePath);
   assert(sha256(sourceBytes) === EXPECTED_LOCAL_SOURCE_SHA256, "The local Tacos Reader source no longer matches the sealed intake.");

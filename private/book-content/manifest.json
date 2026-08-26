@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-05-17T15:56:20.951Z",
-  "count": 287,
+  "count": 284,
   "books": [
     {
       "id": "1776",
@@ -397,15 +397,6 @@
       "sectionCount": 20,
       "wordCount": 5640,
       "path": "book-content/Chemistry.json"
-    },
-    {
-      "id": "Christianity",
-      "slug": "christianity",
-      "title": "Christianity",
-      "sourceFile": "Christianity.epub",
-      "sectionCount": 20,
-      "wordCount": 6258,
-      "path": "book-content/Christianity.json"
     },
     {
       "id": "Churchill",
@@ -1072,15 +1063,6 @@
       "sectionCount": 20,
       "wordCount": 5474,
       "path": "book-content/HowBible.json"
-    },
-    {
-      "id": "HR",
-      "slug": "the-high-road",
-      "title": "The High Road",
-      "sourceFile": "HR.epub",
-      "sectionCount": 35,
-      "wordCount": 20220,
-      "path": "book-content/HR.json"
     },
     {
       "id": "Humans",
@@ -1810,15 +1792,6 @@
       "sectionCount": 47,
       "wordCount": 21293,
       "path": "book-content/Pantheon.json"
-    },
-    {
-      "id": "Pantheon2",
-      "slug": "pantheon-ii",
-      "title": "Pantheon II",
-      "sourceFile": "Pantheon2.epub",
-      "sectionCount": 26,
-      "wordCount": 10688,
-      "path": "book-content/Pantheon2.json"
     },
     {
       "id": "Philosophy",

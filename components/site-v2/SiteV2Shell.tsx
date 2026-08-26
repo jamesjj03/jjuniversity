@@ -61,6 +61,7 @@ export default function SiteV2Shell({ children }: { children: ReactNode }) {
           </Link>
           <nav aria-label="Footer navigation">
             <Link href="/books">Books</Link>
+            <Link href="/books/index">Book index</Link>
             <Link href="/print">Print</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>

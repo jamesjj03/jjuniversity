@@ -929,12 +929,12 @@ function tagBalance(html) {
 }
 
 async function readLocalFallback() {
-  const manifest = JSON.parse(await readFile(join(root, "public", "book-content", "manifest.json"), "utf8"));
+  const manifest = JSON.parse(await readFile(join(root, "private", "book-content", "manifest.json"), "utf8"));
   const rows = [];
   const byFileName = new Map();
   for (const entry of manifest.books || []) {
     const fileName = basename(String(entry.path || ""));
-    const content = JSON.parse(await readFile(join(root, "public", "book-content", fileName), "utf8"));
+    const content = JSON.parse(await readFile(join(root, "private", "book-content", fileName), "utf8"));
     const row = { book_id: String(content.id || entry.id), content_file: fileName, content };
     rows.push(row);
     byFileName.set(fileName.toLowerCase(), { fileName, bookId: row.book_id, content });

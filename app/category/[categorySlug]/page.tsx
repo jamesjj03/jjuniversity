@@ -43,8 +43,8 @@ export default async function CategoryPage({ params }: Props) {
       })),
     },
     breadcrumbJsonLd([
-      { name: "Library", path: "/library" },
-      { name: "Categories", path: "/library" },
+      { name: "Books", path: "/books" },
+      { name: "Categories", path: "/books" },
       { name: category.name, path: `/category/${category.slug}` },
     ]),
   ];

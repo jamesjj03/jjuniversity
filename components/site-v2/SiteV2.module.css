@@ -423,6 +423,12 @@
   font-size: 18px;
 }
 
+.pageHeaderActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+
 .sectionHeadingCentered {
   width: min(100%, 850px);
   margin: 0 auto 38px;
@@ -2347,6 +2353,131 @@
   color: var(--v2-gold);
   font-size: 12px;
   font-weight: 850;
+}
+
+.contentsPanel li a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--v2-paper-deep) !important;
+  text-decoration: none;
+}
+
+.contentsPanel li a:hover {
+  color: var(--v2-ink) !important;
+  text-decoration: underline;
+  text-decoration-color: var(--v2-gold);
+  text-underline-offset: 4px;
+}
+
+.contentsPanel li a:focus-visible,
+.moreContents summary:focus-visible,
+.editionNotes > summary:focus-visible {
+  outline: 3px solid var(--v2-gold-bright);
+  outline-offset: 4px;
+}
+
+.moreContents {
+  margin-top: 18px;
+  border-top: 1px solid var(--v2-line);
+}
+
+.moreContents summary {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  width: fit-content;
+  color: var(--v2-paper-deep);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 820;
+  list-style: none;
+}
+
+.moreContents summary::-webkit-details-marker,
+.editionNotes > summary::-webkit-details-marker {
+  display: none;
+}
+
+.moreContents summary::after,
+.editionNotes > summary::after {
+  content: "+";
+  display: inline-grid;
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: var(--v2-sans);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 160ms ease;
+}
+
+.moreContents[open] summary::after,
+.editionNotes[open] > summary::after {
+  transform: rotate(45deg);
+}
+
+.moreContents[open] summary {
+  color: var(--v2-gold-bright);
+}
+
+.moreContents ol {
+  margin-top: 4px;
+}
+
+.editionNotes {
+  max-width: none;
+  margin-top: 24px;
+  border: 1px solid var(--v2-line);
+  border-radius: 8px;
+  background: linear-gradient(150deg, var(--v2-panel-raised), var(--v2-panel));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22), inset 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.editionNotes > summary {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 8px clamp(22px, 3vw, 36px);
+  color: var(--v2-paper-deep);
+  cursor: pointer;
+  font-family: var(--v2-display);
+  font-size: 18px;
+  font-weight: 820;
+  list-style: none;
+}
+
+.editionNotes[open] > summary {
+  border-bottom: 1px solid var(--v2-line);
+  color: var(--v2-gold-bright);
+}
+
+.editionNotesIntro {
+  padding: 22px clamp(22px, 3vw, 36px) 0;
+  color: var(--v2-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.editionNotesBody {
+  display: grid;
+  gap: 18px;
+  padding: 22px clamp(16px, 3vw, 36px) clamp(22px, 3vw, 36px);
+}
+
+.editionNote > h3 {
+  margin: 0 0 10px;
+  color: var(--v2-ink);
+  font-family: var(--v2-display);
+  font-size: 17px;
+}
+
+.editionNote :global(.bookSectionContent) {
+  max-width: none;
+  padding: clamp(20px, 3vw, 34px);
 }
 
 .excerptPanel > p,

@@ -22,8 +22,8 @@ async function readBooks() {
   const supabase = await readBookCatalogSnapshot();
   if (supabase) return { books: supabase.books as BookRecord[], source: "supabase" as const, revision: supabase.revision };
 
-  const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "books.json");
-  const github = await readGithubJson("public/books.json");
+  const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "catalog", "books.json");
+  const github = await readGithubJson("private/catalog/books.json");
   if (github) {
     const value = github.value as { books?: unknown };
     return { books: (Array.isArray(value) ? value : value.books || []) as BookRecord[], source: "github" as const, version: github.version };
@@ -69,15 +69,20 @@ export async function POST(request: Request) {
       if (source === "supabase") {
         const supabaseSave = await saveBooksToSupabase(books as unknown as Array<Record<string, unknown>>, { expectedRevision: loaded.revision });
         if (!supabaseSave.saved) throw new Error(supabaseSave.error || "Supabase did not save the title updates.");
+        revalidatePath("/books");
+        revalidatePath("/books/index");
+        revalidatePath("/books/[slug]", "page");
+        revalidatePath("/books/[slug]/[sectionSlug]", "page");
+        revalidatePath("/site-v2/books/[slug]", "page");
         revalidatePath("/library");
         revalidatePath("/sitemap.xml");
         target = "supabase";
       } else if (source === "github") {
-        const github = await writeGithubJson("public/books.json", content, "Update JJU titles from manuscript content", loaded.version);
+        const github = await writeGithubJson("private/catalog/books.json", content, "Update JJU titles from manuscript content", loaded.version);
         if (!github) throw new Error("GitHub title saving is not configured.");
         target = "github";
       } else {
-        const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "books.json");
+        const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "catalog", "books.json");
         await writeLocalJson(booksPath, content, loaded.version);
         target = "file";
       }

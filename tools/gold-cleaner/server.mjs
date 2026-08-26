@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
 const toolDir = __dirname;
-const bookDir = path.join(rootDir, "public", "book-content");
+const bookDir = path.join(rootDir, "private", "book-content");
 const outputDir = path.join(toolDir, "gold-output");
 const styleGuidePath = path.join(toolDir, "gold-style-guide.md");
 const envLocalPath = path.join(rootDir, ".env.local");
@@ -242,7 +242,7 @@ async function loadAudit() {
       rows: rows.map(normalizeAuditEntry).filter(row => row.id),
     };
   }
-  return { source: "computed from public/book-content", rows: [] };
+  return { source: "computed from private/book-content", rows: [] };
 }
 
 async function listBooks() {

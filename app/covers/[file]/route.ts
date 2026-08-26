@@ -73,7 +73,7 @@ async function findBook(file: string) {
   const supabaseBook = supabaseBooks?.find(book => compact(book.coverFile || `${book.id || ""}.jpg`) === wanted || compact(book.id || "") === wanted);
   if (supabaseBook) return supabaseBook;
 
-  const booksPath = path.join(process.cwd(), "public", "books.json");
+  const booksPath = path.join(process.cwd(), "private", "catalog", "books.json");
   const raw = JSON.parse(await readFile(booksPath, "utf8"));
   const books: BookRecord[] = Array.isArray(raw) ? raw : raw.books || [];
   return books.find(book => compact(book.coverFile || `${book.id || ""}.jpg`) === wanted || compact(book.id || "") === wanted);

@@ -206,7 +206,7 @@ async function buildLocalCandidateSet(batchDir, originalById, candidateById) {
     const afterBytes = Buffer.from(JSON.stringify(afterContent, null, 2), "utf8");
     const entry = {
       fileName,
-      publicPath: join(root, "public", "book-content", fileName),
+      contentPath: join(root, "private", "book-content", fileName),
       backupPath,
       bookId: String(original.book_id),
       changed: !beforeBytes.equals(afterBytes),
@@ -242,7 +242,7 @@ async function verifyLocalBytes(local, state) {
   for (const entry of local.entries) {
     let actual;
     try {
-      actual = await readFile(entry.publicPath);
+      actual = await readFile(entry.contentPath);
     } catch {
       mismatches.push(entry.fileName);
       continue;
@@ -714,7 +714,7 @@ async function readCurrentLocalFallback(local) {
   const rows = [];
   const byFileName = new Map();
   for (const entry of local.entries) {
-    const content = JSON.parse(await readFile(entry.publicPath, "utf8"));
+    const content = JSON.parse(await readFile(entry.contentPath, "utf8"));
     rows.push({ book_id: entry.bookId, content_file: entry.fileName, content });
     byFileName.set(entry.fileName.toLowerCase(), { fileName: entry.fileName, bookId: entry.bookId, content });
   }
@@ -724,8 +724,8 @@ async function readCurrentLocalFallback(local) {
 async function writeLocalState(local, state) {
   const targetKey = state === "after" ? "afterBytes" : "beforeBytes";
   for (const entry of local.entries.filter(item => item.changed)) {
-    await writeFile(entry.publicPath, entry[targetKey]);
-    const saved = await readFile(entry.publicPath);
+    await writeFile(entry.contentPath, entry[targetKey]);
+    const saved = await readFile(entry.contentPath);
     if (!saved.equals(entry[targetKey])) throw new Error(`${entry.fileName}: fallback ${state} write failed verification.`);
   }
   const mismatches = await verifyLocalBytes(local, state);
@@ -1054,7 +1054,7 @@ async function fetchAllRows(supabase, table, orderColumn) {
 }
 
 async function copyFallbackSnapshot(destination) {
-  const sourceDir = join(root, "public", "book-content");
+  const sourceDir = join(root, "private", "book-content");
   const manifestPath = join(sourceDir, "manifest.json");
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   const books = [];

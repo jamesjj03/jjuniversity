@@ -1,3 +1,5 @@
+import "server-only";
+
 import path from "path";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
 import {
@@ -103,7 +105,7 @@ function manifestRecord(value: unknown, id: string) {
   const fileName = path.basename(manifestPath);
   return {
     fileName,
-    publicPath: manifestPath.startsWith("public/") ? manifestPath : `public/${manifestPath}`,
+    publicPath: `private/book-content/${fileName}`,
   };
 }
 
@@ -149,8 +151,8 @@ async function readSupabaseContent(id: string) {
   const resolved: AdminResolvedBookContent = {
     book: normalizeBookContent(row.content, bookId),
     fileName,
-    absolutePath: path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "book-content", fileName),
-    publicPath: String(row.content_path || `public/book-content/${fileName}`).replace(/\\/g, "/"),
+    absolutePath: path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "book-content", fileName),
+    publicPath: `private/book-content/${fileName}`,
     source: "supabase",
     version,
     writeVersion: version,
@@ -166,7 +168,7 @@ export async function readAdminBookContent(idOrFile: string): Promise<AdminResol
   const live = await readSupabaseContent(id);
   if (live.resolved) return live.resolved;
 
-  const githubManifest = await readGithubJson("public/book-content/manifest.json");
+  const githubManifest = await readGithubJson("private/book-content/manifest.json");
   if (githubManifest) {
     const resolvedPath = manifestRecord(githubManifest.value, id);
     const githubContent = await readGithubJson(resolvedPath.publicPath);
@@ -176,7 +178,7 @@ export async function readAdminBookContent(idOrFile: string): Promise<AdminResol
     return {
       book: normalizeBookContent(githubContent.value, fileStem(resolvedPath.fileName)),
       fileName: resolvedPath.fileName,
-      absolutePath: path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "book-content", resolvedPath.fileName),
+      absolutePath: path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "book-content", resolvedPath.fileName),
       publicPath: resolvedPath.publicPath,
       source: "github",
       version,
@@ -186,7 +188,7 @@ export async function readAdminBookContent(idOrFile: string): Promise<AdminResol
     };
   }
 
-  const manifestPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "public", "book-content", "manifest.json");
+  const manifestPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "book-content", "manifest.json");
   const localManifest = await readLocalJson(manifestPath);
   const resolvedPath = manifestRecord(localManifest.value, id);
   const absolutePath = path.join(/*turbopackIgnore: true*/ process.cwd(), resolvedPath.publicPath);

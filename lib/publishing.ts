@@ -1,10 +1,13 @@
+import "server-only";
+
 import { readBookContent, readFileBookContent, type BookContentSection } from "@/lib/bookContent";
 import { PRIMARY_CATEGORIES } from "@/lib/taxonomy";
-import rawBooks from "@/public/books.json";
-import rawManifest from "@/public/book-content/manifest.json";
+import rawBooks from "@/private/catalog/books.json";
+import rawManifest from "@/private/book-content/manifest.json";
 import rawPaths from "@/public/paths.json";
 import rawPrintProducts from "@/public/print-products.json";
 import { readBooksFromSupabase } from "@/lib/bookCatalog";
+import { hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
 import { canonicalBookId, LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
 
 export { LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
@@ -183,7 +186,9 @@ export function slugify(value: string) {
 }
 
 export function absoluteUrl(path: string) {
-  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+  const value = String(path || "").trim();
+  if (/^https?:\/\//i.test(value)) return value;
+  return `${SITE_URL}${value.startsWith("/") ? value : `/${value}`}`;
 }
 
 export function bookUrl(book: PublishedBook) {
@@ -223,8 +228,13 @@ export function getPublicBooks() {
 }
 
 async function getBooksSource() {
-  const supabaseBooks = await readBooksFromSupabase().catch(() => null);
-  return (supabaseBooks || rawBooks) as RawBook[];
+  if (!hasSupabaseAdminConfig()) return rawBooks as RawBook[];
+
+  const supabaseBooks = await readBooksFromSupabase();
+  if (!supabaseBooks) {
+    throw new Error("The authoritative Supabase catalog is unavailable; refusing to fall back to a stale publication snapshot.");
+  }
+  return supabaseBooks as RawBook[];
 }
 
 export async function getAllBooksLive() {
@@ -713,6 +723,11 @@ export function isPublicCatalogRecord(book: { id?: string | null; status?: strin
     && (status === "ready" || status === "coming-soon")
     && (visibility === "main" || visibility === "archive")
     && !LEGACY_BOOK_ID_ALIASES[id];
+}
+
+export function isPublishedReadableBook(book: { id?: string | null; status?: string | null; visibility?: string | null }) {
+  return isPublicCatalogRecord(book)
+    && String(book.status || "").trim().toLowerCase() === "ready";
 }
 
 function isContentSection(section: BookContentSection) {

@@ -14,9 +14,9 @@ const args = process.argv.slice(2);
 const jsonOutput = args.includes("--json");
 const strict = args.includes("--strict");
 const requestedProduct = valueArg("--product");
-const books = readJson(resolve(root, "public", "books.json")).map(normalizeBook).filter(book => book.id);
+const books = readJson(resolve(root, "private", "catalog", "books.json")).map(normalizeBook).filter(book => book.id);
 const products = readJson(resolve(root, "public", "print-products.json"));
-const contentManifest = readJson(resolve(root, "public", "book-content", "manifest.json"));
+const contentManifest = readJson(resolve(root, "private", "book-content", "manifest.json"));
 
 const signalRules = [
   {
@@ -122,8 +122,8 @@ const report = {
   source: {
     profileConfig: relativePath(printDisclaimerConfigPath),
     bookProfileConfig: relativePath(bookDisclaimerConfigPath),
-    books: "public/books.json",
-    contentManifest: "public/book-content/manifest.json",
+    books: "private/catalog/books.json",
+    contentManifest: "private/book-content/manifest.json",
     products: "public/print-products.json",
   },
   profiles: listPrintDisclaimerProfiles().map(profile => ({
@@ -191,7 +191,7 @@ function auditBook(book) {
 }
 
 function auditManifestBook(record) {
-  const contentPath = resolve(root, "public", "book-content", basename(record.path || ""));
+  const contentPath = resolve(root, "private", "book-content", basename(record.path || ""));
   const wanted = new Set([
     fileStem(record.id),
     fileStem(record.slug),
@@ -326,7 +326,7 @@ function resolveContentPath(book, { required = true } = {}) {
     if (required) fail(`No content JSON found for ${book.id}.`);
     return "";
   }
-  return resolve(root, "public", "book-content", basename(record.path));
+  return resolve(root, "private", "book-content", basename(record.path));
 }
 
 function normalizeBook(raw) {

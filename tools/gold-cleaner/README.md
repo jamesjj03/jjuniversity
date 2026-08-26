@@ -16,7 +16,7 @@ http://localhost:4343
 
 ## Inputs
 
-- Reads book JSON from `public/book-content/*.json`.
+- Reads book JSON from `private/book-content/*.json`.
 - Uses `jju-gold-audit.json` or `gold-audit.json` if one is placed in the repo root, `public/`, or this tool folder.
 - Also checks `C:\Users\JJ\Downloads\jju-gold-audit.json` by default on this machine.
 - You can override the audit path with `GOLD_AUDIT_FILE`.
@@ -53,7 +53,7 @@ Original files are never overwritten.
 
 `*.gold.json` exports are real fixed JSON files: cleaned sections replace `html` and `text`, while `originalHtml` and `originalText` are kept as a backup inside each cleaned section.
 
-Use **Update Live JSON** when you want the tool to overwrite the actual `public/book-content/*.json` file. The tool writes a timestamped backup to `tools/gold-cleaner/gold-output/backups/` before changing the live file.
+Use **Update Live JSON** when you want the tool to overwrite the actual `private/book-content/*.json` file. The tool writes a timestamped backup to `tools/gold-cleaner/gold-output/backups/` before changing the live file.
 
 Drafts and exports save to:
 

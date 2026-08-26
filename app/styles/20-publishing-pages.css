@@ -215,6 +215,10 @@ html body .bookSectionContent {
   color:var(--text);
 }
 
+html body .bookSectionContent .bookSectionSpacer {
+  height:1rem;
+}
+
 html body .bookSectionContent h1,
 html body .bookSectionContent h2,
 html body .bookSectionContent h3 {

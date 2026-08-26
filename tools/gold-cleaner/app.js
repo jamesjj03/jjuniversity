@@ -596,7 +596,7 @@ function collectExportDrafts() {
 
 async function applyLiveBook() {
   if (!state.book) return;
-  const ok = window.confirm(`Update the live public/book-content JSON for "${state.book.title || state.selectedBookId}"? A backup will be saved first.`);
+  const ok = window.confirm(`Update the live private/book-content JSON for "${state.book.title || state.selectedBookId}"? A backup will be saved first.`);
   if (!ok) return;
 
   const drafts = collectExportDrafts();

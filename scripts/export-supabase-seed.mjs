@@ -4,8 +4,8 @@ import { dirname, join } from "node:path";
 const root = process.cwd();
 const outputPath = process.argv[2] || join("supabase", "jju_catalog_seed.sql");
 
-const rawBooks = readJson("public/books.json");
-const rawManifest = readJson("public/book-content/manifest.json");
+const rawBooks = readJson("private/catalog/books.json");
+const rawManifest = readJson("private/book-content/manifest.json");
 const rawPaths = readJson("public/paths.json");
 const rawPrintProducts = readJson("public/print-products.json");
 

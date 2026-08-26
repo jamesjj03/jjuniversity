@@ -10,7 +10,8 @@ export default function SiteFooter() {
         <strong>JJ University</strong>
       </div>
       <nav aria-label="Footer navigation">
-        <Link href="/library">Library</Link>
+        <Link href="/books">Books</Link>
+        <Link href="/books/index">Book index</Link>
         <Link href="/print">Print</Link>
         <Link href="/about">About</Link>
         <Link href="/contact">Contact</Link>

@@ -15,8 +15,8 @@ const tempRoot = resolve(root, "tmp", "pdfs", "jju-101-proof");
 const outputRoot = resolve(root, "output", "pdf");
 const publicProofRoot = resolve(root, "public", "print-proofs");
 const productPath = resolve(root, "public", "print-products.json");
-const booksPath = resolve(root, "public", "books.json");
-const manifestPath = resolve(root, "public", "book-content", "manifest.json");
+const booksPath = resolve(root, "private", "catalog", "books.json");
+const manifestPath = resolve(root, "private", "book-content", "manifest.json");
 const toolsPath = resolve(root, "scripts", "print-proof-pdf-tools.py");
 const generatorPath = resolve(root, "scripts", "generate-101-print-proof.mjs");
 const disclaimerModulePath = resolve(root, "scripts", "print-disclaimer-system.mjs");
@@ -203,7 +203,7 @@ const manifest = {
   schemaVersion: 1,
   generatedAtUtc: "2026-08-19T00:00:00Z",
   status: "proof-only-not-for-sale",
-  sourceModel: "checked-in public/books.json plus checked-in public/book-content JSON",
+  sourceModel: "checked-in private/catalog/books.json plus checked-in private/book-content JSON",
   metadataModel: {
     series: "101: How We Figured It Out",
     titles: ["The Natural World", "The Human World"],
@@ -387,7 +387,7 @@ function resolveContentPath(book) {
   const wanted = new Set([fileStem(book.id), fileStem(book.bookFile), fileStem(book.title)].filter(Boolean));
   const record = (contentManifest.books || []).find(item => wanted.has(fileStem(item.id)) || wanted.has(fileStem(item.slug)) || wanted.has(fileStem(item.sourceFile)) || wanted.has(fileStem(basename(item.path || ""))));
   if (!record?.path) fail(`No content JSON found for ${book.id}.`);
-  return resolve(root, "public", "book-content", basename(record.path));
+  return resolve(root, "private", "book-content", basename(record.path));
 }
 
 function assertDescriptions(payloads) {

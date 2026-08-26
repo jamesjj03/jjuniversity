@@ -9,7 +9,7 @@ import {
   writeLocalJson,
 } from "@/lib/adminVersionedJson";
 import { readAdminBookContent, versionAfterContentWrite } from "@/lib/adminBookContent";
-import { bookUrl, getPublicBooksLive } from "@/lib/publishing";
+import { bookUrl, getPublicBooksLive, isPublishedReadableBook } from "@/lib/publishing";
 import { getBookSectionRoutes } from "@/lib/bookSectionRoutes";
 
 type SaveBody = {
@@ -23,6 +23,11 @@ type SaveBody = {
 
 async function revalidateBookPages(bookId: string) {
   try {
+    revalidatePath("/books");
+    revalidatePath("/books/index");
+    revalidatePath("/books/[slug]", "page");
+    revalidatePath("/books/[slug]/[sectionSlug]", "page");
+    revalidatePath("/site-v2/books/[slug]", "page");
     revalidatePath("/library");
     revalidatePath("/sitemap.xml");
     revalidatePath("/reader");
@@ -110,6 +115,10 @@ export async function POST(
     }
 
     if (current.source === "github") {
+      const publishedBook = (await getPublicBooksLive()).find(item => item.id === nextBook.id);
+      if (!publishedBook || !isPublishedReadableBook(publishedBook)) {
+        throw new Error("Private manuscripts are never written to the public GitHub repository. Save through Supabase or locally instead.");
+      }
       const github = await writeGithubJson(publicPath, content, message, current.writeVersion);
       if (!github) throw new Error("GitHub manuscript saving is not configured.");
       await revalidateBookPages(nextBook.id);

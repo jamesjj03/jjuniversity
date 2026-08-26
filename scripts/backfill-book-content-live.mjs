@@ -14,8 +14,8 @@ const only = (getArgValue("--only") || "")
   .map(value => value.trim().toLowerCase())
   .filter(Boolean);
 
-const manifestPath = join(root, "public", "book-content", "manifest.json");
-const booksPath = join(root, "public", "books.json");
+const manifestPath = join(root, "private", "book-content", "manifest.json");
+const booksPath = join(root, "private", "catalog", "books.json");
 const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
 const books = JSON.parse(readFileSync(booksPath, "utf8"));
 const catalog = new Map(books.map(book => [String(book.id || "").toLowerCase(), book]));
@@ -23,7 +23,7 @@ const catalogBySource = new Map(books.map(book => [fileStem(String(book.bookFile
 const entries = (manifest.books || [])
   .map(entry => {
     const fileName = basename(String(entry.path || ""));
-    const localPath = join(root, "public", "book-content", fileName);
+    const localPath = join(root, "private", "book-content", fileName);
     const catalogBook = catalog.get(String(entry.id || "").toLowerCase())
       || catalogBySource.get(fileStem(String(entry.sourceFile || entry.path || entry.id || "")))
       || catalogBySource.get(fileStem(fileName));
@@ -102,11 +102,11 @@ for (const item of entries) {
     creator: content.creator || "James Johnson",
     description: content.description || "",
     content_file: item.fileName,
-    content_path: `public/book-content/${item.fileName}`,
+    content_path: `private/book-content/${item.fileName}`,
     section_count: Number(content.sectionCount || content.sections.length || 0),
     word_count: Number(content.wordCount || 0),
     content,
-    edit_message: "Initial backfill from public/book-content JSON",
+    edit_message: "Initial backfill from private/book-content JSON",
   });
 
   if (result.error) throw new Error(`Could not backfill ${item.bookId}: ${result.error.message}`);

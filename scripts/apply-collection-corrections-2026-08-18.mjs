@@ -3,7 +3,7 @@ import path from "node:path";
 
 const projectRoot = process.cwd();
 const pathsFile = path.join(projectRoot, "public", "paths.json");
-const booksFile = path.join(projectRoot, "public", "books.json");
+const booksFile = path.join(projectRoot, "private", "catalog", "books.json");
 const printProductsFile = path.join(projectRoot, "public", "print-products.json");
 const data = JSON.parse(fs.readFileSync(pathsFile, "utf8"));
 const originalData = structuredClone(data);

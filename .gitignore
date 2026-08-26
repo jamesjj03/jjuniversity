@@ -54,6 +54,7 @@ next-env.d.ts
 /tmp/manuscript-case-review/
 /tmp/taxonomy-review/
 /workshop/
+/private/unpublished-book-content/
 
 # local audits, generated previews, and unrelated workspace helpers
 /tmp/

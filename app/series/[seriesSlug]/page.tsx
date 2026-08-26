@@ -54,8 +54,8 @@ export default async function SeriesPage({ params }: Props) {
       })),
     },
     breadcrumbJsonLd([
-      { name: "Library", path: "/library" },
-      { name: "Series", path: "/library" },
+      { name: "Books", path: "/books" },
+      { name: "Collections", path: "/books" },
       { name: series.title, path: `/series/${series.slug}` },
     ]),
   ];

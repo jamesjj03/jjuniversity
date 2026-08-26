@@ -219,13 +219,13 @@ export async function POST(request: Request) {
     const title = String(body.title || "").trim() || untitledBookTitle();
     const requestedId = slug(String(body.id || "").trim());
 
-    const booksPath = path.join(process.cwd(), "public", "books.json");
-    const contentDir = path.join(process.cwd(), "public", "book-content");
+    const booksPath = path.join(process.cwd(), "private", "catalog", "books.json");
+    const contentDir = path.join(process.cwd(), "private", "book-content");
     const manifestPath = path.join(contentDir, "manifest.json");
     const localCatalog = await readLocalJson(booksPath);
     const supabaseSnapshot = await readBookCatalogSnapshot();
     const supabaseBooks = supabaseSnapshot?.books ?? null;
-    const githubCatalog = supabaseBooks === null ? await readGithubJson("public/books.json") : null;
+    const githubCatalog = supabaseBooks === null ? await readGithubJson("private/catalog/books.json") : null;
     const booksData: unknown = supabaseBooks !== null ? supabaseBooks : githubCatalog?.value ?? localCatalog.value;
     const catalogTarget = supabaseBooks !== null ? "supabase" : githubCatalog ? "github" : "local";
     const booksEnvelope = booksData && typeof booksData === "object" && !Array.isArray(booksData) ? booksData as Record<string, unknown> : {};
@@ -248,6 +248,7 @@ export async function POST(request: Request) {
     const contentBook = buildContent({ ...body, title }, id, fileName);
     const contentJson = `${JSON.stringify(contentBook, null, 2)}\n`;
     const minutes = Math.max(1, Math.round((contentBook.wordCount || 1) / 180));
+    const status = String(body.status || "hidden").trim().toLowerCase() || "hidden";
     const tags = Array.isArray(body.tags)
       ? body.tags.map(tag => String(tag).trim()).filter(Boolean).sort()
       : String(body.tags || "").split(",").map(tag => tag.trim()).filter(Boolean).sort();
@@ -259,7 +260,7 @@ export async function POST(request: Request) {
       author: contentBook.creator || "James Johnson",
       description: contentBook.description || `A JJ University book about ${contentBook.title}.`,
       tags,
-      status: String(body.status || "hidden").trim().toLowerCase() || "hidden",
+      status,
       visibility,
       archive: visibility === "archive",
       category: visibility === "archive" ? String(body.archiveCategory || "Unsorted Archive").trim() : "",
@@ -276,6 +277,10 @@ export async function POST(request: Request) {
     const nextBooks = [...books, book].sort((a, b) => String(a.title || a.id).localeCompare(String(b.title || b.id)));
     const message = `Create JJU draft book: ${contentBook.title}`;
 
+    if (catalogTarget === "github" && status !== "ready") {
+      throw new Error("Private draft manuscripts require Supabase or local storage; they are never written to the public GitHub repository.");
+    }
+
     if (catalogTarget === "supabase") {
       const canonicalBook = catalogRowToBook(bookToCatalogRow(book));
       const savedBooks = [...books, canonicalBook].sort((a, b) => String(a.title || a.id).localeCompare(String(b.title || b.id)));
@@ -283,11 +288,16 @@ export async function POST(request: Request) {
         book,
         content: contentBook as unknown as Record<string, unknown>,
         fileName: `${fileName}.json`,
-        publicPath: `public/book-content/${fileName}.json`,
+        publicPath: `private/book-content/${fileName}.json`,
         message,
         expectedRevision: supabaseSnapshot?.revision || null,
       });
       if (!supabaseDraft.saved) throw new Error(supabaseDraft.error || "Supabase did not create the draft book.");
+      revalidatePath("/books");
+      revalidatePath("/books/index");
+      revalidatePath("/books/[slug]", "page");
+      revalidatePath("/books/[slug]/[sectionSlug]", "page");
+      revalidatePath("/site-v2/books/[slug]", "page");
       revalidatePath("/library");
       revalidatePath("/sitemap.xml");
       return versionedJson({
@@ -303,7 +313,7 @@ export async function POST(request: Request) {
     }
 
     const localManifest = await readLocalJson(manifestPath);
-    const githubManifest = catalogTarget === "github" ? await readGithubJson("public/book-content/manifest.json") : null;
+    const githubManifest = catalogTarget === "github" ? await readGithubJson("private/book-content/manifest.json") : null;
     const manifestValue = githubManifest?.value || localManifest.value;
     if (!manifestValue || typeof manifestValue !== "object" || Array.isArray(manifestValue)) throw new Error("Book-content manifest is malformed.");
     const manifest = manifestValue as Record<string, unknown>;
@@ -337,11 +347,11 @@ export async function POST(request: Request) {
     if (catalogTarget === "github") {
       try {
         await Promise.all([
-          saveJsonToGithub(`public/book-content/${fileName}.json`, contentJson, message),
+          saveJsonToGithub(`private/book-content/${fileName}.json`, contentJson, message),
         ]);
         if (!githubManifest) throw new Error("GitHub manifest version is unavailable.");
-        await writeGithubJson("public/book-content/manifest.json", manifestJson, message, githubManifest.version);
-        const githubBooks = await writeGithubJson("public/books.json", booksJson, message, expectedVersion);
+        await writeGithubJson("private/book-content/manifest.json", manifestJson, message, githubManifest.version);
+        const githubBooks = await writeGithubJson("private/catalog/books.json", booksJson, message, expectedVersion);
         if (!githubBooks) throw new Error("GitHub catalog saving is not configured.");
         nextCatalogVersion = githubBooks.version;
         savedTarget = "github";

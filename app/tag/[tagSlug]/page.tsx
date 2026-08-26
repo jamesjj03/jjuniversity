@@ -50,8 +50,8 @@ export default async function TagPage({ params }: Props) {
       })),
     },
     breadcrumbJsonLd([
-      { name: "Library", path: "/library" },
-      { name: "Topics", path: "/library" },
+      { name: "Books", path: "/books" },
+      { name: "Topics", path: "/books" },
       { name: tag, path },
     ]),
   ];

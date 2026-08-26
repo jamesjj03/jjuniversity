@@ -720,7 +720,7 @@ export default function AdminReaderEditor({ book, onDirtyChange, recoveryStorage
           <p className="kicker">Content Editor</p>
           <h2>{showContentMetadata ? "Edit JSON book content" : "Edit the manuscript"}</h2>
           <p>{showContentMetadata ? "Edit the live JSON sections the reader uses." : "Choose one section, edit it, then save before moving to another."}</p>
-          {contentFile && <p className="modelStatus ready">Source: public/book-content/{contentFile}</p>}
+          {contentFile && <p className="modelStatus ready">Source: private/book-content/{contentFile}</p>}
         </div>
         <div className="adminActions">
           <button type="button" className="resetBtn" disabled={editorLocked} onClick={() => setEditMode(value => !value)}>{editMode ? "Preview" : "Edit"}</button>

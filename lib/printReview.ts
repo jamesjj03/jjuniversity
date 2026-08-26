@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { resolve, sep } from "node:path";
 import disclaimerProfiles from "@/config/book-disclaimer-profiles.json";
-import ethicsBook from "@/public/book-content/Ethics.json";
+import ethicsBook from "@/private/book-content/Ethics.json";
 import printProducts from "@/public/print-products.json";
 import type {
   PrintArtifactSnapshot,
