@@ -65,7 +65,7 @@
 
 .jumpNav {
   position: sticky;
-  top: 12px;
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 8px);
   z-index: 20;
   display: flex;
   gap: 8px;
@@ -282,7 +282,7 @@
   }
 
   .jumpNav {
-    top: 58px;
+    top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px));
     margin-inline: -6px;
   }
 

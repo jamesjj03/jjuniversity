@@ -29,12 +29,14 @@ import {
   type WorkshopDraftSection,
 } from "@/lib/workshopManuscriptDraft";
 import { workshopBookStatusLabel, type WorkshopBook } from "@/lib/workshopBooks";
+import { rememberWorkshopRecent } from "@/lib/workshopRecent";
 import styles from "./ManuscriptStudio.module.css";
 
 type Props = {
   book: WorkshopBook;
   content: BookContent;
   initialVersion: string;
+  initialSectionId?: string;
   returnHref: string;
 };
 
@@ -372,13 +374,17 @@ export default function ManuscriptStudio({
   book,
   content,
   initialVersion,
+  initialSectionId = "",
   returnHref,
 }: Props) {
   const initialDraft = useMemo(() => manuscriptDraftFromBook(content), [content]);
+  const initialActiveSectionId = initialDraft.sections.some(section => section.id === initialSectionId)
+    ? initialSectionId
+    : initialDraft.selectedSectionId;
   const [draft, setDraft] = useState(initialDraft);
   const [baseline, setBaseline] = useState(initialDraft);
   const [version, setVersion] = useState(() => normalizeAdminVersion(initialVersion));
-  const [activeSectionId, setActiveSectionId] = useState(initialDraft.selectedSectionId);
+  const [activeSectionId, setActiveSectionId] = useState(initialActiveSectionId);
   const [outlineOpen, setOutlineOpen] = useState(false);
   const [outlineQuery, setOutlineQuery] = useState("");
   const [editMode, setEditMode] = useState(true);
@@ -690,17 +696,37 @@ export default function ManuscriptStudio({
     activeEditorRef.current = element;
   }, []);
 
+  const rememberSection = useCallback((sectionId: string) => {
+    const position = draftRef.current.sections.findIndex(section => section.id === sectionId);
+    if (position < 0) return;
+    const section = draftRef.current.sections[position];
+    const params = new URLSearchParams({ section: section.id });
+    if (returnHref) params.set("from", returnHref);
+    rememberWorkshopRecent({
+      href: `/admin/books/${encodeURIComponent(book.id)}?${params.toString()}`,
+      label: book.title,
+      description: `Section ${position + 1} of ${draftRef.current.sections.length} · ${section.title || "Untitled section"}`,
+      kind: "book",
+    });
+  }, [book.id, book.title, returnHref]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => rememberSection(activeSectionRef.current), 0);
+    return () => window.clearTimeout(timer);
+  }, [rememberSection]);
+
   const scrollToSection = useCallback((sectionId: string) => {
     setActiveSectionId(sectionId);
     activeSectionRef.current = sectionId;
     activeEditorRef.current = null;
     setOutlineOpen(false);
+    rememberSection(sectionId);
     window.requestAnimationFrame(() => {
       const section = document.getElementById(sectionDomId(sectionId));
       section?.scrollIntoView({ behavior: "smooth", block: "start" });
       if (window.matchMedia("(max-width: 760px)").matches) section?.focus({ preventScroll: true });
     });
-  }, []);
+  }, [rememberSection]);
 
   function openOutline(event: MouseEvent<HTMLButtonElement>) {
     if (!window.matchMedia("(max-width: 760px)").matches) {
@@ -1081,6 +1107,18 @@ export default function ManuscriptStudio({
       : draft.sections;
   }, [draft.sections, outlineQuery]);
 
+  const activePosition = useMemo(() => {
+    const position = draft.sections.findIndex(section => section.id === activeSectionId);
+    return position >= 0 ? position : 0;
+  }, [activeSectionId, draft.sections]);
+  const activeSection = draft.sections[activePosition];
+
+  const goToSection = useCallback((position: number) => {
+    const section = draftRef.current.sections[position];
+    if (!section) return;
+    scrollToSection(section.id);
+  }, [scrollToSection]);
+
   const statusText = conflict
     ? "Another copy changed — review needed"
     : saveError
@@ -1113,7 +1151,7 @@ export default function ManuscriptStudio({
             />
           </div>
           <div className={styles.bookHeading}>
-            <GuardedAdminLink href={returnHref}>← Find another book</GuardedAdminLink>
+            <GuardedAdminLink href={returnHref}>← Back to where I was</GuardedAdminLink>
             <p>{workshopBookStatusLabel(book.status)} · {draft.sections.length} sections</p>
             <h1>{book.title}</h1>
             <span className={saveError ? styles.saveErrorText : styles.saveState}>{statusText}</span>
@@ -1214,20 +1252,44 @@ export default function ManuscriptStudio({
                 </button>
               );
             })}
+            {outlineSections.length === 0 && (
+              <p className={styles.outlineEmpty}>No section titles match “{outlineQuery.trim()}”.</p>
+            )}
           </nav>
           {editMode && <button type="button" className={styles.addSectionButton} disabled={editorLocked} onClick={addSection}>+ Add a section</button>}
         </aside>
 
         <section className={editMode ? styles.manuscript : styles.readingManuscript} aria-label={`${book.title} manuscript`}>
-          {draft.sections.map((section, position) => (
+          <nav className={styles.sectionNavigator} aria-label="Move through manuscript sections above the editor">
+            <button
+              type="button"
+              disabled={activePosition === 0}
+              onClick={() => goToSection(activePosition - 1)}
+            >
+              <span aria-hidden="true">←</span> Previous
+            </button>
+            <div>
+              <strong>{activePosition + 1} of {draft.sections.length}</strong>
+              <span>{activeSection?.title || "Untitled section"}</span>
+            </div>
+            <button
+              type="button"
+              disabled={activePosition >= draft.sections.length - 1}
+              onClick={() => goToSection(activePosition + 1)}
+            >
+              Next <span aria-hidden="true">→</span>
+            </button>
+          </nav>
+
+          {activeSection && (
             <SectionCard
-              active={section.id === activeSectionId}
+              active
               editable={editMode}
               editorEpoch={editorEpoch}
-              key={section.id}
+              key={activeSection.id}
               locked={editorLocked}
-              position={position}
-              section={section}
+              position={activePosition}
+              section={activeSection}
               total={draft.sections.length}
               onDelete={deleteSection}
               onFocusEditor={focusSection}
@@ -1237,7 +1299,28 @@ export default function ManuscriptStudio({
               onMove={moveSection}
               onTitleChange={handleTitleChange}
             />
-          ))}
+          )}
+
+          <nav className={`${styles.sectionNavigator} ${styles.sectionNavigatorBottom}`} aria-label="Move through manuscript sections below the editor">
+            <button
+              type="button"
+              disabled={activePosition === 0}
+              onClick={() => goToSection(activePosition - 1)}
+            >
+              <span aria-hidden="true">←</span> Previous
+            </button>
+            <div>
+              <strong>{activePosition + 1} of {draft.sections.length}</strong>
+              <span>{activeSection?.title || "Untitled section"}</span>
+            </div>
+            <button
+              type="button"
+              disabled={activePosition >= draft.sections.length - 1}
+              onClick={() => goToSection(activePosition + 1)}
+            >
+              Next <span aria-hidden="true">→</span>
+            </button>
+          </nav>
           {editMode && <button type="button" className={styles.endAddButton} disabled={editorLocked} onClick={addSection}>+ Add another section</button>}
         </section>
       </div>

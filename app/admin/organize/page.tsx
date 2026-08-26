@@ -9,7 +9,7 @@ import styles from "@/app/admin/WorkshopCore.module.css";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Organize | JJU Workshop",
+  title: "Collections | JJU Workshop",
   robots: { index: false, follow: false },
 };
 

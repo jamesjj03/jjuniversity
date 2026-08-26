@@ -336,7 +336,7 @@
   .transport {
     position: sticky;
     z-index: 5;
-    bottom: 12px;
+    bottom: calc(var(--workshop-nav-height, 0px) + 12px + env(safe-area-inset-bottom));
     grid-template-columns: 1fr 1fr 1.35fr 1fr 1fr;
     margin-inline: -8px;
     padding: 8px;

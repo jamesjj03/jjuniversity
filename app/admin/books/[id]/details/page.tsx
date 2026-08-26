@@ -59,7 +59,7 @@ export default async function BookDetailsPage({ params, searchParams }: Props) {
         </div>
         <div className={styles.headerActions}>
           <GuardedAdminLink className={styles.secondaryButton} href={manuscriptHref}>Back to manuscript</GuardedAdminLink>
-          <GuardedAdminLink className={styles.quietButton} href={returnHref}>All books</GuardedAdminLink>
+          <GuardedAdminLink className={styles.quietButton} href={returnHref}>Back to where I was</GuardedAdminLink>
         </div>
       </header>
 

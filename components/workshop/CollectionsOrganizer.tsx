@@ -841,13 +841,13 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
 
       <nav className={styles.viewTabs} aria-label="Collections Organizer views">
         <button type="button" aria-pressed={view === "needs"} className={view === "needs" ? styles.activeView : ""} onClick={() => setView("needs")}>
-          <span>Needs You</span><strong>37</strong>
+          <span>Issues</span><strong>37</strong>
         </button>
         <button type="button" aria-pressed={view === "collections"} className={view === "collections" ? styles.activeView : ""} onClick={() => setView("collections")}>
-          <span>Collections</span><strong>{collections.length}</strong>
+          <span>Organize</span><strong>{collections.length}</strong>
         </button>
         <button type="button" aria-pressed={view === "review"} className={view === "review" ? styles.activeView : ""} onClick={() => setView("review")}>
-          <span>Review</span><strong>{diffs.length}</strong>
+          <span>Review &amp; save</span><strong>{diffs.length}</strong>
         </button>
       </nav>
 
@@ -862,7 +862,7 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
             <div className={styles.issueTotal}><strong>37</strong><span>known decisions</span></div>
           </header>
 
-          <div className={styles.queuePicker} role="group" aria-label="Needs You queues">
+          <div className={styles.queuePicker} role="group" aria-label="Collection issue queues">
             {ORGANIZER_NEEDS_YOU_QUEUES.map(queue => (
               <button
                 type="button"

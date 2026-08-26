@@ -22,7 +22,7 @@ import styles from "./NeedsYou.module.css";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Needs You | JJU Workshop",
+  title: "Review | JJU Workshop",
   robots: { index: false, follow: false },
 };
 
@@ -98,8 +98,8 @@ export default async function ReviewsPage() {
     <main className={`${core.page} ${styles.page}`}>
       <header className={core.pageHeader}>
         <div>
-          <p className={core.eyebrow}>Needs you</p>
-          <h1>Only the calls that require your eyes.</h1>
+          <p className={core.eyebrow}>Review</p>
+          <h1>The calls that require your eyes.</h1>
           <p className={core.intro}>The Workshop can surface evidence, preserve drafts, and block unsafe release states. These are the judgment calls it cannot honestly make for you.</p>
         </div>
       </header>

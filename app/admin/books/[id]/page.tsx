@@ -6,7 +6,7 @@ import { readAdminBookContent, type AdminResolvedBookContent } from "@/lib/admin
 import { readAdminBookCatalog, type AdminBookCatalogSnapshot } from "@/lib/adminBookCatalog";
 import { normalizeWorkshopBook } from "@/lib/workshopBooks";
 import styles from "@/app/admin/WorkshopCore.module.css";
-import { safeBooksReturnHref, type WorkshopSearchParams } from "../_routeState";
+import { firstSearchValue, safeBooksReturnHref, type WorkshopSearchParams } from "../_routeState";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -25,6 +25,7 @@ export default async function BookOverviewPage({ params, searchParams }: Props) 
   const [{ id: rawId }, query] = await Promise.all([params, searchParams]);
   const id = rawId.trim().toLowerCase();
   const returnHref = safeBooksReturnHref(query.from);
+  const initialSectionId = firstSearchValue(query.section).trim();
   let catalog: AdminBookCatalogSnapshot;
   let content: AdminResolvedBookContent;
 
@@ -56,6 +57,7 @@ export default async function BookOverviewPage({ params, searchParams }: Props) 
         book={book}
         content={content.book}
         initialVersion={content.version}
+        initialSectionId={initialSectionId}
         returnHref={returnHref}
       />
     </main>

@@ -185,7 +185,7 @@
 
 .viewTabs {
   position: sticky;
-  top: 14px;
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 8px);
   z-index: 30;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -513,8 +513,8 @@
 
 .directory {
   position: sticky;
-  top: 83px;
-  max-height: calc(100vh - 116px);
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 76px);
+  max-height: calc(100vh - var(--workshop-topbar-height, 0px) - var(--workshop-context-height, 0px) - 104px);
   display: grid;
   gap: 12px;
   padding: 13px;
@@ -675,8 +675,8 @@
 
 .catalogPool {
   position: sticky;
-  top: 84px;
-  max-height: calc(100vh - 112px);
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 76px);
+  max-height: calc(100vh - var(--workshop-topbar-height, 0px) - var(--workshop-context-height, 0px) - 104px);
   display: grid;
   grid-template-rows: auto auto auto minmax(0, 1fr) auto;
   gap: 10px;
@@ -1127,7 +1127,7 @@
 
 .savePanel {
   position: sticky;
-  top: 84px;
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 76px);
 }
 
 .savePanel > p:not(.eyebrow) {
@@ -1495,7 +1495,7 @@
   }
 
   .viewTabs {
-    top: calc(62px + env(safe-area-inset-top));
+    top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + env(safe-area-inset-top));
   }
 
   .viewTabs button {
@@ -1685,7 +1685,7 @@
 
   .saveDock {
     right: 10px;
-    bottom: calc(72px + env(safe-area-inset-bottom));
+    bottom: calc(var(--workshop-nav-height, 72px) + 8px + env(safe-area-inset-bottom));
     left: 10px;
     align-items: stretch;
     padding: 9px;

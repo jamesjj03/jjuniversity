@@ -181,7 +181,7 @@
 
 .viewTabs {
   position: sticky;
-  top: 14px;
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 8px);
   z-index: 30;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -654,7 +654,7 @@
   }
 
   .viewTabs {
-    top: calc(62px + env(safe-area-inset-top));
+    top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + env(safe-area-inset-top));
   }
 
   .viewTabs button {

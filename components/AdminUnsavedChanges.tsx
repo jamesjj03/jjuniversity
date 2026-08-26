@@ -18,6 +18,7 @@ type DirtyMap = Record<string, { dirty: boolean; label: string }>;
 type AdminUnsavedContextValue = {
   adminBasePath: string;
   hasUnsavedChanges: boolean;
+  unsavedLabels: string[];
   setUnsaved: (source: string, dirty: boolean, label?: string) => void;
   confirmNavigation: () => boolean;
   resolveAdminHref: (href: string) => string;
@@ -40,7 +41,10 @@ export function AdminUnsavedChangesProvider({
   const router = useRouter();
   const [dirtyBySource, setDirtyBySource] = useState<DirtyMap>({});
   const [popGuardToken] = useState(() => `jju-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`);
-  const dirtyLabels = Object.values(dirtyBySource).filter(entry => entry.dirty).map(entry => entry.label);
+  const dirtyLabels = useMemo(
+    () => Object.values(dirtyBySource).filter(entry => entry.dirty).map(entry => entry.label),
+    [dirtyBySource],
+  );
   const hasUnsavedChanges = dirtyLabels.length > 0;
   const warning = dirtyLabels.length
     ? `You have unsaved changes in ${dirtyLabels.join(", ")}. Leave this page and discard them?`
@@ -162,10 +166,11 @@ export function AdminUnsavedChangesProvider({
   const value = useMemo<AdminUnsavedContextValue>(() => ({
     adminBasePath,
     hasUnsavedChanges,
+    unsavedLabels: dirtyLabels,
     setUnsaved,
     confirmNavigation,
     resolveAdminHref: resolveHref,
-  }), [adminBasePath, confirmNavigation, hasUnsavedChanges, resolveHref, setUnsaved]);
+  }), [adminBasePath, confirmNavigation, dirtyLabels, hasUnsavedChanges, resolveHref, setUnsaved]);
 
   return <AdminUnsavedContext.Provider value={value}>{children}</AdminUnsavedContext.Provider>;
 }

@@ -242,7 +242,7 @@
 
 .formatBar {
   position: sticky;
-  top: 10px;
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 8px);
   z-index: 35;
   display: flex;
   align-items: center;
@@ -296,8 +296,8 @@
 
 .outline {
   position: sticky;
-  top: 76px;
-  max-height: calc(100vh - 104px);
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 70px);
+  max-height: calc(100vh - var(--workshop-topbar-height, 0px) - var(--workshop-context-height, 0px) - 92px);
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -343,6 +343,13 @@
   padding: 0 4px;
   overflow-y: auto;
   overscroll-behavior: contain;
+}
+
+.outlineEmpty {
+  margin: 12px 8px;
+  color: var(--workshop-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
 
 .outlineItem,
@@ -410,6 +417,69 @@
   background: var(--studio-paper);
   color: var(--studio-ink);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.sectionNavigator {
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: minmax(112px, auto) minmax(0, 1fr) minmax(112px, auto);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 12px;
+  background: #111411;
+  color: var(--workshop-cream);
+}
+
+.sectionNavigator button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  background: var(--workshop-panel-raised);
+  color: var(--workshop-cream);
+  cursor: pointer;
+}
+
+.sectionNavigator button:hover:not(:disabled) {
+  border-color: rgba(215, 166, 76, 0.52);
+}
+
+.sectionNavigator > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  text-align: center;
+}
+
+.sectionNavigator strong {
+  color: var(--workshop-gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sectionNavigator > div span {
+  overflow: hidden;
+  color: var(--workshop-muted);
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sectionNavigatorBottom {
+  margin: 12px 0 0;
+}
+
+.readingManuscript .sectionNavigator {
+  margin-right: calc(clamp(30px, 7vw, 82px) * -1);
+  margin-left: calc(clamp(30px, 7vw, 82px) * -1);
 }
 
 .sectionCard {
@@ -879,7 +949,7 @@
   }
 
   .formatBar {
-    top: 58px;
+    top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px));
     width: calc(100vw - 24px);
     margin-top: 12px;
     justify-content: flex-start;
@@ -903,7 +973,7 @@
 
   .outline {
     position: fixed;
-    inset: 52px 0 calc(62px + env(safe-area-inset-bottom));
+    inset: calc(var(--workshop-topbar-height, 52px) + var(--workshop-context-height, 0px)) 0 calc(var(--workshop-nav-height, 62px) + env(safe-area-inset-bottom));
     z-index: 90;
     max-height: none;
     display: none;
@@ -939,9 +1009,35 @@
   }
 
   .sectionCard {
-    scroll-margin-top: 118px;
+    scroll-margin-top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 64px);
     margin-bottom: 12px;
     border-radius: 9px;
+  }
+
+  .sectionNavigator {
+    grid-template-columns: minmax(88px, auto) minmax(0, 1fr) minmax(88px, auto);
+    gap: 6px;
+    min-height: 58px;
+    padding: 6px;
+  }
+
+  .sectionNavigator button {
+    min-height: 46px;
+    padding-inline: 8px;
+    font-size: 0.78rem;
+  }
+
+  .sectionNavigator strong {
+    font-size: 0.67rem;
+  }
+
+  .sectionNavigator > div span {
+    font-size: 0.7rem;
+  }
+
+  .readingManuscript .sectionNavigator {
+    margin-right: -15px;
+    margin-left: -15px;
   }
 
   .sectionHeader {
@@ -998,7 +1094,7 @@
   .saveDock {
     position: fixed;
     right: 9px;
-    bottom: calc(68px + env(safe-area-inset-bottom));
+    bottom: calc(var(--workshop-nav-height, 68px) + 8px + env(safe-area-inset-bottom));
     left: 9px;
     z-index: 72;
     width: auto;

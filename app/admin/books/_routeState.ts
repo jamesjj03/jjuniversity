@@ -11,8 +11,12 @@ export function safeBooksReturnHref(value: string | string[] | undefined) {
   try {
     const base = new URL("https://workshop.invalid/admin/books");
     const parsed = new URL(candidate, base);
-    if (parsed.origin !== base.origin || parsed.pathname !== "/admin/books") return "/admin/books";
-    return `/admin/books${parsed.search}`;
+    if (
+      parsed.origin !== base.origin
+      || !(parsed.pathname === "/admin" || parsed.pathname.startsWith("/admin/"))
+      || parsed.pathname.startsWith("/admin/api/")
+    ) return "/admin/books";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
   } catch {
     return "/admin/books";
   }

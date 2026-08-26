@@ -1,0 +1,1010 @@
+.shell {
+  --workshop-nav-height: 70px;
+  --workshop-topbar-height: 68px;
+  --workshop-context-height: 54px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 252px minmax(0, 1fr);
+  background:
+    radial-gradient(circle at 20% -10%, rgba(212, 162, 76, 0.1), transparent 36rem),
+    #0b0d0b;
+}
+
+.skipNav {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 200;
+}
+
+.skipLink {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 200;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #f7f5f1;
+  color: #111;
+  font-weight: 750;
+  text-decoration: none;
+  transform: translateY(-150%);
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  height: 100vh;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 14px 16px;
+  overflow-y: auto;
+  border-right: 1px solid var(--workshop-rule);
+  background: rgba(8, 10, 8, 0.95);
+  backdrop-filter: blur(20px);
+}
+
+.brand {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 7px;
+  border-radius: 12px;
+  color: var(--workshop-cream);
+  text-decoration: none;
+}
+
+.brandMark {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(212, 162, 76, 0.48);
+  border-radius: 12px;
+  color: var(--workshop-gold);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: -0.08em;
+}
+
+.brand > span:last-child,
+.sidebarFinder > span:nth-child(2),
+.mode > span:last-child,
+.activeMode > span:last-child {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.brand strong {
+  font-size: 0.98rem;
+  letter-spacing: -0.025em;
+}
+
+.brand small,
+.sidebarFinder small,
+.mode small,
+.activeMode small {
+  color: var(--workshop-muted);
+  font-size: 0.7rem;
+  line-height: 1.25;
+}
+
+.sidebarFinder {
+  width: 100%;
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  border: 1px solid rgba(212, 162, 76, 0.34);
+  border-radius: 13px;
+  background: rgba(212, 162, 76, 0.08);
+  color: var(--workshop-cream);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sidebarFinder > span:first-child {
+  color: var(--workshop-gold);
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.sidebarFinder strong {
+  font-size: 0.82rem;
+}
+
+.sidebarFinder kbd {
+  padding: 4px 6px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 6px;
+  color: var(--workshop-muted);
+  font: 650 0.62rem/1 var(--font-sans, system-ui, sans-serif);
+}
+
+.primaryNav {
+  display: grid;
+  gap: 6px;
+}
+
+.mode,
+.activeMode {
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: var(--workshop-cream);
+  text-decoration: none;
+}
+
+.mode:hover,
+.activeMode {
+  border-color: var(--workshop-rule);
+  background: var(--workshop-panel);
+}
+
+.activeMode {
+  box-shadow: inset 3px 0 0 var(--workshop-gold);
+}
+
+.modeIcon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(247, 245, 241, 0.045);
+  color: var(--workshop-muted);
+}
+
+.activeMode .modeIcon {
+  background: rgba(212, 162, 76, 0.13);
+  color: var(--workshop-gold);
+}
+
+.modeIcon svg,
+.bottomMode svg,
+.activeBottomMode svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mode strong,
+.activeMode strong {
+  font-size: 0.9rem;
+}
+
+.sidebarUtility {
+  margin-top: auto;
+  display: grid;
+  gap: 2px;
+  padding-top: 12px;
+  border-top: 1px solid var(--workshop-rule);
+}
+
+.sidebarUtility button,
+.sidebarUtility a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--workshop-muted);
+  font: inherit;
+  font-size: 0.77rem;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sidebarUtility button:hover,
+.sidebarUtility a:hover {
+  background: var(--workshop-panel);
+  color: var(--workshop-cream);
+}
+
+.stage,
+.content {
+  min-width: 0;
+}
+
+.stage {
+  min-height: 100vh;
+}
+
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 64;
+  height: var(--workshop-topbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 9px clamp(16px, 3vw, 32px);
+  border-bottom: 1px solid var(--workshop-rule);
+  background: rgba(11, 13, 11, 0.92);
+  backdrop-filter: blur(20px);
+}
+
+.mobileBrand {
+  display: none;
+}
+
+.routeIdentity {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.routeIdentity span {
+  color: var(--workshop-gold);
+  font-size: 0.64rem;
+  font-weight: 780;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.routeIdentity strong {
+  max-width: 48vw;
+  overflow: hidden;
+  color: var(--workshop-cream);
+  font-size: 0.98rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.savedState,
+.unsavedState {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 999px;
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+  font-weight: 720;
+}
+
+.savedState i,
+.unsavedState i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6fa980;
+}
+
+.unsavedState {
+  border-color: rgba(226, 170, 77, 0.55);
+  color: #ecd492;
+}
+
+.unsavedState i {
+  background: #e2aa4d;
+  box-shadow: 0 0 10px rgba(226, 170, 77, 0.45);
+}
+
+.finderButton,
+.toolsButton {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 13px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 10px;
+  background: var(--workshop-panel);
+  color: var(--workshop-cream);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.finderButton > span {
+  color: var(--workshop-gold);
+  font-size: 1.25rem;
+}
+
+.toolsButton {
+  width: 44px;
+  padding: 0;
+  letter-spacing: 0.08em;
+}
+
+.contextNav {
+  position: sticky;
+  top: var(--workshop-topbar-height);
+  z-index: 60;
+  min-height: var(--workshop-context-height);
+  display: flex;
+  align-items: center;
+  padding: 5px clamp(16px, 3vw, 32px);
+  border-bottom: 1px solid rgba(218, 166, 76, 0.13);
+  background: rgba(11, 13, 11, 0.92);
+  backdrop-filter: blur(20px);
+}
+
+.contextNav > div {
+  max-width: 100%;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.contextLink,
+.activeContext {
+  min-height: 44px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 13px;
+  border-radius: 9px;
+  color: var(--workshop-muted);
+  font-size: 0.76rem;
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.contextLink:hover,
+.activeContext {
+  background: var(--workshop-panel-raised);
+  color: var(--workshop-cream);
+}
+
+.content {
+  width: 100%;
+  scroll-margin-top: calc(var(--workshop-topbar-height) + var(--workshop-context-height));
+}
+
+.content:focus {
+  outline: none;
+}
+
+.bottomNav {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: grid;
+  place-items: start center;
+  padding: clamp(18px, 5vh, 54px) 16px;
+  overflow: auto;
+  background: rgba(2, 3, 2, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.finderDialog,
+.toolsDialog {
+  width: min(100%, 760px);
+  max-height: min(86vh, 860px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(212, 162, 76, 0.38);
+  border-radius: 20px;
+  background: #101310;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.58);
+}
+
+.toolsDialog {
+  width: min(100%, 580px);
+}
+
+.dialogHeader {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--workshop-rule);
+}
+
+.dialogHeader > div {
+  display: grid;
+  gap: 3px;
+}
+
+.dialogHeader span,
+.resultsLabel {
+  margin: 0;
+  color: var(--workshop-gold);
+  font-size: 0.65rem;
+  font-weight: 780;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dialogHeader h2 {
+  margin: 0;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.65rem;
+  font-weight: 570;
+}
+
+.dialogHeader button {
+  min-width: 58px;
+  min-height: 44px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 9px;
+  background: transparent;
+  color: var(--workshop-muted);
+  font: inherit;
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+
+.globalSearch {
+  display: grid;
+  gap: 7px;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--workshop-rule);
+  color: var(--workshop-muted);
+  font-size: 0.7rem;
+  font-weight: 720;
+}
+
+.globalSearch input {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 15px;
+  border: 1px solid rgba(212, 162, 76, 0.42);
+  border-radius: 12px;
+  background: #090b09;
+  color: var(--workshop-cream);
+  font: inherit;
+  font-size: 16px;
+}
+
+.finderBody {
+  min-height: 190px;
+  overflow-y: auto;
+  padding: 10px 14px 14px;
+}
+
+.finderResults {
+  display: grid;
+  gap: 7px;
+}
+
+.resultsLabel {
+  padding: 5px 4px 2px;
+}
+
+.finderResult {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 13px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.finderResult:hover {
+  border-color: rgba(212, 162, 76, 0.5);
+  background: var(--workshop-panel);
+}
+
+.bookResultMain {
+  min-width: 0;
+  min-height: 84px;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  color: var(--workshop-cream);
+  text-decoration: none;
+}
+
+.finderCover {
+  width: 52px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #050605;
+}
+
+.finderCover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.finderCopy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.finderCopy > span {
+  color: var(--workshop-gold);
+  font-size: 0.61rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.finderCopy > strong,
+.finderCopy > small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.finderCopy > strong {
+  font-size: 0.92rem;
+}
+
+.finderCopy > small {
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+}
+
+.openBook {
+  color: var(--workshop-muted);
+  font-size: 0.7rem;
+  font-weight: 720;
+  white-space: nowrap;
+}
+
+.openBook b {
+  color: var(--workshop-gold);
+  font-size: 1rem;
+}
+
+.detailsLink {
+  min-width: 76px;
+  display: grid;
+  place-items: center;
+  padding: 0 12px;
+  border-left: 1px solid var(--workshop-rule);
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.detailsLink:hover {
+  background: rgba(212, 162, 76, 0.08);
+  color: var(--workshop-cream);
+}
+
+.finderMessage {
+  min-height: 180px;
+  display: grid;
+  place-content: center;
+  gap: 7px;
+  padding: 28px;
+  color: var(--workshop-muted);
+  text-align: center;
+}
+
+.finderMessage strong {
+  color: var(--workshop-cream);
+}
+
+.finderMessage span {
+  max-width: 48ch;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.dialogFooter,
+.toolsFooter {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 18px;
+  border-top: 1px solid var(--workshop-rule);
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+}
+
+.dialogFooter a,
+.toolsFooter a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--workshop-cream);
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.toolList {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.toolList a {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 13px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  color: var(--workshop-cream);
+  text-decoration: none;
+}
+
+.toolList a:hover {
+  border-color: var(--workshop-rule);
+  background: var(--workshop-panel);
+}
+
+.toolList a > span {
+  display: grid;
+  gap: 4px;
+}
+
+.toolList strong {
+  font-size: 0.86rem;
+}
+
+.toolList small {
+  color: var(--workshop-muted);
+  font-size: 0.72rem;
+}
+
+.toolList b {
+  color: var(--workshop-gold);
+}
+
+.toolsFooter {
+  justify-content: flex-start;
+}
+
+.shell :global(.adminSectionTabs) {
+  top: calc(var(--workshop-topbar-height) + var(--workshop-context-height));
+}
+
+.shell :global(.adminWorkbench) {
+  top: calc(var(--workshop-topbar-height) + var(--workshop-context-height) + 70px);
+}
+
+.shell :global(.adminBookCards) {
+  top: calc(var(--workshop-topbar-height) + var(--workshop-context-height) + 144px);
+  max-height: calc(100vh - var(--workshop-topbar-height) - var(--workshop-context-height) - 168px);
+}
+
+.shell :global(.adminPage),
+.shell :global(main) {
+  scroll-padding-top: calc(var(--workshop-topbar-height) + var(--workshop-context-height) + 12px);
+}
+
+.shell a:focus-visible,
+.shell button:focus-visible,
+.shell input:focus-visible,
+.shell select:focus-visible,
+.shell textarea:focus-visible,
+.shell [contenteditable="true"]:focus-visible {
+  outline: 3px solid rgba(238, 198, 102, 0.92);
+  outline-offset: 2px;
+}
+
+@media (max-width: 980px) and (min-width: 721px) {
+  .shell {
+    grid-template-columns: 204px minmax(0, 1fr);
+  }
+
+  .sidebar {
+    padding-inline: 10px;
+  }
+
+  .sidebarFinder kbd,
+  .mode small,
+  .activeMode small {
+    display: none;
+  }
+}
+
+@media (max-width: 720px), (max-height: 520px) and (pointer: coarse) {
+  .shell {
+    min-height: 100dvh;
+    display: block;
+    padding-bottom: calc(var(--workshop-nav-height) + env(safe-area-inset-bottom));
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .stage {
+    min-height: 100dvh;
+  }
+
+  .topBar {
+    height: var(--workshop-topbar-height);
+    gap: 10px;
+    padding: 8px 10px;
+  }
+
+  .mobileBrand {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--workshop-cream);
+    text-decoration: none;
+  }
+
+  .mobileBrand span {
+    color: var(--workshop-gold);
+    font-size: 0.66rem;
+    font-weight: 850;
+    letter-spacing: -0.05em;
+  }
+
+  .mobileBrand strong {
+    font-size: 0.78rem;
+  }
+
+  .routeIdentity {
+    flex: 1 1 auto;
+  }
+
+  .routeIdentity strong {
+    max-width: 30vw;
+    font-size: 0.82rem;
+  }
+
+  .routeIdentity span {
+    font-size: 0.57rem;
+  }
+
+  .topActions {
+    gap: 5px;
+  }
+
+  .savedState,
+  .unsavedState {
+    width: 32px;
+    min-height: 42px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .unsavedState {
+    width: auto;
+    padding-inline: 9px;
+  }
+
+  .savedState > span,
+  .finderButton strong {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .unsavedState > span {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: nowrap;
+  }
+
+  .finderButton {
+    width: 44px;
+    padding: 0;
+  }
+
+  .finderButton > span {
+    font-size: 1.45rem;
+  }
+
+  .toolsButton {
+    width: 44px;
+  }
+
+  .contextNav {
+    min-height: var(--workshop-context-height);
+    padding-inline: 9px;
+  }
+
+  .contextLink,
+  .activeContext {
+    min-height: 44px;
+    padding-inline: 12px;
+    font-size: 0.75rem;
+  }
+
+  .bottomNav {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 100;
+    height: calc(var(--workshop-nav-height) + env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding: 5px 5px calc(5px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--workshop-rule);
+    background: rgba(8, 10, 8, 0.98);
+    backdrop-filter: blur(20px);
+  }
+
+  .bottomMode,
+  .activeBottomMode {
+    min-width: 0;
+    min-height: 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-radius: 10px;
+    color: var(--workshop-muted);
+    font-size: 0.75rem;
+    font-weight: 720;
+    text-decoration: none;
+  }
+
+  .activeBottomMode {
+    background: rgba(212, 162, 76, 0.11);
+    color: #ebcc81;
+  }
+
+  .bottomMode svg,
+  .activeBottomMode svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .content {
+    padding-bottom: 12px;
+    scroll-margin-top: calc(var(--workshop-topbar-height) + var(--workshop-context-height));
+  }
+
+  .overlay {
+    place-items: end center;
+    padding: 0;
+  }
+
+  .finderDialog,
+  .toolsDialog {
+    width: 100%;
+    max-height: calc(100dvh - 12px);
+    border-width: 1px 0 0;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .dialogHeader {
+    min-height: 68px;
+    padding: 11px 14px;
+  }
+
+  .dialogHeader h2 {
+    font-size: 1.4rem;
+  }
+
+  .globalSearch {
+    padding: 11px 14px;
+  }
+
+  .finderBody {
+    padding: 8px 9px 12px;
+  }
+
+  .bookResultMain {
+    grid-template-columns: 47px minmax(0, 1fr);
+    gap: 10px;
+    padding: 7px 9px;
+  }
+
+  .finderCover {
+    width: 47px;
+  }
+
+  .openBook {
+    display: none;
+  }
+
+  .detailsLink {
+    min-width: 68px;
+    padding-inline: 9px;
+  }
+
+  .dialogFooter {
+    padding-inline: 14px;
+  }
+
+  .dialogFooter > span {
+    display: none;
+  }
+
+  .toolList {
+    padding: 8px;
+  }
+
+  .shell :global(.adminSectionTabs) {
+    top: calc(var(--workshop-topbar-height) + var(--workshop-context-height));
+  }
+
+  .shell :global(.adminFormatToolbar) {
+    top: calc(var(--workshop-topbar-height) + var(--workshop-context-height));
+  }
+
+  .shell :global(.adminBookCards.adminBookCardsMobileOpen) {
+    inset: var(--workshop-topbar-height) 0 calc(var(--workshop-nav-height) + env(safe-area-inset-bottom));
+  }
+
+  .shell :global(.adminMobileSaveDock),
+  .shell :global(.saveDock) {
+    bottom: calc(var(--workshop-nav-height) + 8px + env(safe-area-inset-bottom));
+  }
+
+  .shell :global(.adminPage),
+  .shell :global(main) {
+    scroll-padding-bottom: calc(var(--workshop-nav-height) + 76px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 430px) {
+  .mobileBrand strong {
+    display: none;
+  }
+
+  .routeIdentity strong {
+    max-width: 34vw;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    scroll-behavior: auto;
+  }
+}

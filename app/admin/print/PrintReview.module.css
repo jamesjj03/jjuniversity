@@ -1150,7 +1150,7 @@
   }
 
   .saveDock {
-    bottom: calc(68px + env(safe-area-inset-bottom));
+    bottom: calc(var(--workshop-nav-height, 68px) + 8px + env(safe-area-inset-bottom));
     display: grid;
     padding: 11px;
   }

@@ -193,7 +193,7 @@
 
 .toolbar {
   position: sticky;
-  top: 16px;
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 8px);
   z-index: 20;
   display: grid;
   grid-template-columns: minmax(260px, 1fr) 180px 180px;
@@ -378,7 +378,7 @@
 
 .bookTabs {
   position: sticky;
-  top: 14px;
+  top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px) + 8px);
   z-index: 16;
   display: flex;
   gap: 5px;
@@ -618,7 +618,7 @@
   }
 
   .bookTabs {
-    top: 58px;
+    top: calc(var(--workshop-topbar-height, 0px) + var(--workshop-context-height, 0px));
     width: 100%;
   }
 
@@ -642,7 +642,7 @@
   }
 
   .saveDock {
-    bottom: calc(68px + env(safe-area-inset-bottom));
+    bottom: calc(var(--workshop-nav-height, 68px) + 8px + env(safe-area-inset-bottom));
   }
 
   .capabilityRow {

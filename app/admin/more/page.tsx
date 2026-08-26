@@ -5,7 +5,7 @@ import styles from "@/app/admin/WorkshopCore.module.css";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "More | JJU Workshop",
+  title: "All Tools | JJU Workshop",
   robots: { index: false, follow: false },
 };
 
@@ -15,8 +15,8 @@ export default function MoreWorkshopPage() {
       <header className={styles.pageHeader}>
         <div>
           <p className={styles.eyebrow}>Workshop</p>
-          <h1>More</h1>
-          <p className={styles.intro}>Specialized and retained tools live here so they do not crowd the everyday book workflow. Legacy labels are intentional.</p>
+          <h1>All tools</h1>
+          <p className={styles.intro}>Specialized and retained tools live here by name so they do not crowd the five everyday work modes.</p>
         </div>
       </header>
 
