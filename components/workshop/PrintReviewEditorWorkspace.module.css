@@ -1,0 +1,112 @@
+.workspace {
+  min-width: 0;
+}
+
+.switcher {
+  position: relative;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 0 0 8px;
+  padding: 10px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 14px;
+  background: rgba(12, 16, 12, 0.92);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.switcher > div:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+  padding-left: 7px;
+}
+
+.switcher > div:first-child strong {
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 590;
+}
+
+.switcher > div:first-child span {
+  color: var(--workshop-muted);
+  font-size: 0.65rem;
+}
+
+.switcher [role="tablist"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(190px, 1fr));
+  gap: 6px;
+}
+
+.switcher button {
+  min-height: 54px;
+  display: grid;
+  gap: 2px;
+  padding: 8px 13px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--workshop-muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.switcher button span {
+  font-size: 0.77rem;
+  font-weight: 790;
+}
+
+.switcher button small {
+  font-size: 0.61rem;
+  line-height: 1.35;
+}
+
+.switcher button[aria-selected="true"] {
+  border-color: rgba(215, 183, 101, 0.42);
+  background: rgba(215, 183, 101, 0.1);
+  color: var(--workshop-cream);
+}
+
+.switcher button:hover {
+  color: var(--workshop-cream);
+}
+
+.switcher button:focus-visible {
+  outline: 2px solid #e5c66f;
+  outline-offset: 2px;
+}
+
+.workspace [role="tabpanel"][hidden] {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .switcher {
+    align-items: stretch;
+    display: grid;
+    padding: 9px;
+  }
+
+  .switcher > div:first-child {
+    padding: 2px 4px 0;
+  }
+
+  .switcher [role="tablist"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .switcher button {
+    min-height: 62px;
+    padding: 8px 9px;
+  }
+
+  .switcher button small {
+    font-size: 0.57rem;
+  }
+}

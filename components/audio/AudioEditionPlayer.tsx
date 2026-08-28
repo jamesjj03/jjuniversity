@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PublishedAudioEdition } from "@/lib/audioCatalog";
 import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseClient";
@@ -56,13 +57,20 @@ export default function AudioEditionPlayer({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(edition.tracks[0]?.durationSeconds || 0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [mobileControlsActivated, setMobileControlsActivated] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [accountReady, setAccountReady] = useState(edition.accessModel === "free");
   const [accountChecked, setAccountChecked] = useState(edition.accessModel !== "account" || !hasSupabaseConfig());
   const [error, setError] = useState("");
   const track = edition.tracks[trackIndex];
   const nextTrack = edition.tracks[trackIndex + 1] || null;
+  const previousTrack = edition.tracks[trackIndex - 1] || null;
   const completedSet = useMemo(() => new Set(completedTrackIds), [completedTrackIds]);
+  const trackProgress = Math.min(1, currentTime / Math.max(1, duration || track?.durationSeconds || 1));
+  const overallProgress = Math.min(
+    100,
+    ((completedTrackIds.length + (track && !completedSet.has(track.id) ? trackProgress : 0)) / Math.max(1, edition.tracks.length)) * 100,
+  );
 
   useEffect(() => {
     if (edition.accessModel !== "account" || !hasSupabaseConfig()) return;
@@ -141,6 +149,7 @@ export default function AudioEditionPlayer({
     if (persistCurrent && audioRef.current && track) storeProgress(audioRef.current.currentTime);
     setError("");
     setIsPlaying(false);
+    setMobileControlsActivated(true);
     setCurrentTime(0);
     setDuration(edition.tracks[bounded]?.durationSeconds || 0);
     resumeRef.current = null;
@@ -160,6 +169,7 @@ export default function AudioEditionPlayer({
     const audio = audioRef.current;
     if (!audio) return;
     setError("");
+    setMobileControlsActivated(true);
     try {
       if (audio.paused) await audio.play();
       else audio.pause();
@@ -197,114 +207,164 @@ export default function AudioEditionPlayer({
         <p className={styles.candidateNotice}>Private listening proof · Danny&apos;s recovered email masters</p>
       ) : null}
 
-      <div className={styles.nowPlaying} aria-live="polite">
-        <div>
-          <span>Now playing · Track {track.position} of {edition.tracks.length}</span>
-          <strong>{track.title}</strong>
-        </div>
-        <label className={styles.speedControl}>
-          <span>Speed</span>
-          <select
-            value={playbackRate}
-            onChange={event => {
-              const rate = Number(event.target.value);
-              setPlaybackRate(rate);
-              if (audioRef.current) audioRef.current.playbackRate = rate;
+      <div className={styles.playerLayout}>
+        <div className={styles.playbackPanel}>
+          <div className={styles.nowPlaying} aria-live="polite">
+            <div>
+              <span>{isPlaying ? "Now playing" : currentTime > 0 ? "Ready to resume" : "Selected chapter"} · {track.position} of {edition.tracks.length}</span>
+              <strong>{track.title}</strong>
+            </div>
+            <label className={styles.speedControl}>
+              <span>Speed</span>
+              <select
+                aria-label="Playback speed"
+                value={playbackRate}
+                onChange={event => {
+                  const rate = Number(event.target.value);
+                  setPlaybackRate(rate);
+                  if (audioRef.current) audioRef.current.playbackRate = rate;
+                }}
+              >
+                {[0.75, 1, 1.25, 1.5, 1.75, 2].map(rate => <option key={rate} value={rate}>{rate}×</option>)}
+              </select>
+            </label>
+          </div>
+
+          <audio
+            ref={audioRef}
+            key={`${track.id}:${candidatePreviewKey || "published"}`}
+            preload="metadata"
+            src={`/api/audio/editions/${encodeURIComponent(edition.id)}/tracks/${encodeURIComponent(track.id)}${candidatePreviewKey ? `?candidate=${encodeURIComponent(candidatePreviewKey)}` : ""}`}
+            onLoadedMetadata={event => {
+              const audio = event.currentTarget;
+              audio.playbackRate = playbackRate;
+              setDuration(Number.isFinite(audio.duration) ? audio.duration : track.durationSeconds);
+              const resume = resumeRef.current;
+              if (resume?.trackId === track.id && resume.seconds > 0 && resume.seconds < audio.duration - 2) {
+                audio.currentTime = resume.seconds;
+                setCurrentTime(resume.seconds);
+                resumeRef.current = null;
+              }
             }}
+            onTimeUpdate={event => {
+              const seconds = event.currentTarget.currentTime;
+              setCurrentTime(seconds);
+              const whole = Math.floor(seconds);
+              if (whole > 0 && whole !== lastStoredSecondRef.current && whole % 5 === 0) {
+                lastStoredSecondRef.current = whole;
+                storeProgress(seconds);
+              }
+            }}
+            onPlay={() => setIsPlaying(true)}
+            onPause={event => {
+              setIsPlaying(false);
+              storeProgress(event.currentTarget.currentTime);
+            }}
+            onEnded={finishTrack}
+            onError={() => setError("That track could not be loaded. Try it again in a moment.")}
           >
-            {[0.75, 1, 1.25, 1.5, 1.75, 2].map(rate => <option key={rate} value={rate}>{rate}×</option>)}
-          </select>
-        </label>
-      </div>
+            Your browser does not support audio playback.
+          </audio>
 
-      <audio
-        ref={audioRef}
-        key={`${track.id}:${candidatePreviewKey || "published"}`}
-        preload="metadata"
-        src={`/api/audio/editions/${encodeURIComponent(edition.id)}/tracks/${encodeURIComponent(track.id)}${candidatePreviewKey ? `?candidate=${encodeURIComponent(candidatePreviewKey)}` : ""}`}
-        onLoadedMetadata={event => {
-          const audio = event.currentTarget;
-          audio.playbackRate = playbackRate;
-          setDuration(Number.isFinite(audio.duration) ? audio.duration : track.durationSeconds);
-          const resume = resumeRef.current;
-          if (resume?.trackId === track.id && resume.seconds > 0 && resume.seconds < audio.duration - 2) {
-            audio.currentTime = resume.seconds;
-            setCurrentTime(resume.seconds);
-            resumeRef.current = null;
-          }
-        }}
-        onTimeUpdate={event => {
-          const seconds = event.currentTarget.currentTime;
-          setCurrentTime(seconds);
-          const whole = Math.floor(seconds);
-          if (whole > 0 && whole !== lastStoredSecondRef.current && whole % 5 === 0) {
-            lastStoredSecondRef.current = whole;
-            storeProgress(seconds);
-          }
-        }}
-        onPlay={() => setIsPlaying(true)}
-        onPause={event => {
-          setIsPlaying(false);
-          storeProgress(event.currentTarget.currentTime);
-        }}
-        onEnded={finishTrack}
-        onError={() => setError("That track could not be loaded. Try it again in a moment.")}
-      >
-        Your browser does not support audio playback.
-      </audio>
+          <div className={styles.timeline}>
+            <input
+              aria-label={`Position in ${track.title}`}
+              type="range"
+              min="0"
+              max={Math.max(1, duration || track.durationSeconds)}
+              step="0.1"
+              value={Math.min(currentTime, Math.max(1, duration || track.durationSeconds))}
+              style={{ "--track-progress": `${trackProgress * 100}%` } as CSSProperties}
+              onChange={event => {
+                const seconds = Number(event.target.value);
+                if (audioRef.current) audioRef.current.currentTime = seconds;
+                setCurrentTime(seconds);
+                storeProgress(seconds);
+              }}
+            />
+            <div><span>{formatDuration(currentTime)}</span><span>−{formatDuration(Math.max(0, (duration || track.durationSeconds) - currentTime))}</span></div>
+          </div>
 
-      <div className={styles.timeline}>
-        <input
-          aria-label={`Position in ${track.title}`}
-          type="range"
-          min="0"
-          max={Math.max(1, duration || track.durationSeconds)}
-          step="0.1"
-          value={Math.min(currentTime, Math.max(1, duration || track.durationSeconds))}
-          onChange={event => {
-            const seconds = Number(event.target.value);
-            if (audioRef.current) audioRef.current.currentTime = seconds;
-            setCurrentTime(seconds);
-            storeProgress(seconds);
-          }}
-        />
-        <div><span>{formatDuration(currentTime)}</span><span>{formatDuration(duration || track.durationSeconds)}</span></div>
-      </div>
+          <div className={styles.transport} data-mobile-docked={mobileControlsActivated || isPlaying || currentTime > 0}>
+            <button type="button" onClick={() => seekBy(-15)} aria-label="Go back 15 seconds"><span aria-hidden="true">↶</span><small>15</small></button>
+            <button className={styles.playButton} type="button" onClick={togglePlayback} aria-label={isPlaying ? "Pause audiobook" : currentTime > 0 ? "Resume audiobook" : "Play audiobook"}>
+              <span aria-hidden="true">{isPlaying ? "Ⅱ" : "▶"}</span>
+              <small>{isPlaying ? "Pause" : currentTime > 0 ? "Resume" : "Play"}</small>
+            </button>
+            <button type="button" onClick={() => seekBy(15)} aria-label="Go forward 15 seconds"><span aria-hidden="true">↷</span><small>15</small></button>
+          </div>
 
-      <div className={styles.transport}>
-        <button type="button" disabled={trackIndex === 0} onClick={() => chooseTrack(trackIndex - 1)} aria-label="Previous track">Previous</button>
-        <button type="button" onClick={() => seekBy(-15)} aria-label="Go back 15 seconds">−15 sec</button>
-        <button className={styles.playButton} type="button" onClick={togglePlayback}>{isPlaying ? "Pause" : currentTime > 0 ? "Resume" : "Play"}</button>
-        <button type="button" onClick={() => seekBy(15)} aria-label="Go forward 15 seconds">+15 sec</button>
-        <button type="button" disabled={!nextTrack} onClick={() => chooseTrack(trackIndex + 1)} aria-label="Next track">Next</button>
-      </div>
-      {error && <p className={styles.error} role="status">{error}</p>}
+          <div className={styles.chapterNav} aria-label="Chapter navigation">
+            <button type="button" disabled={!previousTrack} onClick={() => chooseTrack(trackIndex - 1)}>
+              <span>← Previous</span>
+              <strong>{previousTrack?.title || "Beginning"}</strong>
+            </button>
+            <button type="button" disabled={!nextTrack} onClick={() => chooseTrack(trackIndex + 1)}>
+              <span>Next →</span>
+              <strong>{nextTrack?.title || "End of audiobook"}</strong>
+            </button>
+          </div>
 
-      <div className={styles.upNext}>
-        <span>Up next</span>
-        <strong>{nextTrack ? `${String(nextTrack.position).padStart(2, "0")} · ${nextTrack.title}` : "End of audiobook"}</strong>
-      </div>
+          {error && <p className={styles.error} role="status">{error}</p>}
 
-      <div className={styles.tracks}>
-        <div className={styles.trackHeading}>
-          <h2>Chapters</h2>
-          <span>{completedTrackIds.length} of {edition.tracks.length} listened</span>
+          <div className={styles.upNext}>
+            <span>Up next</span>
+            <strong>{nextTrack ? `${String(nextTrack.position).padStart(2, "0")} · ${nextTrack.title}` : "You’re at the end of the audiobook"}</strong>
+          </div>
         </div>
-        <ol className={styles.trackList}>
-          {edition.tracks.map((item, index) => {
-            const complete = completedSet.has(item.id);
-            const active = index === trackIndex;
-            return (
-              <li key={item.id}>
-                <button type="button" data-active={active} aria-current={active ? "true" : undefined} onClick={() => chooseTrack(index)}>
-                  <span className={styles.trackNumber}>{complete ? "✓" : String(item.position).padStart(2, "0")}</span>
-                  <span className={styles.trackTitle}>{item.title}<small>{complete ? "Listened" : active && currentTime > 0 ? "In progress" : index === trackIndex + 1 ? "Up next" : ""}</small></span>
-                  <span className={styles.trackDuration}>{formatDuration(item.durationSeconds)}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ol>
+
+        <div className={styles.tracks}>
+          <div className={styles.trackHeading}>
+            <div>
+              <p>Listening progress</p>
+              <h2>Chapters</h2>
+            </div>
+            <strong>{completedTrackIds.length}<span> / {edition.tracks.length}</span></strong>
+          </div>
+          <div
+            className={styles.overallProgress}
+            role="progressbar"
+            aria-label="Overall audiobook progress"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(overallProgress)}
+          >
+            <span style={{ width: `${overallProgress}%` }} />
+          </div>
+          <ol className={styles.trackList}>
+            {edition.tracks.map((item, index) => {
+              const complete = completedSet.has(item.id);
+              const active = index === trackIndex;
+              const status = active ? "active" : complete ? "listened" : index === trackIndex + 1 ? "up-next" : "queued";
+              const statusLabel = active
+                ? isPlaying ? "Playing" : currentTime > 0 ? "In progress" : "Selected"
+                : complete ? "Listened" : status === "up-next" ? "Up next" : "";
+              return (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    data-status={status}
+                    aria-current={active ? "true" : undefined}
+                    aria-label={`Chapter ${item.position}: ${item.title}${statusLabel ? `, ${statusLabel}` : ""}`}
+                    onClick={() => chooseTrack(index)}
+                  >
+                    <span className={styles.trackNumber}>{complete ? "✓" : String(item.position).padStart(2, "0")}</span>
+                    <span className={styles.trackTitle}>{item.title}<small>{statusLabel}</small></span>
+                    <span className={styles.trackDuration}>{formatDuration(item.durationSeconds)}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </div>
+      <div className={styles.mobileDock} data-active={mobileControlsActivated || isPlaying || currentTime > 0} aria-label="Persistent playback controls">
+        <button type="button" onClick={() => seekBy(-15)} aria-label="Go back 15 seconds"><span aria-hidden="true">↶</span><small>15</small></button>
+        <button type="button" onClick={togglePlayback} aria-label={isPlaying ? "Pause audiobook" : currentTime > 0 ? "Resume audiobook" : "Play audiobook"}>
+          <span aria-hidden="true">{isPlaying ? "Ⅱ" : "▶"}</span>
+          <small>{isPlaying ? "Pause" : currentTime > 0 ? "Resume" : "Play"}</small>
+        </button>
+        <button type="button" onClick={() => seekBy(15)} aria-label="Go forward 15 seconds"><span aria-hidden="true">↷</span><small>15</small></button>
       </div>
     </section>
   );

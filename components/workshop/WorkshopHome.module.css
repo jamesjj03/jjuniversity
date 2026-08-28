@@ -40,6 +40,111 @@
   line-height: 1.6;
 }
 
+.addressCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px 24px;
+  margin: 0 0 18px;
+  padding: clamp(19px, 3vw, 26px);
+  border: 1px solid rgba(212, 162, 76, 0.46);
+  border-radius: 18px;
+  background:
+    linear-gradient(115deg, rgba(212, 162, 76, 0.12), transparent 48%),
+    #0b0e0b;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+}
+
+.addressCopy h2 {
+  margin: 6px 0 7px;
+  color: var(--workshop-cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.55rem, 4vw, 2.6rem);
+  font-weight: 560;
+  letter-spacing: -0.035em;
+}
+
+.addressCopy p,
+.addressNotice {
+  margin: 0;
+  color: var(--workshop-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.addressActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addressActions button {
+  min-height: 46px;
+  padding: 0 15px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 10px;
+  background: var(--workshop-panel-raised);
+  color: var(--workshop-cream);
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 760;
+  cursor: pointer;
+}
+
+.addressActions button:first-child {
+  border-color: rgba(212, 162, 76, 0.56);
+  color: #f0d58f;
+}
+
+.addressActions button:hover {
+  background: rgba(212, 162, 76, 0.12);
+}
+
+.permanentDoors {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.permanentDoors a {
+  min-width: 0;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 13px;
+  border: 1px solid var(--workshop-rule);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.018);
+  color: var(--workshop-cream);
+  text-decoration: none;
+}
+
+.permanentDoors a:hover {
+  border-color: rgba(212, 162, 76, 0.52);
+  background: rgba(212, 162, 76, 0.07);
+}
+
+.permanentDoors span {
+  font-size: 0.78rem;
+  font-weight: 760;
+}
+
+.permanentDoors code {
+  overflow: hidden;
+  color: var(--workshop-muted);
+  font-size: 0.66rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.addressNotice {
+  grid-column: 1 / -1;
+  min-height: 1.2em;
+  color: var(--workshop-gold);
+}
+
 .startGrid {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
@@ -348,6 +453,19 @@
 
   .homeHeader h1 {
     font-size: 2.8rem;
+  }
+
+  .addressCard {
+    grid-template-columns: 1fr;
+  }
+
+  .addressActions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .permanentDoors {
+    grid-template-columns: 1fr;
   }
 
   .startGrid {

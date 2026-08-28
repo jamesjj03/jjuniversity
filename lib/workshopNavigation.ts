@@ -44,7 +44,7 @@ export const WORKSHOP_MODES: WorkshopMode[] = [
     description: "Build physical editions",
     relatedHrefs: ["/admin/print"],
     subnav: [
-      { href: "/admin/print", label: "Print editor", shortLabel: "Editor", description: "Covers, formats, notices, and release gates" },
+      { href: "/admin/print", label: "Print Design Lab", shortLabel: "Design", description: "Build covers, spines, formats, and the series system" },
       { href: "/admin/print/proofs", label: "Proof gallery", shortLabel: "Proofs", description: "Inspect rendered pages" },
     ],
   },
@@ -55,8 +55,8 @@ export const WORKSHOP_MODES: WorkshopMode[] = [
     description: "Listen and manage narrators",
     relatedHrefs: ["/admin/audio", "/admin/narrators"],
     subnav: [
-      { href: "/admin/audio", label: "Audio review", shortLabel: "Review", description: "Listen to sealed editions" },
-      { href: "/admin/narrators", label: "Narrators", description: "Assign, offer, and review work" },
+      { href: "/admin/audio", label: "Audio QA", shortLabel: "QA", description: "Listen to sealed editions" },
+      { href: "/admin/narrators", label: "Narrator Room", shortLabel: "Narrators", description: "Assign, offer, and review work" },
     ],
   },
   {

@@ -1,4 +1,5 @@
 import { GuardedAdminLink } from "@/components/AdminUnsavedChanges";
+import WorkshopAddressCard from "@/components/workshop/WorkshopAddressCard";
 import WorkshopResumePanel from "@/components/workshop/WorkshopResumePanel";
 import { WorkshopFinderButton } from "@/components/workshop/WorkshopShell";
 import styles from "@/components/workshop/WorkshopHome.module.css";
@@ -9,8 +10,10 @@ export default function AdminPage() {
       <header className={styles.homeHeader}>
         <span className={styles.eyebrow}>JJU Workshop</span>
         <h1>What do you want to work on?</h1>
-        <p>Find a book, resume the exact desk you last opened, or enter one of five clear work modes.</p>
+        <p>This is the permanent front door. Find a book, resume the exact desk you last opened, or enter one of five clear work modes.</p>
       </header>
+
+      <WorkshopAddressCard />
 
       <section className={styles.startGrid} aria-label="Start or resume work">
         <WorkshopFinderButton className={styles.finderLaunch}>
@@ -36,12 +39,12 @@ export default function AdminPage() {
             <div className={styles.modeActions}><GuardedAdminLink href="/admin/organize">Organize <b>→</b></GuardedAdminLink><GuardedAdminLink href="/admin/topics">Topics <b>→</b></GuardedAdminLink></div>
           </article>
           <article className={styles.modeCard}>
-            <span className={styles.modeNumber}>03</span><h3>Print</h3><p>Choose formats, covers, notices, pricing, and proofs.</p>
-            <div className={styles.modeActions}><GuardedAdminLink href="/admin/print">Editor <b>→</b></GuardedAdminLink><GuardedAdminLink href="/admin/print/proofs">Proofs <b>→</b></GuardedAdminLink></div>
+            <span className={styles.modeNumber}>03</span><h3>Print</h3><p>Design the series system, spines, formats, notices, pricing, and proofs.</p>
+            <div className={styles.modeActions}><GuardedAdminLink href="/admin/print">Design lab <b>→</b></GuardedAdminLink><GuardedAdminLink href="/admin/print/proofs">Proofs <b>→</b></GuardedAdminLink></div>
           </article>
           <article className={styles.modeCard}>
             <span className={styles.modeNumber}>04</span><h3>Audio</h3><p>Listen to editions and manage narrator work.</p>
-            <div className={styles.modeActions}><GuardedAdminLink href="/admin/audio">Listen <b>→</b></GuardedAdminLink><GuardedAdminLink href="/admin/narrators">Narrators <b>→</b></GuardedAdminLink></div>
+            <div className={styles.modeActions}><GuardedAdminLink href="/admin/audio">Audio QA <b>→</b></GuardedAdminLink><GuardedAdminLink href="/admin/narrators">Narrators <b>→</b></GuardedAdminLink></div>
           </article>
           <article className={styles.modeCard}>
             <span className={styles.modeNumber}>05</span><h3>Review</h3><p>Handle the editorial decisions that require your eyes.</p>
