@@ -1,0 +1,2054 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "updatedAt": "2026-08-28T00:00:00.000Z",
+  "topicsByBook": {
+    "1776": [
+      "American History",
+      "Civil Rights & Social Justice",
+      "Government & Politics",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "addiction": [
+      "Addiction & Substance Use",
+      "American History",
+      "Capitalism & Corporations",
+      "Consumer Culture"
+    ],
+    "adolf": [
+      "20th Century",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "European History",
+      "Propaganda & Social Control",
+      "World War II"
+    ],
+    "agency": [
+      "Philosophy",
+      "Political Theory",
+      "Psychology & Human Behavior",
+      "Social Movements"
+    ],
+    "ai": [
+      "Cognitive Science & Neuroscience",
+      "Digital Culture & Technology",
+      "Science History",
+      "Technology & Innovation"
+    ],
+    "aitakeover": [
+      "Addiction & Substance Use",
+      "Consumer Culture",
+      "Digital Culture & Technology",
+      "Propaganda & Social Control",
+      "Psychology & Human Behavior"
+    ],
+    "alcohol": [
+      "Addiction & Substance Use",
+      "American History",
+      "Cultural History",
+      "Food & Culture",
+      "Social Movements"
+    ],
+    "alexander": [
+      "Ancient Greece",
+      "Biography",
+      "Military History",
+      "War & Conflict"
+    ],
+    "aliens": [
+      "Conspiracy & Cover-ups",
+      "Espionage & Intelligence",
+      "Government & Politics",
+      "Propaganda & Social Control",
+      "Science & Mathematics"
+    ],
+    "alta": [
+      "Business & Economics",
+      "Consumer Culture",
+      "Cults & Extremism",
+      "Psychology & Human Behavior"
+    ],
+    "amish": [
+      "American History",
+      "Cultural History",
+      "Religion & Spirituality",
+      "Social Movements"
+    ],
+    "anatomy": [
+      "Biology & Medicine",
+      "Cultural History",
+      "Science History",
+      "Technology & Innovation"
+    ],
+    "antarctica": [
+      "20th Century",
+      "Cold War",
+      "Environmental Issues",
+      "Science History"
+    ],
+    "antisem": [
+      "Christianity",
+      "Civil Rights & Social Justice",
+      "Cults & Extremism",
+      "European History",
+      "Propaganda & Social Control",
+      "World War II"
+    ],
+    "aquinas": [
+      "Christianity",
+      "Medieval History",
+      "Philosophy",
+      "Religion & Spirituality"
+    ],
+    "aristotle": [
+      "Ancient Greece",
+      "Biography",
+      "Philosophy",
+      "Science History"
+    ],
+    "astral": [
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "atheism": [
+      "Philosophy",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "audit": [
+      "Business & Economics",
+      "Government & Politics"
+    ],
+    "august": [
+      "Ancient Civilizations",
+      "Ancient Rome",
+      "Biography"
+    ],
+    "bahai": [
+      "Middle Eastern History",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "bang": [
+      "Physics & Cosmology",
+      "Science & Mathematics"
+    ],
+    "banned": [
+      "Authoritarianism & Dictatorship",
+      "Civil Rights & Social Justice",
+      "Government & Politics",
+      "Propaganda & Social Control"
+    ],
+    "bees": [
+      "Biology & Medicine",
+      "Environmental Issues"
+    ],
+    "believe": [
+      "Buddhism",
+      "Christianity",
+      "Islam",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "believers": [
+      "Eastern Philosophy & Religion",
+      "Religion & Spirituality",
+      "Spirituality & Mysticism",
+      "World Religions"
+    ],
+    "bezos": [
+      "Biography",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Digital Culture & Technology"
+    ],
+    "bible": [
+      "Ancient Civilizations",
+      "Christianity",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "biochemical": [
+      "Biology & Medicine",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Food & Culture"
+    ],
+    "biology": [
+      "Biology & Medicine",
+      "Science & Mathematics",
+      "Science History"
+    ],
+    "bluecollar": [
+      "Addiction & Substance Use",
+      "Capitalism & Corporations",
+      "Civil Rights & Social Justice",
+      "Consumer Culture",
+      "Psychology & Human Behavior"
+    ],
+    "bluster": [
+      "Psychology & Human Behavior"
+    ],
+    "bom": [
+      "American History",
+      "Christianity",
+      "Mythology & Ancient Beliefs",
+      "Religion & Spirituality"
+    ],
+    "borders": [
+      "Colonialism & Empire",
+      "Cultural History",
+      "European History",
+      "Government & Politics",
+      "Middle Eastern History"
+    ],
+    "brain": [
+      "American History",
+      "Mythology & Ancient Beliefs",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "branches": [
+      "Christianity",
+      "Cultural History",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "buddha": [
+      "Biography",
+      "Buddhism",
+      "Eastern Philosophy & Religion",
+      "Spirituality & Mysticism"
+    ],
+    "buddhism": [
+      "Buddhism",
+      "Eastern Philosophy & Religion",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "bure": [
+      "Capitalism & Corporations",
+      "Government & Politics",
+      "Psychology & Human Behavior",
+      "Social Movements"
+    ],
+    "burgers": [
+      "Biology & Medicine",
+      "Cognitive Science & Neuroscience",
+      "Science & Mathematics"
+    ],
+    "burr": [
+      "American History",
+      "American Politics",
+      "Biography"
+    ],
+    "burton": [
+      "20th Century",
+      "Art & Music History",
+      "Biography",
+      "Cultural History"
+    ],
+    "caesar": [
+      "Ancient Rome",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "Revolution & Social Change",
+      "War & Conflict"
+    ],
+    "caffeine": [
+      "Addiction & Substance Use",
+      "Biology & Medicine",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Cultural History"
+    ],
+    "calculus": [
+      "Philosophy",
+      "Science & Mathematics",
+      "Science History"
+    ],
+    "campus": [
+      "American History",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Social Movements"
+    ],
+    "cancer": [
+      "Biology & Medicine",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Psychology & Human Behavior"
+    ],
+    "casinos": [
+      "Addiction & Substance Use",
+      "Business & Economics",
+      "Consumer Culture",
+      "Psychology & Human Behavior"
+    ],
+    "chakras": [
+      "Eastern Philosophy & Religion",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality",
+      "Spirituality & Mysticism"
+    ],
+    "charkas": [
+      "Eastern Philosophy & Religion",
+      "Religion & Spirituality",
+      "Spirituality & Mysticism"
+    ],
+    "charlemagne": [
+      "Biography",
+      "Christianity",
+      "European History",
+      "Government & Politics",
+      "Medieval History"
+    ],
+    "chemistry": [
+      "Science & Mathematics",
+      "Science History"
+    ],
+    "christianity": [
+      "Ancient Rome",
+      "Christianity",
+      "Conspiracy & Cover-ups",
+      "Political Theory",
+      "Religion & Spirituality"
+    ],
+    "churchill": [
+      "20th Century",
+      "Biography",
+      "British History",
+      "Military History",
+      "World War II"
+    ],
+    "cia": [
+      "American History",
+      "Cold War",
+      "Conspiracy & Cover-ups",
+      "Espionage & Intelligence",
+      "Propaganda & Social Control",
+      "War & Conflict"
+    ],
+    "cn": [
+      "Cultural History",
+      "Digital Culture & Technology",
+      "Philosophy",
+      "Psychology & Human Behavior"
+    ],
+    "color": [
+      "Art & Music History",
+      "Cultural History",
+      "Psychology & Human Behavior",
+      "Science History"
+    ],
+    "columbus": [
+      "American History",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "Colonialism & Empire",
+      "Slavery & Abolition"
+    ],
+    "communism": [
+      "20th Century",
+      "Chinese History",
+      "Cold War",
+      "Political Theory",
+      "Revolution & Social Change",
+      "Russian History"
+    ],
+    "condition": [
+      "Biology & Medicine",
+      "Cognitive Science & Neuroscience",
+      "Philosophy",
+      "Psychology & Human Behavior"
+    ],
+    "confucius": [
+      "Ancient Civilizations",
+      "Biography",
+      "Chinese History",
+      "Eastern Philosophy & Religion",
+      "Philosophy"
+    ],
+    "congo": [
+      "African History",
+      "Authoritarianism & Dictatorship",
+      "Civil Rights & Social Justice",
+      "Colonialism & Empire",
+      "War & Conflict"
+    ],
+    "control": [
+      "Asian History",
+      "Authoritarianism & Dictatorship",
+      "Government & Politics",
+      "Middle Eastern History",
+      "Propaganda & Social Control"
+    ],
+    "corps": [
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Environmental Issues",
+      "Political Economy",
+      "Propaganda & Social Control"
+    ],
+    "coups": [
+      "American Politics",
+      "Cold War",
+      "Colonialism & Empire",
+      "Conspiracy & Cover-ups",
+      "Espionage & Intelligence",
+      "Middle Eastern History"
+    ],
+    "credit": [
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Propaganda & Social Control",
+      "Social Movements"
+    ],
+    "crown": [
+      "Biography",
+      "British History",
+      "Government & Politics"
+    ],
+    "crusades": [
+      "Christianity",
+      "Islam",
+      "Medieval History",
+      "Middle Eastern History",
+      "War & Conflict"
+    ],
+    "crust": [
+      "Business & Economics",
+      "Consumer Culture",
+      "Cultural History",
+      "Food & Culture"
+    ],
+    "cuba": [
+      "American History",
+      "American Politics",
+      "Cold War",
+      "Espionage & Intelligence",
+      "Revolution & Social Change"
+    ],
+    "cult": [
+      "American History",
+      "Cults & Extremism",
+      "Psychology & Human Behavior",
+      "Social Movements"
+    ],
+    "cyrus": [
+      "Ancient Civilizations",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "Middle Eastern History",
+      "Military History"
+    ],
+    "d2d": [
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Psychology & Human Behavior"
+    ],
+    "darwin": [
+      "Biography",
+      "Biology & Medicine",
+      "Science History",
+      "Victorian Era"
+    ],
+    "dayton": [
+      "20th Century",
+      "American History",
+      "Business & Economics",
+      "Science History",
+      "Technology & Innovation"
+    ],
+    "descartes": [
+      "Biography",
+      "Cognitive Science & Neuroscience",
+      "Philosophy",
+      "Science History"
+    ],
+    "dianetics": [
+      "Cults & Extremism",
+      "Propaganda & Social Control",
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "dietpop": [
+      "Addiction & Substance Use",
+      "Consumer Culture",
+      "Food & Culture",
+      "Psychology & Human Behavior"
+    ],
+    "disney": [
+      "American History",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture"
+    ],
+    "dollar": [
+      "20th Century",
+      "American History",
+      "Business & Economics",
+      "Political Economy"
+    ],
+    "dopamine": [
+      "Addiction & Substance Use",
+      "Cognitive Science & Neuroscience",
+      "Consumer Culture",
+      "Digital Culture & Technology",
+      "Psychology & Human Behavior"
+    ],
+    "doubt": [
+      "American History",
+      "Biography",
+      "Christianity",
+      "Philosophy",
+      "Religion & Spirituality"
+    ],
+    "drugs": [
+      "Addiction & Substance Use",
+      "Biology & Medicine",
+      "Cultural History",
+      "Psychology & Human Behavior"
+    ],
+    "echoes": [
+      "Ancient Civilizations",
+      "Biography",
+      "Military History",
+      "War & Conflict"
+    ],
+    "economics": [
+      "20th Century",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Political Economy",
+      "World War II"
+    ],
+    "edison": [
+      "American History",
+      "Biography",
+      "Business & Economics",
+      "Science History",
+      "Technology & Innovation"
+    ],
+    "egypt": [
+      "Ancient Civilizations",
+      "Ancient Egypt",
+      "Military History"
+    ],
+    "einstein": [
+      "20th Century",
+      "Biography",
+      "Physics & Cosmology",
+      "Science History"
+    ],
+    "elections": [
+      "American Politics",
+      "American Presidents",
+      "Political Theory"
+    ],
+    "electoral": [
+      "American Politics",
+      "Government & Politics"
+    ],
+    "electricity": [
+      "Physics & Cosmology",
+      "Science & Mathematics",
+      "Science History",
+      "Technology & Innovation"
+    ],
+    "ethics": [
+      "Ancient Greece",
+      "Ancient Rome",
+      "Christianity",
+      "Philosophy",
+      "Political Theory",
+      "Religion & Spirituality"
+    ],
+    "evil": [
+      "American History",
+      "Biography",
+      "Consumer Culture",
+      "Propaganda & Social Control",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality"
+    ],
+    "famine": [
+      "Environmental Issues",
+      "Food & Culture"
+    ],
+    "fantasy": [
+      "Addiction & Substance Use",
+      "Consumer Culture",
+      "Digital Culture & Technology",
+      "Psychology & Human Behavior"
+    ],
+    "fbi": [
+      "American History",
+      "Civil Rights & Social Justice",
+      "Conspiracy & Cover-ups",
+      "Espionage & Intelligence",
+      "Government & Politics",
+      "Propaganda & Social Control"
+    ],
+    "fdr": [
+      "20th Century",
+      "American History",
+      "American Politics",
+      "American Presidents"
+    ],
+    "feynman": [
+      "20th Century",
+      "Biography",
+      "Physics & Cosmology",
+      "Science History"
+    ],
+    "field": [
+      "American History",
+      "Cultural History",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "fields": [
+      "Physics & Cosmology",
+      "Science & Mathematics",
+      "Science History"
+    ],
+    "foodie": [
+      "Consumer Culture",
+      "Cultural History",
+      "Food & Culture"
+    ],
+    "ford": [
+      "20th Century",
+      "American History",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Technology & Innovation"
+    ],
+    "foreskin": [
+      "Biology & Medicine",
+      "Cultural History",
+      "Religion & Spirituality",
+      "Social Movements"
+    ],
+    "fortitude": [
+      "Philosophy",
+      "Psychology & Human Behavior"
+    ],
+    "franklin": [
+      "American History",
+      "American Politics",
+      "Biography",
+      "Revolution & Social Change",
+      "Science History"
+    ],
+    "fresco": [
+      "Art & Music History",
+      "Cultural History",
+      "Renaissance"
+    ],
+    "freud": [
+      "20th Century",
+      "Biography",
+      "Psychology & Human Behavior",
+      "Science History"
+    ],
+    "galileo": [
+      "Biography",
+      "Physics & Cosmology",
+      "Religion & Spirituality",
+      "Renaissance",
+      "Science History"
+    ],
+    "games": [
+      "Business & Economics",
+      "Consumer Culture",
+      "Cultural History",
+      "Digital Culture & Technology",
+      "Technology & Innovation"
+    ],
+    "gandhi": [
+      "20th Century",
+      "Asian History",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "Colonialism & Empire",
+      "Revolution & Social Change"
+    ],
+    "gates": [
+      "Biography",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Digital Culture & Technology",
+      "Technology & Innovation"
+    ],
+    "genghis": [
+      "Asian History",
+      "Biography",
+      "Medieval History",
+      "Military History",
+      "War & Conflict"
+    ],
+    "george": [
+      "American History",
+      "American Presidents",
+      "Biography",
+      "Mythology & Ancient Beliefs"
+    ],
+    "georgism": [
+      "American History",
+      "Business & Economics",
+      "Civil Rights & Social Justice",
+      "Political Economy"
+    ],
+    "germany": [
+      "20th Century",
+      "Cold War",
+      "European History",
+      "War & Conflict",
+      "World War II"
+    ],
+    "gig": [
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Digital Culture & Technology",
+      "Political Economy"
+    ],
+    "gita": [
+      "Ancient Civilizations",
+      "Eastern Philosophy & Religion",
+      "Spirituality & Mysticism",
+      "World Religions"
+    ],
+    "gods": [
+      "Ancient Civilizations",
+      "Christianity",
+      "Cultural History",
+      "Mythology & Ancient Beliefs",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "goo": [
+      "Ancient Civilizations",
+      "Biology & Medicine",
+      "Science History"
+    ],
+    "google": [
+      "Biography",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Digital Culture & Technology",
+      "Philosophy"
+    ],
+    "government": [
+      "Ancient Civilizations",
+      "Government & Politics",
+      "Medieval History",
+      "Political Theory",
+      "Revolution & Social Change"
+    ],
+    "gsp": [
+      "Science & Mathematics"
+    ],
+    "guru": [
+      "Eastern Philosophy & Religion",
+      "Religion & Spirituality",
+      "Spirituality & Mysticism",
+      "World Religions"
+    ],
+    "gwb": [
+      "American Politics",
+      "American Presidents",
+      "Biography"
+    ],
+    "haile": [
+      "20th Century",
+      "African History",
+      "Biography",
+      "Cults & Extremism",
+      "Religion & Spirituality"
+    ],
+    "halloween": [
+      "Cultural History",
+      "Medieval History",
+      "Mythology & Ancient Beliefs",
+      "Religion & Spirituality"
+    ],
+    "ham": [
+      "Ancient Civilizations",
+      "Mythology & Ancient Beliefs",
+      "Political Theory",
+      "Propaganda & Social Control",
+      "Religion & Spirituality"
+    ],
+    "hardest": [
+      "Philosophy",
+      "Physics & Cosmology",
+      "Science & Mathematics"
+    ],
+    "harriet": [
+      "American History",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "Slavery & Abolition"
+    ],
+    "hat": [
+      "Consumer Culture",
+      "Cultural History"
+    ],
+    "hawking": [
+      "20th Century",
+      "Biography",
+      "Physics & Cosmology",
+      "Science History"
+    ],
+    "heads": [
+      "European History",
+      "French History",
+      "Revolution & Social Change",
+      "War & Conflict"
+    ],
+    "helen": [
+      "Ancient Greece",
+      "Biography",
+      "Mythology & Ancient Beliefs"
+    ],
+    "heroes": [
+      "Philosophy",
+      "Political Theory",
+      "Psychology & Human Behavior",
+      "Social Movements"
+    ],
+    "hiddenhand": [
+      "Conspiracy & Cover-ups",
+      "Cults & Extremism",
+      "Cultural History",
+      "Government & Politics"
+    ],
+    "history": [
+      "Ancient Civilizations",
+      "Cultural History",
+      "Philosophy",
+      "Science History"
+    ],
+    "hochi": [
+      "American History",
+      "Cold War",
+      "Colonialism & Empire",
+      "Espionage & Intelligence",
+      "Military History",
+      "Vietnam War"
+    ],
+    "holidays": [
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Cultural History",
+      "Propaganda & Social Control"
+    ],
+    "houdini": [
+      "20th Century",
+      "American History",
+      "Biography",
+      "Cultural History"
+    ],
+    "howbible": [
+      "Ancient Civilizations",
+      "Ancient Rome",
+      "Christianity",
+      "Cultural History",
+      "Religion & Spirituality"
+    ],
+    "hr": [
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Cults & Extremism",
+      "Psychology & Human Behavior"
+    ],
+    "hrold": [
+      "American History",
+      "American Politics",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "humans": [
+      "Ancient Civilizations",
+      "Ancient Egypt",
+      "Chinese History",
+      "Cultural History",
+      "Science History"
+    ],
+    "ibr": [
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "idk": [
+      "20th Century",
+      "Conspiracy & Cover-ups",
+      "Mythology & Ancient Beliefs",
+      "Psychology & Human Behavior"
+    ],
+    "idwt": [
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "illuminati": [
+      "Conspiracy & Cover-ups",
+      "Cults & Extremism",
+      "European History",
+      "Spirituality & Mysticism"
+    ],
+    "imagination": [
+      "Cognitive Science & Neuroscience",
+      "Cultural History",
+      "Philosophy",
+      "Psychology & Human Behavior"
+    ],
+    "inquis": [
+      "Christianity",
+      "European History",
+      "Medieval History",
+      "Propaganda & Social Control",
+      "Religion & Spirituality"
+    ],
+    "insideasylum": [
+      "Biology & Medicine",
+      "Civil Rights & Social Justice",
+      "Psychology & Human Behavior"
+    ],
+    "insidechina": [
+      "Asian History",
+      "Authoritarianism & Dictatorship",
+      "Chinese History",
+      "Digital Culture & Technology",
+      "Propaganda & Social Control"
+    ],
+    "insurance": [
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Propaganda & Social Control"
+    ],
+    "intelligence": [
+      "Civil Rights & Social Justice",
+      "Cognitive Science & Neuroscience",
+      "Psychology & Human Behavior",
+      "Science History"
+    ],
+    "isaac": [
+      "Biography",
+      "Physics & Cosmology",
+      "Psychology & Human Behavior",
+      "Science History"
+    ],
+    "islam": [
+      "Cultural History",
+      "Islam",
+      "Medieval History",
+      "Middle Eastern History",
+      "Religion & Spirituality"
+    ],
+    "isrpal": [
+      "Government & Politics",
+      "Middle Eastern History",
+      "War & Conflict"
+    ],
+    "jackass": [
+      "20th Century",
+      "Consumer Culture",
+      "Cultural History"
+    ],
+    "jackson": [
+      "American History",
+      "American Politics",
+      "American Presidents",
+      "Biography",
+      "Government & Politics"
+    ],
+    "japan": [
+      "Asian History",
+      "Cultural History",
+      "Military History",
+      "War & Conflict",
+      "World War II"
+    ],
+    "jeff": [
+      "American Politics",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "Conspiracy & Cover-ups"
+    ],
+    "jefferson": [
+      "American History",
+      "American Politics",
+      "American Presidents",
+      "Biography",
+      "Revolution & Social Change"
+    ],
+    "jesse": [
+      "20th Century",
+      "American Politics",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "Cold War"
+    ],
+    "jesus": [
+      "Christianity",
+      "Religion & Spirituality"
+    ],
+    "jewish": [
+      "Ancient Civilizations",
+      "Civil Rights & Social Justice",
+      "European History",
+      "Medieval History",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "jfk": [
+      "American History",
+      "American Politics",
+      "American Presidents",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "Cold War"
+    ],
+    "joan": [
+      "Biography",
+      "Christianity",
+      "French History",
+      "Medieval History",
+      "War & Conflict"
+    ],
+    "jobs": [
+      "20th Century",
+      "Biography",
+      "Business & Economics",
+      "Consumer Culture",
+      "Digital Culture & Technology"
+    ],
+    "jung": [
+      "20th Century",
+      "Biography",
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "jungle": [
+      "Psychology & Human Behavior",
+      "Social Movements"
+    ],
+    "jw": [
+      "American History",
+      "Christianity",
+      "Cults & Extremism",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality"
+    ],
+    "kabbalah": [
+      "Philosophy",
+      "Spirituality & Mysticism",
+      "World Religions"
+    ],
+    "kaiser": [
+      "20th Century",
+      "Biography",
+      "European History",
+      "Government & Politics",
+      "World War I"
+    ],
+    "kal": [
+      "20th Century",
+      "American History",
+      "Biography",
+      "Cultural History",
+      "Psychology & Human Behavior",
+      "Science History"
+    ],
+    "kanye": [
+      "American Politics",
+      "Art & Music History",
+      "Biography",
+      "Cults & Extremism",
+      "Psychology & Human Behavior"
+    ],
+    "kfc": [
+      "American History",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Food & Culture"
+    ],
+    "kim": [
+      "Asian History",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "Government & Politics",
+      "Propaganda & Social Control"
+    ],
+    "king": [
+      "American History",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "Social Movements"
+    ],
+    "kojiki": [
+      "Asian History",
+      "Mythology & Ancient Beliefs",
+      "Religion & Spirituality"
+    ],
+    "lee": [
+      "20th Century",
+      "American History",
+      "Art & Music History",
+      "Biography",
+      "Consumer Culture"
+    ],
+    "lenin": [
+      "20th Century",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "Political Theory",
+      "Revolution & Social Change",
+      "Russian History"
+    ],
+    "lennon": [
+      "20th Century",
+      "Art & Music History",
+      "Biography",
+      "Cultural History"
+    ],
+    "leonardo": [
+      "Art & Music History",
+      "Biography",
+      "Renaissance",
+      "Science History"
+    ],
+    "liberated": [
+      "Art & Music History",
+      "Biography",
+      "Cultural History",
+      "Social Movements"
+    ],
+    "lincoln": [
+      "American History",
+      "American Presidents",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "War & Conflict"
+    ],
+    "lobbied": [
+      "American Politics",
+      "Capitalism & Corporations",
+      "Government & Politics",
+      "Political Economy",
+      "Propaganda & Social Control"
+    ],
+    "looped": [
+      "Philosophy",
+      "Psychology & Human Behavior"
+    ],
+    "love": [
+      "Consumer Culture",
+      "Cultural History",
+      "Psychology & Human Behavior",
+      "Social Movements"
+    ],
+    "lr": [
+      "Psychology & Human Behavior"
+    ],
+    "lrold": [
+      "American History",
+      "American Politics",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "lron": [
+      "20th Century",
+      "Biography",
+      "Conspiracy & Cover-ups",
+      "Cults & Extremism",
+      "Religion & Spirituality"
+    ],
+    "lunchtime": [
+      "20th Century",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Cultural History",
+      "Food & Culture"
+    ],
+    "luther": [
+      "Biography",
+      "Christianity",
+      "Medieval History",
+      "Renaissance",
+      "Revolution & Social Change"
+    ],
+    "machi": [
+      "Religion & Spirituality",
+      "Spirituality & Mysticism"
+    ],
+    "malcolm": [
+      "American History",
+      "Biography",
+      "Civil Rights & Social Justice",
+      "Islam",
+      "Revolution & Social Change"
+    ],
+    "mansu": [
+      "African History",
+      "Biography",
+      "Business & Economics",
+      "Islam",
+      "Medieval History"
+    ],
+    "mao": [
+      "20th Century",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "Chinese History",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "marie": [
+      "Biography",
+      "French History"
+    ],
+    "marx": [
+      "Capitalism & Corporations",
+      "Digital Culture & Technology",
+      "Political Economy",
+      "Political Theory",
+      "Revolution & Social Change"
+    ],
+    "materialism": [
+      "Cognitive Science & Neuroscience",
+      "Philosophy",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality"
+    ],
+    "math": [
+      "Ancient Civilizations",
+      "Cultural History",
+      "Science & Mathematics",
+      "Science History"
+    ],
+    "messiah": [
+      "Ancient Civilizations",
+      "Biography",
+      "Christianity",
+      "Religion & Spirituality"
+    ],
+    "mike": [
+      "20th Century",
+      "Art & Music History",
+      "Biography",
+      "Consumer Culture"
+    ],
+    "mkultra": [
+      "American History",
+      "Cold War",
+      "Conspiracy & Cover-ups",
+      "Espionage & Intelligence",
+      "Propaganda & Social Control",
+      "Psychology & Human Behavior"
+    ],
+    "money": [
+      "Business & Economics",
+      "Cultural History",
+      "Government & Politics",
+      "Political Economy"
+    ],
+    "mormon": [
+      "American History",
+      "Christianity",
+      "Cults & Extremism",
+      "Mythology & Ancient Beliefs",
+      "Religion & Spirituality"
+    ],
+    "mossad": [
+      "Conspiracy & Cover-ups",
+      "Espionage & Intelligence",
+      "Middle Eastern History",
+      "War & Conflict"
+    ],
+    "mozart": [
+      "Art & Music History",
+      "Biography",
+      "Cultural History"
+    ],
+    "muhammad": [
+      "Biography",
+      "Islam",
+      "Middle Eastern History",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "music": [
+      "Art & Music History",
+      "Cultural History"
+    ],
+    "musk": [
+      "Biography",
+      "Business & Economics",
+      "Digital Culture & Technology",
+      "Space Exploration",
+      "Technology & Innovation"
+    ],
+    "mussolini": [
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "European History",
+      "Military History",
+      "World War II"
+    ],
+    "myths": [
+      "Conspiracy & Cover-ups",
+      "Mythology & Ancient Beliefs",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality"
+    ],
+    "nagham": [
+      "Ancient Civilizations",
+      "Christianity",
+      "Cultural History",
+      "Religion & Spirituality",
+      "Spirituality & Mysticism"
+    ],
+    "napoleon": [
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "European History",
+      "French History",
+      "Military History",
+      "Revolution & Social Change"
+    ],
+    "nebu": [
+      "Ancient Civilizations",
+      "Biography",
+      "Middle Eastern History",
+      "Religion & Spirituality",
+      "War & Conflict"
+    ],
+    "nero": [
+      "Ancient Rome",
+      "Art & Music History",
+      "Authoritarianism & Dictatorship",
+      "Biography"
+    ],
+    "nestle": [
+      "20th Century",
+      "Addiction & Substance Use",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Food & Culture"
+    ],
+    "nic": [
+      "American History",
+      "American Politics",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "nicotine": [
+      "Addiction & Substance Use",
+      "Biology & Medicine",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Cultural History",
+      "Public Health"
+    ],
+    "nictrap": [
+      "Addiction & Substance Use",
+      "Consumer Culture",
+      "Propaganda & Social Control",
+      "Psychology & Human Behavior"
+    ],
+    "niet": [
+      "Biography",
+      "Philosophy",
+      "Psychology & Human Behavior"
+    ],
+    "nike": [
+      "20th Century",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Civil Rights & Social Justice",
+      "Consumer Culture"
+    ],
+    "nintendo": [
+      "Business & Economics",
+      "Consumer Culture",
+      "Cultural History",
+      "Digital Culture & Technology"
+    ],
+    "nixon": [
+      "20th Century",
+      "American Politics",
+      "American Presidents",
+      "Biography",
+      "Political Economy"
+    ],
+    "northkorea": [
+      "Asian History",
+      "Authoritarianism & Dictatorship",
+      "Cold War",
+      "Cults & Extremism",
+      "Propaganda & Social Control"
+    ],
+    "nsa": [
+      "American Politics",
+      "Civil Rights & Social Justice",
+      "Conspiracy & Cover-ups",
+      "Digital Culture & Technology",
+      "Espionage & Intelligence"
+    ],
+    "nuclear": [
+      "20th Century",
+      "Cold War",
+      "Environmental Issues",
+      "Physics & Cosmology",
+      "Science History",
+      "War & Conflict"
+    ],
+    "obama": [
+      "American Politics",
+      "American Presidents",
+      "Biography",
+      "Civil Rights & Social Justice"
+    ],
+    "odd": [
+      "American History",
+      "Propaganda & Social Control",
+      "Revolution & Social Change",
+      "Slavery & Abolition"
+    ],
+    "odds": [
+      "Psychology & Human Behavior",
+      "Science & Mathematics"
+    ],
+    "off": [
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Conspiracy & Cover-ups",
+      "Political Economy"
+    ],
+    "orwell": [
+      "20th Century",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "British History",
+      "Propaganda & Social Control"
+    ],
+    "pantheon": [
+      "Ancient Civilizations",
+      "Ancient Egypt",
+      "Mythology & Ancient Beliefs",
+      "Religion & Spirituality"
+    ],
+    "pantheon2": [
+      "Ancient Civilizations",
+      "Conspiracy & Cover-ups",
+      "Mythology & Ancient Beliefs",
+      "Science History"
+    ],
+    "philosophy": [
+      "Ancient Greece",
+      "Ancient Rome",
+      "Cultural History",
+      "Philosophy",
+      "Renaissance",
+      "Revolution & Social Change"
+    ],
+    "phone": [
+      "Digital Culture & Technology",
+      "Technology & Innovation"
+    ],
+    "physics": [
+      "20th Century",
+      "Physics & Cosmology",
+      "Science History"
+    ],
+    "pip": [
+      "20th Century",
+      "American History",
+      "Biography",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality",
+      "Science History"
+    ],
+    "pixar": [
+      "Art & Music History",
+      "Cultural History",
+      "Psychology & Human Behavior"
+    ],
+    "planck": [
+      "20th Century",
+      "Biography",
+      "Physics & Cosmology",
+      "Science History"
+    ],
+    "plants": [
+      "Biology & Medicine",
+      "Environmental Issues"
+    ],
+    "plastic": [
+      "20th Century",
+      "Biology & Medicine",
+      "Consumer Culture",
+      "Environmental Issues"
+    ],
+    "plato": [
+      "Ancient Greece",
+      "Biography",
+      "Philosophy",
+      "Political Theory"
+    ],
+    "poker": [
+      "20th Century",
+      "American History",
+      "Business & Economics",
+      "Psychology & Human Behavior"
+    ],
+    "popes": [
+      "Biography",
+      "Christianity",
+      "European History",
+      "Religion & Spirituality"
+    ],
+    "pregnancy": [
+      "Biology & Medicine",
+      "Psychology & Human Behavior",
+      "Public Health"
+    ],
+    "prenancy": [
+      "Biology & Medicine",
+      "Psychology & Human Behavior"
+    ],
+    "presidents": [
+      "American History",
+      "American Politics",
+      "American Presidents",
+      "Biography"
+    ],
+    "psychology": [
+      "Psychology & Human Behavior",
+      "Science History"
+    ],
+    "purdue": [
+      "Addiction & Substance Use",
+      "American History",
+      "Biology & Medicine",
+      "Capitalism & Corporations",
+      "Conspiracy & Cover-ups"
+    ],
+    "putin": [
+      "20th Century",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "Espionage & Intelligence",
+      "Russian History"
+    ],
+    "pyramid": [
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Conspiracy & Cover-ups",
+      "Political Economy"
+    ],
+    "quantum": [
+      "20th Century",
+      "Physics & Cosmology",
+      "Science History"
+    ],
+    "quran": [
+      "Islam",
+      "Middle Eastern History",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "race": [
+      "20th Century",
+      "American History",
+      "Civil Rights & Social Justice",
+      "Slavery & Abolition",
+      "Social Movements"
+    ],
+    "ramses": [
+      "Ancient Civilizations",
+      "Ancient Egypt",
+      "Biography",
+      "Military History"
+    ],
+    "rasputin": [
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "Revolution & Social Change",
+      "Russian History",
+      "World War I"
+    ],
+    "reagan": [
+      "20th Century",
+      "American Politics",
+      "American Presidents",
+      "Biography",
+      "Political Economy"
+    ],
+    "reincarnation": [
+      "Eastern Philosophy & Religion",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality",
+      "Spirituality & Mysticism"
+    ],
+    "relativity": [
+      "20th Century",
+      "Physics & Cosmology",
+      "Science & Mathematics",
+      "Science History"
+    ],
+    "religion": [
+      "Cultural History",
+      "Philosophy",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "revolution": [
+      "American History",
+      "French History",
+      "Political Theory",
+      "Revolution & Social Change"
+    ],
+    "rewrite": [
+      "American History",
+      "Civil Rights & Social Justice",
+      "Consumer Culture",
+      "Political Economy",
+      "Propaganda & Social Control",
+      "Slavery & Abolition"
+    ],
+    "rock": [
+      "Cognitive Science & Neuroscience",
+      "Cultural History",
+      "Science History"
+    ],
+    "rome": [
+      "Ancient Civilizations",
+      "Ancient Rome",
+      "Government & Politics",
+      "Military History",
+      "War & Conflict"
+    ],
+    "rvb": [
+      "20th Century",
+      "American History",
+      "American Politics",
+      "Civil Rights & Social Justice"
+    ],
+    "sacredgeo": [
+      "Ancient Civilizations",
+      "Philosophy",
+      "Science & Mathematics",
+      "Spirituality & Mysticism"
+    ],
+    "sagan": [
+      "Biography",
+      "Physics & Cosmology",
+      "Science History",
+      "Space Exploration"
+    ],
+    "sargon": [
+      "Ancient Civilizations",
+      "Biography",
+      "Middle Eastern History",
+      "War & Conflict"
+    ],
+    "saudi": [
+      "Authoritarianism & Dictatorship",
+      "Capitalism & Corporations",
+      "Islam",
+      "Middle Eastern History",
+      "Political Economy"
+    ],
+    "schooled": [
+      "American History",
+      "Cultural History",
+      "Propaganda & Social Control",
+      "Social Movements"
+    ],
+    "science": [
+      "Ancient Greece",
+      "Ancient Rome",
+      "Biology & Medicine",
+      "Medieval History",
+      "Renaissance",
+      "Science History"
+    ],
+    "scientology": [
+      "20th Century",
+      "Business & Economics",
+      "Cults & Extremism",
+      "Religion & Spirituality"
+    ],
+    "scisim": [
+      "Biology & Medicine",
+      "Physics & Cosmology",
+      "Science & Mathematics"
+    ],
+    "shake": [
+      "Biography",
+      "British History",
+      "Cultural History",
+      "Renaissance"
+    ],
+    "sikhism": [
+      "Asian History",
+      "Military History",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "sitcoms": [
+      "20th Century",
+      "Consumer Culture",
+      "Cultural History"
+    ],
+    "sleep": [
+      "Biology & Medicine",
+      "Cognitive Science & Neuroscience",
+      "Consumer Culture",
+      "Psychology & Human Behavior"
+    ],
+    "soaps": [
+      "American History",
+      "Consumer Culture",
+      "Cultural History",
+      "Psychology & Human Behavior"
+    ],
+    "sociology": [
+      "Cultural History",
+      "Psychology & Human Behavior",
+      "Social Movements"
+    ],
+    "socrates": [
+      "Ancient Civilizations",
+      "Ancient Greece",
+      "Biography",
+      "Philosophy"
+    ],
+    "soros": [
+      "Biography",
+      "Business & Economics",
+      "Conspiracy & Cover-ups",
+      "European History",
+      "Political Economy"
+    ],
+    "spinoza": [],
+    "stalin": [
+      "20th Century",
+      "Authoritarianism & Dictatorship",
+      "Biography",
+      "Propaganda & Social Control",
+      "Russian History",
+      "War & Conflict"
+    ],
+    "steam": [
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Digital Culture & Technology",
+      "Propaganda & Social Control"
+    ],
+    "stoney": [
+      "Digital Culture & Technology",
+      "Mythology & Ancient Beliefs",
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "syria": [
+      "Government & Politics",
+      "Middle Eastern History",
+      "War & Conflict"
+    ],
+    "tacos": [
+      "Mythology & Ancient Beliefs",
+      "Psychology & Human Behavior"
+    ],
+    "talmud": [
+      "Ancient Civilizations",
+      "Cultural History",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "tamerlane": [
+      "Asian History",
+      "Biography",
+      "Medieval History",
+      "Middle Eastern History",
+      "Military History",
+      "War & Conflict"
+    ],
+    "tao": [
+      "Eastern Philosophy & Religion",
+      "Philosophy",
+      "Spirituality & Mysticism"
+    ],
+    "taylor": [
+      "American Politics",
+      "Biography",
+      "Consumer Culture",
+      "Digital Culture & Technology"
+    ],
+    "teddy": [
+      "20th Century",
+      "American History",
+      "American Presidents",
+      "Biography",
+      "Military History"
+    ],
+    "tesla": [
+      "20th Century",
+      "Biography",
+      "Physics & Cosmology",
+      "Science History",
+      "Technology & Innovation"
+    ],
+    "tft": [
+      "Philosophy",
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "thanksgiving": [
+      "American History",
+      "Civil Rights & Social Justice",
+      "Colonialism & Empire",
+      "Cultural History",
+      "Propaganda & Social Control"
+    ],
+    "theboys": [
+      "Art & Music History",
+      "Biography",
+      "Cultural History",
+      "European History",
+      "Renaissance"
+    ],
+    "thiel": [
+      "American Politics",
+      "Biography",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Digital Culture & Technology"
+    ],
+    "thinkers": [
+      "Biography",
+      "Physics & Cosmology",
+      "Renaissance",
+      "Science History",
+      "Technology & Innovation"
+    ],
+    "tiktok": [
+      "Consumer Culture",
+      "Digital Culture & Technology",
+      "Propaganda & Social Control",
+      "Psychology & Human Behavior"
+    ],
+    "time": [
+      "Ancient Civilizations",
+      "Cultural History",
+      "Science History",
+      "Technology & Innovation"
+    ],
+    "tmk": [
+      "20th Century",
+      "Addiction & Substance Use",
+      "Biography",
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "tmts": [
+      "Psychology & Human Behavior"
+    ],
+    "tnd": [
+      "Consumer Culture",
+      "Cultural History",
+      "Psychology & Human Behavior"
+    ],
+    "tns": [
+      "Digital Culture & Technology",
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "tom": [
+      "American History",
+      "Biography",
+      "Consumer Culture"
+    ],
+    "tommy": [
+      "Mythology & Ancient Beliefs"
+    ],
+    "tribes": [
+      "American History",
+      "Cults & Extremism",
+      "Religion & Spirituality",
+      "Social Movements"
+    ],
+    "tsar": [
+      "Authoritarianism & Dictatorship",
+      "Cold War",
+      "Political Theory",
+      "Russian History"
+    ],
+    "tyrants": [
+      "20th Century",
+      "Authoritarianism & Dictatorship",
+      "Psychology & Human Behavior",
+      "World War II"
+    ],
+    "unitednations": [],
+    "unsinkable": [
+      "20th Century",
+      "American History",
+      "Biography",
+      "Cultural History",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality"
+    ],
+    "unsinkable2": [
+      "American History",
+      "Mythology & Ancient Beliefs",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "van": [
+      "Art & Music History",
+      "Biography",
+      "European History",
+      "Psychology & Human Behavior"
+    ],
+    "vangogh": [
+      "American History",
+      "Mythology & Ancient Beliefs",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "veil": [
+      "Colonialism & Empire",
+      "Cultural History",
+      "Eastern Philosophy & Religion",
+      "Spirituality & Mysticism",
+      "World Religions"
+    ],
+    "vibes": [
+      "Art & Music History",
+      "Cultural History",
+      "Digital Culture & Technology",
+      "Psychology & Human Behavior"
+    ],
+    "vic": [
+      "Biography",
+      "British History",
+      "Colonialism & Empire",
+      "Government & Politics",
+      "Victorian Era"
+    ],
+    "videogames": [
+      "American History",
+      "Cultural History",
+      "Propaganda & Social Control",
+      "Revolution & Social Change"
+    ],
+    "voltaire": [
+      "Biography",
+      "French History",
+      "Philosophy",
+      "Revolution & Social Change"
+    ],
+    "warming": [
+      "American History",
+      "Capitalism & Corporations",
+      "Conspiracy & Cover-ups",
+      "Environmental Issues",
+      "Science & Mathematics"
+    ],
+    "warrens": [
+      "20th Century",
+      "Conspiracy & Cover-ups",
+      "Psychology & Human Behavior",
+      "Religion & Spirituality"
+    ],
+    "watchtower": [
+      "Christianity",
+      "Cults & Extremism",
+      "Religion & Spirituality"
+    ],
+    "watts": [
+      "20th Century",
+      "Biography",
+      "Buddhism",
+      "Eastern Philosophy & Religion",
+      "Psychology & Human Behavior",
+      "Spirituality & Mysticism"
+    ],
+    "web": [
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Political Economy",
+      "Propaganda & Social Control"
+    ],
+    "weed": [
+      "20th Century",
+      "Addiction & Substance Use",
+      "American Politics",
+      "Civil Rights & Social Justice",
+      "Cultural History",
+      "Propaganda & Social Control"
+    ],
+    "witches": [
+      "American History",
+      "Cultural History",
+      "European History",
+      "Propaganda & Social Control",
+      "Religion & Spirituality"
+    ],
+    "woke": [
+      "Biography",
+      "Buddhism",
+      "Eastern Philosophy & Religion",
+      "Philosophy",
+      "Spirituality & Mysticism"
+    ],
+    "wu": [
+      "Ancient Civilizations",
+      "Biography",
+      "Buddhism",
+      "Chinese History",
+      "Religion & Spirituality"
+    ],
+    "ww1": [
+      "20th Century",
+      "European History",
+      "Military History",
+      "World War I"
+    ],
+    "xmas": [
+      "Christianity",
+      "Consumer Culture",
+      "Cultural History",
+      "Religion & Spirituality"
+    ],
+    "zoro": [
+      "Ancient Civilizations",
+      "Middle Eastern History",
+      "Mythology & Ancient Beliefs",
+      "Religion & Spirituality",
+      "World Religions"
+    ],
+    "zuck": [
+      "Biography",
+      "Business & Economics",
+      "Capitalism & Corporations",
+      "Consumer Culture",
+      "Digital Culture & Technology",
+      "Propaganda & Social Control"
+    ]
+  }
+}

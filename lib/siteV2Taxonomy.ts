@@ -8,10 +8,12 @@
  *
  * This layer is explicit so the public catalog does not turn manuscript
  * keyword matches into editorial claims. The legacy `tags` array remains
- * available to old routes, while Site V2 applies the reviewed corrections
- * below. A book may appear on every broad Shelf that genuinely fits.
+ * available to old routes, while Site V2 reads Topics only from the complete
+ * per-book authority document. A book may have any number of overlapping
+ * Topics and may appear on every broad Shelf that genuinely fits.
  */
 
+import topicAuthoritySource from "@/private/catalog/topic-authority.json";
 import { PRIMARY_CATEGORIES } from "@/lib/taxonomy";
 
 export type SiteV2ShelfId =
@@ -28,6 +30,62 @@ export const SITE_V2_APPROVED_TOPICS = Object.freeze(
 );
 
 const APPROVED_TOPIC_SET = new Set<string>(SITE_V2_APPROVED_TOPICS);
+
+const TOPIC_AUTHORITY_SCHEMA_VERSION = 1;
+
+type TopicAuthorityDocument = {
+  schemaVersion: number;
+  revision: number;
+  updatedAt: string;
+  topicsByBook: Record<string, string[]>;
+};
+
+function loadBundledTopicAuthority(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error("The bundled Topic authority is not an object.");
+  }
+  const record = value as Partial<TopicAuthorityDocument>;
+  if (record.schemaVersion !== TOPIC_AUTHORITY_SCHEMA_VERSION) {
+    throw new Error(`The bundled Topic authority schema is not supported (${String(record.schemaVersion)}).`);
+  }
+  if (!Number.isSafeInteger(record.revision) || Number(record.revision) < 1) {
+    throw new Error("The bundled Topic authority has no valid revision.");
+  }
+  if (typeof record.updatedAt !== "string" || !Number.isFinite(Date.parse(record.updatedAt))) {
+    throw new Error("The bundled Topic authority has no valid update timestamp.");
+  }
+  if (!record.topicsByBook || typeof record.topicsByBook !== "object" || Array.isArray(record.topicsByBook)) {
+    throw new Error("The bundled Topic authority has no per-book map.");
+  }
+
+  const topicsByBook: Record<string, readonly string[]> = {};
+  for (const [rawBookId, rawTopics] of Object.entries(record.topicsByBook)) {
+    const bookId = rawBookId.trim().toLowerCase();
+    if (!bookId || rawBookId !== bookId || !/^[a-z0-9][a-z0-9_-]*$/.test(bookId)) {
+      throw new Error(`The bundled Topic authority has an invalid book id: ${rawBookId}.`);
+    }
+    if (!Array.isArray(rawTopics)) {
+      throw new Error(`The bundled Topic authority entry for ${bookId} is not an array.`);
+    }
+    const topics = rawTopics.map(topic => String(topic).trim());
+    if (topics.some(topic => !APPROVED_TOPIC_SET.has(topic))) {
+      throw new Error(`The bundled Topic authority entry for ${bookId} contains an unapproved Topic.`);
+    }
+    if (new Set(topics).size !== topics.length) {
+      throw new Error(`The bundled Topic authority entry for ${bookId} contains duplicate Topics.`);
+    }
+    topicsByBook[bookId] = Object.freeze([...topics].sort((a, b) => a.localeCompare(b)));
+  }
+
+  return Object.freeze({
+    revision: record.revision,
+    topicsByBook: Object.freeze(topicsByBook),
+  });
+}
+
+const SITE_V2_TOPIC_AUTHORITY = loadBundledTopicAuthority(topicAuthoritySource);
+
+export const SITE_V2_TOPIC_AUTHORITY_REVISION = SITE_V2_TOPIC_AUTHORITY.revision;
 
 export const SITE_V2_SHELF_BOOK_IDS: Record<SiteV2ShelfId, readonly string[]> = {
   "history-civilization": [
@@ -94,46 +152,9 @@ export const SITE_V2_SHELF_IDS_BY_BOOK: Readonly<Record<string, readonly SiteV2S
 );
 
 /**
- * Confirmed corrections from manuscript-title and chapter-structure review.
- * A complete array replaces the suspect record's topic list; it is not merged
- * with the unreliable enrichment output.
+ * Book ids that still need human editorial review. The authority document
+ * remains the sole source of current assignments while that review happens.
  */
-export const SITE_V2_TOPIC_OVERRIDES: Readonly<Record<string, readonly string[]>> = Object.freeze({
-  astral: ["Psychology & Human Behavior", "Spirituality & Mysticism"],
-  burr: ["American History", "American Politics", "Biography"],
-  chakras: ["Eastern Philosophy & Religion", "Psychology & Human Behavior", "Religion & Spirituality", "Spirituality & Mysticism"],
-  crust: ["Business & Economics", "Consumer Culture", "Cultural History", "Food & Culture"],
-  disney: ["American History", "Business & Economics", "Capitalism & Corporations", "Consumer Culture"],
-  fields: ["Physics & Cosmology", "Science & Mathematics", "Science History"],
-  ford: ["20th Century", "American History", "Capitalism & Corporations", "Consumer Culture", "Technology & Innovation"],
-  games: ["Business & Economics", "Consumer Culture", "Cultural History", "Digital Culture & Technology", "Technology & Innovation"],
-  germany: ["20th Century", "Cold War", "European History", "War & Conflict", "World War II"],
-  jackass: ["20th Century", "Consumer Culture", "Cultural History"],
-  jackson: ["American History", "American Politics", "American Presidents", "Biography", "Government & Politics"],
-  japan: ["Asian History", "Cultural History", "Military History", "War & Conflict", "World War II"],
-  kaiser: ["20th Century", "Biography", "European History", "Government & Politics", "World War I"],
-  king: ["American History", "Biography", "Civil Rights & Social Justice", "Social Movements"],
-  liberated: ["Art & Music History", "Biography", "Cultural History", "Social Movements"],
-  looped: ["Philosophy", "Psychology & Human Behavior"],
-  nicotine: ["Addiction & Substance Use", "Biology & Medicine", "Capitalism & Corporations", "Consumer Culture", "Cultural History", "Public Health"],
-  odds: ["Psychology & Human Behavior", "Science & Mathematics"],
-  off: ["Business & Economics", "Capitalism & Corporations", "Conspiracy & Cover-ups", "Political Economy"],
-  pixar: ["Art & Music History", "Cultural History", "Psychology & Human Behavior"],
-  pregnancy: ["Biology & Medicine", "Psychology & Human Behavior", "Public Health"],
-  psychology: ["Psychology & Human Behavior", "Science History"],
-  quantum: ["20th Century", "Physics & Cosmology", "Science History"],
-  rome: ["Ancient Civilizations", "Ancient Rome", "Government & Politics", "Military History", "War & Conflict"],
-  scientology: ["20th Century", "Business & Economics", "Cults & Extremism", "Religion & Spirituality"],
-  scisim: ["Biology & Medicine", "Physics & Cosmology", "Science & Mathematics"],
-  tsar: ["Authoritarianism & Dictatorship", "Cold War", "Political Theory", "Russian History"],
-  tyrants: ["20th Century", "Authoritarianism & Dictatorship", "Psychology & Human Behavior", "World War II"],
-  van: ["Art & Music History", "Biography", "European History", "Psychology & Human Behavior"],
-  vibes: ["Art & Music History", "Cultural History", "Digital Culture & Technology", "Psychology & Human Behavior"],
-  warrens: ["20th Century", "Conspiracy & Cover-ups", "Psychology & Human Behavior", "Religion & Spirituality"],
-  watchtower: ["Christianity", "Cults & Extremism", "Religion & Spirituality"],
-  witches: ["American History", "Cultural History", "European History", "Propaganda & Social Control", "Religion & Spirituality"],
-});
-
 export const SITE_V2_TAXONOMY_REVIEW_IDS = [
   "biochemical",
   "bure",
@@ -153,6 +174,6 @@ export const SITE_V2_TAXONOMY_REVIEW_IDS = [
 ] as const;
 
 export function siteV2TopicsForBook(book: { id: string; tags: readonly string[] }) {
-  return [...new Set((SITE_V2_TOPIC_OVERRIDES[book.id] || book.tags).filter(topic => APPROVED_TOPIC_SET.has(topic)))]
-    .sort((a, b) => a.localeCompare(b));
+  const bookId = String(book.id || "").trim().toLowerCase();
+  return [...(SITE_V2_TOPIC_AUTHORITY.topicsByBook[bookId] || [])];
 }

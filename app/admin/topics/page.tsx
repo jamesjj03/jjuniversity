@@ -18,8 +18,17 @@ export const metadata: Metadata = {
 
 async function loadAudit() {
   const catalog = await readAdminBookCatalog();
-  const sourceBooks = catalog.books
-    .map(normalizeWorkshopBook)
+  const normalizedBooks = catalog.books.map(normalizeWorkshopBook).filter(book => book.id);
+  const assignmentBooks = normalizedBooks.map(book => ({
+    id: book.id,
+    title: book.title,
+    subtitle: book.subtitle,
+    status: book.status,
+    visibility: book.visibility,
+    coverSrc: coverWebpSrc(book, book.id),
+    fallbackCoverSrc: coverFallbackSrc(book, book.id),
+  }));
+  const sourceBooks = normalizedBooks
     .filter(book => (
       book.id
       && book.status === "ready"
@@ -48,6 +57,7 @@ async function loadAudit() {
     audit: buildTopicDescriptionAudit(books, SITE_V2_APPROVED_TOPICS),
     catalogFingerprint,
     source: catalog.source,
+    assignmentBooks,
   };
 }
 

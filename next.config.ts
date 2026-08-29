@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   outputFileTracingIncludes: {
     "/api/admin/**": ["./private/catalog/books.json", "./private/book-content/**/*.json"],
+    "/api/admin/topics": ["./private/catalog/books.json", "./private/catalog/topic-authority.json"],
     "/api/books": ["./private/catalog/books.json"],
     "/api/admin/print-proof/*": ["./private/print-proof-previews/*.png"],
     "/api/admin/book-draft": ["./private/catalog/books.json", "./private/book-content/manifest.json"],

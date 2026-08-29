@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { GuardedAdminLink, useAdminUnsavedChanges } from "@/components/AdminUnsavedChanges";
+import TopicsAssignmentEditor, { type TopicAssignmentBook } from "@/components/workshop/TopicsAssignmentEditor";
 import type {
   DescriptionAuditBook,
   DescriptionAuditFlag,
@@ -48,11 +48,11 @@ type Props = {
   audit: TopicDescriptionAudit;
   catalogFingerprint: string;
   source: "supabase" | "github" | "file";
+  assignmentBooks: TopicAssignmentBook[];
 };
 
 const STORAGE_PREFIX = "jju.topic-description-review.v1.";
 const UNSAVED_SCOPE = "topic-description-review";
-const BOOK_PAGE_SIZE = 40;
 const DESCRIPTION_PAGE_SIZE = 36;
 
 const TOPIC_OUTCOMES: Array<{ value: TopicOutcome; label: string }> = [
@@ -70,7 +70,7 @@ const DESCRIPTION_OUTCOMES: Array<{ value: DescriptionOutcome; label: string }> 
   { value: "thinking", label: "Think" },
 ];
 
-export default function TopicsDescriptionDesk({ audit, catalogFingerprint, source }: Props) {
+export default function TopicsDescriptionDesk({ audit, catalogFingerprint, source, assignmentBooks }: Props) {
   const storageKey = `${STORAGE_PREFIX}${catalogFingerprint}`;
   const topicNames = useMemo(() => new Set(audit.topics.map(topic => topic.name)), [audit.topics]);
   const bookIds = useMemo(() => new Set(audit.books.map(book => book.id)), [audit.books]);
@@ -87,13 +87,10 @@ export default function TopicsDescriptionDesk({ audit, catalogFingerprint, sourc
   const [saveState, setSaveState] = useState<"ready" | "saving" | "saved" | "failed">("ready");
   const [notice, setNotice] = useState("");
   const [olderDrafts, setOlderDrafts] = useState<StoredOlderDraft[]>([]);
-  const [view, setView] = useState<DeskView>("topics");
+  const [view, setView] = useState<DeskView>("books");
   const [topicQuery, setTopicQuery] = useState("");
   const [topicHealthFilter, setTopicHealthFilter] = useState("needs");
   const [topicSort, setTopicSort] = useState("count-asc");
-  const [bookQuery, setBookQuery] = useState("");
-  const [bookMembershipFilter, setBookMembershipFilter] = useState("all");
-  const [bookLimit, setBookLimit] = useState(BOOK_PAGE_SIZE);
   const [descriptionQuery, setDescriptionQuery] = useState("");
   const [descriptionIssueFilter, setDescriptionIssueFilter] = useState("flagged");
   const [descriptionDecisionFilter, setDescriptionDecisionFilter] = useState("all");
@@ -181,17 +178,6 @@ export default function TopicsDescriptionDesk({ audit, catalogFingerprint, sourc
         return left.count - right.count || sortText(left.name, right.name);
       });
   }, [audit.topics, bookById, draft.topicDecisions, similarTopics, topicHealthFilter, topicQuery, topicSort]);
-
-  const filteredBooks = useMemo(() => {
-    const query = bookQuery.trim().toLocaleLowerCase("en");
-    return audit.books.filter(book => {
-      if (query && !`${book.title} ${book.subtitle} ${book.id} ${book.topics.join(" ")}`.toLocaleLowerCase("en").includes(query)) return false;
-      if (bookMembershipFilter === "2-4") return book.topics.length >= 2 && book.topics.length <= 4;
-      if (bookMembershipFilter === "5+") return book.topics.length >= 5;
-      if (bookMembershipFilter !== "all") return book.topics.length === Number(bookMembershipFilter);
-      return true;
-    });
-  }, [audit.books, bookMembershipFilter, bookQuery]);
 
   const filteredDescriptions = useMemo(() => {
     const query = descriptionQuery.trim().toLocaleLowerCase("en");
@@ -293,13 +279,6 @@ export default function TopicsDescriptionDesk({ audit, catalogFingerprint, sourc
     });
   }
 
-  function openTopic(topic: string) {
-    setTopicQuery(topic);
-    setTopicHealthFilter("all");
-    setView("topics");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
   function exportDraft(candidate: ReviewDraft = draft, filename = "jju-topics-descriptions-review.json") {
     const payload = {
       ...candidate,
@@ -322,24 +301,32 @@ export default function TopicsDescriptionDesk({ audit, catalogFingerprint, sourc
         <div>
           <p className={styles.eyebrow}>Editorial review desk</p>
           <h1>Topics &amp; descriptions</h1>
-          <p>See the whole mess, make one decision at a time, and keep every overlapping Topic that genuinely belongs. This desk records decisions; it never guesses or silently rewrites the catalog.</p>
+          <p>Assign approved Topics across the complete catalog, then review labels and descriptions without losing the overlap that makes the library useful. Nothing here guesses, auto-merges, or silently rewrites.</p>
         </div>
         <div className={styles.heroActions}>
-          <button type="button" className={styles.exportButton} onClick={() => exportDraft()}>Export review JSON</button>
+          {view !== "books" && <button type="button" className={styles.exportButton} onClick={() => exportDraft()}>Export review JSON</button>}
           <GuardedAdminLink className={styles.quietLink} href="/admin/organize">Collections Organizer</GuardedAdminLink>
         </div>
       </header>
 
-      <section className={styles.safetyStrip} aria-label="Review safety">
-        <strong>Review draft only.</strong>
-        <span>Browser autosave + JSON export. No Topic, description, public book, or Supabase row can be changed here.</span>
-        <span className={saveState === "failed" ? styles.saveFailed : styles.saveStatus}>
-          {saveState === "saving" ? "Saving in this browser…" : saveState === "saved" ? `Browser draft saved${draft.updatedAt ? ` ${formatDate(draft.updatedAt)}` : ""}` : saveState === "failed" ? "Export required" : sourceLabel(source)}
-        </span>
-      </section>
+      {view === "books" ? (
+        <section className={styles.safetyStrip} aria-label="Assignment safety">
+          <strong>Authoritative assignments.</strong>
+          <span>The Books workbench uses a complete exact-version Topic document, recoverable phone drafts, an exact diff, and an explicit guarded save.</span>
+          <span className={styles.saveStatus}>Labels and descriptions stay separate</span>
+        </section>
+      ) : (
+        <section className={styles.safetyStrip} aria-label="Review safety">
+          <strong>Review draft only.</strong>
+          <span>Topic-label and description decisions autosave in this browser and never apply themselves to the catalog.</span>
+          <span className={saveState === "failed" ? styles.saveFailed : styles.saveStatus}>
+            {saveState === "saving" ? "Saving in this browser…" : saveState === "saved" ? `Browser draft saved${draft.updatedAt ? ` ${formatDate(draft.updatedAt)}` : ""}` : saveState === "failed" ? "Export required" : sourceLabel(source)}
+          </span>
+        </section>
+      )}
 
       {notice && <div className={styles.notice} role="status">{notice}</div>}
-      {olderDrafts.length > 0 && (
+      {view !== "books" && olderDrafts.length > 0 && (
         <details className={styles.olderDrafts}>
           <summary>{olderDrafts.length} older catalog draft{olderDrafts.length === 1 ? "" : "s"} preserved in this browser</summary>
           <div>
@@ -356,18 +343,20 @@ export default function TopicsDescriptionDesk({ audit, catalogFingerprint, sourc
         </details>
       )}
 
-      <section className={styles.auditSummary} aria-label="Current audit findings">
-        <p><strong>{audit.stats.topicCount} Topics:</strong> {audit.stats.emptyTopics} empty · {audit.stats.singleBookTopics} with one book · {audit.stats.tinyTopics} with 2–4 · {audit.stats.broadTopics} overbroad · {audit.exactDuplicateTopicLabels.length} exact duplicates · {audit.similarTopicPairs.length} similar-looking pairs.</p>
-        <p><strong>{audit.stats.bookCount} descriptions:</strong> {audit.stats.fromToDescriptions} use “from…to…” · {audit.stats.cannedOpeningDescriptions} use a repeated/“How” opening · {audit.stats.grammarDescriptions} obvious A/An errors · {audit.stats.flaggedDescriptions} flagged in total · {audit.exactDuplicateDescriptions.length} exact duplicates.</p>
-        <p className={styles.overlapStatement}><strong>Overlap is preserved:</strong> every current book has 2–6 Topics. A multi-Topic book is not treated as a problem.</p>
-      </section>
+      {view !== "books" && (
+        <section className={styles.auditSummary} aria-label="Current audit findings">
+          <p><strong>{audit.stats.topicCount} Topics:</strong> {audit.stats.emptyTopics} empty · {audit.stats.singleBookTopics} with one book · {audit.stats.tinyTopics} with 2–4 · {audit.stats.broadTopics} overbroad · {audit.exactDuplicateTopicLabels.length} exact duplicates · {audit.similarTopicPairs.length} similar-looking pairs.</p>
+          <p><strong>{audit.stats.bookCount} descriptions:</strong> {audit.stats.fromToDescriptions} use “from…to…” · {audit.stats.cannedOpeningDescriptions} use a repeated/“How” opening · {audit.stats.grammarDescriptions} obvious A/An errors · {audit.stats.flaggedDescriptions} flagged in total · {audit.exactDuplicateDescriptions.length} exact duplicates.</p>
+          <p className={styles.overlapStatement}><strong>Overlap is preserved:</strong> the ready/main public audit currently has 2–6 Topics per book. The complete-catalog editor flags only 0–1 or 7+ for a human look.</p>
+        </section>
+      )}
 
       <nav className={styles.viewTabs} aria-label="Review mode">
-        <button type="button" className={view === "topics" ? styles.activeTab : ""} onClick={() => setView("topics")} aria-pressed={view === "topics"}>
-          <span>Topics</span><strong>{reviewedTopicCount}/{audit.stats.topicCount}</strong>
-        </button>
         <button type="button" className={view === "books" ? styles.activeTab : ""} onClick={() => setView("books")} aria-pressed={view === "books"}>
-          <span>Books</span><strong>{audit.stats.bookCount}</strong>
+          <span>Assignments</span><strong>{assignmentBooks.length}</strong>
+        </button>
+        <button type="button" className={view === "topics" ? styles.activeTab : ""} onClick={() => setView("topics")} aria-pressed={view === "topics"}>
+          <span>Topic labels</span><strong>{reviewedTopicCount}/{audit.stats.topicCount}</strong>
         </button>
         <button type="button" className={view === "descriptions" ? styles.activeTab : ""} onClick={() => setView("descriptions")} aria-pressed={view === "descriptions"}>
           <span>Descriptions</span><strong>{reviewedDescriptionCount}/{audit.stats.bookCount}</strong>
@@ -424,57 +413,9 @@ export default function TopicsDescriptionDesk({ audit, catalogFingerprint, sourc
         </section>
       )}
 
-      {view === "books" && (
-        <section className={styles.workspace} aria-label="Book Topic memberships">
-          <div className={styles.toolbar}>
-            <label className={styles.searchField}>
-              Search every book or Topic
-              <input
-                value={bookQuery}
-                onChange={event => { setBookQuery(event.target.value); setBookLimit(BOOK_PAGE_SIZE); }}
-                placeholder="Title, ID, or Topic…"
-              />
-            </label>
-            <label>
-              Topic count
-              <select value={bookMembershipFilter} onChange={event => { setBookMembershipFilter(event.target.value); setBookLimit(BOOK_PAGE_SIZE); }}>
-                <option value="all">All memberships</option>
-                <option value="2-4">2–4 Topics</option>
-                <option value="5+">5–6 Topics</option>
-                <option value="2">Exactly 2</option>
-                <option value="3">Exactly 3</option>
-                <option value="4">Exactly 4</option>
-                <option value="5">Exactly 5</option>
-                <option value="6">Exactly 6</option>
-              </select>
-            </label>
-            <div className={styles.distribution}>
-              {Object.entries(audit.stats.booksByTopicCount).map(([count, books]) => <span key={count}><strong>{books}</strong> with {count}</span>)}
-            </div>
-          </div>
-          <div className={styles.resultLine}><strong>{filteredBooks.length}</strong> books match · showing {Math.min(bookLimit, filteredBooks.length)}</div>
-          <div className={styles.bookGrid}>
-            {filteredBooks.slice(0, bookLimit).map(book => (
-              <article className={styles.bookCard} key={book.id}>
-                <span className={styles.coverFrame}>
-                  <Image src={book.coverSrc} alt="" width={64} height={96} unoptimized onError={event => swapCover(event.currentTarget, book.fallbackCoverSrc)} />
-                </span>
-                <div className={styles.bookCopy}>
-                  <div>
-                    <h2>{book.title}</h2>
-                    <span>{book.topics.length} overlapping Topics</span>
-                  </div>
-                  <div className={styles.topicChips}>
-                    {book.topics.map(topic => <button key={topic} type="button" onClick={() => openTopic(topic)}>{topic}</button>)}
-                  </div>
-                  <GuardedAdminLink href={`/admin/books/${book.id}`}>Open book →</GuardedAdminLink>
-                </div>
-              </article>
-            ))}
-          </div>
-          {bookLimit < filteredBooks.length && <button type="button" className={styles.showMore} onClick={() => setBookLimit(limit => limit + BOOK_PAGE_SIZE)}>Show {Math.min(BOOK_PAGE_SIZE, filteredBooks.length - bookLimit)} more books</button>}
-        </section>
-      )}
+      <div hidden={view !== "books"}>
+        <TopicsAssignmentEditor books={assignmentBooks} />
+      </div>
 
       {view === "descriptions" && (
         <section className={styles.workspace} aria-label="Description review">
@@ -746,12 +687,6 @@ function downloadText(content: string, filename: string) {
   anchor.click();
   anchor.remove();
   window.setTimeout(() => URL.revokeObjectURL(url), 0);
-}
-
-function swapCover(image: HTMLImageElement, fallbackSrc: string) {
-  if (image.dataset.fallbackApplied === "true") return;
-  image.dataset.fallbackApplied = "true";
-  image.src = fallbackSrc;
 }
 
 function sortText(left: string, right: string) {

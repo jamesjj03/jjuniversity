@@ -137,12 +137,12 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
   const [draftPaths, setDraftPaths] = useState<PathsFile | null>(null);
   const [sourceVersion, setSourceVersion] = useState("");
   const [selectedCollectionId, setSelectedCollectionId] = useState("");
-  const [directoryQuery, setDirectoryQuery] = useState("");
   const [uncollectedQuery, setUncollectedQuery] = useState("");
   const [showAllUncollected, setShowAllUncollected] = useState(false);
   const [poolMode, setPoolMode] = useState<PoolMode>("unassigned");
   const [catalogQuery, setCatalogQuery] = useState("");
   const [catalogLimit, setCatalogLimit] = useState(24);
+  const [momentumIndex, setMomentumIndex] = useState(0);
   const [draggedBook, setDraggedBook] = useState<DraggedBook | null>(null);
   const [dropTarget, setDropTarget] = useState<CollectionDropTarget | null>(null);
   const [pointerGhost, setPointerGhost] = useState<{ x: number; y: number } | null>(null);
@@ -364,13 +364,6 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
     return showAllUncollected || query ? matches : matches.slice(0, 12);
   }, [assignments, readyMainUncollected, selectedBook, showAllUncollected, uncollectedQuery]);
 
-  const matchingCollections = useMemo(() => {
-    const query = directoryQuery.trim().toLowerCase();
-    return query
-      ? collections.filter(collection => `${collection.title} ${collection.id}`.toLowerCase().includes(query))
-      : collections;
-  }, [collections, directoryQuery]);
-
   const poolBooks = useMemo(() => {
     if (!selectedCollection) return [];
     const query = catalogQuery.trim().toLowerCase();
@@ -389,6 +382,9 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
   }, [assignments, books, catalogQuery, poolMode, selectedCollection]);
 
   const visiblePoolBooks = poolBooks.slice(0, catalogLimit);
+  const nextUnassignedBook = readyMainUncollected.length
+    ? readyMainUncollected[momentumIndex % readyMainUncollected.length]
+    : null;
 
   const activeQueue = ORGANIZER_NEEDS_YOU_QUEUES.find(queue => queue.id === activeQueueId) || ORGANIZER_NEEDS_YOU_QUEUES[0];
   const activeIssue = activeQueue.issues[Math.min(issueIndex, activeQueue.issues.length - 1)];
@@ -430,7 +426,12 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
     }), `Moved ${bookById.get(bookId)?.title || bookId} ${direction < 0 ? "up" : "down"}. Authored order remains explicit.`);
   }
 
-  function placeBookAt(bookId: string, targetCollectionId: string, targetIndex: number | null = null) {
+  function placeBookAt(
+    bookId: string,
+    targetCollectionId: string,
+    targetIndex: number | null = null,
+    focusPlacedBook = true,
+  ) {
     const target = collectionById.get(targetCollectionId);
     if (!target || editingLocked || !bookById.has(bookId)) return;
     const title = bookById.get(bookId)?.title || bookId;
@@ -474,7 +475,7 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
       ? `${currentCollectionIds.includes(targetCollectionId) ? "Reordered" : "Moved"} ${title} ${currentCollectionIds.includes(targetCollectionId) ? `in ${target.title}` : `from ${previousCollection} to ${target.title}`}.`
       : `Added ${title} to ${target.title}.`);
     setSelectedCollectionId(targetCollectionId);
-    setFocusRequest(current => ({ id: bookId, token: (current?.token || 0) + 1 }));
+    if (focusPlacedBook) setFocusRequest(current => ({ id: bookId, token: (current?.token || 0) + 1 }));
     draggedBookRef.current = null;
     setDraggedBook(null);
     setDropTarget(null);
@@ -492,18 +493,27 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
     ));
   }
 
+  function gridInsertIndex(rect: DOMRect, clientX: number, clientY: number, baseIndex: number) {
+    const after = clientY > rect.top + rect.height * 0.72
+      || (clientY >= rect.top + rect.height * 0.28 && clientX > rect.left + rect.width / 2);
+    return after ? baseIndex + 1 : baseIndex;
+  }
+
   function resolvePointerDropTarget(clientX: number, clientY: number): CollectionDropTarget | null {
     const hit = document.elementFromPoint(clientX, clientY)?.closest<HTMLElement>(
       "[data-collection-drop-index], [data-collection-drop-id]",
     );
     if (!hit) return null;
     const collectionId = hit.dataset.collectionId || hit.dataset.collectionDropId || "";
-    if (!collectionById.has(collectionId)) return null;
+    if (collectionId !== UNCOLLECTED_ID && !collectionById.has(collectionId)) return null;
     if (hit.dataset.collectionDropIndex !== undefined) {
       const baseIndex = Number(hit.dataset.collectionDropIndex);
       if (!Number.isInteger(baseIndex) || baseIndex < 0) return null;
       const rect = hit.getBoundingClientRect();
-      return { collectionId, index: clientY > rect.top + rect.height / 2 ? baseIndex + 1 : baseIndex };
+      const after = hit.dataset.collectionDropLayout === "grid"
+        ? gridInsertIndex(rect, clientX, clientY, baseIndex) === baseIndex + 1
+        : clientY > rect.top + rect.height / 2;
+      return { collectionId, index: after ? baseIndex + 1 : baseIndex };
     }
     return { collectionId, index: null };
   }
@@ -522,7 +532,7 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
   }
 
   function hoverNativeDrop(event: ReactDragEvent<HTMLElement>, collectionId: string, index: number | null) {
-    if (!draggedBookRef.current || !collectionById.has(collectionId)) return;
+    if (!draggedBookRef.current || (collectionId !== UNCOLLECTED_ID && !collectionById.has(collectionId))) return;
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
     updateDropTarget({ collectionId, index });
@@ -532,7 +542,14 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
     event.preventDefault();
     const transferred = event.dataTransfer.getData("application/x-jju-book") || event.dataTransfer.getData("text/plain");
     const bookId = draggedBookRef.current?.bookId || transferred;
-    if (bookId && bookById.has(bookId)) placeBookAt(bookId, collectionId, index);
+    if (!bookId || !bookById.has(bookId)) return;
+    if (collectionId === UNCOLLECTED_ID) {
+      const sourceCollectionId = assignments.get(bookId)?.[0];
+      if (sourceCollectionId) removeBook(sourceCollectionId, bookId);
+      endNativeDrag();
+      return;
+    }
+    placeBookAt(bookId, collectionId, index);
   }
 
   function endNativeDrag() {
@@ -578,7 +595,14 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
     const target = pointer.active ? resolvePointerDropTarget(event.clientX, event.clientY) : null;
     pointerDragRef.current = null;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-    if (target) placeBookAt(pointer.bookId, target.collectionId, target.index);
+    if (target?.collectionId === UNCOLLECTED_ID) {
+      const sourceCollectionId = assignments.get(pointer.bookId)?.[0];
+      if (sourceCollectionId) removeBook(sourceCollectionId, pointer.bookId);
+      draggedBookRef.current = null;
+      setDraggedBook(null);
+      setDropTarget(null);
+      setPointerGhost(null);
+    } else if (target) placeBookAt(pointer.bookId, target.collectionId, target.index);
     else {
       draggedBookRef.current = null;
       setDraggedBook(null);
@@ -616,6 +640,18 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
     setSelectedCollectionId(collectionId);
     setCatalogLimit(24);
     setDropTarget(null);
+  }
+
+  function advanceUnassigned() {
+    if (!readyMainUncollected.length) return;
+    setMomentumIndex(current => (current + 1) % readyMainUncollected.length);
+  }
+
+  function addNextUnassigned() {
+    if (!selectedCollection || !nextUnassignedBook) return;
+    // Keep the cursor in place: removing this book from the unassigned queue
+    // naturally reveals the next title without skipping one.
+    placeBookAt(nextUnassignedBook.id, selectedCollection.id, null, false);
   }
 
   function openPlacementPanel(bookId: string) {
@@ -919,9 +955,9 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
         <section className={styles.collectionsWorkspace} aria-labelledby="collections-title">
           <header className={styles.sectionHeader}>
             <div>
-              <p className={styles.eyebrow}>Collection-first workspace</p>
-              <h2 id="collections-title">Blitz through the Collections</h2>
-              <p>Switch Collections without leaving the board. Drag books into place, tap Add or Remove, or use the large Up and Down controls. Nothing is classified automatically.</p>
+              <p className={styles.eyebrow}>Rapid cover board</p>
+              <h2 id="collections-title">See it. Place it. Keep moving.</h2>
+              <p>Every cover on one working board. Tap or drag to add, move, remove, and reorder; the exact-version review gate stays unchanged.</p>
             </div>
             <div className={styles.collectionStats}>
               <span><strong>{collections.length}</strong> Collections</span>
@@ -930,95 +966,74 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
             </div>
           </header>
 
-          <label className={styles.mobileCollectionPicker}>
-            Choose a Collection
-            <select value={selectedCollectionId || collections[0]?.id || UNCOLLECTED_ID} onChange={event => chooseCollection(event.target.value)}>
-              {collections.map(collection => <option value={collection.id} key={collection.id}>{collectionLabel(collection)}</option>)}
-              <option value={UNCOLLECTED_ID}>No Collection · {readyMainUncollected.length}</option>
-            </select>
-          </label>
-
-          <nav className={styles.mobileCollectionRail} aria-label="Quick Collection switcher">
-            {collections.map(collection => (
-              <button
-                type="button"
-                className={`${selectedCollection?.id === collection.id ? styles.activeCollectionChip : ""} ${dropTarget?.collectionId === collection.id && dropTarget.index === null ? styles.dropCollectionChip : ""}`}
-                data-collection-drop-id={collection.id}
-                key={collection.id}
-                onClick={() => chooseCollection(collection.id)}
-                onDragOver={event => hoverNativeDrop(event, collection.id, null)}
-                onDrop={event => finishNativeDrop(event, collection.id, null)}
-              >
-                <span>{collection.title}</span><strong>{collection.books.length}</strong>
-              </button>
-            ))}
-            <button
-              type="button"
-              className={selectedCollectionId === UNCOLLECTED_ID ? styles.activeCollectionChip : ""}
-              onClick={() => chooseCollection(UNCOLLECTED_ID)}
-            >
-              <span>No Collection</span><strong>{readyMainUncollected.length}</strong>
-            </button>
-          </nav>
-
-          <div className={styles.collectionLayout}>
-            <aside className={styles.directory} aria-label="Collection directory">
-              <label>
-                Find a Collection
-                <input value={directoryQuery} onChange={event => setDirectoryQuery(event.target.value)} placeholder="Mapmakers, System…" />
-              </label>
-              <div className={styles.directoryList}>
-                {matchingCollections.map(collection => (
-                  <button
-                    type="button"
-                    className={`${selectedCollection?.id === collection.id ? styles.activeDirectoryItem : ""} ${dropTarget?.collectionId === collection.id && dropTarget.index === null ? styles.dropDirectoryItem : ""}`}
-                    data-collection-drop-id={collection.id}
-                    key={collection.id}
-                    onClick={() => chooseCollection(collection.id)}
-                    onDragOver={event => hoverNativeDrop(event, collection.id, null)}
-                    onDrop={event => finishNativeDrop(event, collection.id, null)}
-                  >
-                    <span>{collection.title}</span><strong>{collection.books.length}</strong>
-                  </button>
-                ))}
+          <div className={styles.rapidSwitcher}>
+            <label className={styles.rapidCollectionPicker}>
+              Active Collection
+              <select value={selectedCollectionId || collections[0]?.id || UNCOLLECTED_ID} onChange={event => chooseCollection(event.target.value)}>
+                {collections.map(collection => <option value={collection.id} key={collection.id}>{collectionLabel(collection)}</option>)}
+                <option value={UNCOLLECTED_ID}>No Collection · {readyMainUncollected.length}</option>
+              </select>
+            </label>
+            <nav className={styles.rapidCollectionRail} aria-label="Quick Collection switcher">
+              {collections.map(collection => (
                 <button
                   type="button"
-                  className={selectedCollectionId === UNCOLLECTED_ID ? styles.activeDirectoryItem : ""}
-                  onClick={() => chooseCollection(UNCOLLECTED_ID)}
+                  aria-pressed={selectedCollection?.id === collection.id}
+                  className={`${selectedCollection?.id === collection.id ? styles.activeCollectionChip : ""} ${dropTarget?.collectionId === collection.id && dropTarget.index === null ? styles.dropCollectionChip : ""}`}
+                  data-collection-drop-id={collection.id}
+                  key={collection.id}
+                  onClick={() => chooseCollection(collection.id)}
+                  onDragOver={event => hoverNativeDrop(event, collection.id, null)}
+                  onDrop={event => finishNativeDrop(event, collection.id, null)}
                 >
-                  <span>No Collection</span><strong>{readyMainUncollected.length}</strong>
+                  <span>{collection.title}</span><strong>{collection.books.length}</strong>
                 </button>
-              </div>
-            </aside>
+              ))}
+              <button
+                type="button"
+                aria-pressed={selectedCollectionId === UNCOLLECTED_ID}
+                className={`${selectedCollectionId === UNCOLLECTED_ID ? styles.activeCollectionChip : ""} ${dropTarget?.collectionId === UNCOLLECTED_ID ? styles.dropCollectionChip : ""}`}
+                data-collection-drop-id={UNCOLLECTED_ID}
+                onClick={() => chooseCollection(UNCOLLECTED_ID)}
+                onDragOver={event => hoverNativeDrop(event, UNCOLLECTED_ID, null)}
+                onDrop={event => finishNativeDrop(event, UNCOLLECTED_ID, null)}
+              >
+                <span>No Collection</span><strong>{readyMainUncollected.length}</strong>
+              </button>
+            </nav>
+          </div>
 
-            <div className={styles.collectionDetail}>
-              {selectedCollectionId === UNCOLLECTED_ID ? (
-                <>
-                  <header className={styles.detailHeader}>
-                    <div>
-                      <p className={styles.eyebrow}>Optional by design</p>
-                      <h3>No Collection</h3>
-                      <p>{readyMainUncollected.length} ready Main Library books are uncollected. That is valid; this is not a cleanup quota.</p>
-                    </div>
-                  </header>
-                  <label className={styles.bookSearch}>
-                    Find an uncollected book
-                    <input value={uncollectedQuery} onChange={event => setUncollectedQuery(event.target.value)} placeholder="Title or book ID" />
-                  </label>
-                  <div className={styles.memberList}>
-                    {visibleUncollected.map(book => (
-                      <article
-                        className={`${styles.memberRow} ${styles.uncollectedMember} ${focusRequest?.id === book.id ? styles.focusedMember : ""}`}
-                        draggable={!editingLocked && !book.legacyAlias}
-                        id={`organize-book-${book.id}`}
-                        tabIndex={-1}
-                        key={book.id}
-                        onDragEnd={endNativeDrag}
-                        onDragStart={event => beginNativeDrag(event, book.id, null)}
-                      >
+          <div className={styles.rapidBoard}>
+            {selectedCollectionId === UNCOLLECTED_ID ? (
+              <section className={styles.rapidUnassigned} aria-labelledby="unassigned-title">
+                <header className={styles.rapidDetailHeader}>
+                  <div>
+                    <p className={styles.eyebrow}>Optional by design</p>
+                    <h3 id="unassigned-title">No Collection</h3>
+                    <p>{readyMainUncollected.length} ready Main Library books are uncollected. Drag a cover onto any Collection above, or tap Place.</p>
+                  </div>
+                  <button type="button" className={styles.secondaryButton} disabled={!history.length || busy} onClick={undo}>Undo last</button>
+                </header>
+                <label className={styles.rapidSearch}>
+                  Search uncollected books
+                  <input type="search" value={uncollectedQuery} onChange={event => setUncollectedQuery(event.target.value)} placeholder="Title or book ID" />
+                </label>
+                <div className={styles.rapidPoolGrid}>
+                  {visibleUncollected.map(book => (
+                    <article
+                      className={`${styles.rapidPoolCard} ${focusRequest?.id === book.id ? styles.focusedMember : ""} ${draggedBook?.bookId === book.id ? styles.draggingBook : ""}`}
+                      draggable={!editingLocked && !book.legacyAlias}
+                      id={`organize-book-${book.id}`}
+                      tabIndex={-1}
+                      key={book.id}
+                      onDragEnd={endNativeDrag}
+                      onDragStart={event => beginNativeDrag(event, book.id, null)}
+                    >
+                      <div className={styles.rapidCoverVisual}>
+                        <OrganizerCover book={book} sizes="(max-width: 760px) 42vw, 180px" />
                         <button
                           type="button"
-                          className={styles.dragHandle}
+                          className={styles.rapidDragHandle}
                           disabled={editingLocked || book.legacyAlias}
                           aria-label={`Drag ${book.title} into a Collection`}
                           title="Drag onto a Collection"
@@ -1027,81 +1042,99 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
                           onPointerMove={movePointerDrag}
                           onPointerUp={endPointerDrag}
                         ><span aria-hidden="true">⠿</span></button>
-                        <OrganizerCover book={book} />
-                        <div className={styles.memberCopy}>
-                          <strong>{book.title}</strong>
-                          <span>{book.id} · {book.status}{book.legacyAlias ? " · old alias record" : ""}</span>
-                        </div>
-                        <div className={styles.singleAction}>
-                          <button type="button" disabled={editingLocked || book.legacyAlias} onClick={() => openPlacementPanel(book.id)}>
-                            {book.legacyAlias ? "Alias only" : "Put in Collection"}
-                          </button>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
+                      </div>
+                      <div className={styles.rapidCardCopy}>
+                        <strong>{book.title}</strong>
+                        <span>{book.id} · {book.status}</span>
+                      </div>
+                      <button type="button" className={styles.rapidWideAction} disabled={editingLocked || book.legacyAlias} onClick={() => openPlacementPanel(book.id)}>
+                        {book.legacyAlias ? "Alias only" : "Place in Collection"}
+                      </button>
+                    </article>
+                  ))}
                   {!visibleUncollected.length && <div className={styles.emptyState}>No uncollected books match that search.</div>}
-                  {!showAllUncollected && !uncollectedQuery && readyMainUncollected.length > visibleUncollected.length && (
-                    <button type="button" className={styles.showMoreButton} onClick={() => setShowAllUncollected(true)}>Show all {readyMainUncollected.length}</button>
+                </div>
+                {!showAllUncollected && !uncollectedQuery && readyMainUncollected.length > visibleUncollected.length && (
+                  <button type="button" className={styles.showMoreButton} onClick={() => setShowAllUncollected(true)}>Show all {readyMainUncollected.length}</button>
+                )}
+              </section>
+            ) : selectedCollection ? (
+              <>
+                <header className={styles.rapidDetailHeader}>
+                  <div>
+                    <p className={styles.eyebrow}>{selectedCollection.sourceBucket === "series" ? "Editorial Collection" : "Ordered Collection"}</p>
+                    <h3>{selectedCollection.title}</h3>
+                    <p>{selectedCollection.description || "An authored JJ University Collection."}</p>
+                  </div>
+                  <div className={styles.rapidHeaderActions}>
+                    <button type="button" className={styles.quietButton} disabled={!history.length || busy} onClick={undo}>Undo</button>
+                    <button type="button" className={styles.secondaryButton} disabled={editingLocked} onClick={() => catalogSearchRef.current?.focus()}>Find books</button>
+                    <button type="button" className={styles.primaryButton} disabled={!dirty} onClick={() => setView("review")}>Review {diffs.length || ""}</button>
+                  </div>
+                </header>
+
+                <section className={styles.momentumPanel} aria-labelledby="momentum-title">
+                  <div className={styles.momentumCopy}>
+                    <p className={styles.eyebrow}>Next-unassigned momentum</p>
+                    <h4 id="momentum-title">One cover at a time</h4>
+                    <span>{readyMainUncollected.length ? `${readyMainUncollected.length} ready books remain optional and uncollected.` : "Every ready Main Library book currently has a Collection."}</span>
+                  </div>
+                  {nextUnassignedBook ? (
+                    <article className={styles.momentumBook}>
+                      <OrganizerCover book={nextUnassignedBook} sizes="92px" />
+                      <div>
+                        <strong>{nextUnassignedBook.title}</strong>
+                        <span>{nextUnassignedBook.subtitle || nextUnassignedBook.id}</span>
+                      </div>
+                      <button type="button" className={styles.quietButton} disabled={editingLocked} onClick={advanceUnassigned}>Skip</button>
+                      <button type="button" className={styles.primaryButton} disabled={editingLocked} onClick={addNextUnassigned}>Add here</button>
+                    </article>
+                  ) : (
+                    <div className={styles.momentumDone}>Queue clear. Uncollected books are still allowed whenever you remove one.</div>
                   )}
-                </>
-              ) : selectedCollection ? (
-                <>
-                  <header className={styles.detailHeader}>
-                    <div>
-                      <p className={styles.eyebrow}>{selectedCollection.sourceBucket === "series" ? "Editorial Collection" : "Ordered Collection"}</p>
-                      <h3>{selectedCollection.title}</h3>
-                      <p>{selectedCollection.description || "An authored JJ University Collection."}</p>
+                </section>
+
+                <div className={styles.rapidColumns}>
+                  <section className={styles.rapidMembersPanel} aria-label={`${selectedCollection.title} members`}>
+                    <div className={styles.rapidPanelHeader}>
+                      <div><p className={styles.eyebrow}>Authored order</p><h4>{selectedCollection.books.length} current members</h4></div>
+                      <span>Drag a cover, or tap the arrows. Drag to “No Collection” above to remove.</span>
                     </div>
-                    <button
-                      type="button"
-                      className={styles.primaryButton}
-                      disabled={editingLocked}
-                      onClick={() => catalogSearchRef.current?.focus()}
-                    >Find books</button>
-                  </header>
-                  <div className={styles.blitzLayout}>
-                    <section className={styles.orderPanel} aria-label={`${selectedCollection.title} members`}>
-                      <div className={styles.orderNote}><strong>Authored order</strong><span>{selectedCollection.books.length} books · drag or use the buttons</span></div>
-                      <ol className={styles.memberList}>
-                        {selectedCollection.books.map((member, index) => {
-                          const book = bookById.get(member.id) || {
-                            id: member.id,
-                            title: member.id,
-                            subtitle: "",
-                            status: "missing",
-                            visibility: "main",
-                            coverSrc: "/file.svg",
-                            fallbackCoverSrc: "/file.svg",
-                            legacyAlias: false,
-                          };
-                          const dropBefore = dropTarget?.collectionId === selectedCollection.id && dropTarget.index === index;
-                          const dropAfter = dropTarget?.collectionId === selectedCollection.id && dropTarget.index === index + 1;
-                          return (
-                            <li
-                              className={`${styles.memberRow} ${focusRequest?.id === book.id ? styles.focusedMember : ""} ${draggedBook?.bookId === book.id ? styles.draggingBook : ""} ${dropBefore ? styles.dropBefore : ""} ${dropAfter ? styles.dropAfter : ""}`}
-                              data-collection-id={selectedCollection.id}
-                              data-collection-drop-index={index}
-                              draggable={!editingLocked}
-                              id={`organize-book-${book.id}`}
-                              tabIndex={-1}
-                              key={book.id}
-                              onDragEnd={endNativeDrag}
-                              onDragStart={event => beginNativeDrag(event, book.id, selectedCollection.id)}
-                              onDragOver={event => {
-                                const rect = event.currentTarget.getBoundingClientRect();
-                                const insertAt = event.clientY > rect.top + rect.height / 2 ? index + 1 : index;
-                                hoverNativeDrop(event, selectedCollection.id, insertAt);
-                              }}
-                              onDrop={event => {
-                                const rect = event.currentTarget.getBoundingClientRect();
-                                const insertAt = event.clientY > rect.top + rect.height / 2 ? index + 1 : index;
-                                finishNativeDrop(event, selectedCollection.id, insertAt);
-                              }}
-                            >
+                    <ol className={styles.rapidMemberGrid}>
+                      {selectedCollection.books.map((member, index) => {
+                        const book = bookById.get(member.id) || {
+                          id: member.id,
+                          title: member.id,
+                          subtitle: "",
+                          status: "missing",
+                          visibility: "main",
+                          coverSrc: "/file.svg",
+                          fallbackCoverSrc: "/file.svg",
+                          legacyAlias: false,
+                        };
+                        const dropBefore = dropTarget?.collectionId === selectedCollection.id && dropTarget.index === index;
+                        const dropAfter = dropTarget?.collectionId === selectedCollection.id && dropTarget.index === index + 1;
+                        return (
+                          <li
+                            className={`${styles.rapidMemberCard} ${focusRequest?.id === book.id ? styles.focusedMember : ""} ${draggedBook?.bookId === book.id ? styles.draggingBook : ""} ${dropBefore ? styles.dropBefore : ""} ${dropAfter ? styles.dropAfter : ""}`}
+                            data-collection-id={selectedCollection.id}
+                            data-collection-drop-index={index}
+                            data-collection-drop-layout="grid"
+                            draggable={!editingLocked}
+                            id={`organize-book-${book.id}`}
+                            tabIndex={-1}
+                            key={book.id}
+                            onDragEnd={endNativeDrag}
+                            onDragStart={event => beginNativeDrag(event, book.id, selectedCollection.id)}
+                            onDragOver={event => hoverNativeDrop(event, selectedCollection.id, gridInsertIndex(event.currentTarget.getBoundingClientRect(), event.clientX, event.clientY, index))}
+                            onDrop={event => finishNativeDrop(event, selectedCollection.id, gridInsertIndex(event.currentTarget.getBoundingClientRect(), event.clientX, event.clientY, index))}
+                          >
+                            <div className={styles.rapidCoverVisual}>
+                              <OrganizerCover book={book} sizes="(max-width: 760px) 42vw, 190px" />
+                              <span className={styles.rapidOrderBadge}>{String(index + 1).padStart(2, "0")}</span>
                               <button
                                 type="button"
-                                className={styles.dragHandle}
+                                className={styles.rapidDragHandle}
                                 disabled={editingLocked}
                                 aria-label={`Drag ${book.title}; current position ${index + 1}`}
                                 title="Drag to reorder or move"
@@ -1109,103 +1142,80 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
                                 onPointerDown={event => beginPointerDrag(event, book.id, selectedCollection.id)}
                                 onPointerMove={movePointerDrag}
                                 onPointerUp={endPointerDrag}
-                              ><span aria-hidden="true">⠿</span><small>{index + 1}</small></button>
-                              <OrganizerCover book={book} />
-                              <div className={styles.memberCopy}>
-                                <strong>{book.title}</strong>
-                                <span>{book.id} · {book.status}{book.visibility === "archive" ? " · archive" : ""}</span>
-                              </div>
-                              <div className={styles.orderActions}>
-                                <button type="button" disabled={editingLocked || index === 0} onClick={() => moveBook(selectedCollection.id, book.id, -1)} aria-label={`Move ${book.title} up`}>↑ Up</button>
-                                <button type="button" disabled={editingLocked || index === selectedCollection.books.length - 1} onClick={() => moveBook(selectedCollection.id, book.id, 1)} aria-label={`Move ${book.title} down`}>↓ Down</button>
-                                <button type="button" className={styles.removeButton} disabled={editingLocked} onClick={() => removeBook(selectedCollection.id, book.id)}>Remove</button>
-                              </div>
-                            </li>
-                          );
-                        })}
-                      </ol>
-                      <div
-                        className={`${styles.endDropZone} ${dropTarget?.collectionId === selectedCollection.id && dropTarget.index !== null && dropTarget.index >= selectedCollection.books.length ? styles.activeEndDropZone : ""}`}
-                        data-collection-id={selectedCollection.id}
-                        data-collection-drop-index={selectedCollection.books.length}
-                        onDragOver={event => hoverNativeDrop(event, selectedCollection.id, selectedCollection.books.length)}
-                        onDrop={event => finishNativeDrop(event, selectedCollection.id, selectedCollection.books.length)}
-                      >Drop at the end</div>
-                      {!selectedCollection.books.length && <div className={styles.emptyState}>This draft Collection is empty. Add a book from the catalog. Review will block an authoritative save while it stays empty.</div>}
-                    </section>
+                              ><span aria-hidden="true">⠿</span></button>
+                            </div>
+                            <div className={styles.rapidCardCopy}>
+                              <strong>{book.title}</strong>
+                              <span>{book.id} · {book.status}{book.visibility === "archive" ? " · archive" : ""}</span>
+                            </div>
+                            <div className={styles.rapidOrderActions}>
+                              <button type="button" disabled={editingLocked || index === 0} onClick={() => moveBook(selectedCollection.id, book.id, -1)} aria-label={`Move ${book.title} earlier`}>← Earlier</button>
+                              <button type="button" disabled={editingLocked || index === selectedCollection.books.length - 1} onClick={() => moveBook(selectedCollection.id, book.id, 1)} aria-label={`Move ${book.title} later`}>Later →</button>
+                              <button type="button" className={styles.removeButton} disabled={editingLocked} onClick={() => removeBook(selectedCollection.id, book.id)}>Remove</button>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                    <div
+                      className={`${styles.endDropZone} ${dropTarget?.collectionId === selectedCollection.id && dropTarget.index !== null && dropTarget.index >= selectedCollection.books.length ? styles.activeEndDropZone : ""}`}
+                      data-collection-id={selectedCollection.id}
+                      data-collection-drop-index={selectedCollection.books.length}
+                      onDragOver={event => hoverNativeDrop(event, selectedCollection.id, selectedCollection.books.length)}
+                      onDrop={event => finishNativeDrop(event, selectedCollection.id, selectedCollection.books.length)}
+                    >Drop at the end</div>
+                    {!selectedCollection.books.length && <div className={styles.emptyState}>This draft Collection is empty. Add a cover from the bank; diagnostics will block an authoritative save while it stays empty.</div>}
+                  </section>
 
-                    <aside className={styles.catalogPool} aria-label="Books available to place">
-                      <header className={styles.catalogPoolHeader}>
-                        <div><p className={styles.eyebrow}>Book pool</p><h4>Drag books in</h4></div>
-                        <div className={styles.poolMode} role="group" aria-label="Book pool scope">
-                          <button
-                            type="button"
-                            aria-pressed={poolMode === "unassigned"}
-                            className={poolMode === "unassigned" ? styles.activePoolMode : ""}
-                            onClick={() => { setPoolMode("unassigned"); setCatalogLimit(24); }}
-                          >Unassigned</button>
-                          <button
-                            type="button"
-                            aria-pressed={poolMode === "all"}
-                            className={poolMode === "all" ? styles.activePoolMode : ""}
-                            onClick={() => { setPoolMode("all"); setCatalogLimit(24); }}
-                          >All books</button>
-                        </div>
-                      </header>
-                      <label className={styles.catalogSearch}>
-                        Search the catalog
-                        <input
-                          ref={catalogSearchRef}
-                          type="search"
-                          value={catalogQuery}
-                          placeholder="Title or book ID"
-                          onChange={event => { setCatalogQuery(event.target.value); setCatalogLimit(24); }}
-                        />
-                      </label>
-                      <p className={styles.catalogHelp}>Drag by the grip, or tap Add. Books already assigned elsewhere say Move.</p>
-                      <div className={styles.poolList}>
-                        {visiblePoolBooks.map(book => {
-                          const currentCollectionIds = assignments.get(book.id) || [];
-                          const currentNames = currentCollectionIds.map(id => collectionById.get(id)?.title).filter(Boolean).join(", ");
-                          return (
-                            <article
-                              className={`${styles.poolBook} ${draggedBook?.bookId === book.id ? styles.draggingBook : ""}`}
-                              draggable={!editingLocked}
-                              key={book.id}
-                              onDragEnd={endNativeDrag}
-                              onDragStart={event => beginNativeDrag(event, book.id, currentCollectionIds[0] || null)}
-                            >
+                  <aside className={styles.rapidBankPanel} aria-label="Searchable book bank">
+                    <header className={styles.rapidPanelHeader}>
+                      <div><p className={styles.eyebrow}>Cover bank</p><h4>Find and place books</h4></div>
+                      <div className={styles.poolMode} role="group" aria-label="Book bank scope">
+                        <button type="button" aria-pressed={poolMode === "unassigned"} className={poolMode === "unassigned" ? styles.activePoolMode : ""} onClick={() => { setPoolMode("unassigned"); setCatalogLimit(24); }}>Unassigned</button>
+                        <button type="button" aria-pressed={poolMode === "all"} className={poolMode === "all" ? styles.activePoolMode : ""} onClick={() => { setPoolMode("all"); setCatalogLimit(24); }}>All books</button>
+                      </div>
+                    </header>
+                    <label className={styles.rapidSearch}>
+                      Search the catalog
+                      <input ref={catalogSearchRef} type="search" value={catalogQuery} placeholder="Title or book ID" onChange={event => { setCatalogQuery(event.target.value); setCatalogLimit(24); }} />
+                    </label>
+                    <p className={styles.catalogHelp}>Tap Add or Move to keep your place. Dragging is optional.</p>
+                    <div className={styles.rapidPoolGrid}>
+                      {visiblePoolBooks.map(book => {
+                        const currentCollectionIds = assignments.get(book.id) || [];
+                        const currentNames = currentCollectionIds.map(id => collectionById.get(id)?.title).filter(Boolean).join(", ");
+                        return (
+                          <article className={`${styles.rapidPoolCard} ${draggedBook?.bookId === book.id ? styles.draggingBook : ""}`} draggable={!editingLocked} key={book.id} onDragEnd={endNativeDrag} onDragStart={event => beginNativeDrag(event, book.id, currentCollectionIds[0] || null)}>
+                            <div className={styles.rapidCoverVisual}>
+                              <OrganizerCover book={book} sizes="(max-width: 760px) 42vw, 170px" />
                               <button
                                 type="button"
-                                className={styles.dragHandle}
+                                className={styles.rapidDragHandle}
                                 disabled={editingLocked}
                                 aria-label={`Drag ${book.title} into ${selectedCollection.title}`}
-                                title="Drag into the ordered list or onto another Collection"
+                                title="Drag into the ordered covers or onto another Collection"
                                 onPointerCancel={cancelPointerDrag}
                                 onPointerDown={event => beginPointerDrag(event, book.id, currentCollectionIds[0] || null)}
                                 onPointerMove={movePointerDrag}
                                 onPointerUp={endPointerDrag}
                               ><span aria-hidden="true">⠿</span></button>
-                              <OrganizerCover book={book} />
-                              <div className={styles.memberCopy}><strong>{book.title}</strong><span>{currentNames || "No Collection"} · {book.status}</span></div>
-                              <button type="button" disabled={editingLocked} onClick={() => placeBookAt(book.id, selectedCollection.id)}>{currentNames ? "Move" : "Add"}</button>
-                            </article>
-                          );
-                        })}
-                        {!visiblePoolBooks.length && <div className={styles.emptyState}>No available books match this view.</div>}
-                      </div>
-                      {visiblePoolBooks.length < poolBooks.length && (
-                        <button type="button" className={styles.showMoreButton} onClick={() => setCatalogLimit(limit => limit + 24)}>
-                          Show {Math.min(24, poolBooks.length - visiblePoolBooks.length)} more
-                        </button>
-                      )}
-                    </aside>
-                  </div>
-                </>
-              ) : (
-                <div className={styles.emptyState}>Choose a Collection.</div>
-              )}
-            </div>
+                            </div>
+                            <div className={styles.rapidCardCopy}><strong>{book.title}</strong><span>{currentNames || "No Collection"} · {book.status}</span></div>
+                            <button type="button" className={styles.rapidWideAction} disabled={editingLocked} onClick={() => placeBookAt(book.id, selectedCollection.id, null, false)}>{currentNames ? "Move here" : "Add here"}</button>
+                          </article>
+                        );
+                      })}
+                      {!visiblePoolBooks.length && <div className={styles.emptyState}>No available books match this view.</div>}
+                    </div>
+                    {visiblePoolBooks.length < poolBooks.length && (
+                      <button type="button" className={styles.showMoreButton} onClick={() => setCatalogLimit(limit => limit + 24)}>Show {Math.min(24, poolBooks.length - visiblePoolBooks.length)} more</button>
+                    )}
+                  </aside>
+                </div>
+              </>
+            ) : (
+              <div className={styles.emptyState}>Choose a Collection.</div>
+            )}
           </div>
         </section>
       )}
@@ -1342,7 +1352,7 @@ export default function CollectionsOrganizer({ books, initialBookId = "" }: { bo
   );
 }
 
-function OrganizerCover({ book }: { book: OrganizerBook }) {
+function OrganizerCover({ book, sizes = "72px" }: { book: OrganizerBook; sizes?: string }) {
   const [source, setSource] = useState(book.coverSrc);
   return (
     <span className={styles.coverFrame}>
@@ -1350,7 +1360,7 @@ function OrganizerCover({ book }: { book: OrganizerBook }) {
         src={source}
         alt={`${book.title} cover`}
         fill
-        sizes="72px"
+        sizes={sizes}
         onError={() => setSource(current => current === book.fallbackCoverSrc ? "/file.svg" : book.fallbackCoverSrc)}
       />
     </span>
