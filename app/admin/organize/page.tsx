@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CollectionsOrganizer from "@/components/workshop/CollectionsOrganizer";
+import CollectionsWall from "@/components/workshop/CollectionsWall";
 import { readAdminBookCatalog } from "@/lib/adminBookCatalog";
 import { LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
 import { coverFallbackSrc, coverWebpSrc } from "@/lib/cover";
@@ -57,5 +57,5 @@ export default async function OrganizePage({ searchParams }: { searchParams: Sea
     );
   }
 
-  return <CollectionsOrganizer books={data.books} initialBookId={selectedBook.trim().toLowerCase()} />;
+  return <CollectionsWall books={data.books} initialBookId={selectedBook.trim().toLowerCase()} />;
 }
