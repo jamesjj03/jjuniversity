@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import SiteV2Cover from "@/components/site-v2/SiteV2Cover";
+import SiteV2CoverHistory from "@/components/site-v2/SiteV2CoverHistory";
 import SiteV2BookAccess from "@/components/site-v2/SiteV2BookAccess";
 import SiteV2RelatedBooks from "@/components/site-v2/SiteV2RelatedBooks";
 import styles from "@/components/site-v2/SiteV2.module.css";
@@ -92,8 +93,11 @@ export default async function SiteV2BookPage({ params }: Props) {
       <Link className={styles.backLink} href="/books"><span aria-hidden="true">←</span> Back to books</Link>
 
       <section className={styles.bookHero}>
-        <div className={styles.bookHeroCover}>
-          <SiteV2Cover src={siteV2CoverSrc(book)} fallbackSrc={coverFallbackSrc(book)} alt={`${book.title} cover`} priority sizes="(max-width: 700px) 76vw, 390px" />
+        <div className={styles.bookHeroCoverColumn}>
+          <div className={styles.bookHeroCover}>
+            <SiteV2Cover src={siteV2CoverSrc(book)} fallbackSrc={coverFallbackSrc(book)} alt={`${book.title} cover`} priority sizes="(max-width: 700px) 76vw, 390px" />
+          </div>
+          <SiteV2CoverHistory key={book.id} bookId={book.id} bookTitle={book.title} />
         </div>
 
         <div className={styles.bookHeroCopy}>
@@ -114,7 +118,7 @@ export default async function SiteV2BookPage({ params }: Props) {
               )}
               {series.length > 0 && (
                 <div>
-                  <span>Collections</span>
+                  <span>Series</span>
                   <p className={styles.collectionLinks}>
                     {series.map(item => <Link href={`/series/${item.slug}`} key={item.id}>{item.title}</Link>)}
                   </p>

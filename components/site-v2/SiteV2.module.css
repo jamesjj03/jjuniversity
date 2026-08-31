@@ -622,6 +622,97 @@
   box-shadow: 0 28px 52px rgba(0, 0, 0, 0.5);
 }
 
+.bookHeroCoverColumn {
+  width: 100%;
+  min-width: 0;
+}
+
+.coverHistory {
+  margin-top: 14px;
+  overflow: hidden;
+  border: 1px solid var(--v2-line);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--v2-bg-deep) 68%, transparent);
+}
+
+.coverHistory > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 46px;
+  padding: 10px 13px;
+  color: var(--v2-paper-deep);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  cursor: pointer;
+  list-style: none;
+}
+
+.coverHistory > summary::-webkit-details-marker {
+  display: none;
+}
+
+.coverHistory > summary::after {
+  content: "+";
+  color: var(--v2-gold-bright);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.coverHistory[open] > summary::after {
+  content: "−";
+}
+
+.coverHistory > summary:focus-visible {
+  outline: 2px solid var(--v2-gold-bright);
+  outline-offset: -3px;
+}
+
+.coverHistoryFigure {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding: 14px;
+  border-top: 1px solid var(--v2-line);
+}
+
+.coverHistoryArt {
+  position: relative;
+  width: 80px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--v2-gold) 44%, var(--v2-line));
+  border-radius: 4px;
+  background: #080b10;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .38);
+}
+
+.coverHistoryImage {
+  object-fit: contain;
+}
+
+.coverHistoryFigure figcaption {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.coverHistoryFigure strong {
+  color: var(--v2-ink);
+  font-size: 13px;
+}
+
+.coverHistoryFigure span {
+  color: var(--v2-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
 .starterCopy > span,
 .bookShelfLabel {
   display: inline-block;
@@ -4524,8 +4615,12 @@
     padding: 28px;
   }
 
-  .bookHeroCover {
+  .bookHeroCoverColumn {
     width: min(100%, 340px);
+  }
+
+  .bookHeroCover {
+    width: 100%;
   }
 
   .bookHeroCopy {
@@ -4922,6 +5017,16 @@
 
   .bookActions > * {
     width: 100%;
+  }
+
+  .coverHistoryFigure {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .coverHistoryArt {
+    width: 64px;
   }
 
   .fiveCard {
