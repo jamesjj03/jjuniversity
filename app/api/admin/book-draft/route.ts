@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
-import { revalidatePath } from "next/cache";
+import { revalidateWorkshopBookCatalog } from "@/lib/adminBookCatalog";
 import { bookToCatalogRow, catalogRowToBook, createBookDraftInSupabase, readBookCatalogSnapshot } from "@/lib/bookCatalog";
 import { prepareBookContentForSave, textFromHtml, wordCount, type BookContent } from "@/lib/bookContent";
 import {
@@ -293,13 +293,7 @@ export async function POST(request: Request) {
         expectedRevision: supabaseSnapshot?.revision || null,
       });
       if (!supabaseDraft.saved) throw new Error(supabaseDraft.error || "Supabase did not create the draft book.");
-      revalidatePath("/books");
-      revalidatePath("/books/index");
-      revalidatePath("/books/[slug]", "page");
-      revalidatePath("/books/[slug]/[sectionSlug]", "page");
-      revalidatePath("/site-v2/books/[slug]", "page");
-      revalidatePath("/library");
-      revalidatePath("/sitemap.xml");
+      revalidateWorkshopBookCatalog();
       return versionedJson({
         saved: true,
         target: "supabase",
@@ -375,6 +369,8 @@ export async function POST(request: Request) {
       nextCatalogVersion = localBooks.version;
       savedTarget = "local";
     }
+
+    revalidateWorkshopBookCatalog();
 
     return versionedJson({
       saved: true,

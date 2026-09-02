@@ -46,7 +46,7 @@ const OVERVIEW_DRAFT_LABELS: Record<OverviewDraftField, string> = {
   series: "Series",
   description: "Description",
   tags: "Topics and tags",
-  status: "Publishing state",
+  status: "Edition eligibility",
   visibility: "Placement",
   archiveCategory: "Archive category",
   coverFile: "Cover file",
@@ -662,9 +662,9 @@ export default function BookOverviewEditor({
                 <input value={draft.tags} onChange={event => patch({ tags: event.target.value })} placeholder="History, Power, Biography" />
               </label>
               <label className={styles.field}>
-                Publishing state
+                Edition eligibility
                 <select value={draft.status} onChange={event => patch({ status: event.target.value })}>
-                  <option value="ready">Published</option>
+                  <option value="ready">Ready for next public edition</option>
                   <option value="coming-soon">Coming soon</option>
                   <option value="hidden">Hidden draft</option>
                   <option value="needs-review">Needs editorial review</option>
@@ -709,9 +709,12 @@ export default function BookOverviewEditor({
           </header>
           <div className={styles.statusCallout}>
             <strong>{dirty ? "Changes are only on this phone" : "Matches the loaded Workshop copy"}</strong>
-            <span>Saving details uses the exact loaded catalog version. A newer catalog will stop the save instead of being overwritten.</span>
+            <span>Saving details uses the exact loaded catalog version. It makes this book eligible for a future public edition; it does not publish immediately.</span>
           </div>
           <div className={styles.capabilityList}>
+            <GuardedAdminLink className={styles.secondaryButton} href={`/admin/books/${encodeURIComponent(book.id)}/publication`}>
+              Check publication status
+            </GuardedAdminLink>
             <GuardedAdminLink className={styles.secondaryButton} href={`/admin/organize?book=${encodeURIComponent(book.id)}`}>
               Organize this book
             </GuardedAdminLink>

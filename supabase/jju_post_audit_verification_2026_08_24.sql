@@ -10,6 +10,10 @@
 --   7. this file
 --
 -- Every returned row must have passed=true. This script performs no writes.
+--
+-- Since the 2026-09-02 static-publication cutover, public manuscript bodies
+-- are served from the site edition rather than book_content_live. The former
+-- anonymous SELECT policy and grants are intentionally absent.
 
 with
 public_functions as (
@@ -228,10 +232,11 @@ checks as (
     not has_table_privilege('authenticated', 'public.book_catalog', 'INSERT')
       and not has_table_privilege('authenticated', 'public.book_catalog', 'UPDATE')
       and not has_table_privilege('authenticated', 'public.book_catalog', 'DELETE')
-      and not has_table_privilege('authenticated', 'public.book_slug_aliases', 'INSERT')
-      and not has_table_privilege('authenticated', 'public.book_slug_aliases', 'UPDATE')
-      and not has_table_privilege('authenticated', 'public.book_slug_aliases', 'DELETE')
-      and not has_table_privilege('authenticated', 'public.book_content_live', 'INSERT')
+       and not has_table_privilege('authenticated', 'public.book_slug_aliases', 'INSERT')
+       and not has_table_privilege('authenticated', 'public.book_slug_aliases', 'UPDATE')
+       and not has_table_privilege('authenticated', 'public.book_slug_aliases', 'DELETE')
+       and not has_table_privilege('authenticated', 'public.book_content_live', 'SELECT')
+       and not has_table_privilege('authenticated', 'public.book_content_live', 'INSERT')
       and not has_table_privilege('authenticated', 'public.book_content_live', 'UPDATE')
       and not has_table_privilege('authenticated', 'public.book_content_live', 'DELETE')
       and not has_table_privilege('authenticated', 'public.book_content_versions', 'SELECT')
@@ -247,10 +252,9 @@ checks as (
           and convalidated
       )
       and (
-        select count(*) = 3
+        select count(*) = 2
           and count(*) filter (where policyname = 'book_catalog_public_read' and cmd = 'SELECT') = 1
           and count(*) filter (where policyname = 'book_slug_aliases_public_read' and cmd = 'SELECT') = 1
-          and count(*) filter (where policyname = 'book_content_live_public_read' and cmd = 'SELECT') = 1
         from pg_policies
         where schemaname = 'public'
           and tablename in ('book_catalog', 'book_slug_aliases', 'book_content_live', 'book_content_versions')

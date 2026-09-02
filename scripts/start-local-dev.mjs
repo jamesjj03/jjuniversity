@@ -1,4 +1,4 @@
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import path from "node:path";
 
 const forwarded = [];
@@ -23,6 +23,16 @@ for (let index = 0; index < args.length; index += 1) {
 }
 
 const nextBin = path.join(process.cwd(), "node_modules", "next", "dist", "bin", "next");
+const publicationBuilder = path.join(process.cwd(), "scripts", "build-publication-edition.mjs");
+const publication = spawnSync(process.execPath, [publicationBuilder], {
+  cwd: process.cwd(),
+  env: process.env,
+  stdio: "inherit",
+});
+
+if (publication.error) throw publication.error;
+if (publication.status !== 0) process.exit(publication.status ?? 1);
+
 const child = spawn(
   process.execPath,
   [nextBin, "dev", "--webpack", "--hostname", "127.0.0.1", ...forwarded],

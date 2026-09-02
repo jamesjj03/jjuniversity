@@ -1,5 +1,9 @@
 import { revalidatePath } from "next/cache";
-import { prepareBookContentForSave, saveLiveBookContentToSupabase, type BookContent } from "@/lib/bookContent";
+import {
+  prepareBookContentForSave,
+  saveLiveBookContentToSupabase,
+  type BookContent,
+} from "@/lib/bookContent";
 import {
   adminErrorResponse,
   assertAdminVersion,
@@ -9,8 +13,7 @@ import {
   writeLocalJson,
 } from "@/lib/adminVersionedJson";
 import { readAdminBookContent, versionAfterContentWrite } from "@/lib/adminBookContent";
-import { bookUrl, getPublicBooksLive, isPublishedReadableBook } from "@/lib/publishing";
-import { getBookSectionRoutes } from "@/lib/bookSectionRoutes";
+import { getBookById, isPublishedReadableBook } from "@/lib/publishing";
 
 type SaveBody = {
   sectionId?: string;
@@ -21,25 +24,14 @@ type SaveBody = {
   message?: string;
 };
 
-async function revalidateBookPages(bookId: string) {
+function revalidateWorkshopManuscript(bookId: string) {
   try {
-    revalidatePath("/books");
-    revalidatePath("/books/index");
-    revalidatePath("/books/[slug]", "page");
-    revalidatePath("/books/[slug]/[sectionSlug]", "page");
-    revalidatePath("/site-v2/books/[slug]", "page");
-    revalidatePath("/library");
-    revalidatePath("/sitemap.xml");
-    revalidatePath("/reader");
-
-    const book = (await getPublicBooksLive()).find(item => item.id === bookId);
-    if (!book) return;
-
-    revalidatePath(bookUrl(book));
-    const sectionRoutes = await getBookSectionRoutes(book);
-    sectionRoutes.forEach(route => revalidatePath(route.path));
+    revalidatePath("/admin");
+    revalidatePath("/admin/books");
+    revalidatePath(`/admin/books/${encodeURIComponent(bookId)}`);
+    revalidatePath(`/admin/books/${encodeURIComponent(bookId)}/publication`);
   } catch {
-    // Revalidation should never make a successful content save look failed.
+    // An editor refresh should never make a successful private save look failed.
   }
 }
 
@@ -102,12 +94,12 @@ export async function POST(
         throw new Error(supabaseSave.error || "Live manuscript storage became unavailable while saving. Reload before trying again.");
       }
       const nextVersion = `supabase:${Math.max(1, Number(supabaseSave.versionNumber || 1))}`;
-      await revalidateBookPages(nextBook.id);
+      revalidateWorkshopManuscript(nextBook.id);
       return versionedJson({
         saved: true,
         target: "supabase",
         versionNumber: supabaseSave.versionNumber,
-        note: `Saved live to Supabase${supabaseSave.versionNumber ? ` as version ${supabaseSave.versionNumber}` : ""}.`,
+        note: `Saved privately to Supabase${supabaseSave.versionNumber ? ` as version ${supabaseSave.versionNumber}` : ""}. It is not public until a reviewed edition is published.`,
         contentFile: fileName,
         contentPath: publicPath,
         ...nextBook,
@@ -115,13 +107,13 @@ export async function POST(
     }
 
     if (current.source === "github") {
-      const publishedBook = (await getPublicBooksLive()).find(item => item.id === nextBook.id);
+      const publishedBook = getBookById(nextBook.id);
       if (!publishedBook || !isPublishedReadableBook(publishedBook)) {
         throw new Error("Private manuscripts are never written to the public GitHub repository. Save through Supabase or locally instead.");
       }
       const github = await writeGithubJson(publicPath, content, message, current.writeVersion);
       if (!github) throw new Error("GitHub manuscript saving is not configured.");
-      await revalidateBookPages(nextBook.id);
+      revalidateWorkshopManuscript(nextBook.id);
       return versionedJson({
         saved: true,
         target: "github",
@@ -133,11 +125,11 @@ export async function POST(
     }
 
     const local = await writeLocalJson(absolutePath, content, current.writeVersion);
-    await revalidateBookPages(nextBook.id);
+    revalidateWorkshopManuscript(nextBook.id);
     return versionedJson({
       saved: true,
       target: "local",
-      note: "Saved locally. Add GitHub configuration before using this editor on a read-only deployment.",
+      note: "Saved locally as a private editorial change. It is not public until a reviewed edition is published.",
       contentFile: fileName,
       contentPath: publicPath,
       ...nextBook,

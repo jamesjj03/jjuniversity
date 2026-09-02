@@ -1,8 +1,8 @@
 import { readdir } from "fs/promises";
 import path from "path";
-import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { readBookCatalogSnapshot, saveBooksToSupabase } from "@/lib/bookCatalog";
+import { revalidateWorkshopBookCatalog } from "@/lib/adminBookCatalog";
 import { listLiveBookContentIds } from "@/lib/bookContent";
 import { readGithubJson, readLocalJson, writeGithubJson, writeLocalJson } from "@/lib/adminVersionedJson";
 
@@ -62,13 +62,7 @@ export async function POST() {
     if (source === "supabase") {
       const supabaseSave = await saveBooksToSupabase(updated, { expectedRevision: loaded.revision });
       if (!supabaseSave.saved) throw new Error(supabaseSave.error || "Supabase did not save availability.");
-      revalidatePath("/books");
-      revalidatePath("/books/index");
-      revalidatePath("/books/[slug]", "page");
-      revalidatePath("/books/[slug]/[sectionSlug]", "page");
-      revalidatePath("/site-v2/books/[slug]", "page");
-      revalidatePath("/library");
-      revalidatePath("/sitemap.xml");
+      revalidateWorkshopBookCatalog();
       return NextResponse.json({
         books: supabaseSave.books || updated,
         comingSoon,
@@ -81,6 +75,7 @@ export async function POST() {
     if (source === "github") {
       const github = await writeGithubJson("private/catalog/books.json", content, "Update JJU book availability", loaded.version);
       if (!github) throw new Error("GitHub availability saving is not configured.");
+      revalidateWorkshopBookCatalog();
       return NextResponse.json({
         books: updated,
         comingSoon,
@@ -92,6 +87,7 @@ export async function POST() {
     }
 
     await writeLocalJson(booksPath, content, loaded.version);
+    revalidateWorkshopBookCatalog();
 
     return NextResponse.json({
       books: updated,

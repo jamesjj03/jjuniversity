@@ -8,16 +8,34 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/admin/**": ["./private/catalog/books.json", "./private/book-content/**/*.json"],
     "/api/admin/topics": ["./private/catalog/books.json", "./private/catalog/topic-authority.json"],
-    "/api/books": ["./private/catalog/books.json"],
     "/api/admin/print-proof/*": ["./private/print-proof-previews/*.png"],
     "/api/admin/book-draft": ["./private/catalog/books.json", "./private/book-content/manifest.json"],
     "/api/admin/content/**": ["./private/book-content/**/*.json"],
     "/api/admin/epub/**": ["./private/book-content/**/*.json"],
-    "/api/book/**": ["./private/book-content/**/*.json"],
-    "/books/**": ["./private/book-content/**/*.json"],
+    "/admin/books/\\[id\\]/publication": [
+      "./public/_editions/current.json",
+      "./public/_editions/editions/*/manifest.json",
+      "./public/_editions/editions/*/books/**/*.json",
+    ],
     "/covers/**": ["./private/catalog/books.json"],
-    "/site-v2/books/**": ["./private/book-content/**/*.json"],
-    "/sitemap.xml": ["./private/book-content/**/*.json"],
+  },
+  async headers() {
+    return [
+      {
+        source: "/_editions/current.json",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+      {
+        source: "/_editions/editions/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+    ];
   },
   async rewrites() {
     return {

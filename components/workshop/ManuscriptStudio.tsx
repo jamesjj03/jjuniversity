@@ -1135,6 +1135,7 @@ export default function ManuscriptStudio({
 
   const publicHref = `/books/${encodeURIComponent(book.slug || book.id)}`;
   const detailsHref = `/admin/books/${encodeURIComponent(book.id)}/details?from=${encodeURIComponent(returnHref)}`;
+  const publicationHref = `/admin/books/${encodeURIComponent(book.id)}/publication?from=${encodeURIComponent(returnHref)}`;
 
   return (
     <div className={styles.studio}>
@@ -1164,6 +1165,7 @@ export default function ManuscriptStudio({
             setEditMode(value => !value);
           }}>{editMode ? "Read view" : "Keep editing"}</button>
           <GuardedAdminLink href={detailsHref}>Book details</GuardedAdminLink>
+          <GuardedAdminLink href={publicationHref}>Publication</GuardedAdminLink>
           <GuardedAdminLink href={publicHref}>Public page</GuardedAdminLink>
         </div>
       </header>

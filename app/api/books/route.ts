@@ -1,30 +1,15 @@
-import { readFile } from "fs/promises";
-import path from "path";
 import { NextResponse } from "next/server";
-import { readBooksFromSupabase } from "@/lib/bookCatalog";
-import { isPublicCatalogRecord } from "@/lib/publishing";
+import { getPublicBooksLive } from "@/lib/publishing";
 import { toPublicCatalogBook } from "@/lib/publicBookPayload";
-import { hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
+
+const PUBLIC_CATALOG_CACHE = "public, max-age=0, s-maxage=300, stale-while-revalidate=3600";
 
 export async function GET() {
   try {
-    if (hasSupabaseAdminConfig()) {
-      const supabaseBooks = await readBooksFromSupabase();
-      if (!supabaseBooks) throw new Error("The authoritative Supabase catalog is unavailable.");
-      return NextResponse.json(
-        { books: supabaseBooks.filter(isPublicCatalogRecord).map(toPublicCatalogBook), source: "supabase" },
-        { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600" } },
-      );
-    }
-
-    const booksPath = path.join(process.cwd(), "private", "catalog", "books.json");
-    const books = JSON.parse(await readFile(booksPath, "utf8"));
-    const publicBooks = (Array.isArray(books) ? books : books.books || [])
-      .filter(isPublicCatalogRecord)
-      .map(toPublicCatalogBook);
+    const books = await getPublicBooksLive();
     return NextResponse.json(
-      { books: publicBooks, source: "file" },
-      { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600" } },
+      { books: books.map(toPublicCatalogBook), source: "publication-catalog" },
+      { headers: { "Cache-Control": PUBLIC_CATALOG_CACHE, "X-Robots-Tag": "noindex, nofollow" } },
     );
   } catch {
     return NextResponse.json(

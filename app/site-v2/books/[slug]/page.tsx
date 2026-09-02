@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import SiteV2Cover from "@/components/site-v2/SiteV2Cover";
 import SiteV2CoverHistory from "@/components/site-v2/SiteV2CoverHistory";
@@ -14,6 +14,7 @@ import {
   coverUrl,
   getBookBySlugLive,
   getCollectionsLive,
+  getPublicBooksLive,
   getPrintProductsForBook,
   getRelatedBooksLive,
   slugify,
@@ -29,6 +30,20 @@ import { bookJsonLd, breadcrumbJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const books = await getPublicBooksLive();
+  const params = new Map<string, { slug: string }>();
+  for (const book of books) {
+    for (const slug of [book.slug, ...book.slugAliases].map(slugify).filter(Boolean)) {
+      params.set(slug, { slug });
+    }
+  }
+  return [...params.values()];
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -51,6 +66,7 @@ export default async function SiteV2BookPage({ params }: Props) {
   const { slug } = await params;
   const book = await getBookBySlugLive(slug);
   if (!book) notFound();
+  if (slugify(slug) !== book.slug) permanentRedirect(bookUrl(book));
 
   const [sectionIndex, related, allSeries, audioEdition] = await Promise.all([
     getBookSectionIndex(book),

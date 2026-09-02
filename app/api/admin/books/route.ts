@@ -5,7 +5,7 @@ import {
 } from "@/lib/adminVersionedJson";
 import {
   readAdminBookCatalog,
-  revalidateAdminBookCatalog,
+  revalidateWorkshopBookCatalog,
   saveAdminBookCatalog,
 } from "@/lib/adminBookCatalog";
 
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => ({})) as SaveBody;
     const message = body.message || `Update JJU library metadata (${new Date().toISOString().slice(0, 10)})`;
     const saved = await saveAdminBookCatalog(body.books, expectedVersion, message);
-    revalidateAdminBookCatalog();
+    revalidateWorkshopBookCatalog();
     return versionedJson({
       saved: true,
       target: saved.target,

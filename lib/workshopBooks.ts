@@ -70,7 +70,7 @@ export function normalizeWorkshopBook(value: unknown): WorkshopBook {
 }
 
 export function workshopBookPublicState(book: WorkshopBook) {
-  if (book.status === "ready") return book.visibility === "archive" ? "Visible in Archive" : "Visible in Main Library";
+  if (book.status === "ready") return book.visibility === "archive" ? "Ready for the next Archive edition" : "Ready for the next Main Library edition";
   if (book.status === "coming-soon") return book.visibility === "archive" ? "Coming soon in Archive" : "Coming soon in Main Library";
   if (book.status === "needs-review") return "Hidden pending review";
   if (book.status === "unavailable") return "Unavailable on the public site";
@@ -79,7 +79,7 @@ export function workshopBookPublicState(book: WorkshopBook) {
 
 export function workshopBookStatusLabel(status: string) {
   switch (status) {
-    case "ready": return "Published";
+    case "ready": return "Ready to publish";
     case "coming-soon": return "Coming soon";
     case "needs-review": return "Needs review";
     case "unavailable": return "Unavailable";

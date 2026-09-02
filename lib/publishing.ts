@@ -1,13 +1,10 @@
 import "server-only";
 
-import { readBookContent, readFileBookContent, type BookContentSection } from "@/lib/bookContent";
 import { PRIMARY_CATEGORIES } from "@/lib/taxonomy";
 import rawBooks from "@/private/catalog/books.json";
 import rawManifest from "@/private/book-content/manifest.json";
 import rawPaths from "@/public/paths.json";
 import rawPrintProducts from "@/public/print-products.json";
-import { readBooksFromSupabase } from "@/lib/bookCatalog";
-import { hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
 import { canonicalBookId, LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
 
 export { LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
@@ -227,23 +224,15 @@ export function getPublicBooks() {
   return books.filter(book => isPublicBook(book));
 }
 
-async function getBooksSource() {
-  if (!hasSupabaseAdminConfig()) return rawBooks as RawBook[];
-
-  const supabaseBooks = await readBooksFromSupabase();
-  if (!supabaseBooks) {
-    throw new Error("The authoritative Supabase catalog is unavailable; refusing to fall back to a stale publication snapshot.");
-  }
-  return supabaseBooks as RawBook[];
-}
-
 export async function getAllBooksLive() {
-  const source = await getBooksSource();
-  return source.map(normalizeBook).filter(book => book.id);
+  // The public edition compiler validates this catalog before every build.
+  // Keep catalog-only routes independent from the large section artifact tree;
+  // they do not need a manuscript body to render a shelf or a search result.
+  return [...books];
 }
 
 export async function getPublicBooksLive() {
-  return (await getAllBooksLive()).filter(book => isPublicBook(book));
+  return getPublicBooks();
 }
 
 export function getAllTags() {
@@ -598,37 +587,13 @@ export function printPriceLabel(product: PrintProduct) {
 }
 
 export async function getBookSample(book: PublishedBook, options: { preferFile?: boolean } = {}) {
-  if (book.status !== "ready") {
-    return {
-      toc: [],
-      chapterCount: book.chapterCount,
-      excerpt: cleanExcerpt(book.description),
-      contentWordCount: book.wordCount,
-    };
-  }
-
-  try {
-    const resolved = await (options.preferFile ? readFileBookContent(book.id) : readBookContent(book.id));
-    const sections = resolved.book.sections;
-    const contentSections = sections.filter(isContentSection);
-    const chapterSections = sections.filter(isChapterSection);
-    const excerptSource = contentSections.find(section => section.text && section.text.length > 300)
-      || sections.find(section => section.text && section.text.length > 300);
-
-    return {
-      toc: chapterSections.map(section => section.title).filter(Boolean),
-      chapterCount: chapterSections.length || book.chapterCount,
-      excerpt: cleanExcerpt(excerptSource?.text || book.description),
-      contentWordCount: resolved.book.wordCount || book.wordCount,
-    };
-  } catch {
-    return {
-      toc: [],
-      chapterCount: book.chapterCount,
-      excerpt: cleanExcerpt(book.description),
-      contentWordCount: book.wordCount,
-    };
-  }
+  void options;
+  return {
+    toc: [],
+    chapterCount: book.chapterCount,
+    excerpt: cleanExcerpt(book.description),
+    contentWordCount: book.wordCount,
+  };
 }
 
 export function metadataDescription(text: string, fallback = "Read this free JJ University book online.") {
@@ -728,18 +693,6 @@ export function isPublicCatalogRecord(book: { id?: string | null; status?: strin
 export function isPublishedReadableBook(book: { id?: string | null; status?: string | null; visibility?: string | null }) {
   return isPublicCatalogRecord(book)
     && String(book.status || "").trim().toLowerCase() === "ready";
-}
-
-function isContentSection(section: BookContentSection) {
-  const title = section.title.toLowerCase();
-  const kind = String(section.kind || "").toLowerCase();
-  if (kind === "toc" || kind === "dedication") return false;
-  if (/copyright|acknowledg|about the author|contents/.test(title)) return false;
-  return Boolean(section.text && section.text.length > 120);
-}
-
-function isChapterSection(section: BookContentSection) {
-  return /^chapter\b/i.test(String(section.title || "").trim());
 }
 
 function cleanExcerpt(text: string) {

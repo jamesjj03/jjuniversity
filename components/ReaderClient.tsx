@@ -36,6 +36,8 @@ type BookContent = {
   title?: string;
   creator?: string;
   description?: string;
+  readerSubtitle?: string;
+  editionId?: string;
   sections?: Section[];
   error?: string;
 };
@@ -46,15 +48,56 @@ type BookMeta = {
   coverFile?: string;
 };
 
+type PublishedEditionPointer = {
+  editionId?: string;
+  manifestPath?: string;
+};
+
+type PublishedEditionManifest = {
+  editionId?: string;
+  catalog?: BookMeta[];
+  books?: Array<{ id?: string; indexPath?: string }>;
+};
+
+type PublishedBookIndex = {
+  editionId?: string;
+  book?: Omit<BookContent, "editionId" | "sections">;
+  sections?: Section[];
+};
+
 type Section = {
   id: string;
   index: number;
   title: string;
   kind?: string;
-  html: string;
+  html?: string;
   text?: string;
   wordCount?: number;
+  readerKind?: string;
+  tableOfContents?: boolean;
+  contentHash?: string;
+  artifactPath?: string;
 };
+
+function publicEditionAssetUrl(relativePath: string) {
+  const segments = String(relativePath || "")
+    .replace(/\\/g, "/")
+    .replace(/^\/+/, "")
+    .split("/")
+    .filter(Boolean);
+  if (!segments.length || segments.some(segment => segment === "." || segment === "..")) {
+    throw new Error("The published edition asset path is invalid.");
+  }
+  return `/_editions/${segments.map(segment => encodeURIComponent(segment)).join("/")}`;
+}
+
+function editionAssetUrl(editionId: string, relativePath: string) {
+  const cleanEditionId = String(editionId || "").trim();
+  if (!/^edition-[a-f0-9]{12,}$/i.test(cleanEditionId)) {
+    throw new Error("The published edition identity is invalid.");
+  }
+  return publicEditionAssetUrl(`editions/${cleanEditionId}/${relativePath}`);
+}
 
 type BookAuditSource = {
   url: string;
@@ -363,7 +406,7 @@ function safeKind(kind: string | undefined) {
   return String(kind || "default").toLowerCase().replace(/[^a-z0-9_-]+/g, "-") || "default";
 }
 
-function plainText(html: string) {
+function plainText(html = "") {
   return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
 
@@ -390,18 +433,20 @@ function titleSubtitle(section: Section | undefined, bookTitle: string) {
 }
 
 function isTableOfContentsSection(section: Section) {
+  if (section.tableOfContents) return true;
   const rawKind = safeKind(section.kind);
   const title = section.title.trim().toLowerCase();
   if (/^chapter\b/i.test(section.title)) return false;
   if (title === "contents" || title === "table of contents") return true;
-  if (/<nav\b[^>]*(?:epub:type=["']toc["']|id=["']toc["'])/i.test(section.html)) return true;
+  if (section.html && /<nav\b[^>]*(?:epub:type=["']toc["']|id=["']toc["'])/i.test(section.html)) return true;
   return rawKind === "toc";
 }
 
 function inferSectionKind(section: Section, visibleIndex: number, bookTitle: string) {
+  if (section.readerKind) return section.readerKind;
   const rawKind = safeKind(section.kind);
   const title = section.title.trim().toLowerCase();
-  const text = plainText(section.html).toLowerCase();
+  const text = plainText(section.html || "").toLowerCase();
   const normalizedBookTitle = bookTitle.trim().toLowerCase();
 
   if (isTableOfContentsSection(section)) return "toc";
@@ -614,7 +659,6 @@ export default function ReaderClient({
   libraryHref = "/library",
   libraryLabel = "Library",
   autoOpenDesktopPanels = true,
-  contentSource = "live",
   embedded = false,
   variant = "default",
 }: {
@@ -637,6 +681,7 @@ export default function ReaderClient({
   const pendingQuoteSelectionRef = useRef<PendingQuoteSelection | null>(null);
   const pageScrollIntentRef = useRef<"none" | "top" | "smart">("none");
   const restartRequestedRef = useRef(false);
+  const publicationRefreshAttemptRef = useRef("");
   const cloudHydrationRetryRef = useRef(0);
   const pendingCompletionCloudSyncRef = useRef(false);
   const completionMarkedAtSecondRef = useRef<number | null>(null);
@@ -663,6 +708,7 @@ export default function ReaderClient({
   const [status, setStatus] = useState("Loading book content...");
   const [error, setError] = useState("");
   const [sections, setSections] = useState<Section[]>([]);
+  const [editionId, setEditionId] = useState("");
   const [audit, setAudit] = useState<BookAuditSummary | null>(null);
   const [sectionIndex, setSectionIndex] = useState(0);
   const [preferences, setPreferences] = useState<PreferencesV2>({ ...DEFAULT_PREFERENCES_V2 });
@@ -898,6 +944,7 @@ export default function ReaderClient({
     visitedSectionIndexesRef.current.add(nextIndex);
     pendingQuoteSelectionRef.current = null;
     setPendingQuoteText("");
+    setError("");
     pageScrollIntentRef.current = scrollIntent;
     setSectionIndex(nextIndex);
     if (bookId && preferences.saveProgress !== false) {
@@ -1093,20 +1140,45 @@ export default function ReaderClient({
         setTitle("No book selected");
         setStatus("Open a book from the library.");
         setSections([]);
+        setEditionId("");
         return;
       }
 
-      const bookListPromise = contentSource === "live"
-        ? fetch("/api/books", { cache: "no-store" })
-          .then(response => response.json())
-          .catch(() => [])
-        : null;
-      const sourceQuery = contentSource === "file" ? "?source=file" : "";
-      const item = await fetch(`/api/book/${encodeURIComponent(id)}${sourceQuery}`, { cache: "no-store" }).then(async response => {
+      const pointer = await fetch("/_editions/current.json", { cache: "no-store" }).then(async response => {
         const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.error || "Book content unavailable.");
-        return data as BookContent;
+        if (!response.ok) throw new Error("The current public edition could not be loaded.");
+        return data as PublishedEditionPointer;
       });
+      const currentEditionId = String(pointer.editionId || "").trim();
+      const manifestPath = String(pointer.manifestPath || "").trim();
+      const manifest = await fetch(publicEditionAssetUrl(manifestPath)).then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error("The public edition manifest could not be loaded.");
+        return data as PublishedEditionManifest;
+      });
+      if (manifest.editionId !== currentEditionId) {
+        throw new Error("The public edition manifest does not match its current pointer.");
+      }
+
+      const canonicalRequestedId = canonicalBookId(id);
+      const publishedBook = (manifest.books || []).find(book => (
+        canonicalBookId(String(book.id || "")) === canonicalRequestedId
+      ));
+      if (!publishedBook?.indexPath) throw new Error(`Book content unavailable for "${id}".`);
+      const index = await fetch(editionAssetUrl(currentEditionId, publishedBook.indexPath)).then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error("The published book index could not be loaded.");
+        return data as PublishedBookIndex;
+      });
+      if (index.editionId !== currentEditionId || !index.book?.id) {
+        throw new Error("The published book index does not match its edition.");
+      }
+      const item: BookContent = {
+        ...index.book,
+        id: index.book.id,
+        editionId: currentEditionId,
+        sections: index.sections || [],
+      };
 
       const nextSections = [...(item.sections || [])].sort((a, b) => Number(a.index || 0) - Number(b.index || 0));
       const bodySections = nextSections.filter(nextSection => !isTableOfContentsSection(nextSection));
@@ -1118,10 +1190,12 @@ export default function ReaderClient({
       const rememberPlace = readPreferencesV2().saveProgress;
       setBookId(canonicalId);
       setBookCoverSrc(coverWebpSrc({ id: canonicalId }, canonicalId));
-      setSubtitle(titleSubtitle(bodySections[0] || nextSections[0], item.title || canonicalId));
+      setSubtitle(item.readerSubtitle || titleSubtitle(bodySections[0] || nextSections[0], item.title || canonicalId));
       setActualSeconds(rememberPlace ? readActualSeconds(canonicalId) : 0);
       setTitle(item.title || canonicalId);
       setCreator(item.creator || "");
+      setEditionId(item.editionId || "");
+      publicationRefreshAttemptRef.current = "";
       setSections(nextSections);
       pendingQuoteSelectionRef.current = null;
       setPendingQuoteText("");
@@ -1133,19 +1207,18 @@ export default function ReaderClient({
         .then(data => setAudit(data as BookAuditSummary | null))
         .catch(() => setAudit(null));
 
-      void bookListPromise?.then(bookList => {
-        const books = Array.isArray(bookList) ? bookList : bookList?.books || [];
-        const meta = books.find((book: BookMeta) => String(book.id || "").toLowerCase() === canonicalId.toLowerCase())
-          || books.find((book: BookMeta) => String(book.id || "").toLowerCase() === id.toLowerCase())
-          || { id: canonicalId };
-        setBookCoverSrc(coverWebpSrc(meta, canonicalId));
-      });
+      const catalog = manifest.catalog || [];
+      const meta = catalog.find(book => canonicalBookId(String(book.id || "")) === canonicalId)
+        || catalog.find(book => canonicalBookId(String(book.id || "")) === canonicalRequestedId)
+        || { id: canonicalId };
+      setBookCoverSrc(coverWebpSrc(meta, canonicalId));
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Book content unavailable.");
       setStatus("Unavailable");
       setSections([]);
+      setEditionId("");
     }
-  }, [bookQuery, contentSource]);
+  }, [bookQuery]);
 
   useEffect(() => {
     if (!autoOpenDesktopPanels) return;
@@ -1295,6 +1368,55 @@ export default function ReaderClient({
 
     return () => window.clearTimeout(timeout);
   }, [load]);
+
+  useEffect(() => {
+    if (!bookId || !editionId || !section) {
+      return;
+    }
+    if (typeof section.html === "string") {
+      return;
+    }
+    if (!section.artifactPath) {
+      return;
+    }
+
+    const controller = new AbortController();
+    const currentSectionId = section.id;
+    const sectionUrl = editionAssetUrl(editionId, section.artifactPath);
+
+    async function loadPublishedSection() {
+      const response = await fetch(sectionUrl, { signal: controller.signal });
+      const payload = await response.json().catch(() => ({})) as { error?: string; section?: Section };
+      if (!response.ok || !payload.section) throw new Error(payload.error || "This published section could not be loaded.");
+      if (controller.signal.aborted) return;
+      setSections(current => current.map(item => item.id === currentSectionId ? { ...item, ...payload.section } : item));
+
+      const following = visibleSections[sectionIndex + 1];
+      if (!following?.artifactPath || typeof following.html === "string") return;
+      const nextUrl = editionAssetUrl(editionId, following.artifactPath);
+      void fetch(nextUrl)
+        .then(async nextResponse => {
+          const nextPayload = await nextResponse.json().catch(() => ({})) as { section?: Section };
+          if (!nextResponse.ok || !nextPayload.section || controller.signal.aborted) return;
+          setSections(current => current.map(item => item.id === following.id ? { ...item, ...nextPayload.section } : item));
+        })
+        .catch(() => undefined);
+    }
+
+    void loadPublishedSection()
+      .catch(error => {
+        if (controller.signal.aborted) return;
+        const refreshKey = `${editionId}:${currentSectionId}`;
+        if (publicationRefreshAttemptRef.current !== refreshKey) {
+          publicationRefreshAttemptRef.current = refreshKey;
+          void load();
+          return;
+        }
+        setError(error instanceof Error ? error.message : "This published section could not be loaded.");
+      });
+
+    return () => controller.abort();
+  }, [bookId, editionId, load, section, sectionIndex, visibleSections]);
 
   useEffect(() => {
     function handlePreferences() {
@@ -1732,12 +1854,21 @@ export default function ReaderClient({
     };
   }, [bookId, cloudSyncAttempt, cloudSyncReady, queueReaderMemoryCloudTask, userId, visibleSections]);
 
-  const cleanedHtml = section ? sanitizeReaderHtml(cleanSectionHtml(section.html)) : "";
-  const sectionAuditReceipts = section && audit?.status === "verified"
+  const sectionReady = Boolean(section && typeof section.html === "string");
+  const sectionArtifactMissing = Boolean(section && !sectionReady && !section.artifactPath);
+  const sectionLoading = Boolean(section && !sectionReady && !error);
+  const cleanedHtml = sectionReady ? sanitizeReaderHtml(cleanSectionHtml(section?.html || "")) : "";
+  const sectionAuditReceipts = sectionReady && section && audit?.status === "verified"
     ? audit.receipts.filter(receipt => receipt.sectionId === section.id)
     : [];
-  const renderedHtml = displayKind === "title" && bookCoverSrc ? titleCoverHtml(title, subtitle, bookCoverSrc) : cleanedHtml;
-  const showHeader = section && !["title", "dedication"].includes(displayKind) ? !htmlHasOwnHeading(cleanedHtml, displayKind) : false;
+  const renderedHtml = !sectionReady
+    ? `<p class="readerLoadingPage" role="status">${sectionArtifactMissing ? "This published page is unavailable." : sectionLoading ? "Loading this page…" : "Preparing this page…"}</p>`
+    : displayKind === "title" && bookCoverSrc
+      ? titleCoverHtml(title, subtitle, bookCoverSrc)
+      : cleanedHtml;
+  const showHeader = sectionReady && section && !["title", "dedication"].includes(displayKind)
+    ? !htmlHasOwnHeading(cleanedHtml, displayKind)
+    : false;
   const srcDoc = section
     ? `<!doctype html>
       <html>

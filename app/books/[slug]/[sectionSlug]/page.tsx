@@ -7,8 +7,10 @@ import {
   coverUrl,
   getBookBySlugLive,
   metadataDescription,
+  slugify,
 } from "@/lib/publishing";
 import {
+  getAllBookSectionRoutes,
   getBookSectionRoute,
   getBookSectionRoutes,
   normalizeBookSectionSlug,
@@ -21,10 +23,28 @@ type Props = {
   params: Promise<{ slug: string; sectionSlug: string }>;
 };
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
-export function generateStaticParams() {
-  return [];
+export async function generateStaticParams() {
+  const routes = await getAllBookSectionRoutes();
+  const params = new Map<string, { slug: string; sectionSlug: string }>();
+
+  for (const route of routes) {
+    const bookSlugs = [route.book.slug, ...route.book.slugAliases]
+      .map(slugify)
+      .filter(Boolean);
+    const sectionSlugs = [route.sectionSlug, route.legacySectionSlug]
+      .map(normalizeBookSectionSlug)
+      .filter(Boolean);
+    for (const slug of bookSlugs) {
+      for (const sectionSlug of sectionSlugs) {
+        params.set(`${slug}/${sectionSlug}`, { slug, sectionSlug });
+      }
+    }
+  }
+
+  return [...params.values()];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -52,7 +72,9 @@ export default async function BookSectionPage({ params }: Props) {
 
   const route = await getBookSectionRoute(book, sectionSlug);
   if (!route) notFound();
-  if (normalizeBookSectionSlug(sectionSlug) !== route.sectionSlug) permanentRedirect(route.path);
+  if (slugify(slug) !== book.slug || normalizeBookSectionSlug(sectionSlug) !== route.sectionSlug) {
+    permanentRedirect(route.path);
+  }
 
   const routes = await getBookSectionRoutes(book);
   const previous = routes[route.index - 1];

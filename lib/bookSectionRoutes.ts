@@ -1,5 +1,5 @@
-import { cache } from "react";
-import { readBookContent, type BookContentSection } from "@/lib/bookContent";
+import type { BookContentSection } from "@/lib/bookContent";
+import { readPublicationBookIndex, readPublicationSection, type PublicationSectionSummary } from "@/lib/publicationEdition";
 import {
   bookUrl,
   getPublicBooksLive,
@@ -7,9 +7,6 @@ import {
   slugify,
   type PublishedBook,
 } from "@/lib/publishing";
-
-const MIN_CRAWLABLE_WORDS = 80;
-const readBookContentForIndex = cache(readBookContent);
 
 export type CrawlableBookSection = {
   book: PublishedBook;
@@ -31,57 +28,36 @@ export type BookSectionIndex = {
   available: boolean;
 };
 
-export async function getBookSectionIndex(book: PublishedBook): Promise<BookSectionIndex> {
+export async function getBookSectionIndex(
+  book: PublishedBook,
+): Promise<BookSectionIndex> {
   if (!isPublishedReadableBook(book)) return { routes: [], extras: [], available: false };
 
   try {
-    const resolved = await readBookContentForIndex(book.id);
-    const crawlable = resolved.book.sections.filter(isCrawlableSection);
-    const extras = resolved.book.sections.filter(section => (
-      !isCrawlableSection(section)
-      && !isStructuralDuplicate(section)
-      && hasIndexableText(section)
-    ));
-    const usedTitles = new Map<string, number>();
-    const usedIdentities = new Map<string, number>();
-    const lastModified = validTimestamp(resolved.book.generatedAt);
-
-    const routes = crawlable.map((section, index) => {
-      const titleSlug = slugify(section.title || section.id || `section-${index + 1}`) || `section-${index + 1}`;
-      const titleCount = usedTitles.get(titleSlug) || 0;
-      usedTitles.set(titleSlug, titleCount + 1);
-      const legacySectionSlug = titleCount ? `${titleSlug}-${titleCount + 1}` : titleSlug;
-      const identityBase = slugify(section.id || `section-${index + 1}`) || `section-${index + 1}`;
-      const identityCount = usedIdentities.get(identityBase) || 0;
-      usedIdentities.set(identityBase, identityCount + 1);
-      const identitySlug = identityCount ? `${identityBase}-${identityCount + 1}` : identityBase;
-      const sectionSlug = `${titleSlug}--${identitySlug}`;
-
-      return {
-        book,
-        section,
-        sectionSlug,
-        identitySlug,
-        legacySectionSlug,
-        title: section.title || `Section ${index + 1}`,
-        path: `${bookUrl(book)}/${sectionSlug}`,
-        index,
-        total: crawlable.length,
-        lastModified,
-      };
-    });
-
-    return { routes, extras, lastModified, available: true };
+    const published = await readPublicationBookIndex(book.id);
+    const lastModified = validTimestamp(published.book.generatedAt);
+    return {
+      routes: published.sections
+        .filter(section => section.crawlable)
+        .map(section => routeFromPublishedSummary(book, section, lastModified)),
+      extras: published.extras,
+      lastModified,
+      available: true,
+    };
   } catch {
     return { routes: [], extras: [], available: false };
   }
 }
 
-export async function getBookSectionRoutes(book: PublishedBook): Promise<CrawlableBookSection[]> {
+export async function getBookSectionRoutes(
+  book: PublishedBook,
+): Promise<CrawlableBookSection[]> {
   return (await getBookSectionIndex(book)).routes;
 }
 
-export async function getAllBookSectionRoutes(books?: PublishedBook[]) {
+export async function getAllBookSectionRoutes(
+  books?: PublishedBook[],
+) {
   const availableBooks = books ?? await getPublicBooksLive();
   const readableBooks = availableBooks.filter(isPublishedReadableBook);
   const routes: CrawlableBookSection[] = [];
@@ -104,14 +80,53 @@ export async function getAllBookSectionRoutes(books?: PublishedBook[]) {
   return routes;
 }
 
-export async function getBookSectionRoute(book: PublishedBook, sectionSlug: string) {
+export async function getBookSectionRoute(
+  book: PublishedBook,
+  sectionSlug: string,
+) {
   const clean = normalizeBookSectionSlug(sectionSlug);
   const routes = await getBookSectionRoutes(book);
   const direct = routes.find(route => route.sectionSlug === clean || route.legacySectionSlug === slugify(clean));
-  if (direct) return direct;
-
   const identitySlug = clean.includes("--") ? clean.slice(clean.lastIndexOf("--") + 2) : "";
-  return identitySlug ? routes.find(route => route.identitySlug === identitySlug) : undefined;
+  const found = direct || (identitySlug ? routes.find(route => route.identitySlug === identitySlug) : undefined);
+  if (!found) return undefined;
+
+  try {
+    const published = await readPublicationSection(book.id, found.section.id);
+    return {
+      ...found,
+      section: published.section,
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+function routeFromPublishedSummary(
+  book: PublishedBook,
+  section: PublicationSectionSummary,
+  lastModified?: string,
+): CrawlableBookSection {
+  return {
+    book,
+    section: {
+      id: section.id,
+      index: section.index,
+      title: section.title,
+      kind: section.kind,
+      html: "",
+      text: section.excerpt,
+      wordCount: section.wordCount,
+    },
+    sectionSlug: section.sectionSlug,
+    identitySlug: section.identitySlug,
+    legacySectionSlug: section.legacySectionSlug,
+    title: section.title,
+    path: section.path || `${bookUrl(book)}/${section.sectionSlug}`,
+    index: section.routeIndex,
+    total: section.routeTotal,
+    lastModified,
+  };
 }
 
 export function normalizeBookSectionSlug(value: string) {
@@ -128,16 +143,10 @@ export function normalizeBookSectionSlug(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-export function sectionExcerpt(section: BookContentSection, maxLength = 155) {
+export function sectionExcerpt(section: { text?: string }, maxLength = 155) {
   const text = String(section.text || "").replace(/\s+/g, " ").trim();
   if (text.length <= maxLength) return text;
   return `${text.slice(0, maxLength - 3).replace(/\s+\S*$/, "")}...`;
-}
-
-function isCrawlableSection(section: BookContentSection) {
-  if (isStructuralDuplicate(section) || isEditionNote(section)) return false;
-  return Number(section.wordCount || 0) >= MIN_CRAWLABLE_WORDS
-    || String(section.text || "").trim().length > 420;
 }
 
 export function sanitizePublicSectionHtml(value: string) {
@@ -163,22 +172,6 @@ export function sectionHtmlHasMatchingHeading(html: string, title: string) {
     return heading === normalizedTitle;
   }
   return false;
-}
-
-function isStructuralDuplicate(section: BookContentSection) {
-  const kind = String(section.kind || "").trim().toLowerCase();
-  const title = String(section.title || "").trim().toLowerCase();
-  if (/^(table of )?contents?$/.test(title)) return true;
-  return kind === "title" && Number(section.wordCount || 0) <= 40;
-}
-
-function isEditionNote(section: BookContentSection) {
-  const title = String(section.title || "").trim().toLowerCase();
-  return /^(?:copyright(?:\s*(?:&|and|\/)\s*disclaimers?)?|disclaimers?|acknowledg(?:e)?ments?|about (?:the )?author|dedications?)(?:$|\s|[:—–-])/.test(title);
-}
-
-function hasIndexableText(section: BookContentSection) {
-  return Boolean(String(section.text || "").trim());
 }
 
 function validTimestamp(value: string | undefined) {

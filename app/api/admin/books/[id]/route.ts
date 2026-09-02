@@ -5,7 +5,7 @@ import {
 } from "@/lib/adminVersionedJson";
 import {
   readAdminBookCatalog,
-  revalidateAdminBookCatalog,
+  revalidateWorkshopBookCatalog,
   saveAdminBookCatalog,
 } from "@/lib/adminBookCatalog";
 import {
@@ -135,7 +135,7 @@ export async function PATCH(
     );
     const savedBook = findBook(saved.books, id);
     if (!savedBook) throw new Error("The catalog saved without the edited book. Reload before continuing.");
-    revalidateAdminBookCatalog(id);
+    revalidateWorkshopBookCatalog(id);
 
     return versionedJson({
       saved: true,

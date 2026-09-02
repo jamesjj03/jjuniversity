@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl, SITE_URL } from "@/lib/publishing";
 
 export default function robots(): MetadataRoute.Robots {
-  const privatePaths = ["/admin", "/api", "/fiber-qr"];
+  const privatePaths = ["/admin", "/api", "/fiber-qr", "/_editions/"];
 
   return {
     rules: [

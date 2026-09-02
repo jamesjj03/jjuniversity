@@ -12,7 +12,7 @@ import {
 } from "@/lib/publishing";
 import { getAllBookSectionRoutes } from "@/lib/bookSectionRoutes";
 
-export const revalidate = 600;
+export const dynamic = "force-static";
 
 function validDate(value: string | undefined) {
   const timestamp = Date.parse(String(value || ""));

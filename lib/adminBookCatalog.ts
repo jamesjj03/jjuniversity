@@ -3,7 +3,10 @@ import "server-only";
 import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import { revalidatePath } from "next/cache";
-import { readBookCatalogSnapshot, saveBooksToSupabase } from "@/lib/bookCatalog";
+import {
+  readBookCatalogSnapshot,
+  saveBooksToSupabase,
+} from "@/lib/bookCatalog";
 import {
   assertAdminVersion,
   readGithubJson,
@@ -195,14 +198,13 @@ export async function saveAdminBookCatalog(
   };
 }
 
-export function revalidateAdminBookCatalog(bookId?: string) {
-  revalidatePath("/");
-  revalidatePath("/books");
-  revalidatePath("/books/index");
-  revalidatePath("/books/[slug]", "page");
-  revalidatePath("/books/[slug]/[sectionSlug]", "page");
-  revalidatePath("/site-v2/books/[slug]", "page");
-  revalidatePath("/library");
-  revalidatePath("/sitemap.xml");
-  if (bookId) revalidatePath(`/books/${bookId}`);
+export function revalidateWorkshopBookCatalog(bookId?: string) {
+  // A Workshop save changes the private editorial source, not the public
+  // edition. Public pages and the sitemap move only with a reviewed edition
+  // build and deployment.
+  revalidatePath("/admin");
+  revalidatePath("/admin/books");
+  revalidatePath("/admin/books/[id]", "page");
+  revalidatePath("/admin/books/[id]/publication", "page");
+  if (bookId) revalidatePath(`/admin/books/${encodeURIComponent(bookId)}`);
 }

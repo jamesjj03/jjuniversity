@@ -1,7 +1,7 @@
 import path from "path";
-import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { readBookCatalogSnapshot, saveBooksToSupabase } from "@/lib/bookCatalog";
+import { revalidateWorkshopBookCatalog } from "@/lib/adminBookCatalog";
 import { readAdminBookContent } from "@/lib/adminBookContent";
 import { readGithubJson, readLocalJson, writeGithubJson, writeLocalJson } from "@/lib/adminVersionedJson";
 
@@ -69,21 +69,17 @@ export async function POST(request: Request) {
       if (source === "supabase") {
         const supabaseSave = await saveBooksToSupabase(books as unknown as Array<Record<string, unknown>>, { expectedRevision: loaded.revision });
         if (!supabaseSave.saved) throw new Error(supabaseSave.error || "Supabase did not save the title updates.");
-        revalidatePath("/books");
-        revalidatePath("/books/index");
-        revalidatePath("/books/[slug]", "page");
-        revalidatePath("/books/[slug]/[sectionSlug]", "page");
-        revalidatePath("/site-v2/books/[slug]", "page");
-        revalidatePath("/library");
-        revalidatePath("/sitemap.xml");
+        revalidateWorkshopBookCatalog();
         target = "supabase";
       } else if (source === "github") {
         const github = await writeGithubJson("private/catalog/books.json", content, "Update JJU titles from manuscript content", loaded.version);
         if (!github) throw new Error("GitHub title saving is not configured.");
+        revalidateWorkshopBookCatalog();
         target = "github";
       } else {
         const booksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "private", "catalog", "books.json");
         await writeLocalJson(booksPath, content, loaded.version);
+        revalidateWorkshopBookCatalog();
         target = "file";
       }
     }

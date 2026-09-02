@@ -5,8 +5,6 @@ import { absoluteUrl, bookUrl, getPublicBooksLive } from "@/lib/publishing";
 import { jsonLd, pageMetadata } from "@/lib/seo";
 import styles from "./BookIndex.module.css";
 
-export const revalidate = 600;
-
 export const metadata: Metadata = pageMetadata({
   title: "Complete Book Index",
   description: "An A-Z index of every public JJ University book, with direct links to each book and its readable sections.",
