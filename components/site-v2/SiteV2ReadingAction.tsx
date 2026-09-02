@@ -34,7 +34,6 @@ const LABELS: Record<ReadingState, string> = {
 
 export default function SiteV2ReadingAction({
   bookId,
-  bookSlug,
   status = "ready",
 }: {
   bookId: string;
@@ -63,7 +62,7 @@ export default function SiteV2ReadingAction({
   }
 
   return (
-    <Link className={styles.primaryButton} href={`/reader?book=${encodeURIComponent(bookSlug || bookId)}${readingState === "again" ? "&restart=1" : ""}`}>
+    <Link className={styles.primaryButton} href={`/reader?book=${encodeURIComponent(bookId)}${readingState === "again" ? "&restart=1" : ""}`}>
       {LABELS[readingState]}
     </Link>
   );

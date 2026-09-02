@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseClient";
 import { coverWebpSrc } from "@/lib/cover";
-import { bookIdAliasFamily, canonicalBookId } from "@/lib/bookAliases";
+import { bookIdAliasFamily, canonicalBookId, slugifyBookRoute } from "@/lib/bookAliases";
 import {
   DEFAULT_PREFERENCES_V2,
   PREFERENCES_EVENT,
@@ -44,6 +44,9 @@ type BookContent = {
 
 type BookMeta = {
   id?: string;
+  title?: string;
+  slug?: string;
+  slugAliases?: string[];
   cover?: string;
   coverFile?: string;
 };
@@ -97,6 +100,26 @@ function editionAssetUrl(editionId: string, relativePath: string) {
     throw new Error("The published edition identity is invalid.");
   }
   return publicEditionAssetUrl(`editions/${cleanEditionId}/${relativePath}`);
+}
+
+function resolvePublishedBook(manifest: PublishedEditionManifest, requestedId: string) {
+  const canonicalRequestedId = canonicalBookId(requestedId);
+  const directMatch = (manifest.books || []).find(book => (
+    canonicalBookId(String(book.id || "")) === canonicalRequestedId
+  ));
+  if (directMatch) return directMatch;
+
+  const requestedSlug = slugifyBookRoute(requestedId);
+  if (!requestedSlug) return undefined;
+  const matchingCatalogIds = [...new Set((manifest.catalog || [])
+    .filter(book => [book.slug, ...(book.slugAliases || []), book.title]
+      .some(value => slugifyBookRoute(String(value || "")) === requestedSlug))
+    .map(book => canonicalBookId(String(book.id || "")))
+    .filter(Boolean))];
+  const matchingPublishedBooks = (manifest.books || []).filter(book => (
+    matchingCatalogIds.includes(canonicalBookId(String(book.id || "")))
+  ));
+  return matchingPublishedBooks.length === 1 ? matchingPublishedBooks[0] : undefined;
 }
 
 type BookAuditSource = {
@@ -1161,9 +1184,7 @@ export default function ReaderClient({
       }
 
       const canonicalRequestedId = canonicalBookId(id);
-      const publishedBook = (manifest.books || []).find(book => (
-        canonicalBookId(String(book.id || "")) === canonicalRequestedId
-      ));
+      const publishedBook = resolvePublishedBook(manifest, id);
       if (!publishedBook?.indexPath) throw new Error(`Book content unavailable for "${id}".`);
       const index = await fetch(editionAssetUrl(currentEditionId, publishedBook.indexPath)).then(async response => {
         const data = await response.json().catch(() => ({}));
