@@ -88,6 +88,21 @@ begin
   if to_regprocedure('public.jju_admin_save_book_content(integer,text,jsonb,text,text,text)') is not null then
     execute 'grant execute on function public.jju_admin_save_book_content(integer, text, jsonb, text, text, text) to service_role';
   end if;
+  if to_regprocedure('public.activate_narrator_invite_contact(uuid)') is not null then
+    execute 'grant execute on function public.activate_narrator_invite_contact(uuid) to service_role';
+  end if;
+  if to_regprocedure('public.link_narrator_portal_contact(uuid,timestamptz,uuid,uuid,text,text,text,text,timestamptz,uuid,boolean)') is not null then
+    execute 'grant execute on function public.link_narrator_portal_contact(uuid, timestamptz, uuid, uuid, text, text, text, text, timestamptz, uuid, boolean) to service_role';
+  end if;
+  if to_regprocedure('public.submit_narrator_access_request(text,text,text,text)') is not null then
+    execute 'grant execute on function public.submit_narrator_access_request(text, text, text, text) to service_role';
+  end if;
+  if to_regprocedure('public.claim_narrator_access_notification(uuid)') is not null then
+    execute 'grant execute on function public.claim_narrator_access_notification(uuid) to service_role';
+  end if;
+  if to_regprocedure('public.review_narrator_access_request(uuid,timestamptz,text)') is not null then
+    execute 'grant execute on function public.review_narrator_access_request(uuid, timestamptz, text) to service_role';
+  end if;
 end;
 $later_rpc_hardening$;
 

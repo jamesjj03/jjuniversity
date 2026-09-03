@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
@@ -25,6 +26,8 @@ type PortalTrack = {
   sectionKey: string;
   title: string;
   required: boolean;
+  readerHref: string;
+  readerLinkKind: "section" | "book" | "unavailable";
   latestSubmission: PortalSubmission | null;
 };
 
@@ -50,6 +53,75 @@ type UploadAttempt = {
 };
 
 type StoredUploadAttempts = Record<string, UploadAttempt>;
+type WorkspaceView = "production" | "brief" | "activity";
+
+const PROJECT_STAGES = ["Offer", "Production", "JJ review", "Approved"] as const;
+
+function assignmentStage(status: string) {
+  if (["approved", "complete", "completed"].includes(status)) return 3;
+  if (["submitted", "in-review"].includes(status)) return 2;
+  if (["accepted", "recording", "changes-requested"].includes(status)) return 1;
+  return 0;
+}
+
+function displayStatus(value: string) {
+  if (value === "changes-requested") return "Changes requested";
+  if (value === "in-review" || value === "submitted") return "With JJ";
+  if (value === "offered") return "New offer";
+  return humanStatus(value).replace(/\b\w/g, letter => letter.toUpperCase());
+}
+
+function formatDeadline(value: string) {
+  if (!value) return "No deadline set";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value.slice(0, 10);
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(date);
+}
+
+function formatActivityDate(value: string) {
+  if (!value) return "Date unavailable";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Date unavailable";
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(date);
+}
+
+function narratorInitials(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  return (parts.length > 1 ? `${parts[0][0]}${parts.at(-1)?.[0] || ""}` : parts[0]?.slice(0, 2) || "NA").toUpperCase();
+}
+
+function FolderIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M3.75 6.75A1.75 1.75 0 0 1 5.5 5h4l2 2h7A1.75 1.75 0 0 1 20.25 8.75v8.75a1.75 1.75 0 0 1-1.75 1.75h-13a1.75 1.75 0 0 1-1.75-1.75V6.75Z" />
+    </svg>
+  );
+}
+
+function BookIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M5 4.75h8.25A2.75 2.75 0 0 1 16 7.5v11.75H7.5A2.5 2.5 0 0 1 5 16.75v-12Z" />
+      <path d="M7.5 16.75H19V7.5a2.75 2.75 0 0 0-2.75-2.75H16" />
+    </svg>
+  );
+}
+
+function UploadIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v3.75A1.75 1.75 0 0 0 6.75 20h10.5A1.75 1.75 0 0 0 19 18.25V14.5" />
+    </svg>
+  );
+}
+
+function PlayIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="m9 7 8 5-8 5V7Z" />
+    </svg>
+  );
+}
 
 function humanStatus(value: string) {
   return value.replace(/-/g, " ");
@@ -191,13 +263,36 @@ function progressFor(assignment: PortalAssignment) {
 function trackStatus(track: PortalTrack) {
   const submission = track.latestSubmission;
   if (!submission) return track.required ? "Recording needed" : "Optional";
-  if (["uploaded", "complete", "completed"].includes(submission.status)) return "Ready";
+  if (["uploaded", "complete", "completed"].includes(submission.status)) return "Uploaded";
   if (submission.status === "in-review") return "In review";
   if (submission.status === "approved") return "Approved";
   if (submission.status === "changes-requested") return "Changes requested";
   if (submission.status === "awaiting-upload") return "Upload not finished";
   if (submission.status === "upload-failed") return "Upload failed";
   return humanStatus(submission.status);
+}
+
+function transitionAssignment(
+  assignment: PortalAssignment,
+  status: string,
+  action: "accept" | "submit",
+) {
+  if (action !== "submit") return { ...assignment, status };
+  const submissions = assignment.submissions.map(submission => (
+    submission.status === "uploaded" ? { ...submission, status: "in-review" } : submission
+  ));
+  const byId = new Map(submissions.map(submission => [submission.id, submission]));
+  return {
+    ...assignment,
+    status,
+    submissions,
+    tracks: assignment.tracks.map(track => ({
+      ...track,
+      latestSubmission: track.latestSubmission
+        ? byId.get(track.latestSubmission.id) || track.latestSubmission
+        : null,
+    })),
+  };
 }
 
 function normalizedMimeType(file: File) {
@@ -222,7 +317,13 @@ function displayTransferSize(bytes: number) {
   return bytes > 0 ? displayFileSize(bytes) : "0 KB";
 }
 
-export default function NarratorPortalClient({ initialData }: { initialData: NarratorPortalData }) {
+export default function NarratorPortalClient({
+  initialData,
+  previewMode = false,
+}: {
+  initialData: NarratorPortalData;
+  previewMode?: boolean;
+}) {
   const router = useRouter();
   const initialAssignments = initialData.assignments as PortalAssignment[];
   const [assignments, setAssignments] = useState<PortalAssignment[]>(initialAssignments);
@@ -236,14 +337,16 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
   const [trackNotice, setTrackNotice] = useState<TrackNotice | null>(null);
   const [message, setMessage] = useState("");
   const [listeningSubmissionId, setListeningSubmissionId] = useState("");
+  const [previewAudioUrls, setPreviewAudioUrls] = useState<Record<string, string>>({});
+  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>("production");
   const uploadAttemptRef = useRef<UploadAttempt | null>(null);
   const uploadInFlightRef = useRef(false);
   const fileInputRefs = useRef(new Map<string, HTMLInputElement>());
   const recordButtonRefs = useRef(new Map<string, HTMLButtonElement>());
-  const queueButtonRefs = useRef(new Map<string, HTMLButtonElement>());
   const recordingPanelRef = useRef<HTMLElement | null>(null);
   const uploadButtonRef = useRef<HTMLButtonElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previewAudioUrlsRef = useRef(new Map<string, string>());
   const selected = assignments.find(item => item.id === selectedId) || null;
   const canMutate = initialData.status === "active";
   const uploadBusy = trackNotice?.phase === "preparing"
@@ -270,13 +373,16 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     || orderedTracks[0]
     || null;
   const focusedTrack = orderedTracks.find(track => track.id === activeTrackId) || firstMissingTrack;
-  const focusedTrackId = focusedTrack?.id || "";
   const focusedSubmission = focusedTrack?.latestSubmission || null;
   const focusedReady = isSubmissionReady(focusedSubmission);
   const focusedMutable = Boolean(selected && canMutate && OPEN_UPLOAD_STATUSES.has(selected.status));
   const focusedListening = Boolean(focusedSubmission && listeningSubmissionId === focusedSubmission.id);
   const focusedNotice = focusedTrack && trackNotice?.trackId === focusedTrack.id ? trackNotice : null;
   const remainingRequired = Math.max(0, selectedProgress.total - selectedProgress.ready);
+  const completionPercent = selectedProgress.total > 0
+    ? Math.round((selectedProgress.ready / selectedProgress.total) * 100)
+    : 0;
+  const selectedStage = selected ? assignmentStage(selected.status) : 0;
   const previewUrl = useMemo(() => file ? URL.createObjectURL(file) : "", [file]);
 
   useEffect(() => {
@@ -286,18 +392,12 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
   }, [previewUrl]);
 
   useEffect(() => {
-    if (!focusedTrackId) return;
-    const frame = window.requestAnimationFrame(() => {
-      const button = queueButtonRefs.current.get(focusedTrackId);
-      const queue = button?.closest("ol");
-      if (!button || !queue) return;
-      const queueRect = queue.getBoundingClientRect();
-      const buttonRect = button.getBoundingClientRect();
-      const left = queue.scrollLeft + buttonRect.left - queueRect.left - (queue.clientWidth - button.clientWidth) / 2;
-      queue.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
-    });
-    return () => window.cancelAnimationFrame(frame);
-  }, [focusedTrackId]);
+    const audioUrls = previewAudioUrlsRef.current;
+    return () => {
+      for (const url of audioUrls.values()) URL.revokeObjectURL(url);
+      audioUrls.clear();
+    };
+  }, []);
 
   function clearSelectedFile(trackId?: string) {
     if (trackId) {
@@ -317,8 +417,8 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     setTrackNotice(null);
     setListeningSubmissionId("");
     setMessage("");
+    setWorkspaceView("production");
     setSelectedId(assignmentId);
-    window.setTimeout(() => recordingPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
   }
 
   function focusTrack(track: PortalTrack) {
@@ -328,7 +428,9 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     setActiveTrackId(track.id);
     setTrackNotice(null);
     setListeningSubmissionId("");
-    window.setTimeout(() => recordingPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+    if (window.matchMedia("(max-width: 940px)").matches) {
+      window.setTimeout(() => recordingPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+    }
   }
 
   async function updateAssignment(assignment: PortalAssignment, action: "accept" | "submit") {
@@ -344,6 +446,15 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
         return;
       }
     }
+    if (previewMode) {
+      const status = action === "accept" ? "accepted" : "submitted";
+      setAssignments(current => current.map(item => item.id === assignment.id ? transitionAssignment(item, status, action) : item));
+      setSelectedId(assignment.id);
+      setMessage(action === "accept"
+        ? "Assignment accepted. Start with the first section that needs a recording."
+        : "Book submitted to JJ for review. Your recordings are now read-only.");
+      return;
+    }
     setActionBusy(true);
     setMessage("");
     try {
@@ -355,7 +466,7 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
       const payload = await result.json().catch(() => ({})) as { error?: string; status?: string };
       if (!result.ok) throw new Error(payload.error || "That assignment could not be updated.");
       const status = payload.status || (action === "accept" ? "accepted" : "submitted");
-      setAssignments(current => current.map(item => item.id === assignment.id ? { ...item, status } : item));
+      setAssignments(current => current.map(item => item.id === assignment.id ? transitionAssignment(item, status, action) : item));
       setSelectedId(assignment.id);
       setMessage(action === "accept"
         ? "Assignment accepted. Start with the first section that needs a recording."
@@ -419,6 +530,39 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
     }
     if (!file || activeTrackId !== track.id || !OPEN_UPLOAD_STATUSES.has(assignment.status)) {
       setTrackNotice({ trackId: track.id, phase: "error", text: "Choose an audio file first." });
+      return;
+    }
+
+    if (previewMode) {
+      const selectedFile = file;
+      const submissionId = `preview-upload-${crypto.randomUUID()}`;
+      const submission: PortalSubmission = {
+        id: submissionId,
+        audioTrackId: track.id,
+        trackPosition: track.position,
+        trackTitle: track.title,
+        fileName: selectedFile.name,
+        fileSizeBytes: selectedFile.size,
+        mimeType: normalizedMimeType(selectedFile),
+        status: "uploaded",
+        uploadedAt: new Date().toISOString(),
+        narratorNote: note.trim(),
+        narratorFeedback: "",
+      };
+      const localAudioUrl = URL.createObjectURL(selectedFile);
+      previewAudioUrlsRef.current.set(submissionId, localAudioUrl);
+      setPreviewAudioUrls(current => ({ ...current, [submissionId]: localAudioUrl }));
+      setAssignments(current => current.map(item => item.id === assignment.id ? {
+        ...item,
+        status: "recording",
+        tracks: item.tracks.map(itemTrack => itemTrack.id === track.id
+          ? { ...itemTrack, latestSubmission: submission }
+          : itemTrack),
+        submissions: [submission, ...item.submissions],
+      } : item));
+      clearSelectedFile(track.id);
+      setTrackNotice({ trackId: track.id, phase: "done", text: `${sectionTitle(track)} is uploaded and ready.` });
+      setMessage("Upload complete. You can listen back or continue to the next section.");
       return;
     }
 
@@ -517,8 +661,11 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
         trackPosition: track.position,
         trackTitle: track.title,
         fileName: selectedFile.name,
+        fileSizeBytes: selectedFile.size,
+        mimeType,
         status: "uploaded",
         uploadedAt: new Date().toISOString(),
+        narratorNote,
         narratorFeedback: "",
       };
       const updatedTracks = assignment.tracks.map(item => item.id === track.id
@@ -567,6 +714,10 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
   }
 
   async function signOut() {
+    if (previewMode) {
+      router.push("/account?next=/narrator");
+      return;
+    }
     setActionBusy(true);
     const supabase = createSupabaseBrowserClient();
     await supabase.auth.signOut();
@@ -574,190 +725,285 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
   }
 
   return (
-    <main className={styles.portal}>
-      <div className={styles.shell}>
-        <header className={styles.topbar}>
-          <Link className={styles.brand} href="/">
-            <strong>JJ University</strong>
-            <span>Narrator desk</span>
-          </Link>
-          <button className={styles.signout} type="button" disabled={busy} onClick={signOut}>Sign out</button>
+    <main className={styles.workspace}>
+      <aside className={styles.sidebar}>
+        <Link className={styles.brand} href="/" onClick={event => { if (uploadBusy) event.preventDefault(); }}>
+          <span className={styles.brandMark}>J</span>
+          <span><strong>JJU Audio</strong><small>Narrator workspace</small></span>
+        </Link>
+
+        <nav className={styles.sideNav} aria-label="Narrator workspace">
+          <a href="#narrator-projects" aria-current="page">
+            <FolderIcon />
+            <span>Projects</span>
+            <strong>{assignments.length}</strong>
+          </a>
+        </nav>
+
+        <div className={styles.accountCard}>
+          <span className={styles.avatar}>{narratorInitials(initialData.displayName)}</span>
+          <span className={styles.accountCopy}>
+            <strong>{initialData.displayName}</strong>
+            <small>Narrator</small>
+          </span>
+          <button type="button" disabled={busy} onClick={signOut}>Sign out</button>
+        </div>
+      </aside>
+
+      <section className={styles.main}>
+        <header className={styles.mobileHeader}>
+          <Link className={styles.mobileBrand} href="/" onClick={event => { if (uploadBusy) event.preventDefault(); }}>JJU Audio</Link>
+          <button type="button" disabled={busy} onClick={signOut}>Sign out</button>
         </header>
 
-        <section className={styles.intro}>
-          <p>Narrator desk</p>
-          <h1>Hey, {initialData.displayName}.</h1>
-          <p className={styles.muted}>Pick a book, record its Reader sections in order, and listen back before you send anything.</p>
-        </section>
-
-        {message && <div className={styles.notice} role="status" aria-live="polite">{message}</div>}
-        {!canMutate && (
+        {message ? <div className={styles.notice} role="status" aria-live="polite">{message}</div> : null}
+        {!canMutate ? (
           <div className={styles.notice} role="status">
-            This narrator account is {humanStatus(initialData.status)}. Assignments are view-only until JJ activates it.
+            This account is {humanStatus(initialData.status)}. Projects are view-only until James activates it.
           </div>
-        )}
+        ) : null}
 
-        <div className={styles.grid}>
-          <section className={styles.panel} aria-labelledby="narrator-books-heading">
-            <div className={styles.panelHeading}>
-              <div>
-                <p className={styles.eyebrow}>Step 1</p>
-                <h2 id="narrator-books-heading">Choose a book</h2>
+        <header className={styles.pageHeader}>
+          <div>
+            <h1 id="narrator-projects">Narrator projects</h1>
+            <p>{assignments.length ? `${assignments.length} active ${assignments.length === 1 ? "project" : "projects"}` : "No active projects"}</p>
+          </div>
+          <Link href="/" target="_blank">Open JJ University</Link>
+        </header>
+
+        {!assignments.length ? (
+          <section className={styles.noProjects}>
+            <FolderIcon />
+            <h2>No projects yet</h2>
+            <p>When James assigns a book, it will appear here with the Reader text, section list, files, and review notes.</p>
+          </section>
+        ) : (
+          <div className={styles.projectLayout}>
+            <aside className={styles.projectPanel} aria-labelledby="project-list-heading">
+              <div className={styles.sectionTitle}>
+                <h2 id="project-list-heading">Projects</h2>
+                <span>{assignments.length}</span>
               </div>
-              <span className={styles.count}>{assignments.length}</span>
-            </div>
-            {!assignments.length ? <p className={styles.empty}>Nothing is assigned right now.</p> : (
-              <ol className={styles.assignmentList}>
+              <ol className={styles.projectList}>
                 {assignments.map(assignment => {
                   const progress = progressFor(assignment);
-                  const selectedAssignment = assignment.id === selectedId;
+                  const percent = progress.total ? Math.round((progress.ready / progress.total) * 100) : 0;
+                  const isSelected = assignment.id === selectedId;
                   return (
-                    <li className={styles.assignment} data-selected={selectedAssignment} key={assignment.id}>
+                    <li key={assignment.id}>
                       <button
-                        className={styles.assignmentSelect}
                         type="button"
                         disabled={busy}
-                        aria-current={selectedAssignment ? "true" : undefined}
+                        data-selected={isSelected}
+                        aria-current={isSelected ? "true" : undefined}
                         onClick={() => chooseAssignment(assignment.id)}
                       >
-                        <span className={styles.assignmentTitle}>{assignment.bookTitle}</span>
-                        <span className={styles.assignmentMeta}>
-                          <span>{progress.ready} of {progress.total} required ready</span>
-                          <span className={styles.status}>{humanStatus(assignment.status)}</span>
+                        <Image src={assignment.coverSrc} alt="" width={46} height={69} sizes="46px" />
+                        <span className={styles.projectCardCopy}>
+                          <strong>{assignment.bookTitle}</strong>
+                          <span>{displayStatus(assignment.status)}</span>
+                          <span className={styles.miniProgress} aria-hidden="true"><i style={{ width: `${percent}%` }} /></span>
+                          <small>{progress.ready} of {progress.total} uploaded</small>
                         </span>
                       </button>
-                      {selectedAssignment && (
-                        <div className={styles.assignmentDetails}>
-                          {assignment.brief && <p className={styles.brief}>{assignment.brief}</p>}
-                          {assignment.dueAt && <p className={styles.brief}>Due {assignment.dueAt.slice(0, 10)}</p>}
-                          <div className={styles.assignmentActions}>
-                            {canMutate && assignment.status === "offered" && (
-                              <button className={styles.primary} type="button" disabled={busy} onClick={() => updateAssignment(assignment, "accept")}>Accept assignment</button>
-                            )}
-                            <Link href={`/reader?book=${encodeURIComponent(assignment.bookSlug || assignment.bookId)}`} target="_blank" rel="noreferrer">Open in Reader</Link>
-                          </div>
-                        </div>
-                      )}
                     </li>
                   );
                 })}
               </ol>
-            )}
-          </section>
+            </aside>
 
-          <section ref={recordingPanelRef} className={`${styles.panel} ${styles.recordingPanel}`} aria-labelledby="narrator-recording-heading">
-            <div className={styles.panelHeading}>
-              <div>
-                <p className={styles.eyebrow}>Step 2</p>
-                <h2 id="narrator-recording-heading">Record the sections</h2>
-              </div>
-            </div>
-
-            {!selected ? (
-              <p className={styles.empty}>Choose an assigned book to see its section queue.</p>
-            ) : (
-              <>
-                <div className={styles.progressCard}>
-                  <div className={styles.progressCopy}>
-                    <strong>{selected.bookTitle}</strong>
-                    <span>{selectedProgress.ready} of {selectedProgress.total} required ready</span>
-                  </div>
-                  <progress
-                    className={styles.progress}
-                    max={Math.max(1, selectedProgress.total)}
-                    value={selectedProgress.ready}
-                    aria-label={`${selectedProgress.ready} of ${selectedProgress.total} required recordings ready`}
-                  />
-                </div>
-
-                {selected.status === "offered" ? (
-                  <div className={styles.emptyState}>
-                    <p>Accept this assignment when you’re ready to begin.</p>
-                    {canMutate && (
-                      <button className={styles.primary} type="button" disabled={busy} onClick={() => updateAssignment(selected, "accept")}>Accept assignment</button>
-                    )}
-                  </div>
-                ) : !selected.tracks.length ? (
-                  <p className={styles.empty}>JJ hasn’t prepared the section checklist for this book yet.</p>
-                ) : (
-                  <div className={styles.sectionWorkspace}>
-                    <div className={styles.queueHeader}>
-                      <div>
-                        <p className={styles.eyebrow}>Section queue</p>
-                        <strong>{remainingRequired ? `${remainingRequired} required left` : "Required sections ready"}</strong>
-                      </div>
-                      <Link
-                        className={styles.readerLink}
-                        href={`/reader?book=${encodeURIComponent(selected.bookSlug || selected.bookId)}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Open book in Reader
+            {selected ? (
+              <article className={styles.projectRoom}>
+                <header className={styles.projectHeader}>
+                  <Image className={styles.projectCover} src={selected.coverSrc} alt={`${selected.bookTitle} cover`} width={86} height={129} sizes="86px" />
+                  <div className={styles.projectIdentity}>
+                    <div className={styles.projectStatusRow}>
+                      <span className={styles.statusPill} data-status={selected.status}>{displayStatus(selected.status)}</span>
+                      <span>{formatDeadline(selected.dueAt)}</span>
+                    </div>
+                    <h2>{selected.bookTitle}</h2>
+                    <p>By James Johnson</p>
+                    <div className={styles.projectActions}>
+                      {canMutate && selected.status === "offered" ? (
+                        <button className={styles.primaryButton} type="button" disabled={busy} onClick={() => updateAssignment(selected, "accept")}>Accept project</button>
+                      ) : null}
+                      <Link href={`/books/${encodeURIComponent(selected.bookSlug || selected.bookId)}`} target="_blank" rel="noreferrer">
+                        <BookIcon /> Open current Reader
                       </Link>
                     </div>
+                  </div>
+                  <div className={styles.projectProgress}>
+                    <strong>{completionPercent}%</strong>
+                    <span>{selectedProgress.ready} of {selectedProgress.total} required sections uploaded</span>
+                    <progress max={Math.max(1, selectedProgress.total)} value={selectedProgress.ready} aria-label={`${selectedProgress.ready} of ${selectedProgress.total} required recordings uploaded`} />
+                  </div>
+                </header>
 
-                    <ol className={styles.sectionQueue} aria-label={`Sections for ${selected.bookTitle}`}>
-                      {orderedTracks.map(track => {
-                        const ready = isSubmissionReady(track.latestSubmission);
-                        const current = track.id === focusedTrack?.id;
-                        return (
-                          <li key={track.id}>
-                            <button
-                              ref={element => {
-                                if (element) queueButtonRefs.current.set(track.id, element);
-                                else queueButtonRefs.current.delete(track.id);
-                              }}
-                              type="button"
-                              disabled={busy}
-                              data-active={current}
-                              data-ready={ready}
-                              aria-current={current ? "step" : undefined}
-                              onClick={() => focusTrack(track)}
-                            >
-                              <span className={styles.queueNumber}>{sectionNumber(track.position)}</span>
-                              <span className={styles.queueCopy}>
-                                <strong>{sectionTitle(track)}</strong>
-                                <code>{sectionKeyLabel(track)}</code>
-                              </span>
-                              <span className={styles.queueState}>{ready ? "Ready" : track.required ? "Needed" : "Optional"}</span>
-                            </button>
+                <ol className={styles.stageLine} aria-label="Project stage">
+                  {PROJECT_STAGES.map((stage, index) => (
+                    <li key={stage} data-state={index < selectedStage ? "done" : index === selectedStage ? "current" : "next"} aria-current={index === selectedStage ? "step" : undefined}>
+                      <span>{index < selectedStage ? "✓" : index + 1}</span>
+                      <strong>{stage}</strong>
+                    </li>
+                  ))}
+                </ol>
+
+                <nav className={styles.tabs} aria-label="Project sections">
+                  <button type="button" data-active={workspaceView === "production"} aria-pressed={workspaceView === "production"} onClick={() => setWorkspaceView("production")}>Production</button>
+                  <button type="button" data-active={workspaceView === "brief"} aria-pressed={workspaceView === "brief"} onClick={() => setWorkspaceView("brief")}>Script &amp; brief</button>
+                  <button type="button" data-active={workspaceView === "activity"} aria-pressed={workspaceView === "activity"} onClick={() => setWorkspaceView("activity")}>Activity <span>{selected.submissions.length}</span></button>
+                </nav>
+
+                {workspaceView === "brief" ? (
+                  <div className={styles.resourcesGrid}>
+                    <section>
+                      <h3>Production brief</h3>
+                      <p>{selected.brief || "James hasn’t added any extra direction for this project."}</p>
+                    </section>
+                    <section>
+                      <h3>Script</h3>
+                      <p>Open the current JJU Reader alongside the section list while you work.</p>
+                      <Link className={styles.textLink} href={`/books/${encodeURIComponent(selected.bookSlug || selected.bookId)}`} target="_blank" rel="noreferrer">Open current Reader</Link>
+                    </section>
+                    <section>
+                      <h3>File delivery</h3>
+                      <dl>
+                        <div><dt>Accepted files</dt><dd>MP3, M4A, WAV, FLAC</dd></div>
+                        <div><dt>Maximum size</dt><dd>50 MB per file</dd></div>
+                        <div><dt>Visibility</dt><dd>Private here; publication is separate</dd></div>
+                      </dl>
+                    </section>
+                  </div>
+                ) : workspaceView === "activity" ? (
+                  <section className={styles.activityPanel}>
+                    <div className={styles.contentHeader}>
+                      <div><h3>File activity</h3><p>Uploads and review notes for this project.</p></div>
+                    </div>
+                    {selected.submissions.length ? (
+                      <ol className={styles.activityList}>
+                        {selected.submissions.map(submission => (
+                          <li key={submission.id}>
+                          <span className={styles.activityDot} aria-hidden="true" />
+                            <div>
+                              <strong>{submission.trackTitle || submission.fileName}</strong>
+                              <p>{submission.fileName} · {displayStatus(submission.status)}</p>
+                              {submission.narratorFeedback ? <blockquote>James: {submission.narratorFeedback}</blockquote> : null}
+                            </div>
+                            <time dateTime={submission.uploadedAt}>{formatActivityDate(submission.uploadedAt)}</time>
                           </li>
-                        );
-                      })}
-                    </ol>
-
-                    {focusedTrack && (
-                      <article className={styles.track} data-active="true" data-ready={focusedReady}>
-                        <div className={styles.trackTopline}>
-                          <div className={styles.trackIdentity}>
-                            <span className={styles.sectionPosition}>Section {sectionNumber(focusedTrack.position)}</span>
-                            <h3>{sectionTitle(focusedTrack)}</h3>
-                            <code className={styles.sectionKey}>{sectionKeyLabel(focusedTrack)}</code>
-                            {!focusedTrack.required && <span className={styles.optional}>Optional</span>}
-                          </div>
-                          <span className={styles.trackStatus} data-ready={focusedReady}>{trackStatus(focusedTrack)}</span>
+                        ))}
+                      </ol>
+                    ) : <p className={styles.emptyActivity}>No files have been uploaded for this project yet.</p>}
+                  </section>
+                ) : selected.status === "offered" ? (
+                  <section className={styles.offerPanel}>
+                    <div>
+                      <h3>Project offer</h3>
+                      <p>{selected.brief || "Review the book and accept when you’re ready to begin."}</p>
+                    </div>
+                    {canMutate ? <button className={styles.primaryButton} type="button" disabled={busy} onClick={() => updateAssignment(selected, "accept")}>Accept project</button> : null}
+                  </section>
+                ) : !selected.tracks.length ? (
+                  <section className={styles.offerPanel}>
+                    <div><h3>Chapter list pending</h3><p>James hasn’t prepared the recording checklist for this book yet.</p></div>
+                  </section>
+                ) : (
+                  <>
+                    <div className={styles.productionGrid}>
+                      <section className={styles.chapterPanel} aria-labelledby="chapter-list-heading">
+                        <div className={styles.contentHeader}>
+                          <div><h3 id="chapter-list-heading">Sections</h3><p>{remainingRequired ? `${remainingRequired} required sections remaining` : "All required sections are uploaded"}</p></div>
+                          <span>{selectedProgress.ready}/{selectedProgress.total}</span>
                         </div>
+                        <ol className={styles.chapterList}>
+                          {orderedTracks.map(track => {
+                            const current = track.id === focusedTrack?.id;
+                            const ready = isSubmissionReady(track.latestSubmission);
+                            return (
+                              <li key={track.id}>
+                                <button
+                                  type="button"
+                                  disabled={busy}
+                                  data-active={current}
+                                  aria-current={current ? "step" : undefined}
+                                  onClick={() => focusTrack(track)}
+                                >
+                                  <span className={styles.chapterNumber}>{sectionNumber(track.position)}</span>
+                                  <span className={styles.chapterCopy}>
+                                    <strong>{sectionTitle(track)}</strong>
+                                    <small>{track.latestSubmission?.fileName || (track.required ? "Required" : "Optional")}</small>
+                                  </span>
+                                  <span className={styles.chapterState} data-ready={ready} data-status={track.latestSubmission?.status || "missing"}>{trackStatus(track)}</span>
+                                </button>
+                              </li>
+                            );
+                          })}
+                        </ol>
+                      </section>
 
-                        {focusedSubmission?.narratorFeedback && (
-                          <div className={styles.feedback}>
-                            <strong>Note from JJ</strong>
-                            <p>{focusedSubmission.narratorFeedback}</p>
+                      {focusedTrack ? (
+                        <aside ref={recordingPanelRef} className={styles.inspector} aria-labelledby="selected-chapter-heading">
+                          <div className={styles.inspectorHeader}>
+                            <div>
+                              <span>Section {sectionNumber(focusedTrack.position)}</span>
+                              <h3 id="selected-chapter-heading">{sectionTitle(focusedTrack)}</h3>
+                              <small>{focusedTrack.required ? "Required" : "Optional"}</small>
+                            </div>
+                            <span className={styles.trackStatus} data-ready={focusedReady}>{trackStatus(focusedTrack)}</span>
                           </div>
-                        )}
 
-                        <div className={styles.trackActions}>
-                          {isSubmissionListenable(focusedSubmission) && focusedSubmission && (
-                            <button
-                              className={styles.listenButton}
-                              type="button"
-                              aria-expanded={focusedListening}
-                              aria-controls={`listen-${focusedSubmission.id}`}
-                              onClick={() => setListeningSubmissionId(current => current === focusedSubmission.id ? "" : focusedSubmission.id)}
-                            >
-                              {focusedListening ? "Close listen-back" : "Listen back to upload"}
-                            </button>
+                          {focusedTrack.readerHref ? (
+                            <Link className={styles.scriptLink} href={focusedTrack.readerHref} target="_blank" rel="noreferrer">
+                              <BookIcon />
+                              <span>
+                                <strong>{focusedTrack.readerLinkKind === "section" ? "Open this section in Reader" : "Open the current Reader"}</strong>
+                                <small>{focusedTrack.readerLinkKind === "section" ? "Section text opens in a new tab" : "This section does not have its own Reader page"}</small>
+                              </span>
+                            </Link>
+                          ) : (
+                            <div className={styles.scriptLink} aria-disabled="true">
+                              <BookIcon />
+                              <span><strong>Reader text unavailable</strong><small>James needs to attach a readable edition</small></span>
+                            </div>
                           )}
-                          {focusedMutable && (
+
+                          {focusedSubmission?.narratorFeedback ? (
+                            <div className={styles.feedback}>
+                              <strong>Note from James</strong>
+                              <p>{focusedSubmission.narratorFeedback}</p>
+                            </div>
+                          ) : null}
+
+                          {focusedSubmission ? (
+                            <section className={styles.currentFile}>
+                              <div>
+                                <span className={styles.fileIcon}><PlayIcon /></span>
+                                <span><strong>{focusedSubmission.fileName}</strong><small>{focusedSubmission.fileSizeBytes ? displayFileSize(focusedSubmission.fileSizeBytes) : "Uploaded file"} · {formatActivityDate(focusedSubmission.uploadedAt)}</small></span>
+                              </div>
+                              {isSubmissionListenable(focusedSubmission) ? (
+                                <button type="button" aria-expanded={focusedListening} aria-controls={`listen-${focusedSubmission.id}`} onClick={() => setListeningSubmissionId(current => current === focusedSubmission.id ? "" : focusedSubmission.id)}>
+                                  {focusedListening ? "Close player" : "Listen back"}
+                                </button>
+                              ) : null}
+                              {focusedSubmission.narratorNote ? <p>Your note: {focusedSubmission.narratorNote}</p> : null}
+                            </section>
+                          ) : null}
+
+                          {focusedListening && focusedSubmission ? (
+                            <div className={styles.listenBack} id={`listen-${focusedSubmission.id}`}>
+                              <audio
+                                controls
+                                preload="none"
+                                src={previewMode ? previewAudioUrls[focusedSubmission.id] || undefined : `/api/narrator/submissions/${encodeURIComponent(focusedSubmission.id)}/audio`}
+                                aria-label={`Private recording for ${sectionTitle(focusedTrack)}`}
+                                onError={() => setTrackNotice({ trackId: focusedTrack.id, phase: "error", text: "That recording couldn’t be loaded. Close the player, then try again." })}
+                              >
+                                Your browser does not support audio playback.
+                              </audio>
+                            </div>
+                          ) : null}
+
+                          {focusedMutable ? (
                             <>
                               <input
                                 ref={element => {
@@ -767,6 +1013,8 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
                                 className={styles.visuallyHidden}
                                 id={`narrator-file-${focusedTrack.id}`}
                                 type="file"
+                                tabIndex={-1}
+                                aria-hidden="true"
                                 accept="audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/x-wav,audio/flac,.mp3,.m4a,.wav,.wave,.flac"
                                 disabled={busy}
                                 onChange={event => fileChanged(focusedTrack, event)}
@@ -776,136 +1024,77 @@ export default function NarratorPortalClient({ initialData }: { initialData: Nar
                                   if (element) recordButtonRefs.current.set(focusedTrack.id, element);
                                   else recordButtonRefs.current.delete(focusedTrack.id);
                                 }}
-                                className={focusedSubmission ? styles.secondary : styles.primary}
+                                className={styles.uploadButton}
                                 type="button"
                                 disabled={busy}
-                                aria-label={`${focusedSubmission ? "Replace" : "Add"} recording for ${sectionTitle(focusedTrack)}, ${sectionKeyLabel(focusedTrack)}`}
                                 onClick={() => chooseFile(focusedTrack)}
                               >
-                                {focusedSubmission ? "Replace recording" : "Add recording"}
+                                <UploadIcon /> {focusedSubmission ? "Replace audio file" : "Choose audio file"}
                               </button>
+                              <p className={styles.uploadHelp}>MP3, M4A, WAV, or FLAC · 50 MB maximum</p>
                             </>
-                          )}
-                        </div>
+                          ) : <p className={styles.lockedNote}>This project is read-only at its current stage.</p>}
 
-                        {focusedListening && focusedSubmission && (
-                          <div className={styles.listenBack} id={`listen-${focusedSubmission.id}`}>
-                            <p>Private uploaded recording · {sectionKeyLabel(focusedTrack)}</p>
-                            <audio
-                              controls
-                              preload="none"
-                              src={`/api/narrator/submissions/${encodeURIComponent(focusedSubmission.id)}/audio`}
-                              aria-label={`Private recording for ${sectionTitle(focusedTrack)}, ${sectionKeyLabel(focusedTrack)}`}
-                              onError={() => setTrackNotice({ trackId: focusedTrack.id, phase: "error", text: "That recording couldn’t be loaded. Close Listen back, then try again." })}
-                            >
-                              Your browser does not support audio playback.
-                            </audio>
-                          </div>
-                        )}
-
-                        {activeTrackId === focusedTrack.id && file && (
-                          <div className={styles.uploadComposer}>
-                            <div className={styles.fileSummary}>
-                              <div>
-                                <strong>{file.name}</strong>
-                                <span>{displayFileSize(file.size)}</span>
+                          {activeTrackId === focusedTrack.id && file ? (
+                            <div className={styles.uploadComposer}>
+                              <div className={styles.fileSummary}>
+                                <div><strong>{file.name}</strong><span>{displayFileSize(file.size)}</span></div>
+                                <button type="button" disabled={busy} onClick={() => {
+                                  clearSelectedFile(focusedTrack.id);
+                                  setTrackNotice(null);
+                                  recordButtonRefs.current.get(focusedTrack.id)?.focus();
+                                }}>Change</button>
                               </div>
-                              <button type="button" disabled={busy} onClick={() => {
-                                clearSelectedFile(focusedTrack.id);
-                                setTrackNotice(null);
-                                recordButtonRefs.current.get(focusedTrack.id)?.focus();
-                              }}>Choose a different file</button>
+                              {previewUrl ? (
+                                <div className={styles.localPreview}>
+                                  <span>Check the file before uploading</span>
+                                  <audio controls preload="metadata" src={previewUrl} aria-label={`Preview ${file.name}`}>Your browser does not support audio playback.</audio>
+                                </div>
+                              ) : null}
+                              <label className={styles.noteField}>
+                                Note for James <span>Optional</span>
+                                <textarea value={note} disabled={busy} maxLength={1000} placeholder="Pronunciation, alternate take, or anything else to flag" onChange={event => setNote(event.target.value)} />
+                              </label>
+                              <button ref={uploadButtonRef} className={styles.primaryButton} type="button" disabled={busy} onClick={() => uploadTrack(selected, focusedTrack)}>
+                                {uploadBusy ? "Uploading…" : focusedNotice?.phase === "error" ? "Retry upload" : "Upload section"}
+                              </button>
+                              <p className={styles.fileHelp}>Keep this page open until the upload finishes. If the connection drops, choose the same file and retry.</p>
                             </div>
-                            {previewUrl && (
-                              <div className={styles.localPreview}>
-                                <p>Listen before uploading</p>
-                                <audio
-                                  controls
-                                  preload="metadata"
-                                  src={previewUrl}
-                                  aria-label={`Preview selected recording for ${sectionTitle(focusedTrack)}, ${sectionKeyLabel(focusedTrack)}`}
-                                >
-                                  Your browser does not support audio playback.
-                                </audio>
-                              </div>
-                            )}
-                            <label className={styles.noteField}>
-                              Note for JJ <span>(optional)</span>
-                              <textarea
-                                value={note}
-                                disabled={busy}
-                                maxLength={1000}
-                                placeholder="Anything JJ should know about this take?"
-                                onChange={event => setNote(event.target.value)}
-                              />
-                            </label>
-                            <button
-                              ref={uploadButtonRef}
-                              className={styles.primary}
-                              type="button"
-                              disabled={busy}
-                              onClick={() => uploadTrack(selected, focusedTrack)}
-                            >
-                              {uploadBusy ? "Uploading…" : focusedNotice?.phase === "error" ? "Retry upload" : "Upload this section"}
-                            </button>
-                            <p className={styles.fileHelp}>Private upload. MP3, M4A, WAV, or FLAC; 50 MB maximum. This is not resumable yet. If the connection drops, reselect the same file and retry; the saved attempt prevents a duplicate submission.</p>
-                          </div>
-                        )}
+                          ) : null}
 
-                        {focusedNotice && (
-                          <div
-                            className={styles.trackNotice}
-                            data-phase={focusedNotice.phase}
-                            role={focusedNotice.phase === "error" ? "alert" : "status"}
-                            aria-live="polite"
-                          >
-                            {uploadBusy && <span className={styles.activity} aria-hidden="true" />}
-                            <span>{focusedNotice.text}</span>
-                            {focusedNotice.phase === "uploading" && Number(focusedNotice.total) > 0 && (
-                              <span className={styles.uploadProgress}>
-                                <progress
-                                  max={focusedNotice.total}
-                                  value={focusedNotice.loaded || 0}
-                                  aria-label={`Uploading ${Math.round(((focusedNotice.loaded || 0) / Number(focusedNotice.total)) * 100)} percent`}
-                                />
-                                <span className={styles.uploadBytes} aria-hidden="true">
-                                  {displayTransferSize(focusedNotice.loaded || 0)} / {displayFileSize(Number(focusedNotice.total))}
+                          {focusedNotice ? (
+                            <div className={styles.trackNotice} data-phase={focusedNotice.phase} role={focusedNotice.phase === "error" ? "alert" : "status"} aria-live="polite">
+                              {uploadBusy ? <span className={styles.activitySpinner} aria-hidden="true" /> : null}
+                              <span>{focusedNotice.text}</span>
+                              {focusedNotice.phase === "uploading" && Number(focusedNotice.total) > 0 ? (
+                                <span className={styles.uploadProgress}>
+                                  <progress max={focusedNotice.total} value={focusedNotice.loaded || 0} aria-label={`Uploading ${Math.round(((focusedNotice.loaded || 0) / Number(focusedNotice.total)) * 100)} percent`} />
+                                  <span>{displayTransferSize(focusedNotice.loaded || 0)} / {displayFileSize(Number(focusedNotice.total))}</span>
+                                  <strong>{Math.round(((focusedNotice.loaded || 0) / Number(focusedNotice.total)) * 100)}%</strong>
                                 </span>
-                                <strong aria-hidden="true">{Math.round(((focusedNotice.loaded || 0) / Number(focusedNotice.total)) * 100)}%</strong>
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </article>
-                    )}
-                  </div>
-                )}
+                              ) : null}
+                            </div>
+                          ) : null}
+                        </aside>
+                      ) : null}
+                    </div>
 
-                <div className={styles.submitDock}>
-                  <div>
-                    <strong>{selectedProgress.ready} of {selectedProgress.total} required ready</strong>
-                    <span>{canSubmitSelected ? "Everything is ready for JJ." : "Finish every required section to submit."}</span>
-                  </div>
-                  {canMutate && OPEN_UPLOAD_STATUSES.has(selected.status) ? (
-                    <button
-                      ref={submitButtonRef}
-                      className={styles.primary}
-                      type="button"
-                      disabled={busy || !canSubmitSelected}
-                      onClick={() => updateAssignment(selected, "submit")}
-                    >
-                      Submit book for review
-                    </button>
-                  ) : (
-                    <span className={styles.readOnlyState}>{selected.status === "submitted" ? "Submitted to JJ" : humanStatus(selected.status)}</span>
-                  )}
-                </div>
-              </>
-            )}
-            <p className={styles.help}>Recordings stay private. Nothing becomes a public audiobook until JJ approves the finished edition.</p>
-          </section>
-        </div>
-      </div>
+                    <footer className={styles.submitBar}>
+                      <div>
+                        <strong>{canSubmitSelected ? "All required sections are uploaded" : `${remainingRequired} required ${remainingRequired === 1 ? "section" : "sections"} left`}</strong>
+                        <span>Submitting locks the project while James reviews it.</span>
+                      </div>
+                      {canMutate && OPEN_UPLOAD_STATUSES.has(selected.status) ? (
+                        <button ref={submitButtonRef} className={styles.primaryButton} type="button" disabled={busy || !canSubmitSelected} onClick={() => updateAssignment(selected, "submit")}>Submit project for review</button>
+                      ) : <span className={styles.readOnlyState}>{displayStatus(selected.status)}</span>}
+                    </footer>
+                  </>
+                )}
+              </article>
+            ) : null}
+          </div>
+        )}
+      </section>
     </main>
   );
 }

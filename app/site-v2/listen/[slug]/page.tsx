@@ -59,37 +59,37 @@ export default async function SiteV2ListenPage({ params }: Props) {
     <article className={audioStyles.page}>
       <Link className={audioStyles.backLink} href={`/books/${book.slug}`}>← Back to {book.title}</Link>
 
-      <section className={audioStyles.hero}>
-        <div className={audioStyles.artworkColumn}>
-          <div className={audioStyles.cover}>
-            <SiteV2Cover
-              src={siteV2CoverSrc(book)}
-              fallbackSrc={coverFallbackSrc(book)}
-              alt={`${book.title} cover`}
-              priority
-              sizes="(max-width: 760px) 68vw, 360px"
-            />
+      <div className={audioStyles.listenStage}>
+        <section className={audioStyles.hero} aria-labelledby="audiobook-title">
+          <div className={audioStyles.artworkColumn}>
+            <div className={audioStyles.cover}>
+              <SiteV2Cover
+                src={siteV2CoverSrc(book)}
+                fallbackSrc={coverFallbackSrc(book)}
+                alt={`${book.title} cover`}
+                priority
+                sizes="(max-width: 680px) 58vw, 250px"
+              />
+            </div>
           </div>
-          <span className={audioStyles.editionStamp}>JJ University audio edition</span>
-        </div>
 
-        <div className={audioStyles.copy}>
-          <p className={audioStyles.eyebrow}>Audiobook</p>
-          <h1>{book.title}</h1>
-          <p className={audioStyles.narrator}>Narrated by {edition.narratorName}</p>
-          {description && showDescription && <p className={audioStyles.description}>{description}</p>}
-          <div className={audioStyles.editionFacts} aria-label="Audiobook details">
-            <span>{edition.tracks.length} chapter{edition.tracks.length === 1 ? "" : "s"}</span>
-            <span>{formatEditionLength(totalDuration)}</span>
-            <span>Progress saved on this device</span>
+          <div className={audioStyles.copy}>
+            <p className={audioStyles.eyebrow}>Audiobook</p>
+            <h1 id="audiobook-title">{book.title}</h1>
+            <p className={audioStyles.narrator}><span>Read by</span>{edition.narratorName}</p>
+            {description && showDescription && <p className={audioStyles.description}>{description}</p>}
+            <div className={audioStyles.editionFacts} aria-label="Audiobook details">
+              <span>{edition.tracks.length} chapter{edition.tracks.length === 1 ? "" : "s"}</span>
+              <span>{formatEditionLength(totalDuration)}</span>
+            </div>
           </div>
-        </div>
-      </section>
-      <AudioEditionPlayer
-        edition={playerEdition}
-        bookSlug={book.slug}
-        candidatePreviewKey={candidatePreviewKey}
-      />
+        </section>
+        <AudioEditionPlayer
+          edition={playerEdition}
+          bookSlug={book.slug}
+          candidatePreviewKey={candidatePreviewKey}
+        />
+      </div>
     </article>
   );
 }

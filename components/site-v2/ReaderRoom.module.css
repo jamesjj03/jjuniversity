@@ -1,0 +1,639 @@
+/* The public Reader is a destination, not another page inside the site shell. */
+:global(.jjuSiteV2Route):has(.readerRoomRoute) {
+  min-height: 100svh;
+  overflow: visible;
+  background:
+    radial-gradient(circle at 50% -12rem, rgba(211, 163, 76, 0.1), transparent 38rem),
+    linear-gradient(180deg, #10151c 0%, #090d13 58%, #070a0e 100%);
+}
+
+:global(.jjuSiteV2Route):has(.readerRoomRoute)::before,
+:global(.jjuSiteV2Route):has(.readerRoomRoute)::after {
+  opacity: 0.035;
+}
+
+:global(.jjuSiteV2Route):has(.readerRoomRoute) > header,
+:global(.jjuSiteV2Route):has(.readerRoomRoute) > footer {
+  display: none !important;
+}
+
+:global(.jjuSiteV2Route):has(.readerRoomRoute) > main {
+  min-height: 100svh;
+}
+
+.readerRoomRoute {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.readerRoomRoute :global(.siteV2Reader.readerPageV2) {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100svh;
+  margin: 0 !important;
+  padding: 0 0 clamp(42px, 7vw, 96px) !important;
+}
+
+/* One compact shelf holds identity, movement, tools, and the progress line. */
+.readerRoomRoute :global(.siteV2Reader .readerStickyChrome) {
+  position: sticky;
+  top: 0;
+  z-index: 190;
+  display: block;
+  min-height: 67px;
+  border-bottom: 1px solid rgba(221, 184, 111, 0.24);
+  background: rgba(11, 15, 21, 0.965);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(18px) saturate(115%);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerStickyChrome .readerCommandBarCompact) {
+  position: relative !important;
+  top: auto !important;
+  z-index: auto !important;
+  display: grid;
+  grid-template-columns: auto minmax(180px, 1fr) auto auto !important;
+  gap: 11px;
+  align-items: center;
+  width: min(calc(100% - 24px), 1500px);
+  min-height: 64px;
+  margin: 0 auto !important;
+  padding: 7px 0 9px !important;
+  overflow: visible;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerBackLink) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 76px;
+  min-height: 44px;
+  padding: 0 12px !important;
+  border-color: rgba(221, 184, 111, 0.24) !important;
+  color: #eee6d5 !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  font-size: 13px;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerBackLink > span:first-child) {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTitleBlock) {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.1;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTitleBlock .kicker) {
+  overflow: hidden;
+  margin: 0 !important;
+  color: #a99f91 !important;
+  font-size: 9px !important;
+  letter-spacing: 0.1em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTitleBlock h1) {
+  overflow: hidden;
+  margin: 0 !important;
+  color: #f4eddf !important;
+  font-size: 20px !important;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTitleBlock .readerCurrentPageTitle) {
+  display: block;
+  overflow: hidden;
+  color: #bcb2a4 !important;
+  font: 650 11px/1.15 var(--v2-ui);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTopPager) {
+  display: grid;
+  grid-template-columns: 42px auto 42px;
+  gap: 2px;
+  align-items: center;
+  height: 44px;
+  overflow: hidden;
+  border: 1px solid rgba(221, 184, 111, 0.25);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTopPager button),
+.readerRoomRoute :global(.siteV2Reader .readerTopPager > span) {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  color: #f3ebdc;
+  background: transparent;
+  font: 800 13px/1 var(--v2-ui);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTopPager button) {
+  font-size: 25px;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTopPager button:hover:not(:disabled)) {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTopPager button:disabled) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTopPager > span) {
+  grid-auto-flow: column;
+  gap: 1px;
+  min-width: 58px;
+  border-inline: 1px solid rgba(221, 184, 111, 0.18);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerTopPager small) {
+  color: #9e9589;
+  font-size: 10px;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerCompactActions) {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: repeat(4, max-content) !important;
+  gap: 5px;
+  width: auto;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerCompactActions .readerToolBtn),
+.readerRoomRoute :global(.siteV2Reader .readerCompactActions .readerTextMenu > summary) {
+  display: grid;
+  place-items: center;
+  width: auto;
+  min-width: 58px;
+  min-height: 44px;
+  padding: 0 10px;
+  border-color: rgba(221, 184, 111, 0.24) !important;
+  color: #eee6d5 !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  font-size: 11px;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerCompactActions .primaryTool) {
+  border-color: #d6a84f !important;
+  color: #15181d !important;
+  background: #d6a84f !important;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerProgressCompact) {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  display: block;
+  height: 3px;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerProgressCompact .readerProgressTrack) {
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerProgressCompact .readerProgressTrack span) {
+  display: block;
+  height: 100%;
+  background: #d6a84f;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerProgressSummary) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* The dark stage is the room; the theme-aware document is the book. */
+.readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench),
+.readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench.chaptersClosed),
+.readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench.studyClosed) {
+  display: block !important;
+  width: 100%;
+  min-height: calc(100svh - 67px);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerStageV2) {
+  display: grid !important;
+  width: 100%;
+  min-height: calc(100svh - 67px);
+  padding: clamp(22px, 4vh, 46px) clamp(18px, 4vw, 64px) clamp(40px, 7vh, 84px);
+  scroll-margin-top: 76px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerFrameWrapV2.readerInlineSurface) {
+  --reader-page: #f1e6d2;
+  --reader-text: #282118;
+  --reader-muted: #706352;
+  --reader-heading: #17130f;
+  --reader-link: #81560f;
+  --reader-rule: rgba(92, 66, 25, 0.28);
+  width: 100%;
+  min-height: 0;
+  overflow: visible;
+  color: var(--reader-text);
+  background: transparent !important;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerFrameWrapV2.readerInlineSurface[data-reader-theme="light"]) {
+  --reader-page: #fbfaf6;
+  --reader-text: #202020;
+  --reader-muted: #606060;
+  --reader-heading: #080808;
+  --reader-link: #754f0d;
+  --reader-rule: rgba(91, 67, 27, 0.24);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerFrameWrapV2.readerInlineSurface[data-reader-theme="night"]) {
+  --reader-page: #10161e;
+  --reader-text: #dce6f2;
+  --reader-muted: #9eafc2;
+  --reader-heading: #f8fbff;
+  --reader-link: #88bfff;
+  --reader-rule: rgba(136, 191, 255, 0.24);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument) {
+  --reader-font-size: 21px;
+  --reader-line-height: 1.72;
+  --reader-page-width: 900px;
+  box-sizing: border-box;
+  width: min(100%, var(--reader-page-width));
+  max-width: none;
+  min-height: calc(100svh - 150px);
+  margin: 0 auto;
+  padding: clamp(44px, 5vh, 64px) clamp(38px, 5.5vw, 76px) clamp(70px, 8vh, 104px);
+  scroll-margin-top: 78px;
+  border: 1px solid color-mix(in srgb, var(--reader-rule) 76%, transparent);
+  border-radius: 2px;
+  color: var(--reader-text);
+  background: var(--reader-page);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.025),
+    0 24px 70px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(0, 0, 0, 0.18);
+  font-size: var(--reader-font-size);
+  line-height: var(--reader-line-height);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument[data-reader-width="focused"]) {
+  --reader-page-width: 760px;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument[data-reader-width="wide"]) {
+  --reader-page-width: 1060px;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument .sectionHeader) {
+  margin-bottom: clamp(28px, 4vh, 42px);
+  padding-bottom: 16px;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument .sectionTitle) {
+  font-size: clamp(38px, 4.8vw, 62px);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument.kind-title) {
+  --reader-page-width: 1060px;
+  min-height: calc(100svh - 112px);
+  padding: clamp(30px, 4vh, 46px) clamp(30px, 4vw, 58px);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverPage) {
+  grid-template-columns: minmax(210px, 38%) minmax(0, 1fr);
+  gap: clamp(30px, 5vw, 64px);
+  min-height: 0;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverImage) {
+  width: 100%;
+  max-height: min(520px, calc(100svh - 198px));
+  object-fit: contain;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverText h1) {
+  font-size: clamp(42px, 5vw, 72px);
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerPageNavigationBottom) {
+  width: min(100%, 900px);
+  margin-top: 24px;
+}
+
+.readerRoomRoute :global(.siteV2Reader .readerPageNavigationBottom button),
+.readerRoomRoute :global(.siteV2Reader .readerPageNavigationBottom > span) {
+  border-color: rgba(221, 184, 111, 0.22);
+  color: #e9e1d3;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.readerRoomRoute :global(.siteV2Reader:fullscreen .readerStickyChrome),
+.readerRoomRoute :global(.siteV2Reader.readerFullscreenFallback .readerStickyChrome) {
+  top: 0;
+}
+
+.readerRoomRoute :global(.siteV2Reader:fullscreen .readerInlineDocument),
+.readerRoomRoute :global(.siteV2Reader.readerFullscreenFallback .readerInlineDocument) {
+  scroll-margin-top: 78px;
+}
+
+/* At tablet and scaled-laptop widths, identity and movement stay above tools. */
+@media (max-width: 1080px) {
+  .readerRoomRoute :global(.siteV2Reader .readerStickyChrome) {
+    min-height: 111px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerStickyChrome .readerCommandBarCompact) {
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    grid-template-rows: 48px 47px;
+    gap: 5px 9px;
+    min-height: 108px;
+    padding-block: 5px 8px !important;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerBackLink) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerTitleBlock) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerTopPager) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerCompactActions) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    width: 100%;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerCompactActions .readerToolBtn),
+  .readerRoomRoute :global(.siteV2Reader .readerCompactActions .readerTextMenu > summary) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench),
+  .readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerStageV2) {
+    min-height: calc(100svh - 111px);
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerStageV2) {
+    padding: clamp(18px, 3vh, 34px) clamp(14px, 3vw, 34px) clamp(34px, 6vh, 70px);
+    scroll-margin-top: 120px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument) {
+    min-height: calc(100svh - 164px);
+    scroll-margin-top: 120px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument.kind-title) {
+    min-height: calc(100svh - 150px);
+  }
+
+  .readerRoomRoute :global(.siteV2Reader:fullscreen .readerInlineDocument),
+  .readerRoomRoute :global(.siteV2Reader.readerFullscreenFallback .readerInlineDocument) {
+    scroll-margin-top: 120px;
+  }
+}
+
+@media (max-width: 860px) {
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument.kind-title) {
+    --reader-page-width: 700px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverPage) {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverImage) {
+    width: min(290px, 58vw);
+    max-height: none;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverSubtitle),
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverCreator) {
+    text-align: center;
+  }
+}
+
+@media (max-width: 680px) {
+  .readerRoomRoute :global(.siteV2Reader.readerPageV2) {
+    padding-bottom: 44px !important;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerStickyChrome) {
+    min-height: 105px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerStickyChrome .readerCommandBarCompact) {
+    width: calc(100% - 16px);
+    grid-template-columns: 44px minmax(0, 1fr) auto !important;
+    grid-template-rows: 45px 45px;
+    gap: 4px 7px;
+    min-height: 102px;
+    padding-block: 4px 8px !important;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerBackLink) {
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 !important;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerBackText),
+  .readerRoomRoute :global(.siteV2Reader .readerTitleBlock .kicker) {
+    display: none;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerTitleBlock h1) {
+    font-size: 17px !important;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerTitleBlock .readerCurrentPageTitle) {
+    font-size: 10px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerTopPager) {
+    grid-template-columns: 36px auto 36px;
+    height: 42px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerTopPager button),
+  .readerRoomRoute :global(.siteV2Reader .readerTopPager > span) {
+    height: 40px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerTopPager > span) {
+    min-width: 44px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerCompactActions) {
+    gap: 4px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerCompactActions .readerToolBtn),
+  .readerRoomRoute :global(.siteV2Reader .readerCompactActions .readerTextMenu > summary) {
+    min-height: 44px;
+    padding-inline: 3px;
+    font-size: 10px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench),
+  .readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerStageV2) {
+    min-height: calc(100svh - 105px);
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerStageV2) {
+    padding: 10px 6px 34px;
+    scroll-margin-top: 112px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument) {
+    width: 100%;
+    min-height: calc(100svh - 125px);
+    padding: 34px 22px 64px;
+    scroll-margin-top: 112px;
+    border-radius: 1px;
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.32);
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .sectionHeader) {
+    margin-bottom: 28px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .sectionTitle) {
+    font-size: clamp(34px, 11vw, 48px);
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument.kind-title) {
+    min-height: 0;
+    padding: 28px 22px 44px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverPage) {
+    gap: 22px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverImage) {
+    width: min(250px, 72vw);
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverText h1) {
+    font-size: clamp(36px, 12vw, 52px);
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerPageNavigationBottom) {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 5px;
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerPageNavigationBottom .readerPageEdge) {
+    display: none;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerPageNavigationBottom button),
+  .readerRoomRoute :global(.siteV2Reader .readerPageNavigationBottom > span) {
+    min-height: 48px;
+    padding-inline: 7px;
+    font-size: 11px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerTextMenu > .readerTextPopover),
+  .readerRoomRoute :global(.siteV2Reader .readerSavePopover) {
+    position: fixed;
+    top: 112px;
+    right: 8px;
+    left: 8px;
+    width: auto;
+    max-height: calc(100svh - 120px);
+    transform: none;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerFullscreenButton) {
+    display: grid !important;
+    font-size: 9px !important;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader:fullscreen .readerInlineDocument),
+  .readerRoomRoute :global(.siteV2Reader.readerFullscreenFallback .readerInlineDocument) {
+    scroll-margin-top: 112px;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 861px) {
+  .readerRoomRoute :global(.siteV2Reader .readerCompactWorkbench .readerStageV2) {
+    padding-top: 18px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument) {
+    padding-top: 38px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument.kind-title) {
+    padding-block: 24px;
+  }
+
+  .readerRoomRoute :global(.siteV2Reader .readerInlineDocument .titleCoverImage) {
+    max-height: calc(100svh - 166px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .readerRoomRoute *,
+  .readerRoomRoute *::before,
+  .readerRoomRoute *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

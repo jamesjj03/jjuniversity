@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import SiteV2Cover from "@/components/site-v2/SiteV2Cover";
 import SiteV2CoverHistory from "@/components/site-v2/SiteV2CoverHistory";
 import SiteV2BookAccess from "@/components/site-v2/SiteV2BookAccess";
+import SiteV2SaveButton from "@/components/site-v2/SiteV2SaveButton";
 import SiteV2RelatedBooks from "@/components/site-v2/SiteV2RelatedBooks";
 import styles from "@/components/site-v2/SiteV2.module.css";
 import { getPublishedAudioEditionForBook } from "@/lib/audioCatalog";
@@ -58,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       imageAlt: `${book.title} cover`,
       type: "book",
     }),
-    robots: { index: false, follow: true },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -112,6 +113,9 @@ export default async function SiteV2BookPage({ params }: Props) {
         <div className={styles.bookHeroCoverColumn}>
           <div className={styles.bookHeroCover}>
             <SiteV2Cover src={siteV2CoverSrc(book)} fallbackSrc={coverFallbackSrc(book)} alt={`${book.title} cover`} priority sizes="(max-width: 700px) 76vw, 390px" />
+          </div>
+          <div className={styles.bookHeroSave}>
+            <SiteV2SaveButton bookId={book.id} compact />
           </div>
           <SiteV2CoverHistory key={book.id} bookId={book.id} bookTitle={book.title} />
         </div>

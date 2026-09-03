@@ -1,5 +1,8 @@
 import "server-only";
 
+import { getBookById } from "@/lib/publishing";
+import { readPublicationBookIndex, type PublicationBookIndex } from "@/lib/publicationEdition";
+import { siteV2CoverSrc } from "@/lib/siteV2";
 import { createSupabaseRequestClient } from "@/lib/supabaseServer";
 
 export type NarratorSubmissionView = {
@@ -8,9 +11,13 @@ export type NarratorSubmissionView = {
   trackPosition: number;
   trackTitle: string;
   fileName: string;
+  fileSizeBytes: number;
+  mimeType: string;
   status: string;
   uploadedAt: string;
+  narratorNote: string;
   narratorFeedback: string;
+  previewAudioUrl?: string;
 };
 
 export type NarratorTrackView = {
@@ -19,6 +26,8 @@ export type NarratorTrackView = {
   sectionKey: string;
   title: string;
   required: boolean;
+  readerHref: string;
+  readerLinkKind: "section" | "book" | "unavailable";
   latestSubmission: NarratorSubmissionView | null;
 };
 
@@ -28,6 +37,7 @@ export type NarratorAssignmentView = {
   bookId: string;
   bookTitle: string;
   bookSlug: string;
+  coverSrc: string;
   status: string;
   dueAt: string;
   brief: string;
@@ -99,7 +109,7 @@ export async function getNarratorPortalData(userId: string): Promise<NarratorPor
     assignments.length
       ? supabase
         .from("narrator_submissions")
-        .select("id,assignment_id,audio_track_id,track_position,track_title,original_file_name,upload_status,uploaded_at,narrator_feedback")
+        .select("id,assignment_id,audio_track_id,track_position,track_title,original_file_name,file_size_bytes,mime_type,upload_status,uploaded_at,narrator_note,narrator_feedback")
         .in("assignment_id", assignments.map(row => String(row.id)))
         .order("created_at", { ascending: false })
       : Promise.resolve({ data: [], error: null }),
@@ -120,6 +130,14 @@ export async function getNarratorPortalData(userId: string): Promise<NarratorPor
 
   const editionById = new Map(editions.map(row => [String(row.id), row]));
   const bookById = new Map(((bookResult.data || []) as Row[]).map(row => [String(row.id), row]));
+  const publicationByBookId = new Map<string, PublicationBookIndex>();
+  await Promise.all(bookIds.map(async bookId => {
+    try {
+      publicationByBookId.set(bookId, await readPublicationBookIndex(bookId));
+    } catch {
+      // Some assigned books are private or have no current Reader edition.
+    }
+  }));
   const submissionsByAssignment = new Map<string, NarratorSubmissionView[]>();
   const latestSubmissionByAssignmentTrack = new Map<string, NarratorSubmissionView>();
   const latestHistoricalSubmissionByAssignmentTrack = new Map<string, NarratorSubmissionView>();
@@ -134,8 +152,11 @@ export async function getNarratorPortalData(userId: string): Promise<NarratorPor
       trackPosition: Number(row.track_position || 0),
       trackTitle: String(row.track_title || ""),
       fileName: String(row.original_file_name || ""),
+      fileSizeBytes: Number(row.file_size_bytes || 0),
+      mimeType: String(row.mime_type || ""),
       status: String(row.upload_status || ""),
       uploadedAt: String(row.uploaded_at || ""),
+      narratorNote: String(row.narrator_note || ""),
       narratorFeedback: String(row.narrator_feedback || ""),
     };
     list.push(submission);
@@ -168,23 +189,34 @@ export async function getNarratorPortalData(userId: string): Promise<NarratorPor
       const bookId = String(edition?.book_id || "");
       const book = bookById.get(bookId);
       const id = String(row.id || "");
+      const bookSlug = String(book?.slug || bookId);
+      const localBook = getBookById(bookId) || getBookById(bookSlug);
+      const publication = publicationByBookId.get(bookId);
       return {
         id,
         editionId,
         bookId,
         bookTitle: String(book?.title || bookId || "Assigned book"),
-        bookSlug: String(book?.slug || bookId),
+        bookSlug,
+        coverSrc: localBook ? siteV2CoverSrc(localBook) : "/branding/jju-logo.png",
         status: String(row.status || "offered"),
         dueAt: String(row.due_at || ""),
         brief: String(row.narrator_brief || ""),
         tracks: (tracksByEdition.get(editionId) || []).map(track => {
           const audioTrackId = String(track.id || "");
+          const sectionKey = String(track.section_key || "");
+          const title = String(track.title || "");
+          const publishedSection = publication?.sections.find(section => section.id === sectionKey && section.crawlable);
+          const readerHref = publishedSection?.path
+            || (publication ? `/books/${encodeURIComponent(bookSlug)}` : "");
           return {
             id: audioTrackId,
             position: Number(track.position || 0),
-            sectionKey: String(track.section_key || ""),
-            title: String(track.title || ""),
+            sectionKey,
+            title,
             required: track.required_for_submission !== false,
+            readerHref,
+            readerLinkKind: publishedSection ? "section" : publication ? "book" : "unavailable",
             latestSubmission: latestSubmissionByAssignmentTrack.get(`${id}:${audioTrackId}`)
               || latestHistoricalSubmissionByAssignmentTrack.get(`${id}:${audioTrackId}`)
               || null,

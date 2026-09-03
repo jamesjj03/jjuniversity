@@ -1,0 +1,123 @@
+.page,
+.page * {
+  box-sizing: border-box;
+}
+
+.page {
+  min-height: calc(100svh - 140px);
+  display: grid;
+  place-items: center;
+  padding: clamp(22px, 6vw, 72px) 16px;
+  color: #f4efe4;
+  background:
+    radial-gradient(circle at 20% 4%, rgba(215, 183, 101, 0.15), transparent 34%),
+    #0b0f0d;
+}
+
+.card {
+  width: min(100%, 560px);
+  padding: clamp(24px, 6vw, 46px);
+  border: 1px solid rgba(215, 183, 101, 0.38);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(26, 33, 27, 0.98), rgba(14, 18, 15, 0.99));
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.38);
+}
+
+.eyebrow {
+  margin: 0;
+  color: #d7b765;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.card h1 {
+  margin: 10px 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.3rem, 9vw, 4.4rem);
+  font-weight: 560;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+}
+
+.intro {
+  margin: 18px 0 0;
+  color: #b9b7ae;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.email {
+  margin: 13px 0 0;
+  color: #d7b765;
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.form {
+  display: grid;
+  gap: 15px;
+  margin-top: 26px;
+}
+
+.form label {
+  display: grid;
+  gap: 7px;
+  color: #c9c7bf;
+  font-size: 0.78rem;
+  font-weight: 740;
+}
+
+.form input {
+  width: 100%;
+  min-height: 52px;
+  padding: 11px 13px;
+  border: 1px solid rgba(244, 239, 228, 0.2);
+  border-radius: 11px;
+  background: #0a0d0b;
+  color: #f4efe4;
+  font: inherit;
+  font-size: 16px;
+}
+
+.form button {
+  min-height: 54px;
+  margin-top: 3px;
+  padding: 12px 18px;
+  border: 1px solid #d7b765;
+  border-radius: 11px;
+  background: #d7b765;
+  color: #17130b;
+  font: inherit;
+  font-weight: 820;
+  cursor: pointer;
+}
+
+.form button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+.form input:focus-visible,
+.form button:focus-visible {
+  outline: 3px solid #f0d58f;
+  outline-offset: 3px;
+}
+
+.message {
+  margin: 14px 0 0;
+  padding: 11px 13px;
+  border: 1px solid rgba(227, 118, 100, 0.42);
+  border-radius: 10px;
+  background: rgba(227, 118, 100, 0.1);
+  color: #f3b4aa;
+  line-height: 1.45;
+}
+
+.privacy {
+  margin: 18px 0 0;
+  color: #918f88;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}

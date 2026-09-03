@@ -1,15 +1,19 @@
 import { NextResponse } from "next/server";
 import {
   createNarratorAssignmentPlan,
+  inviteNarratorContact,
   NarratorAdminConflictError,
   NarratorAdminInputError,
   NarratorAdminUnavailableError,
+  reviewNarratorAccessRequest,
   reviewNarratorSubmission,
+  saveNarratorContact,
   saveNarratorProfile,
 } from "@/lib/narratorAdmin";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 const PRIVATE_HEADERS = {
   "Cache-Control": "private, no-store, max-age=0",
@@ -19,6 +23,11 @@ const PRIVATE_HEADERS = {
 
 type RequestBody = {
   action?: unknown;
+  contactId?: unknown;
+  contactEmail?: unknown;
+  source?: unknown;
+  notes?: unknown;
+  confirmedEmail?: unknown;
   userId?: unknown;
   displayName?: unknown;
   status?: unknown;
@@ -31,6 +40,7 @@ type RequestBody = {
   decision?: unknown;
   narratorFeedback?: unknown;
   reviewNote?: unknown;
+  requestId?: unknown;
 };
 
 function json(payload: Record<string, unknown>, status = 200) {
@@ -49,6 +59,36 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => null) as RequestBody | null;
     if (!body) return json({ error: "Invalid request." }, 400);
     const action = String(body.action || "");
+
+    if (action === "save-contact") {
+      const contact = await saveNarratorContact({
+        contactId: body.contactId,
+        displayName: body.displayName,
+        contactEmail: body.contactEmail,
+        source: body.source,
+        notes: body.notes,
+        expectedUpdatedAt: body.expectedUpdatedAt,
+      });
+      return json({ ok: true, contact }, body.contactId ? 200 : 201);
+    }
+
+    if (action === "review-access-request") {
+      const review = await reviewNarratorAccessRequest({
+        requestId: body.requestId,
+        expectedUpdatedAt: body.expectedUpdatedAt,
+        decision: body.decision,
+      });
+      return json({ ok: true, review });
+    }
+
+    if (action === "invite-contact") {
+      const invitation = await inviteNarratorContact({
+        contactId: body.contactId,
+        expectedUpdatedAt: body.expectedUpdatedAt,
+        confirmedEmail: body.confirmedEmail,
+      });
+      return json({ ok: true, invitation }, invitation.invitationSent ? 201 : 200);
+    }
 
     if (action === "save-profile") {
       const profile = await saveNarratorProfile({

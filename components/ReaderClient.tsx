@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseClient";
 import { coverWebpSrc } from "@/lib/cover";
-import { bookIdAliasFamily, canonicalBookId } from "@/lib/bookAliases";
+import { bookIdAliasFamily, canonicalBookId, slugifyBookRoute } from "@/lib/bookAliases";
 import {
   DEFAULT_PREFERENCES_V2,
   PREFERENCES_EVENT,
@@ -44,6 +44,9 @@ type BookContent = {
 
 type BookMeta = {
   id?: string;
+  title?: string;
+  slug?: string;
+  slugAliases?: string[];
   cover?: string;
   coverFile?: string;
 };
@@ -97,6 +100,26 @@ function editionAssetUrl(editionId: string, relativePath: string) {
     throw new Error("The published edition identity is invalid.");
   }
   return publicEditionAssetUrl(`editions/${cleanEditionId}/${relativePath}`);
+}
+
+function resolvePublishedBook(manifest: PublishedEditionManifest, requestedId: string) {
+  const canonicalRequestedId = canonicalBookId(requestedId);
+  const directMatch = (manifest.books || []).find(book => (
+    canonicalBookId(String(book.id || "")) === canonicalRequestedId
+  ));
+  if (directMatch) return directMatch;
+
+  const requestedSlug = slugifyBookRoute(requestedId);
+  if (!requestedSlug) return undefined;
+  const matchingCatalogIds = [...new Set((manifest.catalog || [])
+    .filter(book => [book.slug, ...(book.slugAliases || []), book.title]
+      .some(value => slugifyBookRoute(String(value || "")) === requestedSlug))
+    .map(book => canonicalBookId(String(book.id || "")))
+    .filter(Boolean))];
+  const matchingPublishedBooks = (manifest.books || []).filter(book => (
+    matchingCatalogIds.includes(canonicalBookId(String(book.id || "")))
+  ));
+  return matchingPublishedBooks.length === 1 ? matchingPublishedBooks[0] : undefined;
 }
 
 type BookAuditSource = {
@@ -1161,9 +1184,7 @@ export default function ReaderClient({
       }
 
       const canonicalRequestedId = canonicalBookId(id);
-      const publishedBook = (manifest.books || []).find(book => (
-        canonicalBookId(String(book.id || "")) === canonicalRequestedId
-      ));
+      const publishedBook = resolvePublishedBook(manifest, id);
       if (!publishedBook?.indexPath) throw new Error(`Book content unavailable for "${id}".`);
       const index = await fetch(editionAssetUrl(currentEditionId, publishedBook.indexPath)).then(async response => {
         const data = await response.json().catch(() => ({}));
@@ -2142,64 +2163,73 @@ export default function ReaderClient({
       <section className={`readerCommandBar ${compactReader ? "readerCommandBarCompact" : ""}`}>
         <Link className={`btn secondary ${compactReader ? "readerBackLink" : ""}`} href={libraryHref} aria-label={compactReader ? `Back to ${libraryLabel}` : undefined}>
           {compactReader && <span aria-hidden="true">←</span>}
-          <span className={compactReader ? "readerBackText" : undefined}>{compactReader ? `Back to ${libraryLabel}` : libraryLabel}</span>
+          <span className={compactReader ? "readerBackText" : undefined}>{libraryLabel}</span>
         </Link>
         <div className="readerTitleBlock">
           <p className="kicker">{status}{creator ? ` / ${creator}` : ""}</p>
           <h1>{title}</h1>
-          {!compactReader && <span>{section ? section.title : "Choose a book to start reading."}</span>}
+          <span className={compactReader ? "readerCurrentPageTitle" : undefined}>{section ? section.title : "Choose a book to start reading."}</span>
         </div>
         {compactReader ? (
-          <div className="readerTopActions readerCompactActions">
-            <button className="readerToolBtn" type="button" onClick={toggleChapterDrawer} aria-expanded={chapterDrawerOpen} aria-controls={chapterPanelId}>Contents</button>
-            <details
-              ref={sizeMenuRef}
-              className="readerTextMenu"
-              onToggle={event => {
-                if (!event.currentTarget.open) return;
-                setChapterDrawerOpen(false);
-                setSettingsOpen(false);
-              }}
-            >
-              <summary>Text</summary>
-              <div className="readerTextPopover" aria-label="Reading text settings">
-                <strong>Reading text</strong>
-                <label>
-                  <span>Appearance</span>
-                  <select value={preferences.readerTheme} onChange={event => patchPreferences({ readerTheme: event.target.value as PreferencesV2["readerTheme"] })}>
-                    {READER_THEME_OPTIONS.map(readerTheme => <option key={readerTheme} value={readerTheme}>{READER_THEME_LABELS[readerTheme]}</option>)}
-                  </select>
-                </label>
-                <label>
-                  <span>Typeface</span>
-                  <select value={preferences.readerFont} onChange={event => patchPreferences({ readerFont: event.target.value as PreferencesV2["readerFont"] })}>
-                    {READER_FONT_OPTIONS.map(readerFont => <option key={readerFont} value={readerFont}>{READER_FONT_LABELS[readerFont]}</option>)}
-                  </select>
-                </label>
-                <label>
-                  <span>Size</span>
-                  <select value={preferences.readerSize} onChange={event => patchPreferences({ readerSize: event.target.value as PreferencesV2["readerSize"] })}>
-                    {READER_SIZE_OPTIONS.map(readerSize => <option key={readerSize} value={readerSize}>{READER_SIZE_LABELS[readerSize]} ({READER_SIZE_PIXELS[readerSize]}px)</option>)}
-                  </select>
-                </label>
-                <label>
-                  <span>Spacing</span>
-                  <select value={preferences.readerSpacing} onChange={event => patchPreferences({ readerSpacing: event.target.value as PreferencesV2["readerSpacing"] })}>
-                    {READER_SPACING_OPTIONS.map(readerSpacing => <option key={readerSpacing} value={readerSpacing}>{READER_SPACING_LABELS[readerSpacing]}</option>)}
-                  </select>
-                </label>
-                <label>
-                  <span>Width</span>
-                  <select value={preferences.readerWidth} onChange={event => patchPreferences({ readerWidth: event.target.value as PreferencesV2["readerWidth"] })}>
-                    {READER_WIDTH_OPTIONS.map(readerWidth => <option key={readerWidth} value={readerWidth}>{READER_WIDTH_LABELS[readerWidth]}</option>)}
-                  </select>
-                </label>
-              </div>
-            </details>
-            <button ref={toolsTriggerRef} className="readerToolBtn primaryTool" type="button" onPointerDown={() => { captureQuoteSelection(); }} onClick={toggleTools} aria-expanded={settingsOpen} aria-controls={settingsPanelId}>Save</button>
-            <button className="readerToolBtn readerFullscreenButton" type="button" onClick={toggleFullscreen} aria-label={fullscreenActive || fullscreenFallbackActive ? "Exit full screen" : "Enter full screen"} aria-pressed={fullscreenActive || fullscreenFallbackActive}>
-              {fullscreenActive || fullscreenFallbackActive ? "Exit" : "Full screen"}
-            </button>
+          <>
+            {!!visibleSections.length && (
+              <nav className="readerTopPager" aria-label="Page navigation">
+                <button type="button" onClick={() => prevSection("smart")} disabled={sectionIndex === 0} aria-label="Previous page"><span aria-hidden="true">‹</span></button>
+                <span aria-live="polite"><strong>{sectionIndex + 1}</strong><small>/{visibleSections.length}</small></span>
+                <button type="button" onClick={() => nextSection("smart")} disabled={sectionIndex === visibleSections.length - 1} aria-label="Next page"><span aria-hidden="true">›</span></button>
+              </nav>
+            )}
+            <div className="readerTopActions readerCompactActions">
+              <button className="readerToolBtn" type="button" onClick={toggleChapterDrawer} aria-expanded={chapterDrawerOpen} aria-controls={chapterPanelId}>Contents</button>
+              <details
+                ref={sizeMenuRef}
+                className="readerTextMenu"
+                onToggle={event => {
+                  if (!event.currentTarget.open) return;
+                  setChapterDrawerOpen(false);
+                  setSettingsOpen(false);
+                }}
+              >
+                <summary>Text</summary>
+                <div className="readerTextPopover" aria-label="Reading text settings">
+                  <strong>Reading text</strong>
+                  <label>
+                    <span>Appearance</span>
+                    <select value={preferences.readerTheme} onChange={event => patchPreferences({ readerTheme: event.target.value as PreferencesV2["readerTheme"] })}>
+                      {READER_THEME_OPTIONS.map(readerTheme => <option key={readerTheme} value={readerTheme}>{READER_THEME_LABELS[readerTheme]}</option>)}
+                    </select>
+                  </label>
+                  <label>
+                    <span>Typeface</span>
+                    <select value={preferences.readerFont} onChange={event => patchPreferences({ readerFont: event.target.value as PreferencesV2["readerFont"] })}>
+                      {READER_FONT_OPTIONS.map(readerFont => <option key={readerFont} value={readerFont}>{READER_FONT_LABELS[readerFont]}</option>)}
+                    </select>
+                  </label>
+                  <label>
+                    <span>Size</span>
+                    <select value={preferences.readerSize} onChange={event => patchPreferences({ readerSize: event.target.value as PreferencesV2["readerSize"] })}>
+                      {READER_SIZE_OPTIONS.map(readerSize => <option key={readerSize} value={readerSize}>{READER_SIZE_LABELS[readerSize]} ({READER_SIZE_PIXELS[readerSize]}px)</option>)}
+                    </select>
+                  </label>
+                  <label>
+                    <span>Spacing</span>
+                    <select value={preferences.readerSpacing} onChange={event => patchPreferences({ readerSpacing: event.target.value as PreferencesV2["readerSpacing"] })}>
+                      {READER_SPACING_OPTIONS.map(readerSpacing => <option key={readerSpacing} value={readerSpacing}>{READER_SPACING_LABELS[readerSpacing]}</option>)}
+                    </select>
+                  </label>
+                  <label>
+                    <span>Width</span>
+                    <select value={preferences.readerWidth} onChange={event => patchPreferences({ readerWidth: event.target.value as PreferencesV2["readerWidth"] })}>
+                      {READER_WIDTH_OPTIONS.map(readerWidth => <option key={readerWidth} value={readerWidth}>{READER_WIDTH_LABELS[readerWidth]}</option>)}
+                    </select>
+                  </label>
+                </div>
+              </details>
+              <button ref={toolsTriggerRef} className="readerToolBtn primaryTool" type="button" onPointerDown={() => { captureQuoteSelection(); }} onClick={toggleTools} aria-expanded={settingsOpen} aria-controls={settingsPanelId}>Save</button>
+              <button className="readerToolBtn readerFullscreenButton" type="button" onClick={toggleFullscreen} aria-label={fullscreenActive || fullscreenFallbackActive ? "Exit full screen" : "Enter full screen"} aria-pressed={fullscreenActive || fullscreenFallbackActive}>
+                {fullscreenActive || fullscreenFallbackActive ? "Exit" : "Full screen"}
+              </button>
+            </div>
             {settingsOpen && (
               <section ref={toolsPanelRef} id={settingsPanelId} className="readerSavePopover" aria-label="Save this page">
                 <header>
@@ -2283,7 +2313,7 @@ export default function ReaderClient({
                 </details>
               </section>
             )}
-          </div>
+          </>
         ) : (
           <div className="readerTopActions">
             <button className="readerToolBtn" type="button" onClick={() => setChapterDrawerOpen(open => !open)} aria-expanded={chapterDrawerOpen} aria-controls={chapterPanelId}>Contents</button>
@@ -2301,8 +2331,7 @@ export default function ReaderClient({
           <div className="readerProgressTrack" role="progressbar" aria-label="Reading progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pageProgressPercent}>
             <span style={{ width: `${pageProgressPercent}%` }} />
           </div>
-          <span>{pageProgressPercent}% complete</span>
-          <span>{remainingMinutes ? `About ${remainingMinutes} minutes left` : "Last page"}</span>
+          <span className="readerProgressSummary">{pageProgressPercent}% complete · {remainingMinutes ? `About ${remainingMinutes} minutes left` : "Last page"}</span>
         </section>
       ) : (
         <section className="readerProgressPanel readerProgressPanelV2">
@@ -2325,15 +2354,6 @@ export default function ReaderClient({
         </section>
       ))}
 
-      {compactReader && !!visibleSections.length && (
-        <nav className="readerPageNavigation readerPageNavigationTop" aria-label="Page navigation above the text">
-          <button className="readerPageEdge" type="button" onClick={() => jumpToSection(0, "smart")} disabled={sectionIndex === 0}>First</button>
-          <button type="button" onClick={() => prevSection("smart")} disabled={sectionIndex === 0}>Previous page</button>
-          <span aria-live="polite">Page {sectionIndex + 1} of {visibleSections.length}</span>
-          <button type="button" onClick={() => nextSection("smart")} disabled={sectionIndex === visibleSections.length - 1}>Next page</button>
-          <button className="readerPageEdge" type="button" onClick={() => jumpToSection(visibleSections.length - 1, "smart")} disabled={sectionIndex === visibleSections.length - 1}>Last</button>
-        </nav>
-      )}
       </div>
 
       {!compactReader && settingsOpen ? (

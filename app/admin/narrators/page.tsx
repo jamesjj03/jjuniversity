@@ -45,8 +45,8 @@ export default async function NarratorControlRoomPage() {
       <header className={styles.pageHeader}>
         <div>
           <p className={styles.eyebrow}>Workshop · Narrator control room</p>
-          <h1>Set up the work. Keep release separate.</h1>
-          <p className={styles.intro}>Activate an existing account, pin an audiobook plan to the exact Reader manuscript, listen to private submissions, and send track-level notes.</p>
+          <h1>Add the person. Set up the work.</h1>
+          <p className={styles.intro}>Keep a private narrator roster, send access deliberately, pin each audiobook plan to the exact Reader manuscript, and listen to submissions before anything moves toward release.</p>
         </div>
         <GuardedAdminLink className={styles.backLink} href="/admin">Back to Workshop</GuardedAdminLink>
       </header>

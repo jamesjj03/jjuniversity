@@ -93,22 +93,27 @@ export function audioCatalogEnabled() {
   return process.env.JJU_AUDIO_CATALOG_ENABLED === "1";
 }
 
+function tacosQaPreviewEnvironmentEnabled() {
+  return process.env.VERCEL_ENV === "preview"
+    || (process.env.NODE_ENV === "development" && process.env.JJU_AUDIO_LOCAL_PREVIEW === "1");
+}
+
 function tacosQaPreviewBookEnabled(bookId: string) {
   return audioCatalogEnabled()
-    && process.env.VERCEL_ENV === "preview"
+    && tacosQaPreviewEnvironmentEnabled()
     && bookId.trim().toLowerCase() === TACOS_BOOK_ID;
 }
 
 function tacosQaPreviewEditionEnabled(editionId: string) {
   return audioCatalogEnabled()
-    && process.env.VERCEL_ENV === "preview"
+    && tacosQaPreviewEnvironmentEnabled()
     && editionId.trim().toLowerCase() === TACOS_AUDIO_EDITION_ID;
 }
 
 export function getAudioCandidatePreviewKey(bookId: string, editionId: string) {
   if (
     !audioCatalogEnabled()
-    || process.env.VERCEL_ENV !== "preview"
+    || !tacosQaPreviewEnvironmentEnabled()
     || bookId.trim().toLowerCase() !== TACOS_BOOK_ID
     || editionId.trim().toLowerCase() !== TACOS_AUDIO_EDITION_ID
   ) return null;

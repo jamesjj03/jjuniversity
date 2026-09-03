@@ -35,3 +35,7 @@ content_path = "./supabase/templates/confirmation.html"
 [auth.email.template.recovery]
 subject = "Reset your JJ University password"
 content_path = "./supabase/templates/recovery.html"
+
+[auth.email.template.invite]
+subject = "Your private JJ University narrator desk"
+content_path = "./supabase/templates/invite.html"

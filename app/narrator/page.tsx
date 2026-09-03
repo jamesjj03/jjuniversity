@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import NarratorPortalClient from "./NarratorPortalClient";
 import { getNarratorPortalData, narratorPortalEnabled } from "@/lib/narratorPortal";
+import { getNarratorPortalPreviewData } from "@/lib/narratorPortalPreview";
 import { createSupabaseRequestClient, hasSupabaseServerConfig } from "@/lib/supabaseServer";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +14,10 @@ export const metadata: Metadata = {
 };
 
 export default async function NarratorPage() {
+  if (process.env.NODE_ENV === "development" && process.env.JJU_NARRATOR_LOCAL_PREVIEW !== "0") {
+    return <NarratorPortalClient initialData={getNarratorPortalPreviewData()} previewMode />;
+  }
+
   if (!narratorPortalEnabled() || !hasSupabaseServerConfig()) notFound();
 
   const supabase = await createSupabaseRequestClient();

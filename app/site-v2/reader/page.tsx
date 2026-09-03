@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ReaderClient from "@/components/ReaderClient";
 import styles from "@/components/site-v2/SiteV2.module.css";
+import readerRoomStyles from "@/components/site-v2/ReaderRoom.module.css";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -20,7 +21,7 @@ export default async function SiteV2ReaderPage({
   const restartQuery = Array.isArray(query.restart) ? query.restart[0] || "" : query.restart || "";
 
   return (
-    <div className={styles.readerRoute}>
+    <div className={`${styles.readerRoute} ${readerRoomStyles.readerRoomRoute}`}>
       <ReaderClient
         key={`${bookQuery}:${restartQuery}`}
         bookQuery={bookQuery}

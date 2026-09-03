@@ -1,14 +1,21 @@
 import "server-only";
 
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
+import type { User } from "@supabase/supabase-js";
 import { readAdminBookCatalog } from "@/lib/adminBookCatalog";
 import { readAdminBookContent } from "@/lib/adminBookContent";
+import { narratorRequestNotificationConfigured } from "@/lib/narratorAccessRequests";
+import { SITE_URL } from "@/lib/publishing";
 import { createSupabaseAdminClient, hasSupabaseAdminConfig } from "@/lib/supabaseAdmin";
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const PROFILE_STATUSES = new Set(["invited", "active", "paused", "closed"]);
-const REVIEWABLE_STATUSES = new Set(["uploaded", "in-review"]);
+const INVITABLE_CONTACT_STATUSES = new Set(["contact", "invite-pending", "repair-needed"]);
+const REVIEWABLE_STATUSES = new Set(["in-review"]);
 const INTAKE_BUCKET = "narrator-audio-intake";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const INVITE_RETRY_LEASE_MS = 10 * 60 * 1000;
+const INVITE_RECOVERY_WINDOW_MS = 50 * 60 * 1000;
 
 type Row = Record<string, unknown>;
 
@@ -24,6 +31,33 @@ export type NarratorAdminProfile = {
   displayName: string;
   contactEmail: string;
   status: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type NarratorAdminContact = {
+  id: string;
+  displayName: string;
+  contactEmail: string;
+  source: string;
+  notes: string;
+  status: string;
+  authUserId: string;
+  inviteSentAt: string;
+  inviteRetryLocked: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type NarratorAdminAccessRequest = {
+  id: string;
+  displayName: string;
+  contactEmail: string;
+  note: string;
+  status: string;
+  notificationStatus: string;
+  linkedContactId: string;
+  reviewedAt: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -97,8 +131,14 @@ export type NarratorAdminBook = {
 export type NarratorAdminSnapshot = {
   available: boolean;
   portalEnabled: boolean;
+  invitesEnabled: boolean;
+  contactsAvailable: boolean;
+  accessRequestsAvailable: boolean;
+  requestNotificationConfigured: boolean;
   message: string;
   accounts: NarratorAdminAccount[];
+  contacts: NarratorAdminContact[];
+  accessRequests: NarratorAdminAccessRequest[];
   profiles: NarratorAdminProfile[];
   books: NarratorAdminBook[];
   editions: NarratorAdminEdition[];
@@ -109,6 +149,11 @@ export type NarratorAdminSnapshot = {
 export class NarratorAdminInputError extends Error {}
 export class NarratorAdminConflictError extends Error {}
 export class NarratorAdminUnavailableError extends Error {}
+
+export function narratorInvitesEnabled() {
+  return process.env.JJU_NARRATOR_PORTAL_ENABLED === "1"
+    && process.env.JJU_NARRATOR_INVITES_ENABLED === "1";
+}
 
 function cleanText(value: unknown, maxLength: number) {
   return String(value || "").replace(/\s+/g, " ").trim().slice(0, maxLength);
@@ -126,6 +171,12 @@ function requiredUuid(value: unknown, label: string) {
   return id;
 }
 
+function optionalEmail(value: unknown) {
+  const email = cleanText(value, 254).toLowerCase();
+  if (email && !EMAIL_PATTERN.test(email)) throw new NarratorAdminInputError("Email address is invalid.");
+  return email;
+}
+
 function isMissingAudioFoundation(error: unknown) {
   const record = error && typeof error === "object" ? error as Row : {};
   const code = String(record.code || "");
@@ -133,6 +184,27 @@ function isMissingAudioFoundation(error: unknown) {
   return code === "42P01"
     || code === "PGRST205"
     || /(?:narrator_profiles|audio_editions|audio_tracks|narrator_assignments|narrator_submissions).*does not exist/i.test(message);
+}
+
+function isMissingNarratorContacts(error: unknown) {
+  const record = error && typeof error === "object" ? error as Row : {};
+  const code = String(record.code || "");
+  const message = String(record.message || "");
+  return code === "42P01"
+    || code === "PGRST205"
+    || /narrator_contacts.*does not exist/i.test(message)
+    || /could not find.*narrator_contacts/i.test(message);
+}
+
+function isMissingNarratorAccessRequests(error: unknown) {
+  const record = error && typeof error === "object" ? error as Row : {};
+  const code = String(record.code || "");
+  const message = String(record.message || "");
+  return code === "42P01"
+    || code === "PGRST202"
+    || code === "PGRST205"
+    || /narrator_access_requests.*does not exist/i.test(message)
+    || /could not find.*narrator_access_requests/i.test(message);
 }
 
 function parseContentVersion(version: string) {
@@ -187,8 +259,14 @@ function emptySnapshot(message: string): NarratorAdminSnapshot {
   return {
     available: false,
     portalEnabled: process.env.JJU_NARRATOR_PORTAL_ENABLED === "1",
+    invitesEnabled: narratorInvitesEnabled(),
+    contactsAvailable: false,
+    accessRequestsAvailable: false,
+    requestNotificationConfigured: narratorRequestNotificationConfigured(),
     message,
     accounts: [],
+    contacts: [],
+    accessRequests: [],
     profiles: [],
     books: [],
     editions: [],
@@ -203,9 +281,11 @@ export async function readNarratorAdminSnapshot(): Promise<NarratorAdminSnapshot
   }
 
   const supabase = createSupabaseAdminClient();
-  const [accounts, catalog, profilesResult, editionsResult, tracksResult, assignmentsResult, submissionsResult] = await Promise.all([
+  const [accounts, catalog, contactsResult, accessRequestsResult, profilesResult, editionsResult, tracksResult, assignmentsResult, submissionsResult] = await Promise.all([
     listConfirmedAccounts(),
     readAdminBookCatalog(),
+    supabase.from("narrator_contacts").select("id,display_name,contact_email,source,notes,status,auth_user_id,invite_sent_at,invite_attempt_started_at,created_at,updated_at").order("created_at"),
+    supabase.from("narrator_access_requests").select("id,display_name,contact_email,note,status,notification_status,linked_contact_id,reviewed_at,created_at,updated_at").order("created_at", { ascending: false }),
     supabase.from("narrator_profiles").select("user_id,display_name,contact_email,status,created_at,updated_at").order("display_name"),
     supabase.from("audio_editions").select("id,book_id,edition_key,narrator_name,status,source_content_version,source_content_sha256,created_at,updated_at").order("created_at", { ascending: false }),
     supabase.from("audio_tracks").select("id,edition_id,position,section_key,title,required_for_submission,status").order("position"),
@@ -213,6 +293,14 @@ export async function readNarratorAdminSnapshot(): Promise<NarratorAdminSnapshot
     supabase.from("narrator_submissions").select("id,assignment_id,narrator_user_id,audio_track_id,track_position,track_title,original_file_name,mime_type,file_size_bytes,upload_status,narrator_note,narrator_feedback,review_note,uploaded_at,reviewed_at,updated_at").order("created_at", { ascending: false }),
   ]);
 
+  const contactsAvailable = !contactsResult.error;
+  const accessRequestsAvailable = !accessRequestsResult.error;
+  if (contactsResult.error && !isMissingNarratorContacts(contactsResult.error)) {
+    throw new NarratorAdminUnavailableError(`Could not read the narrator roster: ${contactsResult.error.message}`);
+  }
+  if (accessRequestsResult.error && !isMissingNarratorAccessRequests(accessRequestsResult.error)) {
+    throw new NarratorAdminUnavailableError(`Could not read narrator access requests: ${accessRequestsResult.error.message}`);
+  }
   const firstError = profilesResult.error || editionsResult.error || tracksResult.error || assignmentsResult.error || submissionsResult.error;
   if (firstError) {
     if (isMissingAudioFoundation(firstError)) {
@@ -227,6 +315,33 @@ export async function readNarratorAdminSnapshot(): Promise<NarratorAdminSnapshot
     status: String(book.status || ""),
     visibility: String(book.visibility || ""),
   })).filter(book => book.id).sort((a, b) => a.title.localeCompare(b.title));
+  const contacts = (((contactsResult.data || []) as Row[]).map(row => ({
+    id: String(row.id || ""),
+    displayName: String(row.display_name || "Narrator"),
+    contactEmail: String(row.contact_email || ""),
+    source: String(row.source || ""),
+    notes: String(row.notes || ""),
+    status: String(row.status || "contact"),
+    authUserId: String(row.auth_user_id || ""),
+    inviteSentAt: String(row.invite_sent_at || ""),
+    inviteRetryLocked: String(row.status || "") === "invite-pending"
+      && Number.isFinite(new Date(String(row.invite_attempt_started_at || "")).getTime())
+      && Date.now() - new Date(String(row.invite_attempt_started_at || "")).getTime() < INVITE_RETRY_LEASE_MS,
+    createdAt: String(row.created_at || ""),
+    updatedAt: String(row.updated_at || ""),
+  })) satisfies NarratorAdminContact[]);
+  const accessRequests = (((accessRequestsResult.data || []) as Row[]).map(row => ({
+    id: String(row.id || ""),
+    displayName: String(row.display_name || "Narrator"),
+    contactEmail: String(row.contact_email || ""),
+    note: String(row.note || ""),
+    status: String(row.status || "pending"),
+    notificationStatus: String(row.notification_status || "pending"),
+    linkedContactId: String(row.linked_contact_id || ""),
+    reviewedAt: String(row.reviewed_at || ""),
+    createdAt: String(row.created_at || ""),
+    updatedAt: String(row.updated_at || ""),
+  })) satisfies NarratorAdminAccessRequest[]);
   const bookById = new Map(books.map(book => [book.id, book]));
   const profiles = ((profilesResult.data || []) as Row[]).map(row => ({
     userId: String(row.user_id || ""),
@@ -316,16 +431,379 @@ export async function readNarratorAdminSnapshot(): Promise<NarratorAdminSnapshot
   return {
     available: true,
     portalEnabled: process.env.JJU_NARRATOR_PORTAL_ENABLED === "1",
+    invitesEnabled: narratorInvitesEnabled(),
+    contactsAvailable,
+    accessRequestsAvailable,
+    requestNotificationConfigured: narratorRequestNotificationConfigured(),
     message: profiles.length || assignments.length || submissions.length
       ? "Current private narrator workflow data."
       : "No narrator profiles, assignments, or submissions exist yet.",
     accounts,
+    contacts,
+    accessRequests,
     profiles,
     books,
     editions,
     assignments,
     submissions,
   };
+}
+
+export async function reviewNarratorAccessRequest(input: {
+  requestId: unknown;
+  expectedUpdatedAt: unknown;
+  decision: unknown;
+}) {
+  if (!hasSupabaseAdminConfig()) throw new NarratorAdminUnavailableError("Supabase admin access is not configured.");
+  const requestId = requiredUuid(input.requestId, "Access request");
+  const expectedUpdatedAt = requiredText(input.expectedUpdatedAt, "Current request version", 80);
+  const decision = cleanText(input.decision, 16).toLowerCase();
+  if (!new Set(["approve", "decline"]).has(decision)) {
+    throw new NarratorAdminInputError("Choose approve or decline.");
+  }
+
+  const supabase = createSupabaseAdminClient();
+  const result = await supabase.rpc("review_narrator_access_request", {
+    p_request_id: requestId,
+    p_expected_updated_at: expectedUpdatedAt,
+    p_decision: decision,
+  });
+  if (result.error) {
+    if (isMissingNarratorAccessRequests(result.error)) {
+      throw new NarratorAdminUnavailableError("The narrator request queue has not been installed yet.");
+    }
+    throw new NarratorAdminUnavailableError(result.error.message);
+  }
+
+  const outcome = String(result.data || "");
+  if (outcome === "approved" || outcome === "declined") return { outcome };
+  if (outcome === "request-conflict") {
+    throw new NarratorAdminConflictError("That request changed or was already reviewed. Reload before trying again.");
+  }
+  if (outcome === "contact-conflict") {
+    throw new NarratorAdminConflictError("The matching roster contact changed. Nothing was approved; reload before trying again.");
+  }
+  throw new NarratorAdminInputError("That access-request decision is invalid.");
+}
+
+export async function saveNarratorContact(input: {
+  contactId?: unknown;
+  displayName: unknown;
+  contactEmail?: unknown;
+  source?: unknown;
+  notes?: unknown;
+  expectedUpdatedAt?: unknown;
+}) {
+  if (!hasSupabaseAdminConfig()) throw new NarratorAdminUnavailableError("Supabase admin access is not configured.");
+  const contactId = String(input.contactId || "").trim().toLowerCase();
+  const displayName = requiredText(input.displayName, "Narrator name", 80);
+  const contactEmail = optionalEmail(input.contactEmail);
+  const source = cleanText(input.source || "Manual", 120) || "Manual";
+  const notes = cleanText(input.notes, 1200);
+  const supabase = createSupabaseAdminClient();
+
+  if (contactId) {
+    if (!UUID_PATTERN.test(contactId)) throw new NarratorAdminInputError("Narrator contact is invalid.");
+    const expectedUpdatedAt = requiredText(input.expectedUpdatedAt, "Current narrator version", 80);
+    const current = await supabase
+      .from("narrator_contacts")
+      .select("id,status,auth_user_id,updated_at")
+      .eq("id", contactId)
+      .maybeSingle();
+    if (current.error) {
+      if (isMissingNarratorContacts(current.error)) throw new NarratorAdminUnavailableError("The private narrator roster has not been installed yet.");
+      throw new NarratorAdminUnavailableError(current.error.message);
+    }
+    if (!current.data) throw new NarratorAdminConflictError("That narrator contact no longer exists. Reload before saving.");
+    if (String(current.data.updated_at || "") !== expectedUpdatedAt) {
+      throw new NarratorAdminConflictError("That narrator contact changed. Reload before saving again.");
+    }
+    if (String(current.data.auth_user_id || "")) {
+      throw new NarratorAdminInputError("This narrator is already linked to an account. Update the account profile instead.");
+    }
+    if (String(current.data.status || "contact") !== "contact") {
+      throw new NarratorAdminConflictError("This narrator contact is already being invited or repaired. Reload before changing the address.");
+    }
+    const updated = await supabase
+      .from("narrator_contacts")
+      .update({ display_name: displayName, contact_email: contactEmail || null, source, notes })
+      .eq("id", contactId)
+      .eq("updated_at", expectedUpdatedAt)
+      .select("id,display_name,contact_email,source,notes,status,auth_user_id,invite_sent_at,created_at,updated_at")
+      .maybeSingle();
+    if (updated.error) {
+      if (String(updated.error.code || "") === "23505") throw new NarratorAdminConflictError("That email address is already on the narrator roster.");
+      throw new NarratorAdminUnavailableError(updated.error.message);
+    }
+    if (!updated.data) throw new NarratorAdminConflictError("That narrator contact changed. Reload before saving again.");
+    return updated.data;
+  }
+
+  const inserted = await supabase
+    .from("narrator_contacts")
+    .insert({ display_name: displayName, contact_email: contactEmail || null, source, notes, status: "contact" })
+    .select("id,display_name,contact_email,source,notes,status,auth_user_id,invite_sent_at,created_at,updated_at")
+    .single();
+  if (inserted.error) {
+    if (isMissingNarratorContacts(inserted.error)) throw new NarratorAdminUnavailableError("The private narrator roster has not been installed yet.");
+    if (String(inserted.error.code || "") === "23505") throw new NarratorAdminConflictError("That email address is already on the narrator roster.");
+    throw new NarratorAdminUnavailableError(inserted.error.message);
+  }
+  return inserted.data;
+}
+
+async function findAuthAccountByEmail(email: string) {
+  const supabase = createSupabaseAdminClient();
+  for (let page = 1; page <= 20; page += 1) {
+    const result = await supabase.auth.admin.listUsers({ page, perPage: 100 });
+    if (result.error) throw new NarratorAdminUnavailableError(`Could not check existing accounts: ${result.error.message}`);
+    const match = (result.data.users || []).find(user => String(user.email || "").trim().toLowerCase() === email);
+    if (match) return match;
+    if ((result.data.users || []).length < 100) return null;
+  }
+  throw new NarratorAdminUnavailableError("The account list is too large to verify this invitation safely.");
+}
+
+export async function inviteNarratorContact(input: {
+  contactId: unknown;
+  expectedUpdatedAt: unknown;
+  confirmedEmail: unknown;
+}) {
+  if (!hasSupabaseAdminConfig()) throw new NarratorAdminUnavailableError("Supabase admin access is not configured.");
+  if (process.env.JJU_NARRATOR_PORTAL_ENABLED !== "1") {
+    throw new NarratorAdminUnavailableError("The narrator portal is turned off. Turn it on before inviting or repairing narrator access.");
+  }
+  const contactId = requiredUuid(input.contactId, "Narrator contact");
+  const expectedUpdatedAt = requiredText(input.expectedUpdatedAt, "Current narrator version", 80);
+  const confirmedEmail = optionalEmail(input.confirmedEmail);
+  if (!confirmedEmail) throw new NarratorAdminInputError("Confirm the exact email address before sending an invitation.");
+  const supabase = createSupabaseAdminClient();
+  const current = await supabase
+    .from("narrator_contacts")
+    .select("id,display_name,contact_email,status,auth_user_id,invite_sent_at,invite_reservation_id,invite_attempt_id,invite_attempt_started_at,updated_at")
+    .eq("id", contactId)
+    .maybeSingle();
+  if (current.error) {
+    if (isMissingNarratorContacts(current.error)) throw new NarratorAdminUnavailableError("The private narrator roster has not been installed yet.");
+    throw new NarratorAdminUnavailableError(current.error.message);
+  }
+  if (!current.data) throw new NarratorAdminConflictError("That narrator contact no longer exists. Reload before inviting.");
+  if (String(current.data.updated_at || "") !== expectedUpdatedAt) {
+    throw new NarratorAdminConflictError("That narrator contact changed. Reload and check the address again.");
+  }
+  const contactEmail = optionalEmail(current.data.contact_email);
+  if (!contactEmail || contactEmail !== confirmedEmail) {
+    throw new NarratorAdminInputError("The confirmed email does not match the current narrator contact.");
+  }
+  const contactStatus = String(current.data.status || "contact");
+  if (!INVITABLE_CONTACT_STATUSES.has(contactStatus)) {
+    throw new NarratorAdminInputError("This narrator contact is not waiting for an invitation.");
+  }
+
+  const linkedUserId = String(current.data.auth_user_id || "");
+  const linkedRepair = contactStatus === "repair-needed" && Boolean(linkedUserId);
+  if (!linkedRepair && process.env.JJU_NARRATOR_INVITES_ENABLED !== "1") {
+    throw new NarratorAdminUnavailableError("Narrator invitations are turned off. Turn on the separate invitation switch before sending one.");
+  }
+  if (!linkedRepair && contactStatus === "invite-pending") {
+    const attemptStartedAt = new Date(String(current.data.invite_attempt_started_at || "")).getTime();
+    if (Number.isFinite(attemptStartedAt) && Date.now() - attemptStartedAt < INVITE_RETRY_LEASE_MS) {
+      throw new NarratorAdminConflictError("That invitation attempt is still in progress. No second email was started. Wait ten minutes from the first attempt before retrying.");
+    }
+  }
+
+  let contactVersion = expectedUpdatedAt;
+  let invitationReservationId = String(current.data.invite_reservation_id || "");
+  let invitationAttemptId = "";
+  if (!linkedRepair) {
+    invitationReservationId ||= randomUUID();
+    invitationAttemptId = randomUUID();
+    const inviteAttemptStartedAt = new Date().toISOString();
+    const reserved = await supabase
+      .from("narrator_contacts")
+      .update({
+        status: "invite-pending",
+        invite_reservation_id: invitationReservationId,
+        invite_attempt_id: invitationAttemptId,
+        invite_attempt_started_at: inviteAttemptStartedAt,
+      })
+      .eq("id", contactId)
+      .eq("updated_at", expectedUpdatedAt)
+      .eq("status", contactStatus)
+      .is("auth_user_id", null)
+      .select("id,status,invite_reservation_id,invite_attempt_id,invite_attempt_started_at,updated_at")
+      .maybeSingle();
+    if (reserved.error) throw new NarratorAdminUnavailableError(reserved.error.message);
+    if (!reserved.data) {
+      throw new NarratorAdminConflictError("That narrator contact changed before the invitation was reserved. No email was sent. Reload and check it again.");
+    }
+    contactVersion = String(reserved.data.updated_at || "");
+  }
+
+  async function releaseReservationForEdit(message: string): Promise<never> {
+    if (linkedRepair) throw new NarratorAdminConflictError(message);
+    const released = await supabase
+      .from("narrator_contacts")
+      .update({
+        status: "contact",
+        invite_reservation_id: null,
+        invite_attempt_id: null,
+        invite_attempt_started_at: null,
+      })
+      .eq("id", contactId)
+      .eq("updated_at", contactVersion)
+      .eq("status", "invite-pending")
+      .is("auth_user_id", null)
+      .eq("invite_attempt_id", invitationAttemptId)
+      .select("id")
+      .maybeSingle();
+    const releaseNote = released.error || !released.data
+      ? " The reserved roster row changed before it could be reopened; reload before doing anything else."
+      : " The contact was reopened for editing, and no email was sent.";
+    throw new NarratorAdminConflictError(`${message}${releaseNote}`);
+  }
+
+  let account: User | null = null;
+  if (linkedUserId) {
+    const linkedAccount = await supabase.auth.admin.getUserById(linkedUserId);
+    const linkedEmail = String(linkedAccount.data.user?.email || "").trim().toLowerCase();
+    if (linkedAccount.error || !linkedAccount.data.user || linkedEmail !== contactEmail) {
+      throw new NarratorAdminConflictError("This roster contact is linked to a different or unavailable account. No invitation was sent.");
+    }
+    account = linkedAccount.data.user;
+  } else {
+    account = await findAuthAccountByEmail(contactEmail);
+  }
+  let invitationSent = false;
+  if (!account) {
+    const invited = await supabase.auth.admin.inviteUserByEmail(contactEmail, {
+      redirectTo: `${SITE_URL}/narrator/welcome`,
+      data: {
+        jju_narrator_contact_id: contactId,
+        jju_narrator_invite_reservation_id: invitationReservationId,
+      },
+    });
+    if (invited.error || !invited.data.user) {
+      throw new NarratorAdminUnavailableError(`${invited.error?.message || "The invitation could not be sent."} The roster kept this address reserved so a retry can recover safely.`);
+    }
+    account = invited.data.user;
+    invitationSent = true;
+  }
+
+  const confirmedAt = String(account.email_confirmed_at || account.confirmed_at || "");
+  const invitationMetadata = account.user_metadata || {};
+  const invitationMatchesReservation = String(invitationMetadata.jju_narrator_contact_id || "") === contactId
+    && String(invitationMetadata.jju_narrator_invite_reservation_id || "") === invitationReservationId;
+  const invitationIssuedAt = new Date(String(account.confirmation_sent_at || account.invited_at || "")).getTime();
+  const invitationAge = Date.now() - invitationIssuedAt;
+  const invitationIsFresh = Number.isFinite(invitationIssuedAt)
+    && invitationAge >= -(5 * 60 * 1000)
+    && invitationAge < INVITE_RECOVERY_WINDOW_MS;
+  const sameReservationInvitation = !confirmedAt
+    && Boolean(account.invited_at)
+    && (linkedRepair || invitationMatchesReservation);
+  if (!invitationSent && sameReservationInvitation && !invitationIsFresh) {
+    if (!linkedRepair) {
+      const heldForRepair = await supabase
+        .from("narrator_contacts")
+        .update({
+          auth_user_id: account.id,
+          status: "repair-needed",
+          invite_sent_at: String(account.confirmation_sent_at || account.invited_at || ""),
+          invite_attempt_id: null,
+          invite_attempt_started_at: null,
+        })
+        .eq("id", contactId)
+        .eq("updated_at", contactVersion)
+        .eq("status", "invite-pending")
+        .is("auth_user_id", null)
+        .eq("invite_attempt_id", invitationAttemptId)
+        .select("id")
+        .maybeSingle();
+      if (heldForRepair.error || !heldForRepair.data) {
+        throw new NarratorAdminUnavailableError("The matching invitation is too old to trust, and its safe repair state could not be recorded. Reload before doing anything else.");
+      }
+    }
+    throw new NarratorAdminConflictError("The matching setup email is too old to trust. Send this account a fresh recovery email from the private Auth desk, let the narrator confirm it, then finish portal setup here. No email was sent now.");
+  }
+  const recoverableInvitation = !confirmedAt
+    && sameReservationInvitation
+    && invitationIsFresh;
+  if (!invitationSent && !confirmedAt && !recoverableInvitation) {
+    await releaseReservationForEdit("An unconfirmed JJ University account already uses this email. Resolve that account before linking narrator access.");
+  }
+  const existingProfile = await supabase
+    .from("narrator_profiles")
+    .select("user_id,status")
+    .eq("user_id", account.id)
+    .maybeSingle();
+  if (existingProfile.error) throw new NarratorAdminUnavailableError(existingProfile.error.message);
+  if (existingProfile.data && ["paused", "closed"].includes(String(existingProfile.data.status || ""))) {
+    if (invitationSent) {
+      throw new NarratorAdminUnavailableError("The invitation may have been sent, but that narrator profile is paused or closed. The reserved roster state was left intact for review.");
+    }
+    await releaseReservationForEdit("That account is paused or closed. Reopen it from the existing-account controls instead of sending an invitation.");
+  }
+
+  const awaitsConfirmation = invitationSent || recoverableInvitation;
+  const nextStatus = awaitsConfirmation ? "invite-sent" : "active";
+  const requestedProfileStatus = awaitsConfirmation ? "invited" : "active";
+  const linkResult = await supabase.rpc("link_narrator_portal_contact", {
+    p_contact_id: contactId,
+    p_expected_updated_at: contactVersion,
+    p_attempt_id: invitationAttemptId || null,
+    p_user_id: account.id,
+    p_display_name: String(current.data.display_name || "Narrator"),
+    p_contact_email: contactEmail,
+    p_contact_status: nextStatus,
+    p_profile_status: requestedProfileStatus,
+    p_invite_sent_at: awaitsConfirmation
+      ? String(current.data.invite_sent_at || account.confirmation_sent_at || account.invited_at || new Date().toISOString())
+      : null,
+    p_invite_reservation_id: invitationReservationId || null,
+    p_linked_repair: linkedRepair,
+  });
+  if (linkResult.error) {
+    throw new NarratorAdminUnavailableError(`${invitationSent ? "The invitation may have been sent, but" : "The account was not linked because"} the atomic portal setup failed: ${linkResult.error.message}`);
+  }
+  const linkOutcome = String(linkResult.data || "contact-conflict");
+  if (["profile-paused", "profile-closed"].includes(linkOutcome)) {
+    if (!invitationSent && !linkedRepair) {
+      await releaseReservationForEdit(`That account became ${linkOutcome.replace("profile-", "")} while portal setup was being linked. Reopen it from the existing-account controls first.`);
+    }
+    throw new NarratorAdminConflictError(`That narrator profile is ${linkOutcome.replace("profile-", "")}. Its access state was left unchanged.`);
+  }
+  if (linkOutcome !== "linked") {
+    throw new NarratorAdminConflictError(`${invitationSent ? "The invitation may have been sent, but" : "The account was not linked because"} the reviewed roster state changed. Reload before trying anything else.`);
+  }
+
+  return {
+    contactId,
+    status: nextStatus,
+    invitationSent,
+    invitationRecovered: recoverableInvitation && !invitationSent,
+    linkedExistingAccount: !awaitsConfirmation,
+  };
+}
+
+export async function activateNarratorInvite(userIdValue: unknown) {
+  if (!hasSupabaseAdminConfig()) return;
+  const userId = requiredUuid(userIdValue, "Narrator account");
+  const supabase = createSupabaseAdminClient();
+  const activation = await supabase.rpc("activate_narrator_invite_contact", { p_user_id: userId });
+  if (activation.error) {
+    if (isMissingNarratorContacts(activation.error)) throw new NarratorAdminUnavailableError("The private narrator roster has not been installed yet.");
+    throw new NarratorAdminUnavailableError(activation.error.message);
+  }
+  const outcome = String(activation.data || "not-ready");
+  if (["active", "activated"].includes(outcome)) return;
+  if (["paused", "closed"].includes(outcome)) {
+    throw new NarratorAdminConflictError(`This narrator account is ${outcome}. Its administrative state was left unchanged.`);
+  }
+  if (outcome === "repair-needed") {
+    throw new NarratorAdminUnavailableError("The narrator profile is missing or inconsistent. The roster is marked for repair.");
+  }
+  throw new NarratorAdminConflictError("This narrator invitation is not ready to activate.");
 }
 
 export async function saveNarratorProfile(input: {
@@ -614,7 +1092,7 @@ export async function createNarratorSubmissionListenUrl(submissionIdValue: unkno
     .from("narrator_submissions")
     .select("id,assignment_id,narrator_user_id,audio_track_id,storage_bucket,storage_path,upload_status")
     .eq("id", submissionId)
-    .in("upload_status", ["uploaded", "in-review", "changes-requested", "approved"])
+    .in("upload_status", ["uploaded", "in-review", "changes-requested", "approved", "superseded"])
     .maybeSingle();
   if (result.error) throw new NarratorAdminUnavailableError(result.error.message);
   if (!result.data) throw new NarratorAdminInputError("Recording is not available.");

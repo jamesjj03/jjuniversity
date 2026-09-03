@@ -1,9 +1,11 @@
 # JJ University audiobook and narrator foundation
 
 Date: 2026-08-20
-Updated: 2026-08-21
+Updated: 2026-09-02
 
-Status: implemented in code as a disabled-safe foundation. The SQL has not been applied and no live Supabase data or Storage buckets were changed.
+Status: the audiobook/narrator foundation is present in the current Supabase project, with Tacos held in private QA. The contact-roster, deliberate invitation layer, and shareable access-request queue are implemented locally as reviewed additive changes. Their migrations have not been applied, no narrator account was created, and no invitation or owner-notification email was sent in this work.
+
+Tacos rights status: cleared for the JJ University edition on James's September 2, 2026 owner attestation, paired with ACX Client Support's August 19, 2026 written confirmation that former ACX agreements ended and Audible retains no continuing contractual or exclusive distribution rights over removed titles. James is the narrator; Danny Cancino recorded and edited the session. Technical listening/master approval and the act of publishing remain separate.
 
 ## What exists now
 
@@ -18,7 +20,11 @@ Status: implemented in code as a disabled-safe foundation. The SQL has not been 
 - Active narrator profiles are locked for each mutation transaction, preventing a concurrent pause/closure from racing past the authorization check.
 - Retry-safe upload preparation. The browser creates one idempotency key per unchanged file/track/note attempt, and a retry returns the same private submission instead of creating a duplicate.
 - Reader-aligned track identity. Narrators choose an expected track; the server derives its position and title from that edition rather than trusting hand-entered metadata.
-- Private intake and final-audio buckets in the reviewed SQL draft.
+- Private intake and final-audio buckets; neither bucket is public.
+- A private contact roster that stays separate from Auth accounts. Adding or importing a contact cannot email anyone or grant portal access.
+- A reviewed invitation action that re-checks the exact contact version and email, links an existing confirmed account without email when possible, and otherwise uses a dedicated invite template and welcome/password screen.
+- A stable `/narrator/request` entry where a narrator can supply their own name and email. Requests land in a private Workshop queue; approval creates or links a contact but does not send an invitation. The public route has a honeypot, keyed IP throttling, a global ceiling, generic duplicate handling, and no direct database privileges.
+- An optional immediate owner notice through Resend. It is disabled unless all notification settings are present, uses the saved request as the only email source, and records delivery state in the private queue.
 
 ## Deliberate launch gates
 
@@ -29,6 +35,10 @@ The public audiobook catalog is disabled unless `JJU_AUDIO_CATALOG_ENABLED=1`. E
 3. It has at least one track with `status = 'published'`.
 
 The narrator desk is disabled unless `JJU_NARRATOR_PORTAL_ENABLED=1`. It then requires a verified Supabase account plus a matching narrator profile. Only an `active` profile with a currently open assignment can mutate anything; invited and paused profiles are view-only, and closed assignments are not returned by the portal. Everyone without a narrator profile receives a closed route.
+
+Invitation sending has a second, independent gate: `JJU_NARRATOR_INVITES_ENABLED=1`. Both that switch and the narrator portal must be on before the Workshop can send an invitation. Contact-only imports have their own explicit `JJU_NARRATOR_ROSTER_IMPORT_ENABLED=1` gate and never create Auth users.
+
+The shareable request form has its own `JJU_NARRATOR_ACCESS_REQUESTS_ENABLED=1` gate plus a keyed hashing secret. Opening that form cannot create an account. Owner email notices require `JJU_NARRATOR_REQUEST_NOTIFY_EMAIL`; the existing Resend-backed Supabase SMTP credential and sender can be reused, while `RESEND_API_KEY` and `JJU_NARRATOR_REQUEST_FROM_EMAIL` remain explicit overrides. Missing email settings leave the saved request visible in the Workshop without attempting delivery.
 
 ## Supabase recommendation
 
@@ -60,14 +70,16 @@ Supabase notes that signed URLs stay valid until expiration and that generating 
 
 ## Activation sequence
 
-1. Review and apply `supabase/jju_audio_foundation_2026_08_20.sql` in a non-production check first.
-2. Upgrade Supabase to Pro before bulk audio arrives.
-3. Create one real narrator account, narrator profile, edition, Reader-aligned expected-track plan, and assignment. Pin the edition to the approved manuscript version and content hash.
-4. Enable only `JJU_NARRATOR_PORTAL_ENABLED` and test acceptance, upload, retry, and submission on phone and desktop.
-5. Review the uploaded source, create delivery MP3/M4A tracks, and insert them in the final private bucket.
-6. Mark the edition and its tracks published.
-7. Enable `JJU_AUDIO_CATALOG_ENABLED`; verify the Listen action, playback, seeking, next-track behavior, and account gating.
-8. Add subscriptions only after entitlement, cancellation, refund, and account-deletion behavior are defined and tested.
+1. Review and apply `supabase/jju_narrator_contacts_2026_09_02.sql` without enabling invitations.
+2. Review and apply `supabase/jju_narrator_access_requests_2026_09_02.sql`, then configure the owner-notification address before opening the public request switch.
+3. Run the contact-only starter import and review Danny's exact record in the Workshop. Keep `/narrator/request` ready for narrators whose email is not already known.
+4. Enable invitation sending only for the deliberate Danny test and send the exact reviewed address from his roster card.
+5. Let Danny confirm his address and choose his own password; do not generate or share one for him.
+6. Create a private Tacos test assignment with an edition key such as `danny-portal-test`; the existing Tacos audio already owns `standard`.
+7. Test acceptance, upload, retry, private listen-back, feedback, and replacement on phone and desktop.
+8. Keep audiobook publication separate: review the delivery masters, then mark an edition and its tracks published only after that explicit decision.
+9. Enable `JJU_AUDIO_CATALOG_ENABLED`; verify the public Listen action, playback, seeking, next-track behavior, and account gating.
+10. Add subscriptions only after entitlement, cancellation, refund, and account-deletion behavior are defined and tested.
 
 ## Not included yet
 
@@ -76,4 +88,4 @@ Supabase notes that signed URLs stay valid until expiration and that generating 
 - Codec and container inspection. MIME type and byte size are enforced now; actual audio validity remains an explicit review gate before publication.
 - Resumable TUS upload UI.
 - Narrator contracts, rates, tax forms, or payouts.
-- Admin controls for inviting narrators, generating the expected-track rows from a reviewed Reader manifest, and promoting intake files to published tracks; those belong in the admin redesign.
+- Automatic promotion of narrator intake files into public audiobook tracks. Assignment and review remain intentionally separate from publication.

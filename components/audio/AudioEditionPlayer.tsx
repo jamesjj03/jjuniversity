@@ -8,9 +8,12 @@ import { createSupabaseBrowserClient, hasSupabaseConfig } from "@/lib/supabaseCl
 import styles from "./AudioEditionPlayer.module.css";
 
 type StoredAudioProgress = {
+  version: 2;
   trackId: string;
   currentTime: number;
   completedTrackIds: string[];
+  trackProgressSeconds: Record<string, number>;
+  viewedTrackIds: string[];
 };
 
 function formatDuration(seconds: number) {
@@ -28,11 +31,20 @@ function readStoredProgress(key: string): StoredAudioProgress | null {
     const value = JSON.parse(localStorage.getItem(key) || "null") as Partial<StoredAudioProgress> | null;
     if (!value || typeof value.trackId !== "string") return null;
     return {
+      version: 2,
       trackId: value.trackId,
       currentTime: Number.isFinite(value.currentTime) && Number(value.currentTime) >= 0 ? Number(value.currentTime) : 0,
       completedTrackIds: Array.isArray(value.completedTrackIds)
         ? value.completedTrackIds.filter((item): item is string => typeof item === "string")
         : [],
+      trackProgressSeconds: value.trackProgressSeconds && typeof value.trackProgressSeconds === "object"
+        ? Object.fromEntries(Object.entries(value.trackProgressSeconds).filter((entry): entry is [string, number] => (
+          typeof entry[0] === "string" && Number.isFinite(entry[1]) && entry[1] > 0
+        )))
+        : value.currentTime && value.currentTime > 0 ? { [value.trackId]: value.currentTime } : {},
+      viewedTrackIds: Array.isArray(value.viewedTrackIds)
+        ? value.viewedTrackIds.filter((item): item is string => typeof item === "string")
+        : [value.trackId],
     };
   } catch {
     return null;
@@ -52,8 +64,12 @@ export default function AudioEditionPlayer({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const resumeRef = useRef<{ trackId: string; seconds: number } | null>(null);
   const lastStoredSecondRef = useRef(-1);
+  const trackProgressRef = useRef<Record<string, number>>({});
+  const viewedTrackIdsRef = useRef<string[]>(edition.tracks[0]?.id ? [edition.tracks[0].id] : []);
   const [trackIndex, setTrackIndex] = useState(0);
   const [completedTrackIds, setCompletedTrackIds] = useState<string[]>([]);
+  const [trackProgressSeconds, setTrackProgressSeconds] = useState<Record<string, number>>({});
+  const [viewedTrackIds, setViewedTrackIds] = useState<string[]>(edition.tracks[0]?.id ? [edition.tracks[0].id] : []);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(edition.tracks[0]?.durationSeconds || 0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -67,9 +83,14 @@ export default function AudioEditionPlayer({
   const previousTrack = edition.tracks[trackIndex - 1] || null;
   const completedSet = useMemo(() => new Set(completedTrackIds), [completedTrackIds]);
   const trackProgress = Math.min(1, currentTime / Math.max(1, duration || track?.durationSeconds || 1));
+  const listenedTrackFractions = edition.tracks.reduce((sum, item, index) => {
+    if (completedSet.has(item.id)) return sum + 1;
+    const listenedSeconds = index === trackIndex ? currentTime : trackProgressSeconds[item.id] || 0;
+    return sum + Math.min(1, listenedSeconds / Math.max(1, item.durationSeconds));
+  }, 0);
   const overallProgress = Math.min(
     100,
-    ((completedTrackIds.length + (track && !completedSet.has(track.id) ? trackProgress : 0)) / Math.max(1, edition.tracks.length)) * 100,
+    (listenedTrackFractions / Math.max(1, edition.tracks.length)) * 100,
   );
 
   useEffect(() => {
@@ -90,14 +111,27 @@ export default function AudioEditionPlayer({
     const stored = readStoredProgress(progressKey);
     if (!stored) return;
     const timer = window.setTimeout(() => {
+      const validTrackIds = new Set(edition.tracks.map(item => item.id));
+      const validCompleted = stored.completedTrackIds.filter(id => validTrackIds.has(id));
+      const validProgress = Object.fromEntries(
+        Object.entries(stored.trackProgressSeconds).filter(([id]) => validTrackIds.has(id) && !validCompleted.includes(id)),
+      );
+      const validViewed = Array.from(new Set([
+        ...stored.viewedTrackIds.filter(id => validTrackIds.has(id)),
+        ...(edition.tracks[0]?.id ? [edition.tracks[0].id] : []),
+      ]));
+      trackProgressRef.current = validProgress;
+      viewedTrackIdsRef.current = validViewed;
+      setTrackProgressSeconds(validProgress);
+      setViewedTrackIds(validViewed);
       const restoredIndex = edition.tracks.findIndex(item => item.id === stored.trackId);
-      if (restoredIndex >= 0 && !stored.completedTrackIds.includes(stored.trackId)) {
+      if (restoredIndex >= 0 && !validCompleted.includes(stored.trackId)) {
         resumeRef.current = { trackId: stored.trackId, seconds: stored.currentTime };
         setTrackIndex(restoredIndex);
         setCurrentTime(stored.currentTime);
         setDuration(edition.tracks[restoredIndex]?.durationSeconds || 0);
       }
-      setCompletedTrackIds(stored.completedTrackIds.filter(id => edition.tracks.some(item => item.id === id)));
+      setCompletedTrackIds(validCompleted);
     }, 0);
     return () => window.clearTimeout(timer);
   }, [edition.tracks, progressKey]);
@@ -133,28 +167,45 @@ export default function AudioEditionPlayer({
 
   function storeProgress(seconds: number, completed = completedTrackIds, selectedTrack = track) {
     if (!selectedTrack) return;
+    const safeSeconds = Math.max(0, Number.isFinite(seconds) ? seconds : 0);
+    const progress = { ...trackProgressRef.current };
+    if (completed.includes(selectedTrack.id) || safeSeconds <= 0) delete progress[selectedTrack.id];
+    else progress[selectedTrack.id] = safeSeconds;
+    const viewed = Array.from(new Set([...viewedTrackIdsRef.current, selectedTrack.id]));
+    trackProgressRef.current = progress;
+    viewedTrackIdsRef.current = viewed;
+    setTrackProgressSeconds(progress);
+    setViewedTrackIds(viewed);
     try {
       localStorage.setItem(progressKey, JSON.stringify({
+        version: 2,
         trackId: selectedTrack.id,
-        currentTime: Math.max(0, Number.isFinite(seconds) ? seconds : 0),
+        currentTime: safeSeconds,
         completedTrackIds: completed,
+        trackProgressSeconds: progress,
+        viewedTrackIds: viewed,
       } satisfies StoredAudioProgress));
     } catch {
       // Playback continues when browser storage is unavailable.
     }
   }
 
-  function chooseTrack(index: number, persistCurrent = true) {
+  function chooseTrack(index: number, persistCurrent = true, completed = completedTrackIds) {
     const bounded = Math.max(0, Math.min(edition.tracks.length - 1, index));
     if (persistCurrent && audioRef.current && track) storeProgress(audioRef.current.currentTime);
+    const selectedTrack = edition.tracks[bounded];
+    const resumeSeconds = selectedTrack ? trackProgressRef.current[selectedTrack.id] || 0 : 0;
     setError("");
     setIsPlaying(false);
     setMobileControlsActivated(true);
-    setCurrentTime(0);
-    setDuration(edition.tracks[bounded]?.durationSeconds || 0);
-    resumeRef.current = null;
+    setCurrentTime(resumeSeconds);
+    setDuration(selectedTrack?.durationSeconds || 0);
+    resumeRef.current = selectedTrack && resumeSeconds > 0
+      ? { trackId: selectedTrack.id, seconds: resumeSeconds }
+      : null;
     lastStoredSecondRef.current = -1;
     setTrackIndex(bounded);
+    storeProgress(resumeSeconds, completed, selectedTrack);
   }
 
   function seekBy(delta: number) {
@@ -181,8 +232,8 @@ export default function AudioEditionPlayer({
   function finishTrack() {
     const completed = completedSet.has(track.id) ? completedTrackIds : [...completedTrackIds, track.id];
     setCompletedTrackIds(completed);
-    storeProgress(0, completed, nextTrack || track);
-    if (nextTrack) chooseTrack(trackIndex + 1, false);
+    storeProgress(0, completed, track);
+    if (nextTrack) chooseTrack(trackIndex + 1, false, completed);
     else setIsPlaying(false);
   }
 
@@ -203,10 +254,6 @@ export default function AudioEditionPlayer({
 
   return (
     <section className={styles.player} aria-label="Audiobook player">
-      {candidatePreviewKey ? (
-        <p className={styles.candidateNotice}>Private listening proof · Danny&apos;s recovered email masters</p>
-      ) : null}
-
       <div className={styles.playerLayout}>
         <div className={styles.playbackPanel}>
           <div className={styles.nowPlaying} aria-live="polite">
@@ -306,57 +353,62 @@ export default function AudioEditionPlayer({
           </div>
 
           {error && <p className={styles.error} role="status">{error}</p>}
-
-          <div className={styles.upNext}>
-            <span>Up next</span>
-            <strong>{nextTrack ? `${String(nextTrack.position).padStart(2, "0")} · ${nextTrack.title}` : "You’re at the end of the audiobook"}</strong>
-          </div>
         </div>
 
-        <div className={styles.tracks}>
-          <div className={styles.trackHeading}>
-            <div>
-              <p>Listening progress</p>
-              <h2>Chapters</h2>
+        <details className={styles.tracks}>
+          <summary>
+            <span className={styles.trackSummaryCopy}>
+              <small>Chapters</small>
+              <strong>{String(track.position).padStart(2, "0")} · {track.title}</strong>
+            </span>
+            <span className={styles.trackSummaryProgress}>
+              {completedTrackIds.length}<small> / {edition.tracks.length} finished</small>
+              <i aria-hidden="true">⌄</i>
+            </span>
+          </summary>
+          <div className={styles.trackDrawer}>
+            <div
+              className={styles.overallProgress}
+              role="progressbar"
+              aria-label="Overall audiobook progress"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(overallProgress)}
+            >
+              <span style={{ width: `${overallProgress}%` }} />
             </div>
-            <strong>{completedTrackIds.length}<span> / {edition.tracks.length}</span></strong>
+            <ol className={styles.trackList}>
+              {edition.tracks.map((item, index) => {
+                const complete = completedSet.has(item.id);
+                const active = index === trackIndex;
+                const partial = !complete && ((active && currentTime > 0) || (trackProgressSeconds[item.id] || 0) > 0);
+                const viewed = active || viewedTrackIds.includes(item.id);
+                const progressState = complete ? "completed" : partial ? "partial" : viewed ? "viewed" : "unseen";
+                const upNext = !active && !complete && index === trackIndex + 1;
+                const statusLabel = active
+                  ? isPlaying ? "Playing" : partial ? "In progress" : "Selected"
+                  : complete ? "Finished" : partial ? "Partially listened" : viewed ? "Viewed" : upNext ? "Up next" : "";
+                return (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      data-progress={progressState}
+                      data-active={active ? "true" : undefined}
+                      data-up-next={upNext ? "true" : undefined}
+                      aria-current={active ? "true" : undefined}
+                      aria-label={`Chapter ${item.position}: ${item.title}${statusLabel ? `, ${statusLabel}` : ""}`}
+                      onClick={() => chooseTrack(index)}
+                    >
+                      <span className={styles.trackNumber}>{complete ? "✓" : String(item.position).padStart(2, "0")}</span>
+                      <span className={styles.trackTitle}>{item.title}<small>{statusLabel}</small></span>
+                      <span className={styles.trackDuration}>{formatDuration(item.durationSeconds)}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
-          <div
-            className={styles.overallProgress}
-            role="progressbar"
-            aria-label="Overall audiobook progress"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={Math.round(overallProgress)}
-          >
-            <span style={{ width: `${overallProgress}%` }} />
-          </div>
-          <ol className={styles.trackList}>
-            {edition.tracks.map((item, index) => {
-              const complete = completedSet.has(item.id);
-              const active = index === trackIndex;
-              const status = active ? "active" : complete ? "listened" : index === trackIndex + 1 ? "up-next" : "queued";
-              const statusLabel = active
-                ? isPlaying ? "Playing" : currentTime > 0 ? "In progress" : "Selected"
-                : complete ? "Listened" : status === "up-next" ? "Up next" : "";
-              return (
-                <li key={item.id}>
-                  <button
-                    type="button"
-                    data-status={status}
-                    aria-current={active ? "true" : undefined}
-                    aria-label={`Chapter ${item.position}: ${item.title}${statusLabel ? `, ${statusLabel}` : ""}`}
-                    onClick={() => chooseTrack(index)}
-                  >
-                    <span className={styles.trackNumber}>{complete ? "✓" : String(item.position).padStart(2, "0")}</span>
-                    <span className={styles.trackTitle}>{item.title}<small>{statusLabel}</small></span>
-                    <span className={styles.trackDuration}>{formatDuration(item.durationSeconds)}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
+        </details>
       </div>
       <div className={styles.mobileDock} data-active={mobileControlsActivated || isPlaying || currentTime > 0} aria-label="Persistent playback controls">
         <button type="button" onClick={() => seekBy(-15)} aria-label="Go back 15 seconds"><span aria-hidden="true">↶</span><small>15</small></button>

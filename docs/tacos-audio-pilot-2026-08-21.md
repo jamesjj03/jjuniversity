@@ -73,16 +73,20 @@ The complete sequence is strong evidence that Danny's delivery was built around 
 
 ## Rights and master-ownership gate
 
-James states that he performed the narration and Danny Cancino recorded and edited it in Danny's professional studio. Before any upload, James and Danny should still confirm in writing:
+Release evidence update, September 2, 2026:
 
-1. Who performed the narration and who engineered or produced the session.
-2. Who owns the recorded masters and whether the studio retains any rights or restrictions.
-3. That JJ University may store, copy, edit, transcode, stream, and promote the performance.
-4. The agreed narrator credit, compensation or royalty terms, territory, duration, and takedown process.
-5. That any music, sound effects, or third-party performances in the recording are cleared.
-6. Which files are archival masters and which are approved delivery copies.
+- James confirms that he performed the narration, Danny Cancino recorded and edited it in Danny's professional studio, and James owns the book, audiobook, and applicable masters with the producer/payment clearance needed for JJ University distribution.
+- ACX Client Support confirmed by email on August 19, 2026 (subject: `Request for Clarification and Termination Process for Former ACX Royalty Share Titles`) that the former ACX agreements terminated when James's account closed and Audible retains no continuing exclusive distribution, production, or contractual rights over removed titles. That message is account-wide rather than Tacos-specific, so it is paired with James's title-specific owner attestation above.
 
-An email containing files proves delivery, not the complete rights chain. Do not infer ownership or publication permission from the sender alone.
+For this JJ University edition, treat the rights, master-ownership, and former-ACX restriction gate as cleared. Preserve the following credit and release facts in the final record:
+
+1. Narrator/performance credit: James Johnson.
+2. Recording and editing credit: Danny Cancino.
+3. Rights and master owner: James Johnson, per his September 2, 2026 attestation.
+4. Distribution restriction: no continuing ACX/Audible contractual or exclusive right, per ACX Client Support.
+5. The exact approved delivery copies remain a separate technical and listening-QA decision.
+
+Danny's delivery email remains provenance evidence; the release authority comes from James's owner attestation plus ACX's separate no-continuing-rights confirmation. Clearing this gate does not by itself mark the audio files technically ready or publish them.
 
 ## Codec and listening QA gate
 
