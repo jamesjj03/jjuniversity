@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "bookId": "isrpal",
+  "recordedAt": "2026-09-03T04:18:27Z",
+  "importer": "scripts/import-a-land-divided.py",
+  "remoteWrites": false,
+  "source": {
+    "fileName": "A Land Divided.pdf",
+    "sha256": "7a4d20fdd116824485ddf1455904b78702b7c9036ade9db1155db04db16cbbde",
+    "bytes": 238056,
+    "pages": 40,
+    "creator": "calibre 8.4.0",
+    "createdAt": "2025-09-23T21:32:44.000Z",
+    "originalPreserved": true
+  },
+  "cover": {
+    "path": "public/covers-webp/IsrPal.webp",
+    "sha256": "43ed57c4b9df93878b9164fed062c9d5b116fa4d1ba003d105f49644d0669d4c",
+    "bytes": 31328
+  },
+  "output": {
+    "path": "private/book-content/isrpal.json",
+    "sha256": "44912c7c3150e826c799867a9615a4fe176a582d1f3f9beb7a472be898e76233",
+    "sectionCount": 19,
+    "wordCount": 6770,
+    "sourceTextSha256": "25df3505059356acb23849f44589528f44419536c2383dd8d98362e6b4e859ab",
+    "canonicalTextSha256": "4e9a97581185dbb8824e82b6ca1186c130268d44630fca02ca60573b4de989c2"
+  },
+  "validation": {
+    "unintendedTextDeltaCount": 0,
+    "copyrightPreservedExactly": true,
+    "replacementCharacters": 0,
+    "nullCharacters": 0,
+    "contiguousSectionIndexes": true
+  },
+  "intentionalTextDeltas": [
+    {
+      "section": "Prologue",
+      "kind": "opening-small-caps",
+      "before": "THERE ARE FEW",
+      "after": "There are few"
+    },
+    {
+      "section": "Chapter One - Before the Borders",
+      "kind": "opening-small-caps",
+      "before": "BEFORE THE WARS",
+      "after": "Before the wars"
+    },
+    {
+      "section": "Chapter Two - The Zionist Dream",
+      "kind": "opening-small-caps",
+      "before": "ZIONISM DIDN’T START",
+      "after": "Zionism didn’t start"
+    },
+    {
+      "section": "Chapter Three - The British Mandate",
+      "kind": "opening-small-caps",
+      "before": "WORLD WAR I",
+      "after": "World War I"
+    },
+    {
+      "section": "Chapter Four - Partition and War",
+      "kind": "opening-small-caps",
+      "before": "BY THE END",
+      "after": "By the end"
+    },
+    {
+      "section": "Chapter Five - The Shifting Lines",
+      "kind": "opening-small-caps",
+      "before": "BY THE 1960S",
+      "after": "By the 1960s"
+    },
+    {
+      "section": "Chapter Six - Resistance and Terror",
+      "kind": "opening-small-caps",
+      "before": "BY THE 1970S",
+      "after": "By the 1970s"
+    },
+    {
+      "section": "Chapter Seven - Intifada",
+      "kind": "opening-small-caps",
+      "before": "BY THE LATE 1980s",
+      "after": "By the late 1980s"
+    },
+    {
+      "section": "Chapter Eight - A Nation Divided",
+      "kind": "opening-small-caps",
+      "before": "IT WAS SUPPOSED",
+      "after": "It was supposed"
+    },
+    {
+      "section": "Chapter Nine - The Modern War",
+      "kind": "opening-small-caps",
+      "before": "WAR DOESN’T COME",
+      "after": "War doesn’t come"
+    },
+    {
+      "section": "Chapter Ten - Life on the Ground",
+      "kind": "opening-small-caps",
+      "before": "ASK AN OUTSIDER",
+      "after": "Ask an outsider"
+    },
+    {
+      "section": "Chapter Eleven - Blame and Belief",
+      "kind": "opening-small-caps",
+      "before": "THE EASIEST THING",
+      "after": "The easiest thing"
+    },
+    {
+      "section": "Chapter Twelve - What Comes Next?",
+      "kind": "opening-small-caps",
+      "before": "THERE’S A PHRASE",
+      "after": "There’s a phrase"
+    },
+    {
+      "section": "About the Author",
+      "kind": "stale-author-note",
+      "before": "JJ IS THE author of over 190 books across history, politics, culture, and human conflict. His work focuses on the systems we build, the stories we tell, and the people caught in between. He writes to understand — and to help others do the same. For more books, visit: jjarchives.com",
+      "after": "James Johnson writes about history, power, culture, belief, science, and everyday life. JJ University is home to more than 300 of his books. Read the library at jjuniversity.com."
+    }
+  ],
+  "structuralNormalization": [
+    "Rejoined visual PDF line wraps inside paragraphs.",
+    "Restored paragraph boundaries from first-line indentation.",
+    "Preserved italic and bold font runs as semantic HTML.",
+    "Generated a Reader Contents section from the reviewed PDF outline."
+  ],
+  "sections": [
+    {
+      "title": "A Land Divided",
+      "pageStart": 2,
+      "pageEnd": 2,
+      "sourceTextSha256": "1c8168bedf8b5c3cda9cce2440ebe086dd549f83f9a1d930a3ce93e839d4bab1",
+      "canonicalTextSha256": "1c8168bedf8b5c3cda9cce2440ebe086dd549f83f9a1d930a3ce93e839d4bab1"
+    },
+    {
+      "title": "Dedication",
+      "pageStart": 3,
+      "pageEnd": 3,
+      "sourceTextSha256": "da61262d33ffabcc3bbed156888fe6b310599af6bd06a18903ca5b90c3cfba51",
+      "canonicalTextSha256": "da61262d33ffabcc3bbed156888fe6b310599af6bd06a18903ca5b90c3cfba51"
+    },
+    {
+      "title": "Prologue",
+      "pageStart": 4,
+      "pageEnd": 5,
+      "sourceTextSha256": "0373b50815ea1df5c67554b8d3cb963d00ad26369e08c4fa60d875bc419f1f41",
+      "canonicalTextSha256": "a222ae91d4a7787fd39cd79872173a766fd0ac9689eb1ead4f91071feb542128"
+    },
+    {
+      "title": "Chapter One - Before the Borders",
+      "pageStart": 6,
+      "pageEnd": 7,
+      "sourceTextSha256": "749307b8ed2ac5e44a85ab110338530e498a523f979d4cb06034901efcfaa8e2",
+      "canonicalTextSha256": "f6232594267b0db9efe039a28f8bc849d782ff6bc9ac0daab341bc9b8242aa4d"
+    },
+    {
+      "title": "Chapter Two - The Zionist Dream",
+      "pageStart": 8,
+      "pageEnd": 9,
+      "sourceTextSha256": "7ee950bf692c32b82bb1894b41d43a2f07ad86fe922db79e9e4cf20622385626",
+      "canonicalTextSha256": "6251865d7654d734ef8459baa82f925b262bbefdefdfac398923eb236cb8f600"
+    },
+    {
+      "title": "Chapter Three - The British Mandate",
+      "pageStart": 10,
+      "pageEnd": 12,
+      "sourceTextSha256": "6208a920faf1063619e28a0c94cbdcab7747918d2f0343b0db89f643c3a14e3c",
+      "canonicalTextSha256": "bdd9b278b23144560e4344139f1d6f020b79bfc4d8d31d7ddcac598fe46cd56a"
+    },
+    {
+      "title": "Chapter Four - Partition and War",
+      "pageStart": 13,
+      "pageEnd": 15,
+      "sourceTextSha256": "1d29d485ba58ed7a37129f90b0fc7cf9b37aa7334c8f28b50d70d14dd5904d84",
+      "canonicalTextSha256": "b84ddf9f1da42f80eba01b8ec09feca3dd838c7f8a986afdb69e7dafe9d8b324"
+    },
+    {
+      "title": "Chapter Five - The Shifting Lines",
+      "pageStart": 16,
+      "pageEnd": 18,
+      "sourceTextSha256": "32997ae8614825dd67d10f5dd6cd6f5f9c809eec7c38ee3308c895da637d4104",
+      "canonicalTextSha256": "30f83b06e4e7f9040841a260091f0230d417db9ac4f6b45591d7fd67f11375a5"
+    },
+    {
+      "title": "Chapter Six - Resistance and Terror",
+      "pageStart": 19,
+      "pageEnd": 20,
+      "sourceTextSha256": "f69b85c7bb575037e4eedc660bf0030bc1778d3b2ae8a75a670701e823ad9985",
+      "canonicalTextSha256": "35d160cff36ef2bcd8e4de5514328b441a4cb88ab766488b8eaf4f9d525019d8"
+    },
+    {
+      "title": "Chapter Seven - Intifada",
+      "pageStart": 21,
+      "pageEnd": 23,
+      "sourceTextSha256": "0c97248427aae531cd1a5ffbd0a5cdecd964e274f6fc7ece7c2fffaae85ee484",
+      "canonicalTextSha256": "27813a99ce79c2a327e70b86a05bf9677f32088c6413e055a6e92bc3b6f478eb"
+    },
+    {
+      "title": "Chapter Eight - A Nation Divided",
+      "pageStart": 24,
+      "pageEnd": 25,
+      "sourceTextSha256": "e9229e4f559a3d3a8d233a9c71fda08c74f54395a055db3f5a4bd82a00f9b03b",
+      "canonicalTextSha256": "31dc07a5627493bffbe03b525bfbf7b8e904e3f3db543ef1992bcf9b607b0d14"
+    },
+    {
+      "title": "Chapter Nine - The Modern War",
+      "pageStart": 26,
+      "pageEnd": 28,
+      "sourceTextSha256": "36df029a06f526744f6d6c02072c191df6e85142f16b0e069ff6d57b6f5482c4",
+      "canonicalTextSha256": "e4ee9358c4bbb7fba20a2ece8c63b991be77dadc661bd8e1302b16c0719583f1"
+    },
+    {
+      "title": "Chapter Ten - Life on the Ground",
+      "pageStart": 29,
+      "pageEnd": 31,
+      "sourceTextSha256": "9c6f51c8aaad20aa655927188d6181c431e4936994ea8ec872c5833ca537e2af",
+      "canonicalTextSha256": "2ecf1634f8a2a4831384cbfbcbed25cf0a771b8c01a3e4f41ba3bc236e876a93"
+    },
+    {
+      "title": "Chapter Eleven - Blame and Belief",
+      "pageStart": 32,
+      "pageEnd": 34,
+      "sourceTextSha256": "a1b48b1d90cc898534b9419ded9e3508ce2b33e3926411106d1377f781f09a1e",
+      "canonicalTextSha256": "c9fe541bc030913c6ab94decbf240a808604725a938bc3c5ac5d60f79f5daf3a"
+    },
+    {
+      "title": "Chapter Twelve - What Comes Next?",
+      "pageStart": 35,
+      "pageEnd": 37,
+      "sourceTextSha256": "e9498975e861a3d22df5f4d844bddb6f26c483a43eb3b433b167bfa3c367d876",
+      "canonicalTextSha256": "7294989965dc5d1d1d15439126a0b663afa2c034899bfd36bc0bd98b9b8f9db7"
+    },
+    {
+      "title": "Acknowledgments",
+      "pageStart": 38,
+      "pageEnd": 38,
+      "sourceTextSha256": "d543668a18c7fee99fada515af9defe10875c5ff0be57b65652a4a77187f981e",
+      "canonicalTextSha256": "d543668a18c7fee99fada515af9defe10875c5ff0be57b65652a4a77187f981e"
+    },
+    {
+      "title": "About the Author",
+      "pageStart": 39,
+      "pageEnd": 39,
+      "sourceTextSha256": "61c77f11841172038d2df60b880f865c286205323c32d2118d70e1b8f7353fef",
+      "canonicalTextSha256": "e539eb068dcf79a8656d508b87646ca8f38cc78ad0c0bad3d206486a5de97291"
+    },
+    {
+      "title": "Copyright",
+      "pageStart": 40,
+      "pageEnd": 40,
+      "sourceTextSha256": "ffe47dd37f44d19b529a02cd6aacf262e45d298906a4cbe2411b05a8bf668b3c",
+      "canonicalTextSha256": "ffe47dd37f44d19b529a02cd6aacf262e45d298906a4cbe2411b05a8bf668b3c"
+    }
+  ]
+}

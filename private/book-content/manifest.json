@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-05-17T15:56:20.951Z",
-  "count": 284,
+  "count": 285,
   "books": [
     {
       "id": "1776",
@@ -1162,6 +1162,15 @@
       "sectionCount": 20,
       "wordCount": 7254,
       "path": "book-content/Islam.json"
+    },
+    {
+      "id": "isrpal",
+      "slug": "a-land-divided",
+      "title": "A Land Divided",
+      "sourceFile": "A Land Divided.pdf",
+      "sectionCount": 19,
+      "wordCount": 6770,
+      "path": "book-content/isrpal.json"
     },
     {
       "id": "Jackass",

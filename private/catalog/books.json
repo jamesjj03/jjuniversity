@@ -136,7 +136,7 @@
       "Psychology & Human Behavior",
       "Social Movements"
     ],
-    "status": "ready",
+    "status": "hidden",
     "description": "A declaration arguing that what society calls laziness and lack of discipline is actually resistance to systems of control and domination.",
     "aiTagged": true,
     "confidence": {
@@ -5897,14 +5897,14 @@
     "title": "A Land Divided",
     "series": "",
     "coverFile": "IsrPal.jpg",
-    "bookFile": "isrpal.epub",
+    "bookFile": "isrpal.json",
     "tags": [
       "Government & Politics",
       "Middle Eastern History",
       "War & Conflict"
     ],
-    "status": "coming-soon",
-    "description": "An exploration of Israel and Palestine through historical, political, and regional perspectives.",
+    "status": "ready",
+    "description": "A short history of Israel and Palestine, covering Ottoman rule, Zionism, partition, occupation, intifada, and the long failure to make peace.",
     "aiTagged": true,
     "confidence": {
       "Middle Eastern History": "high",
@@ -5912,19 +5912,19 @@
       "Government & Politics": "medium"
     },
     "similar": [],
-    "wordCount": null,
-    "readingMinutes": null,
-    "readingLabel": "Unknown",
-    "chapterCount": null,
+    "wordCount": 6770,
+    "readingMinutes": 38,
+    "readingLabel": "38 min read",
+    "chapterCount": 19,
     "hiddenCategories": [],
     "hiddenShelves": [],
     "visibility": "main",
     "archive": false,
     "category": "",
     "archiveCategory": "",
-    "subtitle": "",
-    "creator": "",
-    "author": ""
+    "subtitle": "How Israel and Palestine Became a Forever War",
+    "creator": "James Johnson",
+    "author": "James Johnson"
   },
   {
     "id": "jackass",

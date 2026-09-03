@@ -11,6 +11,8 @@
     "publication:verify": "node scripts/verify-publication-edition.mjs",
     "publication:check-live": "node scripts/check-publication-source-parity.mjs",
     "publication:attest": "node scripts/check-publication-source-parity.mjs --write-attestation",
+    "publication:import-land-divided": "python -X utf8 scripts/import-a-land-divided.py",
+    "publication:publish-land-divided": "node scripts/publish-a-land-divided.mjs",
     "gold-cleaner": "node tools/gold-cleaner/server.mjs",
     "enrich-books": "node scripts/enrich-books.mjs",
     "sync-books": "node scripts/enrich-books.mjs",

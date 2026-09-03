@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import SiteV2BooksBrowser from "@/components/site-v2/SiteV2BooksBrowser";
 import styles from "@/components/site-v2/SiteV2.module.css";
 import { getCollectionsLive, getPublicBooksLive } from "@/lib/publishing";
@@ -15,7 +14,7 @@ export const metadata: Metadata = {
     description: "Browse the complete JJ University collection of free short books.",
     path: "/books",
   }),
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default async function SiteV2BooksPage({
@@ -36,11 +35,8 @@ export default async function SiteV2BooksPage({
 
   return (
     <>
-      <header className={styles.pageHeaderCentered}>
-        <h1>Books</h1>
-        <div className={styles.pageHeaderActions}>
-          <Link className={styles.secondaryButton} href="/books/index">Complete A-Z index</Link>
-        </div>
+      <header className={`${styles.pageHeaderCentered} ${styles.libraryHeader}`}>
+        <h1>The Library</h1>
       </header>
       <SiteV2BooksBrowser
         books={books}

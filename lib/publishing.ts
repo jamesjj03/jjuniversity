@@ -6,6 +6,7 @@ import rawManifest from "@/private/book-content/manifest.json";
 import rawPaths from "@/public/paths.json";
 import rawPrintProducts from "@/public/print-products.json";
 import { canonicalBookId, LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
+import { SERIES_CATALOG } from "@/lib/seriesCatalog";
 
 export { LEGACY_BOOK_ID_ALIASES } from "@/lib/bookAliases";
 
@@ -76,10 +77,12 @@ export type PublishedSeries = {
   slug: string;
   slugAliases: string[];
   title: string;
+  tagline: string;
   description: string;
   level: string;
   tags: string[];
   bookIds: string[];
+  visibility: "main" | "archive";
 };
 
 export type PrintProduct = {
@@ -130,10 +133,12 @@ type ReadingPath = {
   title?: string;
   aliases?: string[];
   description?: string;
+  tagline?: string;
   level?: string;
   tags?: string[];
   books?: Array<{ id?: string }>;
   deleted?: boolean;
+  visibility?: string;
 };
 
 const manifestBooks = (rawManifest as { books?: ManifestBook[] }).books || [];
@@ -386,14 +391,11 @@ function deterministicPairRank(sourceId: string, candidateId: string) {
 }
 
 export function getAllSeries() {
-  const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
-  const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
-  return normalizeStaticSeriesItems(items);
+  return normalizeStaticSeriesItems(authoredSeriesItems());
 }
 
 export function getEditorialSeries() {
-  const paths = rawPaths as { series?: ReadingPath[] };
-  return normalizeStaticSeriesItems(paths.series || []);
+  return normalizeStaticSeriesItems(authoredSeriesItems());
 }
 
 export function getReadingPaths() {
@@ -410,9 +412,33 @@ export function getReadingPaths() {
  * their authored order and progress behavior.
  */
 export function getCollections() {
+  return normalizeStaticSeriesItems(authoredSeriesItems());
+}
+
+function rawPathItems() {
   const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
-  const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
-  return normalizeStaticSeriesItems(items);
+  return [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
+}
+
+function authoredSeriesItems(): ReadingPath[] {
+  const existing = new Map(rawPathItems().map(item => [String(item.id || "").trim(), item]));
+
+  return SERIES_CATALOG.map(series => {
+    const previous = existing.get(series.id);
+    return {
+      ...previous,
+      id: series.id,
+      title: series.title,
+      tagline: series.tagline,
+      description: series.description,
+      kind: "series",
+      type: "series",
+      level: previous?.level || "intermediate",
+      visibility: series.archive ? "archive" : "main",
+      books: series.bookIds.map(id => ({ id })),
+      deleted: false,
+    };
+  });
 }
 
 function normalizeStaticSeriesItems(items: ReadingPath[]) {
@@ -428,12 +454,10 @@ function normalizeStaticSeriesItems(items: ReadingPath[]) {
 }
 
 export async function getAllSeriesLive() {
-  const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
-  const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
   const seen = new Set<string>();
   const allBooks = await getAllBooksLive();
   const bookIds = new Set(allBooks.map(book => book.id));
-  return items
+  return authoredSeriesItems()
     .filter(item => !item.deleted && item.id && item.title && Array.isArray(item.books) && item.books.length)
     .map(item => normalizeSeries(item))
     .filter(series => {
@@ -444,12 +468,10 @@ export async function getAllSeriesLive() {
 }
 
 export async function getCollectionsLive() {
-  const paths = rawPaths as { series?: ReadingPath[]; paths?: ReadingPath[]; tagPaths?: ReadingPath[]; recommendedReading?: ReadingPath[] };
-  const items = [...(paths.series || []), ...(paths.paths || []), ...(paths.tagPaths || []), ...(paths.recommendedReading || [])];
   const seen = new Set<string>();
   const allBooks = await getAllBooksLive();
   const bookIds = new Set(allBooks.map(book => book.id));
-  return items
+  return authoredSeriesItems()
     .filter(item => !item.deleted && item.id && item.title && Array.isArray(item.books) && item.books.length)
     .map(item => normalizeSeries(item))
     .filter(series => {
@@ -656,10 +678,12 @@ function normalizeSeries(item: ReadingPath): PublishedSeries {
     slug,
     slugAliases: [...new Set([id, ...authoredAliases].filter(alias => alias && alias !== slug))],
     title,
+    tagline: String(item.tagline || "").trim(),
     description: String(item.description || `A JJ University reading sequence around ${title}.`).trim(),
     level: String(item.level || "starter").trim(),
     tags: Array.isArray(item.tags) ? item.tags.map(String).filter(Boolean) : [],
     bookIds: Array.isArray(item.books) ? item.books.map(book => String(book.id || "").trim().toLowerCase()).filter(Boolean) : [],
+    visibility: String(item.visibility || "main").trim().toLowerCase() === "archive" ? "archive" : "main",
   };
 }
 
