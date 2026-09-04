@@ -9,9 +9,9 @@ Current shape:
 - `00-foundation-legacy.css`: base tokens, shared shell, and the older broad app styles.
 - `10-*` through `30-*`: visual repair, publishing pages, and library polish.
 - `40-*`: Fiber-specific surfaces.
-- `50-*` through `60-*`: theme, library, and Atlas styles.
+- `50-*`: shared theme, library, home, and Fiber styles.
 - `70-*`: reader, Fiber, and admin creation styles.
 - `80-*` through `85-*`: final override stack split by repair pass.
-- `90-*` through `91-*`: former late-fixes layer, including layout fixes and Arena/factory styles.
+- `90-*` through `93-*`: late layout, Arena, and book-audit styles.
 
 When cleaning further, remove or consolidate rules inside a layer first, then run `npm run build` before moving rules across layer boundaries.

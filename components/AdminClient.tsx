@@ -7,7 +7,6 @@ import { coverFallbackSrc, coverWebpSrc } from "@/lib/cover";
 import CoverImage from "@/components/CoverImage";
 import FiberAdminEditor from "@/components/FiberAdminEditor";
 import { DEFAULT_FIBER_CONFIG, FiberConfig, normalizeFiberConfig } from "@/lib/fiberConfig";
-import AtlasClient from "@/components/AtlasClient";
 import { useAdminUnsavedChanges } from "@/components/AdminUnsavedChanges";
 
 type Book = {
@@ -67,9 +66,6 @@ type SiteConfig = {
     featuredPathIds: string[];
     newestIds: string[];
   };
-  atlas: {
-    visible: boolean;
-  };
   fiber: {
     visible: boolean;
   };
@@ -100,9 +96,6 @@ const DEFAULT_SITE: SiteConfig = {
     featuredPathIds: [],
     newestIds: [],
   },
-  atlas: {
-    visible: false,
-  },
   fiber: {
     visible: false,
   },
@@ -119,7 +112,7 @@ const DEFAULT_BOOK_DRAFT: BookDraft = {
   archiveCategory: "Unsorted Archive",
 };
 
-export type AdminView = "add" | "editor" | "paths" | "atlas" | "site" | "fiber";
+export type AdminView = "add" | "editor" | "paths" | "site" | "fiber";
 type AdminResource = "books" | "paths" | "site" | "fiber";
 type LoadStatus = "loading" | "ready" | "error";
 type LoadState = Record<AdminResource, { status: LoadStatus; error: string }>;
@@ -136,7 +129,6 @@ const ADMIN_VIEWS: Array<{ id: AdminView; label: string; description: string }> 
   { id: "editor", label: "Books", description: "Metadata, shelves, tags, and content" },
   { id: "paths", label: "Series", description: "Order and book lists" },
   { id: "site", label: "Homepage", description: "Featured and newest" },
-  { id: "atlas", label: "Atlas quick", description: "Visibility and inventory" },
   { id: "fiber", label: "Fiber", description: "Private quote page" },
 ];
 
@@ -207,9 +199,6 @@ function normalizeSiteConfig(data: Partial<SiteConfig> | null | undefined): Site
     library: {
       featuredPathIds: Array.isArray(data?.library?.featuredPathIds) ? data.library.featuredPathIds.map(String).filter(Boolean) : [],
       newestIds: Array.isArray(data?.library?.newestIds) ? data.library.newestIds.map(String).filter(Boolean) : [],
-    },
-    atlas: {
-      visible: Boolean(data?.atlas?.visible),
     },
     fiber: {
       visible: Boolean(data?.fiber?.visible),
@@ -346,7 +335,7 @@ export default function AdminClient({ initialView = "editor" }: { initialView?: 
       const raw = data as Partial<SiteConfig>;
       if (!data || typeof data !== "object" || !Array.isArray(raw.homeCards) || !raw.homeCards.length || !raw.library
         || !Array.isArray(raw.library.featuredPathIds) || !Array.isArray(raw.library.newestIds)
-        || typeof raw.atlas?.visible !== "boolean" || typeof raw.fiber?.visible !== "boolean") {
+        || typeof raw.fiber?.visible !== "boolean") {
         throw new Error("Site response did not include the expected configuration.");
       }
       setSite(normalizeSiteConfig(raw));
@@ -625,17 +614,6 @@ export default function AdminClient({ initialView = "editor" }: { initialView?: 
   function addFeaturedId(kind: "featuredPathIds" | "newestIds", id: string) {
     if (!id || site.library[kind].includes(id)) return;
     setFeaturedIds(kind, [...site.library[kind], id]);
-  }
-
-  function setAtlasVisible(visible: boolean) {
-    setSiteDirty(true);
-    setSite(current => ({
-      ...current,
-      atlas: {
-        ...current.atlas,
-        visible,
-      },
-    }));
   }
 
   function setFiberVisible(visible: boolean) {
@@ -1007,8 +985,6 @@ export default function AdminClient({ initialView = "editor" }: { initialView?: 
 
       {adminView === "fiber" && <FiberAdminEditor config={fiber} onChange={patchFiber} />}
 
-      {adminView === "atlas" && <AtlasClient admin atlasVisible={site.atlas.visible} onAtlasVisibleChange={setAtlasVisible} />}
-
       {adminView === "site" && <section className="adminPanel siteSettingsPanel">
         <div className="pathBuilderTop">
           <div>
@@ -1016,21 +992,6 @@ export default function AdminClient({ initialView = "editor" }: { initialView?: 
             <h2>Choose featured paths and newest order</h2>
           </div>
         </div>
-
-        <section className="sitePublishPanel">
-          <div>
-            <h3>Atlas page</h3>
-            <p>Keep this off while the map is still being shaped. When it is on, Atlas appears in public navigation and the home buttons.</p>
-          </div>
-          <label className="adminToggle">
-            <input
-              type="checkbox"
-              checked={site.atlas.visible}
-              onChange={event => setAtlasVisible(event.target.checked)}
-            />
-            <span>{site.atlas.visible ? "Published" : "Hidden"}</span>
-          </label>
-        </section>
 
         <section className="sitePublishPanel">
           <div>

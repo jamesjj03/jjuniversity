@@ -179,13 +179,6 @@ export default async function ReviewsPage() {
             href="/admin/manuscript-case"
           />
           <WorkshopHubCard
-            title="Atlas review"
-            description="Inspect map inventory, generation lineage, and editorial layers without treating generated coverage as publication approval."
-            status="Evidence workspace"
-            action="Open Atlas"
-            href="/admin/atlas"
-          />
-          <WorkshopHubCard
             title="Editorial records"
             description="Review existing editorial records. Audit coverage is progress, not proof that a claim is correct."
             status="Protected review index"

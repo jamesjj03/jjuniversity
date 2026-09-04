@@ -1,4 +1,5 @@
 import "./globals.css";
+import "flag-icons/css/flag-icons.min.css";
 import "@fontsource-variable/bricolage-grotesque/wght.css";
 import "@fontsource/atkinson-hyperlegible/400.css";
 import "@fontsource/atkinson-hyperlegible/700.css";

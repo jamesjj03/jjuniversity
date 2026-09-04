@@ -55,6 +55,16 @@
   line-height: 1.62;
 }
 
+.immersiveRoute {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .siteV2Route::before {
   position: fixed;
   inset: 0;
@@ -299,6 +309,18 @@
 
 .siteMain {
   min-height: 72vh;
+}
+
+.immersiveMain {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.immersiveMain > * {
+  min-width: 0;
+  min-height: 0;
 }
 
 .siteFooter {
@@ -2663,104 +2685,8 @@
   font-weight: 750;
 }
 
-/* The public Atlas and Print experiences predate this preview and carry broad
-   global selectors. Keep their behavior, but make their visible shell obey the
-   preview's width, typography, and light/dark tokens. */
-.siteV2Route :global(.siteV2AtlasPage) {
-  width: var(--v2-shell) !important;
-  max-width: none !important;
-  margin-inline: auto !important;
-  color: var(--v2-ink) !important;
-  font-family: var(--v2-body) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsHeader) {
-  border-color: var(--v2-line) !important;
-  background:
-    radial-gradient(circle at 42% 4%, color-mix(in srgb, var(--v2-gold) 13%, transparent), transparent 45%),
-    linear-gradient(180deg, color-mix(in srgb, var(--v2-panel-raised) 62%, transparent), transparent 78%) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsHeader h1),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsExplorerHeader h2),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsOverview h2),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsQueuedState h2),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsSectionHeading h3) {
-  color: var(--v2-ink) !important;
-  font-family: var(--v2-display) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsHeader h1) {
-  font-size: clamp(54px, 8vw, 92px) !important;
-  letter-spacing: -0.045em !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsExplorer),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsOverview),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsWebPanel),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsFamilies),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsQueuedState) {
-  border-color: var(--v2-line) !important;
-  color: var(--v2-ink) !important;
-  background-color: color-mix(in srgb, var(--v2-panel) 90%, transparent) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsTreeChildren),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsFamily),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsClaimGrid section),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsContributorList article),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsRelationNotes article),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsMapFacts div) {
-  border-color: var(--v2-line) !important;
-  color: var(--v2-ink) !important;
-  background-color: color-mix(in srgb, var(--v2-panel-raised) 72%, transparent) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsDisclosure),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsCollapseAll),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsRelatedList button),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsDisclosureCopy strong),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsContributorList strong),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsHeaderStats dd),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsMapFacts dd) {
-  color: var(--v2-ink) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsDisclosureIcon) {
-  color: var(--v2-gold) !important;
-  background: color-mix(in srgb, var(--v2-panel-raised) 78%, transparent) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsKicker),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsNodeIndex),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsDisclosureCopy small),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsHeaderStats dt),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsMapFacts dt),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsStatus),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsClaimGrid h4),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsDetailBlock h4),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsContributorList span),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsRelationNotes span) {
-  color: var(--v2-gold-bright) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsWeb) {
-  background-color: var(--v2-bg) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsCoreText),
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsWebNode text) {
-  fill: var(--v2-ink) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsCoreSubtext) {
-  fill: var(--v2-muted) !important;
-}
-
-.siteV2Route :global(.siteV2AtlasPage) :global(.atlasMapsWebNode circle) {
-  fill: var(--v2-panel) !important;
-  stroke: var(--v2-line-strong) !important;
-}
+/* The public Print experience predates this preview and carries broad global
+   selectors. Keep its behavior while making the shell obey the preview tokens. */
 
 .siteV2Route :global(.siteV2LabsPage),
 .siteV2Route :global(.siteV2PrintPage),

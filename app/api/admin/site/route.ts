@@ -16,9 +16,6 @@ type SiteConfig = {
     featuredPathIds?: unknown;
     newestIds?: unknown;
   };
-  atlas?: {
-    visible?: unknown;
-  };
   fiber?: {
     visible?: unknown;
   };
@@ -38,9 +35,6 @@ const DEFAULT_SITE = {
   library: {
     featuredPathIds: [],
     newestIds: [],
-  },
-  atlas: {
-    visible: false,
   },
   fiber: {
     visible: false,
@@ -69,9 +63,6 @@ function cleanConfig(value: SiteConfig | null | undefined) {
       featuredPathIds: cleanIds(value?.library?.featuredPathIds),
       newestIds: cleanIds(value?.library?.newestIds),
     },
-    atlas: {
-      visible: Boolean(value?.atlas?.visible),
-    },
     fiber: {
       visible: Boolean(value?.fiber?.visible),
     },
@@ -87,7 +78,6 @@ function assertRawSite(value: unknown): SiteConfig {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Site settings source is not an object.");
   const data = value as Record<string, unknown>;
   const library = data.library as Record<string, unknown> | undefined;
-  const atlas = data.atlas as Record<string, unknown> | undefined;
   const fiber = data.fiber as Record<string, unknown> | undefined;
   if (!Array.isArray(data.homeCards) || !data.homeCards.length) throw new Error("Site settings must include homepage cards.");
   data.homeCards.forEach((card, index) => {
@@ -99,8 +89,8 @@ function assertRawSite(value: unknown): SiteConfig {
   if (!library || typeof library !== "object" || !Array.isArray(library.featuredPathIds) || !Array.isArray(library.newestIds)) {
     throw new Error("Site settings must include both library arrays.");
   }
-  if (!atlas || typeof atlas.visible !== "boolean" || !fiber || typeof fiber.visible !== "boolean") {
-    throw new Error("Site settings must include Atlas and Fiber visibility flags.");
+  if (!fiber || typeof fiber.visible !== "boolean") {
+    throw new Error("Site settings must include the Fiber visibility flag.");
   }
   if (!data.social || typeof data.social !== "object" || typeof (data.social as Record<string, unknown>).instagramUrl !== "string") {
     throw new Error("Site settings must include the Instagram URL.");

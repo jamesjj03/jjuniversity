@@ -54,7 +54,7 @@ export default function AdminPage() {
       </section>
 
       <footer className={styles.homeFooter}>
-        <span>Homepage, Fiber, Atlas, Arena, and retained tools remain available without crowding everyday work.</span>
+        <span>Homepage, Fiber, Arena, and retained tools remain available without crowding everyday work.</span>
         <GuardedAdminLink href="/admin/more">See all tools →</GuardedAdminLink>
       </footer>
     </main>

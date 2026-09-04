@@ -22,7 +22,6 @@ export default function AccountMenu() {
   const ref = useRef<HTMLDetailsElement | null>(null);
   const pathname = usePathname();
   const [account, setAccount] = useState<Account | null>(null);
-  const [atlasVisible, setAtlasVisible] = useState(false);
   const [fiberVisible, setFiberVisible] = useState(false);
 
   const navItems = useMemo(() => [
@@ -30,22 +29,20 @@ export default function AccountMenu() {
     { href: "/library", label: "Library" },
     { href: "/print", label: "Print" },
     { href: "/arena", label: "Arena" },
-    ...(atlasVisible ? [{ href: "/atlas", label: "Atlas" }] : []),
+    { href: "/atlas", label: "Atlas" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
     { href: "/settings", label: "Settings" },
     ...(fiberVisible ? [{ href: "/fiber", label: "Fiber" }] : []),
-  ], [atlasVisible, fiberVisible]);
+  ], [fiberVisible]);
 
   useEffect(() => {
     fetch("/site.json", { cache: "no-store" })
       .then(response => response.json())
       .then(data => {
-        setAtlasVisible(Boolean(data?.atlas?.visible));
         setFiberVisible(Boolean(data?.fiber?.visible));
       })
       .catch(() => {
-        setAtlasVisible(false);
         setFiberVisible(false);
       });
 

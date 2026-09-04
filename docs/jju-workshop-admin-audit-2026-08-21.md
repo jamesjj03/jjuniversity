@@ -1,5 +1,7 @@
 # JJU Workshop: admin audit and local-workspace boundary
 
+> Atlas note (September 3, 2026): the Atlas admin/factory described in this historical audit was retired during the world-atlas rebuild. Its routes and API no longer exist.
+
 ## Current state
 
 `/admin` is now presented as **JJU Workshop**, but it remains an online Next.js admin surface. It is protected by the existing Basic Auth boundary in `proxy.ts`; it is not yet an offline application. The redesign preserves the existing routes, APIs, and data locations.

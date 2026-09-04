@@ -43,15 +43,8 @@ export default function MoreWorkshopPage() {
           href="/admin/legacy?view=fiber"
         />
         <WorkshopHubCard
-          title="Atlas quick controls"
-          description="Open the retained Atlas visibility and inventory controls inside the old full workspace. Use Reviews for the dedicated Atlas desk."
-          status="Legacy full-load tool"
-          action="Open Atlas quick controls"
-          href="/admin/legacy?view=atlas"
-        />
-        <WorkshopHubCard
           title="Full legacy workspace"
-          description="The previous all-in-one admin remains available for tools not yet moved into focused routes. It loads Books, Series, Homepage, Atlas quick controls, and Fiber together."
+          description="The previous all-in-one admin remains available for tools not yet moved into focused routes. It loads Books, Series, Homepage, and Fiber together."
           status="Retained for compatibility"
           action="Open legacy workspace"
           href="/admin/legacy"

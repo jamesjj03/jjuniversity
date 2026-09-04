@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const LEGACY_VIEWS = new Set<AdminView>(["add", "editor", "paths", "atlas", "site", "fiber"]);
+const LEGACY_VIEWS = new Set<AdminView>(["add", "editor", "paths", "site", "fiber"]);
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 

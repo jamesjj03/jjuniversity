@@ -19,7 +19,7 @@ const WORKSPACE_LINKS: WorkspaceLink[] = [
   { href: "/admin/books", label: "Write", shortLabel: "Write", description: "Find a book and edit it" },
   { href: "/admin/organize", label: "Organize", shortLabel: "Sort", description: "Collections, Topics, and series", relatedHrefs: ["/admin/topics", "/admin/taxonomy-review"] },
   { href: "/admin/print", label: "Print", shortLabel: "Print", description: "Proofs, covers, and release gates" },
-  { href: "/admin/reviews", label: "Needs you", shortLabel: "Your eyes", description: "Editorial, audio, and people", relatedHrefs: ["/admin/audio", "/admin/narrators", "/admin/manuscript-case", "/admin/editorial", "/admin/atlas", "/admin/arena"] },
+  { href: "/admin/reviews", label: "Needs you", shortLabel: "Your eyes", description: "Editorial, audio, and people", relatedHrefs: ["/admin/audio", "/admin/narrators", "/admin/manuscript-case", "/admin/editorial", "/admin/arena"] },
   { href: "/admin/more", label: "More", shortLabel: "More", description: "Site tools and legacy workspace", relatedHrefs: ["/admin/legacy"] },
 ];
 
