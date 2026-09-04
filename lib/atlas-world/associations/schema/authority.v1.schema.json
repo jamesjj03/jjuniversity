@@ -1,0 +1,518 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jjuniversity.com/schemas/atlas-jju-association-authority.v1.json",
+  "title": "JJU Atlas geographic association authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "authorityId",
+    "revision",
+    "updatedAt",
+    "policy",
+    "sources",
+    "associations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "authorityId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publicReviewStates",
+        "requireExactEvidence",
+        "automatedPublication",
+        "staleWhenSubjectRevisionChanges"
+      ],
+      "properties": {
+        "publicReviewStates": {
+          "const": [
+            "approved"
+          ]
+        },
+        "requireExactEvidence": {
+          "const": true
+        },
+        "automatedPublication": {
+          "const": false
+        },
+        "staleWhenSubjectRevisionChanges": {
+          "const": true
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "associations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/association"
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "location",
+        "revisionStrategy",
+        "snapshotRevision",
+        "capturedAt",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "repository_json",
+            "repository_module",
+            "manuscript",
+            "external"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revisionStrategy": {
+          "enum": [
+            "subject_record_sha256",
+            "file_sha256",
+            "external_revision"
+          ]
+        },
+        "snapshotRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capturedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "association": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "revision",
+        "pilotCollectionId",
+        "subject",
+        "place",
+        "relationship",
+        "salience",
+        "temporal",
+        "evidence",
+        "proposal",
+        "review",
+        "supersedesAssociationId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pilotCollectionId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "subject": {
+          "$ref": "#/$defs/subject"
+        },
+        "place": {
+          "$ref": "#/$defs/place"
+        },
+        "relationship": {
+          "enum": [
+            "primary_subject",
+            "substantial_coverage",
+            "contextual_coverage",
+            "born_in",
+            "died_in",
+            "lived_in",
+            "active_in",
+            "governed_in",
+            "occurred_in",
+            "began_in",
+            "ended_in",
+            "affected",
+            "originated_in",
+            "institutionally_centered",
+            "historically_prominent"
+          ]
+        },
+        "salience": {
+          "enum": [
+            "primary",
+            "substantial",
+            "contextual"
+          ]
+        },
+        "temporal": {
+          "$ref": "#/$defs/temporal"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "proposal": {
+          "$ref": "#/$defs/proposal"
+        },
+        "review": {
+          "$ref": "#/$defs/review"
+        },
+        "supersedesAssociationId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "review": {
+                "properties": {
+                  "state": {
+                    "const": "approved"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "review": {
+                "properties": {
+                  "reviewerKind": {
+                    "enum": [
+                      "human",
+                      "agent"
+                    ]
+                  },
+                  "reviewedBy": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "reviewedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "decisionNote": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "id",
+        "title",
+        "href",
+        "sourceId",
+        "sourceRevision"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "book",
+            "series",
+            "person",
+            "event",
+            "concept"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "href": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceRevision": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "place": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entityId",
+        "name",
+        "slug",
+        "featureId"
+      ],
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "slug": {
+          "type": "string",
+          "minLength": 1
+        },
+        "featureId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "temporal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observedAt",
+        "validFrom",
+        "validTo",
+        "precision",
+        "note"
+      ],
+      "properties": {
+        "observedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "validFrom": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "validTo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "precision": {
+          "enum": [
+            "day",
+            "month",
+            "year",
+            "source_snapshot",
+            "unknown"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "sourceRevision",
+        "locator",
+        "exactText",
+        "exactTextSha256",
+        "supports",
+        "note"
+      ],
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceRevision": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exactText": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exactTextSha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "supports": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "subject_identity",
+              "place_connection",
+              "relationship_semantics"
+            ]
+          }
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "proposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "proposedBy",
+        "proposedAt",
+        "confidence",
+        "rationale"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "manual_editorial",
+            "ai_assisted"
+          ]
+        },
+        "proposedBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "proposedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "reviewerKind",
+        "reviewedBy",
+        "reviewedAt",
+        "decisionNote"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "proposed",
+            "approved",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "reviewerKind": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "human",
+            "agent",
+            null
+          ]
+        },
+        "reviewedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decisionNote": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

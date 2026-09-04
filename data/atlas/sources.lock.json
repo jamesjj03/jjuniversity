@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "1.0.0",
+  "lockId": "jju-atlas-sources-2026-09-04",
+  "cacheDirectory": "data/atlas/source-cache",
+  "builds": [
+    {
+      "id": "atlas-world-snapshot-v1",
+      "command": "npm run atlas:world:build",
+      "code": "scripts/build-atlas-world-snapshot.mjs",
+      "sourceIds": [
+        "natural-earth-admin-0-50m-5.1.2",
+        "world-bank-country-metadata-2026-09-03",
+        "world-bank-sp-pop-totl-2026-07-13",
+        "world-bank-ny-gdp-mktp-cd-2026-07-13",
+        "world-bank-ny-gdp-pcap-cd-2026-07-13",
+        "geonames-country-info-2026-09-03",
+        "cia-world-factbook-final-capture-2026-02"
+      ],
+      "transformations": [
+        "Join datasets through reviewed geographic codes rather than names.",
+        "Normalize government and broad religious categories with versioned rules while retaining source wording.",
+        "Project canonical Natural Earth WGS84 geometry into a 1200 x 650 Equal Earth SVG viewBox."
+      ],
+      "outputs": [
+        "lib/atlas-world/data/countries.v1.json",
+        "lib/atlas-world/data/geometry-equal-earth.v1.json",
+        "lib/atlas-world/data/validation.v1.json",
+        "public/atlas-world/geometry-equal-earth.v1.svg"
+      ]
+    },
+    {
+      "id": "atlas-geography-pack-v1",
+      "command": "npm run atlas:geography:build",
+      "code": "scripts/build-atlas-geography-pack.py",
+      "runner": "scripts/run-atlas-geography-build.mjs",
+      "requirements": {
+        "path": "scripts/atlas-geography-requirements.txt",
+        "python": "3.11",
+        "normalizedTextChecksumSha256": "769f0a4798cc51a820f37a04a30043bef71dbfebc8fb272019121a636338063f"
+      },
+      "sourceIds": [
+        "ghsl-ghs-pop-2025-r2023a-1km",
+        "natural-earth-manual-shaded-relief-50m-3.3.0",
+        "natural-earth-rivers-50m-5.1.2",
+        "natural-earth-lakes-50m-5.1.2",
+        "natural-earth-populated-places-50m-5.1.2"
+      ],
+      "transformations": [
+        "Area-average the 1 km World Mollweide population-count grid into a 2400 x 1300 Equal Earth raster, then apply the recorded log1p palette and sphere mask.",
+        "Bilinear-warp the Natural Earth WGS84 grayscale relief into the same Equal Earth raster and sphere mask.",
+    "Select and round-trip canonical WGS84 vectors, then derive 1200 x 650 Equal Earth SVG paths and points.",
+    "Retain rivers classed River with min_zoom <= 3, lakes with min_zoom <= 3 after exact duplicate removal, and all national capitals plus cities with SCALERANK <= 2.",
+    "Convert Natural Earth Populated Places POP2025 values from the source's thousands-of-people unit into integer people while retaining estimated status and the original field name in provenance."
+      ],
+      "outputs": [
+        "lib/atlas-world/data/geography-pack.v1.json",
+        "public/atlas-world/layers/population-density-2025.equal-earth.webp",
+        "public/atlas-world/layers/physical-relief.equal-earth.webp"
+      ]
+    }
+  ],
+  "notes": [
+    "Every generated Atlas artifact must name a source entry from this lock.",
+    "HTTP downloads are accepted only when both byte length and SHA-256 match.",
+    "The five small mutable World Bank and GeoNames API snapshots are embedded under data/atlas/source-seeds so a future upstream update cannot make the preserved V1 build unrecoverable.",
+    "The Factbook source is pinned to a Git commit and verified with the same deterministic file-set hash used by the Atlas snapshot builder.",
+    "Large raw inputs stay out of Git; bounded browser-ready derivatives are committed."
+  ],
+  "sources": [
+    {
+      "id": "natural-earth-admin-0-50m-5.1.2",
+      "group": "atlas-v1",
+      "kind": "http",
+      "title": "Natural Earth 1:50m Admin 0 – Countries",
+      "publisher": "Natural Earth",
+      "version": "5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_admin_0_countries.geojson",
+      "target": "jju-atlas-ne-50m-v5.1.2.geojson",
+      "expectedBytes": 3083490,
+      "checksumSha256": "3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb",
+      "retrievedAt": "2026-09-03",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "world-bank-country-metadata-2026-09-03",
+      "group": "atlas-v1",
+      "kind": "http",
+      "title": "World Bank country metadata",
+      "publisher": "World Bank",
+      "version": "API snapshot 2026-09-03",
+      "url": "https://api.worldbank.org/v2/country?format=json&per_page=400",
+      "target": "jju-atlas-wb-countries-20260903.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-countries-20260903.json",
+      "expectedBytes": 113590,
+      "checksumSha256": "d29d57f8adf954c5e2a1520a02fb2c7b45575d8db3bd327a9dff47d66914231c",
+      "retrievedAt": "2026-09-03",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://datacatalog.worldbank.org/public-licenses"
+      }
+    },
+    {
+      "id": "world-bank-sp-pop-totl-2026-07-13",
+      "group": "atlas-v1",
+      "kind": "http",
+      "title": "Population, total (SP.POP.TOTL)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-population-20260903.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-population-20260903.json",
+      "expectedBytes": 50532,
+      "checksumSha256": "4657c2140922547408f0652a5a4075ebefd28f31b10bfeb24fc4a78362d56cfe",
+      "retrievedAt": "2026-09-03",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://datacatalog.worldbank.org/public-licenses"
+      }
+    },
+    {
+      "id": "world-bank-ny-gdp-mktp-cd-2026-07-13",
+      "group": "atlas-v1",
+      "kind": "http",
+      "title": "GDP (current US$) (NY.GDP.MKTP.CD)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-gdp-20260903.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-gdp-20260903.json",
+      "expectedBytes": 52796,
+      "checksumSha256": "e986c93686db6e3b47c9df3056468fffef3ea101cc51ee0edec40790092fc3c0",
+      "retrievedAt": "2026-09-03",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://datacatalog.worldbank.org/public-licenses"
+      }
+    },
+    {
+      "id": "world-bank-ny-gdp-pcap-cd-2026-07-13",
+      "group": "atlas-v1",
+      "kind": "http",
+      "title": "GDP per capita (current US$) (NY.GDP.PCAP.CD)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-gdp-pc-20260903.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-gdp-pc-20260903.json",
+      "expectedBytes": 55768,
+      "checksumSha256": "6f2bd07234e17b9d02905484d47692d8b62c7dff0053935dca7f563e4d9ac688",
+      "retrievedAt": "2026-09-03",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://datacatalog.worldbank.org/public-licenses"
+      }
+    },
+    {
+      "id": "geonames-country-info-2026-09-03",
+      "group": "atlas-v1",
+      "kind": "http",
+      "title": "GeoNames countryInfo",
+      "publisher": "GeoNames",
+      "version": "snapshot 2026-09-03",
+      "url": "https://download.geonames.org/export/dump/countryInfo.txt",
+      "target": "jju-atlas-countryInfo-20260903.txt",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-countryInfo-20260903.txt",
+      "expectedBytes": 31678,
+      "checksumSha256": "93bafc525813f22e4711ff9ed6d626343094ce48c26388dc7c49189b3d7d5512",
+      "retrievedAt": "2026-09-03",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://www.geonames.org/export/"
+      }
+    },
+    {
+      "id": "cia-world-factbook-final-capture-2026-02",
+      "group": "atlas-v1",
+      "kind": "git",
+      "title": "CIA World Factbook final content captures",
+      "publisher": "pmusser preservation via Internet Archive",
+      "version": "Git commit 2a40cddf0b0f57273c2f935be169d73496989a21",
+      "url": "https://github.com/pmusser/cia-world-factbook-final.git",
+      "commit": "2a40cddf0b0f57273c2f935be169d73496989a21",
+      "target": "jju-atlas-factbook-20260903",
+      "sparsePaths": [
+        "country-jsons",
+        "LICENSE"
+      ],
+      "fileSet": {
+        "jsonDirectory": "country-jsons",
+        "additionalFiles": [
+          "country-jsons/snapshot_log.csv",
+          "LICENSE"
+        ]
+      },
+      "checksumSha256": "85b7d30911f5c991c4c9ead02fb91879e10ca4a434998263129a0dc8bd6eb79e",
+      "retrievedAt": "2026-09-03",
+      "license": {
+        "name": "CC0 1.0 (repository license)",
+        "url": "https://github.com/pmusser/cia-world-factbook-final/blob/main/LICENSE"
+      }
+    },
+    {
+      "id": "ghsl-ghs-pop-2025-r2023a-1km",
+      "group": "phase2-geography",
+      "kind": "http",
+      "title": "GHS-POP population grid, epoch 2025, World Mollweide 1 km",
+      "publisher": "European Commission Joint Research Centre",
+      "version": "R2023A V1.0, epoch 2025",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2025_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2025_GLOBE_R2023A_54009_1000_V1_0.zip",
+      "target": "GHS_POP_E2025_GLOBE_R2023A_54009_1000_V1_0.zip",
+      "expectedBytes": 323340844,
+      "checksumSha256": "cd630f51ac65dff2a0c7ad252333bbb20c5cf9de4d85eef04e22ef3699d80c95",
+      "retrievedAt": "2026-09-04",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/copyright.txt"
+      }
+    },
+    {
+      "id": "natural-earth-manual-shaded-relief-50m-3.3.0",
+      "group": "phase2-geography",
+      "kind": "http",
+      "title": "Natural Earth Manual Shaded Relief, 1:50m",
+      "publisher": "Natural Earth",
+      "version": "3.3.0",
+      "url": "https://naturalearth.s3.amazonaws.com/50m_raster/MSR_50M.zip",
+      "target": "MSR_50M.zip",
+      "expectedBytes": 17984241,
+      "checksumSha256": "e38f8b256f64eccae250a1e482761d4a7a585e6602c941e6bdb860e160faf609",
+      "retrievedAt": "2026-09-04",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "natural-earth-rivers-50m-5.1.2",
+      "group": "phase2-geography",
+      "kind": "http",
+      "title": "Natural Earth 1:50m Rivers and Lake Centerlines",
+      "publisher": "Natural Earth",
+      "version": "repository release 5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_rivers_lake_centerlines.geojson",
+      "target": "ne_50m_rivers_lake_centerlines.geojson",
+      "expectedBytes": 827318,
+      "checksumSha256": "f286e0ce978fde999ca2d7a78c764be08542e19b63cded52b05c12d5173ccc51",
+      "retrievedAt": "2026-09-04",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "natural-earth-lakes-50m-5.1.2",
+      "group": "phase2-geography",
+      "kind": "http",
+      "title": "Natural Earth 1:50m Lakes",
+      "publisher": "Natural Earth",
+      "version": "repository release 5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_lakes.geojson",
+      "target": "ne_50m_lakes.geojson",
+      "expectedBytes": 876018,
+      "checksumSha256": "d350b75978b26fe839b797c2c529b2fb8f47fb3983c03f4964e36d5df9378a52",
+      "retrievedAt": "2026-09-04",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "natural-earth-populated-places-50m-5.1.2",
+      "group": "phase2-geography",
+      "kind": "http",
+      "title": "Natural Earth 1:50m Populated Places",
+      "publisher": "Natural Earth",
+      "version": "repository release 5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_populated_places.geojson",
+      "target": "ne_50m_populated_places.geojson",
+      "expectedBytes": 3350885,
+      "checksumSha256": "da4662b7bbfeb897d02f228c5839131dce27acff5717630f91ccff4f67828ee7",
+      "retrievedAt": "2026-09-04",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
+import { createReadStream } from "node:fs";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,37 +9,36 @@ import { fileURLToPath } from "node:url";
 const SCHEMA_VERSION = "1.0.0";
 const SNAPSHOT_DATE = process.env.ATLAS_SNAPSHOT_DATE || "2026-09-03";
 const SNAPSHOT_ID = `atlas-world-${SNAPSHOT_DATE}`;
-const GENERATED_AT = process.env.ATLAS_GENERATED_AT || new Date().toISOString();
+const GENERATED_AT = process.env.ATLAS_GENERATED_AT || "2026-09-03T23:18:32.949Z";
 const RETRIEVED_AT = "2026-09-03";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDirectory, "..");
-const localTemp = process.env.LOCALAPPDATA
-  ? path.join(process.env.LOCALAPPDATA, "Temp")
-  : "C:\\Users\\james\\AppData\\Local\\Temp";
+const sourceCache = path.join(repositoryRoot, "data", "atlas", "source-cache");
+const sourceLockPath = path.join(repositoryRoot, "data", "atlas", "sources.lock.json");
 
 const inputs = {
   naturalEarth:
     process.env.ATLAS_NATURAL_EARTH_SOURCE ||
-    path.join(localTemp, "jju-atlas-ne-50m-v5.1.2.geojson"),
+    path.join(sourceCache, "jju-atlas-ne-50m-v5.1.2.geojson"),
   worldBankCountries:
     process.env.ATLAS_WORLD_BANK_COUNTRIES_SOURCE ||
-    path.join(localTemp, "jju-atlas-wb-countries-20260903.json"),
+    path.join(sourceCache, "jju-atlas-wb-countries-20260903.json"),
   worldBankPopulation:
     process.env.ATLAS_WORLD_BANK_POPULATION_SOURCE ||
-    path.join(localTemp, "jju-atlas-wb-population-20260903.json"),
+    path.join(sourceCache, "jju-atlas-wb-population-20260903.json"),
   worldBankGdp:
     process.env.ATLAS_WORLD_BANK_GDP_SOURCE ||
-    path.join(localTemp, "jju-atlas-wb-gdp-20260903.json"),
+    path.join(sourceCache, "jju-atlas-wb-gdp-20260903.json"),
   worldBankGdpPerCapita:
     process.env.ATLAS_WORLD_BANK_GDP_PER_CAPITA_SOURCE ||
-    path.join(localTemp, "jju-atlas-wb-gdp-pc-20260903.json"),
+    path.join(sourceCache, "jju-atlas-wb-gdp-pc-20260903.json"),
   geonames:
     process.env.ATLAS_GEONAMES_SOURCE ||
-    path.join(localTemp, "jju-atlas-countryInfo-20260903.txt"),
+    path.join(sourceCache, "jju-atlas-countryInfo-20260903.txt"),
   factbook:
     process.env.ATLAS_FACTBOOK_SOURCE ||
-    path.join(localTemp, "jju-atlas-factbook-20260903"),
+    path.join(sourceCache, "jju-atlas-factbook-20260903"),
 };
 
 const outputDirectory = process.env.ATLAS_OUTPUT_DIRECTORY
@@ -250,6 +250,7 @@ function temporal(observedAt, precision) {
 function observation(value, sourceId, sourceField, options = {}) {
   return {
     value,
+    status: options.status ?? "observed",
     temporal: temporal(options.observedAt ?? null, options.precision ?? "unknown"),
     sourceId,
     sourceField,
@@ -259,7 +260,7 @@ function observation(value, sourceId, sourceField, options = {}) {
 
 async function sha256File(filePath) {
   const hash = createHash("sha256");
-  hash.update(await readFile(filePath));
+  for await (const chunk of createReadStream(filePath)) hash.update(chunk);
   return hash.digest("hex");
 }
 
@@ -995,6 +996,7 @@ function joinAudit(sourceId, method, sourceCodes, entityIds, totalEntities) {
 
 async function main() {
   const [
+    sourceLock,
     naturalEarth,
     worldBankCountriesPayload,
     worldBankPopulationPayload,
@@ -1003,6 +1005,7 @@ async function main() {
     geonamesText,
     factbook,
   ] = await Promise.all([
+    readJson(sourceLockPath),
     readJson(inputs.naturalEarth),
     readJson(inputs.worldBankCountries),
     readJson(inputs.worldBankPopulation),
@@ -1449,6 +1452,20 @@ async function main() {
       ],
     }))(),
   ]);
+
+  const lockedSources = new Map(sourceLock.sources.map((source) => [source.id, source]));
+  assert(
+    sourceLock.lockId === "jju-atlas-sources-2026-09-04",
+    `Unexpected Atlas source lock ${String(sourceLock.lockId)}`,
+  );
+  for (const sourceRecord of sourceRecords) {
+    const lockedSource = lockedSources.get(sourceRecord.id);
+    assert(lockedSource, `Source ${sourceRecord.id} is absent from data/atlas/sources.lock.json`);
+    assert(
+      sourceRecord.checksumSha256 === lockedSource.checksumSha256,
+      `Input ${sourceRecord.id} does not match data/atlas/sources.lock.json`,
+    );
+  }
 
   const countrySnapshot = {
     schemaVersion: SCHEMA_VERSION,

@@ -34,6 +34,10 @@ The migration at `supabase/migrations/20260903220000_retire_legacy_atlas.sql` re
 
 The migration was applied successfully on September 3, 2026. A live catalog check afterward reported zero `public.atlas_*` tables. `public.set_updated_at()` remained present, and spot checks retained 333 book-catalog rows and 16 audio-track rows.
 
+## Migration history reconciliation
+
+The retirement was originally executed through the project's established reviewed-SQL workflow, so its successful schema change was not recorded in `supabase_migrations.schema_migrations`. On September 4, 2026, after committing the migration itself and independently confirming that the live `public` schema still contained no `atlas_*` tables, the remote ledger was repaired to mark version `20260903220000` as already applied. The migration SQL was not replayed and no application tables were changed during that reconciliation.
+
 ## Deliberately preserved
 
 - `public.set_updated_at()`, because ordinary JJU book, reader, audio, and narrator tables use it

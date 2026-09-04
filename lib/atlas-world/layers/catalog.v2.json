@@ -1,0 +1,798 @@
+{
+  "schemaVersion": "2.0.0",
+  "datasets": [
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-geography",
+      "name": "Present-day country and territory geography",
+      "description": "The 242 Atlas entities and their derived Equal Earth geometry.",
+      "valueType": "geometry",
+      "unit": null,
+      "geometryKind": "multipolygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": { "taxonomyId": "atlas-political-geography", "path": ["present_day", "admin0"], "depth": 1 },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["natural-earth-admin-0-50m-5.1.2"],
+      "sourceField": "ADM0_A3",
+      "access": { "kind": "inline" },
+      "temporal": {
+        "kind": "validity_interval",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "valid_at",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-political-contrast",
+      "name": "Political neighbor contrast",
+      "description": "Natural Earth map-color classes used only to distinguish adjacent entities.",
+      "valueType": "category",
+      "unit": null,
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": { "taxonomyId": "atlas-political-geography", "path": ["present_day", "admin0", "neighbor_contrast"], "depth": 2 },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["natural-earth-admin-0-50m-5.1.2"],
+      "sourceField": "MAPCOLOR7",
+      "access": { "kind": "inline" },
+      "temporal": {
+        "kind": "snapshot",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "snapshot",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-government",
+      "name": "Current government classification",
+      "description": "Broad, reviewable classifications derived from retained Factbook government wording.",
+      "valueType": "category",
+      "unit": null,
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": { "taxonomyId": "atlas-government-v1", "path": ["government", "broad_form"], "depth": 1 },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["cia-world-factbook-final-capture-2026-02"],
+      "sourceField": "government type",
+      "access": { "kind": "inline" },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-religion-dominant",
+      "name": "Dominant broad religious tradition",
+      "description": "Broad-tradition composition normalized from the retained Factbook estimate wording.",
+      "valueType": "category",
+      "unit": "percent_of_population",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": { "taxonomyId": "atlas-religion-v1", "path": ["religion", "broad_tradition", "dominant"], "depth": 1 },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["cia-world-factbook-final-capture-2026-02"],
+      "sourceField": "religions",
+      "access": { "kind": "inline" },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-population-total",
+      "name": "Population total",
+      "description": "Latest available World Bank total for each economy in the snapshot.",
+      "valueType": "number",
+      "unit": "people",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": { "taxonomyId": "world-bank-indicators", "path": ["people", "population", "total"], "depth": 2 },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["world-bank-sp-pop-totl-2026-07-13"],
+      "sourceField": "SP.POP.TOTL",
+      "access": { "kind": "inline" },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-gdp-per-capita",
+      "name": "GDP per capita",
+      "description": "Latest available GDP per person in current US dollars for each World Bank economy.",
+      "valueType": "number",
+      "unit": "current_usd_per_person",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": { "taxonomyId": "world-bank-indicators", "path": ["economy", "output", "gdp_per_capita", "current_usd"], "depth": 3 },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["world-bank-ny-gdp-pcap-cd-2026-07-13"],
+      "sourceField": "NY.GDP.PCAP.CD",
+      "access": { "kind": "api", "endpoint": "/api/atlas/layers/admin0-gdp-per-capita", "cachePolicy": "revalidate_daily" },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "physical-relief",
+      "name": "Physical relief",
+      "description": "A subtle, preprojected Natural Earth shaded-relief underlay aligned to the Atlas Equal Earth sphere.",
+      "valueType": "image",
+      "unit": null,
+      "geometryKind": "raster",
+      "geographicResolution": { "kind": "continuous_surface", "nominalResolution": "Natural Earth 1:50m cartographic raster" },
+      "conceptualResolution": { "taxonomyId": "atlas-physical-geography", "path": ["terrain", "cartographic_relief"], "depth": 1 },
+      "entityKey": "wgs84_coordinate",
+      "sourceIds": ["natural-earth-manual-shaded-relief-50m-3.3.0"],
+      "sourceField": null,
+      "access": { "kind": "static_asset", "href": "/atlas-world/layers/physical-relief.equal-earth.webp" },
+      "temporal": {
+        "kind": "timeless",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "timeless",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "population-density-2025",
+      "name": "Where people live",
+      "description": "Modelled 2025 population density from the GHSL one-kilometre equal-area population grid.",
+      "valueType": "number",
+      "unit": "people_per_square_kilometre_approximately_after_display_resampling",
+      "geometryKind": "raster",
+      "geographicResolution": { "kind": "grid", "cellSize": "1 km equal-area source cells; area-resampled for the 2400 × 1300 display raster" },
+      "conceptualResolution": { "taxonomyId": "atlas-population", "path": ["people", "population", "spatial_density"], "depth": 2 },
+      "entityKey": "wgs84_coordinate",
+      "sourceIds": ["ghsl-ghs-pop-2025-r2023a-1km"],
+      "sourceField": "GHS-POP epoch 2025 population count per 1 km source cell",
+      "access": { "kind": "static_asset", "href": "/atlas-world/layers/population-density-2025.equal-earth.webp" },
+      "temporal": {
+        "kind": "snapshot",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "snapshot",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "major-lakes",
+      "name": "Major lakes",
+      "description": "Generalized lake polygons selected for world and regional display.",
+      "valueType": "geometry",
+      "unit": null,
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "feature", "featureType": "lake" },
+      "conceptualResolution": { "taxonomyId": "atlas-physical-geography", "path": ["hydrography", "lake", "major"], "depth": 2 },
+      "entityKey": "atlas_feature_id",
+      "sourceIds": ["natural-earth-lakes-50m-5.1.2"],
+      "sourceField": "Natural Earth features with min_zoom <= 3",
+      "access": { "kind": "bundled", "resourceId": "atlas-geography-pack.v1", "selector": "featureCollections.majorLakes" },
+      "temporal": {
+        "kind": "timeless",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "timeless",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "major-rivers",
+      "name": "Major rivers",
+      "description": "Generalized river centerlines selected for world and regional display.",
+      "valueType": "geometry",
+      "unit": null,
+      "geometryKind": "multiline",
+      "geographicResolution": { "kind": "feature", "featureType": "river" },
+      "conceptualResolution": { "taxonomyId": "atlas-physical-geography", "path": ["hydrography", "river", "major"], "depth": 2 },
+      "entityKey": "atlas_feature_id",
+      "sourceIds": ["natural-earth-rivers-50m-5.1.2"],
+      "sourceField": "Natural Earth River features with min_zoom <= 3",
+      "access": { "kind": "bundled", "resourceId": "atlas-geography-pack.v1", "selector": "featureCollections.majorRivers" },
+      "temporal": {
+        "kind": "timeless",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "timeless",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "major-cities",
+      "name": "Major cities",
+      "description": "A cartographic selection of national capitals and high-priority populated places, not a complete gazetteer.",
+      "valueType": "geometry",
+      "unit": null,
+      "geometryKind": "point",
+      "geographicResolution": { "kind": "place", "placeType": "city" },
+      "conceptualResolution": { "taxonomyId": "atlas-settlements", "path": ["settlement", "city", "major_or_capital"], "depth": 2 },
+      "entityKey": "atlas_feature_id",
+      "sourceIds": ["natural-earth-populated-places-50m-5.1.2"],
+      "sourceField": "National capitals plus SCALERANK <= 2 populated places",
+      "access": { "kind": "bundled", "resourceId": "atlas-geography-pack.v1", "selector": "featureCollections.majorCities" },
+      "temporal": {
+        "kind": "snapshot",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "snapshot",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "population-geography-annotations",
+      "name": "Contextual explanations",
+      "description": "Source-reviewed explanations tied to conspicuous population patterns, geographic extents, evidence, and supporting layers.",
+      "valueType": "text",
+      "unit": null,
+      "geometryKind": "none",
+      "geographicResolution": { "kind": "feature", "featureType": "contextual_annotation" },
+      "conceptualResolution": { "taxonomyId": "atlas-explanations", "path": ["population", "spatial_pattern", "explanation"], "depth": 2 },
+      "entityKey": "atlas_feature_id",
+      "sourceIds": ["ghsl-ghs-pop-2025-r2023a-1km", "natural-earth-rivers-50m-5.1.2"],
+      "sourceField": "pattern-notes.v1.json evidence and observationRefs",
+      "access": { "kind": "bundled", "resourceId": "atlas-pattern-notes.v1", "selector": "notes" },
+      "temporal": {
+        "kind": "validity_interval",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "valid_at",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    }
+  ],
+  "layers": [
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-political",
+      "name": "Political",
+      "description": "Countries and territories differentiated for geographic exploration.",
+      "datasetId": "admin0-political-contrast",
+      "resolverId": "political-neighbor-contrast-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "base-area",
+      "zIndex": 200,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "categorical",
+        "items": [
+          { "key": "0", "label": "Neighbor contrast", "color": "#587d78" },
+          { "key": "1", "label": "Neighbor contrast", "color": "#9a7456" },
+          { "key": "2", "label": "Neighbor contrast", "color": "#6f719d" },
+          { "key": "3", "label": "Neighbor contrast", "color": "#9a8d56" },
+          { "key": "4", "label": "Neighbor contrast", "color": "#5b7793" },
+          { "key": "5", "label": "Neighbor contrast", "color": "#976976" },
+          { "key": "6", "label": "Neighbor contrast", "color": "#638367" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Unclassified", "color": "#485258", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["natural-earth-admin-0-50m-5.1.2"],
+        "methodology": "Uses Natural Earth MAPCOLOR7 solely to keep adjacent places visually distinct.",
+        "authoredVisualChoices": ["Seven muted colors are an authored navigation palette and do not encode political similarity."]
+      },
+      "temporal": {
+        "kind": "snapshot", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "snapshot", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-government",
+      "name": "Government",
+      "description": "Broad current government form, with original source wording retained for each place.",
+      "datasetId": "admin0-government",
+      "resolverId": "government-broad-form-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "categorical",
+        "items": [
+          { "key": "presidential_republic", "label": "Presidential republic", "color": "#4f8b83" },
+          { "key": "parliamentary_republic", "label": "Parliamentary republic", "color": "#6f88b5" },
+          { "key": "semi_presidential_republic", "label": "Semi-presidential republic", "color": "#7c72ad" },
+          { "key": "constitutional_monarchy", "label": "Constitutional monarchy", "color": "#b88c54" },
+          { "key": "absolute_monarchy", "label": "Absolute monarchy", "color": "#a75f55" },
+          { "key": "one_party_state", "label": "One-party state", "color": "#955565" },
+          { "key": "military_or_transitional", "label": "Military or transitional", "color": "#7d5a51" },
+          { "key": "theocracy", "label": "Theocracy", "color": "#8a6e3c" },
+          { "key": "territory_or_dependency", "label": "Territory or dependency", "color": "#68757d" },
+          { "key": "other", "label": "Other system", "color": "#7e7784" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No current classification", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["cia-world-factbook-final-capture-2026-02"],
+        "methodology": "Rule-based normalization of retained source wording into broad, revisable categories.",
+        "authoredVisualChoices": ["Broad categories trade institutional nuance for legibility at world scale."]
+      },
+      "temporal": {
+        "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-religion",
+      "name": "Religion",
+      "description": "Dominant broad tradition. Country details retain composition and estimate year.",
+      "datasetId": "admin0-religion-dominant",
+      "resolverId": "religion-dominant-broad-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "categorical",
+        "items": [
+          { "key": "christianity", "label": "Christianity", "color": "#b4834d" },
+          { "key": "islam", "label": "Islam", "color": "#4d8a70" },
+          { "key": "hinduism", "label": "Hinduism", "color": "#bc6f43" },
+          { "key": "buddhism", "label": "Buddhism", "color": "#b5a34f" },
+          { "key": "judaism", "label": "Judaism", "color": "#6888b3" },
+          { "key": "folk_or_traditional", "label": "Folk or traditional", "color": "#836c51" },
+          { "key": "religiously_unaffiliated", "label": "Religiously unaffiliated", "color": "#798594" },
+          { "key": "other", "label": "Other tradition", "color": "#8b6f8d" },
+          { "key": "mixed_or_no_clear_majority", "label": "Mixed / no clear majority", "color": "#806c78" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No defensible classification", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["cia-world-factbook-final-capture-2026-02"],
+        "methodology": "Broad-tradition shares are normalized only where source wording supports a defensible comparison.",
+        "authoredVisualChoices": ["The default displays dominant broad tradition; it does not claim denominations are interchangeable or equally measured."]
+      },
+      "temporal": {
+        "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-population",
+      "name": "Population",
+      "description": "Population intensity using the latest World Bank observation in this snapshot.",
+      "datasetId": "admin0-population-total",
+      "resolverId": "population-total-bins-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "binned",
+        "unit": "people",
+        "items": [
+          { "key": "under_1m", "label": "Under 1 million", "color": "#335159", "minInclusive": null, "maxExclusive": 1000000 },
+          { "key": "1m_10m", "label": "1–10 million", "color": "#3e6e6c", "minInclusive": 1000000, "maxExclusive": 10000000 },
+          { "key": "10m_50m", "label": "10–50 million", "color": "#589078", "minInclusive": 10000000, "maxExclusive": 50000000 },
+          { "key": "50m_150m", "label": "50–150 million", "color": "#9b9c62", "minInclusive": 50000000, "maxExclusive": 150000000 },
+          { "key": "150m_plus", "label": "150 million or more", "color": "#c27e50", "minInclusive": 150000000, "maxExclusive": null }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["world-bank-sp-pop-totl-2026-07-13"],
+        "methodology": "Uses the latest available World Bank observation per economy without rewriting its year.",
+        "authoredVisualChoices": ["Country totals are binned for world-scale legibility and are not population density."]
+      },
+      "temporal": {
+        "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-gdp-per-capita",
+      "name": "GDP per capita",
+      "description": "Economic output per person in current US dollars, using each economy's latest available World Bank observation.",
+      "datasetId": "admin0-gdp-per-capita",
+      "resolverId": "gdp-per-capita-current-usd-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "continuous",
+        "scale": "log",
+        "domain": [200, 300000],
+        "clamp": true,
+        "unit": "current US$ per person",
+        "stops": [
+          { "position": 0, "color": "#263f49" },
+          { "position": 0.25, "color": "#37676b" },
+          { "position": 0.5, "color": "#718c72" },
+          { "position": 0.75, "color": "#b49d64" },
+          { "position": 1, "color": "#e2bf78" }
+        ],
+        "ticks": [
+          { "value": 500, "label": "$500" },
+          { "value": 2000, "label": "$2k" },
+          { "value": 10000, "label": "$10k" },
+          { "value": 50000, "label": "$50k" },
+          { "value": 250000, "label": "$250k" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["world-bank-ny-gdp-pcap-cd-2026-07-13"],
+        "methodology": "Uses NY.GDP.PCAP.CD and retains each economy's actual observation year. No inflation or purchasing-power adjustment is implied.",
+        "authoredVisualChoices": ["A logarithmic scale makes world-scale differences visible without letting a few extreme values erase the rest.", "The fixed domain and five-stop palette are authored display choices, not properties of the source data."]
+      },
+      "temporal": {
+        "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "modern-borders",
+      "name": "Modern borders",
+      "description": "Present-day Atlas entity boundaries, kept independent from thematic fills.",
+      "datasetId": "admin0-geography",
+      "resolverId": "geometry-presence-v1",
+      "renderer": "polygon-boundary",
+      "channel": "boundary",
+      "slot": "boundary",
+      "zIndex": 600,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
+      "legend": { "kind": "none" },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Geometry unavailable", "color": "#000000", "opacity": 0 } } },
+      "compatibility": { "exclusiveGroup": null, "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["natural-earth-admin-0-50m-5.1.2"],
+        "methodology": "Derived Equal Earth paths preserve the canonical Natural Earth entity join.",
+        "authoredVisualChoices": ["Boundary weight is a renderer choice and does not encode legal certainty."]
+      },
+      "temporal": {
+        "kind": "validity_interval", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "valid_at", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-interaction",
+      "name": "Country interaction targets",
+      "description": "Transparent hit targets so selection behavior does not depend on a visual layer.",
+      "datasetId": "admin0-geography",
+      "resolverId": "geometry-presence-v1",
+      "renderer": "interaction",
+      "channel": "interaction",
+      "slot": "interaction",
+      "zIndex": 1000,
+      "defaultOpacity": 0,
+      "interactive": { "hover": true, "select": true, "pointerEvents": "visual" },
+      "legend": { "kind": "none" },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Geometry unavailable", "color": "#000000", "opacity": 0 } } },
+      "compatibility": { "exclusiveGroup": "admin0-interaction", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["natural-earth-admin-0-50m-5.1.2"],
+        "methodology": "Interaction targets use the same joined geometry as visible entity paths and tiny-territory markers.",
+        "authoredVisualChoices": ["The hit layer is intentionally independent of fill, boundary, and annotation rendering."]
+      },
+      "temporal": {
+        "kind": "validity_interval", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "valid_at", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "physical-relief",
+      "name": "Physical relief",
+      "description": "Subtle generalized terrain relief beneath analytical layers.",
+      "datasetId": "physical-relief",
+      "resolverId": "raster-asset-v1",
+      "renderer": "raster-field",
+      "channel": "raster",
+      "slot": "raster",
+      "zIndex": 100,
+      "defaultOpacity": 0.18,
+      "style": { "blendMode": "multiply", "clipToSphere": true },
+      "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
+      "legend": { "kind": "none" },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Relief unavailable", "color": "#000000", "opacity": 0 } } },
+      "compatibility": { "exclusiveGroup": null, "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["natural-earth-manual-shaded-relief-50m-3.3.0"],
+        "methodology": "The Natural Earth relief raster is bilinearly reprojected from WGS84 to the exact Equal Earth viewBox and clipped to the sphere.",
+        "authoredVisualChoices": ["Relief is deliberately held to 18% opacity and multiply blend so it adds geographic depth without masquerading as measured elevation or obscuring population evidence."]
+      },
+      "temporal": {
+        "kind": "timeless", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "timeless", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "population-density-2025",
+      "name": "Population density",
+      "description": "Modelled people per square kilometre in the 2025 GHSL epoch.",
+      "datasetId": "population-density-2025",
+      "resolverId": "raster-asset-v1",
+      "renderer": "raster-field",
+      "channel": "raster",
+      "slot": "raster",
+      "zIndex": 120,
+      "defaultOpacity": 1,
+      "style": { "blendMode": "normal", "clipToSphere": true },
+      "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
+      "legend": {
+        "kind": "continuous",
+        "scale": "log1p",
+        "domain": [1, 20000],
+        "clamp": true,
+        "unit": "modelled people per km²",
+        "stops": [
+          { "position": 0, "color": "#31565a" },
+          { "position": 0.18509, "color": "#39756f" },
+          { "position": 0.351633, "color": "#62a278" },
+          { "position": 0.524658, "color": "#d2c56c" },
+          { "position": 0.674847, "color": "#e58d4b" },
+          { "position": 0.849502, "color": "#d95048" },
+          { "position": 1, "color": "#f4e7ce" }
+        ],
+        "ticks": [
+          { "value": 1, "label": "1" },
+          { "value": 10, "label": "10" },
+          { "value": 50, "label": "50" },
+          { "value": 250, "label": "250" },
+          { "value": 1000, "label": "1k" },
+          { "value": 5000, "label": "5k" },
+          { "value": 20000, "label": "20k+" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No modelled density", "color": "#000000", "opacity": 0 } } },
+      "compatibility": { "exclusiveGroup": null, "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["ghsl-ghs-pop-2025-r2023a-1km"],
+        "methodology": "The GHSL R2023A 2025 population-count grid is area-resampled from one-kilometre World Mollweide cells into the 2400 × 1300 Equal Earth display raster.",
+        "authoredVisualChoices": ["The color and alpha ramp uses log1p scaling so sparse settlement and metropolitan concentrations can coexist legibly.", "Transparent zeroes expose the physical base; a display pixel averages many source cells and is not an exact cell reading."]
+      },
+      "temporal": {
+        "kind": "snapshot", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "snapshot", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "major-lakes",
+      "name": "Major lakes",
+      "description": "Selected Natural Earth lakes with canonical WGS84 geometry and an Equal Earth derivative.",
+      "datasetId": "major-lakes",
+      "resolverId": "feature-geometry-v1",
+      "renderer": "polygon-feature",
+      "channel": "feature-fill",
+      "slot": "base-area",
+      "zIndex": 260,
+      "defaultOpacity": 0.86,
+      "style": { "fillColor": "rgba(10, 43, 54, 0.96)", "fillOpacity": 1, "strokeColor": "rgba(104, 175, 183, 0.58)", "strokeOpacity": 1, "strokeWidth": 0.48 },
+      "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
+      "legend": { "kind": "none" },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Lake geometry unavailable", "color": "#000000", "opacity": 0 } } },
+      "compatibility": { "exclusiveGroup": null, "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["natural-earth-lakes-50m-5.1.2"],
+        "methodology": "Natural Earth lake polygons with source min_zoom at or below three are projected from retained WGS84 geometry into the Atlas Equal Earth view.",
+        "authoredVisualChoices": ["Only generalized major lakes appear at world scale; absence does not mean a place has no lakes."]
+      },
+      "temporal": {
+        "kind": "timeless", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "timeless", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "major-rivers",
+      "name": "Major rivers",
+      "description": "Selected Natural Earth river centerlines with canonical WGS84 geometry and an Equal Earth derivative.",
+      "datasetId": "major-rivers",
+      "resolverId": "feature-geometry-v1",
+      "renderer": "line",
+      "channel": "line",
+      "slot": "route",
+      "zIndex": 610,
+      "defaultOpacity": 0.82,
+      "style": { "strokeColor": "rgba(92, 177, 192, 0.82)", "strokeOpacity": 1, "strokeWidth": 0.72 },
+      "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
+      "legend": { "kind": "none" },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "River geometry unavailable", "color": "#000000", "opacity": 0 } } },
+      "compatibility": { "exclusiveGroup": null, "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["natural-earth-rivers-50m-5.1.2"],
+        "methodology": "Natural Earth River features with source min_zoom at or below three are projected from retained WGS84 geometry into the Atlas Equal Earth view.",
+        "authoredVisualChoices": ["The world view shows a cartographic selection of rivers rather than a complete drainage network."]
+      },
+      "temporal": {
+        "kind": "timeless", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "timeless", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "major-cities",
+      "name": "Major cities",
+      "description": "National capitals and selected high-priority populated places.",
+      "datasetId": "major-cities",
+      "resolverId": "city-symbol-v1",
+      "renderer": "point-symbol",
+      "channel": "symbol",
+      "slot": "point",
+      "zIndex": 700,
+      "defaultOpacity": 1,
+      "style": { "symbolShape": "circle", "symbolFill": "#f2d38d", "symbolStroke": "rgba(255, 248, 224, 0.92)", "strokeWidth": 0.38, "symbolMinRadius": 1.45, "symbolMaxRadius": 2.35, "sizeField": "sourceScaleRank" },
+      "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
+      "legend": { "kind": "none" },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "City location unavailable", "color": "#000000", "opacity": 0 } } },
+      "compatibility": { "exclusiveGroup": null, "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["natural-earth-populated-places-50m-5.1.2"],
+        "methodology": "Includes every Natural Earth national capital plus populated places with SCALERANK at or below two. Cartographic rank derives the current display LOD and marker size; capital status also affects size. Source MIN_ZOOM is retained for future refinement but does not currently control rendering.",
+        "authoredVisualChoices": ["City symbols indicate selected settlements, not exact comparable metropolitan populations; Natural Earth cartographic rank and capital status control their size."]
+      },
+      "temporal": {
+        "kind": "snapshot", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "snapshot", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "population-geography-annotations",
+      "name": "Contextual explanations",
+      "description": "Optional source-reviewed notes that explain conspicuous patterns without covering the map in prose.",
+      "datasetId": "population-geography-annotations",
+      "resolverId": "contextual-annotation-v1",
+      "renderer": "annotation",
+      "channel": "annotation",
+      "slot": "annotation",
+      "zIndex": 900,
+      "defaultOpacity": 1,
+      "style": { "symbolShape": "circle", "symbolFill": "#e5b65b", "symbolStroke": "#fff1c4", "strokeWidth": 0.8, "symbolRadius": 4, "minimumZoom": 1.2, "maximumZoom": 6 },
+      "interactive": { "hover": true, "select": true, "pointerEvents": "visual" },
+      "legend": { "kind": "none" },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Explanation unavailable", "color": "#000000", "opacity": 0 } } },
+      "compatibility": { "exclusiveGroup": null, "requiresLayerIds": ["population-density-2025"], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["ghsl-ghs-pop-2025-r2023a-1km", "natural-earth-rivers-50m-5.1.2"],
+        "methodology": "Each note is tied to explicit geography, the rendered population observation, supporting evidence, source dates, caveats, and a review status in pattern-notes.v1.json.",
+        "authoredVisualChoices": ["Only four strong, visually prompted explanations are included; markers remain subtle and the internal PatternNote model name is not exposed as permanent product language."]
+      },
+      "temporal": {
+        "kind": "validity_interval", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "valid_at", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false
+      }
+    }
+  ],
+  "viewPresets": [
+    {
+      "schemaVersion": "2.0.0",
+      "id": "political",
+      "name": "Political",
+      "description": "Countries and territories, differentiated for geographic exploration.",
+      "question": null,
+      "legacyModeAliases": ["political", "countries", "country"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "political:fill", "layerId": "admin0-political", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "political:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "political:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "government",
+      "name": "Government",
+      "description": "Broad current government form, with retained source wording in country details.",
+      "question": "How are forms of national government distributed across the world?",
+      "legacyModeAliases": ["government", "governments"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "government:fill", "layerId": "admin0-government", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "government:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "government:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "religion",
+      "name": "Religion",
+      "description": "Dominant broad religious tradition at national scale.",
+      "question": "Which broad religious traditions are most widespread, and where are the boundaries less clear?",
+      "legacyModeAliases": ["religion", "religions"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "religion:fill", "layerId": "admin0-religion", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "religion:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "religion:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "population",
+      "name": "Population",
+      "description": "Latest World Bank national population totals.",
+      "question": "Which countries contain the largest populations?",
+      "legacyModeAliases": ["population", "people"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "population:fill", "layerId": "admin0-population", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "population:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "population:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "gdp-per-capita",
+      "name": "GDP per capita",
+      "description": "Latest World Bank economic output per person in current US dollars.",
+      "question": "Where is measured economic output per person highest and lowest?",
+      "legacyModeAliases": ["gdp-per-capita", "gdp_pc", "gdppc"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "gdp-per-capita:fill", "layerId": "admin0-gdp-per-capita", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "gdp-per-capita:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "gdp-per-capita:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "where-people-live",
+      "name": "Where people live",
+      "description": "Population density seen together with terrain, water, cities, modern borders, and a few source-reviewed explanations.",
+      "question": "Where do people concentrate, and what geographic patterns help explain it?",
+      "legacyModeAliases": ["where-people-live", "population-density", "settlement"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "where-people-live:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": {} },
+        { "id": "where-people-live:density", "layerId": "population-density-2025", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "where-people-live:country-context", "layerId": "admin0-political", "enabled": true, "opacity": 0.12, "time": null, "parameters": { "role": "context" } },
+        { "id": "where-people-live:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 0.86, "time": null, "parameters": {} },
+        { "id": "where-people-live:borders", "layerId": "modern-borders", "enabled": true, "opacity": 0.72, "time": null, "parameters": {} },
+        { "id": "where-people-live:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 0.82, "time": null, "parameters": {} },
+        { "id": "where-people-live:cities", "layerId": "major-cities", "enabled": true, "opacity": 1, "time": null, "parameters": { "lod": "auto" } },
+        { "id": "where-people-live:explanations", "layerId": "population-geography-annotations", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "where-people-live:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    }
+  ]
+}

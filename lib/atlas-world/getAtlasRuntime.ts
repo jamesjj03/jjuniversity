@@ -10,6 +10,8 @@ import type {
   AtlasRuntimeDataset,
   AtlasRuntimeFact,
 } from "./runtime";
+import { getApprovedAtlasJjuLinksForEntity } from "./associations";
+import { getAtlasGeographyPack } from "./getAtlasGeography";
 
 const countrySnapshot = countrySnapshotJson as unknown as AtlasCountrySnapshot;
 const geometrySnapshot = geometrySnapshotJson as unknown as AtlasGeometrySnapshot;
@@ -18,9 +20,13 @@ function compactFact<T>(fact: AtlasObservation<T> | null): AtlasRuntimeFact<T> |
   if (!fact) return null;
   return {
     value: fact.value,
+    status: fact.status ?? "observed",
     observedAt: fact.temporal.observedAt,
+    validFrom: fact.temporal.validFrom,
+    validTo: fact.temporal.validTo,
     precision: fact.temporal.precision,
     sourceId: fact.sourceId,
+    sourceField: fact.sourceField,
     notes: fact.notes,
   };
 }
@@ -30,11 +36,54 @@ export function getAtlasRuntimeDataset(): AtlasRuntimeDataset {
     throw new Error("Atlas country and geometry snapshots do not match.");
   }
 
+  const geographyPack = getAtlasGeographyPack();
+  const entityIdBySovereignName = new Map<string, string>();
+  for (const country of countrySnapshot.countries) {
+    for (const name of [country.names.common, country.names.official, ...country.names.aliases]) {
+      if (name) entityIdBySovereignName.set(name.toLocaleLowerCase("en-US"), country.id);
+    }
+  }
   return {
     snapshotId: countrySnapshot.snapshotId,
     generatedAt: countrySnapshot.generatedAt,
     countries: countrySnapshot.countries.map((country) => ({
       id: country.id,
+      entity: (() => {
+        const sovereignId = entityIdBySovereignName.get(
+          country.geography.sovereignName.toLocaleLowerCase("en-US"),
+        ) ?? null;
+        const relationToSovereign = sovereignId === country.id
+          ? "self" as const
+          : sovereignId && ["Country", "Dependency"].includes(country.geography.naturalEarthType)
+            ? "associated" as const
+            : sovereignId
+              ? "contested_or_cartographic" as const
+              : "unresolved" as const;
+        return {
+          entityId: country.id,
+          kind: "present-day-admin0" as const,
+          parentId: relationToSovereign === "associated" ? sovereignId : null,
+          sovereignId: relationToSovereign === "self" || relationToSovereign === "associated" ? sovereignId : null,
+          countryId: country.id,
+          adminLevel: 0,
+          codes: [
+            { scheme: "natural-earth-adm0-a3", value: country.codes.naturalEarthAdm0A3 },
+            ...(country.codes.iso2 ? [{ scheme: "iso-3166-1-alpha-2", value: country.codes.iso2 }] : []),
+            ...(country.codes.iso3 ? [{ scheme: "iso-3166-1-alpha-3", value: country.codes.iso3 }] : []),
+            ...(country.codes.wikidataId ? [{ scheme: "wikidata", value: country.codes.wikidataId }] : []),
+            ...(country.codes.geonamesId ? [{ scheme: "geonames", value: country.codes.geonamesId }] : []),
+          ],
+          temporal: {
+            validFrom: country.temporal.validFrom,
+            validTo: country.temporal.validTo,
+          },
+          politicalStatus: {
+            sourceClassification: country.geography.naturalEarthType,
+            sovereignName: country.geography.sovereignName,
+            relationToSovereign,
+          },
+        };
+      })(),
       slug: country.slug,
       name: country.names.common,
       officialName: country.names.official,
@@ -68,19 +117,34 @@ export function getAtlasRuntimeDataset(): AtlasRuntimeDataset {
         headOfGovernment: compactFact(country.facts.headOfGovernment),
         religion: compactFact(country.facts.religion),
       },
-      jjuLinks: country.jjuLinks,
+      jjuLinks: getApprovedAtlasJjuLinksForEntity(country.id),
     })),
-    sources: countrySnapshot.sources.map((source) => ({
-      id: source.id,
-      title: source.title,
-      publisher: source.publisher,
-      url: source.url,
-      licenseName: source.license.name,
-      licenseUrl: source.license.url,
-      retrievedAt: source.retrievedAt,
-      sourceUpdatedAt: source.sourceUpdatedAt,
-      notes: source.notes,
-    })),
+    sources: [
+      ...countrySnapshot.sources.map((source) => ({
+        id: source.id,
+        title: source.title,
+        publisher: source.publisher,
+        url: source.url,
+        licenseName: source.license.name,
+        licenseUrl: source.license.url,
+        retrievedAt: source.retrievedAt,
+        sourceUpdatedAt: source.sourceUpdatedAt,
+        checksumSha256: source.checksumSha256,
+        notes: source.notes,
+      })),
+      ...geographyPack.sources.map((source) => ({
+        id: source.id,
+        title: source.title,
+        publisher: source.publisher,
+        url: source.url,
+        licenseName: source.license.name,
+        licenseUrl: source.license.url,
+        retrievedAt: source.retrievedAt,
+        sourceUpdatedAt: null,
+        checksumSha256: source.checksumSha256,
+        notes: [`Pinned source version: ${source.version}.`],
+      })),
+    ],
     geometry: {
       projectionId: geometrySnapshot.projection.id,
       viewBox: geometrySnapshot.projection.viewBox,
@@ -100,6 +164,7 @@ export function getAtlasClientDataset(data = getAtlasRuntimeDataset()): AtlasCli
     sources: data.sources,
     countries: data.countries.map((country) => ({
       id: country.id,
+      entity: country.entity,
       slug: country.slug,
       name: country.name,
       officialName: country.officialName,
@@ -109,6 +174,7 @@ export function getAtlasClientDataset(data = getAtlasRuntimeDataset()): AtlasCli
       facts: {
         capital: country.facts.capital,
         population: country.facts.population,
+        gdpPerCapitaCurrentUsd: country.facts.gdpPerCapitaCurrentUsd,
         government: country.facts.government,
         religion: country.facts.religion,
       },

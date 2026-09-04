@@ -1,0 +1,619 @@
+{
+  "schemaVersion": "1.0.0",
+  "authorityId": "jju-atlas-geographic-associations",
+  "revision": "2026-09-04.2",
+  "updatedAt": "2026-09-04T17:57:00-04:00",
+  "policy": {
+    "publicReviewStates": [
+      "approved"
+    ],
+    "requireExactEvidence": true,
+    "automatedPublication": false,
+    "staleWhenSubjectRevisionChanges": true
+  },
+  "sources": [
+    {
+      "id": "jju-book-catalog",
+      "title": "JJ University book catalog",
+      "kind": "repository_json",
+      "location": "private/catalog/books.json",
+      "revisionStrategy": "subject_record_sha256",
+      "snapshotRevision": "sha256:43a992833106f62573de583b5407082b1fc1ac0b41f817f1b5a3c80aad908dc0",
+      "capturedAt": "2026-09-04T17:30:00-04:00",
+      "notes": [
+        "Each book association pins a hash of its own identity and descriptive metadata, so an unrelated catalog edit does not stale every association.",
+        "The catalog supplies evidence for editorial association; it does not automatically create geographic links."
+      ]
+    },
+    {
+      "id": "jju-series-catalog",
+      "title": "JJ University authored Series catalog",
+      "kind": "repository_module",
+      "location": "lib/seriesCatalog.ts",
+      "revisionStrategy": "file_sha256",
+      "snapshotRevision": "sha256:e5785839506756b7d1f0bf831f9619fef530809609644e425c1bc254c0a7c1df",
+      "capturedAt": "2026-09-04T17:30:00-04:00",
+      "notes": [
+        "The Mapmakers membership defines this pilot's review scope, not the meaning of any individual geographic relationship."
+      ]
+    }
+  ],
+  "associations": [
+    {
+      "id": "atlas-jju:book:egypt:country:EGY:primary_subject",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "egypt",
+        "title": "EGYPT",
+        "href": "/books/egypt",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:a87b1c46b4da334a061c687c55fefe8e828c62bd91bcb623a4adbf967e97fe69"
+      },
+      "place": {
+        "entityId": "country:EGY",
+        "name": "Egypt",
+        "slug": "egypt",
+        "featureId": null
+      },
+      "relationship": "primary_subject",
+      "salience": "primary",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The association spans the historical range described by the book; it is not a claim about one political snapshot."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:a87b1c46b4da334a061c687c55fefe8e828c62bd91bcb623a4adbf967e97fe69",
+          "locator": "/83/description",
+          "exactText": "Egypt's survival story from the pyramids through foreign invasions and the tactical revolution of chariot warfare.",
+          "exactTextSha256": "sha256:44e3ca164d7943cfaf219a498314c0ee2dd32a820c85ad61cbe54aabae0e81f9",
+          "supports": [
+            "subject_identity",
+            "place_connection",
+            "relationship_semantics"
+          ],
+          "note": null
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 1,
+        "rationale": "The catalog explicitly describes the book as Egypt's history."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:germany:country:DEU:primary_subject",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "germany",
+        "title": "GERMANY",
+        "href": "/books/germany",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:2e7293686a8a788d64bc4187aa57db6b2d74acb150bb4d34996d471e4791284e"
+      },
+      "place": {
+        "entityId": "country:DEU",
+        "name": "Germany",
+        "slug": "germany",
+        "featureId": null
+      },
+      "relationship": "primary_subject",
+      "salience": "primary",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The association spans the historical range described by the book; it is not a claim about one political snapshot."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:2e7293686a8a788d64bc4187aa57db6b2d74acb150bb4d34996d471e4791284e",
+          "locator": "/108/description",
+          "exactText": "A sweeping history of Germany from Bismarck through the economic miracle, examining how a nation confronted its darkest past to rebuild itself.",
+          "exactTextSha256": "sha256:8651cb6372b35d5f2204feba928f107f18f03c6f261214f39e18821907b539f2",
+          "supports": [
+            "subject_identity",
+            "place_connection",
+            "relationship_semantics"
+          ],
+          "note": null
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 1,
+        "rationale": "The catalog explicitly calls this a history of Germany."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:japan:country:JPN:primary_subject",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "japan",
+        "title": "The Rising Sun",
+        "href": "/books/the-rising-sun",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:ac1acfff578e33cd99df24eede8bb910001b3321deaf84c2cf5f9ab36db5d608"
+      },
+      "place": {
+        "entityId": "country:JPN",
+        "name": "Japan",
+        "slug": "japan",
+        "featureId": null
+      },
+      "relationship": "primary_subject",
+      "salience": "primary",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The book's historical subject is associated with the Atlas place identity without asserting unchanged borders."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:ac1acfff578e33cd99df24eede8bb910001b3321deaf84c2cf5f9ab36db5d608",
+          "locator": "/152/description",
+          "exactText": "A searing chronicle of Imperial Japan's militaristic rise, brutal expansion, and catastrophic collapse during World War II.",
+          "exactTextSha256": "sha256:59f74be47a4f70fe7957b0a8b3753b30fa93a9127740835d14d5ea0d3243b122",
+          "supports": [
+            "subject_identity",
+            "place_connection",
+            "relationship_semantics"
+          ],
+          "note": null
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 1,
+        "rationale": "The catalog explicitly identifies Imperial Japan as the subject."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:insidechina:country:CHN:primary_subject",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "insidechina",
+        "title": "Life Inside China",
+        "href": "/books/life-inside-china",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:10b2403e330a1d14369b9f9e170fe0c770bb00cc625f76dea433cb7dd8652f9b"
+      },
+      "place": {
+        "entityId": "country:CHN",
+        "name": "China",
+        "slug": "china",
+        "featureId": null
+      },
+      "relationship": "primary_subject",
+      "salience": "primary",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The source describes modern China but does not provide a reliable validity interval."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:10b2403e330a1d14369b9f9e170fe0c770bb00cc625f76dea433cb7dd8652f9b",
+          "locator": "/144/description",
+          "exactText": "A first-person account of daily life in modern China where the Party monitors your phone, shapes your family values, and controls what you can say or search.",
+          "exactTextSha256": "sha256:1d284a4afb914236a346d87b6dffa6a93aab72f1ab2192647fda4228223bc981",
+          "supports": [
+            "subject_identity",
+            "place_connection",
+            "relationship_semantics"
+          ],
+          "note": null
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 1,
+        "rationale": "The catalog explicitly describes daily life in modern China."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:northkorea:country:PRK:primary_subject",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "northkorea",
+        "title": "The Kingdom of Smoke",
+        "href": "/books/the-kingdom-of-smoke",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:e4538f9d174c32857d552b21507a78fb7bf8e887c558dcab896780e9424e7312"
+      },
+      "place": {
+        "entityId": "country:PRK",
+        "name": "North Korea",
+        "slug": "north-korea",
+        "featureId": null
+      },
+      "relationship": "primary_subject",
+      "salience": "primary",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The source does not provide a reliable validity interval for the topical association."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:e4538f9d174c32857d552b21507a78fb7bf8e887c558dcab896780e9424e7312",
+          "locator": "/213/description",
+          "exactText": "Inside the manufactured mythology of North Korea's Kim dynasty, where three generations of dictators built a nation on lies, fear, and the world's most elaborate illusion.",
+          "exactTextSha256": "sha256:68bf023305b3cbd83619507d63c42cb34baf9ba63bc8ad71b5d042fc98e66a95",
+          "supports": [
+            "subject_identity",
+            "place_connection",
+            "relationship_semantics"
+          ],
+          "note": null
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 1,
+        "rationale": "The catalog explicitly identifies North Korea and its ruling dynasty as the subject."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:cuba:country:CUB:primary_subject",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "cuba",
+        "title": "CUBA",
+        "href": "/books/cuba",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:eb137ffa067e7546f96c19931a4effab4e08a8381d84aa008bfb56d1cef43f22"
+      },
+      "place": {
+        "entityId": "country:CUB",
+        "name": "Cuba",
+        "slug": "cuba",
+        "featureId": null
+      },
+      "relationship": "primary_subject",
+      "salience": "primary",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The association spans the historical range described by the book; it is not a claim about one political snapshot."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:eb137ffa067e7546f96c19931a4effab4e08a8381d84aa008bfb56d1cef43f22",
+          "locator": "/66/description",
+          "exactText": "The story of Cuba's communist revolution, the CIA's failed attempts to destroy it, and how a small island survived decades of American hostility and Soviet collapse.",
+          "exactTextSha256": "sha256:87e5a151c47d31092c7fcbc53904bcd000adf04a977be64dd78bd33b939cd372",
+          "supports": [
+            "subject_identity",
+            "place_connection",
+            "relationship_semantics"
+          ],
+          "note": null
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 1,
+        "rationale": "The catalog explicitly calls this the story of Cuba."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:saudi:country:SAU:primary_subject",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "saudi",
+        "title": "The Mirage",
+        "href": "/books/the-mirage",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:de4d285c75962cb44cb6b541e17e613b5b1bb7a23c5439907fc4f7327e14cdeb"
+      },
+      "place": {
+        "entityId": "country:SAU",
+        "name": "Saudi Arabia",
+        "slug": "saudi-arabia",
+        "featureId": null
+      },
+      "relationship": "primary_subject",
+      "salience": "primary",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The source does not provide a reliable validity interval for the topical association."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:de4d285c75962cb44cb6b541e17e613b5b1bb7a23c5439907fc4f7327e14cdeb",
+          "locator": "/253/description",
+          "exactText": "How Saudi Arabia weaponized Islam's holiest sites and oil wealth to build an absolute monarchy disguised as religious stewardship.",
+          "exactTextSha256": "sha256:e60bac7574036d048da67441e9a09844dca8702eeb25cd8cbf509f9300d524d7",
+          "supports": [
+            "subject_identity",
+            "place_connection",
+            "relationship_semantics"
+          ],
+          "note": null
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 1,
+        "rationale": "The catalog explicitly names Saudi Arabia as the book's subject."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:antarctica:country:ATA:primary_subject",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "antarctica",
+        "title": "White Silence",
+        "href": "/books/white-silence",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:ad1cac704475fd3a14159a8ae37d6942d2db956dc0da2b121c22df9ebd324e19"
+      },
+      "place": {
+        "entityId": "country:ATA",
+        "name": "Antarctica",
+        "slug": "antarctica",
+        "featureId": null
+      },
+      "relationship": "primary_subject",
+      "salience": "primary",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "Antarctica is an Atlas geographic entity, not asserted here to be a sovereign country."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:ad1cac704475fd3a14159a8ae37d6942d2db956dc0da2b121c22df9ebd324e19",
+          "locator": "/12/description",
+          "exactText": "A history of Antarctica, from first sightings to the Antarctic treaty and more.",
+          "exactTextSha256": "sha256:89a1cf569951a3284135fb1fb584fc9391e7a50a06827290a27b21efc31aa78f",
+          "supports": [
+            "subject_identity",
+            "place_connection",
+            "relationship_semantics"
+          ],
+          "note": null
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 1,
+        "rationale": "The catalog explicitly calls this a history of Antarctica."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:control:country:PRK:contextual_coverage",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "control",
+        "title": "Control Freaks",
+        "href": "/books/control-freaks",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:5420a387a0ea9d8435f456bab654d018ae9832caf1649736ca13900ef5b3f921"
+      },
+      "place": {
+        "entityId": "country:PRK",
+        "name": "North Korea",
+        "slug": "north-korea",
+        "featureId": null
+      },
+      "relationship": "contextual_coverage",
+      "salience": "contextual",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The catalog description establishes inclusion but not the chapter-level extent or historical interval."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:5420a387a0ea9d8435f456bab654d018ae9832caf1649736ca13900ef5b3f921",
+          "locator": "/60/description",
+          "exactText": "North Korea's total control",
+          "exactTextSha256": "sha256:92af5b375c865a17f6fe6c83cfb3363bf09af9e6ee4b81ea0dd957f35e838b2c",
+          "supports": [
+            "place_connection"
+          ],
+          "note": "The short excerpt supports inclusion only; it is not enough to approve salience without manuscript review."
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2-proposal-pilot",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 0.72,
+        "rationale": "The catalog description explicitly names North Korea, but the degree of coverage needs editorial review."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    },
+    {
+      "id": "atlas-jju:book:control:country:BLR:contextual_coverage",
+      "revision": 1,
+      "pilotCollectionId": "the-mapmakers",
+      "subject": {
+        "kind": "book",
+        "id": "control",
+        "title": "Control Freaks",
+        "href": "/books/control-freaks",
+        "sourceId": "jju-book-catalog",
+        "sourceRevision": "sha256:5420a387a0ea9d8435f456bab654d018ae9832caf1649736ca13900ef5b3f921"
+      },
+      "place": {
+        "entityId": "country:BLR",
+        "name": "Belarus",
+        "slug": "belarus",
+        "featureId": null
+      },
+      "relationship": "contextual_coverage",
+      "salience": "contextual",
+      "temporal": {
+        "observedAt": "2026-09-04",
+        "validFrom": null,
+        "validTo": null,
+        "precision": "unknown",
+        "note": "The catalog description establishes inclusion but not the chapter-level extent or historical interval."
+      },
+      "evidence": [
+        {
+          "sourceId": "jju-book-catalog",
+          "sourceRevision": "sha256:5420a387a0ea9d8435f456bab654d018ae9832caf1649736ca13900ef5b3f921",
+          "locator": "/60/description",
+          "exactText": "Belarus's frozen Soviet silence",
+          "exactTextSha256": "sha256:952eb78524b925263e519a5398b2bdf27cfb96ffd265cef9b8d3d217b5bd6f05",
+          "supports": [
+            "place_connection"
+          ],
+          "note": "The short excerpt supports inclusion only; it is not enough to approve salience without manuscript review."
+        }
+      ],
+      "proposal": {
+        "method": "ai_assisted",
+        "proposedBy": "codex:atlas-phase2-proposal-pilot",
+        "proposedAt": "2026-09-04T17:30:00-04:00",
+        "confidence": 0.72,
+        "rationale": "The catalog description explicitly names Belarus, but the degree of coverage needs editorial review."
+      },
+      "review": {
+        "state": "proposed",
+        "reviewerKind": null,
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "decisionNote": null
+      },
+      "supersedesAssociationId": null
+    }
+  ]
+}

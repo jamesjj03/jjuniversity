@@ -28,6 +28,15 @@ assert.ok(countries.countries.length >= 240, "The world snapshot must retain glo
 
 const countryIds = new Set(countries.countries.map((country) => country.id));
 const featureIds = new Set(geometry.features.map((feature) => feature.entityId));
+const observationStatuses = new Set([
+  "observed",
+  "estimated",
+  "inherited",
+  "carried_forward",
+  "suppressed",
+  "not_applicable",
+  "unavailable",
+]);
 assert.equal(countryIds.size, countries.countries.length, "Country IDs must be unique");
 assert.equal(featureIds.size, geometry.features.length, "Geometry entity IDs must be unique");
 assert.deepEqual([...featureIds].sort(), [...countryIds].sort(), "Country and geometry IDs must align exactly");
@@ -49,6 +58,10 @@ for (const country of countries.countries) {
     if (!fact) continue;
     assert.ok(fact.sourceId, `${country.id} fact is missing its source`);
     assert.ok(fact.temporal, `${country.id} fact is missing time metadata`);
+    assert.ok(
+      observationStatuses.has(fact.status ?? "observed"),
+      `${country.id} fact has an unknown observation status`,
+    );
   }
 }
 

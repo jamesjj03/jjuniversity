@@ -22,10 +22,32 @@ export interface AtlasTemporalExtent {
 
 export interface AtlasObservation<T> {
   value: T;
+  /** Defaults to observed when reading pre-status Atlas snapshots. */
+  status: AtlasObservationStatus;
   temporal: AtlasTemporalExtent;
   sourceId: string;
   sourceField: string;
   notes: string[];
+}
+
+/**
+ * Observation state is separate from the value itself. In particular, zero is
+ * a value and must never be used as Atlas's missing-data sentinel.
+ */
+export type AtlasObservationStatus =
+  | "observed"
+  | "estimated"
+  | "inherited"
+  | "carried_forward"
+  | "suppressed"
+  | "not_applicable"
+  | "unavailable";
+
+export function atlasObservationStatusHasValue(status: AtlasObservationStatus) {
+  return status === "observed"
+    || status === "estimated"
+    || status === "inherited"
+    || status === "carried_forward";
 }
 
 export interface AtlasLicenseRecord {

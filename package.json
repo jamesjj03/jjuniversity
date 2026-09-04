@@ -35,8 +35,15 @@
     "arena:rank-candidates": "node scripts/arena-rank-candidates-local.mjs",
     "arena:plan-pack": "node scripts/arena-plan-pack.mjs",
     "arena:qa-house-plate": "node scripts/arena-qa-house-plate.mjs",
+    "atlas:sources:fetch": "node scripts/fetch-atlas-sources.mjs",
+    "atlas:sources:check": "node scripts/fetch-atlas-sources.mjs --verify-only",
     "atlas:world:build": "node scripts/build-atlas-world-snapshot.mjs",
-    "atlas:world:check": "node scripts/check-atlas-world-snapshot.mjs"
+    "atlas:geography:build": "node scripts/run-atlas-geography-build.mjs",
+    "atlas:geography:check": "node scripts/check-atlas-geography-pack.mjs",
+    "atlas:world:check": "node scripts/check-atlas-world-snapshot.mjs && node scripts/check-atlas-layer-contracts.mjs && node scripts/check-atlas-geography-pack.mjs && node scripts/check-atlas-jju-associations.mjs",
+    "atlas:associations:check": "node scripts/check-atlas-jju-associations.mjs",
+    "atlas:associations:propose": "node scripts/propose-atlas-jju-association.mjs",
+    "atlas:e2e": "playwright test tests/atlas"
   },
   "dependencies": {
     "@fontsource-variable/bitter": "^5.2.5",
@@ -59,6 +66,7 @@
     "stripe": "^22.2.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/d3-geo": "^3.1.1",
     "@types/d3-selection": "^3.0.11",

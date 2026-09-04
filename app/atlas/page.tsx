@@ -6,6 +6,7 @@ import {
   getAtlasClientDataset,
   getAtlasRuntimeDataset,
 } from "@/lib/atlas-world/getAtlasRuntime";
+import { getAtlasPatternNotes } from "@/lib/atlas-world/getAtlasGeography";
 
 export const metadata: Metadata = {
   title: "Atlas",
@@ -18,6 +19,7 @@ export default function AtlasPage() {
     <SiteV2Shell immersive>
       <AtlasWorldExperience
         data={getAtlasClientDataset(runtimeData)}
+        patternNotes={getAtlasPatternNotes()}
         map={<AtlasWorldMap data={runtimeData} />}
       />
     </SiteV2Shell>

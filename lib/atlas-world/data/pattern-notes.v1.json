@@ -1,0 +1,465 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshotId": "atlas-pattern-notes-2026-09-04",
+  "generatedAt": "2026-09-04T18:00:00Z",
+  "modelName": "PatternNote",
+  "modelStatus": "internal-name-only",
+  "notes": [
+    {
+      "id": "pattern-note:population:nile-valley",
+      "revision": 1,
+      "headline": "A country gathered around one river",
+      "summary": "Egypt’s bright population corridor follows the Nile Valley and Delta through an otherwise arid landscape. Water, cultivable floodplain, cities, and transport have kept settlement tightly concentrated here for millennia.",
+      "noteType": "spatial-explanation",
+      "causalStrength": "supported-multifactor",
+      "triggers": {
+        "datasetIds": [
+          "population-density-2025"
+        ],
+        "viewPresetIds": [
+          "where-people-live"
+        ],
+        "minimumZoom": 1.2,
+        "maximumZoom": 5
+      },
+      "spatial": {
+        "focus": {
+          "longitude": 31,
+          "latitude": 26,
+          "equalEarth": [
+            696.01,
+            213.04
+          ]
+        },
+        "boundsWgs84": [
+          [
+            24,
+            21
+          ],
+          [
+            34,
+            32.5
+          ]
+        ],
+        "entityIds": [
+          "country:EGY"
+        ],
+        "featureIds": [
+          "feature:natural-earth:river:c13cee4632553208"
+        ],
+        "highlight": {
+          "type": "feature-reference",
+          "featureIds": [
+            "feature:natural-earth:river:c13cee4632553208"
+          ]
+        }
+      },
+      "observationRefs": [
+        {
+          "datasetId": "population-density-2025",
+          "snapshotId": "atlas-geography-2026-09-04",
+          "observedAt": "2025",
+          "status": "estimated"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "nasa-earth-observatory-city-lights-nile-2012",
+          "title": "City Lights Illuminate the Nile",
+          "publisher": "NASA Earth Observatory",
+          "url": "https://science.nasa.gov/earth/earth-observatory/city-lights-illuminate-the-nile-79807/",
+          "publishedAt": "2012-12-28",
+          "retrievedAt": "2026-09-04",
+          "supports": "The Nile Valley and Delta occupy less than five percent of Egypt’s land area yet were reported as home to roughly 97 percent of its population at publication."
+        },
+        {
+          "id": "nasa-earth-observatory-nile-farmland-2021",
+          "title": "The Nile Delta’s Disappearing Farmland",
+          "publisher": "NASA Earth Observatory",
+          "url": "https://science.nasa.gov/earth/earth-observatory/the-nile-deltas-disappearing-farmland-149183/",
+          "publishedAt": "2021-09-07",
+          "retrievedAt": "2026-09-04",
+          "supports": "The fertile floodplain concentrates both farming and rapidly expanding towns and cities."
+        }
+      ],
+      "relatedLayerIds": [
+        "major-rivers",
+        "physical-relief"
+      ],
+      "caveats": [
+        "The cited population share is an explanatory historical estimate from the source publication, not the value used to render the 2025 GHSL raster."
+      ],
+      "temporal": {
+        "validFrom": null,
+        "validTo": null,
+        "precision": "open"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "reviewerKind": "ai-assisted",
+        "reviewedBy": "Codex Phase 2 evidence pass",
+        "reviewedAt": "2026-09-04",
+        "humanEditorialReview": "not-performed",
+        "publicationStatus": "atlas-visible"
+      }
+    },
+    {
+      "id": "pattern-note:population:java",
+      "revision": 1,
+      "headline": "More than half a nation on one island",
+      "summary": "Java held 151.6 million people—56.10% of Indonesia’s population—in the 2020 census. Fertile volcanic soils and intensive agriculture helped sustain dense settlement, while centuries of political, economic, and urban concentration reinforced it; this is not a single-cause pattern.",
+      "noteType": "spatial-explanation",
+      "causalStrength": "supported-multifactor",
+      "triggers": {
+        "datasetIds": [
+          "population-density-2025"
+        ],
+        "viewPresetIds": [
+          "where-people-live"
+        ],
+        "minimumZoom": 1.4,
+        "maximumZoom": 6
+      },
+      "spatial": {
+        "focus": {
+          "longitude": 110.2,
+          "latitude": -7.6,
+          "equalEarth": [
+            957.26,
+            358.28
+          ]
+        },
+        "boundsWgs84": [
+          [
+            105,
+            -9.2
+          ],
+          [
+            115,
+            -5.4
+          ]
+        ],
+        "entityIds": [
+          "country:IDN"
+        ],
+        "featureIds": [],
+        "highlight": {
+          "type": "authored-bounds",
+          "method": "A viewing extent around Java, not a claim boundary.",
+          "boundsWgs84": [
+            [
+              105,
+              -9.2
+            ],
+            [
+              115,
+              -5.4
+            ]
+          ]
+        }
+      },
+      "observationRefs": [
+        {
+          "datasetId": "population-density-2025",
+          "snapshotId": "atlas-geography-2026-09-04",
+          "observedAt": "2025",
+          "status": "estimated"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "bps-indonesia-population-census-2020-java",
+          "title": "The 2020 Population Census",
+          "publisher": "BPS-Statistics Indonesia",
+          "url": "https://www.bps.go.id/en/pressrelease/2021/01/21/1854/the-2020-population-census.html",
+          "publishedAt": "2021-01-21",
+          "retrievedAt": "2026-09-04",
+          "supports": "The official census infographic reports 151.6 million people, 56.10 percent of Indonesia’s population, concentrated on Java."
+        },
+        {
+          "id": "national-academies-java-agriculture",
+          "title": "Sustainable Agriculture and the Environment in the Humid Tropics",
+          "publisher": "National Academies Press",
+          "url": "https://www.nationalacademies.org/read/1985/chapter/13",
+          "publishedAt": "1993",
+          "retrievedAt": "2026-09-04",
+          "supports": "Java’s rich volcanic soils, intensive agriculture, and unusually high rural and urban density are linked, while the source predates the current population count."
+        },
+        {
+          "id": "world-bank-place-based-policies-indonesia-2019",
+          "title": "Place-Based Policies in Indonesia: A Critical Review",
+          "publisher": "World Bank",
+          "url": "https://documents1.worldbank.org/curated/en/376361571412939496/pdf/Place-Based-Policies-in-Indonesia-A-Critical-Review.pdf",
+          "publishedAt": "2019-10",
+          "retrievedAt": "2026-09-04",
+          "supports": "The review describes centuries of regional differences and path dependence, and reports Java's concentration of population and non-oil-and-gas manufacturing in 2010."
+        }
+      ],
+      "relatedLayerIds": [
+        "physical-relief",
+        "major-cities"
+      ],
+      "caveats": [
+        "Volcanic fertility is one contributing condition, not a sufficient explanation for Java’s demographic history.",
+        "The 2020 census share and the 2025 modelled raster use different sources and reference years."
+      ],
+      "temporal": {
+        "validFrom": null,
+        "validTo": null,
+        "precision": "open"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "reviewerKind": "ai-assisted",
+        "reviewedBy": "Codex Phase 2 evidence pass",
+        "reviewedAt": "2026-09-04",
+        "humanEditorialReview": "not-performed",
+        "publicationStatus": "atlas-visible"
+      }
+    },
+    {
+      "id": "pattern-note:population:heihe-tengchong",
+      "revision": 1,
+      "headline": "China’s enduring east–west divide",
+      "summary": "A diagonal from Heihe to Tengchong is a useful descriptive line—not a border—between China’s densely settled east and much sparser west. Terrain, aridity, access to cultivable land, and the long growth of eastern cities all contribute to the contrast.",
+      "noteType": "spatial-explanation",
+      "causalStrength": "supported-multifactor",
+      "triggers": {
+        "datasetIds": [
+          "population-density-2025"
+        ],
+        "viewPresetIds": [
+          "where-people-live"
+        ],
+        "minimumZoom": 1.2,
+        "maximumZoom": 5
+      },
+      "spatial": {
+        "focus": {
+          "longitude": 105,
+          "latitude": 36,
+          "equalEarth": [
+            910.21,
+            172.7
+          ]
+        },
+        "boundsWgs84": [
+          [
+            73,
+            18
+          ],
+          [
+            135,
+            54
+          ]
+        ],
+        "entityIds": [
+          "country:CHN"
+        ],
+        "featureIds": [
+          "feature:annotation:heihe-tengchong-line"
+        ],
+        "highlight": {
+          "type": "authored-geometry",
+          "method": "A straight cartographic guide between the named cities; it is a heuristic, not an administrative or ecological boundary.",
+          "geometry": {
+            "geometryId": "geometry:feature:annotation:heihe-tengchong-line:wgs84",
+            "geometryType": "linestring",
+            "crs": "EPSG:4326",
+            "canonicalWgs84": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  127.528,
+                  50.245
+                ],
+                [
+                  98.497,
+                  25.02
+                ]
+              ]
+            },
+            "derived": {
+              "projectionId": "equal-earth",
+              "viewBox": [
+                0,
+                0,
+                1200,
+                650
+              ],
+              "path": "M941.78,120.32L906.19,217.11",
+              "transformationId": "wgs84-to-equal-earth-svg-v1"
+            }
+          }
+        }
+      },
+      "observationRefs": [
+        {
+          "datasetId": "population-density-2025",
+          "snapshotId": "atlas-geography-2026-09-04",
+          "observedAt": "2025",
+          "status": "estimated"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "acta-geographica-sinica-hu-line-2022",
+          "title": "The novel pattern and driving factors of population spatial distribution on both sides of the Hu Line based on the seventh census in China",
+          "publisher": "Acta Geographica Sinica",
+          "url": "https://www.geog.com.cn/EN/abstract/article/0375-5444/53015",
+          "publishedAt": "2022",
+          "retrievedAt": "2026-09-04",
+          "supports": "The Heihe–Tengchong line remains a useful framework for analyzing 2020 census population patterns and their drivers."
+        },
+        {
+          "id": "journal-hydrology-hu-line-aridity-2022",
+          "title": "Historical and future shifts of a sharp zonal aridity gradient: A case study of the Hu Line in China",
+          "publisher": "Journal of Hydrology",
+          "url": "https://doi.org/10.1016/j.jhydrol.2022.128590",
+          "publishedAt": "2022-11",
+          "retrievedAt": "2026-09-04",
+          "supports": "The population contrast overlaps a strong aridity gradient, while the paper does not claim climate is the only cause."
+        }
+      ],
+      "relatedLayerIds": [
+        "physical-relief",
+        "major-cities"
+      ],
+      "caveats": [
+        "Published east/west population shares vary by census year, line implementation, territorial scope, and treatment of Hong Kong, Macao, and Taiwan; the note therefore avoids presenting one percentage as timeless.",
+        "The line describes a pattern and must not be rendered as a political border."
+      ],
+      "temporal": {
+        "validFrom": "1935",
+        "validTo": null,
+        "precision": "year"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "reviewerKind": "ai-assisted",
+        "reviewedBy": "Codex Phase 2 evidence pass",
+        "reviewedAt": "2026-09-04",
+        "humanEditorialReview": "not-performed",
+        "publicationStatus": "atlas-visible"
+      }
+    },
+    {
+      "id": "pattern-note:population:indo-gangetic-plain",
+      "revision": 1,
+      "headline": "A dense arc below the Himalayas",
+      "summary": "The luminous band across northern Pakistan, India, and Bangladesh follows the Indo-Gangetic plains and their great river systems. Flat alluvial land, freshwater and irrigation, productive agriculture, and major cities reinforce one another across this broad region.",
+      "noteType": "spatial-explanation",
+      "causalStrength": "supported-multifactor",
+      "triggers": {
+        "datasetIds": [
+          "population-density-2025"
+        ],
+        "viewPresetIds": [
+          "where-people-live"
+        ],
+        "minimumZoom": 1.2,
+        "maximumZoom": 5
+      },
+      "spatial": {
+        "focus": {
+          "longitude": 80,
+          "latitude": 27,
+          "equalEarth": [
+            846.78,
+            208.91
+          ]
+        },
+        "boundsWgs84": [
+          [
+            67,
+            21
+          ],
+          [
+            92,
+            32.5
+          ]
+        ],
+        "entityIds": [
+          "country:PAK",
+          "country:IND",
+          "country:BGD",
+          "country:NPL"
+        ],
+        "featureIds": [
+          "feature:natural-earth:river:839f6ac6f0bf3ee0",
+          "feature:natural-earth:river:70e4f8ccc790cc9c",
+          "feature:natural-earth:river:2c25e74cb84cc5d3",
+          "feature:natural-earth:river:c86bdb740cee87bc"
+        ],
+        "highlight": {
+          "type": "feature-reference",
+          "featureIds": [
+            "feature:natural-earth:river:839f6ac6f0bf3ee0",
+            "feature:natural-earth:river:70e4f8ccc790cc9c",
+            "feature:natural-earth:river:2c25e74cb84cc5d3",
+            "feature:natural-earth:river:c86bdb740cee87bc"
+          ]
+        }
+      },
+      "observationRefs": [
+        {
+          "datasetId": "population-density-2025",
+          "snapshotId": "atlas-geography-2026-09-04",
+          "observedAt": "2025",
+          "status": "estimated"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "nasa-earth-observatory-roof-edge-2020",
+          "title": "Lighting the Edge of the Roof",
+          "publisher": "NASA Earth Observatory",
+          "url": "https://science.nasa.gov/earth/earth-observatory/lighting-the-edge-of-the-roof-147622/",
+          "publishedAt": "2020-12-06",
+          "retrievedAt": "2026-09-04",
+          "supports": "Nighttime lights sharply distinguish the fertile, densely inhabited Indo-Gangetic plain from the sparsely populated Tibetan Plateau."
+        },
+        {
+          "id": "fao-indo-gangetic-rice-wheat-system",
+          "title": "Farming Systems and Poverty: Rice-Wheat Farming System",
+          "publisher": "Food and Agriculture Organization of the United Nations",
+          "url": "https://www.fao.org/4/y1860e/y1860e07.htm",
+          "publishedAt": "2001",
+          "retrievedAt": "2026-09-04",
+          "supports": "A broad irrigated rice–wheat farming system runs from the Indus region through the Indo-Gangetic plain to Bangladesh."
+        },
+        {
+          "id": "fao-india-alluvial-soils",
+          "title": "Fertilizer use by crop in India: Agro-ecological zones and soils",
+          "publisher": "Food and Agriculture Organization of the United Nations",
+          "url": "https://www.fao.org/4/a0257e/A0257E02.htm",
+          "publishedAt": "2005",
+          "retrievedAt": "2026-09-04",
+          "supports": "River-deposited alluvial soils across the Indo-Gangetic Plains are among India’s most agriculturally important soils."
+        }
+      ],
+      "relatedLayerIds": [
+        "major-rivers",
+        "physical-relief",
+        "major-cities"
+      ],
+      "caveats": [
+        "The Indo-Gangetic plain is not one uniform environment or society; flood risk, groundwater stress, rainfall, soils, and urbanization differ substantially across it.",
+        "The authored viewing bounds are a guide to the visible pattern, not a formal physiographic boundary."
+      ],
+      "temporal": {
+        "validFrom": null,
+        "validTo": null,
+        "precision": "open"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "reviewerKind": "ai-assisted",
+        "reviewedBy": "Codex Phase 2 evidence pass",
+        "reviewedAt": "2026-09-04",
+        "humanEditorialReview": "not-performed",
+        "publicationStatus": "atlas-visible"
+      }
+    }
+  ]
+}

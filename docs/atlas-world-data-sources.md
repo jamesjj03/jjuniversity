@@ -10,7 +10,11 @@ Atlas V1 is built from a committed, reviewable snapshot rather than from live br
 | `lib/atlas-world/data/geometry-equal-earth.v1.json` | 242 SVG country paths projected into a 1200 × 650 Equal Earth viewBox, plus sphere and graticule paths |
 | `lib/atlas-world/data/validation.v1.json` | Exact field coverage, code-join audits, normalization counts, warnings, and fatal validation status |
 | `public/atlas-world/geometry-equal-earth.v1.svg` | Browser-ready copy of the same versioned geometry, referenced once and cached instead of duplicating every path in the page response |
-| `lib/atlas-world/types.ts` | TypeScript contract for the three JSON artifacts |
+| `lib/atlas-world/data/geography-pack.v1.json` | Canonical WGS84 river, lake, and city features; derived Equal Earth paths/points; raster manifests; source, transformation, and time contracts |
+| `lib/atlas-world/data/pattern-notes.v1.json` | Four evidence-backed contextual annotations that passed an AI-assisted source review; human editorial review is explicitly not claimed |
+| `public/atlas-world/layers/*.equal-earth.webp` | Bounded 2400 × 1300 population-density and relief rasters aligned to the map viewBox |
+| `data/atlas/sources.lock.json` | Exact source URLs, versions, dates, licenses, byte counts, checksums, and the pinned Factbook commit for all twelve inputs |
+| `lib/atlas-world/types.ts` and `geographyTypes.ts` | TypeScript contracts for the V1 country snapshot and Phase 2 geography/annotation records |
 
 The geometry record for each map unit contains `entityId`, `path`, projected `centroid`, projected `bounds`, Natural Earth `tinyRank`, and `mapColor7`. Country and geometry snapshots share the same `snapshotId` and `country:<Natural Earth ADM0_A3>` entity IDs.
 
@@ -59,6 +63,54 @@ GeoNames does not give separate measurement dates for the imported descriptive f
 This is not a live CIA API. Individual records retain the Factbook profile update date and Internet Archive capture timestamp when present. Source wording is retained after presentation HTML is removed. It should be refreshed or replaced when a suitably licensed, maintained source is selected.
 
 Every source record in `countries.v1.json` includes a SHA-256 checksum of the local source file, or of the relevant sorted Factbook file set.
+
+## Phase 2 geography pack
+
+### Bounded population-source decision
+
+Atlas evaluated the two strongest practical open global inputs before choosing a source:
+
+| Candidate | Strengths | Constraint for this bounded release | Decision |
+| --- | --- | --- | --- |
+| [GHS-POP R2023A](https://human-settlement.emergency.copernicus.eu/datasets.php) | European Commission JRC product; a stable global 1975–2030 series at five-year intervals; 1 km World Mollweide is already equal-area; published methods and durable product/version identifiers | The 2025 epoch is a projection, and the 1 km grid cannot resolve block-level settlement | **Selected:** epoch 2025, R2023A V1.0, 1 km Mollweide |
+| [WorldPop Global 2 R2025A v1](https://hub.worldpop.org/geodata/listing?id=135) | Newer circa-2020 census inputs, building-informed 100 m estimates, annual 2015–2030 coverage, age/sex products | The provider labels the current release an **alpha** that may change; a global 100 m product is much larger than this world-view use case; country-specific model quality complicates global visual comparison | Retain as a future evaluation candidate after the release stabilizes; do not mix it into this snapshot |
+
+This choice is about repeatability and fitness for a world analytical view, not a claim that GHSL is universally more accurate. Both products redistribute census/administrative estimates with models, both inherit unequal source-census quality, and both project future epochs. The rendered field must be described as an estimate.
+
+The locked GHSL input is the official `GHS_POP_E2025_GLOBE_R2023A_54009_1000_V1_0.zip` (323,340,844 bytes, SHA-256 `cd630f51ac65dff2a0c7ad252333bbb20c5cf9de4d85eef04e22ef3699d80c95`, CC BY 4.0). Its cells store estimated people per 1 km equal-area cell. Atlas area-averages it into a 2400 × 1300 Equal Earth display raster, applies an explicit `log1p` color/opacity scale, and makes zero/no-data pixels transparent. The committed WebP is 486,352 bytes. Its displayed pixels aggregate many source cells at world scale and are not exact per-pixel measurements.
+
+### Physical context
+
+- **Relief:** [Natural Earth 1:50m Manual Shaded Relief 3.3.0](https://www.naturalearthdata.com/downloads/50m-raster-data/50m-manual-shaded-relief/), public domain. Atlas bilinear-warps the 10,800 × 5,400 WGS84 grayscale source to Equal Earth, clips it to the sphere, and stores styling opacity outside the raster. It is cartographic shading based on elevation reference data, not an elevation measurement layer. The committed WebP is 133,098 bytes.
+- **Rivers:** Natural Earth 1:50m Rivers and Lake Centerlines 5.1.2, public domain. Phase 2 retains features explicitly classed as `River` with source `min_zoom <= 3` (94 renderable lines).
+- **Lakes:** Natural Earth 1:50m Lakes 5.1.2, public domain. Phase 2 retains source `min_zoom <= 3` (77 renderable polygons). The build removes one byte-for-byte duplicate Lake Zaysan source feature and records no invented replacement.
+- **Cities:** Natural Earth 1:50m Populated Places 5.1.2, public domain. Phase 2 retains all national capitals plus places with `SCALERANK <= 2` (319 points). `SCALERANK` derives the current world/regional/country display level; `MIN_ZOOM` is retained for future refinement but does not currently drive rendering. Natural Earth's UN urban-agglomeration `POP2025` series is stored in thousands and Atlas converts it to integer people. It remains an estimated future/audit hint—not a harmonized metropolitan-population statistic—and current marker size uses cartographic rank and capital status.
+
+The three vector collections preserve the Natural Earth feature identifier when it is unambiguous, canonical EPSG:4326 geometry, stable Atlas feature/entity IDs, nullable validity bounds, source and observation-time metadata, and a derived Equal Earth path or point. Canonical coordinates stay projection-independent so a later renderer does not have to reverse-engineer SVG paths.
+
+### Contextual annotations
+
+`pattern-notes.v1.json` contains four source-reviewed annotations for patterns visible in the density raster: the Nile Valley and Delta, Java, the Heihe–Tengchong east/west population divide, and the Indo-Gangetic Plain. Each record has:
+
+- layer/view triggers and zoom bounds;
+- country and geography references;
+- WGS84 focus/bounds plus an Equal Earth focus point;
+- concise explanation and causal-strength label;
+- evidence title, publisher, URL, publication/retrieval dates, and the exact claim that evidence supports;
+- time bounds, caveats, related explanatory layers, and editorial review state.
+
+`PatternNote` remains an internal model name, not a permanent user-facing label. The four records are explicitly approved for the Atlas surface after an AI-assisted source review; their metadata also says plainly that human editorial review has not been performed. This is a narrower standard than the human approval required for JJU content associations, and Atlas does not present the notes as human-edited scholarship. The Heihe–Tengchong line is marked as an authored heuristic guide, not a border.
+
+The explanatory citations embedded in `pattern-notes.v1.json` are editorial evidence metadata, not downloaded build inputs. Their URLs, publishers, titles, retrieval dates, and supported claims are retained, but those external pages are not byte-pinned in the twelve-source lock and can therefore move or disappear. The lock's reproducibility guarantee applies to the data and geometry used to build the visualization, not to permanent archival custody of every explanatory webpage.
+
+### Geography-pack limitations
+
+- Population is modeled residential population. It does not show daytime population, commuting, seasonal mobility, displacement after the source model, or uncertainty as a separate visual channel.
+- GHSL 2025 is a projected epoch within R2023A. It must not be presented as a literal 2025 census surface.
+- A 2400 × 1300 world raster is deliberately bounded for fast delivery. Zooming it cannot reveal the original 1 km detail; a tiled renderer would be needed for close-scale analysis.
+- Relief is generalized artwork, not raw DEM data. Rivers and lakes are a small cartographic selection, not a hydrology network. Cities are a labeled-map selection, not a comprehensive gazetteer.
+- Natural Earth includes political and naming choices. Physical features do not imply JJU endorsement of a sovereignty claim.
+- Vector validity dates remain open because these sources do not establish feature-by-feature change dates. The contract can accept dated replacements later, but Phase 2 does not claim a historical physical-geography model.
 
 ## Code joins, never name joins
 
@@ -134,10 +186,13 @@ Raw religion data exists for 228 of 242 map entities (94.2%). A defensible broad
 
 Every fact is an observation with:
 
+- a required status: `observed`, `estimated`, `inherited`, `carried_forward`, `suppressed`, `not_applicable`, or `unavailable`;
 - `observedAt` and its precision;
 - nullable `validFrom` and `validTo`;
 - `sourceId` and exact `sourceField`;
 - explanatory notes.
+
+The first four statuses may carry a displayable value while preserving how it was obtained. Suppressed, not-applicable, and unavailable observations remain explicit missing-data states. A real numeric zero is never treated as missing.
 
 Country and geometry entities also have nullable validity intervals. V1 leaves those intervals open because these sources do not establish precise constitutional or boundary start dates. A later historical build can add dated entity/geometry records instead of changing today's values in place.
 
@@ -169,10 +224,22 @@ These denominators include uninhabited territories and disputed/indeterminate Na
 From the repository root:
 
 ```powershell
+npm run atlas:sources:fetch
+npm run atlas:sources:check
 npm run atlas:world:build
+npm run atlas:geography:build
+npm run atlas:world:check
 ```
 
-The script defaults to the dated source files in the local temporary directory. Another source location can be provided with:
+`atlas:sources:fetch` reads `data/atlas/sources.lock.json`, resolves inputs into the ignored repository-local `data/atlas/source-cache`, and accepts a file only when both its byte length and SHA-256 match. Because the World Bank and GeoNames URLs are mutable, their five small exact V1 inputs are preserved in `data/atlas/source-seeds`; the fetcher restores those locked bytes rather than pretending a later API response is the same snapshot. Version-tagged Natural Earth inputs remain remotely fetchable. The archived Factbook is a sparse checkout pinned to commit `2a40cddf0b0f57273c2f935be169d73496989a21`; its sorted file set is checked against the locked aggregate SHA-256. Useful bounded variants are:
+
+```powershell
+node scripts/fetch-atlas-sources.mjs --group=atlas-v1
+node scripts/fetch-atlas-sources.mjs --group=phase2-geography
+node scripts/fetch-atlas-sources.mjs --verify-only
+```
+
+The world builder now defaults to this repository-local cache. It no longer depends on files surviving in a user's operating-system temp directory. Another source location can still be provided with:
 
 - `ATLAS_NATURAL_EARTH_SOURCE`
 - `ATLAS_WORLD_BANK_COUNTRIES_SOURCE`
@@ -184,4 +251,8 @@ The script defaults to the dated source files in the local temporary directory. 
 - `ATLAS_OUTPUT_DIRECTORY`
 - `ATLAS_MAP_ASSET_DIRECTORY`
 
-`ATLAS_SNAPSHOT_DATE` and `ATLAS_GENERATED_AT` can pin build metadata for a reproducible rebuild. `npm run atlas:world:check` also verifies that every committed map entity is present in the browser SVG and that both files carry the same snapshot ID. The generator exits non-zero if IDs collide, the entity/geometry counts diverge, or a geometry path is empty. Non-fatal gaps and contested joins are written to the validation artifact instead of being hidden.
+`ATLAS_SNAPSHOT_DATE` and `ATLAS_GENERATED_AT` can pin build metadata for a reproducible rebuild. The checked-in defaults reproduce the preserved V1 snapshot metadata.
+
+`atlas:geography:build` creates an ignored Python 3.11 virtual environment under `data/atlas/tool-cache`, installs the exact package versions in `scripts/atlas-geography-requirements.txt`, verifies the five locked geography inputs, and regenerates the bounded raster/vector pack. Set `ATLAS_PYTHON` only when Python 3.11 is not discoverable normally.
+
+`npm run atlas:world:check` verifies the original 242-entity snapshot, the layer contracts, the geography pack and raster hashes/dimensions, city-population unit conversion, contextual-annotation references/review gates, and the human-only JJU association publication gate. The current association authority contains ten unreviewed private proposals and zero published links; the check does not call those proposals reviewed. The generators exit non-zero if IDs collide, counts diverge, source hashes change, geometries are invalid, or a committed browser asset no longer matches its manifest. Non-fatal source gaps and contested joins remain visible in validation artifacts instead of being hidden.

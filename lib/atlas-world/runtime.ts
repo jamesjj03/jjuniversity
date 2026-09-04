@@ -6,18 +6,25 @@ import type {
   AtlasLeadershipValue,
   AtlasProjectedFeature,
   AtlasReligionValue,
+  AtlasObservationStatus,
 } from "./types";
+import type { AtlasAdmin0EntityIdentity } from "./geographyTypes";
 
 export type AtlasRuntimeFact<T> = {
   value: T;
+  status: AtlasObservationStatus;
   observedAt: string | null;
+  validFrom: string | null;
+  validTo: string | null;
   precision: "day" | "month" | "year" | "source_snapshot" | "unknown";
   sourceId: string;
+  sourceField: string;
   notes: string[];
 };
 
 export type AtlasRuntimeCountry = {
   id: string;
+  entity: AtlasAdmin0EntityIdentity;
   slug: string;
   name: string;
   officialName: string | null;
@@ -63,6 +70,7 @@ export type AtlasRuntimeSource = {
   licenseUrl: string;
   retrievedAt: string;
   sourceUpdatedAt: string | null;
+  checksumSha256: string;
   notes: string[];
 };
 
@@ -84,11 +92,11 @@ export type AtlasRuntimeDataset = {
 
 export type AtlasRuntimeCountrySummary = Pick<
   AtlasRuntimeCountry,
-  "id" | "slug" | "name" | "officialName" | "aliases" | "codes" | "geography"
+  "id" | "entity" | "slug" | "name" | "officialName" | "aliases" | "codes" | "geography"
 > & {
   facts: Pick<
     AtlasRuntimeCountry["facts"],
-    "capital" | "population" | "government" | "religion"
+    "capital" | "population" | "gdpPerCapitaCurrentUsd" | "government" | "religion"
   >;
 };
 

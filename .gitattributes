@@ -1,1 +1,3 @@
 *.pdf binary
+data/atlas/source-seeds/** binary
+public/atlas-world/layers/*.webp binary
