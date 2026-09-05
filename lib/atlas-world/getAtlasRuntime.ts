@@ -13,10 +13,14 @@ import type {
 import { getApprovedAtlasJjuLinksForEntity } from "./associations";
 import { getAtlasGeographyPack } from "./getAtlasGeography";
 import { deriveAtlasLabelGeometry } from "./labelGeometry";
+import { deriveAtlasCountryFocusBounds } from "./countryFraming";
 
 const countrySnapshot = countrySnapshotJson as unknown as AtlasCountrySnapshot;
 const geometrySnapshot = geometrySnapshotJson as unknown as AtlasGeometrySnapshot;
-const displayFeatures = geometrySnapshot.features.map((feature) => ({ ...feature, ...deriveAtlasLabelGeometry(feature) }));
+const displayFeatures = geometrySnapshot.features.map((feature) => {
+  const label = deriveAtlasLabelGeometry(feature);
+  return { ...feature, ...label, focusBounds: deriveAtlasCountryFocusBounds(feature, label.focusBounds) };
+});
 
 function compactFact<T>(fact: AtlasObservation<T> | null): AtlasRuntimeFact<T> | null {
   if (!fact) return null;

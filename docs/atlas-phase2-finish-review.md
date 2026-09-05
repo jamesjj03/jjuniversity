@@ -19,6 +19,11 @@ active JJU checkout and its unrelated work were not edited or staged.
 - Zoom reaches 128× (previously 8×); country fitting is bounded at 64×. Clicking
   another country while already exploring a region preserves the camera. Search
   deliberately fits the chosen country. Canonical WGS84 identities remain intact.
+  Hosted visual review exposed a separate framing defect: using a label's largest
+  polygon as the camera extent cropped the other main islands of Japan and other
+  archipelagos. Label placement and country-overview framing are now independent:
+  nine reviewed regional overviews retain meaningful neighboring islands while
+  the existing Kiribati/Netherlands handling of distant fragments is preserved.
 - Country labels have authored anchors and orientation for major/awkward shapes.
   Country names, cities and physical features use distinct typography. Collision
   handling works in screen pixels, respects panels, and avoids repeating the same
@@ -45,7 +50,8 @@ active JJU checkout and its unrelated work were not edited or staged.
   Six disputed-place accounts distinguish claims, administration and the map's
   choice; they do not invent control-line geometry.
 - Phone Atlas replaces the desktop site header with one compact JJ/view/search
-  bar. Selection begins with a small Peek card; Half and Full provide progressive
+  bar. Map taps and deep links begin with a small Peek card; search opens Half.
+  Half and Full provide progressive
   detail. The map fills the screen; controls move above the actual sheet height.
   Covered controls are inactive, touch targets are usable, and pinch/drag remain
   map gestures. Physical iPhone/Safari review remains JJ's required checkpoint.

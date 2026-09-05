@@ -2,6 +2,34 @@ import { expect, test } from "@playwright/test";
 import palette from "../../lib/atlas-world/data/political-palette.v1.json";
 import countries from "../../lib/atlas-world/data/countries.v1.json";
 import { atlasPoliticalColor } from "../../lib/atlas-world/politicalPalette";
+import { projectAtlasWgs84 } from "../../lib/atlas-world/projection";
+
+test("country framing keeps the main islands and both Malaysian regions on screen", async ({page,isMobile}) => {
+  const examples: Array<{slug:string;name:string;places:Array<[number,number]>}> = [
+    {slug:"jpn",name:"Japan",places:[[141.68,45.41],[145.82,43.4],[130.56,31.6],[132.77,33.84],[127.68,26.21]]},
+    {slug:"nzl",name:"New Zealand",places:[[172.68,-34.43],[166.54,-46.18],[174.78,-41.29]]},
+    {slug:"mys",name:"Malaysia",places:[[101.69,3.14],[116.07,5.98]]},
+  ];
+  for(const example of examples) {
+    await page.goto(`/atlas?view=religion&country=${example.slug}`,{waitUntil:"networkidle"});
+    await expect(page.getByRole("heading",{name:example.name,exact:true})).toBeVisible();
+    const group=page.locator("[data-atlas-map-group]");
+    await expect(group).toHaveAttribute("transform",/scale\(/);
+    const pixels=await group.evaluate((node,points)=>{
+      const matrix=(node as SVGGraphicsElement).getScreenCTM()!;
+      return points.map(([x,y])=>({x:matrix.a*x+matrix.c*y+matrix.e,y:matrix.b*x+matrix.d*y+matrix.f}));
+    },example.places.map(projectAtlasWgs84));
+    const map=(await page.locator("[data-atlas-world-map]").boundingBox())!;
+    const toolbar=(await page.locator("[data-atlas-root] > header").boundingBox())!;
+    const panel=(await page.locator("[data-atlas-sheet]").boundingBox())!;
+    for(const point of pixels) {
+      expect(point.x,`${example.name}: primary geography stays inside the left map edge`).toBeGreaterThan(map.x+8);
+      expect(point.x,`${example.name}: primary geography is not behind the desktop cockpit`).toBeLessThan(isMobile?map.x+map.width-8:panel.x-8);
+      expect(point.y,`${example.name}: primary geography stays below the toolbar`).toBeGreaterThan(toolbar.y+toolbar.height+8);
+      expect(point.y,`${example.name}: primary geography stays above the phone sheet`).toBeLessThan(isMobile?panel.y-8:map.y+map.height-8);
+    }
+  }
+});
 
 test("every retained entity has a fixed political identity, including the requested familiar colors", () => {
   expect(Object.keys(palette.colors)).toHaveLength(242);
