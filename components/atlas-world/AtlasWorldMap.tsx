@@ -21,6 +21,7 @@ import type {
 import type { AtlasRuntimeDataset } from "@/lib/atlas-world/runtime";
 import { ATLAS_STATUS_OUTLINE_ENTITY_IDS } from "@/lib/atlas-world/territorialStatus";
 import styles from "./AtlasWorld.module.css";
+import { atlasLabelPlacement } from "@/lib/atlas-world/labelPlacements";
 import AtlasRasterSurface from "./AtlasRasterSurface";
 
 type AtlasWorldMapProps = {
@@ -50,7 +51,7 @@ type AtlasSvgLayerRenderer = (
   context: AtlasSvgRendererContext,
 ) => ReactNode;
 
-const GEOMETRY_ASSET_HREF = "/atlas-world/geometry-equal-earth.v1.svg";
+const GEOMETRY_ASSET_HREF = "/atlas-world/geometry-mercator.v1.svg";
 
 function geometryAssetId(entityId: string) {
   return `atlas-${entityId.replace(/[^A-Za-z0-9_-]/g, "-")}`;
@@ -60,6 +61,11 @@ function pathLabelPoint(path: string): [number, number] {
   const values = path.match(/-?\d+(?:\.\d+)?/g)?.map(Number) ?? [];
   const index = Math.floor(values.length / 4) * 2;
   return [values[index] ?? 0, values[index + 1] ?? 0];
+}
+
+function physicalGeometryHref(feature: AtlasGeometryFeature) {
+  const level = feature.sourceIds.some((id) => id.includes("10m")) ? "detail" : "overview";
+  return `/atlas-world/physical-mercator-${level}.v1.svg#${feature.featureId.replace(/[^A-Za-z0-9_-]/g, "-")}`;
 }
 
 function layerSurfaceStyle(
@@ -174,10 +180,15 @@ function renderPolygonFeatureLayer(
         if (!path) return null;
         const point = pathLabelPoint(path);
         return (
-          <g key={feature.featureId} className={styles[`lod${feature.displayLod}`]}>
-          <path
+          <g key={feature.featureId} data-atlas-map-feature={feature.featureId}
+            data-atlas-feature-bounds={feature.geometry.derived.bounds.flat().join(",")}
+            data-atlas-minimum-zoom={feature.displayMinimumZoom ?? 1}
+            data-atlas-maximum-zoom={feature.displayMaximumZoom}
+            className={styles[`lod${feature.displayLod}`]}>
+          <use
             key={feature.featureId}
-            d={path}
+            href={(feature.displayMinimumZoom ?? 1) <= 1 ? physicalGeometryHref(feature) : undefined}
+            data-atlas-geography-href={physicalGeometryHref(feature)}
             className={`${styles.lakeFeature} ${styles[`lod${feature.displayLod}`]}`}
             style={{
               fill: style?.fillColor,
@@ -190,10 +201,10 @@ function renderPolygonFeatureLayer(
             vectorEffect="non-scaling-stroke"
           >
             <title>{feature.name}</title>
-          </path>
+          </use>
           <text data-atlas-label="physical" data-atlas-x={point[0]} data-atlas-y={point[1]} data-atlas-label-min-zoom="3.2"
             data-atlas-label-priority={40 + (feature.sourceScaleRank ?? 5)} className={styles.physicalLabel}
-            transform={`translate(${point.join(" ")})`} textAnchor="middle">{feature.name}</text>
+            transform={`translate(${point.join(" ")})`} style={{ display: "none" }} textAnchor="middle">{feature.name === "Unnamed feature" ? "" : feature.name}</text>
           </g>
         );
       })}
@@ -220,10 +231,15 @@ function renderLineLayer(
         if (!path) return null;
         const point = pathLabelPoint(path);
         return (
-          <g key={feature.featureId} className={styles[`lod${feature.displayLod}`]}>
-          <path
+          <g key={feature.featureId} data-atlas-map-feature={feature.featureId}
+            data-atlas-feature-bounds={feature.geometry.derived.bounds.flat().join(",")}
+            data-atlas-minimum-zoom={feature.displayMinimumZoom ?? 1}
+            data-atlas-maximum-zoom={feature.displayMaximumZoom}
+            className={styles[`lod${feature.displayLod}`]}>
+          <use
             key={feature.featureId}
-            d={path}
+            href={(feature.displayMinimumZoom ?? 1) <= 1 ? physicalGeometryHref(feature) : undefined}
+            data-atlas-geography-href={physicalGeometryHref(feature)}
             className={`${styles.riverFeature} ${styles[`lod${feature.displayLod}`]}`}
             style={{
               fill: "none",
@@ -235,10 +251,10 @@ function renderLineLayer(
             vectorEffect="non-scaling-stroke"
           >
             <title>{feature.name}</title>
-          </path>
+          </use>
           <text data-atlas-label="physical" data-atlas-x={point[0]} data-atlas-y={point[1]} data-atlas-label-min-zoom="2.4"
             data-atlas-label-priority={40 + (feature.sourceScaleRank ?? 5)} className={styles.physicalLabel}
-            transform={`translate(${point.join(" ")})`} textAnchor="middle" y={-5}>{feature.name}</text>
+            transform={`translate(${point.join(" ")})`} style={{ display: "none" }} textAnchor="middle" y={-5}>{feature.name === "Unnamed feature" ? "" : feature.name}</text>
           </g>
         );
       })}
@@ -281,8 +297,12 @@ function renderPointSymbolLayer(
             key={feature.featureId}
             className={styles[`lod${feature.displayLod}`]}
             data-atlas-map-feature={feature.featureId}
+            data-atlas-city={feature.featureId}
+            data-atlas-feature-bounds={feature.geometry.derived.bounds.flat().join(",")}
+            data-atlas-minimum-zoom={feature.displayMinimumZoom ?? 1}
           >
             <g data-atlas-screen-symbol="city" data-atlas-x={point[0]} data-atlas-y={point[1]} transform={`translate(${point.join(" ")})`}>
+            <circle r={0} fill="transparent" data-atlas-city-hit className={styles.cityHit} aria-label={`Select city ${feature.name}`} />
             <circle r={radius + 1} className={styles.cityHalo} />
             <circle
               r={radius}
@@ -402,11 +422,11 @@ function renderAnnotationLayer(
           className={styles.noteMarker}
           data-atlas-note={note.id}
           data-atlas-screen-symbol="note"
-          data-atlas-x={note.spatial.focus.equalEarth[0]}
-          data-atlas-y={note.spatial.focus.equalEarth[1]}
+          data-atlas-x={note.spatial.focus.projected[0]}
+          data-atlas-y={note.spatial.focus.projected[1]}
           data-atlas-minimum-zoom={note.triggers.minimumZoom}
           data-atlas-maximum-zoom={note.triggers.maximumZoom}
-          transform={`translate(${note.spatial.focus.equalEarth.join(" ")})`}
+          transform={`translate(${note.spatial.focus.projected.join(" ")})`}
         >
           <circle r={symbolRadius + 4.5} className={styles.notePulse} />
           <circle
@@ -603,7 +623,7 @@ export default function AtlasWorldMap({ data }: AtlasWorldMapProps) {
             return <g key={note.id} data-atlas-note-highlight={note.id} style={{ display: "none" }}>
               {features.map((feature) => <path key={feature.featureId} d={feature.geometry.derived.path} vectorEffect="non-scaling-stroke" />)}
               {authored?.derived?.path && <path d={authored.derived.path} vectorEffect="non-scaling-stroke" strokeDasharray="6 4" />}
-              {features.length === 0 && !authored?.derived?.path && <ellipse cx={note.spatial.focus.equalEarth[0]} cy={note.spatial.focus.equalEarth[1]}
+              {features.length === 0 && !authored?.derived?.path && <ellipse cx={note.spatial.focus.projected[0]} cy={note.spatial.focus.projected[1]}
                 rx={24} ry={9} vectorEffect="non-scaling-stroke" strokeDasharray="4 4" />}
             </g>;
           })}
@@ -613,13 +633,17 @@ export default function AtlasWorldMap({ data }: AtlasWorldMapProps) {
             const country = data.countries.find((item) => item.id === feature.entityId);
             if (!country) return null;
             const area = feature.labelArea ?? 0;
-            const anchor = feature.labelPoint ?? feature.centroid;
+            const placement = atlasLabelPlacement(country.id);
+            const anchor = placement?.point ?? feature.labelPoint ?? feature.centroid;
             const minZoom = area > 2600 ? 1 : area > 600 ? 1.8 : area > 120 ? 2.8 : area > 20 ? 4 : 6;
             return <text key={country.id} data-atlas-label="country" data-atlas-label-entity={country.id}
               data-atlas-x={anchor[0]} data-atlas-y={anchor[1]}
-              data-atlas-label-min-zoom={minZoom} data-atlas-label-priority={10 - Math.log(Math.max(1, area))}
+              data-atlas-label-min-zoom={placement?.priority != null ? 1 : minZoom}
+              data-atlas-label-priority={placement?.priority ?? 12 - Math.log(Math.max(1, area))}
+              data-atlas-label-angle={placement?.angle ?? 0}
+              data-atlas-label-major={placement?.priority != null ? "true" : "false"}
               transform={`translate(${anchor.join(" ")})`} textAnchor="middle"
-              className={styles.countryLabel} style={{ display: "none" }}>{country.name}</text>;
+              className={styles.countryLabel} style={{ display: "none" }}>{placement?.name ?? country.name}</text>;
           })}
         </g>
       </g>

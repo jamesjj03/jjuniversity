@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0.0",
+  "reviewedAt": "2026-09-05",
+  "reviewPolicy": {
+    "reviewAfterDays": 120,
+    "description": "A review date is not a promise of current leadership. New office observations are separately sourced; archived facts are never overwritten."
+  },
+  "contexts": [
+    {
+      "personId": "person:brice-oligui-nguema",
+      "entityId": "country:GAB",
+      "roles": ["headOfState", "headOfGovernment"],
+      "exactSourceName": "President Brice OLIGUI Nguema",
+      "archivedObservedAt": "2025-10-01",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "summary": "His inauguration followed the April 2025 election and ended the military transition that began in August 2023.",
+      "sources": [
+        { "publisher": "Gabon Ministry of Foreign Affairs", "title": "Presidential inauguration, 3 May 2025", "url": "https://www.affaires-etrangeres.gouv.ga/9-actualites/2491-gabon-brice-clotaire-oligui-nguema-investi-president-du-gabon/", "publishedAt": "2025-05-05" },
+        { "publisher": "Presidency of Gabon", "title": "Oligui Nguema takes the oath of office", "url": "https://presidence.ga/2025/05/04/le-president-brice-clotaire-oligui-nguema-prete-serment/", "publishedAt": "2025-05-04" }
+      ]
+    },
+    {
+      "personId": "person:charles-iii",
+      "entityId": "country:GBR",
+      "roles": ["headOfState"],
+      "exactSourceName": "King CHARLES III",
+      "archivedObservedAt": "2025-10-01",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "summary": "The monarch is head of state, but does not direct government policy. That is the prime minister’s role.",
+      "sources": [
+        { "publisher": "The Royal Household", "title": "The sovereign and the prime minister", "url": "https://www.royal.uk/the-sovereign-and-the-prime-minister", "publishedAt": null },
+        { "publisher": "House of Commons Library", "title": "King Charles III: first year of the reign", "url": "https://researchbriefings.files.parliament.uk/documents/CBP-9627/CBP-9627.pdf", "publishedAt": null }
+      ]
+    },
+    {
+      "personId": "person:cyril-ramaphosa",
+      "entityId": "country:ZAF",
+      "roles": ["headOfState", "headOfGovernment"],
+      "exactSourceName": "President Matamela Cyril RAMAPHOSA",
+      "archivedObservedAt": "2025-12-21",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "summary": "Parliament elects the president from among its members. Ramaphosa was re-elected in June 2024; the president then appoints the cabinet.",
+      "sources": [
+        { "publisher": "Parliament of South Africa", "title": "National Assembly elects Cyril Ramaphosa", "url": "https://parliament.gov.za/press-releases/national-assembly-elects-cyril-ramaphosa-president-elect", "publishedAt": "2024-06-14" },
+        { "publisher": "South African Government", "title": "Presidential inauguration", "url": "https://www.gov.za/news/speeches/president-cyril-ramaphosa-presidential-inauguration-19-jun-2024", "publishedAt": "2024-06-19" }
+      ]
+    }
+  ],
+  "officeUpdates": [
+    {
+      "id": "office-observation:gbr-prime-minister-2026-09-05",
+      "entityId": "country:GBR",
+      "role": "headOfGovernment",
+      "personId": "person:andy-burnham",
+      "personName": "Andy Burnham",
+      "title": "Prime Minister",
+      "termStartedAt": "2026-07-20",
+      "observedAt": "2026-09-05",
+      "reviewAfter": "2027-01-03",
+      "status": "reviewed_source_observation",
+      "supersedes": {
+        "personId": "person:keir-starmer",
+        "exactSourceName": "Prime Minister Keir STARMER",
+        "sourceId": "cia-world-factbook-final-capture-2026-02",
+        "observedAt": "2025-10-01",
+        "termEndedAt": "2026-07-20"
+      },
+      "summary": "Became prime minister on 20 July 2026. The prime minister leads the government and is responsible for its policy and decisions.",
+      "sources": [
+        { "publisher": "GOV.UK", "title": "Prime Minister: current role holder and responsibilities", "url": "https://www.gov.uk/government/ministers/prime-minister", "publishedAt": null },
+        { "publisher": "GOV.UK", "title": "Andy Burnham: official biography", "url": "https://www.gov.uk/government/people/andy-burnham", "publishedAt": null },
+        { "publisher": "GOV.UK", "title": "Keir Starmer: completed term", "url": "https://www.gov.uk/government/people/keir-starmer", "publishedAt": null }
+      ]
+    }
+  ]
+}

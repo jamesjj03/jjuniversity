@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { deriveAtlasLabelGeometry } from "../../lib/atlas-world/labelGeometry";
 import type { AtlasProjectedFeature } from "../../lib/atlas-world/types";
-import geometrySnapshot from "../../lib/atlas-world/data/geometry-equal-earth.v1.json";
+import geometrySnapshot from "../../lib/atlas-world/data/geometry-mercator.v1.json";
 
 function feature(path: string, overrides: Partial<AtlasProjectedFeature> = {}): AtlasProjectedFeature {
   return {

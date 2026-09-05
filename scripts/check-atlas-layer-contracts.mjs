@@ -52,7 +52,7 @@ for (const dataset of catalog.datasets) {
 }
 
 const knownResolverIds = new Set([
-  "political-neighbor-contrast-v1",
+  "political-authored-palette-v1",
   "government-broad-form-v1",
   "religion-dominant-broad-v1",
   "population-total-bins-v1",
@@ -77,7 +77,7 @@ for (const layer of catalog.layers) {
     assert.ok(Number.isFinite(minimumZoom) && minimumZoom >= 1, `${layer.id} has an invalid minimum zoom.`);
   }
   if (maximumZoom != null) {
-    assert.ok(Number.isFinite(maximumZoom) && maximumZoom <= 8, `${layer.id} has an invalid maximum zoom.`);
+    assert.ok(Number.isFinite(maximumZoom) && maximumZoom <= 128, `${layer.id} has an invalid maximum zoom.`);
   }
   if (minimumZoom != null && maximumZoom != null) {
     assert.ok(minimumZoom <= maximumZoom, `${layer.id} zoom interval is inverted.`);

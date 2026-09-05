@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "lockId": "jju-atlas-sources-2026-09-04",
+  "lockId": "jju-atlas-sources-2026-09-05",
   "cacheDirectory": "data/atlas/source-cache",
   "builds": [
     {
@@ -19,13 +19,13 @@
       "transformations": [
         "Join datasets through reviewed geographic codes rather than names.",
         "Normalize government and broad religious categories with versioned rules while retaining source wording.",
-        "Project canonical Natural Earth WGS84 geometry into a 1200 x 650 Equal Earth SVG viewBox."
+        "Project canonical Natural Earth WGS84 geometry into a 1200 x 650 Mercator SVG viewBox."
       ],
       "outputs": [
         "lib/atlas-world/data/countries.v1.json",
-        "lib/atlas-world/data/geometry-equal-earth.v1.json",
+        "lib/atlas-world/data/geometry-mercator.v1.json",
         "lib/atlas-world/data/validation.v1.json",
-        "public/atlas-world/geometry-equal-earth.v1.svg"
+        "public/atlas-world/geometry-mercator.v1.svg"
       ]
     },
     {
@@ -43,21 +43,28 @@
         "natural-earth-manual-shaded-relief-50m-3.3.0",
         "natural-earth-rivers-50m-5.1.2",
         "natural-earth-lakes-50m-5.1.2",
-        "natural-earth-populated-places-50m-5.1.2"
+        "natural-earth-populated-places-50m-5.1.2",
+        "natural-earth-rivers-10m-5.1.2",
+        "natural-earth-lakes-10m-5.1.2",
+        "natural-earth-populated-places-10m-5.1.2"
       ],
       "transformations": [
-        "Area-average the original 1 km World Mollweide population-count grid independently into a 2400 x 1300 Equal Earth overview and tiled 9600 x 5200 / 19200 x 10400 detail levels, then apply the same recorded log1p palette and sphere mask. Never upscale the overview.",
-        "Bilinear-warp the Natural Earth WGS84 grayscale relief into the same Equal Earth raster and sphere mask; apply the recorded global cartographic shadow contrast of 1.45.",
-    "Select and round-trip canonical WGS84 vectors, then derive 1200 x 650 Equal Earth SVG paths and points.",
-    "Retain rivers classed River with min_zoom <= 3, lakes with min_zoom <= 3 after exact duplicate removal, and all national capitals plus cities with SCALERANK <= 2.",
-    "Convert Natural Earth Populated Places POP2025 values from the source's thousands-of-people unit into integer people while retaining estimated status and the original field name in provenance."
+        "Area-average the original 1 km World Mollweide population-count grid independently into a 2400 x 1300 Mercator overview and tiled 19200 x 10400 / 38400 x 20800 / 76800 x 41600 detail levels, then apply the same recorded log1p palette and sphere mask. Never upscale the overview.",
+        "Bilinear-warp the Natural Earth WGS84 grayscale relief into the same Mercator raster and sphere mask; apply the recorded global cartographic shadow contrast of 1.45.",
+        "Select and round-trip canonical WGS84 vectors, then derive 1200 x 650 Mercator SVG paths and points.",
+        "Retain 50m world/regional rivers and lakes, add 10m close-scale river and lake geometry with min_zoom <= 5 after removing empty/duplicate geometry, and all national capitals plus 10m cities with SCALERANK <= 4. Original city NE_ID and coarse physical feature identities remain stable.",
+        "Convert Natural Earth Populated Places POP2025 values from the source's thousands-of-people unit into integer people while retaining estimated status and the original field name in provenance."
       ],
       "outputs": [
         "lib/atlas-world/data/geography-pack.v1.json",
-        "public/atlas-world/layers/population-density-2025.equal-earth.webp",
-        "public/atlas-world/layers/population-density-2025/regional/",
-        "public/atlas-world/layers/population-density-2025/country/",
-        "public/atlas-world/layers/physical-relief.equal-earth.webp"
+        "public/atlas-world/layers/population-density-2025.mercator.webp",
+        "public/atlas-world/layers/population-density-2025-mercator/regional/",
+        "public/atlas-world/layers/population-density-2025-mercator/country/",
+        "public/atlas-world/layers/physical-relief.mercator.webp",
+        "public/atlas-world/layers/population-density-2025-mercator/close/",
+        "public/atlas-world/physical-mercator-overview.v1.svg",
+        "public/atlas-world/physical-mercator-detail.v1.svg",
+        "lib/atlas-world/data/pattern-notes.v1.json"
       ]
     }
   ],
@@ -69,6 +76,57 @@
     "Large raw inputs stay out of Git; bounded browser-ready derivatives are committed."
   ],
   "sources": [
+    {
+      "id": "natural-earth-rivers-10m-5.1.2",
+      "group": "phase2-geography",
+      "kind": "http",
+      "title": "Natural Earth 1:10m Rivers and Lake Centerlines",
+      "publisher": "Natural Earth",
+      "version": "repository release 5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_rivers_lake_centerlines.geojson",
+      "target": "ne_10m_rivers_lake_centerlines.v5.1.2.geojson",
+      "expectedBytes": 7307743,
+      "checksumSha256": "bb854a900ecbd3b408df46d5e16e3e0f974ba55993f9d8b5c26e855273c0905a",
+      "retrievedAt": "2026-09-05",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "natural-earth-lakes-10m-5.1.2",
+      "group": "phase2-geography",
+      "kind": "http",
+      "title": "Natural Earth 1:10m Lakes",
+      "publisher": "Natural Earth",
+      "version": "repository release 5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_lakes.geojson",
+      "target": "ne_10m_lakes.v5.1.2.geojson",
+      "expectedBytes": 5043554,
+      "checksumSha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9",
+      "retrievedAt": "2026-09-05",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "natural-earth-populated-places-10m-5.1.2",
+      "group": "phase2-geography",
+      "kind": "http",
+      "title": "Natural Earth 1:10m Populated Places",
+      "publisher": "Natural Earth",
+      "version": "repository release 5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_populated_places.geojson",
+      "target": "ne_10m_populated_places.v5.1.2.geojson",
+      "expectedBytes": 19359003,
+      "checksumSha256": "9b8e3de09048ef00dfc70357dbb9fa324493f214b5e0ae4daf1aa79a8d10116b",
+      "retrievedAt": "2026-09-05",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
     {
       "id": "natural-earth-admin-0-50m-5.1.2",
       "group": "atlas-v1",

@@ -85,3 +85,4 @@ if (installedHash !== requirementsHash) {
 }
 
 run(VENV_PYTHON, [BUILD_SCRIPT, ...process.argv.slice(2)]);
+run(process.execPath, [path.join(SCRIPT_DIRECTORY, "reproject-atlas-notes.mjs")]);

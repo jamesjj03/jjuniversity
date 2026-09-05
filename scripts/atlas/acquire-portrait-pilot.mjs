@@ -9,7 +9,7 @@ const manifestPath = path.join(root, 'lib/atlas-world/data/portrait-pilot.json')
 const publicRoot = path.join(root, 'public/atlas/portraits');
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const seeds = [
-  { id: 'brice-oligui-nguema', personId: 'person:brice-oligui-nguema', name: 'Brice Oligui Nguema', title: 'President', entityId: 'country:GAB', exactSourceName: 'President Brice OLIGUI Nguema', file: 'Brice Oligui Nguema in 2024 (cropped).jpg', author: 'Freddie Everett / U.S. Department of State', licenseName: 'Public domain', licenseUrl: 'https://creativecommons.org/publicdomain/mark/1.0/', photoDate: '2024-10-01', changes: 'Commons portrait crop by Ooligan; resized and converted to WebP for Atlas.' },
+  { id: 'brice-oligui-nguema', personId: 'person:brice-oligui-nguema', name: 'Brice Oligui Nguema', title: 'President', entityId: 'country:GAB', exactSourceName: 'President Brice OLIGUI Nguema', file: 'Brice Oligui Nguema on November 26, 2024 (cropped).jpg', author: 'Lukasz Kobus / European Communities, 2024 / EC Audiovisual Service', licenseName: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/', photoDate: '2024-11-26', changes: 'Commons portrait crop by Sashi Suseshi; resized and converted to WebP for Atlas. No generated detail or retouching.', attributionStatement: '© European Union, 2026. Photograph by Lukasz Kobus, taken 26 November 2024.', reviewedSourceSha256: 'eb253b6f90c0fda6e03f23f1038dbed6963c063074474e67c63ee4b1dc96316a', replacesSourceSha256: '1dd9be33ec5ae2ffb562fe9ff55e607fdf372b466439b443c28ffa8f77acbd3c' },
   { id: 'charles-iii', personId: 'person:charles-iii', name: 'Charles III', title: 'King', entityId: 'country:GBR', exactSourceName: 'King CHARLES III', file: 'King Charles III (July 2023).jpg', author: 'The White House', licenseName: 'Public domain', licenseUrl: 'https://creativecommons.org/publicdomain/mark/1.0/', photoDate: '2023-07-10', changes: 'Commons portrait crop by TDKR Chicago 101, tonal adjustment by WikiPedant; resized and converted to WebP for Atlas.' },
   { id: 'keir-starmer', personId: 'person:keir-starmer', name: 'Keir Starmer', title: 'Prime Minister', entityId: 'country:GBR', exactSourceName: 'Prime Minister Keir STARMER', file: 'Keir Starmer official portrait (2x3 cropped).jpg', author: 'Simon Dawson / No 10 Downing Street', licenseName: 'OGL v3', licenseUrl: 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/', photoDate: '2024-07-05', changes: 'Commons portrait crop; resized and converted to WebP for Atlas.', attributionStatement: 'Contains public sector information licensed under the Open Government Licence v3.0.' },
   { id: 'cyril-ramaphosa', personId: 'person:cyril-ramaphosa', name: 'Cyril Ramaphosa', title: 'President', entityId: 'country:ZAF', exactSourceName: 'President Matamela Cyril RAMAPHOSA', file: 'Cyril Ramaphosa 2024.jpg', author: 'Ricardo Stuckert / Presidency of Brazil', licenseName: 'CC BY-SA 2.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/', photoDate: '2024-09-25', changes: 'Commons portrait crop by Segagustin; resized and converted to WebP for Atlas. The Atlas image derivative is also licensed CC BY-SA 2.0.' },
@@ -30,7 +30,7 @@ if (prior) verifyBindings(prior);
 
 if (process.argv.includes('--acquire')) {
   await mkdir(publicRoot, { recursive: true });
-  const manifest = { schemaVersion: '1.0.0', reviewedAt: '2026-09-04', purpose: 'Bounded visual identity pilot, not a current officeholder service.', people: [], media: [], bindings: [] };
+  const manifest = { schemaVersion: '1.1.0', reviewedAt: '2026-09-05', purpose: 'Bounded visual identity pilot, not a current officeholder service.', people: [], media: [], bindings: [] };
   for (const seed of seeds) {
     const api = new URL('https://commons.wikimedia.org/w/api.php');
     api.search = new URLSearchParams({ action: 'query', format: 'json', prop: 'imageinfo', iiprop: 'url|extmetadata|size', titles: `File:${seed.file}` });
@@ -47,13 +47,16 @@ if (process.argv.includes('--acquire')) {
     const input = Buffer.from(await assetResponse.arrayBuffer());
     const sourceSha256 = hash(input);
     const priorMedia = prior?.media.find((media) => media.id === `media:${seed.id}`);
-    if (priorMedia && priorMedia.sourceSha256 !== sourceSha256) throw new Error(`Source image changed for ${seed.id}; review before updating its lock.`);
-    const output = await sharp(input).rotate().resize({ width: 360, withoutEnlargement: true }).webp({ quality: 84 }).toBuffer();
+    if (seed.reviewedSourceSha256 && seed.reviewedSourceSha256 !== sourceSha256) throw new Error(`Reviewed source image changed for ${seed.id}.`);
+    const reviewedReplacement = seed.reviewedSourceSha256 === sourceSha256 && seed.replacesSourceSha256 === priorMedia?.sourceSha256;
+    if (priorMedia && priorMedia.sourceSha256 !== sourceSha256 && !reviewedReplacement) throw new Error(`Source image changed for ${seed.id}; review before updating its lock.`);
+    const inputDimensions = await sharp(input).metadata();
+    const output = await sharp(input).rotate().resize({ width: 560, withoutEnlargement: true }).webp({ quality: 92, effort: 6 }).toBuffer();
     const dimensions = await sharp(output).metadata();
     const href = `/atlas/portraits/${seed.id}.webp`;
     await writeFile(path.join(root, 'public', href), output);
     manifest.people.push({ id: seed.personId, name: seed.name, portraitMediaId: `media:${seed.id}` });
-    manifest.media.push({ id: `media:${seed.id}`, personId: seed.personId, href, width: dimensions.width, height: dimensions.height, author: seed.author, licenseName: seed.licenseName, licenseUrl: seed.licenseUrl, attributionStatement: seed.attributionStatement ?? null, changes: seed.changes, photoDate: seed.photoDate, sourceUrl: info.descriptionurl, sourceCreditHtml: info.extmetadata.Credit?.value ?? null, inputUrl, sourceSha256, outputSha256: hash(output), bytes: output.length, reviewedAt: '2026-09-04' });
+    manifest.media.push({ id: `media:${seed.id}`, personId: seed.personId, href, width: dimensions.width, height: dimensions.height, sourceWidth: inputDimensions.width, sourceHeight: inputDimensions.height, derivation: '560px maximum width, no enlargement, WebP quality 92', author: seed.author, licenseName: seed.licenseName, licenseUrl: seed.licenseUrl, attributionStatement: seed.attributionStatement ?? null, changes: seed.changes, photoDate: seed.photoDate, sourceUrl: info.descriptionurl, sourceCreditHtml: info.extmetadata.Credit?.value ?? null, inputUrl, sourceSha256, outputSha256: hash(output), bytes: output.length, reviewedAt: '2026-09-05' });
     const country = countries.find((candidate) => candidate.id === seed.entityId);
     for (const role of ['headOfState', 'headOfGovernment']) {
       const fact = country.facts[role];
@@ -72,6 +75,9 @@ for (const media of prior.media) {
   const bytes = await readFile(path.join(root, 'public', media.href));
   if (hash(bytes) !== media.outputSha256) throw new Error(`Asset checksum mismatch: ${media.id}`);
   if (!media.sourceSha256 || !media.licenseUrl || !media.author) throw new Error(`Incomplete provenance: ${media.id}`);
+  const dimensions = await sharp(bytes).metadata();
+  if (dimensions.width !== media.width || dimensions.height !== media.height) throw new Error(`Asset dimension mismatch: ${media.id}`);
+  if (dimensions.width < 448 || media.sourceWidth < dimensions.width || media.bytes > 190_000) throw new Error(`Portrait density or payload budget failed: ${media.id}`);
 }
 verifyBindings(prior);
 console.log(`Portrait pilot verified: ${prior.people.length} people, ${new Set(prior.bindings.map((binding) => binding.entityId)).size} countries; identity, source dates, licensing and asset checksums intact.`);

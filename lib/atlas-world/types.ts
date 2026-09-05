@@ -230,7 +230,7 @@ export interface AtlasGeometrySnapshot {
   schemaVersion: "1.0.0";
   snapshotId: string;
   projection: {
-    id: "equal-earth";
+    id: "mercator";
     viewBox: [0, 0, 1200, 650];
     width: 1200;
     height: 650;

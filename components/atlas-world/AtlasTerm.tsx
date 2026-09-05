@@ -11,32 +11,75 @@ type DefinitionDialogProps = {
   onDismiss: () => void;
 };
 
+type GuideGroup = AtlasGlossaryTerm["group"];
+type GuideLocation = { termId: string | null; group: GuideGroup | null; query: string };
+const guideGroups: { name: GuideGroup; description: string }[] = [
+  { name: "Government", description: "Who holds power, and how it is organized." },
+  { name: "Religion", description: "Traditions, identities and the figures behind the colors." },
+  { name: "Reading the map", description: "What the numbers can—and cannot—tell you." },
+  { name: "Geography", description: "Land, borders and places whose status is contested." },
+];
+const guideHome: GuideLocation = { termId: null, group: null, query: "" };
+
 function DefinitionDialog({ initialTerm, triggerRef, onDismiss }: DefinitionDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const [selected, setSelected] = useState(initialTerm);
-  const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+  const closedRef = useRef(false);
+  const [trail, setTrail] = useState<GuideLocation[]>(() => initialTerm
+    ? [guideHome, { termId: initialTerm.id, group: initialTerm.group, query: "" }]
+    : [guideHome]);
+  const location = trail[trail.length - 1];
+  const selected = location.termId ? getAtlasGlossaryTerm(location.termId) : null;
   const titleId = useId();
   const descriptionId = useId();
 
   useEffect(() => {
     dialogRef.current?.showModal();
-  }, []);
+    if (initialTerm) titleRef.current?.focus({ preventScroll: true });
+    else searchRef.current?.focus({ preventScroll: true });
+  }, [initialTerm]);
 
   function dismiss() {
+    if (closedRef.current) return;
+    closedRef.current = true;
     dialogRef.current?.close();
     onDismiss();
     triggerRef.current?.focus({ preventScroll: true });
   }
 
-  function select(entry: AtlasGlossaryTerm | null) {
-    setSelected(entry);
-    requestAnimationFrame(() => titleRef.current?.focus({ preventScroll: true }));
+  function focusPage(search = false) {
+    requestAnimationFrame(() => {
+      dialogRef.current?.scrollTo({ top: 0 });
+      if (search) searchRef.current?.focus({ preventScroll: true });
+      else titleRef.current?.focus({ preventScroll: true });
+    });
   }
 
+  function navigate(next: GuideLocation, search = false) {
+    setTrail((previous) => [...previous, next]);
+    focusPage(search);
+  }
+
+  function back() {
+    if (trail.length < 2) return;
+    setTrail((previous) => previous.slice(0, -1));
+    focusPage();
+  }
+
+  function select(entry: AtlasGlossaryTerm) {
+    navigate({ termId: entry.id, group: entry.group, query: "" });
+  }
+
+  const searchWords = location.query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const matching = ATLAS_GLOSSARY.filter((entry) =>
-    [entry.label, entry.definition, ...entry.aliases].join(" ").toLowerCase().includes(query.toLowerCase().trim()),
+    (!location.group || entry.group === location.group) &&
+    searchWords.every((word) => [entry.label, entry.definition, entry.example ?? "", ...entry.aliases].join(" ").toLowerCase().includes(word)),
   );
+  const related = selected?.relatedTerms.flatMap((id) => {
+    const entry = getAtlasGlossaryTerm(id);
+    return entry ? [entry] : [];
+  }) ?? [];
 
   return createPortal(
     <dialog
@@ -46,46 +89,65 @@ function DefinitionDialog({ initialTerm, triggerRef, onDismiss }: DefinitionDial
       aria-describedby={selected ? descriptionId : undefined}
       onClose={dismiss}
       onCancel={(event) => { event.preventDefault(); event.stopPropagation(); dismiss(); }}
-      onKeyDown={(event) => { if (event.key === "Escape") event.stopPropagation(); }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") event.stopPropagation();
+        if (event.altKey && event.key === "ArrowLeft") { event.preventDefault(); event.stopPropagation(); back(); }
+        if (event.key === "Tab") {
+          const controls = Array.from(event.currentTarget.querySelectorAll<HTMLElement>(
+            'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])',
+          )).filter((element) => element.tabIndex >= 0 && element.getClientRects().length > 0
+            && getComputedStyle(element).visibility !== "hidden");
+          const activeIndex = controls.indexOf(document.activeElement as HTMLElement);
+          const wraps = event.shiftKey ? activeIndex <= 0 : activeIndex < 0 || activeIndex === controls.length - 1;
+          if (wraps) {
+            event.preventDefault();
+            event.stopPropagation();
+            (event.shiftKey ? controls.at(-1) : controls[0])?.focus();
+          }
+        }
+      }}
       onClick={(event) => { if (event.target === event.currentTarget) dismiss(); }}
       data-atlas-glossary="true"
     >
       <div className={styles.body}>
         <header className={styles.header}>
-          <span className={styles.eyebrow}>Atlas field guide</span>
+          <nav className={styles.breadcrumbs} aria-label="Field guide navigation">
+            {trail.length > 1 && <button type="button" className={styles.back} onClick={back} aria-label="Back in field guide">←</button>}
+            <button type="button" onClick={() => { setTrail([guideHome]); focusPage(true); }}>Field guide</button>
+            {location.group && <><span aria-hidden="true">/</span><button type="button" onClick={() => navigate({ termId: null, group: location.group, query: "" })}>{location.group}</button></>}
+          </nav>
           <button type="button" className={styles.close} onClick={dismiss} aria-label="Close definition">×</button>
         </header>
-        <h2 id={titleId} ref={titleRef} tabIndex={-1}>{selected?.label ?? "Reading the Atlas"}</h2>
+        <h2 id={titleId} ref={titleRef} tabIndex={-1}>{selected?.label ?? location.group ?? "Understand the map"}</h2>
         {selected ? (
-          <>
+          <article key={selected.id}>
             <p id={descriptionId} className={styles.definition}>{selected.definition}</p>
-            <section className={styles.section}>
-              <h3>How Atlas uses it</h3>
+            {selected.example && <p className={styles.example}>{selected.example}</p>}
+            <details className={styles.method}>
+              <summary>How Atlas classifies this</summary>
               <p>{selected.inAtlas}</p>
-            </section>
-            <p className={styles.caveat}>{selected.caveat}</p>
-            <section className={styles.sources} aria-label="Definition sources">
-              <h3>Sources &amp; method</h3>
-              {selected.sources.map((source) => (
-                <a key={source.url} href={source.url} target="_blank" rel="noreferrer">{source.title}<span>{source.publisher} ↗</span></a>
-              ))}
-              <small>Explanation reviewed {selected.reviewedAt}. Country facts retain their own observation dates.</small>
-            </section>
-            <button type="button" className={styles.allTerms} onClick={() => select(null)}>Explore all definitions →</button>
-          </>
+              <p className={styles.caveat}>{selected.caveat}</p>
+              <section className={styles.sources} aria-label="Definition sources">
+                <h3>Sources</h3>
+                {selected.sources.map((source) => (
+                  <a key={source.url} href={source.url} target="_blank" rel="noreferrer">{source.title}<span>{source.publisher} ↗</span></a>
+                ))}
+                <small>Explanation reviewed {selected.reviewedAt}. Country facts have their own dates.</small>
+              </section>
+            </details>
+            {related.length > 0 && <section className={styles.related} aria-label="Related definitions"><h3>Related ideas</h3>{related.map((entry) => <button key={entry.id} type="button" onClick={() => select(entry)}>{entry.label}<span aria-hidden="true">→</span></button>)}</section>}
+            <button type="button" className={styles.allTerms} onClick={() => navigate(guideHome, true)}>Search the field guide</button>
+          </article>
         ) : (
           <>
             <label className={styles.search}>
-              <span>Find a definition</span>
-              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Government, density, disputed…" />
+              <span>Find a definition{location.group ? ` in ${location.group.toLowerCase()}` : ""}</span>
+              <input ref={searchRef} type="search" value={location.query} onChange={(event) => setTrail((previous) => [...previous.slice(0, -1), { ...previous[previous.length - 1], query: event.target.value }])} placeholder="Try monarchy, density or folk religion" />
             </label>
-            <div className={styles.index}>
-              {(["Government", "Religion", "Reading the map", "Geography"] as const).map((group) => {
-                const entries = matching.filter((entry) => entry.group === group);
-                return entries.length ? <section key={group}><h3>{group}</h3>{entries.map((entry) => <button type="button" key={entry.id} onClick={() => select(entry)}>{entry.label}<span aria-hidden="true">↗</span></button>)}</section> : null;
-              })}
-              {matching.length === 0 && <p>No matching definition. Try a broader term.</p>}
-            </div>
+            {!location.group && !location.query ? <div className={styles.groups}>{guideGroups.map((group) => <button type="button" key={group.name} onClick={() => navigate({ termId: null, group: group.name, query: "" })}><strong>{group.name}</strong><span>{group.description}</span><span className={styles.groupArrow} aria-hidden="true">→</span></button>)}</div> : <div className={styles.index}>
+              {matching.map((entry) => <button type="button" key={entry.id} onClick={() => select(entry)}><span>{entry.label}<small>{entry.definition.split(/(?<=\.)\s/)[0]}</small></span><span aria-hidden="true">→</span></button>)}
+              {matching.length === 0 && <p role="status">No matching definition. Try a broader term.</p>}
+            </div>}
           </>
         )}
       </div>

@@ -5,6 +5,7 @@ import type {
   AtlasRuntimeFeatureMeta,
 } from "../runtime";
 import { atlasObservationStatusHasValue } from "../types";
+import { atlasPoliticalColor } from "../politicalPalette";
 import type { AtlasObservationStatus } from "../types";
 import type {
   AtlasBinnedLegend,
@@ -85,21 +86,20 @@ function observationSuffix(fact: AtlasRuntimeFact<unknown>) {
   return observationStatusSuffix(fact.status, fact.observedAt);
 }
 
-function resolvePolitical({ feature }: AtlasLayerResolverContext): AtlasResolvedLayerValue {
-  const mapColor = feature.mapColor7 ?? 0;
+function resolvePolitical({ country }: AtlasLayerResolverContext): AtlasResolvedLayerValue {
   return {
     status: "observed",
-    key: String(Math.abs(mapColor) % 7),
+    key: country.id,
     label: "Country or territory",
     tooltip: "Country or territory",
-    value: mapColor,
-    numericValue: mapColor,
+    value: country.id,
+    numericValue: null,
     formattedValue: null,
-    color: "",
+    color: atlasPoliticalColor(country.id),
     temporal: null,
     sourceId: "natural-earth-admin-0-50m-5.1.2",
-    sourceField: "MAPCOLOR7",
-    notes: ["Neighbor-contrast class; it does not encode a country attribute."],
+    sourceField: "ADM0_A3",
+    notes: ["Country colors are chosen for recognition. They do not represent alliances, government type or recognition of a claim."],
   };
 }
 
@@ -175,7 +175,7 @@ function resolveGeometry({ feature }: AtlasLayerResolverContext): AtlasResolvedL
 }
 
 const RESOLVERS: Record<string, (context: AtlasLayerResolverContext) => AtlasResolvedLayerValue | null> = {
-  "political-neighbor-contrast-v1": resolvePolitical,
+  "political-authored-palette-v1": resolvePolitical,
   "government-broad-form-v1": resolveGovernment,
   "religion-dominant-broad-v1": resolveReligion,
   "population-total-bins-v1": resolvePopulation,
@@ -303,7 +303,7 @@ export function resolveAtlasLayerValue(
       }
     } else if (definition.legend.kind === "continuous" && resolved.numericValue != null) {
       resolved.key = continuousLegendKey(resolved.numericValue, definition.legend);
-    } else if (definition.legend.kind === "categorical" && definition.resolverId !== "political-neighbor-contrast-v1") {
+    } else if (definition.legend.kind === "categorical" && definition.resolverId !== "political-authored-palette-v1") {
       const category = definition.legend.items.find((item) => item.key === resolved.key);
       if (category) {
         const numericDetail = resolved.numericValue == null ? "" : ` · ${resolved.numericValue}%`;

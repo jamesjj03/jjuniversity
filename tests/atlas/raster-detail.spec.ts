@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import geographyPack from "../../lib/atlas-world/data/geography-pack.v1.json";
 
-const DETAIL_REQUEST = /\/atlas-world\/layers\/population-density-2025\/(regional|country)\//;
+const DETAIL_REQUEST = /\/atlas-world\/layers\/population-density-2025-mercator\/(regional|country|close)\//;
 const DENSITY = '[data-atlas-layer="population-density-2025"]';
 const SURFACE = `${DENSITY} [data-atlas-raster-level]`;
 const TILES = `${SURFACE} [data-atlas-raster-tile]`;
@@ -82,8 +82,8 @@ test("world views do not fetch detail and zoom loads only registered visible sou
   expect(densityRequests).toEqual([]);
   await expect(page.locator(`${SURFACE} > image[mask]`)).not.toHaveAttribute("href");
   await page.getByRole("button", { name: /^Choose view:/ }).click();
-  await page.getByRole("group", { name: "Atlas view", exact: true }).getByRole("button")
-    .filter({ has: page.getByText("Where people live", { exact: true }) }).click();
+  await page.getByRole("dialog", { name: "Explore the map", exact: true })
+    .getByRole("button", { name: "Where people live", exact: true }).click();
   await expect(page.locator(DENSITY)).toHaveAttribute("data-atlas-layer-active", "true");
   await expect(page.locator(SURFACE)).toHaveAttribute("data-atlas-raster-level", "overview");
   await settleCamera(page);
@@ -112,7 +112,7 @@ test("a failed detail request retains overview pixels and clears fallback after 
   test.skip(testInfo.project.name.startsWith("mobile"), "Desktop failed-resource recovery");
   let failedHref: string | null = null;
   let block = true;
-  await page.route("**/atlas-world/layers/population-density-2025/country/*.webp", async (route) => {
+  await page.route("**/atlas-world/layers/population-density-2025-mercator/*/*.webp", async (route) => {
     if (block && (!failedHref || route.request().url().endsWith(failedHref))) {
       failedHref ??= new URL(route.request().url()).pathname;
       await route.abort("failed");
@@ -126,7 +126,7 @@ test("a failed detail request retains overview pixels and clears fallback after 
   await expect(page.locator(`[data-atlas-raster-tile="${failedTile.id}"]`)).toHaveAttribute("visibility", "hidden");
   const masks = await page.locator(`${SURFACE} mask rect[fill="black"]`).evaluateAll((rectangles) => rectangles.map((rect) => ["x", "y", "width", "height"].map((key) => Number(rect.getAttribute(key)))));
   expect(masks).not.toContainEqual(failedTile.viewBox);
-  await expect(page.locator(`${SURFACE} > image[mask]`)).toHaveAttribute("href", /population-density-2025\.equal-earth\.webp$/);
+  await expect(page.locator(`${SURFACE} > image[mask]`)).toHaveAttribute("href", /population-density-2025\.mercator\.webp$/);
 
   await page.getByRole("button", { name: "Close Egypt", exact: true }).click();
   await openLayers(page);
@@ -169,7 +169,9 @@ test("mobile detail keeps decoded images bounded and disabling density releases 
   await page.goto("/atlas?view=where-people-live&country=egy");
   await expect(page.getByRole("heading", { name: "Egypt", exact: true })).toBeVisible();
   await expectDetailReady(page);
-  await page.getByRole("button", { name: "peek", exact: true }).click();
+  // Country selection starts map-first; the explicit height buttons appear only
+  // after expanding the sheet, so assert the initial compact surface directly.
+  await expect(page.locator("[data-atlas-sheet]")).toHaveAttribute("data-atlas-sheet", "peek");
   await settleCamera(page);
   const state = await assertOnlyViewportTiles(page);
   const tile = manifestTiles.find((entry) => entry.id === state.tiles[0].id)!;

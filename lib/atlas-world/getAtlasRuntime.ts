@@ -1,5 +1,5 @@
 import countrySnapshotJson from "./data/countries.v1.json";
-import geometrySnapshotJson from "./data/geometry-equal-earth.v1.json";
+import geometrySnapshotJson from "./data/geometry-mercator.v1.json";
 import type {
   AtlasCountrySnapshot,
   AtlasGeometrySnapshot,

@@ -21,7 +21,8 @@ const scenes = [
 ];
 try {
   for (const size of [{ name: 'desktop', width: 1440, height: 960 }, { name: 'phone', width: 390, height: 844 }]) {
-    const context = await browser.newContext({ viewport: size, storageState: process.env.ATLAS_TEST_STORAGE_STATE });
+    const context = await browser.newContext({ viewport: size, storageState: process.env.ATLAS_TEST_STORAGE_STATE,
+      extraHTTPHeaders: process.env.ATLAS_SKIP_PREVIEW_TOOLBAR === '1' ? { 'x-vercel-skip-toolbar':'1' } : undefined });
     const page = await context.newPage();
     let issues = [];
     page.on('pageerror', (error) => issues.push(error.message));
@@ -38,14 +39,16 @@ try {
       issues = [];
       const response = await page.goto(`${baseURL}/atlas?${scene.query}`, { waitUntil: 'networkidle' });
       await page.getByRole('button', { name: /^Choose view:/ }).waitFor();
+      await page.waitForFunction(() => Boolean(document.querySelector('[data-atlas-map-group]')?.getAttribute('transform')));
       await page.waitForFunction(() => [...document.querySelectorAll('[data-atlas-raster-tile]')].every((tile) => tile.getAttribute('visibility') === 'visible'));
       const file = `${size.name}-${scene.name}.png`;
       await page.screenshot({ path: path.join(output, file) });
       results.push({ file, url: page.url(), status: response.status(), issues: [...issues] });
       if (scene.name === 'gabon-portrait' && size.name === 'phone') {
-        for (const detent of ['Full', 'Peek', 'Half']) {
-          if (detent === 'Half') await page.getByRole('button', { name: 'Expand country details', exact: true }).click();
-          else await page.getByRole('button', { name: detent.toLowerCase(), exact: true }).click();
+        for (const detent of ['Half', 'Full', 'Peek']) {
+          if (detent === 'Half' || detent === 'Full') await page.getByRole('button', { name: 'Expand country details', exact: true }).click();
+          else await page.getByRole('button', { name: 'peek', exact: true }).click();
+          await page.locator(`[data-atlas-sheet="${detent.toLowerCase()}"]`).waitFor();
           await page.screenshot({ path: path.join(output, `phone-gabon-${detent.toLowerCase()}.png`) });
         }
         await page.getByRole('button', { name: /^Choose view:/ }).click();

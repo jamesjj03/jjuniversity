@@ -1,4 +1,4 @@
-/* Phase 2.5 cartographic surface; country cockpit has its own scoped stylesheet. */
+/* Atlas cartographic surface; country cockpit has its own scoped stylesheet. */
 .atlas {
   position: relative;
   width: 100%;
@@ -2299,6 +2299,45 @@
 .noteCardActions > button { justify-self:start; border-radius:4px; background:transparent; color:#f2d89f; }
 .countryPanel { top:88px; right:18px; bottom:18px; width:340px; background:var(--atlas-panel); }
 .atlas button:focus-visible,.atlas summary:focus-visible { outline:2px solid #f8d98d; outline-offset:3px; }
+.mobileHome { display:none; }
+.cityLayer { pointer-events:none; }
+.cityHit { pointer-events:all; cursor:pointer; }
+.cityPoint { pointer-events:visiblePainted; cursor:pointer; }
+.cityCard { position:absolute; z-index:35; right:20px; bottom:20px; width:290px; padding:24px; border:1px solid #809297; border-radius:10px; background:#132b39f7; box-shadow:0 15px 35px #05131b55; }
+.cityCard>span { font-size:13px; color:#afc9d0; }
+.cityCard h2 { margin:5px 0 8px; font:500 30px/1.15 Georgia,serif; }
+.cityCountry { display:flex; align-items:center; gap:14px; padding:5px 0; border:0; color:#ead29e; background:none; cursor:pointer; font-size:16px; }
+.cityCard p { color:#b8ccd0; font-size:12px; }
+.cityCard details { margin-top:18px; font-size:12px; color:#b4c6ce; }
+.cityCard details a { display:block; margin-top:8px; color:#d8c18f; }
+.cityClose { position:absolute; top:8px; right:8px; border:0; background:none; color:#d8e1e5; width:40px; height:40px; font-size:24px; cursor:pointer; }
+.atlasToolbar { min-height:52px; }
+.atlasTitle { display:flex; align-items:center; gap:9px; padding:10px 18px; }
+.atlasTitle h1 { font-size:23px; letter-spacing:.09em; }
+.searchTrigger { width:44px; padding:0; margin:4px; }
+.searchTrigger > span,.searchTrigger kbd { display:none; }
+.mapStage { inset:0; }
+.countryLabel { font-family:Georgia,serif; font-weight:600; letter-spacing:.12em; fill:#233b46; stroke:#f4eee7b3; stroke-width:2; }
+.cityLabel { font-family:var(--v2-ui),sans-serif; font-weight:500; letter-spacing:0; fill:#fffaf0; stroke:#183042f0; stroke-width:2.5; }
+.physicalLabel { font-family:Georgia,serif; font-style:italic; fill:#d2edfa; stroke:#254f63; font-weight:400; }
+.legend { max-height:min(48vh,440px); padding:13px 16px; }
+.legendHeader span { display:none; }
+.legendHeader h2 { margin:0 0 12px; font-size:24px; }
+.legendDescription { font-size:12px; }
+.legendItems li { font-size:12px; }
+.legendMethod summary,.sourcePopover summary,.mapAppearance>summary { font-size:12px; }
+.mapControls { flex-direction:column; width:40px; border-radius:20px; }
+.mapControls button,.mapControls .resetControl { border:0; width:40px; height:40px; }
+.mapControls .resetControl { border-top:1px solid var(--atlas-line); font-size:19px; }
+.panelOpen .mapControls { right:422px; }
+.countryLabel { text-transform:uppercase; }
+.legendMinimal { width:auto; min-width:175px; padding:8px 15px; }
+.legendMinimal:has(.politicalMapKey[open]) { width:300px; }
+.politicalMapKey>summary { min-height:32px; align-content:center; color:#e0ceac; font-size:13px; cursor:pointer; }
+.politicalMapKey[open]>summary { margin-bottom:13px; }
+@media(min-width:761px) {
+  .atlas:has([data-atlas-city-card]) .mapControls { right:328px; }
+}
 @media(max-width:760px) {
   .atlasToolbar { top:max(7px,env(safe-area-inset-top)); left:8px; right:8px; min-height:50px; padding:0; gap:0; }
   .atlasTitle { padding:9px 11px; }
@@ -2329,4 +2368,32 @@
   .tooltip { display:none; }
   .layerToggles { grid-template-columns:1fr; }
   .layerToggles button { min-height:44px; font-size:12px; }
+}
+
+/* Phone composition: one floating bar and a small place card over the map. */
+@media(max-width:760px) {
+  .mapStage { inset:0; }
+  .atlasToolbar { top:max(8px,env(safe-area-inset-top)); left:9px; right:9px; width:auto; border-radius:13px; min-height:49px; display:flex; justify-content:space-between; }
+  .atlasTitle { padding:0 9px; gap:0; border:0; }
+  .atlasTitle h1 { display:none; }
+  .mobileHome { display:grid; place-items:center; min-width:44px; height:44px; color:#edc779; font:700 21px Georgia,serif; text-decoration:none; }
+  .searchTrigger { width:44px; min-height:44px; border:0; }
+  .mapControls { right:10px; bottom:max(12px,env(safe-area-inset-bottom)); width:44px; border-radius:22px; }
+  .mapControls button,.mapControls .resetControl { width:44px; height:44px; border:0; }
+  .panelOpen .mapControls { right:10px; bottom:calc(var(--atlas-sheet-height,150px) + 18px); }
+  .panelHalf .mapControls { bottom:calc(var(--atlas-sheet-height,56svh) + 18px); }
+  .legend { width:auto; max-width:calc(100% - 75px); bottom:max(12px,env(safe-area-inset-bottom)); left:10px; border-radius:22px; padding:0 14px; }
+  .legendDisclosure>summary { min-height:44px; display:flex; align-items:center; gap:9px; }
+  .legendDisclosure>summary>strong { display:none; }
+  .legendDisclosure>summary>span { font-size:13px; color:#e5edf0; }
+  .legend:has(.legendDisclosure[open]) { width:calc(100% - 80px); border-radius:13px; max-height:52dvh; }
+  .panelOpen .legend { bottom:calc(var(--atlas-sheet-height,150px) + 18px); opacity:1; pointer-events:auto; }
+  .panelHalf .legend,.panelFull .legend { opacity:0; pointer-events:none; }
+  .noteNavigator { top:70px; left:12px; max-width:240px; }
+  .cityCard { left:8px; right:8px; bottom:max(8px,env(safe-area-inset-bottom)); width:auto; padding:18px 22px; }
+  .cityCard h2 { font-size:27px; }
+  .cityCard details { margin-top:8px; }
+  .cityClose { width:44px; height:44px; }
+  .atlas:has([data-atlas-city-card]) .mapControls,.atlas:has([data-atlas-city-card]) .legend { bottom:230px; }
+  .countryLabel { letter-spacing:.08em; }
 }

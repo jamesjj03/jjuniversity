@@ -1,0 +1,36 @@
+.browser { min-width:0; }
+.trigger { display:flex; align-items:center; gap:12px; min-height:48px; padding:0 17px; border:0; background:transparent; color:#f6f0e4; cursor:pointer; font:600 15px var(--font-ui),sans-serif; }
+.trigger svg { width:23px; height:23px; fill:none; stroke:#e0be77; stroke-width:1.4; }
+.trigger:hover { background:#ffffff09; }
+.trigger:focus-visible,.dialog button:focus-visible { outline:2px solid #edc779; outline-offset:3px; }
+.dialog { width:min(760px,calc(100vw - 40px)); padding:0; border:1px solid #617381; border-radius:14px; color:#f2eee4; background:#142937; box-shadow:0 25px 90px #0009; }
+.dialog::backdrop { background:#04121acc; backdrop-filter:blur(5px); }
+.surface { padding:25px; }
+.surface header { display:flex; align-items:center; justify-content:space-between; gap:15px; margin-bottom:20px; }
+.surface h2 { font:500 29px var(--font-display),Georgia,serif; margin:0; }
+.surface header button { width:44px; height:44px; border:0; color:#e6eced; background:transparent; font-size:28px; cursor:pointer; }
+.choices { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.choices>button { position:relative; display:flex; align-items:flex-start; gap:17px; text-align:left; min-height:140px; padding:23px 19px; border:1px solid #70818e44; border-radius:8px; background:#ffffff04; color:inherit; cursor:pointer; }
+.choices>button:hover { border-color:#c4ad7a; background:#ffffff09; }
+.choices>button[aria-pressed=true] { border-color:#d8b775; background:#d3b77c10; }
+.choices svg { width:31px; height:31px; flex:none; margin-top:18px; fill:none; stroke:#a9c2cc; stroke-width:1.35; stroke-linecap:round; stroke-linejoin:round; }
+.choices small { display:block; margin-bottom:4px; font-size:11px; color:#afc0c8; }
+.choices strong { display:block; padding-right:8px; font:500 20px var(--font-display),Georgia,serif; }
+.choices p { margin:8px 0 0; font-size:13px; line-height:1.5; color:#bccbd0; }
+.current { position:absolute; right:10px; top:9px; color:#e5c485; }
+@media(max-width:760px){
+ .trigger { min-height:44px; padding:0 10px; gap:8px; font-size:13px; }
+ .trigger svg { width:21px; height:21px; }
+ .dialog { margin:auto 0 0; width:100%; max-width:none; max-height:88dvh; border-radius:20px 20px 0 0; border-bottom:0; }
+ .surface { padding:18px 18px max(22px,env(safe-area-inset-bottom)); }
+ .surface header { margin-bottom:12px; }
+ .surface h2 { font-size:25px; }
+ .choices { grid-template-columns:1fr; gap:0; }
+ .choices>button { min-height:76px; padding:13px 12px; border:0; border-bottom:1px solid #70818e33; border-radius:0; gap:18px; align-items:center; }
+ .choices>button[aria-pressed=true] { border-radius:8px; border-bottom-color:transparent; }
+ .choices svg { margin:0; width:27px; height:27px; }
+ .choices small { display:none; }
+ .choices strong { font-size:20px; }
+ .choices p { margin-top:3px; font-size:12px; }
+ .current { top:30px; right:12px; }
+}

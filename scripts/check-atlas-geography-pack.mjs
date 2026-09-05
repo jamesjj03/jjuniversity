@@ -39,9 +39,9 @@ const GEOGRAPHY_REQUIREMENTS_PATH = path.join(
 );
 
 const EXPECTED_DATASET_COUNTS = {
-  "major-rivers": 94,
-  "major-lakes": 77,
-  "major-cities": 319,
+  "major-rivers": 582,
+  "major-lakes": 511,
+  "major-cities": 1140,
 };
 const EXPECTED_DATASET_IDS = new Set([
   "population-density-2025",
@@ -127,7 +127,7 @@ function validateGeometry(geometry, label) {
   assert(coordinateCount > 0, `${label} has no canonical coordinates.`);
 
   const derived = geometry.derived;
-  assert(derived?.projectionId === "equal-earth", `${label} has no Equal Earth derivative.`);
+  assert(derived?.projectionId === "mercator", `${label} has no Mercator derivative.`);
   assert(
     Array.isArray(derived?.viewBox) && derived.viewBox.join(",") === "0,0,1200,650",
     `${label} has an unexpected derived viewBox.`,
@@ -176,14 +176,15 @@ async function checkAsset(asset, datasetId) {
   const metadata = await sharp(bytes).metadata();
   assert(metadata.format === "webp", `${datasetId} asset is not WebP.`);
   assert(metadata.width === asset.width && metadata.height === asset.height, `${datasetId} asset dimensions do not match its manifest.`);
-  assert(metadata.hasAlpha === true, `${datasetId} asset must retain alpha outside the Equal Earth sphere.`);
+  assert(metadata.hasAlpha === true, `${datasetId} asset must retain alpha outside the Mercator sphere.`);
 }
 
 async function checkPyramid(pyramid, datasetId) {
-  assert(pyramid.projectionId === "equal-earth", `${datasetId} pyramid is not aligned to Equal Earth.`);
+  assert(pyramid.projectionId === "mercator", `${datasetId} pyramid is not aligned to Mercator.`);
   assert(pyramid.sourceResolutionMetres === 1000, `${datasetId} lost its original one-kilometre source resolution.`);
   assert(pyramid.resampling === "average", `${datasetId} pyramid must preserve area-average resampling.`);
-  assert(pyramid.levels?.length === 2, `${datasetId} must provide regional and country detail levels.`);
+  assert(pyramid.levels?.length === 3, `${datasetId} must provide regional, country and close detail levels.`);
+  assert(JSON.stringify(pyramid.levels?.map((level) => level.minimumZoom)) === "[4,10,20]", `${datasetId} detail activation must retain the verified viewport memory budget.`);
   let previousWidth = 2400;
   let previousMinimumZoom = 1;
   const tileIds = new Set();
@@ -221,26 +222,27 @@ const layerCatalog = await readJson(LAYER_CATALOG_PATH);
 
 assert(sourceLock.schemaVersion === "1.0.0", "Unexpected Atlas source-lock schema version.");
 assert(geographyPack.schemaVersion === "1.0.0", "Unexpected geography-pack schema version.");
+assert(geographyPack.buildStatus !== "development-overview-only", "Development overview-only pack must be replaced by a complete source-detail build before release.");
 assert(patternNotes.schemaVersion === "1.0.0", "Unexpected contextual-annotation schema version.");
 assert(
   geographyPack.sourceLockId === sourceLock.lockId,
   "Geography pack does not identify the checked-in source lock.",
 );
-assert(geographyPack.projection.id === "equal-earth", "Geography pack projection is not Equal Earth.");
-assert(geographyPack.projection.crs === "+proj=eqearth +R=6371007.180918475 +units=m +no_defs", "Geography rasters must use the exact spherical Equal Earth formula used by SVG, not ellipsoidal EPSG:8857.");
+assert(geographyPack.projection.id === "mercator", "Geography pack projection is not Mercator.");
+assert(geographyPack.projection.crs === "+proj=merc +R=6371007.180918475 +units=m +no_defs", "Geography rasters must use the exact spherical Mercator formula used by SVG.");
 assert(geographyPack.projection.registrationChecks?.length === 4, "Geography pack is missing raster/SVG landmark registration evidence.");
 for (const check of geographyPack.projection.registrationChecks ?? []) {
   assert(check.maximumErrorViewBoxUnits <= 0.008, `Raster/SVG geometry is misaligned at ${check.name}.`);
 }
 assert(geographyPack.projection.canonicalCrs === "EPSG:4326", "Geography pack has an unexpected canonical CRS.");
 assert(
-  geographyPack.projection.transformationId === "wgs84-to-equal-earth-svg-v1",
+  geographyPack.projection.transformationId === "wgs84-to-mercator-svg-v1",
   "Geography pack has an unexpected vector transformation.",
 );
 
 const lockedSources = new Map(sourceLock.sources.map((source) => [source.id, source]));
 assert(lockedSources.size === sourceLock.sources.length, "Source lock contains duplicate source IDs.");
-assert(sourceLock.sources.length === 12, `Expected 12 locked Atlas sources; found ${sourceLock.sources.length}.`);
+assert(sourceLock.sources.length === 15, `Expected 15 locked Atlas sources; found ${sourceLock.sources.length}.`);
 const sourceSeedRoot = path.resolve(REPOSITORY_ROOT, "data", "atlas", "source-seeds");
 for (const source of sourceLock.sources.filter((candidate) => candidate.embeddedSnapshot)) {
   const seedPath = path.resolve(REPOSITORY_ROOT, source.embeddedSnapshot);
@@ -391,6 +393,23 @@ assert(
   "Paris POP2025 should verify the thousands-to-people conversion (10,031,000).",
 );
 const knownFeatureIds = unique(featureIds, "geography feature IDs");
+
+for (const level of ["overview", "detail"]) {
+  const asset = geographyPack.physicalGeometryAssets?.[level];
+  assert(Boolean(asset), `Physical geography is missing its separately cached ${level} SVG.`);
+  if (!asset) continue;
+  const bytes = await readFile(assetPathFromHref(asset.href));
+  assert(bytes.length === asset.bytes, `Physical ${level} SVG byte count differs from its manifest.`);
+  assert(createHash("sha256").update(bytes).digest("hex") === asset.checksumSha256, `Physical ${level} SVG checksum differs from its manifest.`);
+  const expected = [...geographyPack.featureCollections.majorRivers.features, ...geographyPack.featureCollections.majorLakes.features]
+    .filter((feature) => (feature.displayMaximumZoom != null) === (level === "overview"));
+  assert(expected.length === asset.featureCount, `Physical ${level} SVG feature count is incorrect.`);
+  const svg = bytes.toString("utf8");
+  for (const feature of expected) {
+    const id = feature.featureId.replace(/[^A-Za-z0-9_-]/g, "-");
+    assert(svg.includes(`id="${id}" d="${feature.geometry.derived.path}"`), `${feature.featureId} differs from its cached SVG geometry.`);
+  }
+}
 
 const noteIds = unique(patternNotes.notes.map((note) => note.id), "contextual annotation IDs");
 assert(noteIds.size === 4, `Expected four reviewed contextual annotations; found ${noteIds.size}.`);

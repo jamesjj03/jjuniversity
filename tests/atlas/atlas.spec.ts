@@ -29,6 +29,17 @@ function searchParam(page: Page, name: string) {
   return new URL(page.url()).searchParams.get(name);
 }
 
+async function waitForMapReady(page: Page) {
+  // Labels precede the fitted camera during hydration. Pointer tests need the
+  // real transform and attached handlers, not those initial SVG coordinates.
+  await expect(page.locator("[data-atlas-map-group]")).toHaveAttribute("transform", /scale\(/);
+}
+
+async function openAtlas(page: Page, url: string) {
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await waitForMapReady(page);
+}
+
 async function chooseCountry(page: Page, name: string) {
   const search = page.getByRole("combobox", { name: "Search countries" });
   if (!await search.isVisible()) await page.getByRole("button", { name: "Search countries", exact: true }).click();
@@ -39,8 +50,10 @@ async function chooseCountry(page: Page, name: string) {
 
 async function chooseView(page: Page, name: string) {
   await page.getByRole("button", { name: /^Choose view:/ }).click();
-  await page.getByRole("group", { name: "Atlas view", exact: true })
-    .getByRole("button").filter({ has: page.getByText(name, { exact: true }) }).click();
+  const chooser = page.getByRole("dialog", { name: "Explore the map", exact: true });
+  await expect(chooser).toBeVisible();
+  await chooser.getByRole("button", { name, exact: true }).click();
+  await expect(chooser).not.toBeVisible();
   await expect(page.getByRole("button", { name: `Choose view: ${name}`, exact: true })).toBeVisible();
 }
 
@@ -74,7 +87,7 @@ async function inertState(locator: ReturnType<Page["locator"]>) {
 test("preserves the search → lens → country curiosity loop and browser history", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop curiosity-loop coverage");
 
-  await page.goto("/atlas");
+  await openAtlas(page, "/atlas");
   await expect(page.getByRole("heading", { name: "ATLAS" })).toBeVisible();
   await expect(page.locator("[data-atlas-world-map]")).toBeVisible();
   await expect(page.getByRole("combobox", { name: "Search countries" })).not.toBeVisible();
@@ -101,7 +114,7 @@ test("preserves the search → lens → country curiosity loop and browser histo
 test("keeps V1 mode links working and canonicalizes them into shareable scene state", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop deep-link coverage");
 
-  await page.goto("/atlas?country=zwe&mode=religion");
+  await openAtlas(page, "/atlas?country=zwe&mode=religion");
   await expect(page.getByRole("heading", { name: "Zimbabwe", exact: true })).toBeVisible();
   await expect(page.getByLabel("What the map is showing")).toContainText("Religion");
   expect(searchParam(page, "mode")).toBeNull();
@@ -115,51 +128,70 @@ test("keeps V1 mode links working and canonicalizes them into shareable scene st
   await expect(page.getByLabel("What the map is showing")).toContainText("Population");
 });
 
-test("keeps shared scenes authored and resets the cockpit when moving between countries", async ({ page }, testInfo) => {
+test("keeps shared scenes authored and replaces country-specific details when moving between countries", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop scene-integrity and cockpit-state coverage");
 
   const unrelatedGovernmentStack = encodeURIComponent(
     'v2:[{"l":"admin0-government"},{"l":"modern-borders"},{"l":"admin0-interaction"}]',
   );
-  await page.goto(`/atlas?view=political&layers=${unrelatedGovernmentStack}`);
+  await openAtlas(page, `/atlas?view=political&layers=${unrelatedGovernmentStack}`);
   await expect(page.getByRole("button", { name: "Choose view: Political", exact: true })).toBeVisible();
   await expect.poll(() => searchParam(page, "layers")).toBeNull();
   await expect(page.getByLabel("Political map legend")).toBeVisible();
-  await expect(page.getByRole("img", { name: /Political view/ })).toBeVisible();
+  // The map is now an interactive group, not a single image that hides city controls.
+  await expect(page.getByRole("group", { name: /Interactive world map in the Political view/ })).toBeVisible();
 
-  await page.goto("/atlas?view=political&focus=entity%3Acountry%3AZWE&country=fra");
+  await openAtlas(page, "/atlas?view=political&focus=entity%3Acountry%3AZWE&country=fra");
   await expect(page.getByRole("heading", { name: "Zimbabwe", exact: true })).toBeVisible();
   expect(searchParam(page, "country")).toBe("zwe");
   expect(searchParam(page, "focus")).toBe("entity:country:ZWE");
 
   await chooseCountry(page, "Andorra");
   const dominantReligion = page.getByLabel("Religious composition", { exact: true });
-  await expect(dominantReligion).toContainText("Christianity");
-  await expect(dominantReligion).toContainText("No comparable percentage is available for the dominant tradition");
-  await page.getByRole("button", { name: "Politics", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Politics", exact: true })).toHaveAttribute("aria-current", "page");
+  // This record has two quantified minority shares, but no complete breakdown.
+  // Preserve the reported values without inventing the unreported remainder.
+  await expect(dominantReligion).toContainText("8.8%");
+  await expect(dominantReligion).toContainText("1.7%");
+  await expect(dominantReligion).toContainText("Some shares are unreported");
+  await dominantReligion.getByText("Read the original figures & how to interpret them", { exact: true }).click();
+  await expect(dominantReligion).toContainText("Map classification: Christianity");
+  const panel = page.locator("[data-atlas-sheet]");
+  const economy = panel.locator("details").filter({ has: page.locator(":scope > summary", { hasText: "Economy, currency & languages" }) });
+  await economy.locator(":scope > summary").click();
+  await expect(economy).toContainText("Euro");
+  // One overview replaces the old shallow tabs; real disclosures still must reset.
+  await expect(panel.getByRole("button", { name: /^(Overview|People|Politics|Economy|Geography)$/ })).toHaveCount(0);
 
   await chooseCountry(page, "Zimbabwe");
-  await expect(page.getByRole("button", { name: "Overview", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(page.getByLabel("Country overview", { exact: true })).toContainText("Harare");
+  await expect(page.getByLabel("Religious composition", { exact: true })).toContainText("85.3%");
+  await expect(economy).not.toHaveAttribute("open", "");
+  await expect(panel.getByRole("heading", { name: "Andorra", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Close Zimbabwe" }).click();
   await expect(page.getByRole("button", { name: "Search countries", exact: true })).toBeFocused();
 });
 
 test("GDP per capita exposes loading, year, missing-data, provenance, and reload-safe share state", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop legend and cockpit coverage");
+  // Five real page loads plus the deliberately held API request; individual
+  // response and UI assertions retain the normal eight-second deadline.
+  test.setTimeout(45_000);
 
   let apiRequestObserved = false;
+  let releaseValues!: () => void;
+  const valuesGate = new Promise<void>((resolve) => { releaseValues = resolve; });
   await page.route(`**${GDP_LAYER_ENDPOINT}*`, async (route) => {
     apiRequestObserved = true;
-    await new Promise((resolve) => setTimeout(resolve, 900));
+    await valuesGate;
     await route.continue();
   });
 
-  await page.goto("/atlas?view=gdp-per-capita", { waitUntil: "domcontentloaded" });
+  await openAtlas(page, "/atlas?view=gdp-per-capita");
   const legend = page.getByLabel("GDP per capita map legend");
   const desktopLegend = legend.locator(":scope > div").first();
   await expect(desktopLegend.getByText("Loading current values…", { exact: true })).toBeVisible();
   await expect.poll(() => apiRequestObserved).toBe(true);
+  releaseValues();
   await expect(desktopLegend.getByText("No World Bank observation", { exact: true })).toBeVisible();
   await expect(desktopLegend.getByText("29 places", { exact: true })).toBeVisible();
 
@@ -182,23 +214,30 @@ test("GDP per capita exposes loading, year, missing-data, provenance, and reload
   await chooseCountry(page, "Zimbabwe");
   const lens = page.getByLabel("What the map is showing");
   await expect(lens).toContainText("GDP per capita");
-  await expect(lens).toContainText("$3,021 · 2025 observation");
-  await expect(lens).toContainText("World Bank");
+  await expect(lens).toContainText("$3,021");
+  await expect(lens).toContainText("2025");
+  // Provenance moved out of the compact lens header, but remains available in-country.
+  const countrySources = page.locator("[data-atlas-sheet] details").filter({ has: page.locator(":scope > summary", { hasText: "Country sources & map record" }) });
+  await countrySources.locator(":scope > summary").click();
+  await expect(countrySources.getByRole("link", { name: /World Bank: GDP per capita/ })).toBeVisible();
   expect(searchParam(page, "view")).toBe("gdp-per-capita");
   expect(searchParam(page, "country")).toBe("zwe");
 
   await page.reload();
+  await waitForMapReady(page);
   await expect(page.getByRole("heading", { name: "Zimbabwe", exact: true })).toBeVisible();
-  await expect(page.getByLabel("What the map is showing")).toContainText("$3,021 · 2025 observation");
+  await expect(page.getByLabel("What the map is showing")).toContainText("$3,021");
+  await expect(page.getByLabel("What the map is showing")).toContainText("2025");
 
-  await page.goto("/atlas?view=gdp-per-capita&country=ata");
+  await openAtlas(page, "/atlas?view=gdp-per-capita&country=ata");
   await expect(page.getByRole("heading", { name: "Antarctica", exact: true })).toBeVisible();
   await expect(page.getByLabel("What the map is showing")).toContainText("No World Bank observation");
 
-  await page.goto("/atlas?view=gdp-per-capita&time=1900&country=zwe");
+  await openAtlas(page, "/atlas?view=gdp-per-capita&time=1900&country=zwe");
   await expect(page.getByRole("heading", { name: "Zimbabwe", exact: true })).toBeVisible();
   expect(searchParam(page, "time")).toBeNull();
-  await expect(page.getByLabel("What the map is showing")).toContainText("$3,021 · 2025 observation");
+  await expect(page.getByLabel("What the map is showing")).toContainText("$3,021");
+  await expect(page.getByLabel("What the map is showing")).toContainText("2025");
 });
 
 test("GDP per capita API preserves observation and time-selection semantics", async ({ request }, testInfo) => {
@@ -249,7 +288,7 @@ test("GDP per capita API preserves observation and time-selection semantics", as
 test("Where people live composes physical layers, preserves toggles, and explains visible patterns", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop composed-view coverage");
 
-  await page.goto("/atlas?view=where-people-live");
+  await openAtlas(page, "/atlas?view=where-people-live");
   await expect(page.getByRole("button", { name: "Choose view: Where people live", exact: true })).toBeVisible();
   await expect(page.getByLabel("Explanations on this map", { exact: true })).toBeVisible();
 
@@ -328,6 +367,7 @@ test("Where people live composes physical layers, preserves toggles, and explain
   expect(sharedLayerState.find((layer) => layer.l === "admin0-political")?.p).toEqual({ role: "context" });
 
   await page.reload();
+  await waitForMapReady(page);
   await openLayerControls(page);
   await expect(page.getByRole("button", { name: "Major rivers", exact: true })).toHaveAttribute("aria-pressed", "false");
   await expectLayerVisible(page, "major-rivers", false);
@@ -349,6 +389,7 @@ test("Where people live composes physical layers, preserves toggles, and explain
   await expect(page.getByRole("link", { name: /NASA Earth Observatory/ }).first()).toBeVisible();
 
   await page.reload();
+  await waitForMapReady(page);
   await expect(page.getByRole("heading", { name: "A country gathered around one river", exact: true })).toBeVisible();
   await page.goBack();
   await expect(page.getByRole("heading", { name: "A country gathered around one river", exact: true })).toHaveCount(0);
@@ -358,17 +399,31 @@ test("Where people live composes physical layers, preserves toggles, and explain
 test("mobile country details deliberately move through Peek, Half, and Full", async ({ page }, testInfo) => {
   test.skip(!isMobile(testInfo), "Mobile interaction and accessibility coverage");
 
-  await page.goto("/atlas?country=zwe");
-  await expect(page.getByRole("heading", { name: "ATLAS" })).toBeVisible();
+  await openAtlas(page, "/atlas?country=zwe");
+  // Mobile's compact toolbar uses the JJ home mark instead of the desktop title.
+  const toolbar = page.locator("[data-atlas-root] > header");
+  await expect(toolbar.getByRole("link", { name: "JJ University home", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Zimbabwe", exact: true })).toBeVisible();
 
   const panel = page.locator("[data-atlas-sheet]");
-  const toolbar = page.locator("header").filter({ has: page.getByRole("heading", { name: "ATLAS" }) });
   const legend = page.locator('[aria-label="Political map legend"]');
   const mapControls = page.locator('[aria-label="Map controls"]');
   const detentButtons = page.getByRole("group", { name: "Country detail height" }).getByRole("button");
 
+  // Deep links now begin with the compact place card so the map remains visible.
+  await expect(panel).toHaveAttribute("data-atlas-sheet", "peek");
+  const peekHeight = (await panel.boundingBox())!.height;
+  await expect.poll(() => inertState(legend)).toBe(false);
+  await expect.poll(() => inertState(toolbar)).toBe(false);
+  await expect(detentButtons).toHaveCount(0);
+  const expandHandle = page.getByRole("button", { name: "Expand country details", exact: true });
+  await expect(expandHandle).toBeVisible();
+  const handleBox = (await expandHandle.boundingBox())!;
+  expect(handleBox.width).toBeGreaterThanOrEqual(44);
+  expect(handleBox.height).toBeGreaterThanOrEqual(44);
+  await expandHandle.click();
   await expect(panel).toHaveAttribute("data-atlas-sheet", "half");
+  await expect.poll(async () => (await panel.boundingBox())!.height).toBeGreaterThan(peekHeight + 100);
   const halfHeight = (await panel.boundingBox())!.height;
   await expect(legend).toHaveAttribute("aria-hidden", "true");
   await expect.poll(() => inertState(legend)).toBe(true);
@@ -387,7 +442,8 @@ test("mobile country details deliberately move through Peek, Half, and Full", as
     expect(target!.height).toBeGreaterThanOrEqual(44);
   }
 
-  await page.getByRole("button", { name: "full", exact: true }).click();
+  // The visible handle reaches Full as well; no hidden Peek-only button is clicked.
+  await page.getByRole("button", { name: "Expand country details", exact: true }).click();
   await expect(panel).toHaveAttribute("data-atlas-sheet", "full");
   await expect.poll(async () => (await panel.boundingBox())!.height).toBeGreaterThan(halfHeight + 100);
   await expect.poll(() => inertState(toolbar)).toBe(true);
@@ -399,6 +455,8 @@ test("mobile country details deliberately move through Peek, Half, and Full", as
   expect(fullBox.y).toBeGreaterThanOrEqual(0);
   expect(fullBox.y + fullBox.height).toBeLessThanOrEqual(viewport.height + 1);
 
+  await page.getByRole("button", { name: "Collapse country details", exact: true }).click();
+  await expect(panel).toHaveAttribute("data-atlas-sheet", "half");
   await page.getByRole("button", { name: "peek", exact: true }).click();
   await expect(panel).toHaveAttribute("data-atlas-sheet", "peek");
   await expect.poll(async () => (await panel.boundingBox())!.height).toBeLessThan(halfHeight - 100);
@@ -414,7 +472,7 @@ test("mobile country details deliberately move through Peek, Half, and Full", as
 test("mobile legend exposes source links without clipping", async ({ page }, testInfo) => {
   test.skip(!isMobile(testInfo), "Mobile legend disclosure coverage");
 
-  await page.goto("/atlas?view=gdp-per-capita");
+  await openAtlas(page, "/atlas?view=gdp-per-capita");
   const legend = page.getByLabel("GDP per capita map legend");
   const layerDisclosure = legend.locator(":scope > details");
   await layerDisclosure.locator(":scope > summary").click();
@@ -435,7 +493,7 @@ test("mobile legend exposes source links without clipping", async ({ page }, tes
 test("mobile explanations remove covered map controls from interaction", async ({ page }, testInfo) => {
   test.skip(!isMobile(testInfo), "Mobile annotation accessibility coverage");
 
-  await page.goto("/atlas?view=where-people-live");
+  await openAtlas(page, "/atlas?view=where-people-live");
   const mapControls = page.locator('[aria-label="Map controls"]');
   await expect.poll(() => inertState(mapControls)).toBe(false);
 
@@ -467,7 +525,7 @@ async function countryAtPoint(page: Page, point: { x: number; y: number }) {
 
 test("tiny-place assistance never steals Belgium and retires when Luxembourg is directly clickable", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop pointer hit-testing and zoom regression");
-  await page.goto("/atlas");
+  await openAtlas(page, "/atlas");
   const luxembourgHit = page.locator('circle[data-atlas-country="country:LUX"]');
   await expect(luxembourgHit).toBeVisible();
   const worldHit = (await luxembourgHit.boundingBox())!;
@@ -501,7 +559,7 @@ test("tiny-place assistance never steals Belgium and retires when Luxembourg is 
 
 test("country and city labels remain readable while zoom reveals detail", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop geographic label and symbol scale coverage");
-  await page.goto("/atlas?view=where-people-live");
+  await openAtlas(page, "/atlas?view=where-people-live");
   const visibleCityLabels = () => page.locator('[data-atlas-label="city"]').evaluateAll((elements) =>
     elements.filter((element) => getComputedStyle(element).display !== "none").length,
   );
@@ -531,13 +589,15 @@ test("country and city labels remain readable while zoom reveals detail", async 
 
 test("government terms are inspectable without losing the selected place or keyboard focus", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop glossary semantics and focus coverage");
-  await page.goto("/atlas?view=government&country=zwe");
+  await openAtlas(page, "/atlas?view=government&country=zwe");
   const term = page.getByLabel("Government map legend", { exact: true }).getByRole("button", { name: "Define Presidential republic", exact: true });
   await term.focus();
   await page.keyboard.press("Enter");
   const definition = page.getByRole("dialog", { name: "Presidential republic", exact: true });
   await expect(definition).toBeVisible();
-  await expect(definition).toContainText("How Atlas uses it");
+  await expect(definition).toContainText("A country where a president leads the government separately from parliament");
+  await expect(definition.getByRole("link", { name: /Presidential and semi-presidential systems/ })).not.toBeVisible();
+  await definition.locator("details > summary").click();
   await expect(definition.getByRole("link", { name: /Presidential and semi-presidential systems/ })).toBeVisible();
   await page.keyboard.press("/");
   await expect(definition).toBeVisible();
@@ -549,15 +609,18 @@ test("government terms are inspectable without losing the selected place or keyb
   expect(searchParam(page, "country")).toBe("zwe");
 
   await page.getByRole("button", { name: "Field guide", exact: true }).filter({ visible: true }).click();
-  const index = page.getByRole("dialog", { name: "Reading the Atlas", exact: true });
+  const index = page.getByRole("dialog", { name: "Understand the map", exact: true });
   await index.getByRole("searchbox", { name: "Find a definition", exact: true }).fill("density");
   await index.getByRole("button", { name: /Population density/ }).click();
-  await expect(page.getByRole("dialog", { name: "Population density", exact: true })).toContainText("modeled distribution");
+  const densityDefinition = page.getByRole("dialog", { name: "Population density", exact: true });
+  await expect(densityDefinition).toContainText("How many people live in a given area");
+  await densityDefinition.locator("details > summary").click();
+  await expect(densityDefinition).toContainText("modeled distribution");
 });
 
 test("territorial status is visible on hover and explained with source evidence on selection", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop hover and territorial-status evidence coverage");
-  await page.goto("/atlas");
+  await openAtlas(page, "/atlas");
   const point = await countryScreenPoint(page, "SAH");
   await page.mouse.move(point.x, point.y);
   const tooltip = page.getByRole("status").filter({ hasText: "Western Sahara" });
@@ -565,15 +628,18 @@ test("territorial status is visible on hover and explained with source evidence 
   await page.mouse.click(point.x, point.y);
   await expect(page.getByRole("heading", { name: "Western Sahara", exact: true })).toBeVisible();
   const statusNote = page.locator("[data-atlas-territorial-status]");
-  await statusNote.locator(":scope > summary").click();
+  await expect(statusNote).toContainText("Morocco administers most of Western Sahara");
+  await statusNote.getByText("Claims, control & what this map shows", { exact: true }).click();
   await expect(statusNote).toContainText("UN list of Non-Self-Governing Territories");
+  await expect(statusNote).toContainText("Polisario Front controls territory to its east");
+  await statusNote.getByText(/^Sources · checked/).click();
   await expect(statusNote.getByRole("link", { name: /Western Sahara · UN decolonization record/ })).toBeVisible();
   await expect(statusNote).toContainText("does not locate each disputed");
 });
 
 test("religion retains composition in both the tooltip and compact cockpit", async ({ page }, testInfo) => {
   test.skip(isMobile(testInfo), "Desktop two-level religion information coverage");
-  await page.goto("/atlas?view=religion");
+  await openAtlas(page, "/atlas?view=religion");
   const point = await countryScreenPoint(page, "ZWE");
   await page.mouse.move(point.x, point.y);
   const tooltip = page.getByRole("status").filter({ hasText: "Zimbabwe" });

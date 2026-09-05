@@ -323,6 +323,11 @@
   min-height: 0;
 }
 
+@media (max-width:760px) {
+  .mobileMapRoute { grid-template-rows:minmax(0,1fr); }
+  .mobileMapRoute > .siteHeader { display:none; }
+}
+
 .siteFooter {
   margin-top: 80px;
   border-top: 1px solid var(--v2-line);

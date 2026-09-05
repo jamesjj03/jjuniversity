@@ -2,7 +2,7 @@
 """Build the bounded Phase 2 physical/population geography pack.
 
 The script consumes only sources named in data/atlas/sources.lock.json. It
-keeps canonical feature geometry in WGS84 and emits Equal Earth derivatives
+keeps canonical feature geometry in WGS84 and emits Mercator derivatives
 for the current SVG renderer. Dense rasters are warped once at build time;
 they are never expanded into browser-side SVG cells.
 """
@@ -14,6 +14,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import shutil
 import tempfile
 import zipfile
@@ -31,22 +32,21 @@ from rasterio.warp import reproject, transform
 
 
 SCHEMA_VERSION = "1.0.0"
-SNAPSHOT_ID = "atlas-geography-2026-09-04-phase25"
-GENERATED_AT = "2026-09-04T23:00:00Z"
+SNAPSHOT_ID = "atlas-geography-2026-09-05-mercator"
+GENERATED_AT = "2026-09-05T03:30:00Z"
 VIEWBOX_WIDTH = 1200
 VIEWBOX_HEIGHT = 650
 PROJECTION_PADDING = 14
 OUTPUT_WIDTH = 2400
 OUTPUT_HEIGHT = 1300
-# D3 Equal Earth uses geographic latitude on an authalic-radius sphere. EPSG
-# 8857 instead applies ellipsoidal/authalic-latitude conversion and shifts the
-# raster relative to the existing SVG by ~0.45 viewBox units near 30 degrees.
-# Preserve the SVG exactly and make this source warp explicitly match it.
+# Spherical Mercator matches the authored SVG formula exactly. The radius
+# controls raster metres, not the geometry's fitted screen coordinates.
 EQUAL_EARTH_RADIUS = 6371007.180918475
-RASTER_TARGET_CRS = f"+proj=eqearth +R={EQUAL_EARTH_RADIUS} +units=m +no_defs"
+RASTER_TARGET_CRS = f"+proj=merc +R={EQUAL_EARTH_RADIUS} +units=m +no_defs"
 POPULATION_DETAIL_LEVELS = [
-    {"id": "regional", "width": 9600, "height": 5200, "columns": 8, "rows": 4, "minimumZoom": 2.4},
-    {"id": "country", "width": 19200, "height": 10400, "columns": 16, "rows": 8, "minimumZoom": 6},
+    {"id": "regional", "width": 19200, "height": 10400, "columns": 16, "rows": 8, "minimumZoom": 4},
+    {"id": "country", "width": 38400, "height": 20800, "columns": 32, "rows": 16, "minimumZoom": 10},
+    {"id": "close", "width": 76800, "height": 41600, "columns": 64, "rows": 32, "minimumZoom": 20},
 ]
 
 POP_SOURCE_ID = "ghsl-ghs-pop-2025-r2023a-1km"
@@ -54,6 +54,9 @@ RELIEF_SOURCE_ID = "natural-earth-manual-shaded-relief-50m-3.3.0"
 RIVER_SOURCE_ID = "natural-earth-rivers-50m-5.1.2"
 LAKE_SOURCE_ID = "natural-earth-lakes-50m-5.1.2"
 CITY_SOURCE_ID = "natural-earth-populated-places-50m-5.1.2"
+DETAIL_RIVER_SOURCE_ID = "natural-earth-rivers-10m-5.1.2"
+DETAIL_LAKE_SOURCE_ID = "natural-earth-lakes-10m-5.1.2"
+DETAIL_CITY_SOURCE_ID = "natural-earth-populated-places-10m-5.1.2"
 
 POP_ZIP_MEMBER = "GHS_POP_E2025_GLOBE_R2023A_54009_1000_V1_0.tif"
 RELIEF_ZIP_MEMBER = "MSR_50M/MSR_50M.tif"
@@ -116,7 +119,7 @@ def sphere_coordinates(step: int = 1) -> list[tuple[float, float]]:
 
 
 def projection_parameters() -> tuple[float, float, float]:
-    outline = [equal_earth_raw(*point) for point in sphere_coordinates(2)]
+    outline = [mercator_raw(*point) for point in sphere_coordinates(2)]
     xs = [point[0] for point in outline]
     ys = [point[1] for point in outline]
     scale = min(
@@ -128,12 +131,18 @@ def projection_parameters() -> tuple[float, float, float]:
     return scale, translate_x, translate_y
 
 
+def mercator_raw(longitude: float, latitude: float) -> tuple[float, float]:
+    limit = 85.0511287798066
+    phi = math.radians(max(-limit, min(limit, latitude)))
+    return math.radians(longitude), -math.log(math.tan(math.pi / 4 + phi / 2))
+
+
 PROJECT_SCALE, PROJECT_TRANSLATE_X, PROJECT_TRANSLATE_Y = projection_parameters()
 
 
 def project_point(coordinate: Iterable[float]) -> list[float]:
     longitude, latitude = coordinate
-    x, y = equal_earth_raw(float(longitude), float(latitude))
+    x, y = mercator_raw(float(longitude), float(latitude))
     return [
         round_number(x * PROJECT_SCALE + PROJECT_TRANSLATE_X, 2),
         round_number(y * PROJECT_SCALE + PROJECT_TRANSLATE_Y, 2),
@@ -142,9 +151,9 @@ def project_point(coordinate: Iterable[float]) -> list[float]:
 
 def target_transform(width: int, height: int) -> Affine:
     if width / height != OUTPUT_WIDTH / OUTPUT_HEIGHT:
-        raise ValueError("Equal Earth raster output must preserve the 1200:650 viewBox ratio")
+        raise ValueError("Mercator raster output must preserve the 1200:650 viewBox ratio")
     epsg_x, _ = transform("EPSG:4326", RASTER_TARGET_CRS, [180.0], [0.0])
-    raw_x, _ = equal_earth_raw(180.0, 0.0)
+    raw_x, _ = mercator_raw(180.0, 0.0)
     equal_earth_radius = epsg_x[0] / raw_x
     viewbox_pixels_per_metre = PROJECT_SCALE / equal_earth_radius
     output_multiplier = width / VIEWBOX_WIDTH
@@ -315,7 +324,7 @@ def build_population_pyramid(source_path: Path, asset_output: Path) -> dict[str,
         for level in POPULATION_DETAIL_LEVELS:
             width, height = level["width"], level["height"]
             tile_width, tile_height = width // level["columns"], height // level["rows"]
-            folder = asset_output / "population-density-2025" / level["id"]
+            folder = asset_output / "population-density-2025-mercator" / level["id"]
             folder.mkdir(parents=True, exist_ok=True)
             tiles = []
             with WarpedVRT(
@@ -341,7 +350,7 @@ def build_population_pyramid(source_path: Path, asset_output: Path) -> dict[str,
                         write_webp(rgba, asset, lossless=True)
                         tiles.append({
                             "id": f"{level['id']}:{column}:{row}",
-                            "href": f"/atlas-world/layers/population-density-2025/{level['id']}/{column}-{row}.webp",
+                            "href": f"/atlas-world/layers/population-density-2025-mercator/{level['id']}/{column}-{row}.webp",
                             "mediaType": "image/webp",
                             "width": tile_width,
                             "height": tile_height,
@@ -360,7 +369,7 @@ def build_population_pyramid(source_path: Path, asset_output: Path) -> dict[str,
                 "bytes": sum(tile["bytes"] for tile in tiles),
             })
     return {
-        "projectionId": "equal-earth",
+        "projectionId": "mercator",
         "sourceResolutionMetres": 1000,
         "sourceCrs": "ESRI:54009",
         "resampling": "average",
@@ -403,8 +412,7 @@ def canonical_geometry(geometry: dict[str, Any]) -> dict[str, Any]:
 
 def line_path(coordinates: list[list[float]], close: bool = False) -> str:
     commands = []
-    for index, coordinate in enumerate(coordinates):
-        x, y = project_point(coordinate)
+    for index, (x, y) in enumerate([project_point(coordinate) for coordinate in coordinates]):
         commands.append(f"{'M' if index == 0 else 'L'}{x:g},{y:g}")
     return "".join(commands) + ("Z" if close else "")
 
@@ -492,11 +500,11 @@ def vector_feature(
             "canonicalWgs84": geometry,
             "boundsWgs84": geometry_bounds(geometry),
             "derived": {
-                "projectionId": "equal-earth",
+                "projectionId": "mercator",
                 "viewBox": [0, 0, VIEWBOX_WIDTH, VIEWBOX_HEIGHT],
                 "path": projected_path(geometry),
                 "bounds": projected_bounds(geometry),
-                "transformationId": "wgs84-to-equal-earth-svg-v1",
+                "transformationId": "wgs84-to-mercator-svg-v1",
             },
         },
     }
@@ -505,7 +513,7 @@ def vector_feature(
 def load_vectors(source_cache: Path, lock_by_id: dict[str, Any]) -> tuple[list[Any], list[Any], list[Any]]:
     river_payload = json.loads((source_cache / lock_by_id[RIVER_SOURCE_ID]["target"]).read_text("utf8"))
     lake_payload = json.loads((source_cache / lock_by_id[LAKE_SOURCE_ID]["target"]).read_text("utf8"))
-    city_payload = json.loads((source_cache / lock_by_id[CITY_SOURCE_ID]["target"]).read_text("utf8"))
+    city_payload = json.loads((source_cache / lock_by_id[DETAIL_CITY_SOURCE_ID]["target"]).read_text("utf8"))
 
     rivers = [
         vector_feature(
@@ -569,7 +577,7 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any]) -> tuple[list[A
         properties = feature["properties"]
         source_rank = properties.get("SCALERANK")
         rank = int(source_rank) if source_rank is not None else 99
-        if not (rank <= 2 or int(properties.get("ADM0CAP") or 0) == 1):
+        if not (rank <= 4 or int(properties.get("ADM0CAP") or 0) == 1):
             continue
         natural_earth_id = str(properties["NE_ID"])
         feature_id = f"feature:natural-earth:city:{natural_earth_id}"
@@ -620,13 +628,14 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any]) -> tuple[list[A
                 "sourceScaleRank": rank,
                 "sourceMinZoom": properties.get("MIN_ZOOM"),
                 "displayLod": display_lod,
+                "displayMinimumZoom": 1 if rank <= 1 else (4 if rank <= 2 else (8 if rank <= 3 else 14)),
                 "population": (
                     {
                         "value": int(round(float(population_2025_thousands) * 1_000)),
                         "status": "estimated",
                         "unit": "people",
                         "temporal": temporal_extent("2025", "year"),
-                        "sourceIds": [CITY_SOURCE_ID],
+                        "sourceIds": [DETAIL_CITY_SOURCE_ID],
                         "sourceField": "POP2025 (thousands; converted to people)",
                         "notes": [
                             "Natural Earth's UN urban-agglomeration POP2025 field is stored in thousands and converted here to people.",
@@ -636,25 +645,52 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any]) -> tuple[list[A
                     if population_2025_thousands and float(population_2025_thousands) > 0
                     else None
                 ),
-                "sourceIds": [CITY_SOURCE_ID],
+                "sourceIds": [DETAIL_CITY_SOURCE_ID],
                 "temporal": temporal_extent(),
                 "geometry": {
                     "geometryId": f"geometry:{feature_id}:wgs84",
-                    "geometrySetId": "natural-earth-populated-places-50m-5.1.2",
+                    "geometrySetId": "natural-earth-populated-places-10m-5.1.2",
                     "geometryType": "point",
                     "crs": "EPSG:4326",
                     "canonicalWgs84": {"type": "Point", "coordinates": location},
                     "boundsWgs84": [location, location],
                     "derived": {
-                        "projectionId": "equal-earth",
+                        "projectionId": "mercator",
                         "viewBox": [0, 0, VIEWBOX_WIDTH, VIEWBOX_HEIGHT],
                         "point": projected,
                         "bounds": [projected, projected],
-                        "transformationId": "wgs84-to-equal-earth-svg-v1",
+                        "transformationId": "wgs84-to-mercator-svg-v1",
                     },
                 },
             }
         )
+    # Keep the original coarse feature identities (including note references),
+    # then replace their display at close zoom with separately addressable 10m
+    # source features. Matching names is not assumed to identify the same reach.
+    for feature in [*rivers, *lakes]:
+        feature["displayMaximumZoom"] = 6
+    for kind, source_id, collection in [("river", DETAIL_RIVER_SOURCE_ID, rivers), ("lake", DETAIL_LAKE_SOURCE_ID, lakes)]:
+        payload = json.loads((source_cache / lock_by_id[source_id]["target"]).read_text("utf8"))
+        seen = set()
+        for raw_feature in payload["features"]:
+            properties = raw_feature["properties"]
+            if not raw_feature.get("geometry") or not geometry_coordinates(raw_feature["geometry"]):
+                # Some 10m source records have an empty geometry. They cannot
+                # represent a selectable/drawable place and are excluded.
+                continue
+            minimum = number_or_default(properties.get("min_zoom"), 99)
+            if minimum > 5 or (kind == "river" and properties.get("featurecla") not in ("River", "Lake Centerline")):
+                continue
+            name = properties.get("name_en") or properties.get("name") or properties.get("label") or "Unnamed feature"
+            identity = f"10m:{feature_hash(name, raw_feature['geometry'])}"
+            if identity in seen:
+                continue
+            seen.add(identity)
+            feature = vector_feature(raw_feature, kind=kind, source_id=source_id, source_identity=properties.get("ne_id"), feature_identity=identity)
+            feature["displayLod"] = "country"
+            feature["displayMinimumZoom"] = 6 if minimum <= 3 else (10 if minimum <= 4 else 16)
+            feature["geometry"]["geometrySetId"] = "natural-earth-physical-10m-5.1.2"
+            collection.append(feature)
     return rivers, lakes, cities
 
 
@@ -671,6 +707,28 @@ def source_record(source: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def write_physical_geometry_sprites(pack: dict[str, Any], destination: Path) -> None:
+    """Cache geometry separately from SSR and delay close geography until needed.
+
+    Source vertices are kept intact. Feature identity is shared with the country,
+    source and annotation records; only a safe SVG fragment identifier is derived.
+    """
+    assets = {}
+    features = [*pack["featureCollections"]["majorRivers"]["features"], *pack["featureCollections"]["majorLakes"]["features"]]
+    for level in ["overview", "detail"]:
+        selected = [feature for feature in features if (feature.get("displayMaximumZoom") is not None) == (level == "overview")]
+        filename = f"physical-mercator-{level}.v1.svg"
+        sprite_path = destination / filename
+        fragments = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650"><defs>']
+        for feature in selected:
+            identity = re.sub(r"[^A-Za-z0-9_-]", "-", feature["featureId"])
+            fragments.append(f'<path id="{identity}" d="{feature["geometry"]["derived"]["path"]}" vector-effect="non-scaling-stroke"/>')
+        fragments.append('</defs></svg>')
+        sprite_path.write_text(''.join(fragments) + '\n', 'utf8')
+        assets[level] = {"href": f"/atlas-world/{filename}", "mediaType": "image/svg+xml", "bytes": sprite_path.stat().st_size, "checksumSha256": sha256_file(sprite_path), "featureCount": len(selected)}
+    pack["physicalGeometryAssets"] = assets
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--width", type=int, default=OUTPUT_WIDTH)
@@ -678,6 +736,8 @@ def main() -> None:
     parser.add_argument("--source-cache", type=Path)
     parser.add_argument("--data-output", type=Path)
     parser.add_argument("--asset-output", type=Path)
+    parser.add_argument("--overview-only", action="store_true", help="Development review: publish current-projection overview/vector derivatives without advertising unfinished detail levels.")
+    parser.add_argument("--vectors-only", action="store_true", help="Rebuild physical vectors against checked source locks while retaining unchanged registered raster assets.")
     arguments = parser.parse_args()
 
     repository_root = Path(__file__).resolve().parents[1]
@@ -691,7 +751,7 @@ def main() -> None:
     asset_output.mkdir(parents=True, exist_ok=True)
     registration_checks = verify_raster_registration()
 
-    required_source_ids = [POP_SOURCE_ID, RELIEF_SOURCE_ID, RIVER_SOURCE_ID, LAKE_SOURCE_ID, CITY_SOURCE_ID]
+    required_source_ids = [POP_SOURCE_ID, RELIEF_SOURCE_ID, RIVER_SOURCE_ID, LAKE_SOURCE_ID, DETAIL_RIVER_SOURCE_ID, DETAIL_LAKE_SOURCE_ID, DETAIL_CITY_SOURCE_ID]
     for source_id in required_source_ids:
         source = lock_by_id[source_id]
         source_path = source_cache / source["target"]
@@ -701,29 +761,59 @@ def main() -> None:
         if actual_hash != source["checksumSha256"]:
             raise ValueError(f"Source checksum mismatch for {source_id}: {actual_hash}")
 
-    population_asset = asset_output / "population-density-2025.equal-earth.webp"
-    relief_asset = asset_output / "physical-relief.equal-earth.webp"
-    with tempfile.TemporaryDirectory(prefix="jju-atlas-geography-") as temporary_directory:
-        temporary_path = Path(temporary_directory)
-        population_source = extract_member(
-            source_cache / lock_by_id[POP_SOURCE_ID]["target"], POP_ZIP_MEMBER, temporary_path
-        )
-        relief_source = extract_member(
-            source_cache / lock_by_id[RELIEF_SOURCE_ID]["target"], RELIEF_ZIP_MEMBER, temporary_path
-        )
-        population_rgba, population_statistics = warp_population(
-            population_source, arguments.width, arguments.height
-        )
-        relief_rgba = warp_relief(relief_source, arguments.width, arguments.height)
-        write_webp(population_rgba, population_asset, lossless=True)
-        write_webp(relief_rgba, relief_asset, lossless=False)
-        population_pyramid = build_population_pyramid(population_source, asset_output)
+    if arguments.vectors_only:
+        output_path = data_output / "geography-pack.v1.json"
+        pack = json.loads(output_path.read_text("utf8"))
+        if pack["projection"]["crs"] != RASTER_TARGET_CRS or pack["sourceLockId"] != lock["lockId"]:
+            raise ValueError("Vector-only refresh requires an existing matching projection/source-lock pack.")
+        for collection_name, dataset_id, features in zip(["majorRivers", "majorLakes", "majorCities"], ["major-rivers", "major-lakes", "major-cities"], load_vectors(source_cache, lock_by_id)):
+            pack["featureCollections"][collection_name] = {"datasetId": dataset_id, "features": features}
+            next(dataset for dataset in pack["datasets"] if dataset["id"] == dataset_id)["featureCount"] = len(features)
+        # Activation thresholds are authored rendering choices, not source or
+        # raster-pixel changes. Refresh them without an expensive resampling run.
+        population = next(dataset for dataset in pack["datasets"] if dataset["id"] == "population-density-2025")
+        for level in population.get("assetPyramid", {}).get("levels", []):
+            definition = next(item for item in POPULATION_DETAIL_LEVELS if item["id"] == level["id"])
+            if (level["width"], level["height"]) != (definition["width"], definition["height"]):
+                raise ValueError("Raster dimensions changed; a complete raster rebuild is required.")
+            level["minimumZoom"] = definition["minimumZoom"]
+        pack["projection"].pop("displayPathSimplificationTolerance", None)
+        write_physical_geometry_sprites(pack, asset_output.parent)
+        output_path.write_text(json.dumps(pack, ensure_ascii=False, separators=(",", ":")) + "\n", "utf8")
+        print("Refreshed source-checked physical vectors; retained registered raster manifests unchanged.")
+        return
+
+    population_asset = asset_output / "population-density-2025.mercator.webp"
+    relief_asset = asset_output / "physical-relief.mercator.webp"
+    if arguments.overview_only and population_asset.exists() and relief_asset.exists():
+        for asset in [population_asset, relief_asset]:
+            with Image.open(asset) as image:
+                if image.size != (arguments.width, arguments.height):
+                    raise ValueError("Existing overview dimensions do not match this development review request.")
+        population_statistics = {}
+        population_pyramid = None
+    else:
+        with tempfile.TemporaryDirectory(prefix="jju-atlas-geography-") as temporary_directory:
+            temporary_path = Path(temporary_directory)
+            population_source = extract_member(
+                source_cache / lock_by_id[POP_SOURCE_ID]["target"], POP_ZIP_MEMBER, temporary_path
+            )
+            relief_source = extract_member(
+                source_cache / lock_by_id[RELIEF_SOURCE_ID]["target"], RELIEF_ZIP_MEMBER, temporary_path
+            )
+            population_rgba, population_statistics = warp_population(
+                population_source, arguments.width, arguments.height
+            )
+            relief_rgba = warp_relief(relief_source, arguments.width, arguments.height)
+            write_webp(population_rgba, population_asset, lossless=True)
+            write_webp(relief_rgba, relief_asset, lossless=False)
+            population_pyramid = None if arguments.overview_only else build_population_pyramid(population_source, asset_output)
 
     rivers, lakes, cities = load_vectors(source_cache, lock_by_id)
     sources = [source_record(lock_by_id[source_id]) for source_id in required_source_ids]
     output_assets = {
         "populationDensity": {
-            "href": "/atlas-world/layers/population-density-2025.equal-earth.webp",
+            "href": "/atlas-world/layers/population-density-2025.mercator.webp",
             "mediaType": "image/webp",
             "width": arguments.width,
             "height": arguments.height,
@@ -732,7 +822,7 @@ def main() -> None:
             "bytes": population_asset.stat().st_size,
         },
         "physicalRelief": {
-            "href": "/atlas-world/layers/physical-relief.equal-earth.webp",
+            "href": "/atlas-world/layers/physical-relief.mercator.webp",
             "mediaType": "image/webp",
             "width": arguments.width,
             "height": arguments.height,
@@ -748,36 +838,36 @@ def main() -> None:
         "generatedAt": GENERATED_AT,
         "sourceLockId": lock["lockId"],
         "projection": {
-            "id": "equal-earth",
+            "id": "mercator",
             "crs": RASTER_TARGET_CRS,
-            "projectionMethod": "Equal Earth, spherical D3-compatible latitude",
+            "projectionMethod": "Spherical Mercator; latitude clipped at ±85.05112878 degrees; high-latitude areas inflated",
             "viewBox": [0, 0, VIEWBOX_WIDTH, VIEWBOX_HEIGHT],
             "canonicalCrs": "EPSG:4326",
             "canonicalGeometryCrs": "EPSG:4326",
-            "transformationId": "wgs84-to-equal-earth-svg-v1",
+            "transformationId": "wgs84-to-mercator-svg-v1",
             "registrationChecks": registration_checks,
         },
         "sources": sources,
         "transformations": [
             {
-                "id": "ghsl-mollweide-to-equal-earth-raster-v1",
-                "description": "Area-resample the original 1 km World Mollweide population-count grid independently into a 2400 × 1300 overview and 9600 × 5200 / 19200 × 10400 equivalent tiled Equal Earth levels; apply the same explicit log1p color/opacity scale; clip to the projected sphere. Detail is never upscaled from the overview.",
+                "id": "ghsl-mollweide-to-mercator-raster-v1",
+                "description": "Area-resample the original 1 km World Mollweide population-count grid independently into a 2400 × 1300 overview and 19200 × 10400 / 38400 × 20800 / 76800 × 41600 equivalent tiled Mercator levels; apply one explicit log1p color/opacity scale. Detail is never upscaled from the overview. Projected display scale varies from ground scale by latitude.",
                 "inputCrs": "ESRI:54009",
                 "outputCrs": RASTER_TARGET_CRS,
                 "resampling": "average",
                 "code": "scripts/build-atlas-geography-pack.py",
             },
             {
-                "id": "natural-earth-relief-to-equal-earth-raster-v1",
-                "description": "Bilinear-warp the public-domain grayscale relief from WGS84 into Equal Earth and clip to the projected sphere. Apply global cartographic shadow contrast clamp(255 − (255 − gray) × 1.45). Styling opacity remains layer-owned.",
+                "id": "natural-earth-relief-to-mercator-raster-v1",
+                "description": "Bilinear-warp the public-domain grayscale relief from WGS84 into Mercator and clip to the projected sphere. Apply global cartographic shadow contrast clamp(255 − (255 − gray) × 1.45). Styling opacity remains layer-owned.",
                 "inputCrs": "EPSG:4326",
                 "outputCrs": RASTER_TARGET_CRS,
                 "resampling": "bilinear",
                 "code": "scripts/build-atlas-geography-pack.py",
             },
             {
-                "id": "wgs84-to-equal-earth-svg-v1",
-                "description": "Project canonical WGS84 coordinates with the same fitted Equal Earth formula and 1200 × 650 viewBox used by Atlas country geometry.",
+                "id": "wgs84-to-mercator-svg-v1",
+                "description": "Project canonical WGS84 coordinates with the same fitted Mercator formula and 1200 × 650 viewBox used by Atlas country geometry.",
                 "inputCrs": "EPSG:4326",
                 "outputCrs": RASTER_TARGET_CRS,
                 "resampling": None,
@@ -802,7 +892,7 @@ def main() -> None:
                     "selectionPolicy": "exact",
                 },
                 "sourceIds": [POP_SOURCE_ID],
-                "transformationId": "ghsl-mollweide-to-equal-earth-raster-v1",
+                "transformationId": "ghsl-mollweide-to-mercator-raster-v1",
                 "asset": output_assets["populationDensity"],
                 "assetPyramid": population_pyramid,
                 "visualization": {
@@ -817,7 +907,7 @@ def main() -> None:
                     "This is a modelled spatial distribution, not a census count observed independently in every grid cell.",
                     "The 2025 epoch is a projection within a five-year GHSL series; accuracy varies with the age and resolution of upstream census inputs.",
                     "A browser display pixel averages many 1 km source cells at world scale, so it must not be interpreted as the exact value of a single source cell.",
-                    "Regional and country detail tiles are generated independently from the original source at approximately 3.7 km and 1.8 km per projected display pixel. Further magnification does not add new source information; this is not a street-level population map.",
+                    "Three detail levels are generated independently from the original source. The finest is approximately 1 km per projected display pixel at the equator. Ground scale varies by latitude; zoom never creates finer source information. This is not a street-level population map.",
                 ],
             },
             {
@@ -830,7 +920,7 @@ def main() -> None:
                 "conceptualResolution": "terrain relief",
                 "temporal": {"support": "static", "observedAt": None, "validFrom": None, "validTo": None, "precision": "unknown", "selectionPolicy": "timeless"},
                 "sourceIds": [RELIEF_SOURCE_ID],
-                "transformationId": "natural-earth-relief-to-equal-earth-raster-v1",
+                "transformationId": "natural-earth-relief-to-mercator-raster-v1",
                 "asset": output_assets["physicalRelief"],
                 "visualization": {"recommendedOpacity": 0.42, "recommendedBlendMode": "multiply", "shadowContrast": 1.45},
                 "caveats": [
@@ -844,13 +934,13 @@ def main() -> None:
                 "dataType": "line",
                 "measure": "generalized river centerline geometry",
                 "unit": None,
-                "geographicResolution": "1:50m cartographic vectors",
+                "geographicResolution": "1:50m world/regional and 1:10m close-scale cartographic vectors",
                 "conceptualResolution": "major named river segments visible by regional zoom",
-                "sourceIds": [RIVER_SOURCE_ID],
-                "transformationId": "wgs84-to-equal-earth-svg-v1",
+                "sourceIds": [RIVER_SOURCE_ID, DETAIL_RIVER_SOURCE_ID],
+                "transformationId": "wgs84-to-mercator-svg-v1",
                 "geometrySetId": "natural-earth-physical-50m-5.1.2",
                 "featureCount": len(rivers),
-                "selectionRule": "Natural Earth feature class River with source min_zoom <= 3.",
+                "selectionRule": "50m rivers with min_zoom <= 3 below zoom 6; 10m River/Lake Centerline geometry with min_zoom <= 5 revealed progressively at zoom 6, 10 and 16.",
                 "temporal": {"support": "static", "observedAt": None, "validFrom": None, "validTo": None, "precision": "unknown", "selectionPolicy": "timeless"},
                 "caveats": [
                     "This is a generalized cartographic selection, not a connected hydrological network.",
@@ -863,13 +953,13 @@ def main() -> None:
                 "dataType": "polygon",
                 "measure": "generalized lake polygon geometry",
                 "unit": None,
-                "geographicResolution": "1:50m cartographic vectors",
+                "geographicResolution": "1:50m world/regional and 1:10m close-scale cartographic vectors",
                 "conceptualResolution": "major lakes visible by regional zoom",
-                "sourceIds": [LAKE_SOURCE_ID],
-                "transformationId": "wgs84-to-equal-earth-svg-v1",
+                "sourceIds": [LAKE_SOURCE_ID, DETAIL_LAKE_SOURCE_ID],
+                "transformationId": "wgs84-to-mercator-svg-v1",
                 "geometrySetId": "natural-earth-physical-50m-5.1.2",
                 "featureCount": len(lakes),
-                "selectionRule": "Natural Earth lake polygons with source min_zoom <= 3, after removal of exact duplicate source features.",
+                "selectionRule": "50m lakes with min_zoom <= 3 below zoom 6; 10m lakes with min_zoom <= 5 revealed at zoom 6, 10 and 16, with exact duplicate source geometries removed.",
                 "temporal": {"support": "static", "observedAt": None, "validFrom": None, "validTo": None, "precision": "unknown", "selectionPolicy": "timeless"},
                 "caveats": [
                     "This is a generalized cartographic selection, not a comprehensive inland-water inventory.",
@@ -882,13 +972,13 @@ def main() -> None:
                 "dataType": "point",
                 "measure": "cartographic populated-place point",
                 "unit": None,
-                "geographicResolution": "1:50m populated-place point selection",
+                "geographicResolution": "1:10m populated-place point selection",
                 "conceptualResolution": "national capitals and high-rank world/regional cities",
-                "sourceIds": [CITY_SOURCE_ID],
-                "transformationId": "wgs84-to-equal-earth-svg-v1",
-                "geometrySetId": "natural-earth-populated-places-50m-5.1.2",
+                "sourceIds": [DETAIL_CITY_SOURCE_ID],
+                "transformationId": "wgs84-to-mercator-svg-v1",
+                "geometrySetId": "natural-earth-populated-places-10m-5.1.2",
                 "featureCount": len(cities),
-                "selectionRule": "All Natural Earth national capitals plus populated places with SCALERANK <= 2; SCALERANK derives the current world/regional/country LOD while source MIN_ZOOM is retained for future refinement.",
+                "selectionRule": "All Natural Earth national capitals plus populated places with SCALERANK <= 4, revealed progressively; stable NE_ID entity identities retained.",
                 "temporal": {"support": "snapshot", "observedAt": "2025", "validFrom": None, "validTo": None, "precision": "year", "selectionPolicy": "exact"},
                 "caveats": [
                     "Natural Earth is a cartographic selection, not a complete city gazetteer.",
@@ -903,6 +993,10 @@ def main() -> None:
         },
     }
     output_path = data_output / "geography-pack.v1.json"
+    write_physical_geometry_sprites(pack, asset_output.parent)
+    if population_pyramid is None:
+        pack["buildStatus"] = "development-overview-only"
+        del pack["datasets"][0]["assetPyramid"]
     output_path.write_text(json.dumps(pack, ensure_ascii=False, separators=(",", ":")) + "\n", "utf8")
     print(
         json.dumps(
@@ -911,7 +1005,7 @@ def main() -> None:
                 "rasters": output_assets,
                 "counts": {"rivers": len(rivers), "lakes": len(lakes), "cities": len(cities)},
                 "populationStatistics": population_statistics,
-                "populationPyramid": [{"id": level["id"], "tiles": len(level["tiles"]), "bytes": level["bytes"], "metresPerPixel": level["displayMetresPerPixel"]} for level in population_pyramid["levels"]],
+                "populationPyramid": [{"id": level["id"], "tiles": len(level["tiles"]), "bytes": level["bytes"], "metresPerPixel": level["displayMetresPerPixel"]} for level in (population_pyramid["levels"] if population_pyramid else [])],
             },
             indent=2,
         )

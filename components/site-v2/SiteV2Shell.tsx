@@ -8,11 +8,12 @@ import styles from "./SiteV2.module.css";
 type SiteV2ShellProps = {
   children: ReactNode;
   immersive?: boolean;
+  mobileMap?: boolean;
 };
 
-export default function SiteV2Shell({ children, immersive = false }: SiteV2ShellProps) {
+export default function SiteV2Shell({ children, immersive = false, mobileMap = false }: SiteV2ShellProps) {
   return (
-    <div className={`${styles.siteV2Route} ${immersive ? styles.immersiveRoute : ""} jjuSiteV2Route`}>
+    <div className={`${styles.siteV2Route} ${immersive ? styles.immersiveRoute : ""} ${mobileMap ? styles.mobileMapRoute : ""} jjuSiteV2Route`}>
       <a className={styles.skipLink} href="#site-v2-main">Skip to content</a>
 
       <header className={styles.siteHeader}>

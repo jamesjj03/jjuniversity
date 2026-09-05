@@ -1,4 +1,5 @@
 import pilot from './data/portrait-pilot.json';
+import leadershipContext from './data/leadership-context.json';
 import type { AtlasRuntimeCountry } from './runtime';
 import type { AtlasLeadershipOfficeholder } from './types';
 
@@ -10,6 +11,35 @@ export type AtlasPortraitMatch = {
   media: AtlasPortraitMedia;
   title: string;
 };
+type LeadershipFact = NonNullable<AtlasRuntimeCountry['facts']['headOfState']>;
+
+/** Updates are explicitly reviewed observations, not mutation of the archived import. */
+export function findAtlasOfficeUpdate(countryId: string, role: string, fact: LeadershipFact) {
+  return leadershipContext.officeUpdates.find((update) =>
+    update.entityId === countryId && update.role === role
+    && update.supersedes.sourceId === fact.sourceId
+    && update.supersedes.observedAt === fact.observedAt
+    && !fact.value.isVacant
+    && fact.value.officeholders.some((holder) => holder.nameAndTitle === update.supersedes.exactSourceName),
+  ) ?? null;
+}
+
+export function findAtlasLeadershipContext(countryId: string, role: string, fact: LeadershipFact, holder: AtlasLeadershipOfficeholder) {
+  return leadershipContext.contexts.find((context) =>
+    context.entityId === countryId && context.roles.includes(role)
+    && context.sourceId === fact.sourceId && context.archivedObservedAt === fact.observedAt
+    && context.exactSourceName === holder.nameAndTitle,
+  ) ?? null;
+}
+
+/** Pure date check also used by the review report. Unknown and future dates fail closed. */
+export function atlasLeadershipReviewDue(observedAt: string | null, asOf = new Date().toISOString().slice(0, 10)): boolean {
+  if (!observedAt || !/^\d{4}-\d{2}-\d{2}$/.test(observedAt)) return true;
+  const observed = Date.parse(observedAt);
+  const current = Date.parse(asOf);
+  return !Number.isFinite(observed) || !Number.isFinite(current) || observed > current
+    || current - observed >= leadershipContext.reviewPolicy.reviewAfterDays * 86400000;
+}
 
 /**
  * This is an exact, reviewed-in-code match against a dated source observation.
@@ -23,6 +53,8 @@ export function findAtlasPortrait(
   officeholder: AtlasLeadershipOfficeholder,
 ): AtlasPortraitMatch | null {
   if (fact.value.isVacant) return null;
+  // Known superseded officeholders cannot remain the current country's portrait.
+  if (findAtlasOfficeUpdate(countryId, role, fact)) return null;
   const binding = pilot.bindings.find((candidate) =>
     candidate.entityId === countryId
     && candidate.role === role

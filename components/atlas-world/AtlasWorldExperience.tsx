@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import { select } from "d3-selection";
+import Link from "next/link";
 import { zoom, zoomIdentity, type ZoomBehavior } from "d3-zoom";
 import {
   ATLAS_LAYER_BY_ID,
@@ -39,6 +40,9 @@ import type { AtlasPatternNote } from "@/lib/atlas-world/geographyTypes";
 import { atlasObservationStatusHasValue } from "@/lib/atlas-world/types";
 import { updateAtlasCartography } from "@/lib/atlas-world/cartography";
 import AtlasViewBrowser from "./AtlasViewBrowser";
+import AtlasCityCard from "./AtlasCityCard";
+import type { AtlasCitySummary } from "@/lib/atlas-world/cities";
+import { ATLAS_INITIAL_BOUNDS, ATLAS_WORLD_BOUNDS } from "@/lib/atlas-world/projection";
 import { getAtlasTerritorialStatus } from "@/lib/atlas-world/territorialStatus";
 import AtlasCountryPanel, {
   type AtlasCountryLensContext,
@@ -51,11 +55,13 @@ import styles from "./AtlasWorld.module.css";
 type AtlasWorldExperienceProps = {
   data: AtlasClientDataset;
   patternNotes: AtlasPatternNote[];
+  cities: AtlasCitySummary[];
   map: ReactNode;
 };
 
 type TooltipState = {
-  countryId: string;
+  countryId?: string;
+  cityId?: string;
   x: number;
   y: number;
 };
@@ -63,6 +69,12 @@ type TooltipState = {
 const VIEWBOX_WIDTH = 1200;
 const VIEWBOX_HEIGHT = 650;
 const SEARCH_LIMIT = 8;
+
+function initialCamera() {
+  const [[x0, y0], [x1, y1]] = ATLAS_INITIAL_BOUNDS;
+  const scale = Math.min(1140 / (x1 - x0), 592 / (y1 - y0));
+  return zoomIdentity.translate(600 - scale * (x0 + x1) / 2, 333 - scale * (y0 + y1) / 2).scale(scale);
+}
 
 const compactFormatter = new Intl.NumberFormat("en-US", {
   notation: "compact",
@@ -130,8 +142,17 @@ function applyAtlasZoomVisibility(host: Element, zoomScale: number) {
     const layerIsActive = element.hasAttribute("data-atlas-layer")
       ? element.dataset.atlasLayerActive === "true"
       : true;
-    element.dataset.atlasZoomVisible = visibleAtZoom ? "true" : "false";
-    element.style.display = visibleAtZoom && layerIsActive ? "" : "none";
+    const state = visibleAtZoom ? "true" : "false";
+    if (element.dataset.atlasZoomVisible !== state) element.dataset.atlasZoomVisible = state;
+    const display = visibleAtZoom && layerIsActive ? "" : "none";
+    if (element.style.display !== display) element.style.display = display;
+  });
+  host.querySelectorAll<SVGUseElement>("[data-atlas-geography-href]").forEach((element) => {
+    const feature = element.closest<SVGElement>("[data-atlas-map-feature]");
+    const layer = element.closest<SVGElement>("[data-atlas-layer]");
+    if (feature && elementIsVisibleAtZoom(feature, zoomScale) && layer?.dataset.atlasLayerActive === "true" && !element.getAttribute("href")) {
+      element.setAttribute("href", element.dataset.atlasGeographyHref!);
+    }
   });
 }
 
@@ -202,7 +223,7 @@ function sceneWithLayerToggled(scene: AtlasSceneState, instanceId: string) {
   return { ...scene, layers };
 }
 
-export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasWorldExperienceProps) {
+export default function AtlasWorldExperience({ data, patternNotes, cities, map }: AtlasWorldExperienceProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -211,6 +232,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
   const hoveredIdRef = useRef<string | null>(null);
   const suppressHoverUntilMoveRef = useRef(false);
   const focusPanelOnReadyRef = useRef(false);
+  const focusCityOnReadyRef = useRef(false);
   const focusReturnRef = useRef<HTMLElement | null>(null);
   const detailCacheRef = useRef(new Map<string, AtlasRuntimeCountry>());
   const layerDataCacheRef = useRef(new Map<string, AtlasLayerDataResponse>());
@@ -267,8 +289,18 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
       element.style.display = element.dataset.atlasNoteHighlight === activeNote?.id ? "" : "none";
     });
   }, [activeNote]);
-  const tooltipCountry = tooltip ? countryById.get(tooltip.countryId) ?? null : null;
-  const tooltipFeature = tooltip ? featureById.get(tooltip.countryId) ?? null : null;
+  const cityById = useMemo(() => new Map(cities.map((city) => [city.featureId, city])), [cities]);
+  const selectedCities = useMemo(() => cities.filter((city) => city.countryId === selectedId)
+    .sort((a, b) => Number(b.isNationalCapital) - Number(a.isNationalCapital) || a.name.localeCompare(b.name)), [cities, selectedId]);
+  const activeCity = activeNoteFocusId ? cityById.get(activeNoteFocusId) ?? null : null;
+  useEffect(() => {
+    if (!activeCity || !focusCityOnReadyRef.current) return;
+    focusCityOnReadyRef.current = false;
+    rootRef.current?.querySelector<HTMLElement>("[data-atlas-city-card]")?.focus({ preventScroll: true });
+  }, [activeCity]);
+  const tooltipCountry = tooltip?.countryId ? countryById.get(tooltip.countryId) ?? null : null;
+  const tooltipFeature = tooltip?.countryId ? featureById.get(tooltip.countryId) ?? null : null;
+  const tooltipCity = tooltip?.cityId ? cityById.get(tooltip.cityId) ?? null : null;
 
   const searchResults = useMemo(() => {
     if (normalized(deferredQuery).length === 0) return [];
@@ -353,53 +385,34 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
   const focusFeature = useCallback((feature: AtlasRuntimeFeatureMeta) => {
     const svg = mapHostRef.current?.querySelector<SVGSVGElement>("[data-atlas-world-map]") ?? null;
     const behavior = zoomBehaviorRef.current;
-    if (!svg || !behavior) return;
-    const [[x0, y0], [x1, y1]] = feature.focusBounds ?? feature.bounds;
-    const dx = Math.max(4, x1 - x0);
-    const dy = Math.max(4, y1 - y0);
-    const scale = clamp(0.38 / Math.max(dx / VIEWBOX_WIDTH, dy / VIEWBOX_HEIGHT), 1.45, 7);
-    const centerX = (x0 + x1) / 2;
-    const centerY = (y0 + y1) / 2;
-    const isMobileSheet = window.matchMedia("(max-width: 760px)").matches;
-    const screenWidth = svg.getBoundingClientRect().width;
-    const panelWidth = Math.min(340, screenWidth * 0.31);
-    const targetX = isMobileSheet ? VIEWBOX_WIDTH / 2 : VIEWBOX_WIDTH * (screenWidth - panelWidth) / screenWidth / 2;
-    let targetY = VIEWBOX_HEIGHT / 2;
-
-    if (isMobileSheet) {
-      const svgRect = svg.getBoundingClientRect();
-      const toolbarRect = rootRef.current
-        ?.querySelector<HTMLElement>(`.${styles.atlasToolbar}`)
-        ?.getBoundingClientRect();
-      const panelRect = rootRef.current
-        ?.querySelector<HTMLElement>("[data-atlas-sheet]")
-        ?.getBoundingClientRect();
-      const renderedScale = Math.min(
-        svgRect.width / VIEWBOX_WIDTH,
-        svgRect.height / VIEWBOX_HEIGHT,
-      );
-      const letterboxTop = (svgRect.height - VIEWBOX_HEIGHT * renderedScale) / 2;
-      const toolbarBottom = toolbarRect ? toolbarRect.bottom - svgRect.top : 112;
-      const panelTop = panelRect ? panelRect.top - svgRect.top : svgRect.height * 0.44;
-      const visibleMapCenter = (toolbarBottom + panelTop) / 2;
-      targetY = (visibleMapCenter - letterboxTop) / renderedScale;
-    }
-    const transform = zoomIdentity
-      .translate(targetX - scale * centerX, targetY - scale * centerY)
-      .scale(scale);
-    select(svg).call(behavior.transform, transform);
+    const matrix = svg?.getScreenCTM();
+    if (!svg || !behavior || !matrix) return;
+    const [[x0,y0],[x1,y1]]=feature.focusBounds ?? feature.bounds;
+    const rect=svg.getBoundingClientRect();
+    const mobile=window.matchMedia("(max-width:760px)").matches;
+    const toolbar=rootRef.current?.querySelector<HTMLElement>(`.${styles.atlasToolbar}`)?.getBoundingClientRect();
+    const panel=rootRef.current?.querySelector<HTMLElement>("[data-atlas-sheet]")?.getBoundingClientRect();
+    const left=rect.left+24;
+    const right=mobile ? rect.right-24 : (panel?.left ?? rect.right-400)-24;
+    const top=Math.max(rect.top+24,toolbar?.bottom ?? rect.top)+18;
+    const bottom=mobile ? (panel?.top ?? rect.bottom-145)-18 : rect.bottom-34;
+    const displayScale=Math.hypot(matrix.a,matrix.b);
+    const availableWidth=Math.max(100,right-left), availableHeight=Math.max(160,bottom-top);
+    const scale=clamp(Math.min(availableWidth/(displayScale*Math.max(.2,x1-x0)),availableHeight/(displayScale*Math.max(.2,y1-y0)))*.83,1.45,64);
+    const center=new DOMPoint((left+right)/2,(top+bottom)/2).matrixTransform(matrix.inverse());
+    select(svg).call(behavior.transform,zoomIdentity.translate(center.x-scale*(x0+x1)/2,center.y-scale*(y0+y1)/2).scale(scale));
   }, []);
 
   const focusPatternNote = useCallback((note: AtlasPatternNote) => {
     const svg = mapHostRef.current?.querySelector<SVGSVGElement>("[data-atlas-world-map]") ?? null;
     const behavior = zoomBehaviorRef.current;
     if (!svg || !behavior) return;
-    const point = note.spatial.focus.equalEarth;
-    const bounds = note.spatial.viewingBoundsEqualEarth;
+    const point = note.spatial.focus.projected;
+    const bounds = note.spatial.viewingBoundsProjected;
     const scale = bounds ? clamp(0.55 / Math.max(
       Math.max(4, bounds[1][0] - bounds[0][0]) / VIEWBOX_WIDTH,
       Math.max(4, bounds[1][1] - bounds[0][1]) / VIEWBOX_HEIGHT,
-    ), 2.5, 7) : 2.5;
+    ), 2.5, 28) : 2.5;
     const isMobile = window.matchMedia("(max-width: 760px)").matches;
     const targetX = isMobile ? VIEWBOX_WIDTH / 2 : 485;
     let targetY = VIEWBOX_HEIGHT / 2;
@@ -407,7 +420,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
       const rect = svg.getBoundingClientRect();
       const toolbar = rootRef.current?.querySelector<HTMLElement>(`.${styles.atlasToolbar}`)?.getBoundingClientRect();
       const noteCard = rootRef.current?.querySelector<HTMLElement>(`.${styles.noteCard}`)?.getBoundingClientRect();
-      const displayScale = Math.min(rect.width / VIEWBOX_WIDTH, rect.height / VIEWBOX_HEIGHT);
+      const displayScale = Math.max(rect.width / VIEWBOX_WIDTH, rect.height / VIEWBOX_HEIGHT);
       const letterboxTop = (rect.height - VIEWBOX_HEIGHT * displayScale) / 2;
       const visibleCenter = ((toolbar?.bottom ?? rect.top) + (noteCard?.top ?? rect.top + rect.height * 0.5)) / 2 - rect.top;
       targetY = (visibleCenter - letterboxTop) / displayScale;
@@ -457,7 +470,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
   const closeCountry = useCallback((push = true) => {
     const returnTarget = focusReturnRef.current;
     const shouldRestoreFocus = Boolean(
-      rootRef.current?.querySelector("[data-atlas-sheet]")?.contains(document.activeElement),
+      rootRef.current?.querySelector("[data-atlas-sheet], [data-atlas-city-card]")?.contains(document.activeElement),
     );
     clearMapHover();
     setSelectedId(null);
@@ -481,7 +494,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
   const chooseView = useCallback((nextViewId: string) => {
     if (!isAtlasViewPresetId(nextViewId)) return;
     const nextScene = createAtlasSceneFromPreset(nextViewId);
-    nextScene.focus = selectedCountry
+    nextScene.focus = activeCity ? { kind: "feature", id: activeCity.featureId } : selectedCountry
       ? { kind: "entity", id: selectedCountry.id }
       : nextViewId === "where-people-live" && activeNote
         ? { kind: "feature", id: activeNote.id }
@@ -489,7 +502,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
     setScene(nextScene);
     setTooltip(null);
     writeSceneUrl(nextScene, selectedCountry, false);
-  }, [activeNote, selectedCountry]);
+  }, [activeCity, activeNote, selectedCountry]);
 
   const toggleLayer = useCallback((instanceId: string) => {
     const nextScene = sceneWithLayerToggled(scene, instanceId);
@@ -522,16 +535,52 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
     writeSceneUrl(nextScene, null, push);
   }, [activeNote, scene]);
 
+  const focusCity = useCallback((city: AtlasCitySummary) => {
+    const svg = mapHostRef.current?.querySelector<SVGSVGElement>("[data-atlas-world-map]");
+    const behavior = zoomBehaviorRef.current;
+    if (!svg || !behavior) return;
+    const scale = Math.max(18, zoomScaleRef.current);
+    select(svg).call(behavior.transform, zoomIdentity.translate(VIEWBOX_WIDTH / 2 - city.point[0] * scale, VIEWBOX_HEIGHT / 2 - city.point[1] * scale).scale(scale));
+  }, []);
+
+  const selectCity = useCallback((city: AtlasCitySummary, focusDetails = false) => {
+    focusCityOnReadyRef.current = focusDetails;
+    clearMapHover();
+    const nextScene: AtlasSceneState = { ...scene, focus: { kind: "feature", id: city.featureId } };
+    setScene(nextScene);
+    setSelectedId(null);
+    setSelectedDetail(null);
+    setDetailStatus("idle");
+    setSearchVisible(false);
+    writeSceneUrl(nextScene, null, true);
+    focusCity(city);
+  }, [clearMapHover, focusCity, scene]);
+
   useEffect(() => {
     const svg = mapHostRef.current?.querySelector<SVGSVGElement>("[data-atlas-world-map]") ?? null;
     const group = svg?.querySelector<SVGGElement>("[data-atlas-map-group]") ?? null;
     if (!svg || !group) return;
 
+    let frame = 0;
+    let previousDetailBand = -1;
+    const drawReadingAids = () => {
+      frame = 0;
+      const scale = zoomScaleRef.current;
+      const detailBand = [1, 4, 6, 8, 10, 14, 16].filter((threshold) => scale >= threshold).length;
+      if (detailBand !== previousDetailBand) {
+        applyAtlasZoomVisibility(group, scale);
+        previousDetailBand = detailBand;
+      }
+      updateAtlasCartography(svg, scale, selectedIdRef.current);
+    };
+    const scheduleReadingAids = () => {
+      if (!frame) frame = requestAnimationFrame(drawReadingAids);
+    };
     const behavior = zoom<SVGSVGElement, unknown>()
-      .scaleExtent([1, 8])
+      .scaleExtent([0.55, 128])
       .wheelDelta((event) => -event.deltaY * (event.deltaMode === 1 ? 0.025 : 0.0016) * (event.ctrlKey ? 4 : 1))
       .clickDistance(5)
-      .translateExtent([[-220, -100], [VIEWBOX_WIDTH + 220, VIEWBOX_HEIGHT + 100]])
+      .translateExtent([[ATLAS_WORLD_BOUNDS[0][0] - 170, -170], [ATLAS_WORLD_BOUNDS[1][0] + 170, 820]])
       .extent([[0, 0], [VIEWBOX_WIDTH, VIEWBOX_HEIGHT]])
       .on("zoom", (event) => {
         zoomScaleRef.current = event.transform.k;
@@ -541,19 +590,24 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
           "data-atlas-zoom-level",
           event.transform.k >= 3.6 ? "country" : event.transform.k >= 1.8 ? "regional" : "world",
         );
-        applyAtlasZoomVisibility(group, event.transform.k);
-        updateAtlasCartography(svg, event.transform.k, selectedIdRef.current);
+        scheduleReadingAids();
       });
 
     const selection = select(svg);
+    svg.setAttribute("preserveAspectRatio", window.matchMedia("(max-width:760px)").matches ? "xMidYMid slice" : "xMidYMid meet");
     selection.call(behavior).on("dblclick.zoom", null);
+    selection.call(behavior.transform, initialCamera());
     zoomBehaviorRef.current = behavior;
-    const resize = new ResizeObserver(() => updateAtlasCartography(svg, zoomScaleRef.current, selectedIdRef.current));
+    const resize = new ResizeObserver(() => {
+      svg.setAttribute("preserveAspectRatio", window.matchMedia("(max-width:760px)").matches ? "xMidYMid slice" : "xMidYMid meet");
+      scheduleReadingAids();
+    });
     resize.observe(svg);
-    updateAtlasCartography(svg, 1, selectedIdRef.current);
+    scheduleReadingAids();
 
     return () => {
       selection.on(".zoom", null);
+      cancelAnimationFrame(frame);
       resize.disconnect();
       zoomBehaviorRef.current = null;
     };
@@ -652,6 +706,20 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
   }, [detailStatus, selectedDetail]);
 
   useEffect(() => {
+    const root=rootRef.current;
+    const panel=root?.querySelector<HTMLElement>("[data-atlas-sheet]");
+    if(!root || !panel)return;
+    const sync=() => {
+      root.style.setProperty("--atlas-sheet-height",`${panel.getBoundingClientRect().height}px`);
+      const svg=mapHostRef.current?.querySelector<SVGSVGElement>("[data-atlas-world-map]");
+      if(svg)updateAtlasCartography(svg,zoomScaleRef.current,selectedIdRef.current);
+    };
+    const observer=new ResizeObserver(sync);
+    observer.observe(panel); sync();
+    return()=>observer.disconnect();
+  },[selectedDetail]);
+
+  useEffect(() => {
     const restoreFromUrl = () => {
       const params = new URLSearchParams(window.location.search);
       const parsed = parseAtlasSceneSearchParams(params);
@@ -672,11 +740,12 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
       const focusedNote = focusedNoteId
         ? patternNotes.find((note) => note.id === focusedNoteId) ?? null
         : null;
-      const hasNonCountryFocus = parsed.scene.focus?.kind === "coordinate" || Boolean(focusedNote);
+      const focusedCity = focusedNoteId ? cityById.get(focusedNoteId) ?? null : null;
+      const hasNonCountryFocus = parsed.scene.focus?.kind === "coordinate" || Boolean(focusedNote) || Boolean(focusedCity);
       const nextCountry = hasNonCountryFocus ? null : focusedCountry ?? legacyCountry;
       const nextScene: AtlasSceneState = nextCountry
         ? { ...parsed.scene, focus: { kind: "entity", id: nextCountry.id } }
-        : parsed.scene.focus?.kind === "entity" || (parsed.scene.focus?.kind === "feature" && !focusedNote)
+        : parsed.scene.focus?.kind === "entity" || (parsed.scene.focus?.kind === "feature" && !focusedNote && !focusedCity)
           ? { ...parsed.scene, focus: null }
           : parsed.scene;
 
@@ -698,19 +767,21 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
       if (parsed.usedLegacyModeAlias || parsed.issues.length > 0 || focusWasCanonicalized || countryWasCanonicalized) {
         writeSceneUrl(nextScene, nextCountry, false);
       }
-      if (nextCountry) setSheetDetent("half");
+      if (nextCountry) setSheetDetent("peek");
       if (nextCountry) {
         const feature = featureById.get(nextCountry.id);
         if (feature) window.requestAnimationFrame(() => focusFeature(feature));
       } else if (focusedNote) {
         window.requestAnimationFrame(() => focusPatternNote(focusedNote));
+      } else if (focusedCity) {
+        window.requestAnimationFrame(() => focusCity(focusedCity));
       }
     };
 
     restoreFromUrl();
     window.addEventListener("popstate", restoreFromUrl);
     return () => window.removeEventListener("popstate", restoreFromUrl);
-  }, [countryById, data.countries, featureById, focusFeature, focusPatternNote, patternNotes]);
+  }, [countryById, data.countries, featureById, focusFeature, focusPatternNote, patternNotes, cityById, focusCity]);
 
   useEffect(() => {
     const onKeyDown = (event: globalThis.KeyboardEvent) => {
@@ -734,11 +805,11 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
         return;
       }
       if (activeNote) closePatternNote();
-      else if (selectedId) closeCountry();
+      else if (selectedId || activeCity) closeCountry();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [activeNote, closeCountry, closePatternNote, searchOpen, searchVisible, selectedId]);
+  }, [activeNote, activeCity, closeCountry, closePatternNote, searchOpen, searchVisible, selectedId]);
 
   const handleSearchKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (!searchOpen || searchResults.length === 0) {
@@ -784,7 +855,10 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
   };
 
   const handleMapPointerOver = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch") return;
     if (suppressHoverUntilMoveRef.current) return;
+    const cityId = event.target instanceof Element ? event.target.closest<SVGElement>("[data-atlas-city]")?.dataset.atlasCity : null;
+    if (cityId) { clearMapHover(); setTooltip({ cityId, ...pointerPosition(event) }); return; }
     const countryId = countryIdFromTarget(event.target);
     if (!countryId || countryId === hoveredIdRef.current) return;
     toggleHoverVisual(hoveredIdRef.current, false);
@@ -815,7 +889,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
     const behavior = zoomBehaviorRef.current;
     if (!svg || !behavior) return;
     const selection = select(svg);
-    if (action === "reset") selection.call(behavior.transform, zoomIdentity);
+    if (action === "reset") selection.call(behavior.transform, initialCamera());
     else selection.call(behavior.scaleBy, action === "in" ? 1.45 : 1 / 1.45);
   };
 
@@ -872,6 +946,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
     <div
       className={`${styles.atlas} ${selectedCountry ? styles.panelOpen : ""} ${selectedCountry && sheetDetent === "half" ? styles.panelHalf : ""} ${selectedCountry && sheetDetent === "full" ? styles.panelFull : ""}`}
       ref={rootRef}
+      data-atlas-root
     >
       <div className={styles.mapBackdrop} aria-hidden="true" />
 
@@ -879,7 +954,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
         className={styles.atlasToolbar}
         inert={isMobileLayout && sheetDetent === "full" && Boolean(selectedCountry)}
       >
-        <div className={styles.atlasTitle}><h1>ATLAS</h1><span>JJ University</span></div>
+        <div className={styles.atlasTitle}><Link href="/" aria-label="JJ University home" className={styles.mobileHome}>JJ</Link><h1>ATLAS</h1></div>
         <AtlasViewBrowser activeViewId={scene.viewPresetId} onChoose={chooseView} />
         <button ref={searchButtonRef} type="button" className={styles.searchTrigger} aria-label="Search countries"
           aria-expanded={searchVisible} onClick={() => {
@@ -955,7 +1030,7 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
       <div
         className={styles.mapStage}
         ref={mapHostRef}
-        role="img"
+        role="group"
         aria-label={`Interactive world map in the ${view.name} view. Use country search to explore with a keyboard.`}
         onPointerOver={handleMapPointerOver}
         onPointerMove={handleMapPointerMove}
@@ -965,6 +1040,9 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
         }}
         onPointerLeave={clearMapHover}
         onClick={(event) => {
+          const cityId = event.target instanceof Element ? event.target.closest<SVGElement>("[data-atlas-city]")?.dataset.atlasCity : null;
+          const city = cityId ? cityById.get(cityId) : null;
+          if (city) { selectCity(city); return; }
           const noteId = noteIdFromTarget(event.target);
           const note = noteId ? patternNotes.find((candidate) => candidate.id === noteId) : null;
           if (note) {
@@ -973,11 +1051,20 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
           }
           const countryId = countryIdFromTarget(event.target);
           const country = countryId ? countryById.get(countryId) : null;
-          if (country) selectCountry(country, true);
+          if (country) selectCountry(country, zoomScaleRef.current < 4);
         }}
       >
         {map}
       </div>
+
+      {tooltip && tooltipCity && <div ref={tooltipRef} className={styles.tooltip} style={{ left: tooltip.x, top: tooltip.y }} role="status">
+        <strong>{tooltipCity.name}</strong><span>{tooltipCity.isNationalCapital ? "National capital" : "City"}{tooltipCity.countryId && countryById.has(tooltipCity.countryId) ? ` · ${countryById.get(tooltipCity.countryId)!.name}` : ""}</span>
+      </div>}
+      {activeCity && <AtlasCityCard city={activeCity} country={activeCity.countryId ? countryById.get(activeCity.countryId) ?? null : null}
+        sources={data.sources} onClose={() => closeCountry()} onCountry={() => {
+          const country = activeCity.countryId ? countryById.get(activeCity.countryId) : null;
+          if (country) selectCountry(country, false, true, "half", true);
+        }} />}
 
       {tooltip && tooltipCountry && (
         <div ref={tooltipRef} className={styles.tooltip} style={{ left: tooltip.x, top: tooltip.y }} role="status">
@@ -1024,8 +1111,8 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
         generatedAt={data.generatedAt}
         layerData={layerData}
         layerErrors={layerErrors}
-        onToggleLayer={scene.viewPresetId === "where-people-live" ? toggleLayer : undefined}
-        inactive={isMobileLayout && Boolean(selectedCountry)}
+        onToggleLayer={toggleLayer}
+        inactive={isMobileLayout && sheetDetent !== "peek" && Boolean(selectedCountry)}
         onHighlightCategory={highlightCategory}
       />
 
@@ -1056,7 +1143,6 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
         <button type="button" onClick={() => mapControl("reset")} aria-label="Reset world view" className={styles.resetControl}>⌂</button>
       </div>
 
-      <div className={styles.interactionHint}>Drag to move · scroll or pinch to zoom · click a country</div>
 
       {selectedCountry && selectedDetail?.id === selectedCountry.id && detailStatus === "ready" && (
         <AtlasCountryPanel
@@ -1067,6 +1153,8 @@ export default function AtlasWorldExperience({ data, patternNotes, map }: AtlasW
           sheetDetent={sheetDetent}
           onSheetDetentChange={setSheetDetent}
           onShowView={chooseView}
+          cities={selectedCities}
+          onShowCity={(id) => { const city = cityById.get(id); if (city) selectCity(city, true); }}
           onClose={() => closeCountry()}
         />
       )}

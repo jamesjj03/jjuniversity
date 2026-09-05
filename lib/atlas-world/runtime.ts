@@ -80,7 +80,7 @@ export type AtlasRuntimeDataset = {
   countries: AtlasRuntimeCountry[];
   sources: AtlasRuntimeSource[];
   geometry: {
-    projectionId: "equal-earth";
+    projectionId: "mercator";
     viewBox: [0, 0, 1200, 650];
     spherePath: string;
     graticulePath: string;
@@ -108,7 +108,7 @@ export type AtlasClientDataset = {
   countries: AtlasRuntimeCountrySummary[];
   sources: AtlasRuntimeSource[];
   geometry: {
-    projectionId: "equal-earth";
+    projectionId: "mercator";
     viewBox: [0, 0, 1200, 650];
     features: AtlasRuntimeFeatureMeta[];
     validFrom: string | null;

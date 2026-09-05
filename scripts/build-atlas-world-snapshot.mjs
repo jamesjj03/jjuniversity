@@ -819,22 +819,11 @@ function worldBankIndicatorMap(records, economyCodes) {
   );
 }
 
-function equalEarthRaw([longitudeDegrees, latitudeDegrees]) {
-  const A1 = 1.340264;
-  const A2 = -0.081106;
-  const A3 = 0.000893;
-  const A4 = 0.003796;
-  const M = Math.sqrt(3) / 2;
+function mercatorRaw([longitudeDegrees, latitudeDegrees]) {
   const lambda = (longitudeDegrees * Math.PI) / 180;
-  const phi = (Math.max(-90, Math.min(90, latitudeDegrees)) * Math.PI) / 180;
-  const theta = Math.asin(M * Math.sin(phi));
-  const theta2 = theta * theta;
-  const theta6 = theta2 * theta2 * theta2;
-  const denominator = M * (A1 + 3 * A2 * theta2 + theta6 * (7 * A3 + 9 * A4 * theta2));
-  return [
-    (lambda * Math.cos(theta)) / denominator,
-    -(theta * (A1 + A2 * theta2 + theta6 * (A3 + A4 * theta2))),
-  ];
+  const limit = 85.0511287798066;
+  const phi = (Math.max(-limit, Math.min(limit, latitudeDegrees)) * Math.PI) / 180;
+  return [lambda, -Math.log(Math.tan(Math.PI / 4 + phi / 2))];
 }
 
 function sphereCoordinates(step = 2) {
@@ -847,7 +836,7 @@ function sphereCoordinates(step = 2) {
 }
 
 function projectionForViewBox() {
-  const rawOutline = sphereCoordinates().map(equalEarthRaw);
+  const rawOutline = sphereCoordinates().map(mercatorRaw);
   const xs = rawOutline.map((point) => point[0]);
   const ys = rawOutline.map((point) => point[1]);
   const minX = Math.min(...xs);
@@ -862,7 +851,7 @@ function projectionForViewBox() {
   const translateY = VIEWBOX_HEIGHT / 2 - ((minY + maxY) / 2) * scale;
 
   return (coordinate) => {
-    const [x, y] = equalEarthRaw(coordinate);
+    const [x, y] = mercatorRaw(coordinate);
     return [x * scale + translateX, y * scale + translateY];
   };
 }
@@ -1455,7 +1444,7 @@ async function main() {
 
   const lockedSources = new Map(sourceLock.sources.map((source) => [source.id, source]));
   assert(
-    sourceLock.lockId === "jju-atlas-sources-2026-09-04",
+    sourceLock.lockId === "jju-atlas-sources-2026-09-05",
     `Unexpected Atlas source lock ${String(sourceLock.lockId)}`,
   );
   for (const sourceRecord of sourceRecords) {
@@ -1479,7 +1468,7 @@ async function main() {
     schemaVersion: SCHEMA_VERSION,
     snapshotId: SNAPSHOT_ID,
     projection: {
-      id: "equal-earth",
+      id: "mercator",
       viewBox: [0, 0, VIEWBOX_WIDTH, VIEWBOX_HEIGHT],
       width: VIEWBOX_WIDTH,
       height: VIEWBOX_HEIGHT,
@@ -1803,7 +1792,7 @@ async function main() {
       "utf8",
     ),
     writeFile(
-      path.join(outputDirectory, "geometry-equal-earth.v1.json"),
+      path.join(outputDirectory, "geometry-mercator.v1.json"),
       `${JSON.stringify(geometrySnapshot, null, 2)}\n`,
       "utf8",
     ),
@@ -1813,7 +1802,7 @@ async function main() {
       "utf8",
     ),
     writeFile(
-      path.join(mapAssetDirectory, "geometry-equal-earth.v1.svg"),
+      path.join(mapAssetDirectory, "geometry-mercator.v1.svg"),
       renderGeometrySvgAsset(geometrySnapshot),
       "utf8",
     ),

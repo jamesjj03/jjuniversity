@@ -26,9 +26,9 @@
         "focus": {
           "longitude": 31,
           "latitude": 26,
-          "equalEarth": [
-            696.01,
-            213.04
+          "projected": [
+            653.56,
+            278.45
           ]
         },
         "boundsWgs84": [
@@ -57,7 +57,7 @@
       "observationRefs": [
         {
           "datasetId": "population-density-2025",
-          "snapshotId": "atlas-geography-2026-09-04-phase25",
+          "snapshotId": "atlas-geography-2026-09-05-mercator",
           "observedAt": "2025",
           "status": "estimated"
         }
@@ -124,9 +124,9 @@
         "focus": {
           "longitude": 110.2,
           "latitude": -7.6,
-          "equalEarth": [
-            957.26,
-            358.28
+          "projected": [
+            790.4,
+            338.17
           ]
         },
         "boundsWgs84": [
@@ -161,7 +161,7 @@
       "observationRefs": [
         {
           "datasetId": "population-density-2025",
-          "snapshotId": "atlas-geography-2026-09-04-phase25",
+          "snapshotId": "atlas-geography-2026-09-05-mercator",
           "observedAt": "2025",
           "status": "estimated"
         }
@@ -238,9 +238,9 @@
         "focus": {
           "longitude": 105,
           "latitude": 36,
-          "equalEarth": [
-            910.21,
-            172.7
+          "projected": [
+            781.42,
+            258.25
           ]
         },
         "boundsWgs84": [
@@ -280,15 +280,25 @@
               ]
             },
             "derived": {
-              "projectionId": "equal-earth",
+              "projectionId": "mercator",
               "viewBox": [
                 0,
                 0,
                 1200,
                 650
               ],
-              "path": "M941.78,120.32L906.19,217.11",
-              "transformationId": "wgs84-to-equal-earth-svg-v1"
+              "transformationId": "wgs84-to-mercator-svg-v1",
+              "path": "M820.34,224.29L770.18,280.33",
+              "bounds": [
+                [
+                  770.18,
+                  224.29
+                ],
+                [
+                  820.34,
+                  280.33
+                ]
+              ]
             }
           }
         }
@@ -296,7 +306,7 @@
       "observationRefs": [
         {
           "datasetId": "population-density-2025",
-          "snapshotId": "atlas-geography-2026-09-04-phase25",
+          "snapshotId": "atlas-geography-2026-09-05-mercator",
           "observedAt": "2025",
           "status": "estimated"
         }
@@ -364,9 +374,9 @@
         "focus": {
           "longitude": 80,
           "latitude": 27,
-          "equalEarth": [
-            846.78,
-            208.91
+          "projected": [
+            738.22,
+            276.52
           ]
         },
         "boundsWgs84": [
@@ -404,7 +414,7 @@
       "observationRefs": [
         {
           "datasetId": "population-density-2025",
-          "snapshotId": "atlas-geography-2026-09-04-phase25",
+          "snapshotId": "atlas-geography-2026-09-05-mercator",
           "observedAt": "2025",
           "status": "estimated"
         }

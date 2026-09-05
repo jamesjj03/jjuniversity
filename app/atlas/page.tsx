@@ -6,7 +6,8 @@ import {
   getAtlasClientDataset,
   getAtlasRuntimeDataset,
 } from "@/lib/atlas-world/getAtlasRuntime";
-import { getAtlasPatternNotes } from "@/lib/atlas-world/getAtlasGeography";
+import { getAtlasGeographyPack, getAtlasPatternNotes } from "@/lib/atlas-world/getAtlasGeography";
+import { atlasCitySummary } from "@/lib/atlas-world/cities";
 
 export const metadata: Metadata = {
   title: "Atlas",
@@ -16,10 +17,11 @@ export const metadata: Metadata = {
 export default function AtlasPage() {
   const runtimeData = getAtlasRuntimeDataset();
   return (
-    <SiteV2Shell immersive>
+    <SiteV2Shell immersive mobileMap>
       <AtlasWorldExperience
         data={getAtlasClientDataset(runtimeData)}
         patternNotes={getAtlasPatternNotes()}
+        cities={getAtlasGeographyPack().featureCollections.majorCities.features.map(atlasCitySummary)}
         map={<AtlasWorldMap data={runtimeData} />}
       />
     </SiteV2Shell>

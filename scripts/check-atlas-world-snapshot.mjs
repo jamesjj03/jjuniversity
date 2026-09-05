@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const dataDirectory = path.join(scriptDirectory, "..", "lib", "atlas-world", "data");
-const mapAssetPath = path.join(scriptDirectory, "..", "public", "atlas-world", "geometry-equal-earth.v1.svg");
+const mapAssetPath = path.join(scriptDirectory, "..", "public", "atlas-world", "geometry-mercator.v1.svg");
 
 async function readJson(name) {
   return JSON.parse(await readFile(path.join(dataDirectory, name), "utf8"));
@@ -15,7 +15,7 @@ async function readJson(name) {
 
 const [countries, geometry, validation, mapAsset] = await Promise.all([
   readJson("countries.v1.json"),
-  readJson("geometry-equal-earth.v1.json"),
+  readJson("geometry-mercator.v1.json"),
   readJson("validation.v1.json"),
   readFile(mapAssetPath, "utf8"),
 ]);

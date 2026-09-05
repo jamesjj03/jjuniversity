@@ -154,6 +154,7 @@ export default function AtlasLegend({
             </p>
           ))}
           <span>Country facts snapshot {generatedAt.slice(0, 10)}</span>
+          <p>Mercator keeps local directions and shapes familiar, but exaggerates land area near the poles. Use area figures to compare country size.</p>
         </div>
       </details>
       <p className={styles.legendDescription}>{viewDescription}</p>
@@ -197,17 +198,17 @@ export default function AtlasLegend({
 
   return (
     <aside
-      className={styles.legend}
+      className={`${styles.legend} ${plan.scene.viewPresetId === "political" ? styles.legendMinimal : ""}`}
       aria-label={`${viewName} map legend`}
       aria-hidden={inactive || undefined}
       inert={inactive}
     >
       <div className={styles.desktopLegendBody}>
-        {renderLegendBody()}
+        {plan.scene.viewPresetId === "political" ? <details className={styles.politicalMapKey}><summary>Map key & sources</summary>{renderLegendBody()}</details> : renderLegendBody()}
       </div>
       <details className={styles.legendDisclosure}>
         <summary>
-          <span>Layers</span>
+          <span>Map key</span>
           <strong>{viewName}</strong>
           <i aria-hidden="true">⌃</i>
         </summary>
