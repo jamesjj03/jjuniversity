@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1.0",
+  "schemaVersion": "1.2.0",
   "reviewedAt": "2026-09-05",
   "purpose": "Bounded visual identity pilot, not a current officeholder service.",
   "people": [
@@ -120,58 +120,76 @@
   ],
   "bindings": [
     {
+      "officeId": "office:country:GAB:head-of-state",
       "entityId": "country:GAB",
       "role": "headOfState",
       "personId": "person:brice-oligui-nguema",
       "title": "President",
       "exactSourceName": "President Brice OLIGUI Nguema",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
-      "observedAt": "2025-10-01"
+      "observedAt": "2025-10-01",
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
     },
     {
+      "officeId": "office:country:GAB:head-of-government",
       "entityId": "country:GAB",
       "role": "headOfGovernment",
       "personId": "person:brice-oligui-nguema",
       "title": "President",
       "exactSourceName": "President Brice OLIGUI Nguema",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
-      "observedAt": "2025-10-01"
+      "observedAt": "2025-10-01",
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
     },
     {
+      "officeId": "office:country:GBR:head-of-state",
       "entityId": "country:GBR",
       "role": "headOfState",
       "personId": "person:charles-iii",
       "title": "King",
       "exactSourceName": "King CHARLES III",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
-      "observedAt": "2025-10-01"
+      "observedAt": "2025-10-01",
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
     },
     {
+      "officeId": "office:country:GBR:head-of-government",
       "entityId": "country:GBR",
       "role": "headOfGovernment",
       "personId": "person:keir-starmer",
       "title": "Prime Minister",
       "exactSourceName": "Prime Minister Keir STARMER",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
-      "observedAt": "2025-10-01"
+      "observedAt": "2025-10-01",
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
     },
     {
+      "officeId": "office:country:ZAF:head-of-state",
       "entityId": "country:ZAF",
       "role": "headOfState",
       "personId": "person:cyril-ramaphosa",
       "title": "President",
       "exactSourceName": "President Matamela Cyril RAMAPHOSA",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
-      "observedAt": "2025-12-21"
+      "observedAt": "2025-12-21",
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
     },
     {
+      "officeId": "office:country:ZAF:head-of-government",
       "entityId": "country:ZAF",
       "role": "headOfGovernment",
       "personId": "person:cyril-ramaphosa",
       "title": "President",
       "exactSourceName": "President Matamela Cyril RAMAPHOSA",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
-      "observedAt": "2025-12-21"
+      "observedAt": "2025-12-21",
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
     }
   ]
 }

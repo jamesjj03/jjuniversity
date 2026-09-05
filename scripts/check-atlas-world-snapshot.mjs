@@ -49,7 +49,19 @@ for (const feature of geometry.features) {
   assert.ok(mapAsset.includes(`id="${assetId}"`), `${feature.entityId} is missing from the browser geometry asset`);
 }
 
-for (const key of ["population", "governmentNormalized", "religionNormalized", "headOfState", "headOfGovernment"]) {
+for (const key of [
+  "population",
+  "urbanPopulationPercent",
+  "populationGrowthAnnualPercent",
+  "populationAges0To14Percent",
+  "populationAges65PlusPercent",
+  "fertilityRateBirthsPerWoman",
+  "lifeExpectancyYears",
+  "governmentNormalized",
+  "religionNormalized",
+  "headOfState",
+  "headOfGovernment",
+]) {
   assert.ok(validation.coverage[key]?.populated >= 200, `${key} must retain useful global coverage`);
 }
 

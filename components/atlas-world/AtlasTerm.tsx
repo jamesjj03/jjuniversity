@@ -2,7 +2,13 @@
 
 import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from "react";
 import { createPortal } from "react-dom";
-import { ATLAS_GLOSSARY, getAtlasGlossaryTerm, type AtlasGlossaryTerm } from "@/lib/atlas-world/glossary";
+import {
+  ATLAS_GLOSSARY,
+  ATLAS_GLOSSARY_GROUPS,
+  getAtlasGlossaryTerm,
+  type AtlasGlossaryGroup,
+  type AtlasGlossaryTerm,
+} from "@/lib/atlas-world/glossary";
 import styles from "./AtlasTerm.module.css";
 
 type DefinitionDialogProps = {
@@ -11,14 +17,8 @@ type DefinitionDialogProps = {
   onDismiss: () => void;
 };
 
-type GuideGroup = AtlasGlossaryTerm["group"];
+type GuideGroup = AtlasGlossaryGroup;
 type GuideLocation = { termId: string | null; group: GuideGroup | null; query: string };
-const guideGroups: { name: GuideGroup; description: string }[] = [
-  { name: "Government", description: "Who holds power, and how it is organized." },
-  { name: "Religion", description: "Traditions, identities and the figures behind the colors." },
-  { name: "Reading the map", description: "What the numbers can—and cannot—tell you." },
-  { name: "Geography", description: "Land, borders and places whose status is contested." },
-];
 const guideHome: GuideLocation = { termId: null, group: null, query: "" };
 
 function DefinitionDialog({ initialTerm, triggerRef, onDismiss }: DefinitionDialogProps) {
@@ -144,7 +144,7 @@ function DefinitionDialog({ initialTerm, triggerRef, onDismiss }: DefinitionDial
               <span>Find a definition{location.group ? ` in ${location.group.toLowerCase()}` : ""}</span>
               <input ref={searchRef} type="search" value={location.query} onChange={(event) => setTrail((previous) => [...previous.slice(0, -1), { ...previous[previous.length - 1], query: event.target.value }])} placeholder="Try monarchy, density or folk religion" />
             </label>
-            {!location.group && !location.query ? <div className={styles.groups}>{guideGroups.map((group) => <button type="button" key={group.name} onClick={() => navigate({ termId: null, group: group.name, query: "" })}><strong>{group.name}</strong><span>{group.description}</span><span className={styles.groupArrow} aria-hidden="true">→</span></button>)}</div> : <div className={styles.index}>
+            {!location.group && !location.query ? <><div className={styles.groups}>{ATLAS_GLOSSARY_GROUPS.map((group) => <button type="button" key={group.name} onClick={() => navigate({ termId: null, group: group.name, query: "" })}><strong>{group.name}</strong><span>{group.description}</span><span className={styles.groupArrow} aria-hidden="true">→</span></button>)}</div><a className={styles.completeIndex} href="/atlas/index">Open the complete Atlas Index <span aria-hidden="true">→</span></a></> : <div className={styles.index}>
               {matching.map((entry) => <button type="button" key={entry.id} onClick={() => select(entry)}><span>{entry.label}<small>{entry.definition.split(/(?<=\.)\s/)[0]}</small></span><span aria-hidden="true">→</span></button>)}
               {matching.length === 0 && <p role="status">No matching definition. Try a broader term.</p>}
             </div>}

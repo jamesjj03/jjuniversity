@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0.0",
+  "authorityId": "jju-atlas-annotation-drafts",
+  "revision": 1,
+  "updatedAt": "2026-09-05T00:00:00.000Z",
+  "policy": {
+    "requireHumanApproval": true,
+    "automatedPublication": false,
+    "publicPatternNotesAreSeparate": true
+  },
+  "drafts": []
+}

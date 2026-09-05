@@ -6,7 +6,7 @@ const placements: Record<string, Placement> = {
   USA:{at:[-101,39],name:"United States",priority:0}, CAN:{at:[-104,59],priority:0},
   BRA:{at:[-52,-10],angle:-8,priority:0}, RUS:{at:[97,61],priority:0},
   CHN:{at:[103,36],priority:0}, IND:{at:[79,22],priority:0}, AUS:{at:[134,-25],priority:0},
-  DZA:{at:[2,28],priority:1}, COD:{at:[23,-3],name:"DR Congo",priority:1},
+  DZA:{at:[2,28]}, COD:{at:[23,-3],name:"DR Congo"},
   MEX:{at:[-102,24],angle:22,priority:1}, ARG:{at:[-65,-37],angle:65}, CHL:{at:[-71,-31],angle:82},
   JPN:{at:[138,36],angle:-48}, NOR:{at:[9,62],angle:-55}, ITA:{at:[12.5,43],angle:43},
   FRA:{at:[2.2,46.5]}, GBR:{at:[-2.8,54],name:"United Kingdom"},

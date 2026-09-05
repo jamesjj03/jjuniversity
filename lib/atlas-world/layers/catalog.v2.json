@@ -250,6 +250,192 @@
     },
     {
       "schemaVersion": "2.0.0",
+      "id": "admin0-urban-population-share",
+      "name": "Urban population share",
+      "description": "Latest available share of the population living in nationally defined urban areas for each World Bank economy.",
+      "valueType": "number",
+      "unit": "percent_of_population",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": {
+        "taxonomyId": "world-bank-indicators",
+        "path": ["people", "settlement", "urban_population_share"],
+        "depth": 3
+      },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["world-bank-sp-urb-totl-in-zs-2026-07-13"],
+      "sourceField": "SP.URB.TOTL.IN.ZS",
+      "access": {
+        "kind": "api",
+        "endpoint": "/api/atlas/layers/admin0-urban-population-share",
+        "cachePolicy": "revalidate_daily"
+      },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-population-growth-annual",
+      "name": "Population growth",
+      "description": "Latest available annual population growth rate for each World Bank economy.",
+      "valueType": "number",
+      "unit": "annual_percent",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": {
+        "taxonomyId": "world-bank-indicators",
+        "path": ["people", "population", "annual_growth"],
+        "depth": 3
+      },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["world-bank-sp-pop-grow-2026-07-13"],
+      "sourceField": "SP.POP.GROW",
+      "access": {
+        "kind": "api",
+        "endpoint": "/api/atlas/layers/admin0-population-growth-annual",
+        "cachePolicy": "revalidate_daily"
+      },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-population-ages-0-14",
+      "name": "Population ages 0–14",
+      "description": "Latest available share of each World Bank economy's population ages 0–14.",
+      "valueType": "number",
+      "unit": "percent_of_population",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": {
+        "taxonomyId": "world-bank-indicators",
+        "path": ["people", "age_structure", "ages_0_14"],
+        "depth": 3
+      },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["world-bank-sp-pop-0014-to-zs-2026-07-13"],
+      "sourceField": "SP.POP.0014.TO.ZS",
+      "access": {
+        "kind": "api",
+        "endpoint": "/api/atlas/layers/admin0-population-ages-0-14",
+        "cachePolicy": "revalidate_daily"
+      },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-population-ages-65-plus",
+      "name": "Population ages 65+",
+      "description": "Latest available share of each World Bank economy's population ages 65 and above.",
+      "valueType": "number",
+      "unit": "percent_of_population",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": {
+        "taxonomyId": "world-bank-indicators",
+        "path": ["people", "age_structure", "ages_65_plus"],
+        "depth": 3
+      },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["world-bank-sp-pop-65up-to-zs-2026-07-13"],
+      "sourceField": "SP.POP.65UP.TO.ZS",
+      "access": {
+        "kind": "api",
+        "endpoint": "/api/atlas/layers/admin0-population-ages-65-plus",
+        "cachePolicy": "revalidate_daily"
+      },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-fertility-rate",
+      "name": "Fertility rate",
+      "description": "Latest available total fertility rate for each World Bank economy.",
+      "valueType": "number",
+      "unit": "births_per_woman",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": {
+        "taxonomyId": "world-bank-indicators",
+        "path": ["people", "demography", "total_fertility_rate"],
+        "depth": 3
+      },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["world-bank-sp-dyn-tfrt-in-2026-07-13"],
+      "sourceField": "SP.DYN.TFRT.IN",
+      "access": {
+        "kind": "api",
+        "endpoint": "/api/atlas/layers/admin0-fertility-rate",
+        "cachePolicy": "revalidate_daily"
+      },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-life-expectancy",
+      "name": "Life expectancy",
+      "description": "Latest available life expectancy at birth for each World Bank economy.",
+      "valueType": "number",
+      "unit": "years",
+      "geometryKind": "polygon",
+      "geographicResolution": { "kind": "administrative", "level": 0, "parentLevel": null },
+      "conceptualResolution": {
+        "taxonomyId": "world-bank-indicators",
+        "path": ["people", "health", "life_expectancy_at_birth"],
+        "depth": 3
+      },
+      "entityKey": "atlas_entity_id",
+      "sourceIds": ["world-bank-sp-dyn-le00-in-2026-07-13"],
+      "sourceField": "SP.DYN.LE00.IN",
+      "access": {
+        "kind": "api",
+        "endpoint": "/api/atlas/layers/admin0-life-expectancy",
+        "cachePolicy": "revalidate_daily"
+      },
+      "temporal": {
+        "kind": "observation_series",
+        "defaultSelection": { "kind": "latest" },
+        "selectionPolicy": "latest_observation_per_feature",
+        "fallback": "none",
+        "heterogeneousObservationDates": true,
+        "supportsArbitraryTime": false
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
       "id": "physical-relief",
       "name": "Physical relief",
       "description": "Subtle Natural Earth shaded relief aligned to the Atlas Mercator map.",
@@ -968,6 +1154,264 @@
     },
     {
       "schemaVersion": "2.0.0",
+      "id": "admin0-urban-population-share",
+      "name": "Urban population share",
+      "description": "The share of people living in nationally defined urban areas.",
+      "datasetId": "admin0-urban-population-share",
+      "resolverId": "urban-population-share-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "continuous",
+        "scale": "linear",
+        "domain": [0, 100],
+        "clamp": true,
+        "unit": "% urban population",
+        "stops": [
+          { "position": 0, "color": "#d7c9a8" },
+          { "position": 0.25, "color": "#aeb487" },
+          { "position": 0.5, "color": "#75977b" },
+          { "position": 0.75, "color": "#3f776d" },
+          { "position": 1, "color": "#174e55" }
+        ],
+        "ticks": [
+          { "value": 0, "label": "0%" },
+          { "value": 25, "label": "25%" },
+          { "value": 50, "label": "50%" },
+          { "value": 75, "label": "75%" },
+          { "value": 100, "label": "100%" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["world-bank-sp-urb-totl-in-zs-2026-07-13"],
+        "methodology": "Uses SP.URB.TOTL.IN.ZS and retains each economy's observation year. Urban definitions come from national statistical offices and are not perfectly harmonized.",
+        "authoredVisualChoices": ["The fixed 0–100% linear scale supports direct percentage comparison; color does not imply city quality or development."]
+      },
+      "temporal": { "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-population-growth-annual",
+      "name": "Population growth",
+      "description": "Annual population change, including births, deaths and migration.",
+      "datasetId": "admin0-population-growth-annual",
+      "resolverId": "population-growth-annual-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "continuous",
+        "scale": "linear",
+        "domain": [-5, 5],
+        "clamp": true,
+        "unit": "annual %",
+        "stops": [
+          { "position": 0, "color": "#733c4d" },
+          { "position": 0.25, "color": "#b56f62" },
+          { "position": 0.5, "color": "#c8c2aa" },
+          { "position": 0.75, "color": "#6f9980" },
+          { "position": 1, "color": "#215e58" }
+        ],
+        "ticks": [
+          { "value": -5, "label": "−5%" },
+          { "value": -2.5, "label": "−2.5%" },
+          { "value": 0, "label": "0%" },
+          { "value": 2.5, "label": "+2.5%" },
+          { "value": 5, "label": "+5%" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["world-bank-sp-pop-grow-2026-07-13"],
+        "methodology": "Uses SP.POP.GROW, the exponential annual rate of change in de facto midyear population, retaining each economy's observation year.",
+        "authoredVisualChoices": ["A diverging scale centers zero so decline and growth read as different directions; visual clamping at ±5% does not alter tooltip values."]
+      },
+      "temporal": { "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-population-ages-0-14",
+      "name": "Children and young teens",
+      "description": "The share of the population ages 0–14.",
+      "datasetId": "admin0-population-ages-0-14",
+      "resolverId": "population-ages-0-14-share-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "continuous",
+        "scale": "linear",
+        "domain": [0, 50],
+        "clamp": true,
+        "unit": "% of population ages 0–14",
+        "stops": [
+          { "position": 0, "color": "#d5d1ba" },
+          { "position": 0.25, "color": "#c4b37f" },
+          { "position": 0.5, "color": "#b28b50" },
+          { "position": 0.75, "color": "#a2643b" },
+          { "position": 1, "color": "#7f3c2e" }
+        ],
+        "ticks": [
+          { "value": 10, "label": "10%" },
+          { "value": 20, "label": "20%" },
+          { "value": 30, "label": "30%" },
+          { "value": 40, "label": "40%" },
+          { "value": 50, "label": "50%" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["world-bank-sp-pop-0014-to-zs-2026-07-13"],
+        "methodology": "Uses SP.POP.0014.TO.ZS as a share of de facto total population and retains each economy's observation year.",
+        "authoredVisualChoices": ["A fixed 0–50% scale makes countries comparable without recalculating colors from the current snapshot."]
+      },
+      "temporal": { "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-population-ages-65-plus",
+      "name": "Older population",
+      "description": "The share of the population ages 65 and above.",
+      "datasetId": "admin0-population-ages-65-plus",
+      "resolverId": "population-ages-65-plus-share-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "continuous",
+        "scale": "linear",
+        "domain": [0, 40],
+        "clamp": true,
+        "unit": "% of population ages 65+",
+        "stops": [
+          { "position": 0, "color": "#d6cfb7" },
+          { "position": 0.25, "color": "#aaa984" },
+          { "position": 0.5, "color": "#7b876b" },
+          { "position": 0.75, "color": "#55644f" },
+          { "position": 1, "color": "#34443e" }
+        ],
+        "ticks": [
+          { "value": 0, "label": "0%" },
+          { "value": 10, "label": "10%" },
+          { "value": 20, "label": "20%" },
+          { "value": 30, "label": "30%" },
+          { "value": 40, "label": "40%" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["world-bank-sp-pop-65up-to-zs-2026-07-13"],
+        "methodology": "Uses SP.POP.65UP.TO.ZS as a share of de facto total population and retains each economy's observation year.",
+        "authoredVisualChoices": ["A fixed 0–40% scale reveals global age-structure differences while retaining outlier values in tooltips."]
+      },
+      "temporal": { "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-fertility-rate",
+      "name": "Fertility rate",
+      "description": "The period total fertility rate, measured as births per woman.",
+      "datasetId": "admin0-fertility-rate",
+      "resolverId": "fertility-rate-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "continuous",
+        "scale": "linear",
+        "domain": [0.5, 7],
+        "clamp": true,
+        "unit": "births per woman",
+        "stops": [
+          { "position": 0, "color": "#485d6b" },
+          { "position": 0.25, "color": "#5f8583" },
+          { "position": 0.5, "color": "#a1a56f" },
+          { "position": 0.75, "color": "#bb7748" },
+          { "position": 1, "color": "#8f3d32" }
+        ],
+        "ticks": [
+          { "value": 1, "label": "1" },
+          { "value": 2, "label": "2" },
+          { "value": 3, "label": "3" },
+          { "value": 5, "label": "5" },
+          { "value": 7, "label": "7" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["world-bank-sp-dyn-tfrt-in-2026-07-13"],
+        "methodology": "Uses SP.DYN.TFRT.IN, a period rate implied by the age-specific fertility rates of the stated year, and retains each economy's observation year.",
+        "authoredVisualChoices": ["The fixed linear scale shows the full observed world range; it does not label demographic outcomes as good or bad."]
+      },
+      "temporal": { "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "admin0-life-expectancy",
+      "name": "Life expectancy",
+      "description": "Period life expectancy at birth under the mortality pattern of the observation year.",
+      "datasetId": "admin0-life-expectancy",
+      "resolverId": "life-expectancy-v1",
+      "renderer": "polygon-fill",
+      "channel": "admin0-fill",
+      "slot": "thematic-area",
+      "zIndex": 300,
+      "defaultOpacity": 1,
+      "interactive": { "hover": false, "select": false, "pointerEvents": "shared_admin0_hit_layer" },
+      "legend": {
+        "kind": "continuous",
+        "scale": "linear",
+        "domain": [50, 90],
+        "clamp": true,
+        "unit": "years at birth",
+        "stops": [
+          { "position": 0, "color": "#874238" },
+          { "position": 0.25, "color": "#b4714d" },
+          { "position": 0.5, "color": "#b9a874" },
+          { "position": 0.75, "color": "#668d76" },
+          { "position": 1, "color": "#285f66" }
+        ],
+        "ticks": [
+          { "value": 50, "label": "50" },
+          { "value": 60, "label": "60" },
+          { "value": 70, "label": "70" },
+          { "value": 80, "label": "80" },
+          { "value": 90, "label": "90" }
+        ]
+      },
+      "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
+      "compatibility": { "exclusiveGroup": "admin0-fill", "requiresLayerIds": [], "conflictsWithLayerIds": [] },
+      "provenance": {
+        "sourceIds": ["world-bank-sp-dyn-le00-in-2026-07-13"],
+        "methodology": "Uses SP.DYN.LE00.IN as period life expectancy at birth and retains each economy's observation year; it is not an individual lifespan forecast.",
+        "authoredVisualChoices": ["The fixed 50–90 year linear scale emphasizes meaningful world differences while preserving exact values in tooltips."]
+      },
+      "temporal": { "kind": "observation_series", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "latest_observation_per_feature", "fallback": "none", "heterogeneousObservationDates": true, "supportsArbitraryTime": false }
+    },
+    {
+      "schemaVersion": "2.0.0",
       "id": "modern-borders",
       "name": "Modern borders",
       "description": "Present-day Atlas entity boundaries, kept independent from thematic fills.",
@@ -1283,9 +1727,9 @@
         "strokeWidth": 0.55
       },
       "interactive": {
-        "hover": false,
-        "select": false,
-        "pointerEvents": "none"
+        "hover": true,
+        "select": true,
+        "pointerEvents": "visual"
       },
       "legend": {
         "kind": "none"
@@ -1344,9 +1788,9 @@
         "strokeWidth": 1.05
       },
       "interactive": {
-        "hover": false,
-        "select": false,
-        "pointerEvents": "none"
+        "hover": true,
+        "select": true,
+        "pointerEvents": "visual"
       },
       "legend": {
         "kind": "none"
@@ -1910,6 +2354,114 @@
             "role": "context"
           }
         }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "urbanization",
+      "name": "Urbanization",
+      "description": "The share of people living in areas each country defines as urban. Definitions differ across countries.",
+      "question": "Where does daily life concentrate in towns and cities rather than rural areas?",
+      "legacyModeAliases": ["urbanization", "urban-share", "urban"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "urbanization:fill", "layerId": "admin0-urban-population-share", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "urbanization:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "urbanization:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "urbanization:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "urbanization:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "urbanization:cities", "layerId": "major-cities", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "urbanization:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "population-growth",
+      "name": "Population growth",
+      "description": "Annual population change from births, deaths and migration—not fertility alone.",
+      "question": "Where are populations growing, stable or shrinking?",
+      "legacyModeAliases": ["population-growth", "growth"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "population-growth:fill", "layerId": "admin0-population-growth-annual", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "population-growth:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "population-growth:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "population-growth:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "population-growth:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "population-growth:cities", "layerId": "major-cities", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "population-growth:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "children-share",
+      "name": "Children and young teens",
+      "description": "The share of each population ages 0–14.",
+      "question": "Where do children and young teens make up the largest share of society?",
+      "legacyModeAliases": ["children-share", "ages-0-14", "young-population"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "children-share:fill", "layerId": "admin0-population-ages-0-14", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "children-share:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "children-share:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "children-share:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "children-share:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "children-share:cities", "layerId": "major-cities", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "children-share:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "older-population",
+      "name": "Older population",
+      "description": "The share of each population ages 65 and above.",
+      "question": "Where do older adults make up the largest share of society?",
+      "legacyModeAliases": ["older-population", "ages-65-plus", "aging"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "older-population:fill", "layerId": "admin0-population-ages-65-plus", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "older-population:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "older-population:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "older-population:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "older-population:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "older-population:cities", "layerId": "major-cities", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "older-population:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "fertility",
+      "name": "Fertility",
+      "description": "The period total fertility rate implied by the observation year's age-specific rates.",
+      "question": "Where are present fertility rates highest and lowest?",
+      "legacyModeAliases": ["fertility", "fertility-rate"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "fertility:fill", "layerId": "admin0-fertility-rate", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "fertility:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "fertility:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "fertility:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "fertility:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "fertility:cities", "layerId": "major-cities", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "fertility:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "life-expectancy",
+      "name": "Life expectancy",
+      "description": "Period life expectancy at birth under the mortality pattern of the observation year.",
+      "question": "Where do current mortality patterns imply longer or shorter lives?",
+      "legacyModeAliases": ["life-expectancy", "longevity"],
+      "shareable": true,
+      "layerInstances": [
+        { "id": "life-expectancy:fill", "layerId": "admin0-life-expectancy", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "life-expectancy:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "life-expectancy:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "life-expectancy:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
+        { "id": "life-expectancy:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "life-expectancy:cities", "layerId": "major-cities", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
+        { "id": "life-expectancy:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }
       ]
     },
     {

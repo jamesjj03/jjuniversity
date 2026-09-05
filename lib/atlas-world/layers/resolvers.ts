@@ -35,6 +35,16 @@ const currentUsd = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+const oneDecimal = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
+});
+
+const twoDecimals = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 2,
+});
+
 function temporalFromFact<T>(fact: AtlasRuntimeFact<T>) {
   return {
     observedAt: fact.observedAt,
@@ -157,6 +167,71 @@ function resolveGdpPerCapita({ country }: AtlasLayerResolverContext) {
   );
 }
 
+function resolvePercentFact(
+  fact: AtlasRuntimeFact<number> | null,
+  key: string,
+  tooltipLabel: string,
+) {
+  if (!fact) return null;
+  const formatted = `${oneDecimal.format(fact.value)}%`;
+  return resolvedFact(
+    fact,
+    key,
+    formatted,
+    `${formatted} ${tooltipLabel}${observationSuffix(fact)}`,
+    formatted,
+  );
+}
+
+function optionalNumericFact(
+  country: AtlasRuntimeCountry | AtlasRuntimeCountrySummary,
+  key: keyof AtlasRuntimeCountry["facts"],
+) {
+  return (country.facts as Partial<AtlasRuntimeCountry["facts"]>)[key] as AtlasRuntimeFact<number> | null | undefined;
+}
+
+function resolveUrbanShare({ country }: AtlasLayerResolverContext) {
+  return resolvePercentFact(optionalNumericFact(country, "urbanPopulationPercent") ?? null, "urban-share", "urban population");
+}
+
+function resolvePopulationGrowth({ country }: AtlasLayerResolverContext) {
+  return resolvePercentFact(optionalNumericFact(country, "populationGrowthAnnualPercent") ?? null, "population-growth", "annual population growth");
+}
+
+function resolveAges0To14({ country }: AtlasLayerResolverContext) {
+  return resolvePercentFact(optionalNumericFact(country, "populationAges0To14Percent") ?? null, "ages-0-14", "of the population ages 0–14");
+}
+
+function resolveAges65Plus({ country }: AtlasLayerResolverContext) {
+  return resolvePercentFact(optionalNumericFact(country, "populationAges65PlusPercent") ?? null, "ages-65-plus", "of the population ages 65+");
+}
+
+function resolveFertility({ country }: AtlasLayerResolverContext) {
+  const fact = optionalNumericFact(country, "fertilityRateBirthsPerWoman");
+  if (!fact) return null;
+  const formatted = twoDecimals.format(fact.value);
+  return resolvedFact(
+    fact,
+    "fertility-rate",
+    formatted,
+    `${formatted} births per woman${observationSuffix(fact)}`,
+    formatted,
+  );
+}
+
+function resolveLifeExpectancy({ country }: AtlasLayerResolverContext) {
+  const fact = optionalNumericFact(country, "lifeExpectancyYears");
+  if (!fact) return null;
+  const formatted = `${oneDecimal.format(fact.value)} years`;
+  return resolvedFact(
+    fact,
+    "life-expectancy",
+    formatted,
+    `${formatted} life expectancy at birth${observationSuffix(fact)}`,
+    formatted,
+  );
+}
+
 function resolveGeometry({ feature }: AtlasLayerResolverContext): AtlasResolvedLayerValue {
   return {
     status: "observed",
@@ -180,6 +255,12 @@ const RESOLVERS: Record<string, (context: AtlasLayerResolverContext) => AtlasRes
   "religion-dominant-broad-v1": resolveReligion,
   "population-total-bins-v1": resolvePopulation,
   "gdp-per-capita-current-usd-v1": resolveGdpPerCapita,
+  "urban-population-share-v1": resolveUrbanShare,
+  "population-growth-annual-v1": resolvePopulationGrowth,
+  "population-ages-0-14-share-v1": resolveAges0To14,
+  "population-ages-65-plus-share-v1": resolveAges65Plus,
+  "fertility-rate-v1": resolveFertility,
+  "life-expectancy-v1": resolveLifeExpectancy,
   "geometry-presence-v1": resolveGeometry,
 };
 

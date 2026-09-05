@@ -4,6 +4,10 @@ import countries from "../../lib/atlas-world/data/countries.v1.json";
 import { atlasPoliticalColor } from "../../lib/atlas-world/politicalPalette";
 import { projectAtlasWgs84 } from "../../lib/atlas-world/projection";
 
+async function waitForAtlasHydration(page: import("@playwright/test").Page) {
+  await expect(page.getByRole("button", { name: /^Choose view:/ })).toBeEnabled({ timeout: 30_000 });
+}
+
 test("country framing keeps the main islands and both Malaysian regions on screen", async ({page,isMobile}) => {
   const examples: Array<{slug:string;name:string;places:Array<[number,number]>}> = [
     {slug:"jpn",name:"Japan",places:[[141.68,45.41],[145.82,43.4],[130.56,31.6],[132.77,33.84],[127.68,26.21]]},
@@ -65,11 +69,9 @@ test("the camera explores beyond the previous ceiling and city focus survives re
   for(let i=0;i<4;i++)await page.getByRole("button",{name:"Zoom in",exact:true}).click();
   const group=page.locator("[data-atlas-map-group]");
   expect(Number(await group.getAttribute("data-atlas-zoom-scale"))).toBeGreaterThan(8);
-  // City is a independently addressable feature, never an alias for country.
-  const cairo=page.locator('[data-atlas-city]').filter({has:page.locator('title',{hasText:/^Cairo$/})}).first();
-  const id=await cairo.getAttribute("data-atlas-city");
-  expect(id).toBeTruthy();
-  await page.goto(`/atlas?view=where-people-live&focus=${encodeURIComponent(`feature:${id}`)}`);
+  // City identity resolves on the server even when its vector is not mounted
+  // in the current viewport's progressive detail set.
+  await page.goto("/atlas?view=where-people-live&city=cairo-egy");
   await expect(page.locator("[data-atlas-city-card]").getByRole("heading",{name:"Cairo",exact:true})).toBeVisible();
   await expect(page.locator("[data-atlas-city-card]").getByRole("button",{name:"Egypt",exact:false})).toBeVisible();
   await page.reload();
@@ -77,7 +79,8 @@ test("the camera explores beyond the previous ceiling and city focus survives re
 });
 
 test("a visible city selects a city, not the underlying country", async ({page,isMobile}) => {
-  await page.goto("/atlas?view=political&country=egy", {waitUntil:"networkidle"});
+  await page.goto("/atlas?view=political&country=egy", {waitUntil:"domcontentloaded"});
+  await waitForAtlasHydration(page);
   await expect(page.getByRole("heading",{name:"Egypt",exact:true})).toBeVisible();
   const cairo=page.locator('[data-atlas-city]').filter({has:page.locator('title',{hasText:/^Cairo$/})}).first();
   const dot=cairo.locator("circle").filter({has:page.locator("title")});
@@ -94,7 +97,8 @@ test("a visible city selects a city, not the underlying country", async ({page,i
 
 test("phone pinch and drag change the map camera without selecting a place", async ({page,context,isMobile}) => {
   test.skip(!isMobile,"Touch input is exercised on the phone project.");
-  await page.goto("/atlas",{waitUntil:"networkidle"});
+  await page.goto("/atlas",{waitUntil:"domcontentloaded"});
+  await waitForAtlasHydration(page);
   const map=page.locator("[data-atlas-map-group]");
   await expect(map).toHaveAttribute("data-atlas-zoom-scale",/[0-9]/);
   const initial=Number(await map.getAttribute("data-atlas-zoom-scale"));

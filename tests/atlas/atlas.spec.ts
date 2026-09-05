@@ -41,10 +41,11 @@ async function openAtlas(page: Page, url: string) {
 }
 
 async function chooseCountry(page: Page, name: string) {
-  const search = page.getByRole("combobox", { name: "Search countries" });
-  if (!await search.isVisible()) await page.getByRole("button", { name: "Search countries", exact: true }).click();
+  const search = page.getByRole("combobox", { name: "Find a country, city, river, or lake" });
+  if (!await search.isVisible()) await page.getByRole("button", { name: "Find a place", exact: true }).click();
   await search.fill(name.slice(0, 4));
-  await page.getByRole("option", { name: new RegExp(`^${name}(?:\\s|$)`) }).click();
+  const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  await page.getByRole("option", { name: new RegExp(`^${escapedName} Country(?:\\s|·|$)`) }).click();
   await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
 }
 
@@ -90,7 +91,7 @@ test("preserves the search → lens → country curiosity loop and browser histo
   await openAtlas(page, "/atlas");
   await expect(page.getByRole("heading", { name: "ATLAS" })).toBeVisible();
   await expect(page.locator("[data-atlas-world-map]")).toBeVisible();
-  await expect(page.getByRole("combobox", { name: "Search countries" })).not.toBeVisible();
+  await expect(page.getByRole("combobox", { name: "Find a country, city, river, or lake" })).not.toBeVisible();
 
   await chooseCountry(page, "Zimbabwe");
   await expect(page.locator("[data-atlas-sheet]")).toBeFocused();
@@ -168,7 +169,7 @@ test("keeps shared scenes authored and replaces country-specific details when mo
   await expect(economy).not.toHaveAttribute("open", "");
   await expect(panel.getByRole("heading", { name: "Andorra", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Close Zimbabwe" }).click();
-  await expect(page.getByRole("button", { name: "Search countries", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Find a place", exact: true })).toBeFocused();
 });
 
 test("GDP per capita exposes loading, year, missing-data, provenance, and reload-safe share state", async ({ page }, testInfo) => {
@@ -604,7 +605,7 @@ test("government terms are inspectable without losing the selected place or keyb
   await page.keyboard.press("Escape");
   await expect(definition).not.toBeVisible();
   await expect(term).toBeFocused();
-  await expect(page.getByRole("combobox", { name: "Search countries", exact: true })).not.toBeVisible();
+  await expect(page.getByRole("combobox", { name: "Find a country, city, river, or lake", exact: true })).not.toBeVisible();
   await expect(page.getByRole("heading", { name: "Zimbabwe", exact: true })).toBeVisible();
   expect(searchParam(page, "country")).toBe("zwe");
 

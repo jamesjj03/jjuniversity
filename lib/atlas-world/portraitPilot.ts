@@ -1,44 +1,43 @@
-import pilot from './data/portrait-pilot.json';
-import leadershipContext from './data/leadership-context.json';
 import type { AtlasRuntimeCountry } from './runtime';
 import type { AtlasLeadershipOfficeholder } from './types';
+import {
+  ATLAS_LEADERSHIP_AUTHORITY,
+  ATLAS_PORTRAIT_PILOT,
+  atlasLeadershipFreshness,
+  findAtlasLeadershipAuthorityContext,
+  findAtlasLeadershipAuthorityUpdate,
+  getAtlasLeadershipOffice,
+} from './leadership/authority';
+import type { AtlasLeadershipRole } from './leadership/types';
 
 /** A person/media identity is not an office and is deliberately not owned by a country. */
-export type AtlasPortraitMedia = (typeof pilot.media)[number];
-export type AtlasPortraitPerson = (typeof pilot.people)[number];
+export type AtlasPortraitMedia = (typeof ATLAS_PORTRAIT_PILOT.media)[number];
+export type AtlasPortraitPerson = (typeof ATLAS_PORTRAIT_PILOT.people)[number];
 export type AtlasPortraitMatch = {
   person: AtlasPortraitPerson;
   media: AtlasPortraitMedia;
   title: string;
+  officeId: `office:${string}`;
+  identityConfidence: "high" | "medium" | "low";
+  identityReviewedAt: string;
 };
 type LeadershipFact = NonNullable<AtlasRuntimeCountry['facts']['headOfState']>;
+const isLeadershipRole = (role: string): role is AtlasLeadershipRole => role === 'headOfState' || role === 'headOfGovernment';
 
 /** Updates are explicitly reviewed observations, not mutation of the archived import. */
 export function findAtlasOfficeUpdate(countryId: string, role: string, fact: LeadershipFact) {
-  return leadershipContext.officeUpdates.find((update) =>
-    update.entityId === countryId && update.role === role
-    && update.supersedes.sourceId === fact.sourceId
-    && update.supersedes.observedAt === fact.observedAt
-    && !fact.value.isVacant
-    && fact.value.officeholders.some((holder) => holder.nameAndTitle === update.supersedes.exactSourceName),
-  ) ?? null;
+  return isLeadershipRole(role) ? findAtlasLeadershipAuthorityUpdate(countryId, role, fact) : null;
 }
 
 export function findAtlasLeadershipContext(countryId: string, role: string, fact: LeadershipFact, holder: AtlasLeadershipOfficeholder) {
-  return leadershipContext.contexts.find((context) =>
-    context.entityId === countryId && context.roles.includes(role)
-    && context.sourceId === fact.sourceId && context.archivedObservedAt === fact.observedAt
-    && context.exactSourceName === holder.nameAndTitle,
-  ) ?? null;
+  return isLeadershipRole(role)
+    ? findAtlasLeadershipAuthorityContext(countryId, role, fact, holder.nameAndTitle)
+    : null;
 }
 
 /** Pure date check also used by the review report. Unknown and future dates fail closed. */
 export function atlasLeadershipReviewDue(observedAt: string | null, asOf = new Date().toISOString().slice(0, 10)): boolean {
-  if (!observedAt || !/^\d{4}-\d{2}-\d{2}$/.test(observedAt)) return true;
-  const observed = Date.parse(observedAt);
-  const current = Date.parse(asOf);
-  return !Number.isFinite(observed) || !Number.isFinite(current) || observed > current
-    || current - observed >= leadershipContext.reviewPolicy.reviewAfterDays * 86400000;
+  return atlasLeadershipFreshness(observedAt, asOf) !== 'recent_observation';
 }
 
 /**
@@ -55,15 +54,25 @@ export function findAtlasPortrait(
   if (fact.value.isVacant) return null;
   // Known superseded officeholders cannot remain the current country's portrait.
   if (findAtlasOfficeUpdate(countryId, role, fact)) return null;
-  const binding = pilot.bindings.find((candidate) =>
+  const binding = ATLAS_PORTRAIT_PILOT.bindings.find((candidate) =>
     candidate.entityId === countryId
+    && candidate.officeId === getAtlasLeadershipOffice(countryId, role).id
     && candidate.role === role
     && candidate.exactSourceName === officeholder.nameAndTitle
     && candidate.sourceId === fact.sourceId
     && candidate.observedAt === fact.observedAt,
   );
   if (!binding) return null;
-  const person = pilot.people.find((candidate) => candidate.id === binding.personId);
-  const media = pilot.media.find((candidate) => candidate.id === person?.portraitMediaId && candidate.personId === person?.id);
-  return person && media ? { person, media, title: binding.title } : null;
+  const person = ATLAS_PORTRAIT_PILOT.people.find((candidate) => candidate.id === binding.personId);
+  const media = ATLAS_PORTRAIT_PILOT.media.find((candidate) => candidate.id === person?.portraitMediaId && candidate.personId === person?.id);
+  return person && media ? {
+    person,
+    media,
+    title: binding.title,
+    officeId: binding.officeId,
+    identityConfidence: binding.identityConfidence,
+    identityReviewedAt: binding.reviewedAt,
+  } : null;
 }
+
+export { ATLAS_LEADERSHIP_AUTHORITY, ATLAS_PORTRAIT_PILOT };

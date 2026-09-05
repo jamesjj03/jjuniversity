@@ -3,6 +3,7 @@ import { atlasProjectedWgs84Bounds, projectAtlasWgs84 } from "./projection";
 
 import geographyPackJson from "./data/geography-pack.v1.json";
 import patternNotesJson from "./data/pattern-notes.v1.json";
+import { isAtlasPatternNoteVisible } from "./annotations/authority";
 import type { AtlasGeographyPack, AtlasPatternNoteSnapshot } from "./geographyTypes";
 
 const geographyPack = geographyPackJson as unknown as AtlasGeographyPack;
@@ -24,5 +25,5 @@ export function getAtlasGeographyPack() {
 export function getAtlasPatternNotes() {
   // Source review is the publication gate for Atlas explanations. Human
   // editorial review is recorded separately and must never be implied.
-  return displayNotes.filter((note) => note.review.publicationStatus === "atlas-visible");
+  return displayNotes.filter(isAtlasPatternNoteVisible);
 }

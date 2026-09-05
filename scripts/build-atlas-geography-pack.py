@@ -17,18 +17,35 @@ import os
 import re
 import shutil
 import tempfile
+import unicodedata
 import zipfile
 from pathlib import Path
 from typing import Any, Iterable
 
-import numpy as np
-import rasterio
-from PIL import Image, ImageDraw
-from rasterio.enums import Resampling
-from rasterio.transform import Affine
-from rasterio.vrt import WarpedVRT
-from rasterio.windows import Window
-from rasterio.warp import reproject, transform
+try:
+    import numpy as np
+    import rasterio
+    from PIL import Image, ImageDraw
+    from rasterio.enums import Resampling
+    from rasterio.transform import Affine
+    from rasterio.vrt import WarpedVRT
+    from rasterio.windows import Window
+    from rasterio.warp import reproject, transform
+except ModuleNotFoundError:
+    # A vector-only refresh intentionally uses a tiny environment and preserves
+    # the already-registered population and relief assets byte-for-byte.
+    np = None
+    rasterio = None
+    Image = None
+    ImageDraw = None
+    Resampling = None
+    Affine = None
+    WarpedVRT = None
+    Window = None
+    reproject = None
+    transform = None
+from shapely.geometry import shape
+from shapely.strtree import STRtree
 
 
 SCHEMA_VERSION = "1.0.0"
@@ -63,6 +80,7 @@ CITY_SOURCE_ID = "natural-earth-populated-places-50m-5.1.2"
 DETAIL_RIVER_SOURCE_ID = "natural-earth-rivers-10m-5.1.2"
 DETAIL_LAKE_SOURCE_ID = "natural-earth-lakes-10m-5.1.2"
 DETAIL_CITY_SOURCE_ID = "natural-earth-populated-places-10m-5.1.2"
+ADMIN0_SOURCE_ID = "natural-earth-admin-0-50m-5.1.2"
 
 POP_ZIP_MEMBER = "GHS_POP_E2025_GLOBE_R2023A_54009_1000_V1_0.tif"
 RELIEF_ZIP_MEMBER = "MSR_50M/MSR_50M.tif"
@@ -76,6 +94,26 @@ POPULATION_STOPS = [
     {"value": 5000, "color": "#ed5e43", "opacity": 0.97},
     {"value": 20000, "color": "#fff0ca", "opacity": 1.0},
 ]
+
+# A small, reviewed cross-scale identity bridge for river systems whose source
+# records use several reach names and identifiers. Everything else remains
+# conservatively source-part scoped rather than merging unrelated namesakes.
+RIVER_SYSTEM_ALIASES = {
+    "nile": {"nile", "white nile", "blue nile", "albert nile", "victoria nile", "mountain nile", "bahr el jebel", "el bahr el abyad", "el bahr el azraq", "abay"},
+    "amazon": {"amazon", "amazonas"},
+    "yangtze": {"yangtze", "chang jiang", "jinsha"},
+    "danube": {"danube", "donau"},
+    "congo": {"congo", "lualaba"},
+    "mekong": {"mekong", "lancang"},
+    "mississippi": {"mississippi"},
+    "ganges": {"ganges", "ganga"},
+}
+
+CITY_COUNTRY_CODE_OVERRIDES = {
+    # Natural Earth populated places uses ISO-style SSD while its Admin-0
+    # cartography retains the historical Natural Earth code SDS.
+    "SSD": "SDS",
+}
 
 
 def sha256_file(file_path: Path) -> str:
@@ -539,6 +577,51 @@ def feature_hash(name: str, geometry: dict[str, Any]) -> str:
     return hashlib.sha256(payload.encode("utf8")).hexdigest()[:16]
 
 
+def normalized_name(value: str) -> str:
+    decomposed = unicodedata.normalize("NFKD", value)
+    ascii_value = "".join(character for character in decomposed if not unicodedata.combining(character))
+    return re.sub(r"[^a-z0-9]+", " ", ascii_value.casefold()).strip()
+
+
+def feature_aliases(properties: dict[str, Any], display_name: str) -> list[str]:
+    aliases: list[str] = []
+    seen = {normalized_name(display_name)}
+    for key in ("label", "name", "name_en", "name_alt", "name_abb", "LABEL", "NAME", "NAME_EN", "NAMEALT", "NAMEASCII"):
+        value = properties.get(key)
+        if not isinstance(value, str) or not value.strip():
+            continue
+        name = value.strip()
+        normalized = normalized_name(name)
+        if not normalized or normalized in seen:
+            continue
+        seen.add(normalized)
+        aliases.append(name)
+    return aliases
+
+
+def logical_physical_place_id(
+    properties: dict[str, Any],
+    kind: str,
+    source_id: str,
+    identity: str,
+    names: list[str],
+) -> str:
+    if kind == "lake":
+        natural_earth_id = properties.get("ne_id")
+        if natural_earth_id not in (None, ""):
+            return f"place:natural-earth:lake:{natural_earth_id}"
+    if kind == "river":
+        normalized_names = {normalized_name(name) for name in names}
+        for system_name, aliases in RIVER_SYSTEM_ALIASES.items():
+            if normalized_names.intersection(aliases):
+                return f"place:natural-earth:river:{system_name}"
+        river_number = properties.get("rivernum")
+        if source_id == DETAIL_RIVER_SOURCE_ID and river_number not in (None, "", 0, -99):
+            return f"place:natural-earth:river:10m-{river_number}"
+    source_scale = "10m" if "10m" in source_id else "50m"
+    return f"place:natural-earth:{kind}:{source_scale}-{identity}"
+
+
 def temporal_extent(observed_at: str | None = None, precision: str = "source_snapshot") -> dict[str, Any]:
     return {
         "observedAt": observed_at,
@@ -557,18 +640,29 @@ def vector_feature(
     feature_identity: str | None = None,
 ) -> dict[str, Any]:
     properties = feature["properties"]
-    name = properties.get("name_en") or properties.get("name") or properties.get("label") or "Unnamed feature"
+    name = (
+        (properties.get("label") or properties.get("name") or properties.get("name_en"))
+        if kind == "lake"
+        else (properties.get("name_en") or properties.get("name") or properties.get("label"))
+    ) or "Unnamed feature"
     raw_source_identity = str(source_identity) if source_identity not in (None, "") else None
     identity = feature_identity or raw_source_identity or feature_hash(name, feature["geometry"])
     feature_id = f"feature:natural-earth:{kind}:{identity}"
     geometry = canonical_geometry(feature["geometry"])
     source_min_zoom = properties.get("min_zoom")
+    aliases = feature_aliases(properties, name)
     return {
         "featureId": feature_id,
+        "placeId": logical_physical_place_id(properties, kind, source_id, identity, [name, *aliases]),
         "kind": kind,
         "name": name,
         "alternateName": properties.get("name_alt"),
+        "aliases": aliases,
         "entityIds": [],
+        "entityRelation": {
+            "kind": "intersects_mapped_admin0_geometry",
+            "method": "natural-earth-admin0-intersection-v1",
+        },
         "sourceIds": [source_id],
         "sourceFeatureId": raw_source_identity or identity,
         "sourceScaleRank": properties.get("scalerank"),
@@ -591,6 +685,35 @@ def vector_feature(
             },
         },
     }
+
+
+def attach_admin0_relations(
+    features: list[dict[str, Any]],
+    source_cache: Path,
+    lock_by_id: dict[str, Any],
+    countries: dict[str, Any],
+) -> None:
+    admin0_payload = json.loads((source_cache / lock_by_id[ADMIN0_SOURCE_ID]["target"]).read_text("utf8"))
+    entity_by_code = {
+        country["codes"]["naturalEarthAdm0A3"]: country["id"]
+        for country in countries["countries"]
+    }
+    indexed: list[tuple[str, Any]] = []
+    for raw_feature in admin0_payload["features"]:
+        properties = raw_feature.get("properties") or {}
+        entity_id = entity_by_code.get(properties.get("ADM0_A3"))
+        if not entity_id or not raw_feature.get("geometry"):
+            continue
+        geometry = shape(raw_feature["geometry"])
+        if not geometry.is_valid:
+            geometry = geometry.buffer(0)
+        indexed.append((entity_id, geometry))
+    geometries = [entry[1] for entry in indexed]
+    tree = STRtree(geometries)
+    for feature in features:
+        feature_geometry = shape(feature["geometry"]["canonicalWgs84"])
+        intersecting = tree.query(feature_geometry, predicate="intersects")
+        feature["entityIds"] = sorted({indexed[int(index)][0] for index in intersecting})
 
 
 def load_vectors(source_cache: Path, lock_by_id: dict[str, Any], repository_root: Path | None = None) -> tuple[list[Any], list[Any], list[Any]]:
@@ -670,7 +793,9 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any], repository_root
             round_number(feature["geometry"]["coordinates"][1]),
         ]
         projected = project_point(location)
-        country_entity_id = f"country:{properties.get('ADM0_A3')}"
+        city_country_code = str(properties.get("ADM0_A3") or "")
+        city_country_code = CITY_COUNTRY_CODE_OVERRIDES.get(city_country_code, city_country_code)
+        country_entity_id = f"country:{city_country_code}"
         if country_entity_id not in country_ids:
             country_entity_id = None
         is_capital = int(properties.get("ADM0CAP") or 0) == 1
@@ -684,6 +809,7 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any], repository_root
                 "featureId": feature_id,
                 "kind": "city",
                 "name": properties.get("NAME_EN") or properties.get("NAME"),
+                "aliases": feature_aliases(properties, properties.get("NAME_EN") or properties.get("NAME") or "Unnamed city"),
                 "entity": {
                     "entityId": entity_id,
                     "kind": "city",
@@ -706,6 +832,7 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any], repository_root
                     ],
                     "temporal": {"validFrom": None, "validTo": None},
                 },
+                "administrativeRegion": properties.get("ADM1NAME"),
                 "isNationalCapital": is_capital,
                 "isWorldCity": int(properties.get("WORLDCITY") or 0) == 1,
                 "sourceScaleRank": rank,
@@ -774,6 +901,7 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any], repository_root
             feature["displayMinimumZoom"] = 6 if minimum <= 3 else (10 if minimum <= 4 else (16 if minimum <= 6 else 20))
             feature["geometry"]["geometrySetId"] = "natural-earth-physical-10m-5.1.2"
             collection.append(feature)
+    attach_admin0_relations([*rivers, *lakes], source_cache, lock_by_id, countries)
     return rivers, lakes, cities
 
 
@@ -834,9 +962,17 @@ def main() -> None:
     asset_output = arguments.asset_output or repository_root / "public" / "atlas-world" / "layers"
     data_output.mkdir(parents=True, exist_ok=True)
     asset_output.mkdir(parents=True, exist_ok=True)
-    registration_checks = verify_raster_registration()
+    if not arguments.vectors_only:
+        if any(module is None for module in (np, rasterio, Image, ImageDraw, transform)):
+            raise RuntimeError(
+                "Full and relief-only geography builds require the locked raster environment. "
+                "Run this script through scripts/run-atlas-geography-build.mjs with Python 3.11."
+            )
+        registration_checks = verify_raster_registration()
+    else:
+        registration_checks = None
 
-    required_source_ids = [POP_SOURCE_ID, RELIEF_SOURCE_ID, RIVER_SOURCE_ID, LAKE_SOURCE_ID, DETAIL_RIVER_SOURCE_ID, DETAIL_LAKE_SOURCE_ID, DETAIL_CITY_SOURCE_ID]
+    required_source_ids = [POP_SOURCE_ID, RELIEF_SOURCE_ID, RIVER_SOURCE_ID, LAKE_SOURCE_ID, DETAIL_RIVER_SOURCE_ID, DETAIL_LAKE_SOURCE_ID, DETAIL_CITY_SOURCE_ID, ADMIN0_SOURCE_ID]
     for source_id in required_source_ids:
         source = lock_by_id[source_id]
         source_path = source_cache / source["target"]

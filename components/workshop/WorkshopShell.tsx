@@ -58,6 +58,7 @@ const ROUTE_IDENTITIES: Array<{
   { href: "/admin/reading", label: "Reading activity", description: "Signed-in reader analytics", kind: "review" },
   { href: "/admin/manuscript-case", label: "Capitalization review", description: "Continue a reviewed case batch", kind: "review" },
   { href: "/admin/editorial", label: "Editorial records", description: "Inspect editorial review records", kind: "review" },
+  { href: "/admin/atlas", label: "Atlas editorial authority", description: "Review explanations and geographic links", kind: "review" },
   { href: "/admin/arena", label: "Arena", description: "Review local source candidates", kind: "review" },
   { href: "/admin/reviews", label: "Review queue", description: "Decisions that require your eyes", kind: "review" },
   { href: "/admin/legacy", label: "Legacy workspace", description: "Retained compatibility tools", kind: "tool" },

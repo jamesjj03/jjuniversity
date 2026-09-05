@@ -88,6 +88,7 @@ function isPublishable(association: AtlasJjuAssociationRecord) {
   return association.review.state === "approved"
     && association.review.reviewerKind === "human"
     && Boolean(association.review.reviewedAt && association.review.reviewedBy)
+    && association.evidence.some((evidence) => evidence.supports.includes("relationship_semantics"))
     && isCurrentBookSubject(association)
     && isReadableBookSubject(association);
 }

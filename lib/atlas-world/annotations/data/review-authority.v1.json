@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "authorityId": "jju-atlas-annotation-editorial-review",
+  "revision": 1,
+  "updatedAt": "2026-09-05T00:00:00.000Z",
+  "sourceSnapshotId": "atlas-pattern-notes-2026-09-04",
+  "policy": {
+    "requireHumanDecision": true,
+    "automatedPublication": false,
+    "legacySourceReviewedNotesRemainVisibleWhileProposed": true
+  },
+  "records": [
+    {
+      "noteId": "pattern-note:population:nile-valley",
+      "noteRevision": 2,
+      "recordRevision": 1,
+      "state": "proposed",
+      "reviewerKind": null,
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "decisionNote": null,
+      "supersededByNoteId": null
+    },
+    {
+      "noteId": "pattern-note:population:java",
+      "noteRevision": 2,
+      "recordRevision": 1,
+      "state": "proposed",
+      "reviewerKind": null,
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "decisionNote": null,
+      "supersededByNoteId": null
+    },
+    {
+      "noteId": "pattern-note:population:heihe-tengchong",
+      "noteRevision": 2,
+      "recordRevision": 1,
+      "state": "proposed",
+      "reviewerKind": null,
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "decisionNote": null,
+      "supersededByNoteId": null
+    },
+    {
+      "noteId": "pattern-note:population:indo-gangetic-plain",
+      "noteRevision": 2,
+      "recordRevision": 1,
+      "state": "proposed",
+      "reviewerKind": null,
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "decisionNote": null,
+      "supersededByNoteId": null
+    }
+  ]
+}

@@ -41,6 +41,8 @@
 .groups span { display:block; color:#a5bdb9; font-size:14px; line-height:1.5; }
 .groups .groupArrow { margin-top:12px; color:#d8bd86; font-size:20px; }
 .groups button:hover strong { color:#f1cb78; }
+.completeIndex { display:flex; align-items:center; justify-content:space-between; gap:14px; min-height:48px; margin-top:21px; padding:10px 0; border-top:1px solid #9eb2ad33; color:#d8bd86; font-size:14px; font-weight:700; text-decoration:none; }
+.completeIndex:hover { color:#f1cb78; }
 .index button { display:flex; align-items:center; justify-content:space-between; gap:18px; width:100%; min-height:52px; padding:14px 0; border:0; border-bottom:1px solid #a3b2ba26; background:transparent; color:#e2eae5; font-size:16px; line-height:1.4; text-align:left; cursor:pointer; }
 .index button small { display:block; margin-top:6px; color:#9fb9b6; font-size:13px; line-height:1.55; }
 .index button > span:last-child { color:#d7b97c; }

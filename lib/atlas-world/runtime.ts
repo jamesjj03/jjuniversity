@@ -53,6 +53,12 @@ export type AtlasRuntimeCountry = {
     currency: AtlasRuntimeFact<AtlasCurrency> | null;
     gdpCurrentUsd: AtlasRuntimeFact<number> | null;
     gdpPerCapitaCurrentUsd: AtlasRuntimeFact<number> | null;
+    urbanPopulationPercent: AtlasRuntimeFact<number> | null;
+    populationGrowthAnnualPercent: AtlasRuntimeFact<number> | null;
+    populationAges0To14Percent: AtlasRuntimeFact<number> | null;
+    populationAges65PlusPercent: AtlasRuntimeFact<number> | null;
+    fertilityRateBirthsPerWoman: AtlasRuntimeFact<number> | null;
+    lifeExpectancyYears: AtlasRuntimeFact<number> | null;
     government: AtlasRuntimeFact<AtlasGovernmentValue> | null;
     headOfState: AtlasRuntimeFact<AtlasLeadershipValue> | null;
     headOfGovernment: AtlasRuntimeFact<AtlasLeadershipValue> | null;
@@ -96,7 +102,17 @@ export type AtlasRuntimeCountrySummary = Pick<
 > & {
   facts: Pick<
     AtlasRuntimeCountry["facts"],
-    "capital" | "population" | "gdpPerCapitaCurrentUsd" | "government" | "religion"
+    | "capital"
+    | "population"
+    | "gdpPerCapitaCurrentUsd"
+    | "urbanPopulationPercent"
+    | "populationGrowthAnnualPercent"
+    | "populationAges0To14Percent"
+    | "populationAges65PlusPercent"
+    | "fertilityRateBirthsPerWoman"
+    | "lifeExpectancyYears"
+    | "government"
+    | "religion"
   >;
 };
 

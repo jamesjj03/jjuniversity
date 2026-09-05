@@ -56,10 +56,17 @@ export type AtlasGeometryRecord = {
 
 export type AtlasPhysicalFeature = {
   featureId: string;
+  /** Stable logical place identity. Several LOD geometry parts may share it. */
+  placeId: string;
   kind: "river" | "lake";
   name: string;
   alternateName: string | null;
+  aliases: string[];
   entityIds: string[];
+  entityRelation: {
+    kind: "intersects_mapped_admin0_geometry";
+    method: "natural-earth-admin0-intersection-v1";
+  };
   sourceIds: string[];
   sourceFeatureId: string;
   sourceScaleRank: number | null;
@@ -80,7 +87,9 @@ export type AtlasCityFeature = {
   featureId: string;
   kind: "city";
   name: string;
+  aliases: string[];
   entity: AtlasEntityIdentity;
+  administrativeRegion: string | null;
   isNationalCapital: boolean;
   isWorldCity: boolean;
   sourceScaleRank: number;

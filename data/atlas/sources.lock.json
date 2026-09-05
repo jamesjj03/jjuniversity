@@ -13,12 +13,19 @@
         "world-bank-sp-pop-totl-2026-07-13",
         "world-bank-ny-gdp-mktp-cd-2026-07-13",
         "world-bank-ny-gdp-pcap-cd-2026-07-13",
+        "world-bank-sp-urb-totl-in-zs-2026-07-13",
+        "world-bank-sp-pop-grow-2026-07-13",
+        "world-bank-sp-pop-0014-to-zs-2026-07-13",
+        "world-bank-sp-pop-65up-to-zs-2026-07-13",
+        "world-bank-sp-dyn-tfrt-in-2026-07-13",
+        "world-bank-sp-dyn-le00-in-2026-07-13",
         "geonames-country-info-2026-09-03",
         "cia-world-factbook-final-capture-2026-02"
       ],
       "transformations": [
         "Join datasets through reviewed geographic codes rather than names.",
         "Normalize government and broad religious categories with versioned rules while retaining source wording.",
+        "Retain the latest non-empty World Bank observation and its own year for each approved How People Live indicator; preserve missing entities rather than imputing values.",
         "Project canonical Natural Earth WGS84 geometry into a 1200 x 650 Mercator SVG viewBox."
       ],
       "outputs": [
@@ -29,6 +36,21 @@
       ]
     },
     {
+      "id": "atlas-globe-geometry-v1",
+      "command": "npm run atlas:globe:geometry",
+      "code": "scripts/build-atlas-globe-geometry.mjs",
+      "sourceIds": [
+        "natural-earth-admin-0-50m-5.1.2"
+      ],
+      "transformations": [
+        "Retain canonical Natural Earth WGS84 Polygon and MultiPolygon coordinates, strip unrelated source properties, and join every feature to the existing Atlas entity ID through ADM0_A3.",
+        "Retain source label coordinates and tiny-map-unit ranks for bounded screen-space selection assistance without changing political geometry."
+      ],
+      "outputs": [
+        "public/atlas-world/geometry-wgs84.v1.json"
+      ]
+    },
+    {
       "id": "atlas-geography-pack-v1",
       "command": "npm run atlas:geography:build",
       "code": "scripts/build-atlas-geography-pack.py",
@@ -36,23 +58,29 @@
       "requirements": {
         "path": "scripts/atlas-geography-requirements.txt",
         "python": "3.11",
-        "normalizedTextChecksumSha256": "769f0a4798cc51a820f37a04a30043bef71dbfebc8fb272019121a636338063f"
+        "normalizedTextChecksumSha256": "c00345c7ae4cf8f776d15a9c281fa20bd2a3f1bb3fc3ffa8caa2d9301610d379"
+      },
+      "vectorOnlyRequirements": {
+        "path": "scripts/atlas-vector-requirements.txt",
+        "python": "3.11-3.14",
+        "normalizedTextChecksumSha256": "9a23a0bfeb677ae3f93527a4e65ce31591c0144e29b2f355caa31d50909dca47"
       },
       "sourceIds": [
         "ghsl-ghs-pop-2025-r2023a-1km",
         "natural-earth-manual-shaded-relief-50m-3.3.0",
         "natural-earth-rivers-50m-5.1.2",
         "natural-earth-lakes-50m-5.1.2",
-        "natural-earth-populated-places-50m-5.1.2",
         "natural-earth-rivers-10m-5.1.2",
         "natural-earth-lakes-10m-5.1.2",
-        "natural-earth-populated-places-10m-5.1.2"
+        "natural-earth-populated-places-10m-5.1.2",
+        "natural-earth-admin-0-50m-5.1.2"
       ],
       "transformations": [
         "Area-average the original 1 km World Mollweide population-count grid independently into a 2400 x 1300 Mercator overview and tiled 19200 x 10400 / 38400 x 20800 / 76800 x 41600 detail levels, then apply the same recorded log1p palette and sphere mask. Never upscale the overview.",
-        "Bilinear-warp the Natural Earth WGS84 grayscale relief into the same Mercator raster and sphere mask; apply the recorded global cartographic shadow contrast of 1.45.",
+        "Bilinear-warp the Natural Earth WGS84 grayscale relief into the same Mercator raster and sphere mask while preserving the source-authored grayscale without synthetic contrast, sharpening, or embossing.",
         "Select and round-trip canonical WGS84 vectors, then derive 1200 x 650 Mercator SVG paths and points.",
-        "Retain 50m world/regional rivers and lakes, add 10m close-scale river and lake geometry with min_zoom <= 5 after removing empty/duplicate geometry, and all national capitals plus 10m cities with SCALERANK <= 4. Original city NE_ID and coarse physical feature identities remain stable.",
+        "Retain 50m world/regional rivers and lakes, add 10m close-scale rivers with min_zoom <= 7 and lakes with min_zoom <= 5 after removing empty/duplicate geometry, and all national capitals plus 10m cities with SCALERANK <= 4. Preserve source identities and add conservative logical place identities for named physical features.",
+        "Derive river and lake relationships to current Atlas Admin-0 map units by WGS84 geometry intersection against the pinned Natural Earth Admin-0 source; these are map-intersection observations, not claims about complete drainage basins or political ownership.",
         "Convert Natural Earth Populated Places POP2025 values from the source's thousands-of-people unit into integer people while retaining estimated status and the original field name in provenance."
       ],
       "outputs": [
@@ -61,17 +89,36 @@
         "public/atlas-world/layers/population-density-2025-mercator/regional/",
         "public/atlas-world/layers/population-density-2025-mercator/country/",
         "public/atlas-world/layers/physical-relief.mercator.webp",
+        "public/atlas-world/physical-relief-mercator/source-detail/",
         "public/atlas-world/layers/population-density-2025-mercator/close/",
         "public/atlas-world/physical-mercator-overview.v1.svg",
         "public/atlas-world/physical-mercator-detail.v1.svg",
         "lib/atlas-world/data/pattern-notes.v1.json"
+      ]
+    },
+    {
+      "id": "atlas-admin1-pilot-v1",
+      "command": "npm run atlas:admin1:build",
+      "code": "scripts/build-atlas-admin1-pilot.mjs",
+      "sourceIds": [
+        "natural-earth-admin-1-10m-repository-5.1.2"
+      ],
+      "transformations": [
+        "Select first-order units for Canada, China, Germany, India, Nigeria, and the United States using ADM0_A3 plus a standard-shaped ISO 3166-2 code and GADM_LEVEL 1.",
+        "Preserve selected source geometry as canonical WGS84 GeoJSON and derive a separate 1200 x 650 Mercator SVG asset.",
+        "Exclude the Paracel Islands source feature because Natural Earth classifies it at GADM level 0 and supplies a non-standard provisional code."
+      ],
+      "outputs": [
+        "data/atlas/derived/admin1-pilot-wgs84.v1.geojson",
+        "lib/atlas-world/data/admin1-pilot.v1.json",
+        "public/atlas-world/admin1-pilot-mercator.v1.svg"
       ]
     }
   ],
   "notes": [
     "Every generated Atlas artifact must name a source entry from this lock.",
     "HTTP downloads are accepted only when both byte length and SHA-256 match.",
-    "The five small mutable World Bank and GeoNames API snapshots are embedded under data/atlas/source-seeds so a future upstream update cannot make the preserved V1 build unrecoverable.",
+    "The eleven small mutable World Bank and GeoNames API snapshots are embedded under data/atlas/source-seeds so a future upstream update cannot change a preserved build.",
     "The Factbook source is pinned to a Git commit and verified with the same deterministic file-set hash used by the Atlas snapshot builder.",
     "Large raw inputs stay out of Git; bounded browser-ready derivatives are committed."
   ],
@@ -217,6 +264,96 @@
       }
     },
     {
+      "id": "world-bank-sp-urb-totl-in-zs-2026-07-13",
+      "group": "phase3-how-people-live",
+      "kind": "http",
+      "title": "Urban population (% of total population) (SP.URB.TOTL.IN.ZS)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SP.URB.TOTL.IN.ZS?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-urban-share-20260905.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-urban-share-20260905.json",
+      "expectedBytes": 60246,
+      "checksumSha256": "0e2c8a2f585c51652dcd3815043872f9450d9c402e75e3ffed0c3debdd588084",
+      "retrievedAt": "2026-09-05",
+      "license": { "name": "CC BY 4.0", "url": "https://datacatalog.worldbank.org/public-licenses" }
+    },
+    {
+      "id": "world-bank-sp-pop-grow-2026-07-13",
+      "group": "phase3-how-people-live",
+      "kind": "http",
+      "title": "Population growth (annual %) (SP.POP.GROW)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.GROW?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-population-growth-20260905.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-population-growth-20260905.json",
+      "expectedBytes": 55836,
+      "checksumSha256": "d3464edbe351197eb7688771de9a4de3d4a769e4cd8acd86ed2064ae4c743e1e",
+      "retrievedAt": "2026-09-05",
+      "license": { "name": "CC BY 4.0", "url": "https://datacatalog.worldbank.org/public-licenses" }
+    },
+    {
+      "id": "world-bank-sp-pop-0014-to-zs-2026-07-13",
+      "group": "phase3-how-people-live",
+      "kind": "http",
+      "title": "Population ages 0–14 (% of total population) (SP.POP.0014.TO.ZS)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.0014.TO.ZS?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-population-ages-0-14-20260905.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-population-ages-0-14-20260905.json",
+      "expectedBytes": 61448,
+      "checksumSha256": "794e276672ec25ff4146ee097b57a90ce2ed73e6247f8d91ce533e14971b603f",
+      "retrievedAt": "2026-09-05",
+      "license": { "name": "CC BY 4.0", "url": "https://datacatalog.worldbank.org/public-licenses" }
+    },
+    {
+      "id": "world-bank-sp-pop-65up-to-zs-2026-07-13",
+      "group": "phase3-how-people-live",
+      "kind": "http",
+      "title": "Population ages 65 and above (% of total population) (SP.POP.65UP.TO.ZS)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.65UP.TO.ZS?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-population-ages-65-plus-20260905.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-population-ages-65-plus-20260905.json",
+      "expectedBytes": 63561,
+      "checksumSha256": "37d11682e3bc9406445832d40ff44b5c37fb137eae455cfe66ac1e34f9f193d9",
+      "retrievedAt": "2026-09-05",
+      "license": { "name": "CC BY 4.0", "url": "https://datacatalog.worldbank.org/public-licenses" }
+    },
+    {
+      "id": "world-bank-sp-dyn-tfrt-in-2026-07-13",
+      "group": "phase3-how-people-live",
+      "kind": "http",
+      "title": "Fertility rate, total (births per woman) (SP.DYN.TFRT.IN)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.TFRT.IN?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-fertility-20260905.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-fertility-20260905.json",
+      "expectedBytes": 57170,
+      "checksumSha256": "708a3e74c6b66b01a26a49d12e19c81600e8fe3d9430f7248c81a3e7c015ce6c",
+      "retrievedAt": "2026-09-05",
+      "license": { "name": "CC BY 4.0", "url": "https://datacatalog.worldbank.org/public-licenses" }
+    },
+    {
+      "id": "world-bank-sp-dyn-le00-in-2026-07-13",
+      "group": "phase3-how-people-live",
+      "kind": "http",
+      "title": "Life expectancy at birth, total (years) (SP.DYN.LE00.IN)",
+      "publisher": "World Bank",
+      "version": "API update 2026-07-13",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?format=json&per_page=400&mrnev=1",
+      "target": "jju-atlas-wb-life-expectancy-20260905.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/jju-atlas-wb-life-expectancy-20260905.json",
+      "expectedBytes": 57677,
+      "checksumSha256": "5aebdc83e8d7a71b06e424c2e14d516ed2035000abc0a971fe16dd7aac27e79f",
+      "retrievedAt": "2026-09-05",
+      "license": { "name": "CC BY 4.0", "url": "https://datacatalog.worldbank.org/public-licenses" }
+    },
+    {
       "id": "geonames-country-info-2026-09-03",
       "group": "atlas-v1",
       "kind": "http",
@@ -342,6 +479,23 @@
       "expectedBytes": 3350885,
       "checksumSha256": "da4662b7bbfeb897d02f228c5839131dce27acff5717630f91ccff4f67828ee7",
       "retrievedAt": "2026-09-04",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "natural-earth-admin-1-10m-repository-5.1.2",
+      "group": "phase3-admin1-pilot",
+      "kind": "http",
+      "title": "Natural Earth 1:10m Admin 1 - States and Provinces",
+      "publisher": "Natural Earth",
+      "version": "data theme 5.1.1 pinned at repository release 5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "target": "ne_10m_admin_1_states_provinces.v5.1.2.geojson",
+      "expectedBytes": 40726851,
+      "checksumSha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "retrievedAt": "2026-09-05",
       "license": {
         "name": "Public domain",
         "url": "https://www.naturalearthdata.com/about/terms-of-use/"

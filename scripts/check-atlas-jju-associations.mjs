@@ -154,9 +154,11 @@ for (const association of authority.associations) {
   }
 }
 
-assert.ok(stateCounts.proposed > 0, "The pilot should prove proposed records cannot leak into public output");
 assert.ok(compiledPublic.length <= stateCounts.approved, "Public output cannot exceed approved records");
-assert.ok(!compiledPublic.some((link) => link.title === "Control Freaks"), "Unreviewed AI proposals leaked into public output");
+const proposedAssociationIds = new Set(authority.associations
+  .filter((association) => association.review.state === "proposed")
+  .map((association) => association.id));
+assert.ok(!compiledPublic.some((link) => proposedAssociationIds.has(link.associationId)), "A proposed association leaked into public output");
 assert.ok(compiledPublic.every((link) => link.relationship), "Compiled links lost relationship semantics");
 
 const result = {

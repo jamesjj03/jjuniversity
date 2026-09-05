@@ -1,10 +1,12 @@
 import { expect, test } from "@playwright/test";
 
 async function openCountry(page: import("@playwright/test").Page, country: string, view = "political") {
-  await page.goto(`/atlas?country=${country}&view=${view}`);
-  await page.waitForLoadState("networkidle");
+  await page.goto(`/atlas?country=${country}&view=${view}`, { waitUntil: "domcontentloaded" });
   const panel = page.locator("aside[data-atlas-sheet]");
   await expect(panel).toBeVisible({ timeout: 30_000 });
+  // Country details are server-rendered before their client interactions are
+  // attached. The view trigger becomes enabled at the same hydration boundary.
+  await expect(page.getByRole("button", { name: /^Choose view:/ })).toBeEnabled({ timeout: 30_000 });
   if (await panel.getAttribute("data-atlas-sheet") === "peek") {
     const expand = panel.getByRole("button", { name: "Expand country details" });
     if (await expand.isVisible()) await expand.click();
@@ -77,7 +79,7 @@ test("a country offers a keyboard-accessible route to its mapped cities", async 
   await expect(cityCard.getByRole("heading", { name: "Cairo", exact: true })).toBeVisible();
   await expect(cityCard.getByRole("button", { name: /^Egypt/ })).toBeVisible();
   await expect(cityCard).toBeFocused();
-  await expect(page).toHaveURL(/feature%3Anatural-earth%3Acity%3A1159151603/);
+  await expect(page).toHaveURL(/focus=feature%3Acity%3Anatural-earth%3A1159151603/);
 });
 
 test("Western Sahara identifies the claimant name and flag in its persistent header", async ({ page }) => {

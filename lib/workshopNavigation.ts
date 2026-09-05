@@ -69,6 +69,7 @@ export const WORKSHOP_MODES: WorkshopMode[] = [
       "/admin/reading",
       "/admin/manuscript-case",
       "/admin/editorial",
+      "/admin/atlas",
       "/admin/arena",
       "/admin/more",
       "/admin/legacy",
@@ -78,6 +79,7 @@ export const WORKSHOP_MODES: WorkshopMode[] = [
       { href: "/admin/reading", label: "Reading", description: "Signed-in reading activity" },
       { href: "/admin/manuscript-case", label: "Capitalization", shortLabel: "Case", description: "Review capitalization batches" },
       { href: "/admin/editorial", label: "Editorial", description: "Inspect editorial records" },
+      { href: "/admin/atlas", label: "Atlas", description: "Review map explanations and JJU place links" },
       { href: "/admin/arena", label: "Arena · local", shortLabel: "Arena", description: "Review local source candidates" },
     ],
   },
@@ -88,6 +90,7 @@ export const WORKSHOP_TOOLS: WorkshopNavItem[] = [
   { href: "/admin/legacy?view=site", label: "Homepage editor", description: "Featured and newest books" },
   { href: "/admin/legacy?view=fiber", label: "Fiber editor", description: "Private Fiber configuration" },
   { href: "/admin/editorial", label: "Editorial records", description: "Existing editorial review records" },
+  { href: "/admin/atlas", label: "Atlas editorial authority", description: "Explanations and reviewed geographic links" },
   { href: "/admin/arena", label: "Arena · local only", description: "Source and diagram review on this PC" },
   { href: "/admin/legacy", label: "Legacy workspace", description: "Retained tools and compatibility" },
 ];

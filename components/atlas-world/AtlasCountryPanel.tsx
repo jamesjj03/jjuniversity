@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useMemo, useRef, type PointerEvent } from "react";
 import type { AtlasReligionCategory } from "@/lib/atlas-world/types";
 import type { AtlasRuntimeCountry, AtlasRuntimeSource } from "@/lib/atlas-world/runtime";
-import type { AtlasCitySummary } from "@/lib/atlas-world/cities";
+import type { AtlasCityPlaceSummary } from "@/lib/atlas-world/places";
 import { atlasLeadershipReviewDue, findAtlasLeadershipContext, findAtlasOfficeUpdate, findAtlasPortrait } from "@/lib/atlas-world/portraitPilot";
 import { getAtlasTerritorialStatus } from "@/lib/atlas-world/territorialStatus";
 import { ATLAS_LAYER_BY_ID } from "@/lib/atlas-world/layers";
@@ -22,8 +22,8 @@ type AtlasCountryPanelProps = {
   sheetDetent: AtlasSheetDetent;
   onSheetDetentChange: (detent: AtlasSheetDetent) => void;
   onShowView: (viewId: string) => void;
-  cities?: AtlasCitySummary[];
-  onShowCity?: (featureId: string) => void;
+  cities?: AtlasCityPlaceSummary[];
+  onShowCity?: (placeId: string) => void;
   onClose: () => void;
 };
 type LeadershipFact = NonNullable<AtlasRuntimeCountry["facts"]["headOfState"]>;
@@ -31,6 +31,7 @@ type ReligionFact = NonNullable<AtlasRuntimeCountry["facts"]["religion"]>;
 const integer = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const compactMoney = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", notation: "compact", maximumFractionDigits: 1 });
 const populationScale = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
+const oneDecimal = new Intl.NumberFormat("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const dateFormatter = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const RELIGION_LABELS: Record<AtlasReligionCategory, string> = {
   christianity: "Christianity", islam: "Islam", hinduism: "Hinduism", buddhism: "Buddhism", judaism: "Judaism",
@@ -47,7 +48,7 @@ const GOVERNMENT_LABELS = new Map([
   ["territory_or_dependency", "Territory / dependency"], ["other", "Other system"], ["unknown", "Not classified"],
 ]);
 const DETENT_ORDER: AtlasSheetDetent[] = ["peek", "half", "full"];
-const NO_CITIES: AtlasCitySummary[] = [];
+const NO_CITIES: AtlasCityPlaceSummary[] = [];
 function readableDate(value: string | null) {
   return value && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) ? dateFormatter.format(new Date(value)) : value ?? "date not recorded";
 }
@@ -153,7 +154,13 @@ function ReligionComposition({ religion, countryName, active, onShowView }: { re
 export default function AtlasCountryPanel({ country, sources, activeLens, sheetDetent, onSheetDetentChange, onShowView, cities = NO_CITIES, onShowCity, onClose }: AtlasCountryPanelProps) {
   const dragStartRef = useRef<number | null>(null);
   const draggedRef = useRef(false);
-  const { government, religion, population, areaKm2: area, currency, languages, gdpCurrentUsd: gdp, gdpPerCapitaCurrentUsd: gdpPerCapita } = country.facts;
+  const {
+    government, religion, population, areaKm2: area, currency, languages,
+    gdpCurrentUsd: gdp, gdpPerCapitaCurrentUsd: gdpPerCapita,
+    urbanPopulationPercent, populationGrowthAnnualPercent,
+    populationAges0To14Percent, populationAges65PlusPercent,
+    fertilityRateBirthsPerWoman, lifeExpectancyYears,
+  } = country.facts;
   const status = getAtlasTerritorialStatus(country);
   const hasClaimantIdentity = country.id === "country:SAH";
   const mappedCities = useMemo(() => cities.filter((city) => city.countryId === country.id)
@@ -187,6 +194,21 @@ export default function AtlasCountryPanel({ country, sources, activeLens, sheetD
         {area && <div><dt>Area</dt><dd>{integer.format(area.value)} <span className={styles.unit}>km²</span></dd></div>}
         {gdpPerCapita && <div><dt><AtlasTerm term="gdp-per-capita">GDP per person</AtlasTerm> <FactYear observedAt={gdpPerCapita.observedAt} /></dt><dd>${integer.format(gdpPerCapita.value)} <span className={styles.unit}>USD</span></dd></div>}
       </dl>{population && <LensAction onClick={() => onShowView("where-people-live")}>See where people live</LensAction>}</section>
+      {(urbanPopulationPercent || populationGrowthAnnualPercent || populationAges0To14Percent
+        || populationAges65PlusPercent || fertilityRateBirthsPerWoman || lifeExpectancyYears) && (
+        <details className={styles.overviewDisclosure} data-atlas-people-facts>
+          <summary>How people live</summary>
+          <dl className={styles.detailFacts}>
+            {urbanPopulationPercent && <div><dt>Urban population <FactYear observedAt={urbanPopulationPercent.observedAt} /></dt><dd>{oneDecimal.format(urbanPopulationPercent.value)}%</dd><LensAction onClick={() => onShowView("urbanization")}>Compare on map</LensAction></div>}
+            {populationGrowthAnnualPercent && <div><dt>Population growth <FactYear observedAt={populationGrowthAnnualPercent.observedAt} /></dt><dd>{populationGrowthAnnualPercent.value > 0 ? "+" : ""}{oneDecimal.format(populationGrowthAnnualPercent.value)}% <span className={styles.unit}>per year</span></dd><LensAction onClick={() => onShowView("population-growth")}>Compare on map</LensAction></div>}
+            {populationAges0To14Percent && <div><dt>Ages 0–14 <FactYear observedAt={populationAges0To14Percent.observedAt} /></dt><dd>{oneDecimal.format(populationAges0To14Percent.value)}%</dd><LensAction onClick={() => onShowView("children-share")}>Compare on map</LensAction></div>}
+            {populationAges65PlusPercent && <div><dt>Ages 65+ <FactYear observedAt={populationAges65PlusPercent.observedAt} /></dt><dd>{oneDecimal.format(populationAges65PlusPercent.value)}%</dd><LensAction onClick={() => onShowView("older-population")}>Compare on map</LensAction></div>}
+            {fertilityRateBirthsPerWoman && <div><dt><AtlasTerm term="total-fertility-rate">Fertility rate</AtlasTerm> <FactYear observedAt={fertilityRateBirthsPerWoman.observedAt} /></dt><dd>{oneDecimal.format(fertilityRateBirthsPerWoman.value)} <span className={styles.unit}>births per woman</span></dd><LensAction onClick={() => onShowView("fertility")}>Compare on map</LensAction></div>}
+            {lifeExpectancyYears && <div><dt><AtlasTerm term="life-expectancy">Life expectancy</AtlasTerm> <FactYear observedAt={lifeExpectancyYears.observedAt} /></dt><dd>{oneDecimal.format(lifeExpectancyYears.value)} <span className={styles.unit}>years</span></dd><LensAction onClick={() => onShowView("life-expectancy")}>Compare on map</LensAction></div>}
+          </dl>
+          <p className={styles.contextCopy}>These are national observations. Definitions and measurement years remain attached to each value.</p>
+        </details>
+      )}
       {!religionLens && <Leadership country={country} />}
       {!religionLens && religion && <ReligionComposition religion={religion} countryName={country.name} active={false} onShowView={onShowView} />}
       {religionLens && <details className={styles.overviewDisclosure}><summary>Government & leadership</summary><Leadership country={country} /></details>}
@@ -198,7 +220,7 @@ export default function AtlasCountryPanel({ country, sources, activeLens, sheetD
       </dl>{gdpPerCapita && <><p className={styles.contextCopy}>GDP measures economic output, not household income. Dollar values do not adjust for local purchasing power.</p><LensAction onClick={() => onShowView("gdp-per-capita")}>Compare GDP per person</LensAction></>}</details>}
       {onShowCity && mappedCities.length > 0 && <details className={styles.overviewDisclosure} data-atlas-mapped-cities><summary>Cities on this map</summary>
         <p className={styles.contextCopy}>Open a mapped city to see its location and source. This is the map’s selection, not a complete list of settlements.</p>
-        <ul className={styles.cityList}>{mappedCities.slice(0, 12).map((city) => <li key={city.featureId}><button type="button" onClick={() => onShowCity(city.featureId)} aria-label={`Show ${city.name} on map`}><span>{city.name}{city.isNationalCapital && <small>National capital</small>}</span><span aria-hidden="true">↗</span></button></li>)}</ul>
+        <ul className={styles.cityList}>{mappedCities.slice(0, 12).map((city) => <li key={city.placeId}><button type="button" onClick={() => onShowCity(city.placeId)} aria-label={`Show ${city.name} on map`}><span>{city.name}{city.isNationalCapital && <small>National capital</small>}</span><span aria-hidden="true">↗</span></button></li>)}</ul>
         {mappedCities.length > 12 && <p className={styles.contextCopy}>Showing 12 of {mappedCities.length} mapped cities.</p>}
       </details>}
       {country.jjuLinks.length > 0 && <section className={styles.jjuSection}><h3>Read in JJ University</h3><ul className={styles.jjuLinks}>{country.jjuLinks.map((link) => <li key={`${link.kind}-${link.href}`}><a href={link.href}>{link.title}<span>{"relationshipLabel" in link ? String(link.relationshipLabel) : link.kind}</span></a></li>)}</ul></section>}

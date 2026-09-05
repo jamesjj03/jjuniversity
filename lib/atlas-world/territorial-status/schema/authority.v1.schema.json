@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jjuniversity.com/schemas/atlas/territorial-status-authority.v1.schema.json",
+  "title": "JJU Atlas territorial-status authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "authorityId", "revision", "updatedAt", "policy", "sources", "records"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "authorityId": { "const": "jju-atlas-territorial-status" },
+    "revision": { "type": "string", "minLength": 1 },
+    "updatedAt": { "$ref": "#/$defs/date" },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["geometrySemantic", "controlLineGeometryIncluded", "adjudicatesSovereignty", "requireSourceForEveryRelationship", "requireReviewMetadata"],
+      "properties": {
+        "geometrySemantic": { "const": "map-unit-outline" },
+        "controlLineGeometryIncluded": { "const": false },
+        "adjudicatesSovereignty": { "const": false },
+        "requireSourceForEveryRelationship": { "const": true },
+        "requireReviewMetadata": { "const": true }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 7,
+      "items": { "$ref": "#/$defs/record" }
+    }
+  },
+  "$defs": {
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "partialDate": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "publisher", "url", "publishedAt", "retrievedAt"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "title": { "type": "string", "minLength": 3 },
+        "publisher": { "type": "string", "minLength": 2 },
+        "url": { "type": "string", "pattern": "^https://" },
+        "publishedAt": { "$ref": "#/$defs/partialDate" },
+        "retrievedAt": { "$ref": "#/$defs/date" }
+      }
+    },
+    "sourceIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3 }
+    },
+    "claimant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actorId", "actorName", "relationshipKind", "description", "sourceIds"],
+      "properties": {
+        "actorId": { "type": "string", "minLength": 3 },
+        "actorName": { "type": "string", "minLength": 2 },
+        "relationshipKind": {
+          "enum": ["claims-sovereignty", "claims-independent-statehood", "seeks-self-determination"]
+        },
+        "description": { "type": "string", "minLength": 20 },
+        "sourceIds": { "$ref": "#/$defs/sourceIds" }
+      }
+    },
+    "administrator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actorId", "actorName", "relationshipKind", "extentDescription", "sourceIds"],
+      "properties": {
+        "actorId": { "type": "string", "minLength": 3 },
+        "actorName": { "type": "string", "minLength": 2 },
+        "relationshipKind": {
+          "enum": ["administers", "administers-most", "administers-limited-areas", "operates-separate-institutions", "military-control-is-changing", "supports-parallel-services"]
+        },
+        "extentDescription": { "type": "string", "minLength": 20 },
+        "sourceIds": { "$ref": "#/$defs/sourceIds" }
+      }
+    },
+    "perspective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "actorId", "actorName", "kind", "statement", "sourceIds"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "actorId": { "type": "string", "minLength": 3 },
+        "actorName": { "type": "string", "minLength": 2 },
+        "kind": {
+          "enum": ["united-nations-framework", "claimant-position", "administering-authority-position", "recognizing-state-position", "third-party-diplomatic-position", "source-cartography"]
+        },
+        "statement": { "type": "string", "minLength": 20 },
+        "sourceIds": { "$ref": "#/$defs/sourceIds" }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "revision", "entityId", "placeName", "statusKind", "badge", "geometrySemantic", "scope", "scopeCaveat", "sourceSnapshot", "claimants", "administratorsOrControllers", "internationalStatus", "explanation", "citations", "review", "temporal"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^territorial-status:" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "entityId": { "type": "string", "pattern": "^country:[A-Z0-9]{3}$" },
+        "placeName": { "type": "string", "minLength": 2 },
+        "statusKind": { "enum": ["disputed", "partial-recognition"] },
+        "badge": { "type": "string", "minLength": 3 },
+        "geometrySemantic": { "const": "map-unit-outline" },
+        "scope": { "enum": ["territorial-status-case", "specific-feature-only"] },
+        "scopeCaveat": { "type": "string", "minLength": 30 },
+        "sourceSnapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["datasetId", "classification", "sovereignName", "boundaryNote"],
+          "properties": {
+            "datasetId": { "const": "natural-earth-admin-0-50m-5.1.2" },
+            "classification": { "type": "string", "minLength": 3 },
+            "sovereignName": { "type": "string", "minLength": 2 },
+            "boundaryNote": { "type": ["string", "null"] }
+          }
+        },
+        "claimants": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/claimant" }
+        },
+        "administratorsOrControllers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/administrator" }
+        },
+        "internationalStatus": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["summary", "perspectives"],
+          "properties": {
+            "summary": { "type": "string", "minLength": 30 },
+            "perspectives": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/perspective" }
+            }
+          }
+        },
+        "explanation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["summary", "claims", "administration", "disputeReason", "mapChoice"],
+          "properties": {
+            "summary": { "type": "string", "minLength": 50 },
+            "claims": { "type": "string", "minLength": 50 },
+            "administration": { "type": "string", "minLength": 50 },
+            "disputeReason": { "type": "string", "minLength": 50 },
+            "mapChoice": { "type": "string", "minLength": 50 }
+          }
+        },
+        "citations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sourceId", "supports"],
+            "properties": {
+              "sourceId": { "type": "string", "minLength": 3 },
+              "supports": { "type": "string", "minLength": 20 }
+            }
+          }
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reviewerKind", "reviewedBy", "reviewedAt", "sourceCheckedThrough", "note"],
+          "properties": {
+            "status": { "const": "published-reviewed" },
+            "reviewerKind": { "enum": ["agent", "human"] },
+            "reviewedBy": { "type": "string", "minLength": 3 },
+            "reviewedAt": { "$ref": "#/$defs/date" },
+            "sourceCheckedThrough": { "$ref": "#/$defs/date" },
+            "note": { "type": "string", "minLength": 20 }
+          }
+        },
+        "temporal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["precision", "validFrom", "validTo"],
+          "properties": {
+            "precision": { "const": "source_snapshot" },
+            "validFrom": { "type": "null" },
+            "validTo": { "type": "null" }
+          }
+        }
+      }
+    }
+  }
+}

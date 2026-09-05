@@ -22,6 +22,13 @@ export default function MoreWorkshopPage() {
 
       <section className={styles.hubGrid} aria-label="Additional Workshop tools">
         <WorkshopHubCard
+          title="Atlas editorial authority"
+          description="Review map explanations and proposed links between JJU content and places. AI suggestions remain separate from human approval."
+          status="Human review gate"
+          action="Open Atlas review"
+          href="/admin/atlas"
+        />
+        <WorkshopHubCard
           title="Reading activity"
           description="See signed-in reader minutes, qualified reads, trends, and per-book activity. Anonymous reading is not counted."
           status="Signed-in coverage only"

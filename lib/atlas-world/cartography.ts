@@ -3,6 +3,10 @@
 type Rect = { x: number; y: number; width: number; height: number };
 const indexes = new WeakMap<SVGSVGElement, ReturnType<typeof indexMap>>();
 
+export function invalidateAtlasCartography(svg: SVGSVGElement) {
+  indexes.delete(svg);
+}
+
 function indexMap(svg: SVGSVGElement) {
   const group = svg.querySelector<SVGGElement>("[data-atlas-map-group]")!;
   const features = Array.from(group.querySelectorAll<SVGGElement>("[data-atlas-feature-bounds]"), (element) => ({
@@ -23,7 +27,7 @@ function indexMap(svg: SVGSVGElement) {
     owner: element.closest<SVGElement>("[data-atlas-layer]"),
     feature: featureByElement.get(element.closest<SVGGElement>("[data-atlas-feature-bounds]")!),
     hit: element.closest("[data-atlas-city]")?.querySelector("[data-atlas-city-hit]"),
-    entityId: element.dataset.atlasLabelEntity,
+    entityId: element.dataset.atlasLabelEntity ?? element.dataset.atlasLabelPlace,
     kind: element.dataset.atlasLabel,
     major: element.dataset.atlasLabelMajor === "true",
     priority: Number(element.dataset.atlasLabelPriority ?? 10),
@@ -61,7 +65,7 @@ export function updateAtlasCartography(svg: SVGSVGElement, zoom: number, selecte
   const viewport = svg.getBoundingClientRect();
   const occupied: Rect[] = [];
   svg.closest("[data-atlas-root]")?.querySelectorAll<HTMLElement>(
-    "header, [data-atlas-sheet], [data-atlas-city-card], aside[aria-label$='map legend']",
+    "header, [data-atlas-sheet], [data-atlas-place-card], aside[aria-label$='map legend']",
   ).forEach((element) => {
     if (element.closest("dialog") || element.inert || !element.getClientRects().length) return;
     const rect = element.getBoundingClientRect();
@@ -130,5 +134,5 @@ export function updateAtlasCartography(svg: SVGSVGElement, zoom: number, selecte
     if (kind === "city") { attribute(element, "x", String(offsetX)); attribute(element, "y", String(offsetY + 3)); }
     occupied.push(rectangle);
   }
-  svg.dispatchEvent(new CustomEvent("atlas-camera", { detail: { zoom } }));
+  svg.dispatchEvent(new CustomEvent("atlas-camera", { detail: { zoom, selectedId } }));
 }

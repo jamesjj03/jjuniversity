@@ -2320,6 +2320,46 @@
 .countryLabel { font-family:Arial,Helvetica,sans-serif; font-weight:600; letter-spacing:.09em; fill:#253730; stroke:#e8e9d9; stroke-width:1.4; }
 .cityLabel { font-family:Arial,Helvetica,sans-serif; font-weight:500; letter-spacing:.015em; fill:#1f363b; stroke:#e8e9d9; stroke-width:1.7; }
 .physicalLabel { font-family:Georgia,serif; font-style:italic; fill:#244e61; stroke:#e8e9d9; stroke-width:.9; font-weight:400; }
+.riverHit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 10;
+  pointer-events: stroke;
+  cursor: pointer;
+}
+.lakeHit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 8;
+  pointer-events: all;
+  cursor: pointer;
+}
+[data-atlas-place-hovered="true"] .riverFeature {
+  stroke: #e6d49b !important;
+  stroke-width: 1.65 !important;
+}
+[data-atlas-place-selected="true"] .riverFeature {
+  stroke: #f4d27f !important;
+  stroke-width: 2.15 !important;
+}
+[data-atlas-place-hovered="true"] .lakeFeature {
+  stroke: #ead89f !important;
+  stroke-width: 1.35 !important;
+}
+[data-atlas-place-selected="true"] .lakeFeature {
+  fill: #6d9eaa !important;
+  stroke: #f4d27f !important;
+  stroke-width: 1.8 !important;
+}
+[data-atlas-place-hovered="true"] .cityPoint,
+[data-atlas-place-selected="true"] .cityPoint {
+  fill: #f4d27f !important;
+  stroke: #273a34 !important;
+  stroke-width: 1.2 !important;
+}
+[data-atlas-place-selected="true"] .cityHalo {
+  fill: #f6edd6;
+}
 /* The surface gets depth from source geography, not cast shadows or bloom.
    Text keylines are hard, screen-space ink knockouts, never blur filters. */
 .atlasToolbar,.legend,.mapControls,.countryPanel,.cityCard,.noteCard,.tooltip { box-shadow:none; backdrop-filter:none; }
@@ -2340,7 +2380,7 @@
 .politicalMapKey>summary { min-height:32px; align-content:center; color:#e0ceac; font-size:13px; cursor:pointer; }
 .politicalMapKey[open]>summary { margin-bottom:13px; }
 @media(min-width:761px) {
-  .atlas:has([data-atlas-city-card]) .mapControls { right:328px; }
+  .atlas:has([data-atlas-place-card]) .mapControls { right:396px; }
 }
 @media(max-width:760px) {
   .atlasToolbar { top:max(7px,env(safe-area-inset-top)); left:8px; right:8px; min-height:50px; padding:0; gap:0; }
@@ -2398,6 +2438,6 @@
   .cityCard h2 { font-size:27px; }
   .cityCard details { margin-top:8px; }
   .cityClose { width:44px; height:44px; }
-  .atlas:has([data-atlas-city-card]) .mapControls,.atlas:has([data-atlas-city-card]) .legend { bottom:230px; }
+  .atlas:has([data-atlas-place-card]) .mapControls,.atlas:has([data-atlas-place-card]) .legend { bottom:calc(var(--atlas-sheet-height,230px) + 18px); }
   .countryLabel { letter-spacing:.08em; }
 }

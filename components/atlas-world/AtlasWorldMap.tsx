@@ -1,34 +1,35 @@
 import type { CSSProperties, ReactNode } from "react";
 import {
   ATLAS_DATASET_BY_ID,
-  ATLAS_LAYER_BY_ID,
   ATLAS_LAYER_DEFINITIONS,
-  ATLAS_VIEW_PRESET_BY_ID,
-  DEFAULT_ATLAS_VIEW_PRESET_ID,
+  buildAtlasRenderPlan,
   resolveAtlasLayerValue,
   type AtlasDatasetDefinition,
   type AtlasLayerDefinition,
   type AtlasLayerRendererType,
-  type AtlasLayerStyleSpec,
+  type AtlasSceneState,
 } from "@/lib/atlas-world/layers";
 import { getAtlasGeographyPack, getAtlasPatternNotes } from "@/lib/atlas-world/getAtlasGeography";
 import type {
-  AtlasCityFeature,
   AtlasGeographyPack,
   AtlasPatternNote,
-  AtlasPhysicalFeature,
 } from "@/lib/atlas-world/geographyTypes";
+import {
+  atlasInitialFeatureSurfaceRecords,
+  buildAtlasFeatureSurfaceIndex,
+  type AtlasFeatureSurfaceRecord,
+} from "@/lib/atlas-world/featureSurface";
 import type { AtlasRuntimeDataset } from "@/lib/atlas-world/runtime";
 import { ATLAS_STATUS_OUTLINE_ENTITY_IDS } from "@/lib/atlas-world/territorialStatus";
 import styles from "./AtlasWorld.module.css";
 import { atlasLabelPlacement } from "@/lib/atlas-world/labelPlacements";
 import AtlasRasterSurface from "./AtlasRasterSurface";
+import AtlasFeatureSurface from "./AtlasFeatureSurface";
 
 type AtlasWorldMapProps = {
   data: AtlasRuntimeDataset;
+  initialScene: AtlasSceneState;
 };
-
-type AtlasGeometryFeature = AtlasPhysicalFeature | AtlasCityFeature;
 
 function assistanceExtent(feature: AtlasRuntimeDataset["geometry"]["features"][number]) {
   // Overseas pieces and dateline wrapping must not make a tiny main polygon
@@ -43,6 +44,7 @@ type AtlasSvgRendererContext = {
   defaultLayerInstances: Map<string, { enabled: boolean; opacity: number }>;
   geographyDatasetById: Map<string, AtlasGeographyPack["datasets"][number]>;
   bundledResources: Map<string, unknown>;
+  initialFeatureRecords: AtlasFeatureSurfaceRecord[];
 };
 
 type AtlasSvgLayerRenderer = (
@@ -57,15 +59,27 @@ function geometryAssetId(entityId: string) {
   return `atlas-${entityId.replace(/[^A-Za-z0-9_-]/g, "-")}`;
 }
 
-function pathLabelPoint(path: string): [number, number] {
-  const values = path.match(/-?\d+(?:\.\d+)?/g)?.map(Number) ?? [];
-  const index = Math.floor(values.length / 4) * 2;
-  return [values[index] ?? 0, values[index + 1] ?? 0];
-}
-
-function physicalGeometryHref(feature: AtlasGeometryFeature) {
-  const level = feature.sourceIds.some((id) => id.includes("10m")) ? "detail" : "overview";
-  return `/atlas-world/physical-mercator-${level}.v1.svg#${feature.featureId.replace(/[^A-Za-z0-9_-]/g, "-")}`;
+function countryLabelPlan(data: AtlasRuntimeDataset) {
+  const importance = (country: AtlasRuntimeDataset["countries"][number]) => {
+    const population = country.facts.population?.value ?? 0;
+    const area = country.facts.areaKm2?.value ?? 0;
+    return Math.log10(Math.max(1, population)) * 0.72 + Math.log10(Math.max(1, area)) * 0.28;
+  };
+  const ranked = data.countries.slice().sort((left, right) => importance(right) - importance(left));
+  const globalRank = new Map(ranked.map((country, index) => [country.id, index]));
+  const continentRank = new Map<string, number>();
+  for (const continent of new Set(ranked.map((country) => country.geography.continent))) {
+    ranked.filter((country) => country.geography.continent === continent)
+      .forEach((country, index) => continentRank.set(country.id, index));
+  }
+  return new Map(data.countries.map((country) => {
+    const global = globalRank.get(country.id) ?? 999;
+    const regional = continentRank.get(country.id) ?? 999;
+    return [country.id, {
+      worldScale: global < 24 || regional < 3,
+      priority: Math.min(6 + global * 0.15, 7 + regional * 0.45),
+    }] as const;
+  }));
 }
 
 function layerSurfaceStyle(
@@ -168,8 +182,6 @@ function renderPolygonFeatureLayer(
   dataset: AtlasDatasetDefinition,
   context: AtlasSvgRendererContext,
 ) {
-  const records = bundledRecords(dataset, context) as AtlasGeometryFeature[];
-  const style = definition.style;
   return (
     <g
       key={definition.id}
@@ -177,39 +189,9 @@ function renderPolygonFeatureLayer(
       className={styles.lakeLayer}
       style={layerSurfaceStyle(definition, context)}
     >
-      {records.map((feature) => {
-        const path = feature.geometry.derived.path;
-        if (!path) return null;
-        const point = pathLabelPoint(path);
-        return (
-          <g key={feature.featureId} data-atlas-map-feature={feature.featureId}
-            data-atlas-feature-bounds={feature.geometry.derived.bounds.flat().join(",")}
-            data-atlas-minimum-zoom={feature.displayMinimumZoom ?? 1}
-            data-atlas-maximum-zoom={feature.displayMaximumZoom}
-            className={styles[`lod${feature.displayLod}`]}>
-          <use
-            key={feature.featureId}
-            href={(feature.displayMinimumZoom ?? 1) <= 1 ? physicalGeometryHref(feature) : undefined}
-            data-atlas-geography-href={physicalGeometryHref(feature)}
-            className={`${styles.lakeFeature} ${styles[`lod${feature.displayLod}`]}`}
-            style={{
-              fill: style?.fillColor,
-              fillOpacity: style?.fillOpacity,
-              stroke: style?.strokeColor,
-              strokeOpacity: style?.strokeOpacity,
-              strokeWidth: style?.strokeWidth,
-              strokeDasharray: style?.strokeDasharray,
-            }}
-            vectorEffect="non-scaling-stroke"
-          >
-            <title>{feature.name}</title>
-          </use>
-          <text data-atlas-label="physical" data-atlas-x={point[0]} data-atlas-y={point[1]} data-atlas-label-min-zoom="3.2"
-            data-atlas-label-priority={40 + (feature.sourceScaleRank ?? 5)} className={styles.physicalLabel}
-            transform={`translate(${point.join(" ")})`} style={{ display: "none" }} textAnchor="middle">{feature.name === "Unnamed feature" ? "" : feature.name}</text>
-          </g>
-        );
-      })}
+      <AtlasFeatureSurface kind="lake"
+        initialFeatures={context.initialFeatureRecords.filter((feature) => feature.kind === "lake")}
+        style={definition.style} />
     </g>
   );
 }
@@ -219,8 +201,6 @@ function renderLineLayer(
   dataset: AtlasDatasetDefinition,
   context: AtlasSvgRendererContext,
 ) {
-  const records = bundledRecords(dataset, context) as AtlasGeometryFeature[];
-  const style = definition.style;
   return (
     <g
       key={definition.id}
@@ -228,52 +208,11 @@ function renderLineLayer(
       className={styles.riverLayer}
       style={layerSurfaceStyle(definition, context)}
     >
-      {records.map((feature) => {
-        const path = feature.geometry.derived.path;
-        if (!path) return null;
-        const point = pathLabelPoint(path);
-        return (
-          <g key={feature.featureId} data-atlas-map-feature={feature.featureId}
-            data-atlas-feature-bounds={feature.geometry.derived.bounds.flat().join(",")}
-            data-atlas-minimum-zoom={feature.displayMinimumZoom ?? 1}
-            data-atlas-maximum-zoom={feature.displayMaximumZoom}
-            className={styles[`lod${feature.displayLod}`]}>
-          <use
-            key={feature.featureId}
-            href={(feature.displayMinimumZoom ?? 1) <= 1 ? physicalGeometryHref(feature) : undefined}
-            data-atlas-geography-href={physicalGeometryHref(feature)}
-            className={`${styles.riverFeature} ${styles[`lod${feature.displayLod}`]}`}
-            style={{
-              fill: "none",
-              stroke: style?.strokeColor,
-              strokeOpacity: style?.strokeOpacity,
-              strokeWidth: style?.strokeWidth,
-              strokeDasharray: style?.strokeDasharray,
-            }}
-            vectorEffect="non-scaling-stroke"
-          >
-            <title>{feature.name}</title>
-          </use>
-          <text data-atlas-label="physical" data-atlas-x={point[0]} data-atlas-y={point[1]} data-atlas-label-min-zoom="2.4"
-            data-atlas-label-priority={40 + (feature.sourceScaleRank ?? 5)} className={styles.physicalLabel}
-            transform={`translate(${point.join(" ")})`} style={{ display: "none" }} textAnchor="middle" y={-5}>{feature.name === "Unnamed feature" ? "" : feature.name}</text>
-          </g>
-        );
-      })}
+      <AtlasFeatureSurface kind="river"
+        initialFeatures={context.initialFeatureRecords.filter((feature) => feature.kind === "river")}
+        style={definition.style} />
     </g>
   );
-}
-
-function pointRadius(feature: AtlasGeometryFeature, style: AtlasLayerStyleSpec | undefined) {
-  const minimum = style?.symbolMinRadius ?? style?.symbolRadius ?? 1.45;
-  const maximum = style?.symbolMaxRadius ?? Math.max(minimum, 2.35);
-  if (feature.sourceScaleRank != null && feature.sourceScaleRank <= 1) {
-    return maximum;
-  }
-  if (feature.kind === "city" && feature.isNationalCapital) {
-    return minimum + ((maximum - minimum) / 2);
-  }
-  return minimum;
 }
 
 function renderPointSymbolLayer(
@@ -281,8 +220,6 @@ function renderPointSymbolLayer(
   dataset: AtlasDatasetDefinition,
   context: AtlasSvgRendererContext,
 ) {
-  const records = bundledRecords(dataset, context) as AtlasGeometryFeature[];
-  const style = definition.style;
   return (
     <g
       key={definition.id}
@@ -290,46 +227,9 @@ function renderPointSymbolLayer(
       className={styles.cityLayer}
       style={layerSurfaceStyle(definition, context)}
     >
-      {records.map((feature) => {
-        const point = feature.geometry.derived.point;
-        if (!point) return null;
-        const radius = pointRadius(feature, style);
-        return (
-          <g
-            key={feature.featureId}
-            className={styles[`lod${feature.displayLod}`]}
-            data-atlas-map-feature={feature.featureId}
-            data-atlas-city={feature.featureId}
-            data-atlas-feature-bounds={feature.geometry.derived.bounds.flat().join(",")}
-            data-atlas-minimum-zoom={feature.displayMinimumZoom ?? 1}
-          >
-            <g data-atlas-screen-symbol="city" data-atlas-x={point[0]} data-atlas-y={point[1]} transform={`translate(${point.join(" ")})`}>
-            <circle r={0} fill="transparent" data-atlas-city-hit className={styles.cityHit} aria-label={`Select city ${feature.name}`} />
-            <circle r={radius + 1} className={styles.cityHalo} />
-            <circle
-              r={radius}
-              className={styles.cityPoint}
-              style={{
-                fill: style?.symbolFill,
-                stroke: style?.symbolStroke,
-                strokeWidth: style?.strokeWidth,
-              }}
-            >
-              <title>{feature.name}</title>
-            </circle>
-            </g>
-            <text
-              data-atlas-label="city"
-              data-atlas-label-country={feature.kind === "city" ? feature.entity.countryId ?? undefined : undefined}
-              data-atlas-x={point[0]} data-atlas-y={point[1]}
-              data-atlas-label-priority={20 + (feature.sourceScaleRank ?? 5)}
-              data-atlas-label-min-zoom={feature.kind === "city" && feature.isNationalCapital ? 2.6 : 4}
-              transform={`translate(${point.join(" ")})`}
-              x={8} y={3} className={styles.cityLabel} style={{ display: "none" }}
-            >{feature.kind === "city" && feature.isNationalCapital ? "▪ " : ""}{feature.name}</text>
-          </g>
-        );
-      })}
+      <AtlasFeatureSurface kind="city"
+        initialFeatures={context.initialFeatureRecords.filter((feature) => feature.kind === "city")}
+        style={definition.style} />
     </g>
   );
 }
@@ -528,36 +428,38 @@ function renderSharedAdmin0Fill(
   );
 }
 
-export default function AtlasWorldMap({ data }: AtlasWorldMapProps) {
+export default function AtlasWorldMap({ data, initialScene }: AtlasWorldMapProps) {
   const geography = getAtlasGeographyPack();
   const patternNotes = getAtlasPatternNotes();
   const geometryAssetHref = `${GEOMETRY_ASSET_HREF}?snapshot=${encodeURIComponent(data.snapshotId)}`;
-  const defaultPreset = ATLAS_VIEW_PRESET_BY_ID.get(DEFAULT_ATLAS_VIEW_PRESET_ID);
-  if (!defaultPreset) throw new Error("The default Atlas view preset is not registered.");
-
   const defaultLayerInstances = new Map(
-    defaultPreset.layerInstances.map((instance) => [
+    initialScene.layers.map((instance) => [
       instance.layerId,
       { enabled: instance.enabled, opacity: instance.opacity },
     ]),
   );
   const geographyDatasetById = new Map(geography.datasets.map((dataset) => [dataset.id, dataset]));
+  const featureSurfaceRecords = buildAtlasFeatureSurfaceIndex(geography.featureCollections);
+  const focusedPlaceId = initialScene.focus?.kind === "feature" ? initialScene.focus.id : null;
+  const initialFeatureRecords = atlasInitialFeatureSurfaceRecords(featureSurfaceRecords, focusedPlaceId);
   const bundledResources = new Map<string, unknown>([
     ["atlas-geography-pack.v1", geography],
     ["atlas-pattern-notes.v1", { notes: patternNotes }],
   ]);
+  const labelPlan = countryLabelPlan(data);
   const context: AtlasSvgRendererContext = {
     data,
     geometryAssetHref,
     defaultLayerInstances,
     geographyDatasetById,
     bundledResources,
+    initialFeatureRecords,
   };
 
-  const defaultFillDefinition = defaultPreset.layerInstances
-    .map((instance) => ATLAS_LAYER_BY_ID.get(instance.layerId))
-    .find((definition) => definition?.renderer === "polygon-fill");
-  if (!defaultFillDefinition) throw new Error("The default Atlas view has no polygon-fill layer.");
+  const defaultFillDefinition = buildAtlasRenderPlan(initialScene).layers
+    .map((entry) => entry.definition)
+    .find((definition) => definition.renderer === "polygon-fill");
+  if (!defaultFillDefinition) throw new Error("The initial Atlas view has no polygon-fill layer.");
 
   const catalogSurfaces = ATLAS_LAYER_DEFINITIONS
     .filter((definition) => definition.renderer !== "polygon-fill")
@@ -584,6 +486,8 @@ export default function AtlasWorldMap({ data }: AtlasWorldMapProps) {
       viewBox={data.geometry.viewBox.join(" ")}
       className={styles.worldMap}
       data-atlas-world-map
+      data-atlas-initial-view={initialScene.viewPresetId}
+      data-atlas-initial-focus={initialScene.focus?.kind ?? "none"}
       aria-hidden="true"
     >
       <defs>
@@ -639,12 +543,13 @@ export default function AtlasWorldMap({ data }: AtlasWorldMapProps) {
             if (!country) return null;
             const area = feature.labelArea ?? 0;
             const placement = atlasLabelPlacement(country.id);
+            const planned = labelPlan.get(country.id);
             const anchor = placement?.point ?? feature.labelPoint ?? feature.centroid;
             const minZoom = area > 2600 ? 1 : area > 600 ? 1.8 : area > 120 ? 2.8 : area > 20 ? 4 : 6;
             return <text key={country.id} data-atlas-label="country" data-atlas-label-entity={country.id}
               data-atlas-x={anchor[0]} data-atlas-y={anchor[1]}
-              data-atlas-label-min-zoom={placement?.priority != null ? 1 : minZoom}
-              data-atlas-label-priority={placement?.priority ?? 12 - Math.log(Math.max(1, area))}
+              data-atlas-label-min-zoom={placement?.priority != null || planned?.worldScale ? 1 : minZoom}
+              data-atlas-label-priority={placement?.priority ?? planned?.priority ?? 99}
               data-atlas-label-angle={placement?.angle ?? 0}
               data-atlas-label-major={placement?.priority != null ? "true" : "false"}
               transform={`translate(${anchor.join(" ")})`} textAnchor="middle"

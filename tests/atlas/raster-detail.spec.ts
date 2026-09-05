@@ -90,8 +90,8 @@ test("world views do not fetch detail and zoom loads only registered visible sou
   expect(await page.locator(TILES).count()).toBe(0);
   expect(detailRequests).toEqual([]);
 
-  await page.getByRole("button", { name: "Search countries", exact: true }).click();
-  await page.getByRole("combobox", { name: "Search countries", exact: true }).fill("Egypt");
+  await page.getByRole("button", { name: "Find a place", exact: true }).click();
+  await page.getByRole("combobox", { name: "Find a country, city, river, or lake", exact: true }).fill("Egypt");
   await page.getByRole("option", { name: /^Egypt\s/ }).click();
   await expect(page.getByRole("heading", { name: "Egypt", exact: true })).toBeVisible();
   await expectDetailReady(page);

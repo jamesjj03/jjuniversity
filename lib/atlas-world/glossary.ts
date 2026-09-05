@@ -5,10 +5,19 @@ export type AtlasGlossarySource = {
   url: string;
 };
 
+export type AtlasGlossaryGroup =
+  | "Government"
+  | "Religion"
+  | "Demography"
+  | "Economy"
+  | "Territorial status"
+  | "Reading the map"
+  | "Geography";
+
 export type AtlasGlossaryTerm = {
   id: string;
   label: string;
-  group: "Government" | "Religion" | "Reading the map" | "Geography";
+  group: AtlasGlossaryGroup;
   aliases: string[];
   definition: string;
   inAtlas: string;
@@ -19,6 +28,19 @@ export type AtlasGlossaryTerm = {
   sources: AtlasGlossarySource[];
   reviewedAt: "2026-09-05";
 };
+
+export const ATLAS_GLOSSARY_GROUPS: readonly {
+  name: AtlasGlossaryGroup;
+  description: string;
+}[] = [
+  { name: "Geography", description: "Land, water, settlements, and the physical features beneath the borders." },
+  { name: "Territorial status", description: "Claims, control, recognition, and what a boundary does—or does not—mean." },
+  { name: "Demography", description: "How populations change, where people live, and what national summaries leave out." },
+  { name: "Economy", description: "Ways of comparing production, prices, growth, and exchange between economies." },
+  { name: "Government", description: "Who holds power, and how it is organized." },
+  { name: "Religion", description: "Traditions, identities, and the figures behind the colors." },
+  { name: "Reading the map", description: "How to read sources, scales, estimates, and missing information." },
+];
 
 const factbook: AtlasGlossarySource = {
   title: "Government-type definitions · archived World Factbook",
@@ -65,6 +87,76 @@ const ghsl: AtlasGlossarySource = {
   publisher: "European Commission Joint Research Centre",
   url: "https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php",
 };
+const worldBankLifeExpectancy: AtlasGlossarySource = {
+  title: "Life expectancy at birth, total · SP.DYN.LE00.IN",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/SP.DYN.LE00.IN",
+};
+const worldBankFertility: AtlasGlossarySource = {
+  title: "Fertility rate, total · SP.DYN.TFRT.IN",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/SP.DYN.TFRT.IN",
+};
+const worldBankUrbanPopulation: AtlasGlossarySource = {
+  title: "Urban population, share of total · SP.URB.TOTL.IN.ZS",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS",
+};
+const worldBankPopulationGrowth: AtlasGlossarySource = {
+  title: "Population growth, annual percent · SP.POP.GROW",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/SP.POP.GROW",
+};
+const worldBankChildrenShare: AtlasGlossarySource = {
+  title: "Population ages 0–14, share of total · SP.POP.0014.TO.ZS",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/SP.POP.0014.TO.ZS",
+};
+const worldBankOlderPopulationShare: AtlasGlossarySource = {
+  title: "Population ages 65 and above, share of total · SP.POP.65UP.TO.ZS",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/SP.POP.65UP.TO.ZS",
+};
+const worldBankGniPerCapita: AtlasGlossarySource = {
+  title: "GNI per capita, Atlas method · NY.GNP.PCAP.CD",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/NY.GNP.PCAP.CD",
+};
+const worldBankGdpGrowth: AtlasGlossarySource = {
+  title: "GDP growth, annual percent · NY.GDP.MKTP.KD.ZG",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG",
+};
+const worldBankInflation: AtlasGlossarySource = {
+  title: "Inflation, consumer prices · FP.CPI.TOTL.ZG",
+  publisher: "World Bank · sourced from IMF International Financial Statistics",
+  url: "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG",
+};
+const worldBankTrade: AtlasGlossarySource = {
+  title: "Trade as a share of GDP · NE.TRD.GNFS.ZS",
+  publisher: "World Bank · World Development Indicators",
+  url: "https://data.worldbank.org/indicator/NE.TRD.GNFS.ZS",
+};
+const worldBankPpp: AtlasGlossarySource = {
+  title: "Purchasing power parities · concepts and definitions",
+  publisher: "World Bank · International Comparison Program",
+  url: "https://www.worldbank.org/en/programs/icp/faq",
+};
+const naturalEarthPhysical: AtlasGlossarySource = {
+  title: "Rivers, lakes, coastlines, and other physical vectors",
+  publisher: "Natural Earth",
+  url: "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+};
+const naturalEarthCultural: AtlasGlossarySource = {
+  title: "Admin 0 map units and Admin 1 states and provinces",
+  publisher: "Natural Earth",
+  url: "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+};
+const unitedNationsRecognition: AtlasGlossarySource = {
+  title: "Recognition and United Nations membership",
+  publisher: "United Nations",
+  url: "https://www.un.org/en/node/122427",
+};
 
 // Authored teaching paths, not every possible relationship in a taxonomy.
 const teaching: Record<string, { example?: string; related: string[] }> = {
@@ -104,6 +196,28 @@ const teaching: Record<string, { example?: string; related: string[] }> = {
   "logarithmic-scale": { example: "On a logarithmic scale, 100 → 1,000 can occupy the same space as 1,000 → 10,000. Both steps multiply by ten.", related: ["gdp-per-capita", "population-density"] },
   inherited: { example: "A value borrowed from a parent country is not a fresh measurement of its territory. Atlas should say when a value has been borrowed.", related: ["observed", "unknown"] },
   observed: { example: "A profile downloaded in 2026 might report a population measured in 2025 or a survey from 2010. The download date does not make either fact new.", related: ["modeled-estimate", "unknown"] },
+  "life-expectancy": { example: "Life expectancy of 80 years does not predict that every newborn will live to 80. It summarizes the death rates observed across all ages.", related: ["total-fertility-rate", "population-growth", "observed"] },
+  "total-fertility-rate": { example: "A rate of 2.1 is an average across a population, not a claim that any one woman has a fraction of a child.", related: ["population-growth", "life-expectancy", "modeled-estimate"] },
+  "urban-population-share": { example: "A country can be mostly urban while still containing enormous rural areas, because the percentage counts people rather than land.", related: ["population-density", "major-cities", "observed"] },
+  "population-growth": { example: "Population can keep growing after average family size falls because a large generation of young adults is entering childbearing ages.", related: ["total-fertility-rate", "life-expectancy", "population"] },
+  "children-share": { example: "A large 0–14 share can mean schools will face growing demand even before that generation reaches working age.", related: ["older-population-share", "total-fertility-rate", "population-growth"] },
+  "older-population-share": { example: "Two countries can have the same population total but very different needs if one has a much larger share of people aged 65 and above.", related: ["children-share", "life-expectancy", "population-growth"] },
+  "purchasing-power-parity": { example: "The same market-exchange-rate amount may buy very different baskets of everyday goods in two countries. PPP adjusts comparisons for that price difference.", related: ["gdp-per-capita", "gni-per-capita", "inflation"] },
+  "gni-per-capita": { example: "Income earned abroad by residents can make GNI differ from production located inside the country, which GDP measures.", related: ["gdp-per-capita", "income-classification", "purchasing-power-parity"] },
+  "economic-growth": { example: "An economy that falls from 100 to 90 and then grows 10% reaches 99, not 100. Percentage changes depend on the starting level.", related: ["gdp", "inflation", "observed"] },
+  inflation: { example: "If a broad consumer basket costs 100 one year and 105 the next, its measured inflation rate is 5%. Individual prices can move very differently.", related: ["economic-growth", "purchasing-power-parity", "observed"] },
+  "trade-share": { example: "A small trading hub can record imports plus exports greater than its GDP because trade is a flow through the economy, not a slice of national output.", related: ["gdp", "economic-growth", "observed"] },
+  sovereignty: { example: "A map may display a place as a separate selectable unit without taking a position that it is a universally recognized sovereign state.", related: ["de-facto-control", "territorial-claim", "diplomatic-recognition"] },
+  "de-facto-control": { example: "The authority administering checkpoints, schools, and laws on the ground may differ from the state with the internationally recognized legal claim.", related: ["sovereignty", "territorial-claim", "disputed-territory"] },
+  "territorial-claim": { example: "Two claims can overlap. Drawing one claimant's preferred border as ordinary fact would hide the disagreement the map needs to explain.", related: ["de-facto-control", "diplomatic-recognition", "disputed-boundary"] },
+  "diplomatic-recognition": { example: "Recognition can vary from one government to another and change over time; it is not a permanent yes-or-no property of a polygon.", related: ["sovereignty", "territorial-claim", "observed"] },
+  "map-unit": { example: "Greenland can be mapped separately from Denmark for geographic exploration while its constitutional relationship to Denmark remains explicit.", related: ["political-geography", "administrative-unit", "territory_or_dependency"] },
+  "administrative-unit": { example: "A state, province, county, or district can have its own boundary and data while remaining inside a parent country.", related: ["map-unit", "political-geography", "sovereignty"] },
+  "disputed-boundary": { example: "Only part of a territory's outline may be contested. A dashed whole-country outline is a warning to read the note, not a precise claim line.", related: ["disputed-territory", "territorial-claim", "de-facto-control"] },
+  river: { example: "A river line can connect a mountain watershed to the sea, but the line alone does not show the full land area that drains into it.", related: ["drainage-basin", "lake", "physical-relief"] },
+  "drainage-basin": { example: "Rain falling on opposite sides of a ridge may enter different river systems even when the two locations are only a short distance apart.", related: ["river", "physical-relief", "population-density"] },
+  lake: { example: "A reservoir is human-made but still behaves as a large inland water body on a small-scale world map.", related: ["river", "coastline", "physical-relief"] },
+  coastline: { example: "A coastline becomes longer as it is measured with finer detail, so map scale always affects the line you see and any stated length.", related: ["lake", "political-geography", "physical-relief"] },
 };
 
 type TermInput = Omit<AtlasGlossaryTerm, "reviewedAt" | "example" | "relatedTerms">;
@@ -187,6 +301,50 @@ export const ATLAS_GLOSSARY: readonly AtlasGlossaryTerm[] = [
     definition: "An estimate made by combining observations with assumptions about how the world works. It fills gaps where measuring every place directly is not possible.",
     inAtlas: "The population grid redistributes population inputs using built-up-area information and includes projected epochs. Its source, version and observation year remain attached to the layer.",
     caveat: "A visually precise grid does not mean equally precise knowledge. Input age, resolution and model assumptions affect local accuracy.", sources: [ghsl] }),
+  term({ id: "life-expectancy", label: "Life expectancy at birth", group: "Demography", aliases: ["Life expectancy", "Expected lifespan", "SP.DYN.LE00.IN"],
+    definition: "The average number of years a newborn would live if the death rates observed at each age stayed the same throughout that child’s life.",
+    inAtlas: "Atlas carries the latest available World Bank observation for each covered economy as a national People layer. Its year travels with the value because the latest year is not necessarily identical everywhere.",
+    caveat: "This is a population summary built from age-specific death rates, not a forecast for one person. Values can combine national records, estimates, and modeled inputs, so the observation year and source still matter.", sources: [worldBankLifeExpectancy] }),
+  term({ id: "total-fertility-rate", label: "Total fertility rate", group: "Demography", aliases: ["Fertility rate", "Births per woman", "SP.DYN.TFRT.IN"],
+    definition: "The average number of children a woman would have if the age-specific birth rates observed in one period applied throughout her reproductive years.",
+    inAtlas: "Atlas carries World Bank SP.DYN.TFRT.IN as a national People layer. The renderer keeps the observation year and missing-data state rather than extracting an undated number from prose.",
+    caveat: "It is a period measure, not the completed family size of one woman or generation. It does not by itself determine population growth, which also reflects mortality, migration, and age structure.", sources: [worldBankFertility] }),
+  term({ id: "urban-population-share", label: "Urban population share", group: "Demography", aliases: ["Urbanization", "Urban population percent", "Percent urban", "SP.URB.TOTL.IN.ZS"],
+    definition: "The percentage of a place’s population living in areas its statistical system classifies as urban.",
+    inAtlas: "Atlas carries World Bank SP.URB.TOTL.IN.ZS as a national People layer. It stays distinct from the gridded population-density surface, which answers where people live rather than how a country classifies settlements.",
+    caveat: "Countries do not all define an urban settlement the same way. This is a share of people, not a share of land, and it does not show the size or shape of individual cities.", sources: [worldBankUrbanPopulation] }),
+  term({ id: "population-growth", label: "Population growth", group: "Demography", aliases: ["Population growth rate", "Annual population growth", "SP.POP.GROW"],
+    definition: "The rate at which the number of people living in a place changes over a period, usually expressed as an annual percentage.",
+    inAtlas: "Atlas carries the latest available World Bank annual-growth observation as a national People layer. The renderer keeps the year and supports negative as well as positive values.",
+    caveat: "Growth combines births, deaths, and migration. A single annual percentage can be volatile for small populations and does not reveal which of those forces caused the change.", sources: [worldBankPopulationGrowth] }),
+  term({ id: "children-share", label: "Population ages 0–14", group: "Demography", aliases: ["Children share", "Youth population", "Ages 0 to 14", "SP.POP.0014.TO.ZS"],
+    definition: "The percentage of a place’s total population who are between birth and age 14 in the source observation.",
+    inAtlas: "Atlas carries World Bank SP.POP.0014.TO.ZS as one national age-structure layer. It is a percentage of the whole population, not a count of children.",
+    caveat: "A single age band hides differences within childhood and says nothing by itself about school attendance, dependency, health, or future growth. Observation years can differ across economies.", sources: [worldBankChildrenShare] }),
+  term({ id: "older-population-share", label: "Population ages 65+", group: "Demography", aliases: ["Older population", "Senior population", "Ages 65 and above", "SP.POP.65UP.TO.ZS"],
+    definition: "The percentage of a place’s total population who are age 65 or older in the source observation.",
+    inAtlas: "Atlas carries World Bank SP.POP.65UP.TO.ZS as one national age-structure layer. It remains separate from life expectancy and from the absolute number of older residents.",
+    caveat: "Age 65 is a statistical threshold, not a universal retirement age or a measure of health. National age profiles and observation dates require more context than one share can provide.", sources: [worldBankOlderPopulationShare] }),
+  term({ id: "purchasing-power-parity", label: "Purchasing power parity", group: "Economy", aliases: ["PPP", "Purchasing power", "International dollars"],
+    definition: "A currency conversion method that adjusts for differences in price levels, so the converted amount buys a broadly comparable basket of goods and services across economies.",
+    inAtlas: "The current GDP-per-capita map uses market exchange rates, not PPP. A future PPP view must name its International Comparison Program reference year and remain distinct from the current-dollar layer.",
+    caveat: "PPP is designed for comparisons across places, not ordinary currency exchange. Results depend on price surveys, a common basket, national accounts, and the chosen reference year.", sources: [worldBankPpp] }),
+  term({ id: "gni-per-capita", label: "GNI per capita", group: "Economy", aliases: ["Gross national income per capita", "GNI per person", "Atlas method", "NY.GNP.PCAP.CD"],
+    definition: "Gross national income divided by population: income earned by a country’s residents and businesses, including relevant income from abroad, averaged across its population.",
+    inAtlas: "Atlas uses the World Bank’s GNI-per-capita classification in country metadata, but does not yet expose a dedicated GNI layer. It must not be relabeled as GDP per capita.",
+    caveat: "This is an average, not a typical household income. GNI differs from GDP because it follows residents’ income rather than only production located inside the economy.", sources: [worldBankGniPerCapita] }),
+  term({ id: "economic-growth", label: "Economic growth", group: "Economy", aliases: ["GDP growth", "Real GDP growth", "Annual GDP growth", "NY.GDP.MKTP.KD.ZG"],
+    definition: "The percentage change in the amount an economy produces from one period to the next, usually measured with inflation-adjusted gross domestic product.",
+    inAtlas: "Atlas does not yet map growth. A future layer should use the World Bank’s constant-price GDP growth series, show the exact period, and allow negative as well as positive values.",
+    caveat: "A high rate can reflect recovery from a low base, and a low rate can accompany a large mature economy. One year does not establish a durable trend or show how gains are distributed.", sources: [worldBankGdpGrowth] }),
+  term({ id: "inflation", label: "Consumer-price inflation", group: "Economy", aliases: ["Inflation", "CPI inflation", "Consumer prices", "FP.CPI.TOTL.ZG"],
+    definition: "The percentage change in the price of a representative basket of goods and services bought by households over a period.",
+    inAtlas: "Atlas does not yet map inflation. A future view should use a dated consumer-price series, preserve negative values, and avoid silently combining observations from very different years.",
+    caveat: "A national average does not match every household’s purchases, and it does not mean every price rose by the same amount. Methods and basket weights differ across statistical systems.", sources: [worldBankInflation] }),
+  term({ id: "trade-share", label: "Trade as a share of GDP", group: "Economy", aliases: ["Trade openness", "Exports plus imports", "Trade percent GDP", "NE.TRD.GNFS.ZS"],
+    definition: "The value of exports plus imports of goods and services, divided by gross domestic product and expressed as a percentage.",
+    inAtlas: "Atlas does not yet map this indicator. If added, it should retain the World Bank series definition and be called a trade share—not a complete measure of openness or trade policy.",
+    caveat: "The percentage can exceed 100 because trade and GDP are different flows. Country size, re-exports, supply chains, geography, and policy all affect the figure.", sources: [worldBankTrade] }),
   term({ id: "dominant-religion", label: "Dominant religious tradition", group: "Religion", aliases: ["Dominant tradition", "Religion", "Largest religion"],
     definition: "The broad religious tradition used to give a country its map color. It is a starting point: people within that country may follow many different traditions, or none.",
     inAtlas: "With usable percentages, a tradition above 50% supplies the color. Without them, explicit source descriptions can supply a qualitative label. Otherwise Atlas keeps mixed or unresolved values.",
@@ -214,11 +372,39 @@ export const ATLAS_GLOSSARY: readonly AtlasGlossaryTerm[] = [
       ...(["christianity", "islam", "hinduism", "buddhism", "judaism"].includes(id) ? [{ title: `${label} · introduction and traditions`, publisher: "Harvard University · The Pluralism Project", url: `https://pluralism.org/${id}` }] : []),
       factbookSnapshot,
     ] })),
-  term({ id: "disputed-territory", label: "Disputed territory", group: "Geography", aliases: ["Disputed", "Disputed status", "Contested status", "Partially recognized", "Disputed boundary"],
+  term({ id: "sovereignty", label: "Sovereignty", group: "Territorial status", aliases: ["Sovereign", "Sovereign state", "Independence"],
+    definition: "The authority of a state to govern its territory and conduct its relations with other states without being legally subordinate to another state.",
+    inAtlas: "Atlas treats sovereignty as one attribute of a place, not as the rule for whether a polygon can be selected. Its 242-place geography deliberately includes non-sovereign territories and disputed entities.",
+    caveat: "A map cannot settle sovereignty. Legal claims, effective administration, international recognition, constitutional relationships, and the boundary source’s categories must remain distinguishable.", sources: [naturalEarth] }),
+  term({ id: "de-facto-control", label: "De facto control", group: "Territorial status", aliases: ["Actual control", "Effective control", "Administration on the ground", "De facto boundary"],
+    definition: "Control exercised in practice: the authority that actually administers a place, whether or not every state accepts that arrangement as lawful.",
+    inAtlas: "Natural Earth generally draws Admin 0 geography according to de facto control. Atlas records separate prose for administration and claims where its curated status data supports that distinction.",
+    caveat: "Control can be partial, contested, or change rapidly. A de facto boundary is a cartographic observation, not an endorsement of the controlling authority’s legal claim.", sources: [naturalEarth] }),
+  term({ id: "territorial-claim", label: "Territorial claim", group: "Territorial status", aliases: ["Claim", "Claimant", "De jure claim", "Claimed territory"],
+    definition: "An assertion by a state or other political authority that a place belongs under its sovereignty or jurisdiction.",
+    inAtlas: "Where curated evidence exists, Atlas keeps claims separate from administration and from the line chosen for the base map. Precise claim-line geometry is not yet a global Atlas layer.",
+    caveat: "Claims can overlap, cover only part of an area, and rest on different legal or historical arguments. Listing a claim does not validate it or make every boundary of the territory disputed.", sources: [naturalEarth] }),
+  term({ id: "diplomatic-recognition", label: "Diplomatic recognition", group: "Territorial status", aliases: ["Recognition", "International recognition", "Recognized state", "Partially recognized"],
+    definition: "A government’s formal acceptance that another political entity has a particular status, often including statehood or a government’s authority to represent that state.",
+    inAtlas: "Atlas does not reduce recognition to one permanent yes-or-no field. Place notes may describe it when sources and dates support the wording, while the base map remains usable without treating recognition as polygon truth.",
+    caveat: "Recognition decisions differ among governments and can change. Membership in an international organization, diplomatic relations, sovereignty, and control on the ground are related but not identical.", sources: [unitedNationsRecognition, naturalEarth] }),
+  term({ id: "map-unit", label: "Map unit", group: "Territorial status", aliases: ["Mapunit", "Cartographic unit", "Natural Earth map unit"],
+    definition: "A geographic area represented as its own cartographic feature because separating it makes the map easier to read or analyze, even when it is not a sovereign state.",
+    inAtlas: "Atlas joins Natural Earth Admin 0 features into 242 selectable places. The stable Atlas entity ID and territorial-status record explain what each selectable unit represents.",
+    caveat: "A separate color, outline, label, or search result is a design and data-model choice—not a declaration of independence or universal recognition.", sources: [naturalEarthCultural, naturalEarth] }),
+  term({ id: "administrative-unit", label: "Administrative unit", group: "Territorial status", aliases: ["Subdivision", "Administrative division", "State", "Province", "County", "District", "Admin 1", "Admin 2"],
+    definition: "A legally or practically organized part of a larger territory, such as a state, province, county, district, or municipality.",
+    inAtlas: "The current world geography is primarily Admin 0. Future subdivision pilots should give each unit a stable identity, a parent place, a geometry level, and dated observations without replacing the 242-place ontology.",
+    caveat: "Names, powers, and hierarchy differ by country, and not every system has comparable first- or second-level units. ‘Admin 1’ is a data level, not a claim that all units have the same status.", sources: [naturalEarthCultural] }),
+  term({ id: "disputed-boundary", label: "Disputed boundary", group: "Territorial status", aliases: ["Contested boundary", "Disputed border", "Claim line"],
+    definition: "A boundary whose location or legal standing is contested by the authorities that claim territory on one or both sides.",
+    inAtlas: "The current dashed whole-place outline is a prompt to read the status note; it is not precise disputed-boundary geometry. Natural Earth supplies separate de facto and auxiliary claim concepts for more exact future treatment.",
+    caveat: "A dispute often concerns only one segment of a border. Styling every edge alike can exaggerate the geographic extent of the disagreement.", sources: [naturalEarth] }),
+  term({ id: "disputed-territory", label: "Disputed territory", group: "Geography", aliases: ["Disputed", "Disputed status", "Contested status", "Partially recognized"],
     definition: "A place whose ownership, borders or political status are contested. Who actually governs it and who is internationally recognized as sovereign may be different.",
     inAtlas: "A dashed outline asks you to inspect the place-specific status note. It follows the source feature’s outline; it is not a surveyed claim line or a statement that every edge is disputed.",
     caveat: "Map inclusion, color and the source’s ‘sovereign’ field do not establish legal sovereignty. This is a dated cartographic snapshot, not a live boundary or recognition service.", sources: [naturalEarth] }),
-  term({ id: "political-geography", label: "Political geography", group: "Geography", aliases: ["Political", "Country or territory", "Country", "Sovereign country", "Sovereignty", "Indeterminate", "Status", "Natural Earth", "Neighbor contrast", "Modern borders"],
+  term({ id: "political-geography", label: "Political geography", group: "Geography", aliases: ["Political", "Country or territory", "Country", "Sovereign country", "Indeterminate", "Status", "Natural Earth", "Neighbor contrast", "Modern borders"],
     definition: "How land is divided and governed. Atlas includes countries and separately mapped territories, so its 242 selectable places are not 242 universally recognized independent states.",
     inAtlas: "Natural Earth 1:50m Admin 0 version 5.1.2 supplies the boundaries and original classification. Natural Earth generally represents de facto control; the source snapshot is preserved.",
     caveat: "Source terms mix cartographic and political concepts. ‘Sovereignty’ is a source class, not a dispute flag; ‘Indeterminate’ also includes Antarctica’s treaty arrangement.", sources: [naturalEarth] }),
@@ -230,6 +416,22 @@ export const ATLAS_GLOSSARY: readonly AtlasGlossaryTerm[] = [
     definition: "Cities and capitals help you locate where people live within a country. The map shows a selection, with more names appearing as you zoom closer.",
     inAtlas: "Cities come from Natural Earth’s ranked populated-place dataset. Visibility changes with zoom so an overview does not show every point.",
     caveat: "A visible marker is not an urban boundary. Marker rank, city population and metropolitan population are different measures; not every settlement is included.", sources: [{ title: "Natural Earth · populated places", publisher: "Natural Earth", url: "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/" }] }),
+  term({ id: "river", label: "River", group: "Geography", aliases: ["Rivers", "River line", "Drainage"],
+    definition: "A natural channel through which water flows downhill toward another river, a lake, an inland basin, or the sea.",
+    inAtlas: "Atlas uses ranked Natural Earth river centerlines for geographic context. More rivers appear with closer zoom; the line is a cartographic centerline rather than a measured bank-to-bank width.",
+    caveat: "Coverage and positional detail depend on the source scale. Seasonal flow, distributaries, canals, and the exact riverbank are not completely described by one simplified line.", sources: [naturalEarthPhysical] }),
+  term({ id: "drainage-basin", label: "Drainage basin", group: "Geography", aliases: ["River basin", "Watershed", "Catchment", "Drainage area"],
+    definition: "The area of land where water drains toward the same river system, lake, or other outlet, usually separated from neighboring basins by higher ground.",
+    inAtlas: "Atlas can show rivers and physical relief, but it does not yet include global drainage-basin polygons. A future basin layer should be separate from the river centerlines it helps explain.",
+    caveat: "A watershed is an area, not just a river line. Human engineering, underground flow, seasonal changes, and differences in dataset scale can complicate its boundary.", sources: [naturalEarthPhysical] }),
+  term({ id: "lake", label: "Lake", group: "Geography", aliases: ["Lakes", "Reservoir", "Inland water"],
+    definition: "A body of water surrounded by land. Map datasets commonly group natural lakes and human-made reservoirs in the same visual layer.",
+    inAtlas: "Atlas uses Natural Earth lake and reservoir polygons, ranked so smaller features can appear as the user moves closer. Lake centerlines can also connect river paths through large water bodies.",
+    caveat: "Shorelines and water levels change, especially for reservoirs and seasonal lakes. Source scale determines which islands, inlets, and smaller lakes are visible.", sources: [naturalEarthPhysical] }),
+  term({ id: "coastline", label: "Coastline", group: "Geography", aliases: ["Coast", "Shoreline", "Coastal boundary"],
+    definition: "The line where land meets the sea, simplified to the level of detail appropriate for a particular map scale.",
+    inAtlas: "Atlas derives the world land edge from Natural Earth geometry and keeps it visually distinct from inland political borders. Detail is intentionally reduced at world scale.",
+    caveat: "There is no single scale-independent coastline length or shape. Tides, erosion, sea level, and increasingly fine measurement all change the line that can be reported.", sources: [naturalEarthPhysical] }),
   term({ id: "income-classification", label: "Income classification", group: "Reading the map", aliases: ["Income level", "Low income", "Lower middle income", "Upper middle income", "High income"],
     definition: "The World Bank sorts economies into low-, middle- and high-income groups using national income per person. This gives a broad comparison, not a description of every resident’s circumstances.",
     inAtlas: "Country details retain the income group supplied by the World Bank country-metadata snapshot. It is not calculated from the displayed GDP-per-capita layer.",

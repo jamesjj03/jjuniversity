@@ -232,10 +232,7 @@
               "review": {
                 "properties": {
                   "reviewerKind": {
-                    "enum": [
-                      "human",
-                      "agent"
-                    ]
+                    "const": "human"
                   },
                   "reviewedBy": {
                     "type": "string",

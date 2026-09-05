@@ -186,6 +186,13 @@ export default async function ReviewsPage() {
             href="/admin/editorial"
           />
           <WorkshopHubCard
+            title="Atlas explanations and links"
+            description="Review the four source-backed map explanations and ten proposed JJU-to-place associations. Nothing AI-proposed is treated as human-approved."
+            status="Two evidence queues"
+            action="Open Atlas review"
+            href="/admin/atlas"
+          />
+          <WorkshopHubCard
             title="Arena source review"
             description={deployed
               ? "Arena writes local review files, so it remains unavailable in the deployed Workshop."

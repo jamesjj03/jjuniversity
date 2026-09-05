@@ -37,6 +37,11 @@ const GEOGRAPHY_REQUIREMENTS_PATH = path.join(
   "scripts",
   "atlas-geography-requirements.txt",
 );
+const VECTOR_REQUIREMENTS_PATH = path.join(
+  REPOSITORY_ROOT,
+  "scripts",
+  "atlas-vector-requirements.txt",
+);
 
 const EXPECTED_DATASET_COUNTS = {
   "major-rivers": 1311,
@@ -272,7 +277,7 @@ assert(
 
 const lockedSources = new Map(sourceLock.sources.map((source) => [source.id, source]));
 assert(lockedSources.size === sourceLock.sources.length, "Source lock contains duplicate source IDs.");
-assert(sourceLock.sources.length === 15, `Expected 15 locked Atlas sources; found ${sourceLock.sources.length}.`);
+assert(sourceLock.sources.length >= 15, `Expected at least the 15 Phase 2 Atlas sources; found ${sourceLock.sources.length}.`);
 const sourceSeedRoot = path.resolve(REPOSITORY_ROOT, "data", "atlas", "source-seeds");
 for (const source of sourceLock.sources.filter((candidate) => candidate.embeddedSnapshot)) {
   const seedPath = path.resolve(REPOSITORY_ROOT, source.embeddedSnapshot);
@@ -311,6 +316,13 @@ const requirementsDigest = createHash("sha256").update(normalizedRequirements).d
 assert(
   geographyBuild?.requirements?.normalizedTextChecksumSha256 === requirementsDigest,
   "Geography Python requirements no longer match the source-lock build recipe.",
+);
+const vectorRequirementsBytes = await readFile(VECTOR_REQUIREMENTS_PATH);
+const normalizedVectorRequirements = vectorRequirementsBytes.toString("utf8").replaceAll("\r\n", "\n");
+const vectorRequirementsDigest = createHash("sha256").update(normalizedVectorRequirements).digest("hex");
+assert(
+  geographyBuild?.vectorOnlyRequirements?.normalizedTextChecksumSha256 === vectorRequirementsDigest,
+  "Geography vector-only Python requirements no longer match the source-lock build recipe.",
 );
 
 for (const source of geographyPack.sources) {

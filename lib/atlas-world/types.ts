@@ -197,6 +197,12 @@ export interface AtlasCountryEntity {
     currency: AtlasObservation<AtlasCurrency> | null;
     gdpCurrentUsd: AtlasObservation<number> | null;
     gdpPerCapitaCurrentUsd: AtlasObservation<number> | null;
+    urbanPopulationPercent: AtlasObservation<number> | null;
+    populationGrowthAnnualPercent: AtlasObservation<number> | null;
+    populationAges0To14Percent: AtlasObservation<number> | null;
+    populationAges65PlusPercent: AtlasObservation<number> | null;
+    fertilityRateBirthsPerWoman: AtlasObservation<number> | null;
+    lifeExpectancyYears: AtlasObservation<number> | null;
     government: AtlasObservation<AtlasGovernmentValue> | null;
     headOfState: AtlasObservation<AtlasLeadershipValue> | null;
     headOfGovernment: AtlasObservation<AtlasLeadershipValue> | null;

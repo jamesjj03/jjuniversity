@@ -7,9 +7,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SCHEMA_VERSION = "1.0.0";
-const SNAPSHOT_DATE = process.env.ATLAS_SNAPSHOT_DATE || "2026-09-03";
+const SNAPSHOT_DATE = process.env.ATLAS_SNAPSHOT_DATE || "2026-09-05";
 const SNAPSHOT_ID = `atlas-world-${SNAPSHOT_DATE}`;
-const GENERATED_AT = process.env.ATLAS_GENERATED_AT || "2026-09-03T23:18:32.949Z";
+const GENERATED_AT = process.env.ATLAS_GENERATED_AT || "2026-09-05T05:58:58.533Z";
 const RETRIEVED_AT = "2026-09-03";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
@@ -40,6 +40,82 @@ const inputs = {
     process.env.ATLAS_FACTBOOK_SOURCE ||
     path.join(sourceCache, "jju-atlas-factbook-20260903"),
 };
+
+const HOW_PEOPLE_LIVE_INDICATORS = [
+  {
+    factKey: "urbanPopulationPercent",
+    sourceId: "world-bank-sp-urb-totl-in-zs-2026-07-13",
+    sourceField: "SP.URB.TOTL.IN.ZS",
+    title: "Urban population (% of total population)",
+    input: process.env.ATLAS_WORLD_BANK_URBAN_SHARE_SOURCE
+      || path.join(sourceCache, "jju-atlas-wb-urban-share-20260905.json"),
+    retrievedAt: "2026-09-05",
+    notes: [
+      "Urban population follows each national statistical office's definition; national estimates are therefore not perfectly harmonized.",
+      "The World Bank notes that the underlying United Nations Population Division series is collected and smoothed.",
+    ],
+  },
+  {
+    factKey: "populationGrowthAnnualPercent",
+    sourceId: "world-bank-sp-pop-grow-2026-07-13",
+    sourceField: "SP.POP.GROW",
+    title: "Population growth (annual %)",
+    input: process.env.ATLAS_WORLD_BANK_POPULATION_GROWTH_SOURCE
+      || path.join(sourceCache, "jju-atlas-wb-population-growth-20260905.json"),
+    retrievedAt: "2026-09-05",
+    notes: [
+      "The annual growth rate is the exponential rate of change in de facto midyear population from the prior year.",
+    ],
+  },
+  {
+    factKey: "populationAges0To14Percent",
+    sourceId: "world-bank-sp-pop-0014-to-zs-2026-07-13",
+    sourceField: "SP.POP.0014.TO.ZS",
+    title: "Population ages 0–14 (% of total population)",
+    input: process.env.ATLAS_WORLD_BANK_AGES_0_TO_14_SOURCE
+      || path.join(sourceCache, "jju-atlas-wb-population-ages-0-14-20260905.json"),
+    retrievedAt: "2026-09-05",
+    notes: [
+      "The denominator is de facto total population, which counts residents regardless of legal status or citizenship.",
+    ],
+  },
+  {
+    factKey: "populationAges65PlusPercent",
+    sourceId: "world-bank-sp-pop-65up-to-zs-2026-07-13",
+    sourceField: "SP.POP.65UP.TO.ZS",
+    title: "Population ages 65 and above (% of total population)",
+    input: process.env.ATLAS_WORLD_BANK_AGES_65_PLUS_SOURCE
+      || path.join(sourceCache, "jju-atlas-wb-population-ages-65-plus-20260905.json"),
+    retrievedAt: "2026-09-05",
+    notes: [
+      "The denominator is de facto total population, which counts residents regardless of legal status or citizenship.",
+    ],
+  },
+  {
+    factKey: "fertilityRateBirthsPerWoman",
+    sourceId: "world-bank-sp-dyn-tfrt-in-2026-07-13",
+    sourceField: "SP.DYN.TFRT.IN",
+    title: "Fertility rate, total (births per woman)",
+    input: process.env.ATLAS_WORLD_BANK_FERTILITY_SOURCE
+      || path.join(sourceCache, "jju-atlas-wb-fertility-20260905.json"),
+    retrievedAt: "2026-09-05",
+    notes: [
+      "This is a period total fertility rate: the implied number of births under the age-specific fertility rates of the stated year, not a count of births already experienced by an average woman.",
+    ],
+  },
+  {
+    factKey: "lifeExpectancyYears",
+    sourceId: "world-bank-sp-dyn-le00-in-2026-07-13",
+    sourceField: "SP.DYN.LE00.IN",
+    title: "Life expectancy at birth, total (years)",
+    input: process.env.ATLAS_WORLD_BANK_LIFE_EXPECTANCY_SOURCE
+      || path.join(sourceCache, "jju-atlas-wb-life-expectancy-20260905.json"),
+    retrievedAt: "2026-09-05",
+    notes: [
+      "This is a period life-expectancy measure under the mortality pattern of the stated year, not a prediction of an individual newborn's actual lifespan.",
+    ],
+  },
+];
 
 const outputDirectory = process.env.ATLAS_OUTPUT_DIRECTORY
   ? path.resolve(process.env.ATLAS_OUTPUT_DIRECTORY)
@@ -993,6 +1069,7 @@ async function main() {
     worldBankGdpPerCapitaPayload,
     geonamesText,
     factbook,
+    howPeopleLivePayloads,
   ] = await Promise.all([
     readJson(sourceLockPath),
     readJson(inputs.naturalEarth),
@@ -1002,6 +1079,7 @@ async function main() {
     readJson(inputs.worldBankGdpPerCapita),
     readFile(inputs.geonames, "utf8"),
     parseFactbook(inputs.factbook),
+    Promise.all(HOW_PEOPLE_LIVE_INDICATORS.map((indicator) => readJson(indicator.input))),
   ]);
 
   assert(naturalEarth.type === "FeatureCollection", "Natural Earth input is not a FeatureCollection");
@@ -1026,6 +1104,18 @@ async function main() {
   const wbPopulationByCode = worldBankIndicatorMap(wbPopulation.records, wbEconomyCodes);
   const wbGdpByCode = worldBankIndicatorMap(wbGdp.records, wbEconomyCodes);
   const wbGdpPerCapitaByCode = worldBankIndicatorMap(wbGdpPerCapita.records, wbEconomyCodes);
+  const howPeopleLiveRows = new Map(
+    HOW_PEOPLE_LIVE_INDICATORS.map((indicator, index) => [
+      indicator.factKey,
+      worldBankRows(howPeopleLivePayloads[index]),
+    ]),
+  );
+  const howPeopleLiveByCode = new Map(
+    HOW_PEOPLE_LIVE_INDICATORS.map((indicator) => [
+      indicator.factKey,
+      worldBankIndicatorMap(howPeopleLiveRows.get(indicator.factKey).records, wbEconomyCodes),
+    ]),
+  );
 
   const naturalEarthCodes = naturalEarth.features.map((feature) => feature.properties.ADM0_A3);
   const naturalEarthCodeSet = new Set(naturalEarthCodes);
@@ -1076,6 +1166,23 @@ async function main() {
     const populationRecord = externalCode ? wbPopulationByCode.get(externalCode) ?? null : null;
     const gdpRecord = externalCode ? wbGdpByCode.get(externalCode) ?? null : null;
     const gdpPerCapitaRecord = externalCode ? wbGdpPerCapitaByCode.get(externalCode) ?? null : null;
+    const howPeopleLiveFacts = Object.fromEntries(
+      HOW_PEOPLE_LIVE_INDICATORS.map((indicator) => {
+        const record = externalCode
+          ? howPeopleLiveByCode.get(indicator.factKey).get(externalCode) ?? null
+          : null;
+        return [
+          indicator.factKey,
+          record
+            ? observation(Number(record.value), indicator.sourceId, indicator.sourceField, {
+                observedAt: record.date,
+                precision: "year",
+                notes: [record.indicator?.value || indicator.title, ...indicator.notes],
+              })
+            : null,
+        ];
+      }),
+    );
 
     const commonName = properties.ADMIN || properties.NAME_EN || properties.NAME_LONG || properties.NAME;
     const aliases = uniqueStrings([
@@ -1291,6 +1398,7 @@ async function main() {
         currency: currencyFact,
         gdpCurrentUsd: gdpFact,
         gdpPerCapitaCurrentUsd: gdpPerCapitaFact,
+        ...howPeopleLiveFacts,
         government: governmentFact,
         headOfState: headOfStateFact,
         headOfGovernment: headOfGovernmentFact,
@@ -1325,7 +1433,31 @@ async function main() {
     .filter(Boolean)
     .sort();
 
-  const sourceRecords = await Promise.all([
+  const howPeopleLiveSourceRecords = await Promise.all(
+    HOW_PEOPLE_LIVE_INDICATORS.map(async (indicator) => {
+      const rows = howPeopleLiveRows.get(indicator.factKey);
+      return {
+        id: indicator.sourceId,
+        title: `${indicator.title} (${indicator.sourceField})`,
+        publisher: "World Bank",
+        url: `https://api.worldbank.org/v2/country/all/indicator/${indicator.sourceField}`,
+        license: {
+          name: "CC BY 4.0",
+          url: "https://datacatalog.worldbank.org/public-licenses",
+        },
+        retrievedAt: indicator.retrievedAt,
+        sourceUpdatedAt: rows.metadata.lastupdated || null,
+        localInput: path.basename(indicator.input),
+        checksumSha256: await sha256File(indicator.input),
+        notes: [
+          "The latest available non-empty observation is retained for each World Bank economy, together with its own year.",
+          ...indicator.notes,
+        ],
+      };
+    }),
+  );
+
+  const coreSourceRecords = await Promise.all([
     (async () => ({
       id: SOURCE_IDS.naturalEarth,
       title: "Natural Earth 1:50m Admin 0 – Countries",
@@ -1441,6 +1573,11 @@ async function main() {
       ],
     }))(),
   ]);
+  const sourceRecords = [
+    ...coreSourceRecords.slice(0, 5),
+    ...howPeopleLiveSourceRecords,
+    ...coreSourceRecords.slice(5),
+  ];
 
   const lockedSources = new Map(sourceLock.sources.map((source) => [source.id, source]));
   assert(
@@ -1640,6 +1777,12 @@ async function main() {
   const populationMatchedIds = countries.filter((country) => country.facts.population).map((country) => country.id);
   const gdpMatchedIds = countries.filter((country) => country.facts.gdpCurrentUsd).map((country) => country.id);
   const gdpPcMatchedIds = countries.filter((country) => country.facts.gdpPerCapitaCurrentUsd).map((country) => country.id);
+  const howPeopleLiveMatchedIds = new Map(
+    HOW_PEOPLE_LIVE_INDICATORS.map((indicator) => [
+      indicator.factKey,
+      countries.filter((country) => country.facts[indicator.factKey]).map((country) => country.id),
+    ]),
+  );
 
   const geoSourceCodes = geonames.map((record) => ({
     code: record.iso3,
@@ -1661,6 +1804,15 @@ async function main() {
     code,
     matched: externalCodeToEntityId.has(code),
   }));
+  const howPeopleLiveSourceCodes = new Map(
+    HOW_PEOPLE_LIVE_INDICATORS.map((indicator) => [
+      indicator.factKey,
+      [...howPeopleLiveByCode.get(indicator.factKey).keys()].map((code) => ({
+        code,
+        matched: externalCodeToEntityId.has(code),
+      })),
+    ]),
+  );
   const factbookSourceCodes = factbook.records.map((record) => ({
     code: record.code,
     matched: Boolean(factbookJoinByCode.get(record.code)),
@@ -1689,6 +1841,12 @@ async function main() {
       currency: valueCoverage((country) => Boolean(country.facts.currency)),
       gdpCurrentUsd: valueCoverage((country) => Boolean(country.facts.gdpCurrentUsd)),
       gdpPerCapitaCurrentUsd: valueCoverage((country) => Boolean(country.facts.gdpPerCapitaCurrentUsd)),
+      ...Object.fromEntries(
+        HOW_PEOPLE_LIVE_INDICATORS.map((indicator) => [
+          indicator.factKey,
+          valueCoverage((country) => Boolean(country.facts[indicator.factKey])),
+        ]),
+      ),
       governmentRaw: valueCoverage((country) => Boolean(country.facts.government)),
       governmentNormalized: valueCoverage(
         (country) => Boolean(country.facts.government) && country.facts.government.value.category !== "unknown",
@@ -1758,6 +1916,13 @@ async function main() {
         gdpPcMatchedIds,
         total,
       ),
+      ...HOW_PEOPLE_LIVE_INDICATORS.map((indicator) => joinAudit(
+        indicator.sourceId,
+        "World Bank countryiso3code -> official ISO3 or audited Natural Earth external-code override; aggregate rows excluded.",
+        howPeopleLiveSourceCodes.get(indicator.factKey),
+        howPeopleLiveMatchedIds.get(indicator.factKey),
+        total,
+      )),
       joinAudit(
         SOURCE_IDS.factbook,
         "Factbook placeCode (FIPS) -> GeoNames FIPS -> GeoNames ISO3 -> Atlas external code; one audited AT -> ATC override.",

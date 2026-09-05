@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "snapshotId": "atlas-world-2026-09-03",
-  "generatedAt": "2026-09-03T23:18:32.949Z",
+  "snapshotId": "atlas-world-2026-09-05",
+  "generatedAt": "2026-09-05T05:58:58.533Z",
   "status": "pass",
   "counts": {
     "geometryFeatures": 242,
@@ -64,6 +64,36 @@
       "populated": 213,
       "total": 242,
       "percent": 88
+    },
+    "urbanPopulationPercent": {
+      "populated": 215,
+      "total": 242,
+      "percent": 88.8
+    },
+    "populationGrowthAnnualPercent": {
+      "populated": 215,
+      "total": 242,
+      "percent": 88.8
+    },
+    "populationAges0To14Percent": {
+      "populated": 215,
+      "total": 242,
+      "percent": 88.8
+    },
+    "populationAges65PlusPercent": {
+      "populated": 215,
+      "total": 242,
+      "percent": 88.8
+    },
+    "fertilityRateBirthsPerWoman": {
+      "populated": 215,
+      "total": 242,
+      "percent": 88.8
+    },
+    "lifeExpectancyYears": {
+      "populated": 215,
+      "total": 242,
+      "percent": 88.8
     },
     "governmentRaw": {
       "populated": 230,
@@ -203,6 +233,96 @@
         "populated": 213,
         "total": 242,
         "percent": 88
+      }
+    },
+    {
+      "sourceId": "world-bank-sp-urb-totl-in-zs-2026-07-13",
+      "method": "World Bank countryiso3code -> official ISO3 or audited Natural Earth external-code override; aggregate rows excluded.",
+      "sourceRecords": 217,
+      "matchedEntities": 215,
+      "unmatchedSourceCodes": [
+        "CHI",
+        "GIB"
+      ],
+      "entityCoverage": {
+        "populated": 215,
+        "total": 242,
+        "percent": 88.8
+      }
+    },
+    {
+      "sourceId": "world-bank-sp-pop-grow-2026-07-13",
+      "method": "World Bank countryiso3code -> official ISO3 or audited Natural Earth external-code override; aggregate rows excluded.",
+      "sourceRecords": 217,
+      "matchedEntities": 215,
+      "unmatchedSourceCodes": [
+        "CHI",
+        "GIB"
+      ],
+      "entityCoverage": {
+        "populated": 215,
+        "total": 242,
+        "percent": 88.8
+      }
+    },
+    {
+      "sourceId": "world-bank-sp-pop-0014-to-zs-2026-07-13",
+      "method": "World Bank countryiso3code -> official ISO3 or audited Natural Earth external-code override; aggregate rows excluded.",
+      "sourceRecords": 217,
+      "matchedEntities": 215,
+      "unmatchedSourceCodes": [
+        "CHI",
+        "GIB"
+      ],
+      "entityCoverage": {
+        "populated": 215,
+        "total": 242,
+        "percent": 88.8
+      }
+    },
+    {
+      "sourceId": "world-bank-sp-pop-65up-to-zs-2026-07-13",
+      "method": "World Bank countryiso3code -> official ISO3 or audited Natural Earth external-code override; aggregate rows excluded.",
+      "sourceRecords": 217,
+      "matchedEntities": 215,
+      "unmatchedSourceCodes": [
+        "CHI",
+        "GIB"
+      ],
+      "entityCoverage": {
+        "populated": 215,
+        "total": 242,
+        "percent": 88.8
+      }
+    },
+    {
+      "sourceId": "world-bank-sp-dyn-tfrt-in-2026-07-13",
+      "method": "World Bank countryiso3code -> official ISO3 or audited Natural Earth external-code override; aggregate rows excluded.",
+      "sourceRecords": 217,
+      "matchedEntities": 215,
+      "unmatchedSourceCodes": [
+        "CHI",
+        "GIB"
+      ],
+      "entityCoverage": {
+        "populated": 215,
+        "total": 242,
+        "percent": 88.8
+      }
+    },
+    {
+      "sourceId": "world-bank-sp-dyn-le00-in-2026-07-13",
+      "method": "World Bank countryiso3code -> official ISO3 or audited Natural Earth external-code override; aggregate rows excluded.",
+      "sourceRecords": 217,
+      "matchedEntities": 215,
+      "unmatchedSourceCodes": [
+        "CHI",
+        "GIB"
+      ],
+      "entityCoverage": {
+        "populated": 215,
+        "total": 242,
+        "percent": 88.8
       }
     },
     {

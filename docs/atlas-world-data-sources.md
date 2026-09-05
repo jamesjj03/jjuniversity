@@ -35,13 +35,15 @@ Natural Earth is cartography, not a statement by JJU about sovereignty. This fil
 
 ### World Bank
 
-- **Datasets:** country metadata; `SP.POP.TOTL`; `NY.GDP.MKTP.CD`; `NY.GDP.PCAP.CD`
-- **Use:** capital, region/income classification, population, GDP, and GDP per capita
+- **Datasets:** country metadata; `SP.POP.TOTL`; `NY.GDP.MKTP.CD`; `NY.GDP.PCAP.CD`; `SP.URB.TOTL.IN.ZS`; `SP.POP.GROW`; `SP.POP.0014.TO.ZS`; `SP.POP.65UP.TO.ZS`; `SP.DYN.TFRT.IN`; `SP.DYN.LE00.IN`
+- **Use:** capital, region/income classification, population, GDP, GDP per capita, urban share, population growth, age structure, fertility, and life expectancy
 - **License:** [CC BY 4.0](https://datacatalog.worldbank.org/public-licenses)
 - **Source:** [World Bank API](https://api.worldbank.org/)
-- **Snapshot inputs:** `jju-atlas-wb-*-20260903.json`, retrieved 2026-09-03; indicator files report an API update date of 2026-07-13
+- **Snapshot inputs:** `jju-atlas-wb-*-20260903.json` and `jju-atlas-wb-*-20260905.json`, retrieved 2026-09-03 and 2026-09-05; indicator files report an API update date of 2026-07-13
 
-Rows whose World Bank region is `Aggregates` are removed before joining. Population coverage is 215 map entities and all populated values in this snapshot are 2025 observations. GDP and GDP-per-capita coverage is 213 entities. Their years are deliberately not flattened: 186 values are from 2025, 14 from 2024, 3 from 2023, 5 from 2022, and one each from 2021, 2020, 2018, 2015, and 2011.
+Rows whose World Bank region is `Aggregates` are removed before joining. Population and each of the six How People Live indicators cover the same 215 of 242 Atlas entities. Urban share, population growth, and both age bands are 2025 observations in this pinned snapshot; fertility and life expectancy are 2024 observations. The remaining 27 Atlas units stay explicitly unavailable rather than borrowing a sovereign's value or receiving an invented estimate. GDP and GDP-per-capita coverage is 213 entities. Their years are deliberately not flattened: 186 values are from 2025, 14 from 2024, 3 from 2023, 5 from 2022, and one each from 2021, 2020, 2018, 2015, and 2011.
+
+These measures need different interpretations. “Urban” follows national definitions, so it is not perfectly harmonized. Population growth includes births, deaths, and net migration. Total fertility is a period rate implied by the year's age-specific fertility rates, and life expectancy is a period measure under the year's mortality pattern—not a forecast of an individual's lifespan. Atlas carries these cautions in source and layer provenance.
 
 ### GeoNames
 
@@ -210,6 +212,12 @@ Country and geometry entities also have nullable validity intervals. V1 leaves t
 | Population | 215 / 242 | 88.8% |
 | GDP | 213 / 242 | 88.0% |
 | GDP per capita | 213 / 242 | 88.0% |
+| Urban population share | 215 / 242 | 88.8% |
+| Population growth | 215 / 242 | 88.8% |
+| Population ages 0–14 | 215 / 242 | 88.8% |
+| Population ages 65+ | 215 / 242 | 88.8% |
+| Total fertility rate | 215 / 242 | 88.8% |
+| Life expectancy at birth | 215 / 242 | 88.8% |
 | Government raw/normalized | 230 / 242 | 95.0% |
 | Chief of state | 231 / 242 | 95.5% |
 | Chief of state with term date | 227 / 242 | 93.8% |
@@ -232,11 +240,12 @@ npm run atlas:geography:build
 npm run atlas:world:check
 ```
 
-`atlas:sources:fetch` reads `data/atlas/sources.lock.json`, resolves inputs into the ignored repository-local `data/atlas/source-cache`, and accepts a file only when both its byte length and SHA-256 match. Because the World Bank and GeoNames URLs are mutable, their five small exact V1 inputs are preserved in `data/atlas/source-seeds`; the fetcher restores those locked bytes rather than pretending a later API response is the same snapshot. Version-tagged Natural Earth inputs remain remotely fetchable. The archived Factbook is a sparse checkout pinned to commit `2a40cddf0b0f57273c2f935be169d73496989a21`; its sorted file set is checked against the locked aggregate SHA-256. Useful bounded variants are:
+`atlas:sources:fetch` reads `data/atlas/sources.lock.json`, resolves inputs into the ignored repository-local `data/atlas/source-cache`, and accepts a file only when both its byte length and SHA-256 match. Because the World Bank and GeoNames URLs are mutable, their eleven small exact inputs are preserved in `data/atlas/source-seeds`; the fetcher restores those locked bytes rather than pretending a later API response is the same snapshot. Version-tagged Natural Earth inputs remain remotely fetchable. The archived Factbook is a sparse checkout pinned to commit `2a40cddf0b0f57273c2f935be169d73496989a21`; its sorted file set is checked against the locked aggregate SHA-256. Useful bounded variants are:
 
 ```powershell
 node scripts/fetch-atlas-sources.mjs --group=atlas-v1
 node scripts/fetch-atlas-sources.mjs --group=phase2-geography
+node scripts/fetch-atlas-sources.mjs --group=phase3-how-people-live
 node scripts/fetch-atlas-sources.mjs --verify-only
 ```
 
@@ -247,12 +256,18 @@ The world builder now defaults to this repository-local cache. It no longer depe
 - `ATLAS_WORLD_BANK_POPULATION_SOURCE`
 - `ATLAS_WORLD_BANK_GDP_SOURCE`
 - `ATLAS_WORLD_BANK_GDP_PER_CAPITA_SOURCE`
+- `ATLAS_WORLD_BANK_URBAN_SHARE_SOURCE`
+- `ATLAS_WORLD_BANK_POPULATION_GROWTH_SOURCE`
+- `ATLAS_WORLD_BANK_AGES_0_TO_14_SOURCE`
+- `ATLAS_WORLD_BANK_AGES_65_PLUS_SOURCE`
+- `ATLAS_WORLD_BANK_FERTILITY_SOURCE`
+- `ATLAS_WORLD_BANK_LIFE_EXPECTANCY_SOURCE`
 - `ATLAS_GEONAMES_SOURCE`
 - `ATLAS_FACTBOOK_SOURCE`
 - `ATLAS_OUTPUT_DIRECTORY`
 - `ATLAS_MAP_ASSET_DIRECTORY`
 
-`ATLAS_SNAPSHOT_DATE` and `ATLAS_GENERATED_AT` can pin build metadata for a reproducible rebuild. The checked-in defaults reproduce the preserved V1 snapshot metadata.
+`ATLAS_SNAPSHOT_DATE` and `ATLAS_GENERATED_AT` can pin build metadata for a reproducible rebuild. The checked-in defaults reproduce the committed snapshot metadata. `npm run atlas:people-data:acquire` is the deliberate upstream-refresh tool; it refuses to overwrite an existing dated seed unless `--replace` is explicitly supplied. Ordinary builds restore and verify the already pinned seeds instead of calling the live API.
 
 `atlas:geography:build` creates an ignored Python 3.11 virtual environment under `data/atlas/tool-cache`, installs the exact package versions in `scripts/atlas-geography-requirements.txt`, verifies the five locked geography inputs, and regenerates the bounded raster/vector pack. Set `ATLAS_PYTHON` only when Python 3.11 is not discoverable normally.
 

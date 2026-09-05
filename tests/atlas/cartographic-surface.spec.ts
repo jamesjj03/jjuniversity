@@ -75,8 +75,8 @@ async function openAtlas(page: Page, query: string) {
 }
 
 async function chooseCountry(page: Page, name: string) {
-  const search = page.getByRole("combobox", { name: "Search countries", exact: true });
-  if (!await search.isVisible()) await page.getByRole("button", { name: "Search countries", exact: true }).click();
+  const search = page.getByRole("combobox", { name: "Find a country, city, river, or lake", exact: true });
+  if (!await search.isVisible()) await page.getByRole("button", { name: "Find a place", exact: true }).click();
   await search.fill(name);
   await page.getByRole("option", { name: new RegExp(`^${name}(?:\\s|$)`) }).click();
   await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();

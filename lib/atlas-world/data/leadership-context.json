@@ -1,15 +1,106 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "2.0.0",
+  "authorityId": "jju-atlas-leadership",
+  "revision": "2026-09-05.1",
   "reviewedAt": "2026-09-05",
+  "purpose": "Bounded reviewed leadership context and office observations; not a global current-officeholder service.",
+  "policy": {
+    "automaticPublication": false,
+    "freshnessDoesNotAssertCurrentOffice": true,
+    "separatePersonOfficeAndPolityIdentity": true,
+    "unreviewedPortraitBehavior": "no_portrait"
+  },
   "reviewPolicy": {
     "reviewAfterDays": 120,
     "description": "A review date is not a promise of current leadership. New office observations are separately sourced; archived facts are never overwritten."
   },
+  "people": [
+    {
+      "id": "person:brice-oligui-nguema",
+      "canonicalName": "Brice Oligui Nguema",
+      "aliases": [],
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
+    },
+    {
+      "id": "person:charles-iii",
+      "canonicalName": "Charles III",
+      "aliases": [],
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
+    },
+    {
+      "id": "person:keir-starmer",
+      "canonicalName": "Keir Starmer",
+      "aliases": [],
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
+    },
+    {
+      "id": "person:cyril-ramaphosa",
+      "canonicalName": "Cyril Ramaphosa",
+      "aliases": [],
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
+    },
+    {
+      "id": "person:andy-burnham",
+      "canonicalName": "Andy Burnham",
+      "aliases": [],
+      "identityConfidence": "high",
+      "reviewedAt": "2026-09-05"
+    }
+  ],
+  "offices": [
+    {
+      "id": "office:country:GAB:head-of-state",
+      "polityEntityId": "country:GAB",
+      "role": "headOfState",
+      "label": "Head of state",
+      "holderModel": "individual"
+    },
+    {
+      "id": "office:country:GAB:head-of-government",
+      "polityEntityId": "country:GAB",
+      "role": "headOfGovernment",
+      "label": "Head of government",
+      "holderModel": "individual"
+    },
+    {
+      "id": "office:country:GBR:head-of-state",
+      "polityEntityId": "country:GBR",
+      "role": "headOfState",
+      "label": "Head of state",
+      "holderModel": "individual"
+    },
+    {
+      "id": "office:country:GBR:head-of-government",
+      "polityEntityId": "country:GBR",
+      "role": "headOfGovernment",
+      "label": "Head of government",
+      "holderModel": "individual"
+    },
+    {
+      "id": "office:country:ZAF:head-of-state",
+      "polityEntityId": "country:ZAF",
+      "role": "headOfState",
+      "label": "Head of state",
+      "holderModel": "individual"
+    },
+    {
+      "id": "office:country:ZAF:head-of-government",
+      "polityEntityId": "country:ZAF",
+      "role": "headOfGovernment",
+      "label": "Head of government",
+      "holderModel": "individual"
+    }
+  ],
   "contexts": [
     {
       "personId": "person:brice-oligui-nguema",
       "entityId": "country:GAB",
       "roles": ["headOfState", "headOfGovernment"],
+      "officeIds": ["office:country:GAB:head-of-state", "office:country:GAB:head-of-government"],
       "exactSourceName": "President Brice OLIGUI Nguema",
       "archivedObservedAt": "2025-10-01",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
@@ -23,6 +114,7 @@
       "personId": "person:charles-iii",
       "entityId": "country:GBR",
       "roles": ["headOfState"],
+      "officeIds": ["office:country:GBR:head-of-state"],
       "exactSourceName": "King CHARLES III",
       "archivedObservedAt": "2025-10-01",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
@@ -36,6 +128,7 @@
       "personId": "person:cyril-ramaphosa",
       "entityId": "country:ZAF",
       "roles": ["headOfState", "headOfGovernment"],
+      "officeIds": ["office:country:ZAF:head-of-state", "office:country:ZAF:head-of-government"],
       "exactSourceName": "President Matamela Cyril RAMAPHOSA",
       "archivedObservedAt": "2025-12-21",
       "sourceId": "cia-world-factbook-final-capture-2026-02",
@@ -49,6 +142,7 @@
   "officeUpdates": [
     {
       "id": "office-observation:gbr-prime-minister-2026-09-05",
+      "officeId": "office:country:GBR:head-of-government",
       "entityId": "country:GBR",
       "role": "headOfGovernment",
       "personId": "person:andy-burnham",
@@ -57,6 +151,8 @@
       "termStartedAt": "2026-07-20",
       "observedAt": "2026-09-05",
       "reviewAfter": "2027-01-03",
+      "occupancyStatus": "occupied",
+      "confidence": "high",
       "status": "reviewed_source_observation",
       "supersedes": {
         "personId": "person:keir-starmer",

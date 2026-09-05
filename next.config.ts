@@ -8,6 +8,30 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/admin/**": ["./private/catalog/books.json", "./private/book-content/**/*.json"],
     "/api/admin/topics": ["./private/catalog/books.json", "./private/catalog/topic-authority.json"],
+    "/api/admin/atlas/annotations": [
+      "./lib/atlas-world/annotations/data/review-authority.v1.json",
+      "./lib/atlas-world/data/pattern-notes.v1.json",
+    ],
+    "/api/admin/atlas/annotation-drafts": [
+      "./lib/atlas-world/annotations/data/draft-authority.v1.json",
+      "./lib/atlas-world/layers/catalog.v2.json",
+      "./lib/atlas-world/data/countries.v1.json",
+      "./lib/atlas-world/data/geography-pack.v1.json",
+    ],
+    "/api/admin/atlas/associations": [
+      "./lib/atlas-world/associations/data/authority.v1.json",
+      "./private/catalog/books.json",
+    ],
+    "/admin/atlas": [
+      "./lib/atlas-world/annotations/data/review-authority.v1.json",
+      "./lib/atlas-world/annotations/data/draft-authority.v1.json",
+      "./lib/atlas-world/associations/data/authority.v1.json",
+      "./lib/atlas-world/data/pattern-notes.v1.json",
+      "./lib/atlas-world/layers/catalog.v2.json",
+      "./lib/atlas-world/data/countries.v1.json",
+      "./lib/atlas-world/data/geography-pack.v1.json",
+      "./private/catalog/books.json",
+    ],
     "/api/admin/print-proof/*": ["./private/print-proof-previews/*.png"],
     "/api/admin/book-draft": ["./private/catalog/books.json", "./private/book-content/manifest.json"],
     "/api/admin/content/**": ["./private/book-content/**/*.json"],

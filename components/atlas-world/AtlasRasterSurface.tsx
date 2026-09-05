@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import type { AtlasRasterAsset, AtlasRasterPyramid } from "@/lib/atlas-world/geographyTypes";
+import { recordAtlasEvent } from "@/lib/atlas-world/telemetry";
 
 type Tile = AtlasRasterAsset & { id: string };
 /** One source-derived detail level at a time, only for the visible viewport.
@@ -73,7 +74,11 @@ export default function AtlasRasterSurface({ overview, pyramid }: { overview: At
       <rect x={x} y={y} width={width} height={height} fill="white" />
       {tiles.filter((tile) => loaded.has(tile.id)).map((tile) => <rect key={tile.id} x={tile.viewBox[0]} y={tile.viewBox[1]} width={tile.viewBox[2]} height={tile.viewBox[3]} fill="black" />)}
     </mask></defs>
-    <image href={visible ? overview.href : undefined} x={x} y={y} width={width} height={height} preserveAspectRatio="none" mask={`url(#${maskId})`} />
+    <image href={visible ? overview.href : undefined} x={x} y={y} width={width} height={height} preserveAspectRatio="none" mask={`url(#${maskId})`}
+      onError={() => recordAtlasEvent("Atlas raster failure", {
+        level: "overview",
+        surface: overview.href.includes("population") ? "population-density" : "physical-relief",
+      }, `atlas-raster:${overview.href}:overview`)} />
     {tiles.map((tile) => <image key={tile.id} data-atlas-raster-tile={tile.id} href={tile.href}
       x={tile.viewBox[0]} y={tile.viewBox[1]} width={tile.viewBox[2]} height={tile.viewBox[3]} preserveAspectRatio="none"
       visibility={loaded.has(tile.id) ? "visible" : "hidden"}
@@ -84,6 +89,10 @@ export default function AtlasRasterSurface({ overview, pyramid }: { overview: At
       }}
       onError={() => {
         if (!mountedTiles.current.has(tile.id)) return;
+        recordAtlasEvent("Atlas raster failure", {
+          level: levelId,
+          surface: overview.href.includes("population") ? "population-density" : "physical-relief",
+        }, `atlas-raster:${overview.href}:${levelId}`);
         setFailed((current) => new Set(current).add(tile.id));
         setLoaded((current) => { const next = new Set(current); next.delete(tile.id); return next; });
       }} />)}

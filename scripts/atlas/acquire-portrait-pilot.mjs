@@ -21,6 +21,8 @@ try { prior = JSON.parse(await readFile(manifestPath, 'utf8')); } catch (error) 
 
 function verifyBindings(manifest) {
   for (const binding of manifest.bindings) {
+    const expectedOfficeId = `office:${binding.entityId}:${binding.role === 'headOfState' ? 'head-of-state' : 'head-of-government'}`;
+    if (binding.officeId !== expectedOfficeId || !['high', 'medium', 'low'].includes(binding.identityConfidence) || !/^\d{4}-\d{2}-\d{2}$/.test(binding.reviewedAt)) throw new Error(`Incomplete office identity review for ${binding.entityId}`);
     const fact = countries.find((country) => country.id === binding.entityId)?.facts[binding.role];
     if (fact?.sourceId !== binding.sourceId || fact?.temporal.observedAt !== binding.observedAt || !fact.value.officeholders.some((holder) => holder.nameAndTitle === binding.exactSourceName)) throw new Error(`Leadership snapshot changed; review portrait binding for ${binding.entityId}`);
   }
@@ -30,7 +32,7 @@ if (prior) verifyBindings(prior);
 
 if (process.argv.includes('--acquire')) {
   await mkdir(publicRoot, { recursive: true });
-  const manifest = { schemaVersion: '1.1.0', reviewedAt: '2026-09-05', purpose: 'Bounded visual identity pilot, not a current officeholder service.', people: [], media: [], bindings: [] };
+  const manifest = { schemaVersion: '1.2.0', reviewedAt: '2026-09-05', purpose: 'Bounded visual identity pilot, not a current officeholder service.', people: [], media: [], bindings: [] };
   for (const seed of seeds) {
     const api = new URL('https://commons.wikimedia.org/w/api.php');
     api.search = new URLSearchParams({ action: 'query', format: 'json', prop: 'imageinfo', iiprop: 'url|extmetadata|size', titles: `File:${seed.file}` });
@@ -61,7 +63,7 @@ if (process.argv.includes('--acquire')) {
     for (const role of ['headOfState', 'headOfGovernment']) {
       const fact = country.facts[role];
       if (fact?.value.officeholders.some((holder) => holder.nameAndTitle === seed.exactSourceName)) {
-        manifest.bindings.push({ entityId: country.id, role, personId: seed.personId, title: seed.title, exactSourceName: seed.exactSourceName, sourceId: fact.sourceId, observedAt: fact.temporal.observedAt });
+        manifest.bindings.push({ officeId: `office:${country.id}:${role === 'headOfState' ? 'head-of-state' : 'head-of-government'}`, entityId: country.id, role, personId: seed.personId, title: seed.title, exactSourceName: seed.exactSourceName, sourceId: fact.sourceId, observedAt: fact.temporal.observedAt, identityConfidence: 'high', reviewedAt: '2026-09-05' });
       }
     }
     console.log(`${seed.name}: ${output.length} bytes, ${actualLicense}`);
