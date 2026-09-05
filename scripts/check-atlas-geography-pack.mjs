@@ -30,6 +30,7 @@ const COUNTRIES_PATH = path.join(
   "data",
   "countries.v1.json",
 );
+const LAYER_CATALOG_PATH = path.join(REPOSITORY_ROOT, "lib", "atlas-world", "layers", "catalog.v2.json");
 const WORLD_BUILDER_PATH = path.join(REPOSITORY_ROOT, "scripts", "build-atlas-world-snapshot.mjs");
 const GEOGRAPHY_REQUIREMENTS_PATH = path.join(
   REPOSITORY_ROOT,
@@ -174,14 +175,49 @@ async function checkAsset(asset, datasetId) {
 
   const metadata = await sharp(bytes).metadata();
   assert(metadata.format === "webp", `${datasetId} asset is not WebP.`);
-  assert(metadata.width === 2400 && metadata.height === 1300, `${datasetId} asset is not 2400 x 1300.`);
+  assert(metadata.width === asset.width && metadata.height === asset.height, `${datasetId} asset dimensions do not match its manifest.`);
   assert(metadata.hasAlpha === true, `${datasetId} asset must retain alpha outside the Equal Earth sphere.`);
+}
+
+async function checkPyramid(pyramid, datasetId) {
+  assert(pyramid.projectionId === "equal-earth", `${datasetId} pyramid is not aligned to Equal Earth.`);
+  assert(pyramid.sourceResolutionMetres === 1000, `${datasetId} lost its original one-kilometre source resolution.`);
+  assert(pyramid.resampling === "average", `${datasetId} pyramid must preserve area-average resampling.`);
+  assert(pyramid.levels?.length === 2, `${datasetId} must provide regional and country detail levels.`);
+  let previousWidth = 2400;
+  let previousMinimumZoom = 1;
+  const tileIds = new Set();
+  for (const level of pyramid.levels ?? []) {
+    assert(level.width > previousWidth, `${datasetId}/${level.id} does not improve source display resolution.`);
+    assert(level.minimumZoom > previousMinimumZoom, `${datasetId}/${level.id} has an invalid activation threshold.`);
+    assert(level.width / level.height === 1200 / 650, `${datasetId}/${level.id} has a mismatched projection aspect ratio.`);
+    assert(level.displayMetresPerPixel >= 1000, `${datasetId}/${level.id} implies more detail than the original source provides.`);
+    let levelBytes = 0;
+    for (const tile of level.tiles ?? []) {
+      assert(!tileIds.has(tile.id), `${datasetId} has duplicate tile ${tile.id}.`);
+      tileIds.add(tile.id);
+      assert(tile.width <= 1200 && tile.height <= 1300, `${datasetId}/${tile.id} exceeds its bounded decode size.`);
+      assert(tile.width * tile.height * 4 <= pyramid.maximumDecodedTileBytes, `${datasetId}/${tile.id} exceeds the documented memory bound.`);
+      const [x, y, width, height] = tile.viewBox;
+      assert(x >= 0 && y >= 0 && width > 0 && height > 0 && x + width <= 1200 && y + height <= 650, `${datasetId}/${tile.id} has an invalid destination rectangle.`);
+      assert(Math.abs(tile.width / width - level.width / 1200) < 0.0001, `${datasetId}/${tile.id} has a misaligned x scale.`);
+      assert(Math.abs(tile.height / height - level.height / 650) < 0.0001, `${datasetId}/${tile.id} has a misaligned y scale.`);
+      await checkAsset(tile, `${datasetId}/${tile.id}`);
+      levelBytes += tile.bytes;
+    }
+    assert(levelBytes === level.bytes, `${datasetId}/${level.id} has a mismatched payload budget.`);
+    previousWidth = level.width;
+    previousMinimumZoom = level.minimumZoom;
+  }
+  assert(tileIds.size > 0, `${datasetId} has no independently generated detail tiles.`);
+  return tileIds.size;
 }
 
 const sourceLock = await readJson(SOURCE_LOCK_PATH);
 const geographyPack = await readJson(GEOGRAPHY_PACK_PATH);
 const patternNotes = await readJson(PATTERN_NOTES_PATH);
 const countrySnapshot = await readJson(COUNTRIES_PATH);
+const layerCatalog = await readJson(LAYER_CATALOG_PATH);
 
 assert(sourceLock.schemaVersion === "1.0.0", "Unexpected Atlas source-lock schema version.");
 assert(geographyPack.schemaVersion === "1.0.0", "Unexpected geography-pack schema version.");
@@ -191,7 +227,11 @@ assert(
   "Geography pack does not identify the checked-in source lock.",
 );
 assert(geographyPack.projection.id === "equal-earth", "Geography pack projection is not Equal Earth.");
-assert(geographyPack.projection.crs === "EPSG:8857", "Geography pack has an unexpected projected CRS.");
+assert(geographyPack.projection.crs === "+proj=eqearth +R=6371007.180918475 +units=m +no_defs", "Geography rasters must use the exact spherical Equal Earth formula used by SVG, not ellipsoidal EPSG:8857.");
+assert(geographyPack.projection.registrationChecks?.length === 4, "Geography pack is missing raster/SVG landmark registration evidence.");
+for (const check of geographyPack.projection.registrationChecks ?? []) {
+  assert(check.maximumErrorViewBoxUnits <= 0.008, `Raster/SVG geometry is misaligned at ${check.name}.`);
+}
 assert(geographyPack.projection.canonicalCrs === "EPSG:4326", "Geography pack has an unexpected canonical CRS.");
 assert(
   geographyPack.projection.transformationId === "wgs84-to-equal-earth-svg-v1",
@@ -267,6 +307,7 @@ assert(
   transformations.size === geographyPack.transformations.length,
   "Geography pack contains duplicate transformation IDs.",
 );
+let detailTileCount = 0;
 for (const dataset of geographyPack.datasets) {
   validateTemporal(dataset.temporal, `dataset ${dataset.id}`);
   assert(Boolean(dataset.measure), `Dataset ${dataset.id} has no measure description.`);
@@ -282,7 +323,15 @@ for (const dataset of geographyPack.datasets) {
     assert(lockedSources.has(sourceId), `Dataset ${dataset.id} references unknown source ${sourceId}.`);
   }
   if (dataset.asset) await checkAsset(dataset.asset, dataset.id);
+  if (dataset.assetPyramid) detailTileCount += await checkPyramid(dataset.assetPyramid, dataset.id);
 }
+assert(datasets.get("population-density-2025")?.assetPyramid, "Population density has no genuine source-detail pyramid.");
+const populationColorStops = datasets.get("population-density-2025")?.visualization?.stops ?? [];
+const populationLegend = layerCatalog.layers.find((layer) => layer.id === "population-density-2025")?.legend;
+assert(
+  JSON.stringify(populationColorStops.map((stop) => stop.color)) === JSON.stringify(populationLegend?.stops?.map((stop) => stop.color)),
+  "Population density legend colors disagree with the generated raster palette.",
+);
 
 const countryIds = new Set(countrySnapshot.countries.map((country) => country.id));
 assert(countryIds.size === 242, `Expected the preserved 242-country ontology; found ${countryIds.size}.`);
@@ -415,6 +464,6 @@ if (failures.length > 0) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Atlas geography validation passed: ${datasets.size} datasets, ${knownFeatureIds.size} vector features, ${noteIds.size} contextual annotations, 2 raster assets.`,
+    `Atlas geography validation passed: ${datasets.size} datasets, ${knownFeatureIds.size} vector features, ${noteIds.size} contextual annotations, 2 overview rasters, ${detailTileCount} source-detail tiles.`,
   );
 }

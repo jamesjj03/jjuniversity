@@ -25,17 +25,29 @@ import rasterio
 from PIL import Image, ImageDraw
 from rasterio.enums import Resampling
 from rasterio.transform import Affine
+from rasterio.vrt import WarpedVRT
+from rasterio.windows import Window
 from rasterio.warp import reproject, transform
 
 
 SCHEMA_VERSION = "1.0.0"
-SNAPSHOT_ID = "atlas-geography-2026-09-04"
-GENERATED_AT = "2026-09-04T18:00:00Z"
+SNAPSHOT_ID = "atlas-geography-2026-09-04-phase25"
+GENERATED_AT = "2026-09-04T23:00:00Z"
 VIEWBOX_WIDTH = 1200
 VIEWBOX_HEIGHT = 650
 PROJECTION_PADDING = 14
 OUTPUT_WIDTH = 2400
 OUTPUT_HEIGHT = 1300
+# D3 Equal Earth uses geographic latitude on an authalic-radius sphere. EPSG
+# 8857 instead applies ellipsoidal/authalic-latitude conversion and shifts the
+# raster relative to the existing SVG by ~0.45 viewBox units near 30 degrees.
+# Preserve the SVG exactly and make this source warp explicitly match it.
+EQUAL_EARTH_RADIUS = 6371007.180918475
+RASTER_TARGET_CRS = f"+proj=eqearth +R={EQUAL_EARTH_RADIUS} +units=m +no_defs"
+POPULATION_DETAIL_LEVELS = [
+    {"id": "regional", "width": 9600, "height": 5200, "columns": 8, "rows": 4, "minimumZoom": 2.4},
+    {"id": "country", "width": 19200, "height": 10400, "columns": 16, "rows": 8, "minimumZoom": 6},
+]
 
 POP_SOURCE_ID = "ghsl-ghs-pop-2025-r2023a-1km"
 RELIEF_SOURCE_ID = "natural-earth-manual-shaded-relief-50m-3.3.0"
@@ -47,13 +59,13 @@ POP_ZIP_MEMBER = "GHS_POP_E2025_GLOBE_R2023A_54009_1000_V1_0.tif"
 RELIEF_ZIP_MEMBER = "MSR_50M/MSR_50M.tif"
 
 POPULATION_STOPS = [
-    {"value": 1, "color": "#31565a", "opacity": 0.20},
-    {"value": 10, "color": "#39756f", "opacity": 0.42},
-    {"value": 50, "color": "#62a278", "opacity": 0.62},
-    {"value": 250, "color": "#d2c56c", "opacity": 0.76},
-    {"value": 1000, "color": "#e58d4b", "opacity": 0.86},
-    {"value": 5000, "color": "#d95048", "opacity": 0.93},
-    {"value": 20000, "color": "#f4e7ce", "opacity": 0.98},
+    {"value": 1, "color": "#3c737d", "opacity": 0.26},
+    {"value": 10, "color": "#49a3a1", "opacity": 0.48},
+    {"value": 50, "color": "#95c49b", "opacity": 0.67},
+    {"value": 250, "color": "#efd17b", "opacity": 0.82},
+    {"value": 1000, "color": "#f49b52", "opacity": 0.92},
+    {"value": 5000, "color": "#ed5e43", "opacity": 0.97},
+    {"value": 20000, "color": "#fff0ca", "opacity": 1.0},
 ]
 
 
@@ -131,7 +143,7 @@ def project_point(coordinate: Iterable[float]) -> list[float]:
 def target_transform(width: int, height: int) -> Affine:
     if width / height != OUTPUT_WIDTH / OUTPUT_HEIGHT:
         raise ValueError("Equal Earth raster output must preserve the 1200:650 viewBox ratio")
-    epsg_x, _ = transform("EPSG:4326", "EPSG:8857", [180.0], [0.0])
+    epsg_x, _ = transform("EPSG:4326", RASTER_TARGET_CRS, [180.0], [0.0])
     raw_x, _ = equal_earth_raw(180.0, 0.0)
     equal_earth_radius = epsg_x[0] / raw_x
     viewbox_pixels_per_metre = PROJECT_SCALE / equal_earth_radius
@@ -155,6 +167,18 @@ def sphere_mask(width: int, height: int) -> np.ndarray:
         for x, y in (project_point(point) for point in sphere_coordinates())
     ]
     image = Image.new("L", (width, height), color=0)
+    ImageDraw.Draw(image).polygon(outline, fill=255)
+    return np.asarray(image, dtype=np.uint8)
+
+
+def sphere_window_mask(width: int, height: int, window: Window) -> np.ndarray:
+    """Clip a tile without allocating a full high-resolution global mask."""
+    multiplier = width / VIEWBOX_WIDTH
+    outline = [
+        (round(x * multiplier - window.col_off), round(y * multiplier - window.row_off))
+        for x, y in (project_point(point) for point in sphere_coordinates())
+    ]
+    image = Image.new("L", (int(window.width), int(window.height)), color=0)
     ImageDraw.Draw(image).polygon(outline, fill=255)
     return np.asarray(image, dtype=np.uint8)
 
@@ -205,7 +229,7 @@ def warp_population(source_path: Path, width: int, height: int) -> tuple[np.ndar
             src_crs=source.crs,
             src_nodata=source.nodata,
             dst_transform=target_transform(width, height),
-            dst_crs="EPSG:8857",
+            dst_crs=RASTER_TARGET_CRS,
             dst_nodata=np.nan,
             resampling=Resampling.average,
             init_dest_nodata=True,
@@ -233,7 +257,7 @@ def warp_relief(source_path: Path, width: int, height: int) -> np.ndarray:
             src_transform=source.transform,
             src_crs=source.crs,
             dst_transform=target_transform(width, height),
-            dst_crs="EPSG:8857",
+            dst_crs=RASTER_TARGET_CRS,
             dst_nodata=0,
             resampling=Resampling.bilinear,
             init_dest_nodata=True,
@@ -241,9 +265,12 @@ def warp_relief(source_path: Path, width: int, height: int) -> np.ndarray:
         )
     mask = sphere_mask(width, height)
     rgba = np.zeros((height, width, 4), dtype=np.uint8)
-    rgba[..., 0] = destination
-    rgba[..., 1] = destination
-    rgba[..., 2] = destination
+    # Increase cartographic shadow separation without inventing elevation.
+    # The same global linear transfer is applied everywhere and recorded below.
+    shade = np.clip(255 - (255 - destination.astype(np.float32)) * 1.45, 0, 255).astype(np.uint8)
+    rgba[..., 0] = shade
+    rgba[..., 1] = shade
+    rgba[..., 2] = shade
     rgba[..., 3] = mask
     return rgba
 
@@ -257,6 +284,91 @@ def write_webp(rgba: np.ndarray, output_path: Path, *, lossless: bool) -> None:
         method=6,
         exact=True,
     )
+
+
+def verify_raster_registration() -> list[dict[str, Any]]:
+    """Check geographically dispersed landmarks against the exact SVG formula."""
+    landmarks = {"Nile delta": [31, 30], "Himalayan foothills": [77, 29], "Java": [107, -7], "Central Europe": [6, 50]}
+    affine = target_transform(OUTPUT_WIDTH, OUTPUT_HEIGHT)
+    results = []
+    for name, coordinate in landmarks.items():
+        x, y = transform("EPSG:4326", RASTER_TARGET_CRS, [coordinate[0]], [coordinate[1]])
+        pixel_x, pixel_y = ~affine * (x[0], y[0])
+        raster_point = [pixel_x / 2, pixel_y / 2]
+        svg_point = project_point(coordinate)
+        error = math.hypot(raster_point[0] - svg_point[0], raster_point[1] - svg_point[1])
+        if error > 0.008:
+            raise ValueError(f"Raster/SVG registration failed at {name}: {error} viewBox units")
+        results.append({"name": name, "wgs84": coordinate, "maximumErrorViewBoxUnits": round_number(error, 6)})
+    return results
+
+
+def build_population_pyramid(source_path: Path, asset_output: Path) -> dict[str, Any]:
+    """Warp each detail tile directly from the original one-kilometre source.
+
+    Never upscale the overview. GDAL reads the source windows needed by each
+    tile, so no 200-million-pixel display image is allocated by the build or
+    decoded by a browser. Entirely empty tiles are absent from the manifest.
+    """
+    levels = []
+    with rasterio.Env(GDAL_CACHEMAX=128 * 1024 * 1024), rasterio.open(source_path) as source:
+        for level in POPULATION_DETAIL_LEVELS:
+            width, height = level["width"], level["height"]
+            tile_width, tile_height = width // level["columns"], height // level["rows"]
+            folder = asset_output / "population-density-2025" / level["id"]
+            folder.mkdir(parents=True, exist_ok=True)
+            tiles = []
+            with WarpedVRT(
+                source,
+                crs=RASTER_TARGET_CRS,
+                transform=target_transform(width, height),
+                width=width,
+                height=height,
+                nodata=np.nan,
+                dtype="float32",
+                resampling=Resampling.average,
+                warp_mem_limit=64,
+            ) as warped:
+                for row in range(level["rows"]):
+                    for column in range(level["columns"]):
+                        window = Window(column * tile_width, row * tile_height, tile_width, tile_height)
+                        values = warped.read(1, window=window)
+                        mask = (sphere_window_mask(width, height, window) > 0) & np.isfinite(values) & (values > 0)
+                        if not np.any(mask):
+                            continue
+                        rgba = render_population(values, mask)
+                        asset = folder / f"{column}-{row}.webp"
+                        write_webp(rgba, asset, lossless=True)
+                        tiles.append({
+                            "id": f"{level['id']}:{column}:{row}",
+                            "href": f"/atlas-world/layers/population-density-2025/{level['id']}/{column}-{row}.webp",
+                            "mediaType": "image/webp",
+                            "width": tile_width,
+                            "height": tile_height,
+                            "viewBox": [round_number(window.col_off * VIEWBOX_WIDTH / width), round_number(window.row_off * VIEWBOX_HEIGHT / height), round_number(tile_width * VIEWBOX_WIDTH / width), round_number(tile_height * VIEWBOX_HEIGHT / height)],
+                            "checksumSha256": sha256_file(asset),
+                            "bytes": asset.stat().st_size,
+                        })
+                    print(f"Population {level['id']}: row {row + 1}/{level['rows']}", flush=True)
+            levels.append({
+                "id": level["id"],
+                "minimumZoom": level["minimumZoom"],
+                "width": width,
+                "height": height,
+                "displayMetresPerPixel": round_number(target_transform(width, height).a, 2),
+                "tiles": tiles,
+                "bytes": sum(tile["bytes"] for tile in tiles),
+            })
+    return {
+        "projectionId": "equal-earth",
+        "sourceResolutionMetres": 1000,
+        "sourceCrs": "ESRI:54009",
+        "resampling": "average",
+        "maximumDecodedTileBytes": 1200 * 1300 * 4,
+        "compositing": "replace-overview-inside-loaded-tile; never alpha-stack density resolutions",
+        "emptyTileBehavior": "transparent; no population estimate rendered",
+        "levels": levels,
+    }
 
 
 def geometry_coordinates(geometry: dict[str, Any]) -> list[list[float]]:
@@ -577,6 +689,7 @@ def main() -> None:
     asset_output = arguments.asset_output or repository_root / "public" / "atlas-world" / "layers"
     data_output.mkdir(parents=True, exist_ok=True)
     asset_output.mkdir(parents=True, exist_ok=True)
+    registration_checks = verify_raster_registration()
 
     required_source_ids = [POP_SOURCE_ID, RELIEF_SOURCE_ID, RIVER_SOURCE_ID, LAKE_SOURCE_ID, CITY_SOURCE_ID]
     for source_id in required_source_ids:
@@ -604,6 +717,7 @@ def main() -> None:
         relief_rgba = warp_relief(relief_source, arguments.width, arguments.height)
         write_webp(population_rgba, population_asset, lossless=True)
         write_webp(relief_rgba, relief_asset, lossless=False)
+        population_pyramid = build_population_pyramid(population_source, asset_output)
 
     rivers, lakes, cities = load_vectors(source_cache, lock_by_id)
     sources = [source_record(lock_by_id[source_id]) for source_id in required_source_ids]
@@ -635,27 +749,29 @@ def main() -> None:
         "sourceLockId": lock["lockId"],
         "projection": {
             "id": "equal-earth",
-            "crs": "EPSG:8857",
+            "crs": RASTER_TARGET_CRS,
+            "projectionMethod": "Equal Earth, spherical D3-compatible latitude",
             "viewBox": [0, 0, VIEWBOX_WIDTH, VIEWBOX_HEIGHT],
             "canonicalCrs": "EPSG:4326",
             "canonicalGeometryCrs": "EPSG:4326",
             "transformationId": "wgs84-to-equal-earth-svg-v1",
+            "registrationChecks": registration_checks,
         },
         "sources": sources,
         "transformations": [
             {
                 "id": "ghsl-mollweide-to-equal-earth-raster-v1",
-                "description": "Area-resample the 1 km World Mollweide population-count grid into a 2400 × 1300 Equal Earth raster; apply an explicit log1p color/opacity scale; clip to the projected sphere.",
+                "description": "Area-resample the original 1 km World Mollweide population-count grid independently into a 2400 × 1300 overview and 9600 × 5200 / 19200 × 10400 equivalent tiled Equal Earth levels; apply the same explicit log1p color/opacity scale; clip to the projected sphere. Detail is never upscaled from the overview.",
                 "inputCrs": "ESRI:54009",
-                "outputCrs": "EPSG:8857",
+                "outputCrs": RASTER_TARGET_CRS,
                 "resampling": "average",
                 "code": "scripts/build-atlas-geography-pack.py",
             },
             {
                 "id": "natural-earth-relief-to-equal-earth-raster-v1",
-                "description": "Bilinear-warp the public-domain grayscale relief from WGS84 into Equal Earth and clip to the projected sphere. Styling opacity remains layer-owned.",
+                "description": "Bilinear-warp the public-domain grayscale relief from WGS84 into Equal Earth and clip to the projected sphere. Apply global cartographic shadow contrast clamp(255 − (255 − gray) × 1.45). Styling opacity remains layer-owned.",
                 "inputCrs": "EPSG:4326",
-                "outputCrs": "EPSG:8857",
+                "outputCrs": RASTER_TARGET_CRS,
                 "resampling": "bilinear",
                 "code": "scripts/build-atlas-geography-pack.py",
             },
@@ -663,7 +779,7 @@ def main() -> None:
                 "id": "wgs84-to-equal-earth-svg-v1",
                 "description": "Project canonical WGS84 coordinates with the same fitted Equal Earth formula and 1200 × 650 viewBox used by Atlas country geometry.",
                 "inputCrs": "EPSG:4326",
-                "outputCrs": "EPSG:8857",
+                "outputCrs": RASTER_TARGET_CRS,
                 "resampling": None,
                 "code": "scripts/build-atlas-geography-pack.py",
             },
@@ -688,6 +804,7 @@ def main() -> None:
                 "sourceIds": [POP_SOURCE_ID],
                 "transformationId": "ghsl-mollweide-to-equal-earth-raster-v1",
                 "asset": output_assets["populationDensity"],
+                "assetPyramid": population_pyramid,
                 "visualization": {
                     "scale": "log1p",
                     "clamp": True,
@@ -700,6 +817,7 @@ def main() -> None:
                     "This is a modelled spatial distribution, not a census count observed independently in every grid cell.",
                     "The 2025 epoch is a projection within a five-year GHSL series; accuracy varies with the age and resolution of upstream census inputs.",
                     "A browser display pixel averages many 1 km source cells at world scale, so it must not be interpreted as the exact value of a single source cell.",
+                    "Regional and country detail tiles are generated independently from the original source at approximately 3.7 km and 1.8 km per projected display pixel. Further magnification does not add new source information; this is not a street-level population map.",
                 ],
             },
             {
@@ -714,7 +832,7 @@ def main() -> None:
                 "sourceIds": [RELIEF_SOURCE_ID],
                 "transformationId": "natural-earth-relief-to-equal-earth-raster-v1",
                 "asset": output_assets["physicalRelief"],
-                "visualization": {"recommendedOpacity": 0.18, "recommendedBlendMode": "multiply"},
+                "visualization": {"recommendedOpacity": 0.42, "recommendedBlendMode": "multiply", "shadowContrast": 1.45},
                 "caveats": [
                     "This is generalized cartographic relief, not an elevation measurement surface.",
                     "It should remain subtle beneath analytical layers and must not be used to read elevations.",
@@ -793,6 +911,7 @@ def main() -> None:
                 "rasters": output_assets,
                 "counts": {"rivers": len(rivers), "lakes": len(lakes), "cities": len(cities)},
                 "populationStatistics": population_statistics,
+                "populationPyramid": [{"id": level["id"], "tiles": len(level["tiles"]), "bytes": level["bytes"], "metresPerPixel": level["displayMetresPerPixel"]} for level in population_pyramid["levels"]],
             },
             indent=2,
         )

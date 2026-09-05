@@ -7,6 +7,7 @@ import type {
 } from "@/lib/atlas-world/layers";
 import { ATLAS_LAYER_BY_ID, continuousLegendPosition } from "@/lib/atlas-world/layers";
 import type { AtlasRuntimeSource } from "@/lib/atlas-world/runtime";
+import AtlasTerm, { AtlasGlossaryIndex } from "./AtlasTerm";
 import styles from "./AtlasWorld.module.css";
 
 type LegendCount = {
@@ -25,6 +26,7 @@ type AtlasLegendProps = {
   layerErrors: Record<string, string>;
   onToggleLayer?: (instanceId: string) => void;
   inactive?: boolean;
+  onHighlightCategory?: (key: string | null) => void;
 };
 
 const EXPLORABLE_LAYER_IDS = new Set([
@@ -41,7 +43,7 @@ function layerSources(layer: AtlasRenderPlanLayer, sources: AtlasRuntimeSource[]
   return sources.filter((source) => ids.has(source.id));
 }
 
-function LegendItems({ layer, count }: { layer: AtlasRenderPlanLayer; count: LegendCount | undefined }) {
+function LegendItems({ layer, count, onHighlightCategory }: { layer: AtlasRenderPlanLayer; count: LegendCount | undefined; onHighlightCategory?: (key: string | null) => void }) {
   const legend = layer.definition.legend;
   const missing = layer.definition.missingData.styles.unavailable;
   if (legend.kind === "none") return null;
@@ -94,9 +96,10 @@ function LegendItems({ layer, count }: { layer: AtlasRenderPlanLayer; count: Leg
       {items
         .filter((item) => !count || (count.counts.get(item.key) ?? 0) > 0)
         .map((item) => (
-          <li key={item.key}>
+          <li key={item.key} onPointerEnter={() => onHighlightCategory?.(item.key)} onPointerLeave={() => onHighlightCategory?.(null)}
+            onFocus={() => onHighlightCategory?.(item.key)} onBlur={() => onHighlightCategory?.(null)}>
             <i style={{ backgroundColor: item.color }} />
-            <span>{item.label}</span>
+            <span><AtlasTerm term={item.key} context={layer.definition.id === "admin0-religion" ? "religion" : undefined}>{item.label}</AtlasTerm></span>
             {count && <small>{count.counts.get(item.key) ?? 0}</small>}
           </li>
         ))}
@@ -122,8 +125,9 @@ export default function AtlasLegend({
   layerErrors,
   onToggleLayer,
   inactive = false,
+  onHighlightCategory,
 }: AtlasLegendProps) {
-  const informativeLayers = plan.layers.filter((layer) => layer.definition.legend.kind !== "none");
+  const informativeLayers = plan.layers.filter((layer) => layer.definition.legend.kind !== "none" && layer.instance.parameters.role !== "context");
   const sourceRecords = sources.filter((source) => plan.sources.includes(source.id));
   const layerControls = onToggleLayer
     ? plan.scene.layers.flatMap((instance) => {
@@ -153,8 +157,25 @@ export default function AtlasLegend({
         </div>
       </details>
       <p className={styles.legendDescription}>{viewDescription}</p>
+      <div className={styles.legendLayers}>
+        {informativeLayers.map((layer) => {
+          const error = layerErrors[layer.instance.id];
+          const loading = layer.dataset.access.kind === "api" && !layerData[layer.instance.id] && !error;
+          return <section key={layer.instance.id} className={styles.legendLayer}>
+            <LegendItems layer={layer} count={counts.get(layer.instance.id)} onHighlightCategory={onHighlightCategory} />
+            {loading && <p className={styles.legendDataStatus}>Loading current values…</p>}
+            {error && <p className={`${styles.legendDataStatus} ${styles.legendDataError}`}>Layer data unavailable</p>}
+            <details className={styles.legendMethod}>
+              <summary>How to read this map</summary>
+              <p>{layer.definition.provenance.methodology}</p>
+              {layer.definition.provenance.authoredVisualChoices.map((choice) => <p key={choice}>{choice}</p>)}
+              {layerSources(layer, sources).map((source) => <small key={source.id}>{source.publisher}{source.sourceUpdatedAt ? ` · ${source.sourceUpdatedAt.slice(0, 4)}` : ""}</small>)}
+            </details>
+          </section>;
+        })}
+      </div>
       {layerControls.length > 0 && (
-        <div className={styles.layerToggles} role="group" aria-label="Visible map layers">
+        <details className={styles.mapAppearance}><summary>Map detail & layers</summary><div className={styles.layerToggles} role="group" aria-label="Visible map layers">
           {layerControls.map(({ instance, definition }) => (
             <button
               key={instance.id}
@@ -166,28 +187,10 @@ export default function AtlasLegend({
               <span>{definition.name}</span>
             </button>
           ))}
-        </div>
+        </div></details>
       )}
-      <div className={styles.legendLayers}>
-        {informativeLayers.map((layer) => {
-          const error = layerErrors[layer.instance.id];
-          const loading = layer.dataset.access.kind === "api" && !layerData[layer.instance.id] && !error;
-          return (
-            <section key={layer.instance.id} className={styles.legendLayer}>
-              {informativeLayers.length > 1 && <h3>{layer.definition.name}</h3>}
-              <LegendItems layer={layer} count={counts.get(layer.instance.id)} />
-              {loading && <p className={styles.legendDataStatus}>Loading current values…</p>}
-              {error && <p className={`${styles.legendDataStatus} ${styles.legendDataError}`}>Layer data unavailable</p>}
-              <details className={styles.legendMethod}>
-                <summary>How this view was made</summary>
-                <p>{layer.definition.provenance.methodology}</p>
-                {layer.definition.provenance.authoredVisualChoices.map((choice) => <p key={choice}>{choice}</p>)}
-                {layerSources(layer, sources).map((source) => <small key={source.id}>{source.publisher}{source.sourceUpdatedAt ? ` · ${source.sourceUpdatedAt.slice(0, 4)}` : ""}</small>)}
-              </details>
-            </section>
-          );
-        })}
-      </div>
+      <p className={styles.legendStatusKey}><i aria-hidden="true" />Dashed outline: <AtlasTerm term="disputed territory">inspect territorial status</AtlasTerm></p>
+      <AtlasGlossaryIndex />
       {!plan.valid && <p className={`${styles.legendDataStatus} ${styles.legendDataError}`}>This layer combination could not be rendered safely.</p>}
     </div>
   );

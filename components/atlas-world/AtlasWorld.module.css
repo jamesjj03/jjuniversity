@@ -1,3 +1,4 @@
+/* Phase 2.5 cartographic surface; country cockpit has its own scoped stylesheet. */
 .atlas {
   position: relative;
   width: 100%;
@@ -14,6 +15,15 @@
   --atlas-panel: rgba(13, 29, 33, 0.92);
   --atlas-line: rgba(220, 231, 224, 0.14);
   --atlas-shadow: rgba(0, 6, 9, 0.52);
+  --atlas-ocean: #17394f;
+  --atlas-land: #9aacb5;
+  --atlas-missing: #687780;
+  --atlas-selected: #fff1be;
+  --atlas-hover: #fff8e4;
+  --atlas-disputed: #fff0b9;
+  --atlas-city: #f8f1dd;
+  --atlas-river: #8bc9ec;
+  --atlas-lake: #244f71;
 }
 
 .mapBackdrop {
@@ -388,7 +398,6 @@
 .noteMarker:hover .noteDot,
 .noteMarker:focus-visible .noteDot {
   fill: #ffdd8d;
-  r: 6.8px;
 }
 
 .noteMarker text {
@@ -425,7 +434,6 @@
 
 .hoveredMarker,
 .selectedMarker {
-  r: 4.2px;
   stroke: white;
   stroke-width: 1.25;
   filter: drop-shadow(0 0 3px rgba(255, 222, 143, 0.8));
@@ -2183,4 +2191,142 @@
     animation: none;
     transition: none;
   }
+}
+
+/* Editorial navigation and cartographic hierarchy. */
+.atlas { --atlas-gold:#edc779; --atlas-panel:rgba(16,29,42,.97); --atlas-ink:#f4f1e9; --atlas-muted:#aebfcc; --atlas-line:rgba(188,207,220,.19); background:#102637; }
+.mapBackdrop { background:radial-gradient(ellipse at 50% 45%,#274a60,#102637 85%); }
+.atlasToolbar { top:14px; left:18px; right:auto; display:flex; gap:0; padding:0; min-height:58px; border-color:var(--atlas-line); border-radius:9px; background:var(--atlas-panel); box-shadow:0 8px 28px #06111d40; }
+.atlasTitle { display:block; min-width:0; padding:8px 19px; border-right:1px solid var(--atlas-line); }
+.atlasTitle h1 { margin:0; font:500 22px/1.1 Georgia,serif; letter-spacing:.12em; }
+.atlasTitle > span:last-child { display:block; margin-top:3px; color:var(--atlas-gold); font-size:8px; letter-spacing:.1em; text-transform:uppercase; }
+.atlasToolbar { z-index:45; }
+.atlasToolbar[inert] { z-index:30; }
+.viewBrowser { position:relative; }
+.viewTrigger { display:flex; align-items:center; justify-content:space-between; gap:28px; min-width:215px; min-height:58px; padding:9px 17px; border:0; background:transparent; color:var(--atlas-ink); cursor:pointer; text-align:left; }
+.viewTrigger > span:first-child { display:grid; gap:3px; }
+.viewTrigger small { font-size:8px; letter-spacing:.14em; color:var(--atlas-muted); }
+.viewTrigger strong { font-size:14px; font-weight:650; }
+.viewTrigger > span:last-child { color:var(--atlas-gold); font-size:18px; }
+.viewMenu { position:absolute; top:calc(100% + 10px); left:-133px; width:390px; padding:16px; max-height:min(650px,calc(100svh - 160px)); overflow:auto; border:1px solid var(--atlas-line); border-radius:10px; background:#101e2c; box-shadow:0 18px 50px #07111d88; }
+.viewMenuHeading { padding:2px 3px 12px; font:18px/1.25 Georgia,serif; color:#f5e7c8; }
+.viewMenu section + section { margin-top:12px; }
+.viewMenu h2 { margin:0 0 5px 4px; color:#8ea6b7; font-size:9px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; }
+.viewMenu button { display:flex; align-items:center; gap:12px; width:100%; min-height:54px; padding:8px; border:1px solid transparent; border-radius:6px; color:var(--atlas-ink); background:none; cursor:pointer; text-align:left; }
+.viewMenu button:hover,.viewMenu button[aria-pressed="true"] { background:#243748; border-color:#35495a; }
+.viewMenu button > span:nth-child(2) { display:grid; gap:3px; flex:1; }
+.viewMenu button strong { font-size:13px; }
+.viewMenu button small { color:#afc0cc; font-size:11px; }
+.viewMenu button > span:last-child { color:var(--atlas-gold); }
+.viewSwatch { width:32px; height:32px; border-radius:50%; background:conic-gradient(#abb0d0 0 30%,#dfb28c 30% 60%,#a3c294 60%); border:1px solid #ffffff30; }
+.swatch_where_people_live { background:linear-gradient(140deg,#27485b 25%,#88b783 50%,#edd077 70%,#db7042); }
+.swatch_population { background:linear-gradient(140deg,#dbe5d9,#4a936d,#173f4e); }
+.swatch_religion { background:conic-gradient(#e4b46c 0 45%,#58ac98 45% 80%,#b4b7c0 80%); }
+.swatch_government { background:conic-gradient(#51aea1 0 35%,#8cb2e7 35% 65%,#da8498 65% 80%,#ecc074 80%); }
+.swatch_gdp_per_capita { background:linear-gradient(140deg,#f3e6aa,#64bba8,#28748d,#223e71); }
+.searchTrigger { display:flex; align-items:center; justify-content:center; gap:9px; min-height:44px; margin:7px; padding:0 12px; border:0; border-left:1px solid var(--atlas-line); border-radius:0; color:#c1cfda; background:transparent; cursor:pointer; font-size:12px; }
+.searchTrigger kbd { color:#91a8b9; padding:3px 5px; border:1px solid #405264; border-radius:3px; font:11px monospace; }
+.search { position:absolute; right:0; top:calc(100% + 10px); width:340px; padding:8px; background:#101e2c; border:1px solid var(--atlas-line); border-radius:9px; box-shadow:0 14px 40px #06111d66; }
+.search[hidden] { display:none; }
+.searchVisible { display:block; }
+.search input { height:46px; border-color:#486075; border-radius:5px; background:#1b2d3e; font-size:14px; }
+.searchIcon { top:18px; left:18px; }
+.clearSearch { top:10px; right:10px; width:40px; height:42px; }
+.searchResults,.noResults { top:100%; border-color:var(--atlas-line); background:#101e2c; }
+.mapStage { inset:50px 0 22px; }
+.ocean { stroke:#8fb1c733; stroke-width:.6; }
+.graticule { stroke:#aacce013; stroke-width:.6; }
+.countryShape { transition:fill 160ms ease; }
+.hoveredShape { stroke:var(--atlas-hover); stroke-width:1.8; filter:brightness(1.13); }
+.selectedShape { stroke:var(--atlas-selected); stroke-width:2.5; filter:brightness(1.12) drop-shadow(0 0 2px #fff1bd99); }
+.hoveredMarker,.selectedMarker { stroke:white; stroke-width:1.5; }
+.reliefLayer { filter:none; }
+.riverFeature { filter:none; }
+.modernBoundary { stroke:#183345bb; stroke-width:.65; }
+.disputedBoundary { fill:none; stroke:var(--atlas-disputed); stroke-width:1.5; stroke-dasharray:3 2; pointer-events:none; }
+.cityHalo { fill:#152b3bd9; }
+.cityPoint { filter:none; }
+.countryLabels { pointer-events:none; }
+.baseLand { fill:#657d81; pointer-events:none; }
+.annotationHighlights { fill:none; stroke:#ffe7a2; stroke-width:3; pointer-events:none; filter:drop-shadow(0 0 3px #b89d55); }
+.cityLabel,.countryLabel,.physicalLabel { fill:#f8f4e9; stroke:#183042e0; stroke-width:2.6; paint-order:stroke; stroke-linejoin:round; font-family:var(--v2-ui,sans-serif); font-weight:550; pointer-events:none; }
+.countryLabel { font-weight:650; letter-spacing:.03em; }
+.countryLabel[data-atlas-selected-label="true"] { fill:#fff3b9; font-weight:800; }
+.physicalLabel { fill:#c2e5f6; font-style:italic; font-weight:400; }
+.noteMarker text { font-size:7px; }
+.noteMarker:hover .noteDot { fill:#ffe4a1; }
+.tooltip { width:245px; padding:13px 15px; border-color:#698393; border-radius:7px; background:#142636f5; }
+.tooltip > strong { font:500 18px/1.2 Georgia,serif; text-transform:none; letter-spacing:0; }
+.tooltipComposition { display:grid; gap:4px; margin-top:9px; }
+.tooltipComposition span { display:flex; justify-content:space-between; text-transform:capitalize; font-size:11px; }
+.tooltipComposition small { color:#a9bdcc; font-size:10px; }
+.statusBadge { color:#ecd298; font-size:10px; margin-bottom:6px; }
+.legendStatusKey { display:flex; align-items:center; gap:5px; color:#a9bdcc; font-size:10px; line-height:1.5; margin:12px 0 8px; }
+.legendStatusKey > i { width:16px; border-top:2px dashed #eed296; }
+.legend { left:18px; bottom:18px; width:min(310px,calc(100% - 94px)); max-height:min(52vh,470px); padding:15px; border-color:var(--atlas-line); border-radius:8px; background:var(--atlas-panel); }
+.legendHeader h2 { margin:3px 0 9px; font:22px/1.1 Georgia,serif; color:#f9eed5; }
+.legendHeader span { color:#9cb2c2; font-size:8px; }
+.legendDescription { margin:1px 0 12px; color:#bacbd6; font-size:11px; line-height:1.5; }
+.legendItems { gap:7px; }
+.legendItems li { color:#dde5e9; font-size:11px; }
+.legendItems small,.legendMissing small { color:#91acbd; font-size:10px; }
+.legendGradient { height:13px; border-radius:3px; }
+.legendTicks { height:17px; color:#d4e0e7; font-size:10px; }
+.continuousLegend > small,.politicalLegend small { color:#a9c0ce; font-size:10px; line-height:1.5; }
+.legendMethod { padding-top:8px; margin-top:11px; border-top:1px solid var(--atlas-line); }
+.legendMethod summary,.sourcePopover summary { color:#dbc494; font-size:10px; }
+.legendMethod p { font-size:11px; line-height:1.5; }
+.sourcePopover > div { background:#102333; }
+.mapAppearance { padding-top:9px; margin-top:11px; border-top:1px solid var(--atlas-line); }
+.mapAppearance > summary { cursor:pointer; color:#bdced7; font-size:11px; }
+.layerToggles { grid-template-columns:1fr 1fr; }
+.layerToggles button { min-height:35px; padding:4px; border:0; background:none; font-size:10px; }
+.mapControls { right:18px; bottom:18px; display:flex; padding:0; gap:0; overflow:hidden; border-color:var(--atlas-line); border-radius:7px; background:var(--atlas-panel); }
+.mapControls button,.mapControls .resetControl { width:40px; height:42px; border:0; border-right:1px solid var(--atlas-line); border-radius:0; color:#f0e6cd; background:none; font-size:20px; }
+.mapControls button:last-child { border:0; font-size:19px; }
+.panelOpen .mapControls { right:374px; }
+.interactionHint { color:#97adbd; background:none; font-size:9px; font-weight:400; }
+.noteNavigator { top:91px; left:22px; display:block; max-width:265px; padding:0; border:0; border-radius:0; background:none; box-shadow:none; text-transform:none; letter-spacing:0; }
+.noteNavigator > summary { padding:9px 13px; cursor:pointer; list-style:none; border-left:2px solid #e6c380; color:#f7e3bc; background:#142939df; font:15px/1.25 Georgia,serif; }
+.noteNavigator > div { display:grid; margin-top:5px; padding:5px; border:1px solid var(--atlas-line); border-radius:5px; background:#142939f5; }
+.noteNavigator button { width:100%; height:auto; min-height:40px; padding:10px; text-align:left; color:#c5d6e0; background:none; border:0; border-radius:4px; font-size:12px; font-weight:500; line-height:1.35; }
+.noteNavigator button:hover,.noteNavigator .activeNoteButton { background:#2b4456; color:#f9e3b3; }
+.noteCard { left:auto; right:18px; bottom:18px; width:345px; max-height:calc(100% - 110px); overflow:auto; padding:20px; border-color:#b2935d; border-radius:8px; background:#132737f7; }
+.noteCard h2 { font:26px/1.08 Georgia,serif; color:#faefd9; }
+.noteCard > p { font-size:13px; line-height:1.65; color:#c7d5df; }
+.noteCardActions { display:grid; gap:14px; }
+.noteCardActions details > div { position:static; width:auto; max-height:none; padding:0; margin-top:12px; border:0; background:none; box-shadow:none; }
+.noteCardActions > button { justify-self:start; border-radius:4px; background:transparent; color:#f2d89f; }
+.countryPanel { top:88px; right:18px; bottom:18px; width:340px; background:var(--atlas-panel); }
+.atlas button:focus-visible,.atlas summary:focus-visible { outline:2px solid #f8d98d; outline-offset:3px; }
+@media(max-width:760px) {
+  .atlasToolbar { top:max(7px,env(safe-area-inset-top)); left:8px; right:8px; min-height:50px; padding:0; gap:0; }
+  .atlasTitle { padding:9px 11px; }
+  .atlasTitle h1 { font-size:16px; }
+  .atlasTitle > span:last-child { display:none; }
+  .viewBrowser { position:static; flex:1; min-width:0; }
+  .viewTrigger { width:100%; min-width:0; min-height:50px; gap:9px; padding:7px 11px; }
+  .viewTrigger strong { font-size:12px; }
+  .searchTrigger { width:43px; flex-shrink:0; margin:2px; padding:0; }
+  .searchTrigger > span,.searchTrigger kbd { display:none; }
+  .search { left:0; right:0; width:auto; }
+  .search input { height:46px; }
+  .viewMenu { position:absolute; top:calc(100% + 8px); left:0; right:0; width:auto; max-height:calc(100svh - 155px); padding:12px; }
+  .viewMenu button { min-height:52px; }
+  .mapStage { inset:46px 0 28px; }
+  .legend { left:8px; bottom:max(8px,env(safe-area-inset-bottom)); padding:0 12px; max-height:40svh; width:calc(100% - 155px); }
+  .legendItems { max-height:150px; }
+  .mapControls { right:8px; bottom:max(8px,env(safe-area-inset-bottom)); }
+  .mapControls button,.mapControls .resetControl { width:42px; height:44px; }
+  .panelOpen .mapControls { right:8px; bottom:184px; }
+  .panelHalf .mapControls { bottom:calc(min(58svh,540px) + max(16px,env(safe-area-inset-bottom))); }
+  .countryPanel { top:auto; left:7px; right:7px; bottom:max(7px,env(safe-area-inset-bottom)); width:auto; height:174px; }
+  .noteNavigator { top:68px; left:12px; max-width:235px; }
+  .noteNavigator > summary { padding:9px 11px; font-size:13px; }
+  .noteNavigator button { min-height:44px; width:100%; height:auto; }
+  .noteCard { right:8px; left:8px; bottom:max(8px,env(safe-area-inset-bottom)); width:auto; max-height:53svh; padding:17px; }
+  .noteCard h2 { font-size:24px; }
+  .tooltip { display:none; }
+  .layerToggles { grid-template-columns:1fr; }
+  .layerToggles button { min-height:44px; font-size:12px; }
 }

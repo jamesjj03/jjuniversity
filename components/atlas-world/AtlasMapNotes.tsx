@@ -22,8 +22,8 @@ export default function AtlasMapNotes({
 }: AtlasMapNotesProps) {
   return (
     <div aria-hidden={inactive || undefined} inert={inactive}>
-      <nav className={styles.noteNavigator} aria-label="Explanations on this map">
-        <span>Notice a pattern</span>
+      <details className={styles.noteNavigator} aria-label="Explanations on this map">
+        <summary>Four places to look closer <span aria-hidden="true">↗</span></summary>
         <div>
           {notes.map((note, index) => (
             <button
@@ -35,11 +35,11 @@ export default function AtlasMapNotes({
               title={note.headline}
               onClick={() => onSelect(note)}
             >
-              {index + 1}
+              {note.headline}
             </button>
           ))}
         </div>
-      </nav>
+      </details>
 
       {activeNote && (
         <aside className={styles.noteCard} aria-labelledby="atlas-note-title">

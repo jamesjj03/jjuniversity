@@ -1,6 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const port = 3211;
+const port = Number(process.env.ATLAS_TEST_PORT ?? 3211);
+const externalBaseURL = process.env.ATLAS_TEST_BASE_URL;
 
 export default defineConfig({
   testDir: "./tests",
@@ -11,11 +12,11 @@ export default defineConfig({
   timeout: 30_000,
   expect: { timeout: 8_000 },
   use: {
-    baseURL: `http://127.0.0.1:${port}`,
+    baseURL: externalBaseURL ?? `http://127.0.0.1:${port}`,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
-  webServer: {
+  webServer: externalBaseURL ? undefined : {
     command: `npm run dev -- --port ${port}`,
     url: `http://127.0.0.1:${port}/atlas`,
     reuseExistingServer: !process.env.CI,

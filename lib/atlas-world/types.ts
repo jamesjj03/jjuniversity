@@ -221,6 +221,9 @@ export interface AtlasProjectedFeature {
   bounds: [[number, number], [number, number]];
   tinyRank: number | null;
   mapColor7: number | null;
+  labelPoint?: [number, number];
+  labelArea?: number;
+  focusBounds?: [[number, number], [number, number]];
 }
 
 export interface AtlasGeometrySnapshot {

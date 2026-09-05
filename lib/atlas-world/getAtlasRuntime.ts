@@ -12,9 +12,11 @@ import type {
 } from "./runtime";
 import { getApprovedAtlasJjuLinksForEntity } from "./associations";
 import { getAtlasGeographyPack } from "./getAtlasGeography";
+import { deriveAtlasLabelGeometry } from "./labelGeometry";
 
 const countrySnapshot = countrySnapshotJson as unknown as AtlasCountrySnapshot;
 const geometrySnapshot = geometrySnapshotJson as unknown as AtlasGeometrySnapshot;
+const displayFeatures = geometrySnapshot.features.map((feature) => ({ ...feature, ...deriveAtlasLabelGeometry(feature) }));
 
 function compactFact<T>(fact: AtlasObservation<T> | null): AtlasRuntimeFact<T> | null {
   if (!fact) return null;
@@ -150,7 +152,7 @@ export function getAtlasRuntimeDataset(): AtlasRuntimeDataset {
       viewBox: geometrySnapshot.projection.viewBox,
       spherePath: geometrySnapshot.spherePath,
       graticulePath: geometrySnapshot.graticulePath,
-      features: geometrySnapshot.features,
+      features: displayFeatures,
       validFrom: geometrySnapshot.temporal.validFrom,
       validTo: geometrySnapshot.temporal.validTo,
     },
@@ -188,6 +190,9 @@ export function getAtlasClientDataset(data = getAtlasRuntimeDataset()): AtlasCli
         bounds: feature.bounds,
         tinyRank: feature.tinyRank,
         mapColor7: feature.mapColor7,
+        labelPoint: feature.labelPoint,
+        labelArea: feature.labelArea,
+        focusBounds: feature.focusBounds,
       })),
       validFrom: data.geometry.validFrom,
       validTo: data.geometry.validTo,

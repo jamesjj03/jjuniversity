@@ -19,13 +19,22 @@ import type {
   AtlasPhysicalFeature,
 } from "@/lib/atlas-world/geographyTypes";
 import type { AtlasRuntimeDataset } from "@/lib/atlas-world/runtime";
+import { ATLAS_STATUS_OUTLINE_ENTITY_IDS } from "@/lib/atlas-world/territorialStatus";
 import styles from "./AtlasWorld.module.css";
+import AtlasRasterSurface from "./AtlasRasterSurface";
 
 type AtlasWorldMapProps = {
   data: AtlasRuntimeDataset;
 };
 
 type AtlasGeometryFeature = AtlasPhysicalFeature | AtlasCityFeature;
+
+function assistanceExtent(feature: AtlasRuntimeDataset["geometry"]["features"][number]) {
+  // Overseas pieces and dateline wrapping must not make a tiny main polygon
+  // look continent-sized to the screen-space assistance rule.
+  const bounds = feature.focusBounds ?? feature.bounds;
+  return Math.min(bounds[1][0] - bounds[0][0], bounds[1][1] - bounds[0][1]);
+}
 
 type AtlasSvgRendererContext = {
   data: AtlasRuntimeDataset;
@@ -45,6 +54,12 @@ const GEOMETRY_ASSET_HREF = "/atlas-world/geometry-equal-earth.v1.svg";
 
 function geometryAssetId(entityId: string) {
   return `atlas-${entityId.replace(/[^A-Za-z0-9_-]/g, "-")}`;
+}
+
+function pathLabelPoint(path: string): [number, number] {
+  const values = path.match(/-?\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+  const index = Math.floor(values.length / 4) * 2;
+  return [values[index] ?? 0, values[index + 1] ?? 0];
 }
 
 function layerSurfaceStyle(
@@ -113,6 +128,13 @@ function renderRasterLayer(
     ? styles.reliefLayer
     : styles.populationDensityLayer;
 
+  if (packAsset && geographyDataset?.assetPyramid) {
+    return <g key={definition.id} {...surfaceMetadata(definition, dataset)} className={rasterClass}
+      style={layerSurfaceStyle(definition, context)}>
+      <AtlasRasterSurface overview={packAsset} pyramid={geographyDataset.assetPyramid} />
+    </g>;
+  }
+
   return (
     <image
       key={definition.id}
@@ -150,7 +172,9 @@ function renderPolygonFeatureLayer(
       {records.map((feature) => {
         const path = feature.geometry.derived.path;
         if (!path) return null;
+        const point = pathLabelPoint(path);
         return (
+          <g key={feature.featureId} className={styles[`lod${feature.displayLod}`]}>
           <path
             key={feature.featureId}
             d={path}
@@ -167,6 +191,10 @@ function renderPolygonFeatureLayer(
           >
             <title>{feature.name}</title>
           </path>
+          <text data-atlas-label="physical" data-atlas-x={point[0]} data-atlas-y={point[1]} data-atlas-label-min-zoom="3.2"
+            data-atlas-label-priority={40 + (feature.sourceScaleRank ?? 5)} className={styles.physicalLabel}
+            transform={`translate(${point.join(" ")})`} textAnchor="middle">{feature.name}</text>
+          </g>
         );
       })}
     </g>
@@ -190,7 +218,9 @@ function renderLineLayer(
       {records.map((feature) => {
         const path = feature.geometry.derived.path;
         if (!path) return null;
+        const point = pathLabelPoint(path);
         return (
+          <g key={feature.featureId} className={styles[`lod${feature.displayLod}`]}>
           <path
             key={feature.featureId}
             d={path}
@@ -206,6 +236,10 @@ function renderLineLayer(
           >
             <title>{feature.name}</title>
           </path>
+          <text data-atlas-label="physical" data-atlas-x={point[0]} data-atlas-y={point[1]} data-atlas-label-min-zoom="2.4"
+            data-atlas-label-priority={40 + (feature.sourceScaleRank ?? 5)} className={styles.physicalLabel}
+            transform={`translate(${point.join(" ")})`} textAnchor="middle" y={-5}>{feature.name}</text>
+          </g>
         );
       })}
     </g>
@@ -248,10 +282,9 @@ function renderPointSymbolLayer(
             className={styles[`lod${feature.displayLod}`]}
             data-atlas-map-feature={feature.featureId}
           >
-            <circle cx={point[0]} cy={point[1]} r={radius + 1.25} className={styles.cityHalo} />
+            <g data-atlas-screen-symbol="city" data-atlas-x={point[0]} data-atlas-y={point[1]} transform={`translate(${point.join(" ")})`}>
+            <circle r={radius + 1} className={styles.cityHalo} />
             <circle
-              cx={point[0]}
-              cy={point[1]}
               r={radius}
               className={styles.cityPoint}
               style={{
@@ -262,6 +295,15 @@ function renderPointSymbolLayer(
             >
               <title>{feature.name}</title>
             </circle>
+            </g>
+            <text
+              data-atlas-label="city"
+              data-atlas-x={point[0]} data-atlas-y={point[1]}
+              data-atlas-label-priority={20 + (feature.sourceScaleRank ?? 5)}
+              data-atlas-label-min-zoom={feature.kind === "city" && feature.isNationalCapital ? 2.6 : 4}
+              transform={`translate(${point.join(" ")})`}
+              x={8} y={3} className={styles.cityLabel} style={{ display: "none" }}
+            >{feature.kind === "city" && feature.isNationalCapital ? "▪ " : ""}{feature.name}</text>
           </g>
         );
       })}
@@ -313,6 +355,21 @@ function renderInteractionLayer(
       className={styles.interactionLayer}
       style={layerSurfaceStyle(definition, context)}
     >
+      {context.data.geometry.features
+        .filter((feature) => feature.tinyRank != null)
+        .map((feature) => (
+          <circle
+            key={`${definition.id}-marker-${feature.entityId}`}
+            cx={(feature.labelPoint ?? feature.centroid)[0]}
+            cy={(feature.labelPoint ?? feature.centroid)[1]}
+            r={7}
+            className={styles.tinyHit}
+            data-atlas-country={feature.entityId}
+            data-atlas-assistance="hit"
+            data-atlas-extent={assistanceExtent(feature)}
+          />
+        ))}
+      {/* Polygon hits take priority over every surrogate circle. */}
       {context.data.geometry.features.map((feature) => (
         <use
           key={`${definition.id}-${feature.entityId}`}
@@ -321,18 +378,6 @@ function renderInteractionLayer(
           data-atlas-country={feature.entityId}
         />
       ))}
-      {context.data.geometry.features
-        .filter((feature) => feature.tinyRank != null)
-        .map((feature) => (
-          <circle
-            key={`${definition.id}-marker-${feature.entityId}`}
-            cx={feature.centroid[0]}
-            cy={feature.centroid[1]}
-            r={12}
-            className={styles.tinyHit}
-            data-atlas-country={feature.entityId}
-          />
-        ))}
     </g>
   );
 }
@@ -356,6 +401,9 @@ function renderAnnotationLayer(
           key={note.id}
           className={styles.noteMarker}
           data-atlas-note={note.id}
+          data-atlas-screen-symbol="note"
+          data-atlas-x={note.spatial.focus.equalEarth[0]}
+          data-atlas-y={note.spatial.focus.equalEarth[1]}
           data-atlas-minimum-zoom={note.triggers.minimumZoom}
           data-atlas-maximum-zoom={note.triggers.maximumZoom}
           transform={`translate(${note.spatial.focus.equalEarth.join(" ")})`}
@@ -440,12 +488,14 @@ function renderSharedAdmin0Fill(
           return (
             <circle
               key={`marker-${feature.entityId}`}
-              cx={feature.centroid[0]}
-              cy={feature.centroid[1]}
+              cx={(feature.labelPoint ?? feature.centroid)[0]}
+              cy={(feature.labelPoint ?? feature.centroid)[1]}
               r={2.7}
               fill={resolveAtlasLayerValue(definition, { country, feature }).color}
               className={styles.tinyMarker}
               data-atlas-visual={country.id}
+              data-atlas-assistance="visual"
+              data-atlas-extent={assistanceExtent(feature)}
               data-map-color={feature.mapColor7 ?? 0}
               vectorEffect="non-scaling-stroke"
             />
@@ -515,13 +565,17 @@ export default function AtlasWorldMap({ data }: AtlasWorldMapProps) {
     >
       <defs>
         <radialGradient id="atlas-ocean-glow" cx="50%" cy="42%" r="62%">
-          <stop offset="0%" stopColor="#152f36" />
-          <stop offset="100%" stopColor="#07181d" />
+          <stop offset="0%" stopColor="#21475e" />
+          <stop offset="100%" stopColor="#112b41" />
         </radialGradient>
       </defs>
       <g data-atlas-map-group data-atlas-zoom-level="world" data-atlas-zoom-scale="1">
         <use href={`${geometryAssetHref}#atlas-sphere`} className={styles.ocean} fill="url(#atlas-ocean-glow)" />
         <use href={`${geometryAssetHref}#atlas-graticule`} className={styles.graticule} />
+        <g data-atlas-base-geography="land" className={styles.baseLand}>
+          {data.geometry.features.map((feature) => <use key={feature.entityId}
+            href={`${geometryAssetHref}#${geometryAssetId(feature.entityId)}`} />)}
+        </g>
 
         {orderedPassiveSurfaces.map((definition) =>
           definition.renderer === "polygon-fill"
@@ -530,11 +584,44 @@ export default function AtlasWorldMap({ data }: AtlasWorldMapProps) {
         )}
 
         {interactionSurfaces.map((definition) => renderCatalogLayer(definition, context))}
+        <g className={styles.boundaryLayer} data-atlas-status-outlines>
+          {data.geometry.features.filter((feature) => ATLAS_STATUS_OUTLINE_ENTITY_IDS.has(feature.entityId)).map((feature) => (
+            <use key={feature.entityId} href={`${geometryAssetHref}#${geometryAssetId(feature.entityId)}`}
+              className={styles.disputedBoundary} vectorEffect="non-scaling-stroke" />
+          ))}
+        </g>
 
         {/* Interactive visual surfaces sit above the broad country hit surface
             so specific feature interaction wins. Their relative order still
             follows catalog zIndex/slot ordering. */}
         {foregroundInteractiveSurfaces.map((definition) => renderCatalogLayer(definition, context))}
+        <g className={styles.annotationHighlights}>
+          {patternNotes.map((note) => {
+            const features = [...geography.featureCollections.majorRivers.features, ...geography.featureCollections.majorLakes.features]
+              .filter((feature) => note.spatial.featureIds.includes(feature.featureId));
+            const authored = note.spatial.highlight.geometry as { derived?: { path?: string } } | undefined;
+            return <g key={note.id} data-atlas-note-highlight={note.id} style={{ display: "none" }}>
+              {features.map((feature) => <path key={feature.featureId} d={feature.geometry.derived.path} vectorEffect="non-scaling-stroke" />)}
+              {authored?.derived?.path && <path d={authored.derived.path} vectorEffect="non-scaling-stroke" strokeDasharray="6 4" />}
+              {features.length === 0 && !authored?.derived?.path && <ellipse cx={note.spatial.focus.equalEarth[0]} cy={note.spatial.focus.equalEarth[1]}
+                rx={24} ry={9} vectorEffect="non-scaling-stroke" strokeDasharray="4 4" />}
+            </g>;
+          })}
+        </g>
+        <g className={styles.countryLabels}>
+          {data.geometry.features.map((feature) => {
+            const country = data.countries.find((item) => item.id === feature.entityId);
+            if (!country) return null;
+            const area = feature.labelArea ?? 0;
+            const anchor = feature.labelPoint ?? feature.centroid;
+            const minZoom = area > 2600 ? 1 : area > 600 ? 1.8 : area > 120 ? 2.8 : area > 20 ? 4 : 6;
+            return <text key={country.id} data-atlas-label="country" data-atlas-label-entity={country.id}
+              data-atlas-x={anchor[0]} data-atlas-y={anchor[1]}
+              data-atlas-label-min-zoom={minZoom} data-atlas-label-priority={10 - Math.log(Math.max(1, area))}
+              transform={`translate(${anchor.join(" ")})`} textAnchor="middle"
+              className={styles.countryLabel} style={{ display: "none" }}>{country.name}</text>;
+          })}
+        </g>
       </g>
     </svg>
   );

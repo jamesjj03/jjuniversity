@@ -7,7 +7,7 @@
   "notes": [
     {
       "id": "pattern-note:population:nile-valley",
-      "revision": 1,
+      "revision": 2,
       "headline": "A country gathered around one river",
       "summary": "Egypt’s bright population corridor follows the Nile Valley and Delta through an otherwise arid landscape. Water, cultivable floodplain, cities, and transport have kept settlement tightly concentrated here for millennia.",
       "noteType": "spatial-explanation",
@@ -57,7 +57,7 @@
       "observationRefs": [
         {
           "datasetId": "population-density-2025",
-          "snapshotId": "atlas-geography-2026-09-04",
+          "snapshotId": "atlas-geography-2026-09-04-phase25",
           "observedAt": "2025",
           "status": "estimated"
         }
@@ -105,7 +105,7 @@
     },
     {
       "id": "pattern-note:population:java",
-      "revision": 1,
+      "revision": 2,
       "headline": "More than half a nation on one island",
       "summary": "Java held 151.6 million people—56.10% of Indonesia’s population—in the 2020 census. Fertile volcanic soils and intensive agriculture helped sustain dense settlement, while centuries of political, economic, and urban concentration reinforced it; this is not a single-cause pattern.",
       "noteType": "spatial-explanation",
@@ -161,7 +161,7 @@
       "observationRefs": [
         {
           "datasetId": "population-density-2025",
-          "snapshotId": "atlas-geography-2026-09-04",
+          "snapshotId": "atlas-geography-2026-09-04-phase25",
           "observedAt": "2025",
           "status": "estimated"
         }
@@ -219,7 +219,7 @@
     },
     {
       "id": "pattern-note:population:heihe-tengchong",
-      "revision": 1,
+      "revision": 2,
       "headline": "China’s enduring east–west divide",
       "summary": "A diagonal from Heihe to Tengchong is a useful descriptive line—not a border—between China’s densely settled east and much sparser west. Terrain, aridity, access to cultivable land, and the long growth of eastern cities all contribute to the contrast.",
       "noteType": "spatial-explanation",
@@ -296,7 +296,7 @@
       "observationRefs": [
         {
           "datasetId": "population-density-2025",
-          "snapshotId": "atlas-geography-2026-09-04",
+          "snapshotId": "atlas-geography-2026-09-04-phase25",
           "observedAt": "2025",
           "status": "estimated"
         }
@@ -345,7 +345,7 @@
     },
     {
       "id": "pattern-note:population:indo-gangetic-plain",
-      "revision": 1,
+      "revision": 2,
       "headline": "A dense arc below the Himalayas",
       "summary": "The luminous band across northern Pakistan, India, and Bangladesh follows the Indo-Gangetic plains and their great river systems. Flat alluvial land, freshwater and irrigation, productive agriculture, and major cities reinforce one another across this broad region.",
       "noteType": "spatial-explanation",
@@ -404,7 +404,7 @@
       "observationRefs": [
         {
           "datasetId": "population-density-2025",
-          "snapshotId": "atlas-geography-2026-09-04",
+          "snapshotId": "atlas-geography-2026-09-04-phase25",
           "observedAt": "2025",
           "status": "estimated"
         }

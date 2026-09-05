@@ -295,13 +295,13 @@
       "legend": {
         "kind": "categorical",
         "items": [
-          { "key": "0", "label": "Neighbor contrast", "color": "#587d78" },
-          { "key": "1", "label": "Neighbor contrast", "color": "#9a7456" },
-          { "key": "2", "label": "Neighbor contrast", "color": "#6f719d" },
-          { "key": "3", "label": "Neighbor contrast", "color": "#9a8d56" },
-          { "key": "4", "label": "Neighbor contrast", "color": "#5b7793" },
-          { "key": "5", "label": "Neighbor contrast", "color": "#976976" },
-          { "key": "6", "label": "Neighbor contrast", "color": "#638367" }
+          { "key": "0", "label": "Neighbor contrast", "color": "#89b0b9" },
+          { "key": "1", "label": "Neighbor contrast", "color": "#dfb28c" },
+          { "key": "2", "label": "Neighbor contrast", "color": "#abb0d0" },
+          { "key": "3", "label": "Neighbor contrast", "color": "#ddd096" },
+          { "key": "4", "label": "Neighbor contrast", "color": "#89acce" },
+          { "key": "5", "label": "Neighbor contrast", "color": "#caa2b1" },
+          { "key": "6", "label": "Neighbor contrast", "color": "#a3c294" }
         ]
       },
       "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Unclassified", "color": "#485258", "opacity": 1 } } },
@@ -309,7 +309,7 @@
       "provenance": {
         "sourceIds": ["natural-earth-admin-0-50m-5.1.2"],
         "methodology": "Uses Natural Earth MAPCOLOR7 solely to keep adjacent places visually distinct.",
-        "authoredVisualChoices": ["Seven muted colors are an authored navigation palette and do not encode political similarity."]
+        "authoredVisualChoices": ["Seven light mineral colors are an authored navigation palette and do not encode political similarity. Dashed outlines flag territorial-status notes, not precise disputed border segments."]
       },
       "temporal": {
         "kind": "snapshot", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "snapshot", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": false
@@ -331,16 +331,16 @@
       "legend": {
         "kind": "categorical",
         "items": [
-          { "key": "presidential_republic", "label": "Presidential republic", "color": "#4f8b83" },
-          { "key": "parliamentary_republic", "label": "Parliamentary republic", "color": "#6f88b5" },
-          { "key": "semi_presidential_republic", "label": "Semi-presidential republic", "color": "#7c72ad" },
-          { "key": "constitutional_monarchy", "label": "Constitutional monarchy", "color": "#b88c54" },
-          { "key": "absolute_monarchy", "label": "Absolute monarchy", "color": "#a75f55" },
-          { "key": "one_party_state", "label": "One-party state", "color": "#955565" },
-          { "key": "military_or_transitional", "label": "Military or transitional", "color": "#7d5a51" },
-          { "key": "theocracy", "label": "Theocracy", "color": "#8a6e3c" },
-          { "key": "territory_or_dependency", "label": "Territory or dependency", "color": "#68757d" },
-          { "key": "other", "label": "Other system", "color": "#7e7784" }
+          { "key": "presidential_republic", "label": "Presidential republic", "color": "#51aea1" },
+          { "key": "parliamentary_republic", "label": "Parliamentary republic", "color": "#8cb2e7" },
+          { "key": "semi_presidential_republic", "label": "Semi-presidential republic", "color": "#ac94d4" },
+          { "key": "constitutional_monarchy", "label": "Constitutional monarchy", "color": "#ecc074" },
+          { "key": "absolute_monarchy", "label": "Absolute monarchy", "color": "#e48b54" },
+          { "key": "one_party_state", "label": "One-party state", "color": "#da8498" },
+          { "key": "military_or_transitional", "label": "Military or transitional", "color": "#bba896" },
+          { "key": "theocracy", "label": "Theocracy", "color": "#c7c563" },
+          { "key": "territory_or_dependency", "label": "Territory or dependency", "color": "#7e94a7" },
+          { "key": "other", "label": "Other system", "color": "#c1c5cc" }
         ]
       },
       "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No current classification", "color": "#343c40", "opacity": 1 } } },
@@ -370,15 +370,15 @@
       "legend": {
         "kind": "categorical",
         "items": [
-          { "key": "christianity", "label": "Christianity", "color": "#b4834d" },
-          { "key": "islam", "label": "Islam", "color": "#4d8a70" },
-          { "key": "hinduism", "label": "Hinduism", "color": "#bc6f43" },
-          { "key": "buddhism", "label": "Buddhism", "color": "#b5a34f" },
-          { "key": "judaism", "label": "Judaism", "color": "#6888b3" },
-          { "key": "folk_or_traditional", "label": "Folk or traditional", "color": "#836c51" },
-          { "key": "religiously_unaffiliated", "label": "Religiously unaffiliated", "color": "#798594" },
-          { "key": "other", "label": "Other tradition", "color": "#8b6f8d" },
-          { "key": "mixed_or_no_clear_majority", "label": "Mixed / no clear majority", "color": "#806c78" }
+          { "key": "christianity", "label": "Christianity", "color": "#e4b46c" },
+          { "key": "islam", "label": "Islam", "color": "#58ac98" },
+          { "key": "hinduism", "label": "Hinduism", "color": "#e78c58" },
+          { "key": "buddhism", "label": "Buddhism", "color": "#d6d479" },
+          { "key": "judaism", "label": "Judaism", "color": "#80afe4" },
+          { "key": "folk_or_traditional", "label": "Folk or traditional", "color": "#bba18c" },
+          { "key": "religiously_unaffiliated", "label": "Religiously unaffiliated", "color": "#a1b1c5" },
+          { "key": "other", "label": "Other tradition", "color": "#b896c8" },
+          { "key": "mixed_or_no_clear_majority", "label": "Mixed / no clear majority", "color": "#b9aab6" }
         ]
       },
       "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No defensible classification", "color": "#343c40", "opacity": 1 } } },
@@ -409,11 +409,11 @@
         "kind": "binned",
         "unit": "people",
         "items": [
-          { "key": "under_1m", "label": "Under 1 million", "color": "#335159", "minInclusive": null, "maxExclusive": 1000000 },
-          { "key": "1m_10m", "label": "1–10 million", "color": "#3e6e6c", "minInclusive": 1000000, "maxExclusive": 10000000 },
-          { "key": "10m_50m", "label": "10–50 million", "color": "#589078", "minInclusive": 10000000, "maxExclusive": 50000000 },
-          { "key": "50m_150m", "label": "50–150 million", "color": "#9b9c62", "minInclusive": 50000000, "maxExclusive": 150000000 },
-          { "key": "150m_plus", "label": "150 million or more", "color": "#c27e50", "minInclusive": 150000000, "maxExclusive": null }
+          { "key": "under_1m", "label": "Under 1 million", "color": "#dbe5d9", "minInclusive": null, "maxExclusive": 1000000 },
+          { "key": "1m_10m", "label": "1–10 million", "color": "#a6cbbb", "minInclusive": 1000000, "maxExclusive": 10000000 },
+          { "key": "10m_50m", "label": "10–50 million", "color": "#66a69a", "minInclusive": 10000000, "maxExclusive": 50000000 },
+          { "key": "50m_150m", "label": "50–150 million", "color": "#337783", "minInclusive": 50000000, "maxExclusive": 150000000 },
+          { "key": "150m_plus", "label": "150 million or more", "color": "#204965", "minInclusive": 150000000, "maxExclusive": null }
         ]
       },
       "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "No World Bank observation", "color": "#343c40", "opacity": 1 } } },
@@ -447,11 +447,11 @@
         "clamp": true,
         "unit": "current US$ per person",
         "stops": [
-          { "position": 0, "color": "#263f49" },
-          { "position": 0.25, "color": "#37676b" },
-          { "position": 0.5, "color": "#718c72" },
-          { "position": 0.75, "color": "#b49d64" },
-          { "position": 1, "color": "#e2bf78" }
+          { "position": 0, "color": "#f3e6aa" },
+          { "position": 0.25, "color": "#b9d6a8" },
+          { "position": 0.5, "color": "#64bba8" },
+          { "position": 0.75, "color": "#28748d" },
+          { "position": 1, "color": "#223e71" }
         ],
         "ticks": [
           { "value": 500, "label": "$500" },
@@ -533,7 +533,7 @@
       "channel": "raster",
       "slot": "raster",
       "zIndex": 100,
-      "defaultOpacity": 0.18,
+      "defaultOpacity": 0.42,
       "style": { "blendMode": "multiply", "clipToSphere": true },
       "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
       "legend": { "kind": "none" },
@@ -542,7 +542,7 @@
       "provenance": {
         "sourceIds": ["natural-earth-manual-shaded-relief-50m-3.3.0"],
         "methodology": "The Natural Earth relief raster is bilinearly reprojected from WGS84 to the exact Equal Earth viewBox and clipped to the sphere.",
-        "authoredVisualChoices": ["Relief is deliberately held to 18% opacity and multiply blend so it adds geographic depth without masquerading as measured elevation or obscuring population evidence."]
+        "authoredVisualChoices": ["Relief uses 42% opacity and multiply blend in the settlement view. It is a generalized physical context image, not measured elevation."]
       },
       "temporal": {
         "kind": "timeless", "defaultSelection": { "kind": "latest" }, "selectionPolicy": "timeless", "fallback": "none", "heterogeneousObservationDates": false, "supportsArbitraryTime": true
@@ -569,13 +569,13 @@
         "clamp": true,
         "unit": "modelled people per km²",
         "stops": [
-          { "position": 0, "color": "#31565a" },
-          { "position": 0.18509, "color": "#39756f" },
-          { "position": 0.351633, "color": "#62a278" },
-          { "position": 0.524658, "color": "#d2c56c" },
-          { "position": 0.674847, "color": "#e58d4b" },
-          { "position": 0.849502, "color": "#d95048" },
-          { "position": 1, "color": "#f4e7ce" }
+          { "position": 0, "color": "#3c737d" },
+          { "position": 0.18509, "color": "#49a3a1" },
+          { "position": 0.351633, "color": "#95c49b" },
+          { "position": 0.524658, "color": "#efd17b" },
+          { "position": 0.674847, "color": "#f49b52" },
+          { "position": 0.849502, "color": "#ed5e43" },
+          { "position": 1, "color": "#fff0ca" }
         ],
         "ticks": [
           { "value": 1, "label": "1" },
@@ -591,7 +591,7 @@
       "compatibility": { "exclusiveGroup": null, "requiresLayerIds": [], "conflictsWithLayerIds": [] },
       "provenance": {
         "sourceIds": ["ghsl-ghs-pop-2025-r2023a-1km"],
-        "methodology": "The GHSL R2023A 2025 population-count grid is area-resampled from one-kilometre World Mollweide cells into the 2400 × 1300 Equal Earth display raster.",
+        "methodology": "The GHSL R2023A 2025 population-count grid is area-resampled from one-kilometre World Mollweide cells into an overview and two tiled detail levels, all matching the spherical Equal Earth vector projection. Zoom loads source-derived regional detail, not an enlargement of the overview.",
         "authoredVisualChoices": ["The color and alpha ramp uses log1p scaling so sparse settlement and metropolitan concentrations can coexist legibly.", "Transparent zeroes expose the physical base; a display pixel averages many source cells and is not an exact cell reading."]
       },
       "temporal": {
@@ -610,7 +610,7 @@
       "slot": "base-area",
       "zIndex": 260,
       "defaultOpacity": 0.86,
-      "style": { "fillColor": "rgba(10, 43, 54, 0.96)", "fillOpacity": 1, "strokeColor": "rgba(104, 175, 183, 0.58)", "strokeOpacity": 1, "strokeWidth": 0.48 },
+      "style": { "fillColor": "#244f71", "fillOpacity": 1, "strokeColor": "#8bc9ec", "strokeOpacity": 0.7, "strokeWidth": 0.55 },
       "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
       "legend": { "kind": "none" },
       "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Lake geometry unavailable", "color": "#000000", "opacity": 0 } } },
@@ -636,7 +636,7 @@
       "slot": "route",
       "zIndex": 610,
       "defaultOpacity": 0.82,
-      "style": { "strokeColor": "rgba(92, 177, 192, 0.82)", "strokeOpacity": 1, "strokeWidth": 0.72 },
+      "style": { "strokeColor": "#8bc9ec", "strokeOpacity": 1, "strokeWidth": 1.05 },
       "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
       "legend": { "kind": "none" },
       "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "River geometry unavailable", "color": "#000000", "opacity": 0 } } },
@@ -662,7 +662,7 @@
       "slot": "point",
       "zIndex": 700,
       "defaultOpacity": 1,
-      "style": { "symbolShape": "circle", "symbolFill": "#f2d38d", "symbolStroke": "rgba(255, 248, 224, 0.92)", "strokeWidth": 0.38, "symbolMinRadius": 1.45, "symbolMaxRadius": 2.35, "sizeField": "sourceScaleRank" },
+      "style": { "symbolShape": "circle", "symbolFill": "#f8f1dd", "symbolStroke": "#d7e4ec", "strokeWidth": 0.3, "symbolMinRadius": 1.2, "symbolMaxRadius": 1.8, "sizeField": "sourceScaleRank" },
       "interactive": { "hover": false, "select": false, "pointerEvents": "none" },
       "legend": { "kind": "none" },
       "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "City location unavailable", "color": "#000000", "opacity": 0 } } },
@@ -688,7 +688,7 @@
       "slot": "annotation",
       "zIndex": 900,
       "defaultOpacity": 1,
-      "style": { "symbolShape": "circle", "symbolFill": "#e5b65b", "symbolStroke": "#fff1c4", "strokeWidth": 0.8, "symbolRadius": 4, "minimumZoom": 1.2, "maximumZoom": 6 },
+      "style": { "symbolShape": "circle", "symbolFill": "#e5b65b", "symbolStroke": "#fff1c4", "strokeWidth": 0.8, "symbolRadius": 4, "minimumZoom": 1, "maximumZoom": 8 },
       "interactive": { "hover": true, "select": true, "pointerEvents": "visual" },
       "legend": { "kind": "none" },
       "missingData": { "defaultStatus": "unavailable", "styles": { "unavailable": { "label": "Explanation unavailable", "color": "#000000", "opacity": 0 } } },
@@ -708,7 +708,7 @@
       "schemaVersion": "2.0.0",
       "id": "political",
       "name": "Political",
-      "description": "Countries and territories, differentiated for geographic exploration.",
+      "description": "Follow a border. Find a neighbour. Dashed outlines invite a closer look at territorial status.",
       "question": null,
       "legacyModeAliases": ["political", "countries", "country"],
       "shareable": true,
@@ -722,7 +722,7 @@
       "schemaVersion": "2.0.0",
       "id": "government",
       "name": "Government",
-      "description": "Broad current government form, with retained source wording in country details.",
+      "description": "Where do monarchies cluster? Point to a key below to locate a system; select its name for a definition. Archived source dates remain visible.",
       "question": "How are forms of national government distributed across the world?",
       "legacyModeAliases": ["government", "governments"],
       "shareable": true,
@@ -736,7 +736,7 @@
       "schemaVersion": "2.0.0",
       "id": "religion",
       "name": "Religion",
-      "description": "Dominant broad religious tradition at national scale.",
+      "description": "Compare Indonesia and the Philippines. One map color is only a starting point: select a country to see its religious composition.",
       "question": "Which broad religious traditions are most widespread, and where are the boundaries less clear?",
       "legacyModeAliases": ["religion", "religions"],
       "shareable": true,
@@ -750,7 +750,7 @@
       "schemaVersion": "2.0.0",
       "id": "population",
       "name": "Population",
-      "description": "Latest World Bank national population totals.",
+      "description": "How many people live within each border? Country totals are different from settlement density: compare this with Where people live.",
       "question": "Which countries contain the largest populations?",
       "legacyModeAliases": ["population", "people"],
       "shareable": true,
@@ -764,7 +764,7 @@
       "schemaVersion": "2.0.0",
       "id": "gdp-per-capita",
       "name": "GDP per capita",
-      "description": "Latest World Bank economic output per person in current US dollars.",
+      "description": "Look for regional clusters and small-country outliers. This is economic output per person—not wages, wealth or purchasing power. Years differ by country.",
       "question": "Where is measured economic output per person highest and lowest?",
       "legacyModeAliases": ["gdp-per-capita", "gdp_pc", "gdppc"],
       "shareable": true,
@@ -778,17 +778,17 @@
       "schemaVersion": "2.0.0",
       "id": "where-people-live",
       "name": "Where people live",
-      "description": "Population density seen together with terrain, water, cities, modern borders, and a few source-reviewed explanations.",
+      "description": "Trace the Nile, Java and the plains below the Himalayas. Zoom to reveal settlement detail; open a field note to explore the geography behind it.",
       "question": "Where do people concentrate, and what geographic patterns help explain it?",
       "legacyModeAliases": ["where-people-live", "population-density", "settlement"],
       "shareable": true,
       "layerInstances": [
-        { "id": "where-people-live:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": {} },
+        { "id": "where-people-live:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.42, "time": null, "parameters": {} },
         { "id": "where-people-live:density", "layerId": "population-density-2025", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
-        { "id": "where-people-live:country-context", "layerId": "admin0-political", "enabled": true, "opacity": 0.12, "time": null, "parameters": { "role": "context" } },
-        { "id": "where-people-live:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 0.86, "time": null, "parameters": {} },
+        { "id": "where-people-live:country-context", "layerId": "admin0-political", "enabled": true, "opacity": 0.035, "time": null, "parameters": { "role": "context" } },
+        { "id": "where-people-live:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "where-people-live:borders", "layerId": "modern-borders", "enabled": true, "opacity": 0.72, "time": null, "parameters": {} },
-        { "id": "where-people-live:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 0.82, "time": null, "parameters": {} },
+        { "id": "where-people-live:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "where-people-live:cities", "layerId": "major-cities", "enabled": true, "opacity": 1, "time": null, "parameters": { "lod": "auto" } },
         { "id": "where-people-live:explanations", "layerId": "population-geography-annotations", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "where-people-live:interaction", "layerId": "admin0-interaction", "enabled": true, "opacity": 0, "time": null, "parameters": {} }

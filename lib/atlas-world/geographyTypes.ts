@@ -119,6 +119,36 @@ export type AtlasGeographySource = {
   checksumSha256: string;
 };
 
+export type AtlasRasterAsset = {
+  href: string;
+  mediaType: string;
+  width: number;
+  height: number;
+  /** Exact destination rectangle in the existing Equal Earth coordinate space. */
+  viewBox: [number, number, number, number];
+  checksumSha256: string;
+  bytes: number;
+};
+
+export type AtlasRasterPyramid = {
+  projectionId: "equal-earth";
+  sourceResolutionMetres: number;
+  sourceCrs: string;
+  resampling: "average";
+  maximumDecodedTileBytes: number;
+  compositing: string;
+  emptyTileBehavior: string;
+  levels: Array<{
+    id: string;
+    minimumZoom: number;
+    width: number;
+    height: number;
+    displayMetresPerPixel: number;
+    bytes: number;
+    tiles: Array<AtlasRasterAsset & { id: string }>;
+  }>;
+};
+
 export type AtlasGeographyDataset = {
   id: string;
   name: string;
@@ -137,15 +167,8 @@ export type AtlasGeographyDataset = {
   };
   sourceIds: string[];
   transformationId: string;
-  asset?: {
-    href: string;
-    mediaType: string;
-    width: number;
-    height: number;
-    viewBox: [0, 0, 1200, 650];
-    checksumSha256: string;
-    bytes: number;
-  };
+  asset?: AtlasRasterAsset;
+  assetPyramid?: AtlasRasterPyramid;
   visualization?: Record<string, unknown>;
   statistics?: Record<string, unknown>;
   caveats: string[];
@@ -158,6 +181,7 @@ export type AtlasGeographyPack = {
   sourceLockId: string;
   projection: {
     id: "equal-earth";
+    crs: string;
     viewBox: [0, 0, 1200, 650];
     canonicalCrs: "EPSG:4326";
     transformationId: string;
@@ -198,6 +222,8 @@ export type AtlasPatternNote = {
   spatial: {
     focus: { longitude: number; latitude: number; equalEarth: [number, number] };
     boundsWgs84: [[number, number], [number, number]];
+    /** Derived viewing extent, never a claim or measurement boundary. */
+    viewingBoundsEqualEarth?: [[number, number], [number, number]];
     entityIds: string[];
     featureIds: string[];
     highlight: Record<string, unknown>;

@@ -46,8 +46,8 @@
         "natural-earth-populated-places-50m-5.1.2"
       ],
       "transformations": [
-        "Area-average the 1 km World Mollweide population-count grid into a 2400 x 1300 Equal Earth raster, then apply the recorded log1p palette and sphere mask.",
-        "Bilinear-warp the Natural Earth WGS84 grayscale relief into the same Equal Earth raster and sphere mask.",
+        "Area-average the original 1 km World Mollweide population-count grid independently into a 2400 x 1300 Equal Earth overview and tiled 9600 x 5200 / 19200 x 10400 detail levels, then apply the same recorded log1p palette and sphere mask. Never upscale the overview.",
+        "Bilinear-warp the Natural Earth WGS84 grayscale relief into the same Equal Earth raster and sphere mask; apply the recorded global cartographic shadow contrast of 1.45.",
     "Select and round-trip canonical WGS84 vectors, then derive 1200 x 650 Equal Earth SVG paths and points.",
     "Retain rivers classed River with min_zoom <= 3, lakes with min_zoom <= 3 after exact duplicate removal, and all national capitals plus cities with SCALERANK <= 2.",
     "Convert Natural Earth Populated Places POP2025 values from the source's thousands-of-people unit into integer people while retaining estimated status and the original field name in provenance."
@@ -55,6 +55,8 @@
       "outputs": [
         "lib/atlas-world/data/geography-pack.v1.json",
         "public/atlas-world/layers/population-density-2025.equal-earth.webp",
+        "public/atlas-world/layers/population-density-2025/regional/",
+        "public/atlas-world/layers/population-density-2025/country/",
         "public/atlas-world/layers/physical-relief.equal-earth.webp"
       ]
     }

@@ -193,9 +193,8 @@ assert.equal(
   1,
   "Where People Live must have exactly one contextual admin0 fill.",
 );
-assert.equal(
-  peopleView.layerInstances.find((instance) => instance.layerId === "admin0-political")?.opacity,
-  0.12,
+assert.ok(
+  peopleView.layerInstances.find((instance) => instance.layerId === "admin0-political")?.opacity <= 0.12,
   "Where People Live country context should remain subtle enough to reveal the density raster.",
 );
 

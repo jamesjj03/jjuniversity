@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "1.0.0",
+  "reviewedAt": "2026-09-04",
+  "purpose": "Bounded visual identity pilot, not a current officeholder service.",
+  "people": [
+    {
+      "id": "person:brice-oligui-nguema",
+      "name": "Brice Oligui Nguema",
+      "portraitMediaId": "media:brice-oligui-nguema"
+    },
+    {
+      "id": "person:charles-iii",
+      "name": "Charles III",
+      "portraitMediaId": "media:charles-iii"
+    },
+    {
+      "id": "person:keir-starmer",
+      "name": "Keir Starmer",
+      "portraitMediaId": "media:keir-starmer"
+    },
+    {
+      "id": "person:cyril-ramaphosa",
+      "name": "Cyril Ramaphosa",
+      "portraitMediaId": "media:cyril-ramaphosa"
+    }
+  ],
+  "media": [
+    {
+      "id": "media:brice-oligui-nguema",
+      "personId": "person:brice-oligui-nguema",
+      "href": "/atlas/portraits/brice-oligui-nguema.webp",
+      "width": 360,
+      "height": 481,
+      "author": "Freddie Everett / U.S. Department of State",
+      "licenseName": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "attributionStatement": null,
+      "changes": "Commons portrait crop by Ooligan; resized and converted to WebP for Atlas.",
+      "photoDate": "2024-10-01",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brice_Oligui_Nguema_in_2024_(cropped).jpg",
+      "sourceCreditHtml": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/statephotos/54036198268/\">Secretary Blinken Meets with Gabon Transition President</a>",
+      "inputUrl": "https://upload.wikimedia.org/wikipedia/commons/2/24/Brice_Oligui_Nguema_in_2024_%28cropped%29.jpg",
+      "sourceSha256": "1dd9be33ec5ae2ffb562fe9ff55e607fdf372b466439b443c28ffa8f77acbd3c",
+      "outputSha256": "107ab6fcbc52ae600105d7ab01d56721cb247189db1aa409c4757fd05919e94e",
+      "bytes": 47018,
+      "reviewedAt": "2026-09-04"
+    },
+    {
+      "id": "media:charles-iii",
+      "personId": "person:charles-iii",
+      "href": "/atlas/portraits/charles-iii.webp",
+      "width": 360,
+      "height": 508,
+      "author": "The White House",
+      "licenseName": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "attributionStatement": null,
+      "changes": "Commons portrait crop by TDKR Chicago 101, tonal adjustment by WikiPedant; resized and converted to WebP for Atlas.",
+      "photoDate": "2023-07-10",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:King_Charles_III_(July_2023).jpg",
+      "sourceCreditHtml": "<a rel=\"nofollow\" class=\"external free\" href=\"https://twitter.com/POTUS/status/1678465366501064705\">https://twitter.com/POTUS/status/1678465366501064705</a>",
+      "inputUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ac/King_Charles_III_%28July_2023%29.jpg",
+      "sourceSha256": "9a2ca14586c6aa5cf347682049e14b92a3f7bb66f961b795b829b7af06d554c4",
+      "outputSha256": "6d1e0fedbbf9c6a735e7c71dd03f3f972bf54be911a66e715349a5639e8694bb",
+      "bytes": 29586,
+      "reviewedAt": "2026-09-04"
+    },
+    {
+      "id": "media:keir-starmer",
+      "personId": "person:keir-starmer",
+      "href": "/atlas/portraits/keir-starmer.webp",
+      "width": 360,
+      "height": 537,
+      "author": "Simon Dawson / No 10 Downing Street",
+      "licenseName": "OGL v3",
+      "licenseUrl": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "attributionStatement": "Contains public sector information licensed under the Open Government Licence v3.0.",
+      "changes": "Commons portrait crop; resized and converted to WebP for Atlas.",
+      "photoDate": "2024-07-05",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Keir_Starmer_official_portrait_(2x3_cropped).jpg",
+      "sourceCreditHtml": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.gov.uk/government/people/keir-starmer#biography\">https://www.gov.uk/government/people/keir-starmer#biography</a>",
+      "inputUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Keir_Starmer_official_portrait_%282x3_cropped%29.jpg",
+      "sourceSha256": "a73c129513fb16622968a122a430948a7eb2beb65bd9d86f6fe0b353b6366cf0",
+      "outputSha256": "65a9b017d261694d875b931dc49910cae98b1357b7a41d7bffea7a4e7fa84993",
+      "bytes": 22176,
+      "reviewedAt": "2026-09-04"
+    },
+    {
+      "id": "media:cyril-ramaphosa",
+      "personId": "person:cyril-ramaphosa",
+      "href": "/atlas/portraits/cyril-ramaphosa.webp",
+      "width": 360,
+      "height": 469,
+      "author": "Ricardo Stuckert / Presidency of Brazil",
+      "licenseName": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "attributionStatement": null,
+      "changes": "Commons portrait crop by Segagustin; resized and converted to WebP for Atlas. The Atlas image derivative is also licensed CC BY-SA 2.0.",
+      "photoDate": "2024-09-25",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cyril_Ramaphosa_2024.jpg",
+      "sourceCreditHtml": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/lulaoficial/54021050003/\">25.09.2024 - Sessão de Abertura da Reunião Ministerial do G20</a>",
+      "inputUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Cyril_Ramaphosa_2024.jpg",
+      "sourceSha256": "7dca0a1a2d155e8e711a966f27fca51317384beeef7f91a62ab36048bdcc35ba",
+      "outputSha256": "f4d560fbdbb02c6ed04e52b2b8139b723e5216c29aa34a826a9e510bad9a5f04",
+      "bytes": 31532,
+      "reviewedAt": "2026-09-04"
+    }
+  ],
+  "bindings": [
+    {
+      "entityId": "country:GAB",
+      "role": "headOfState",
+      "personId": "person:brice-oligui-nguema",
+      "title": "President",
+      "exactSourceName": "President Brice OLIGUI Nguema",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "observedAt": "2025-10-01"
+    },
+    {
+      "entityId": "country:GAB",
+      "role": "headOfGovernment",
+      "personId": "person:brice-oligui-nguema",
+      "title": "President",
+      "exactSourceName": "President Brice OLIGUI Nguema",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "observedAt": "2025-10-01"
+    },
+    {
+      "entityId": "country:GBR",
+      "role": "headOfState",
+      "personId": "person:charles-iii",
+      "title": "King",
+      "exactSourceName": "King CHARLES III",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "observedAt": "2025-10-01"
+    },
+    {
+      "entityId": "country:GBR",
+      "role": "headOfGovernment",
+      "personId": "person:keir-starmer",
+      "title": "Prime Minister",
+      "exactSourceName": "Prime Minister Keir STARMER",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "observedAt": "2025-10-01"
+    },
+    {
+      "entityId": "country:ZAF",
+      "role": "headOfState",
+      "personId": "person:cyril-ramaphosa",
+      "title": "President",
+      "exactSourceName": "President Matamela Cyril RAMAPHOSA",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "observedAt": "2025-12-21"
+    },
+    {
+      "entityId": "country:ZAF",
+      "role": "headOfGovernment",
+      "personId": "person:cyril-ramaphosa",
+      "title": "President",
+      "exactSourceName": "President Matamela Cyril RAMAPHOSA",
+      "sourceId": "cia-world-factbook-final-capture-2026-02",
+      "observedAt": "2025-12-21"
+    }
+  ]
+}
