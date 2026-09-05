@@ -207,17 +207,25 @@
 .context span, .government span { color: var(--muted); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
 .context strong { font: 600 14px Georgia, serif; }
 
+.subdivisionFacts,
 .inherited { padding: 20px 22px; border-bottom: 1px solid var(--line); }
 .sectionHeading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .sectionHeading span { color: #7b5e39; font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
 .sectionHeading h2 { margin: 4px 0 0; font: 600 18px Georgia, serif; }
 .sectionHeading b { padding: 4px 6px; border: 1px solid rgba(125, 85, 43, 0.28); color: #79532e; font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
 .inherited > p { margin: 12px 0 14px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.subdivisionFacts dl,
 .inherited dl { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 0; background: var(--line); }
+.subdivisionFacts dl { margin-top: 13px; }
+.subdivisionFacts dl div,
 .inherited dl div { display: grid; gap: 5px; padding: 12px; background: #eaeada; }
+.subdivisionFacts dt,
 .inherited dt { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; }
+.subdivisionFacts dd,
 .inherited dd { margin: 0; font: 600 17px Georgia, serif; }
+.subdivisionFacts dd small,
 .inherited dd small { display: block; margin-top: 3px; color: var(--muted); font: 9px Arial, sans-serif; }
+.subdivisionFacts > p { margin: 10px 0 0; color: var(--muted); font-size: 9px; }
 .government { display: grid; gap: 5px; margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); }
 .government strong { font: 600 14px/1.35 Georgia, serif; }
 .government small { color: var(--muted); font-size: 9px; }
@@ -272,6 +280,9 @@
   .panelIdentity h1 { margin-top: 6px; font-size: 27px; }
   .context { display: none; }
   .inherited { padding: 13px 16px; }
+  .subdivisionFacts { padding: 13px 16px; }
+  .subdivisionFacts dl { margin-top: 9px; }
+  .subdivisionFacts > p { display: none; }
   .inherited > p, .government { display: none; }
   .inherited dl { margin-top: 10px; grid-template-columns: repeat(4, minmax(100px, 1fr)); overflow-x: auto; }
   .inherited dl div { min-width: 100px; padding: 10px; }

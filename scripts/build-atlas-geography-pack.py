@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import math
 import os
@@ -44,7 +45,9 @@ except ModuleNotFoundError:
     Window = None
     reproject = None
     transform = None
-from shapely.geometry import shape
+import shapefile
+from shapely.geometry import Point, mapping, shape
+from shapely.ops import nearest_points, unary_union
 from shapely.strtree import STRtree
 
 
@@ -81,6 +84,14 @@ DETAIL_RIVER_SOURCE_ID = "natural-earth-rivers-10m-5.1.2"
 DETAIL_LAKE_SOURCE_ID = "natural-earth-lakes-10m-5.1.2"
 DETAIL_CITY_SOURCE_ID = "natural-earth-populated-places-10m-5.1.2"
 ADMIN0_SOURCE_ID = "natural-earth-admin-0-50m-5.1.2"
+WATER_SOURCE_ID = "natural-earth-marine-areas-10m-5.1.2"
+BASIN_SOURCE_ID = "world-bank-major-river-basins-2019"
+RIVER_FACT_SOURCE_ID = "wikidata-major-river-pilot-2026-09-05"
+RIVER_LABEL_SOURCE_ID = "wikidata-major-river-linked-labels-2026-09-05"
+
+WATER_CLASSES = {"ocean", "sea", "gulf", "bay", "strait", "channel"}
+WATER_MAX_SCALE_RANK = 4
+WATER_COASTLINE_TOLERANCE_DEGREES = 0.12
 
 POP_ZIP_MEMBER = "GHS_POP_E2025_GLOBE_R2023A_54009_1000_V1_0.tif"
 RELIEF_ZIP_MEMBER = "MSR_50M/MSR_50M.tif"
@@ -107,6 +118,105 @@ RIVER_SYSTEM_ALIASES = {
     "mekong": {"mekong", "lancang"},
     "mississippi": {"mississippi"},
     "ganges": {"ganges", "ganga"},
+    "ohio": {"ohio"},
+    "missouri": {"missouri"},
+    "allegheny": {"allegheny"},
+    "monongahela": {"monongahela"},
+}
+
+BASIN_PILOT = {
+    "Amazon": {"sourceIds": [205, 209], "riverPlaceId": "place:natural-earth:river:amazon"},
+    "Danube": {"sourceIds": [47], "riverPlaceId": "place:natural-earth:river:danube"},
+    "Mississippi": {"sourceIds": [50], "riverPlaceId": "place:natural-earth:river:mississippi"},
+    "Nile": {"sourceIds": [116], "riverPlaceId": "place:natural-earth:river:nile"},
+    "Yangtze": {"sourceIds": [105], "riverPlaceId": "place:natural-earth:river:yangtze"},
+}
+
+# A deliberately bounded authored selection over pinned Wikidata statements.
+# Statement IDs are asserted during the build, so an accidental reinterpretation
+# of the raw snapshot fails rather than silently changing an Atlas fact.
+RIVER_FACT_SELECTIONS = {
+    "place:natural-earth:river:nile": {
+        "entityId": "Q3392",
+        "length": ("P2043", "Q3392$2a0f0e27-4d98-2522-d7eb-5c3f64797e26"),
+        "headwaters": [("P885", "Q3392$c04d7217-4163-ac13-27c7-83d75ad08f46")],
+        "mouth": ("P403", "q3392$6F881C7F-7012-4139-8F7E-63D4B264E975"),
+        "basin": ("P4614", "Q3392$7171BFC7-BAFD-49C3-A361-B4BC58F91BA0"),
+        "basinArea": ("P2053", "Q3392$336A2F2C-9B35-498D-AB33-E27CC908CFB8"),
+        "tributaries": [
+            ("P974", "Q3392$e9de31be-467f-83d3-44ba-520657d495f5"),
+            ("P974", "Q3392$5f259332-458c-8226-507f-5708f020eb21"),
+        ],
+        "notes": ["River-source definitions vary; Atlas presents the selected structured statement, not a claim that every naming convention agrees."],
+    },
+    "place:natural-earth:river:amazon": {
+        "entityId": "Q3783",
+        "length": ("P2043", "Q3783$868009a4-4217-7aa5-da1b-3b57856372dd"),
+        "headwaters": [
+            ("P885", "Q3783$1598b7a1-42ed-39b3-adb2-39d44d2f0bd9"),
+            ("P885", "Q3783$f1ede7ec-49aa-7c73-9e0f-33280521ca58"),
+        ],
+        "mouth": ("P403", "q3783$9AB850F5-B049-441E-84B4-A7F9E26CEF2F"),
+        "basin": ("P4614", "Q3783$E6337182-2C5B-419E-ACB1-199EEB7118FD"),
+        "basinArea": ("P2053", "Q3783$63f11340-4e0f-6cdd-72dc-a07bb6730390"),
+        "tributaries": [
+            ("P974", "Q3783$A8A1010C-1C7D-4C22-A388-187097F17C84"),
+            ("P974", "Q3783$28BFBC48-D7FC-418B-A026-0F6FFFA173BC"),
+            ("P974", "Q3783$5353200F-DB08-4DF3-B8D8-E5441E15D76D"),
+            ("P974", "Q3783$c27a9c11-4f93-10d9-eeff-4a9ec8049e3f"),
+            ("P974", "Q3783$5903c768-4d19-cee7-9618-5e6e5ef312cd"),
+        ],
+        "notes": ["Published length estimates for the Amazon differ with the chosen headwater and measurement method; Atlas retains Wikidata's preferred snapshot statement and this caveat."],
+    },
+    "place:natural-earth:river:mississippi": {
+        "entityId": "Q1497",
+        "length": ("P2043", "Q1497$cad6e5b1-44fd-714b-4632-f4a7dd11e69c"),
+        "headwaters": [("P885", "Q1497$2806eaed-4c89-5fa8-72a0-17aed3f222d6")],
+        "mouth": ("P403", "q1497$53E1F598-EC18-4483-AFF0-873C634348F9"),
+        "basin": ("P4614", "Q1497$148e4823-4238-1f95-8c0d-239fc784a04b"),
+        "basinArea": ("P2053", "Q1497$D60F41BA-60AC-4988-BC92-E0AF47D13B64"),
+        "tributaries": [
+            ("P974", "Q1497$6d36cdaf-4c4e-b4a3-0474-1481b6fe77d3"),
+            ("P974", "Q1497$f7b5ebb5-408e-f091-c643-902804aaee1c"),
+            ("P974", "Q1497$78ea11b8-43fe-6396-cc0f-7e41fada8b9f"),
+        ],
+        "notes": [],
+    },
+    "place:natural-earth:river:danube": {
+        "entityId": "Q1653",
+        "length": ("P2043", "Q1653$f5550db9-4ad9-de77-6247-f3d99fab7497"),
+        "headwaters": [
+            ("P885", "Q1653$55285e79-406c-638e-0db2-51006133badf"),
+            ("P885", "Q1653$8f3a6c31-40a4-e9fc-881c-b7561320a548"),
+        ],
+        "mouth": ("P403", "q1653$30df16f1-4f16-8305-6e15-ec66eb5c72d2"),
+        "basin": ("P4614", "Q1653$46CCA059-4E10-4780-BF30-E902480A9D51"),
+        "basinArea": ("P2053", "Q1653$d960d866-4b71-1603-720e-15d75c0d2511"),
+        "tributaries": [
+            ("P974", "Q1653$1204bcfc-4f2c-7f2a-33c3-7e7e1f20beb4"),
+            ("P974", "Q1653$c838f0fc-421e-21b6-5668-71bcab899c42"),
+            ("P974", "Q1653$8003a57e-4e0f-c882-4c0e-b5c28c1f6472"),
+            ("P974", "Q1653$531328ce-4913-cd7f-4c56-081d56ce8d58"),
+        ],
+        "notes": [],
+    },
+    "place:natural-earth:river:yangtze": {
+        "entityId": "Q5413",
+        "length": ("P2043", "Q5413$042ef160-4b61-5e10-a9cb-bed5ab697d7b"),
+        "headwaters": [
+            ("P885", "Q5413$2DF8CEA8-6EC7-43E4-AAA1-830CAE231A38"),
+            ("P885", "Q5413$853eeea0-4059-eec7-fac1-b801555f2db9"),
+        ],
+        "mouth": ("P403", "q5413$7D88E3AC-C445-4032-8D3B-A3C244E3AFEE"),
+        "basin": ("P4614", "Q5413$ECC56F8F-AC9B-48A2-B8A7-955A939375A5"),
+        "basinArea": ("P2053", "Q5413$08D422EA-FDB9-461B-90B9-54C680F7C20A"),
+        "tributaries": [
+            ("P974", "Q5413$f738acdc-4b4e-85ba-83b2-4cdd07953862"),
+            ("P974", "Q5413$fcd8ccf8-484e-cce1-44da-c6d290649674"),
+            ("P974", "Q5413$7108e706-4d07-c72d-797a-7933f5ba58da"),
+        ],
+        "notes": [],
+    },
 }
 
 CITY_COUNTRY_CODE_OVERRIDES = {
@@ -524,7 +634,7 @@ def canonical_geometry(geometry: dict[str, Any]) -> dict[str, Any]:
     def rounded(value: Any) -> Any:
         if isinstance(value, (int, float)):
             return round_number(value)
-        if isinstance(value, list):
+        if isinstance(value, (list, tuple)):
             return [rounded(child) for child in value]
         return value
 
@@ -714,6 +824,391 @@ def attach_admin0_relations(
         feature_geometry = shape(feature["geometry"]["canonicalWgs84"])
         intersecting = tree.query(feature_geometry, predicate="intersects")
         feature["entityIds"] = sorted({indexed[int(index)][0] for index in intersecting})
+
+
+def admin0_spatial_index(
+    source_cache: Path,
+    lock_by_id: dict[str, Any],
+    countries: dict[str, Any],
+) -> tuple[list[tuple[str, Any]], STRtree]:
+    payload = json.loads((source_cache / lock_by_id[ADMIN0_SOURCE_ID]["target"]).read_text("utf8"))
+    entity_by_code = {
+        country["codes"]["naturalEarthAdm0A3"]: country["id"]
+        for country in countries["countries"]
+    }
+    indexed: list[tuple[str, Any]] = []
+    for raw_feature in payload["features"]:
+        properties = raw_feature.get("properties") or {}
+        entity_id = entity_by_code.get(properties.get("ADM0_A3"))
+        if not entity_id or not raw_feature.get("geometry"):
+            continue
+        geometry = shape(raw_feature["geometry"])
+        if not geometry.is_valid:
+            geometry = geometry.buffer(0)
+        indexed.append((entity_id, geometry))
+    return indexed, STRtree([entry[1] for entry in indexed])
+
+
+def geometry_record(feature_id: str, geometry: dict[str, Any], geometry_set_id: str) -> dict[str, Any]:
+    canonical = canonical_geometry(geometry)
+    return {
+        "geometryId": f"geometry:{feature_id}:wgs84",
+        "geometrySetId": geometry_set_id,
+        "geometryType": canonical["type"].lower(),
+        "crs": "EPSG:4326",
+        "canonicalWgs84": canonical,
+        "boundsWgs84": geometry_bounds(canonical),
+        "derived": {
+            "projectionId": "mercator",
+            "viewBox": [0, 0, VIEWBOX_WIDTH, VIEWBOX_HEIGHT],
+            "path": projected_path(canonical),
+            "bounds": projected_bounds(canonical),
+            "transformationId": "wgs84-to-mercator-svg-v1",
+        },
+    }
+
+
+def load_water_bodies(
+    source_cache: Path,
+    lock_by_id: dict[str, Any],
+    countries: dict[str, Any],
+) -> list[dict[str, Any]]:
+    payload = json.loads((source_cache / lock_by_id[WATER_SOURCE_ID]["target"]).read_text("utf8"))
+    indexed_admin0, tree = admin0_spatial_index(source_cache, lock_by_id, countries)
+    candidates = []
+    source_id_counts: dict[str, int] = {}
+    for raw_feature in payload["features"]:
+        properties = raw_feature.get("properties") or {}
+        water_kind = str(properties.get("featurecla") or "").casefold()
+        name = properties.get("name_en") or properties.get("name") or properties.get("label")
+        rank = int(properties.get("scalerank") if properties.get("scalerank") is not None else 99)
+        if water_kind not in WATER_CLASSES or rank > WATER_MAX_SCALE_RANK or not name or not raw_feature.get("geometry"):
+            continue
+        candidates.append(raw_feature)
+        source_identity = str(properties.get("ne_id") or "")
+        source_id_counts[source_identity] = source_id_counts.get(source_identity, 0) + 1
+
+    features = []
+    for raw_feature in candidates:
+        properties = raw_feature["properties"]
+        water_kind = str(properties["featurecla"]).casefold()
+        name = str(properties.get("name_en") or properties.get("name") or properties.get("label")).strip()
+        source_identity = str(properties.get("ne_id") or feature_hash(name, raw_feature["geometry"]))
+        feature_identity = source_identity
+        if source_id_counts.get(str(properties.get("ne_id") or ""), 0) > 1:
+            feature_identity = f"{source_identity}:{feature_hash(name, raw_feature['geometry'])}"
+        feature_id = f"feature:natural-earth:water:{feature_identity}"
+        wikidata_id = str(properties.get("wikidataid") or "").strip() or None
+        place_identity = wikidata_id.casefold() if wikidata_id else source_identity
+        source_shape = shape(raw_feature["geometry"])
+        if not source_shape.is_valid:
+            source_shape = source_shape.buffer(0)
+        representative = source_shape.representative_point()
+        coastline_probe = source_shape.boundary.buffer(WATER_COASTLINE_TOLERANCE_DEGREES)
+        adjacent = tree.query(coastline_probe, predicate="intersects")
+        adjacent_ids = sorted({indexed_admin0[int(index)][0] for index in adjacent})
+        rank = int(properties.get("scalerank") or 0)
+        minimum_zoom = {0: 1, 1: 1, 2: 2, 3: 4, 4: 7}[rank]
+        maximum_source_zoom = properties.get("max_label")
+        label_anchor_wgs84 = [round_number(representative.x), round_number(representative.y)]
+        features.append({
+            "featureId": feature_id,
+            "placeId": f"place:natural-earth:water:{place_identity}",
+            "kind": "water",
+            "waterKind": water_kind,
+            "name": name,
+            "aliases": feature_aliases(properties, name),
+            "wikidataId": wikidata_id,
+            "adjacentEntityIds": adjacent_ids,
+            "entityRelation": {
+                "kind": "coastline_adjacent_to_mapped_admin0_geometry",
+                "method": "natural-earth-marine-admin0-coastline-proximity-v1",
+                "toleranceDegrees": WATER_COASTLINE_TOLERANCE_DEGREES,
+                "caveat": "Adjacency is derived from generalized Natural Earth coastline proximity. It is not ownership, jurisdiction, or a maritime-boundary claim.",
+            },
+            "label": {
+                "anchorWgs84": label_anchor_wgs84,
+                "anchorProjected": project_point(label_anchor_wgs84),
+                "priority": max(1, 10 - rank * 2),
+                "minimumZoom": minimum_zoom,
+                "maximumZoom": None,
+                "sourceMinimumLabelScale": properties.get("min_label"),
+                "sourceMaximumLabelScale": maximum_source_zoom,
+                "method": "representative-point-within-source-polygon",
+            },
+            "sourceIds": [WATER_SOURCE_ID],
+            "sourceFeatureId": source_identity,
+            "sourceScaleRank": rank,
+            "sourceMinZoom": properties.get("min_label"),
+            "displayLod": "world" if rank <= 1 else ("regional" if rank <= 3 else "country"),
+            "displayMinimumZoom": minimum_zoom,
+            "temporal": temporal_extent(),
+            "geometry": geometry_record(feature_id, raw_feature["geometry"], "natural-earth-marine-10m-5.1.2"),
+        })
+    return sorted(features, key=lambda feature: (feature["sourceScaleRank"], feature["name"], feature["featureId"]))
+
+
+def shapefile_from_zip(zip_path: Path) -> shapefile.Reader:
+    with zipfile.ZipFile(zip_path) as archive:
+        members = {Path(name).suffix.casefold(): name for name in archive.namelist()}
+        return shapefile.Reader(
+            shp=io.BytesIO(archive.read(members[".shp"])),
+            shx=io.BytesIO(archive.read(members[".shx"])),
+            dbf=io.BytesIO(archive.read(members[".dbf"])),
+            encoding="latin1",
+        )
+
+
+def load_watershed_pilot(
+    source_cache: Path,
+    lock_by_id: dict[str, Any],
+    countries: dict[str, Any],
+) -> list[dict[str, Any]]:
+    reader = shapefile_from_zip(source_cache / lock_by_id[BASIN_SOURCE_ID]["target"])
+    geometries_by_name: dict[str, list[tuple[int, Any]]] = {name: [] for name in BASIN_PILOT}
+    for shape_record in reader.iterShapeRecords():
+        record = shape_record.record.as_dict()
+        name = str(record.get("NAME") or "")
+        if name not in BASIN_PILOT:
+            continue
+        source_id = int(record["BASWC4_ID"])
+        if source_id not in BASIN_PILOT[name]["sourceIds"]:
+            continue
+        geometry = shape(shape_record.shape.__geo_interface__)
+        if not geometry.is_valid:
+            geometry = geometry.buffer(0)
+        geometries_by_name[name].append((source_id, geometry))
+
+    indexed_admin0, tree = admin0_spatial_index(source_cache, lock_by_id, countries)
+    features = []
+    for name, definition in BASIN_PILOT.items():
+        source_parts = geometries_by_name[name]
+        actual_ids = sorted(source_id for source_id, _ in source_parts)
+        if actual_ids != sorted(definition["sourceIds"]):
+            raise ValueError(f"World Bank basin pilot source IDs changed for {name}: {actual_ids}")
+        unioned = unary_union([geometry for _, geometry in source_parts])
+        if not unioned.is_valid:
+            unioned = unioned.buffer(0)
+        raw_geometry = mapping(unioned)
+        slug = normalized_name(name).replace(" ", "-")
+        feature_id = f"feature:world-bank:watershed:{slug}"
+        place_id = f"place:world-bank:watershed:{slug}"
+        representative = unioned.representative_point()
+        intersecting = tree.query(unioned, predicate="intersects")
+        entity_ids = sorted({indexed_admin0[int(index)][0] for index in intersecting})
+        anchor_wgs84 = [round_number(representative.x), round_number(representative.y)]
+        features.append({
+            "featureId": feature_id,
+            "placeId": place_id,
+            "kind": "watershed",
+            "name": f"{name} drainage basin",
+            "aliases": [f"{name} basin", f"{name} watershed"],
+            "linkedRiverPlaceId": definition["riverPlaceId"],
+            "sourceIds": [BASIN_SOURCE_ID],
+            "sourceFeatureIds": [f"BASWC4_ID:{source_id}" for source_id in actual_ids],
+            "intersectingEntityIds": entity_ids,
+            "entityRelation": {
+                "kind": "intersects_mapped_admin0_geometry",
+                "method": "world-bank-basin-admin0-intersection-v1",
+                "caveat": "Country relations are geometric intersections with a generalized drainage basin. They do not imply ownership or control of shared water.",
+            },
+            "label": {
+                "anchorWgs84": anchor_wgs84,
+                "anchorProjected": project_point(anchor_wgs84),
+                "priority": 8,
+                "minimumZoom": 3,
+                "method": "representative-point-within-derived-union",
+            },
+            "temporal": temporal_extent("2019-06-25", "day"),
+            "geometry": geometry_record(feature_id, raw_geometry, "world-bank-major-river-basins-2019-pilot"),
+        })
+    return sorted(features, key=lambda feature: feature["name"])
+
+
+def find_statement(entity: dict[str, Any], property_id: str, statement_id: str) -> dict[str, Any]:
+    matches = [statement for statement in entity.get("claims", {}).get(property_id, []) if statement.get("id") == statement_id]
+    if len(matches) != 1:
+        raise ValueError(f"Pinned Wikidata statement missing or ambiguous: {statement_id}")
+    statement = matches[0]
+    if statement.get("rank") == "deprecated" or statement.get("mainsnak", {}).get("snaktype") != "value":
+        raise ValueError(f"Pinned Wikidata statement is not an active value: {statement_id}")
+    return statement
+
+
+def statement_value(statement: dict[str, Any]) -> Any:
+    return statement["mainsnak"]["datavalue"]["value"]
+
+
+def item_id(statement: dict[str, Any]) -> str:
+    value = statement_value(statement)
+    if not isinstance(value, dict) or not value.get("id"):
+        raise ValueError(f"Expected an item-valued Wikidata statement: {statement.get('id')}")
+    return str(value["id"])
+
+
+def attach_river_pilot_facts(
+    rivers: list[dict[str, Any]],
+    source_cache: Path,
+    lock_by_id: dict[str, Any],
+) -> None:
+    entities = json.loads((source_cache / lock_by_id[RIVER_FACT_SOURCE_ID]["target"]).read_text("utf8"))["entities"]
+    linked = json.loads((source_cache / lock_by_id[RIVER_LABEL_SOURCE_ID]["target"]).read_text("utf8"))["entities"]
+    labels = {entity_id: entity.get("labels", {}).get("en", {}).get("value") for entity_id, entity in linked.items()}
+
+    def label_for(entity_id: str) -> str:
+        label = labels.get(entity_id)
+        if not label:
+            raise ValueError(f"Pinned Wikidata linked-label snapshot is missing {entity_id}")
+        return str(label)
+
+    for place_id, selection in RIVER_FACT_SELECTIONS.items():
+        entity = entities.get(selection["entityId"])
+        if not entity:
+            raise ValueError(f"Pinned Wikidata river snapshot is missing {selection['entityId']}")
+        length_statement = find_statement(entity, *selection["length"])
+        length_value = statement_value(length_statement)
+        if not isinstance(length_value, dict) or not str(length_value.get("unit", "")).endswith("/Q828224"):
+            raise ValueError(f"River length unit changed for {place_id}")
+        headwater_statements = [find_statement(entity, *statement) for statement in selection["headwaters"]]
+        mouth_statement = find_statement(entity, *selection["mouth"])
+        basin_statement = find_statement(entity, *selection["basin"])
+        area_statement = find_statement(entity, *selection["basinArea"])
+        area_value = statement_value(area_statement)
+        if not isinstance(area_value, dict) or not str(area_value.get("unit", "")).endswith("/Q712226"):
+            raise ValueError(f"River basin-area unit changed for {place_id}")
+        tributary_statements = [find_statement(entity, *statement) for statement in selection["tributaries"]]
+        headwater_names = [label_for(item_id(statement)) for statement in headwater_statements]
+        common_notes = [
+            "Bounded River V2 pilot sourced from pinned Wikidata structured statements; it is not a live hydrology service.",
+            *selection["notes"],
+        ]
+        text_sources = [RIVER_FACT_SOURCE_ID, RIVER_LABEL_SOURCE_ID]
+        facts = {
+            "lengthKm": {
+                "value": round_number(float(length_value["amount"]), 2),
+                "status": "estimated",
+                "unit": "kilometres",
+                "observedAt": "2026-09-05",
+                "sourceIds": [RIVER_FACT_SOURCE_ID],
+                "sourceStatementIds": [length_statement["id"]],
+                "notes": common_notes,
+            },
+            "sourcePlace": ({
+                "value": headwater_names[0],
+                "status": "observed",
+                "unit": None,
+                "observedAt": "2026-09-05",
+                "sourceIds": text_sources,
+                "sourceStatementIds": [headwater_statements[0]["id"]],
+                "notes": common_notes,
+            } if len(headwater_names) == 1 else None),
+            "headwaters": {
+                "value": headwater_names,
+                "status": "observed",
+                "unit": None,
+                "observedAt": "2026-09-05",
+                "sourceIds": text_sources,
+                "sourceStatementIds": [statement["id"] for statement in headwater_statements],
+                "notes": [*common_notes, "Headwater naming and the definition of a river's source can vary."],
+            },
+            "mouthPlace": {
+                "value": label_for(item_id(mouth_statement)),
+                "status": "observed",
+                "unit": None,
+                "observedAt": "2026-09-05",
+                "sourceIds": text_sources,
+                "sourceStatementIds": [mouth_statement["id"]],
+                "notes": common_notes,
+            },
+            "basinName": {
+                "value": label_for(item_id(basin_statement)),
+                "status": "observed",
+                "unit": None,
+                "observedAt": "2026-09-05",
+                "sourceIds": text_sources,
+                "sourceStatementIds": [basin_statement["id"]],
+                "notes": common_notes,
+            },
+            "basinAreaKm2": {
+                "value": round_number(float(area_value["amount"]), 2),
+                "status": "estimated",
+                "unit": "square kilometres",
+                "observedAt": "2026-09-05",
+                "sourceIds": [RIVER_FACT_SOURCE_ID],
+                "sourceStatementIds": [area_statement["id"]],
+                "notes": [*common_notes, "Basin-area estimates can vary with watershed delineation and source method."],
+            },
+            "majorTributaries": {
+                "value": [label_for(item_id(statement)) for statement in tributary_statements],
+                "status": "observed",
+                "unit": None,
+                "observedAt": "2026-09-05",
+                "sourceIds": text_sources,
+                "sourceStatementIds": [statement["id"] for statement in tributary_statements],
+                "notes": [*common_notes, "This is an authored, non-exhaustive selection from structured tributary statements."],
+            },
+        }
+        matching = [feature for feature in rivers if feature["placeId"] == place_id]
+        if not matching:
+            raise ValueError(f"River V2 pilot could not find mapped geometry for {place_id}")
+        anchor = sorted(matching, key=lambda feature: (0 if RIVER_SOURCE_ID in feature["sourceIds"] else 1, feature["featureId"]))[0]
+        anchor["facts"] = facts
+        anchor["sourceIds"] = sorted(set([*anchor["sourceIds"], RIVER_FACT_SOURCE_ID, RIVER_LABEL_SOURCE_ID]))
+
+
+def haversine_km(left: Any, right: Any) -> float:
+    left_lon, left_lat, right_lon, right_lat = map(math.radians, [left.x, left.y, right.x, right.y])
+    delta_lon = right_lon - left_lon
+    delta_lat = right_lat - left_lat
+    amount = math.sin(delta_lat / 2) ** 2 + math.cos(left_lat) * math.cos(right_lat) * math.sin(delta_lon / 2) ** 2
+    return 6371.0088 * 2 * math.asin(min(1, math.sqrt(amount)))
+
+
+def build_city_relationship_pilot(
+    rivers: list[dict[str, Any]],
+    cities: list[dict[str, Any]],
+    water_bodies: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    definitions = [
+        ("cairo-nile", "city:natural-earth:1159151603", "place:natural-earth:river:nile", 35, "Cairo is near the mapped Nile centerline."),
+        ("pittsburgh-allegheny", "city:natural-earth:1159150531", "place:natural-earth:river:allegheny", 35, "Pittsburgh is near the mapped Allegheny centerline."),
+        ("pittsburgh-monongahela", "city:natural-earth:1159150531", "place:natural-earth:river:monongahela", 35, "Pittsburgh is near the mapped Monongahela centerline."),
+        ("pittsburgh-ohio", "city:natural-earth:1159150531", "place:natural-earth:river:ohio", 35, "Pittsburgh is near the mapped Ohio centerline."),
+        ("new-orleans-mississippi", "city:natural-earth:1159151233", "place:natural-earth:river:mississippi", 40, "New Orleans is near the mapped Mississippi centerline."),
+        ("new-orleans-gulf", "city:natural-earth:1159151233", "place:natural-earth:water:q12630", 220, "New Orleans is near the mapped Gulf of Mexico marine area."),
+    ]
+    city_by_id = {city["entity"]["entityId"]: city for city in cities}
+    targets: dict[str, list[dict[str, Any]]] = {}
+    for feature in [*rivers, *water_bodies]:
+        targets.setdefault(feature["placeId"], []).append(feature)
+    relationships = []
+    for key, city_id, target_id, threshold_km, wording in definitions:
+        city = city_by_id.get(city_id)
+        target_features = targets.get(target_id)
+        if not city or not target_features:
+            raise ValueError(f"City relationship pilot target missing: {key}")
+        city_point = shape(city["geometry"]["canonicalWgs84"])
+        target_shape = unary_union([shape(feature["geometry"]["canonicalWgs84"]) for feature in target_features])
+        nearest_city, nearest_target = nearest_points(city_point, target_shape)
+        distance_km = round_number(haversine_km(nearest_city, nearest_target), 2)
+        if distance_km > threshold_km:
+            raise ValueError(f"City relationship {key} is {distance_km} km from mapped geometry (threshold {threshold_km})")
+        relationships.append({
+            "id": f"relationship:city-geography:{key}",
+            "fromPlaceId": city_id,
+            "toPlaceId": target_id,
+            "kind": "near_mapped_geometry",
+            "wording": wording,
+            "distanceKm": distance_km,
+            "sourceIds": sorted(set([*city["sourceIds"], *[source_id for feature in target_features for source_id in feature["sourceIds"]]])),
+            "evidence": {
+                "method": "nearest-wgs84-source-geometry-v1",
+                "thresholdKm": threshold_km,
+                "caveat": "This is a proximity relation derived from generalized source geometry. It does not by itself assert hydrological topology, a legal boundary, or causation.",
+            },
+            "review": {"status": "derived-reviewed", "reviewedAt": "2026-09-05"},
+        })
+    return relationships
 
 
 def load_vectors(source_cache: Path, lock_by_id: dict[str, Any], repository_root: Path | None = None) -> tuple[list[Any], list[Any], list[Any]]:
@@ -940,6 +1435,189 @@ def write_physical_geometry_sprites(pack: dict[str, Any], destination: Path) -> 
     pack["physicalGeometryAssets"] = assets
 
 
+def write_vector_sprite(
+    features: list[dict[str, Any]],
+    destination: Path,
+    filename: str,
+) -> dict[str, Any]:
+    sprite_path = destination / filename
+    fragments = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650"><defs>']
+    for feature in features:
+        identity = re.sub(r"[^A-Za-z0-9_-]", "-", feature["featureId"])
+        fragments.append(f'<path id="{identity}" d="{feature["geometry"]["derived"]["path"]}" vector-effect="non-scaling-stroke"/>')
+    fragments.append('</defs></svg>')
+    sprite_path.write_text(''.join(fragments) + '\n', 'utf8')
+    return {
+        "href": f"/atlas-world/{filename}",
+        "mediaType": "image/svg+xml",
+        "bytes": sprite_path.stat().st_size,
+        "checksumSha256": sha256_file(sprite_path),
+        "featureCount": len(features),
+    }
+
+
+def write_phase4_geometry_assets(pack: dict[str, Any], destination: Path) -> None:
+    pack["waterGeometryAsset"] = write_vector_sprite(
+        pack["featureCollections"]["majorWaterBodies"]["features"],
+        destination,
+        "water-mercator.v1.svg",
+    )
+    pack["watershedGeometryAsset"] = write_vector_sprite(
+        pack["featureCollections"]["watershedPilot"]["features"],
+        destination,
+        "watersheds-mercator.v1.svg",
+    )
+
+
+def write_globe_context_asset(pack: dict[str, Any], destination: Path) -> None:
+    rivers = [
+        {
+            "featureId": feature["featureId"],
+            "placeId": feature["placeId"],
+            "name": feature["name"],
+            "sourceScaleRank": feature.get("sourceScaleRank"),
+            "geometry": feature["geometry"]["canonicalWgs84"],
+        }
+        for feature in pack["featureCollections"]["majorRivers"]["features"]
+        if feature.get("displayLod") == "world" and RIVER_SOURCE_ID in feature.get("sourceIds", [])
+    ]
+    cities = [
+        {
+            "featureId": feature["featureId"],
+            "placeId": feature["entity"]["entityId"],
+            "name": feature["name"],
+            "countryId": feature["entity"].get("countryId"),
+            "isNationalCapital": feature["isNationalCapital"],
+            "sourceScaleRank": feature["sourceScaleRank"],
+            "coordinates": feature["geometry"]["canonicalWgs84"]["coordinates"],
+        }
+        for feature in pack["featureCollections"]["majorCities"]["features"]
+        if feature["sourceScaleRank"] <= 1 or feature["isNationalCapital"]
+    ]
+    labels_by_place = {}
+    for feature in pack["featureCollections"]["majorWaterBodies"]["features"]:
+        if feature["sourceScaleRank"] > 2:
+            continue
+        candidate = {
+            "placeId": feature["placeId"],
+            "name": feature["name"],
+            "waterKind": feature["waterKind"],
+            "priority": feature["label"]["priority"],
+            "minimumZoom": feature["label"]["minimumZoom"],
+            "coordinates": feature["label"]["anchorWgs84"],
+        }
+        current = labels_by_place.get(feature["placeId"])
+        if current is None or (candidate["priority"], candidate["name"]) > (current["priority"], current["name"]):
+            labels_by_place[feature["placeId"]] = candidate
+    asset_payload = {
+        "schemaVersion": "1.0.0",
+        "snapshotId": f"{pack['snapshotId']}-globe-context-v1",
+        "generatedAt": GENERATED_AT,
+        "canonicalCrs": "EPSG:4326",
+        "sourceLockId": pack["sourceLockId"],
+        "sourceIds": [RIVER_SOURCE_ID, DETAIL_CITY_SOURCE_ID, WATER_SOURCE_ID],
+        "rivers": sorted(rivers, key=lambda feature: feature["featureId"]),
+        "cities": sorted(cities, key=lambda feature: feature["featureId"]),
+        "waterLabels": sorted(labels_by_place.values(), key=lambda label: (-label["priority"], label["name"])),
+    }
+    asset_path = destination / "globe-context.v1.json"
+    asset_path.write_text(json.dumps(asset_payload, ensure_ascii=False, separators=(",", ":")) + "\n", "utf8")
+    pack["globeContextAsset"] = {
+        "href": "/atlas-world/globe-context.v1.json",
+        "mediaType": "application/json",
+        "bytes": asset_path.stat().st_size,
+        "checksumSha256": sha256_file(asset_path),
+        "riverCount": len(rivers),
+        "cityCount": len(cities),
+        "waterLabelCount": len(labels_by_place),
+    }
+
+
+def phase4_datasets(water_bodies: list[dict[str, Any]], watersheds: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        {
+            "id": "major-water-bodies",
+            "name": "Major water bodies",
+            "dataType": "water",
+            "measure": "generalized named marine-area polygon and cartographic label anchor",
+            "unit": None,
+            "geographicResolution": "1:10m Natural Earth marine geography polygons",
+            "conceptualResolution": "named oceans, major seas, gulfs, bays, straits, and channels at source scale rank 4 or better",
+            "sourceIds": [WATER_SOURCE_ID],
+            "transformationId": "wgs84-to-mercator-svg-v1",
+            "geometrySetId": "natural-earth-marine-10m-5.1.2",
+            "featureCount": len(water_bodies),
+            "selectionRule": "Named ocean, sea, gulf, bay, strait, and channel features with Natural Earth SCALERANK <= 4; multipart features share a logical Wikidata place identity when available.",
+            "temporal": {"support": "static", "observedAt": None, "validFrom": None, "validTo": None, "precision": "unknown", "selectionPolicy": "timeless"},
+            "caveats": [
+                "Marine polygons are generalized cartographic areas, not legal maritime boundaries.",
+                "Country relationships describe coastline adjacency to mapped geometry only; they never imply ownership or jurisdiction.",
+                "Label anchors are derived representative points inside source polygons, not official named-place coordinates.",
+            ],
+        },
+        {
+            "id": "watershed-pilot",
+            "name": "Major drainage basins pilot",
+            "dataType": "watershed",
+            "measure": "generalized drainage-basin polygon geometry",
+            "unit": None,
+            "geographicResolution": "World Bank global major-river-basin polygons; five authored logical basins",
+            "conceptualResolution": "Amazon, Danube, Mississippi, Nile, and Yangtze drainage basins",
+            "sourceIds": [BASIN_SOURCE_ID],
+            "transformationId": "wgs84-to-mercator-svg-v1",
+            "geometrySetId": "world-bank-major-river-basins-2019-pilot",
+            "featureCount": len(watersheds),
+            "selectionRule": "Exact World Bank BASWC4_ID records for five named basin systems; Amazon source parts 205 and 209 are unioned as one logical basin.",
+            "temporal": {"support": "snapshot", "observedAt": "2019-06-25", "validFrom": None, "validTo": None, "precision": "day", "selectionPolicy": "exact"},
+            "caveats": [
+                "These are generalized basin boundaries suitable for world/regional learning, not engineering, legal, or local watershed work.",
+                "A basin crossing a country is shared physical geography and does not imply ownership or control.",
+                "Source area attributes are intentionally not published because one pilot record contains an unusable zero and the attributes are not consistently documented for comparison.",
+            ],
+        },
+    ]
+
+
+def install_phase4_vector_data(
+    pack: dict[str, Any],
+    rivers: list[dict[str, Any]],
+    lakes: list[dict[str, Any]],
+    cities: list[dict[str, Any]],
+    water_bodies: list[dict[str, Any]],
+    watersheds: list[dict[str, Any]],
+    relationships: list[dict[str, Any]],
+    lock_by_id: dict[str, Any],
+    required_source_ids: list[str],
+    public_asset_root: Path,
+) -> None:
+    pack["sources"] = [source_record(lock_by_id[source_id]) for source_id in required_source_ids]
+    pack["featureCollections"] = {
+        "majorRivers": {"datasetId": "major-rivers", "features": rivers},
+        "majorLakes": {"datasetId": "major-lakes", "features": lakes},
+        "majorCities": {"datasetId": "major-cities", "features": cities},
+        "majorWaterBodies": {"datasetId": "major-water-bodies", "features": water_bodies},
+        "watershedPilot": {"datasetId": "watershed-pilot", "features": watersheds},
+    }
+    pack["placeRelationships"] = relationships
+    for dataset_id, features in [("major-rivers", rivers), ("major-lakes", lakes), ("major-cities", cities)]:
+        dataset = next(item for item in pack["datasets"] if item["id"] == dataset_id)
+        dataset["featureCount"] = len(features)
+    river_dataset = next(item for item in pack["datasets"] if item["id"] == "major-rivers")
+    river_dataset["sourceIds"] = [RIVER_SOURCE_ID, DETAIL_RIVER_SOURCE_ID, RIVER_FACT_SOURCE_ID, RIVER_LABEL_SOURCE_ID]
+    river_dataset["selectionRule"] = RIVER_SELECTION_RULE
+    river_dataset["factPilot"] = {
+        "placeIds": sorted(RIVER_FACT_SELECTIONS),
+        "omittedMeasures": ["discharge"],
+        "omissionReason": "Available statements use different measurement locations, periods, and qualifiers; Atlas does not present them as a comparable global value.",
+    }
+    phase4_ids = {"major-water-bodies", "watershed-pilot"}
+    pack["datasets"] = [dataset for dataset in pack["datasets"] if dataset["id"] not in phase4_ids]
+    pack["datasets"].extend(phase4_datasets(water_bodies, watersheds))
+    write_physical_geometry_sprites(pack, public_asset_root)
+    write_phase4_geometry_assets(pack, public_asset_root)
+    write_globe_context_asset(pack, public_asset_root)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--width", type=int, default=OUTPUT_WIDTH)
@@ -972,7 +1650,20 @@ def main() -> None:
     else:
         registration_checks = None
 
-    required_source_ids = [POP_SOURCE_ID, RELIEF_SOURCE_ID, RIVER_SOURCE_ID, LAKE_SOURCE_ID, DETAIL_RIVER_SOURCE_ID, DETAIL_LAKE_SOURCE_ID, DETAIL_CITY_SOURCE_ID, ADMIN0_SOURCE_ID]
+    required_source_ids = [
+        POP_SOURCE_ID,
+        RELIEF_SOURCE_ID,
+        RIVER_SOURCE_ID,
+        LAKE_SOURCE_ID,
+        DETAIL_RIVER_SOURCE_ID,
+        DETAIL_LAKE_SOURCE_ID,
+        DETAIL_CITY_SOURCE_ID,
+        ADMIN0_SOURCE_ID,
+        WATER_SOURCE_ID,
+        BASIN_SOURCE_ID,
+        RIVER_FACT_SOURCE_ID,
+        RIVER_LABEL_SOURCE_ID,
+    ]
     for source_id in required_source_ids:
         source = lock_by_id[source_id]
         source_path = source_cache / source["target"]
@@ -992,10 +1683,12 @@ def main() -> None:
                 relief_source = extract_member(source_cache / lock_by_id[RELIEF_SOURCE_ID]["target"], RELIEF_ZIP_MEMBER, Path(temporary_directory))
                 refresh_relief_dataset(pack, relief_source, asset_output, arguments.width, arguments.height)
             pack["derivedRevision"] = "2026-09-05-source-relief-and-river-detail"
-        for collection_name, dataset_id, features in zip(["majorRivers", "majorLakes", "majorCities"], ["major-rivers", "major-lakes", "major-cities"], load_vectors(source_cache, lock_by_id, repository_root)):
-            pack["featureCollections"][collection_name] = {"datasetId": dataset_id, "features": features}
-            next(dataset for dataset in pack["datasets"] if dataset["id"] == dataset_id)["featureCount"] = len(features)
-        next(dataset for dataset in pack["datasets"] if dataset["id"] == "major-rivers")["selectionRule"] = RIVER_SELECTION_RULE
+        rivers, lakes, cities = load_vectors(source_cache, lock_by_id, repository_root)
+        attach_river_pilot_facts(rivers, source_cache, lock_by_id)
+        countries = json.loads((repository_root / "lib" / "atlas-world" / "data" / "countries.v1.json").read_text("utf8"))
+        water_bodies = load_water_bodies(source_cache, lock_by_id, countries)
+        watersheds = load_watershed_pilot(source_cache, lock_by_id, countries)
+        relationships = build_city_relationship_pilot(rivers, cities, water_bodies)
         # Activation thresholds are authored rendering choices, not source or
         # raster-pixel changes. Refresh them without an expensive resampling run.
         population = next(dataset for dataset in pack["datasets"] if dataset["id"] == "population-density-2025")
@@ -1005,7 +1698,18 @@ def main() -> None:
                 raise ValueError("Raster dimensions changed; a complete raster rebuild is required.")
             level["minimumZoom"] = definition["minimumZoom"]
         pack["projection"].pop("displayPathSimplificationTolerance", None)
-        write_physical_geometry_sprites(pack, asset_output.parent)
+        install_phase4_vector_data(
+            pack,
+            rivers,
+            lakes,
+            cities,
+            water_bodies,
+            watersheds,
+            relationships,
+            lock_by_id,
+            required_source_ids,
+            asset_output.parent,
+        )
         output_path.write_text(json.dumps(pack, ensure_ascii=False, separators=(",", ":")) + "\n", "utf8")
         print("Refreshed source-checked physical geography; population raster manifests and observations retained unchanged.")
         return
@@ -1039,6 +1743,11 @@ def main() -> None:
             relief_pyramid = None if arguments.overview_only else build_relief_pyramid(relief_source, asset_output)
 
     rivers, lakes, cities = load_vectors(source_cache, lock_by_id, repository_root)
+    attach_river_pilot_facts(rivers, source_cache, lock_by_id)
+    countries = json.loads((repository_root / "lib" / "atlas-world" / "data" / "countries.v1.json").read_text("utf8"))
+    water_bodies = load_water_bodies(source_cache, lock_by_id, countries)
+    watersheds = load_watershed_pilot(source_cache, lock_by_id, countries)
+    relationships = build_city_relationship_pilot(rivers, cities, water_bodies)
     sources = [source_record(lock_by_id[source_id]) for source_id in required_source_ids]
     output_assets = {
         "populationDensity": {
@@ -1226,7 +1935,18 @@ def main() -> None:
         },
     }
     output_path = data_output / "geography-pack.v1.json"
-    write_physical_geometry_sprites(pack, asset_output.parent)
+    install_phase4_vector_data(
+        pack,
+        rivers,
+        lakes,
+        cities,
+        water_bodies,
+        watersheds,
+        relationships,
+        lock_by_id,
+        required_source_ids,
+        asset_output.parent,
+    )
     if population_pyramid is None:
         pack["buildStatus"] = "development-overview-only"
         del pack["datasets"][0]["assetPyramid"]

@@ -11,6 +11,12 @@ import type {
 } from "@/lib/atlas-world/featureSurface";
 import type { AtlasLayerStyleSpec } from "@/lib/atlas-world/layers";
 import { recordAtlasEvent } from "@/lib/atlas-world/telemetry";
+import {
+  atlasRenderedWorldOffsets,
+  atlasVisibleWorldCopies,
+  atlasWorldCopyPlacementsEqual,
+  type AtlasWorldCopyPlacement,
+} from "@/lib/atlas-world/worldWrap";
 import styles from "./AtlasWorld.module.css";
 
 type AtlasFeatureSurfaceProps = {
@@ -53,12 +59,17 @@ function pointRadius(feature: AtlasFeatureSurfaceRecord, style: AtlasLayerStyleS
   return minimum;
 }
 
+function featureHitId(feature: AtlasFeatureSurfaceRecord) {
+  return `atlas-feature-hit-${feature.featureId.replace(/[^A-Za-z0-9_-]/g, "-")}`;
+}
+
 function PhysicalFeature({ feature, style, selected }: {
   feature: AtlasFeatureSurfaceRecord;
   style: AtlasLayerStyleSpec | undefined;
   selected: boolean;
 }) {
   const [x, y] = feature.point;
+  const hitId = featureHitId(feature);
   const common = {
     "data-atlas-map-feature": feature.featureId,
     "data-atlas-place": feature.placeId,
@@ -70,9 +81,9 @@ function PhysicalFeature({ feature, style, selected }: {
   };
   if (feature.kind === "lake") {
     return <g {...common} className={styles[`lod${feature.displayLod}`]}>
-      {feature.name !== "Unnamed feature" && <use href={feature.geometryHref ?? undefined}
+      {feature.name !== "Unnamed feature" && <g id={hitId}><use href={feature.geometryHref ?? undefined}
         data-atlas-geography-href={feature.geometryHref ?? undefined} className={styles.lakeHit}
-        aria-label={`Select lake ${feature.name}`} vectorEffect="non-scaling-stroke" />}
+        aria-label={`Select lake ${feature.name}`} vectorEffect="non-scaling-stroke" /></g>}
       <use href={feature.geometryHref ?? undefined} data-atlas-geography-href={feature.geometryHref ?? undefined}
         className={`${styles.lakeFeature} ${styles[`lod${feature.displayLod}`]}`}
         style={{ fill: style?.fillColor, fillOpacity: style?.fillOpacity, stroke: style?.strokeColor,
@@ -86,10 +97,37 @@ function PhysicalFeature({ feature, style, selected }: {
       </text>
     </g>;
   }
+  if (feature.kind === "water" || feature.kind === "watershed") {
+    const isWater = feature.kind === "water";
+    const featureClass = isWater ? styles.waterFeature : styles.watershedFeature;
+    const hitClass = isWater ? styles.waterHit : styles.watershedHit;
+    const labelClass = isWater ? styles.waterLabel : styles.watershedLabel;
+    const kindLabel = isWater ? "water body" : "drainage basin";
+    return <g {...common} className={styles[`lod${feature.displayLod}`]}>
+      <g id={hitId}><use href={feature.geometryHref ?? undefined}
+        data-atlas-geography-href={feature.geometryHref ?? undefined} className={hitClass}
+        aria-label={`Select ${kindLabel} ${feature.name}`} vectorEffect="non-scaling-stroke" /></g>
+      <use href={feature.geometryHref ?? undefined} data-atlas-geography-href={feature.geometryHref ?? undefined}
+        className={featureClass}
+        style={{ fill: style?.fillColor, fillOpacity: style?.fillOpacity, stroke: style?.strokeColor,
+          strokeOpacity: style?.strokeOpacity, strokeWidth: style?.strokeWidth, strokeDasharray: style?.strokeDasharray }}
+        vectorEffect="non-scaling-stroke"><title>{feature.name}</title></use>
+      <text data-atlas-label={isWater ? "water" : "watershed"} data-atlas-label-place={feature.placeId}
+        data-atlas-x={feature.label?.anchor[0] ?? x} data-atlas-y={feature.label?.anchor[1] ?? y}
+        data-atlas-label-min-zoom={feature.label?.minimumZoom ?? feature.minimumZoom}
+        data-atlas-label-max-zoom={feature.label?.maximumZoom ?? feature.maximumZoom ?? undefined}
+        data-atlas-label-priority={feature.label?.priority ?? 55}
+        className={labelClass}
+        transform={`translate(${feature.label?.anchor[0] ?? x} ${feature.label?.anchor[1] ?? y})`}
+        style={{ display: "none" }} textAnchor="middle">
+        {feature.label?.text ?? feature.name}
+      </text>
+    </g>;
+  }
   return <g {...common} className={styles[`lod${feature.displayLod}`]}>
-    {feature.name !== "Unnamed feature" && <use href={feature.geometryHref ?? undefined}
+    {feature.name !== "Unnamed feature" && <g id={hitId}><use href={feature.geometryHref ?? undefined}
       data-atlas-geography-href={feature.geometryHref ?? undefined} className={styles.riverHit}
-      aria-label={`Select river ${feature.name}`} vectorEffect="non-scaling-stroke" />}
+      aria-label={`Select river ${feature.name}`} vectorEffect="non-scaling-stroke" /></g>}
     <use href={feature.geometryHref ?? undefined} data-atlas-geography-href={feature.geometryHref ?? undefined}
       className={`${styles.riverFeature} ${styles[`lod${feature.displayLod}`]}`}
       style={{ fill: "none", stroke: style?.strokeColor, strokeOpacity: style?.strokeOpacity,
@@ -111,15 +149,19 @@ function CityFeature({ feature, style, selected }: {
 }) {
   const [x, y] = feature.point;
   const radius = pointRadius(feature, style);
+  const hitId = featureHitId(feature);
   return <g className={styles[`lod${feature.displayLod}`]}
     data-atlas-map-feature={feature.featureId} data-atlas-city={feature.featureId}
     data-atlas-place={feature.placeId} data-atlas-place-kind="city"
     data-atlas-place-selected={selected}
     data-atlas-feature-bounds={feature.bounds.join(",")}
     data-atlas-minimum-zoom={feature.minimumZoom} data-atlas-maximum-zoom={feature.maximumZoom ?? undefined}>
-    <g data-atlas-screen-symbol="city" data-atlas-x={x} data-atlas-y={y} transform={`translate(${x} ${y})`}>
+    <g id={hitId} data-atlas-screen-symbol="city-hit" data-atlas-x={x} data-atlas-y={y}
+      transform={`translate(${x} ${y})`}>
       <circle r={0} fill="transparent" data-atlas-city-hit className={styles.cityHit}
         aria-label={`Select city ${feature.name}`} />
+    </g>
+    <g data-atlas-screen-symbol="city" data-atlas-x={x} data-atlas-y={y} transform={`translate(${x} ${y})`}>
       <circle r={radius + 1} className={styles.cityHalo} />
       <circle r={radius} className={styles.cityPoint}
         style={{ fill: style?.symbolFill, stroke: style?.symbolStroke, strokeWidth: style?.strokeWidth }}>
@@ -145,6 +187,7 @@ export default function AtlasFeatureSurface({ kind, initialFeatures, style }: At
   const detailLoadingRef = useRef(false);
   const [features, setFeatures] = useState(initialFeatures);
   const [mountedIds, setMountedIds] = useState(() => initialFeatures.map((feature) => feature.featureId));
+  const [wrapPlacements, setWrapPlacements] = useState<AtlasWorldCopyPlacement[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const loadDetail = useCallback(() => {
@@ -170,6 +213,11 @@ export default function AtlasFeatureSurface({ kind, initialFeatures, style }: At
     const matrix = group?.getScreenCTM();
     if (!svg || !matrix) return;
     const viewport = svg.getBoundingClientRect();
+    const worldOffsets = atlasRenderedWorldOffsets(svg);
+    const nextWrapPlacements = atlasVisibleWorldCopies(svg, 80);
+    setWrapPlacements((current) => atlasWorldCopyPlacementsEqual(current, nextWrapPlacements)
+      ? current
+      : nextWrapPlacements);
     const { zoom } = cameraRef.current;
     const atlasRoot = svg.closest<HTMLElement>("[data-atlas-root]");
     const selectedId = atlasRoot?.dataset.atlasFocus === "feature"
@@ -179,8 +227,8 @@ export default function AtlasFeatureSurface({ kind, initialFeatures, style }: At
       if (feature.placeId === selectedId || feature.featureId === selectedId) return true;
       if (zoom < feature.minimumZoom || (feature.maximumZoom != null && zoom > feature.maximumZoom)) return false;
       const [x0, y0, x1, y1] = feature.bounds;
-      return matrix.a * x1 + matrix.e >= viewport.left - 80
-        && matrix.a * x0 + matrix.e <= viewport.right + 80
+      return worldOffsets.some((offset) => matrix.a * (x1 + offset) + matrix.e >= viewport.left - 80
+        && matrix.a * (x0 + offset) + matrix.e <= viewport.right + 80)
         && matrix.d * y1 + matrix.f >= viewport.top - 80
         && matrix.d * y0 + matrix.f <= viewport.bottom + 80;
     }).map((feature) => feature.featureId);
@@ -242,7 +290,7 @@ export default function AtlasFeatureSurface({ kind, initialFeatures, style }: At
       cameraRef.current.selectedId,
     ));
     return () => window.cancelAnimationFrame(frame);
-  }, [mounted]);
+  }, [mounted, wrapPlacements]);
 
   return <g ref={surfaceRef} data-atlas-dynamic-feature-surface={kind}>
     {mounted.map((feature) => feature.kind === "city"
@@ -250,5 +298,24 @@ export default function AtlasFeatureSurface({ kind, initialFeatures, style }: At
           selected={feature.placeId === selectedId} />
       : <PhysicalFeature key={feature.featureId} feature={feature} style={style}
           selected={feature.placeId === selectedId} />)}
+    {wrapPlacements.map(({ slot, offset }) => {
+      return <g key={`wrap-feature-hit-${slot}:${offset}`}
+        data-atlas-world-wrap-slot={slot} data-atlas-world-offset={offset}
+        transform={`translate(${offset} 0)`}>
+        {mounted.filter((feature) => feature.name !== "Unnamed feature").map((feature) => (
+          <use key={feature.featureId} href={`#${featureHitId(feature)}`}
+            data-atlas-wrapped-place={feature.placeId}
+            className={feature.kind === "city"
+              ? styles.cityHit
+              : feature.kind === "river"
+                ? styles.riverHit
+                : feature.kind === "water"
+                  ? styles.waterHit
+                  : feature.kind === "watershed"
+                    ? styles.watershedHit
+                    : styles.lakeHit} />
+        ))}
+      </g>;
+    })}
   </g>;
 }

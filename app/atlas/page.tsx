@@ -32,7 +32,7 @@ export default async function AtlasPage({ searchParams }: AtlasPageProps) {
   const clientData = getAtlasClientDataset(runtimeData);
   const geography = getAtlasGeographyPack();
   const patternNotes = getAtlasPatternNotes();
-  const places = buildAtlasPlaceIndex(geography.featureCollections);
+  const places = buildAtlasPlaceIndex(geography.featureCollections, geography.placeRelationships);
   const resolved = resolveAtlasInitialState(
     toUrlSearchParams(await searchParams),
     clientData.countries,
@@ -44,8 +44,12 @@ export default async function AtlasPage({ searchParams }: AtlasPageProps) {
       ...geography.featureCollections.majorRivers.features,
       ...geography.featureCollections.majorLakes.features,
       ...geography.featureCollections.majorCities.features,
+      ...geography.featureCollections.majorWaterBodies.features,
+      ...geography.featureCollections.watershedPilot.features,
     ]
-      .filter((feature) => (feature.displayMinimumZoom ?? 1) <= 1)
+      .filter((feature) => (
+        !("displayMinimumZoom" in feature) || (feature.displayMinimumZoom ?? 1) <= 1
+      ))
       .map((feature) => feature.featureId),
   );
   const initialPlaces = places.filter((place) =>

@@ -24,6 +24,9 @@ const expected = new Map([
 ]);
 
 assert(lock.sources.some((source) => source.id === manifest.source.id), "Pilot source is absent from the source lock.");
+for (const source of manifest.observationSources) {
+  assert(lock.sources.some((candidate) => candidate.id === source.id), `Observation source ${source.id} is absent from the source lock.`);
+}
 assert(lock.builds.some((build) => build.id === "atlas-admin1-pilot-v1"), "Pilot build is absent from the source lock.");
 assert(manifest.sourceLockId === lock.lockId, "Pilot refers to the wrong source lock.");
 assert(manifest.pilot.status === "bounded-pilot", "Pilot is not marked as bounded.");
@@ -58,6 +61,14 @@ for (const feature of manifest.features) {
   assert(feature.geometry.derived.viewBox.join(",") === "0,0,1200,650", `${label} has the wrong viewBox.`);
   assert(canonicalById.has(feature.geometry.canonicalFeatureId), `${label} cannot resolve its canonical feature.`);
   assert(svg.includes(`id="${feature.geometry.derived.assetId}"`), `${label} cannot resolve its projected path.`);
+  const population = feature.observations?.population ?? null;
+  if (feature.entity.countryId === "country:USA") {
+    assert(population?.status === "estimated" && population.value > 0, `${label} has no valid Census population estimate.`);
+    assert(population?.temporal.observedAt === "2024-07-01", `${label} has the wrong population date.`);
+    assert(population?.sourceIds.includes("us-census-population-estimates-2024-admin1"), `${label} has the wrong population source.`);
+  } else {
+    assert(population === null, `${label} should not inherit or fabricate a subdivision population.`);
+  }
 }
 for (const [countryId, count] of expected) {
   const actual = manifest.features.filter((feature) => feature.entity.countryId === countryId).length;
@@ -67,11 +78,15 @@ assert(manifest.dataset.caveats.some((caveat) => caveat.includes("not an authori
   "Legal-status caveat is missing.");
 assert(manifest.dataset.caveats.some((caveat) => caveat.includes("stale or inconsistent")),
   "Administrative-type quality caveat is missing.");
+assert(manifest.observationDatasets.length === 1, "Expected one bounded subdivision observation dataset.");
+assert(manifest.observationDatasets[0]?.coverage.populatedFeatures === 51, "Expected 51 official U.S. population observations.");
+assert(manifest.features.filter((feature) => feature.observations?.population).length === 51,
+  "Subdivision population coverage changed.");
 
 if (failures.length) {
   console.error("Atlas Admin-1 pilot validation failed:");
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exitCode = 1;
 } else {
-  console.log("Atlas Admin-1 pilot validated: 184 sourced units across six countries; canonical WGS84 and Mercator assets match.");
+  console.log("Atlas Admin-1 pilot validated: 184 sourced units across six countries; 51 U.S. population estimates; canonical WGS84 and Mercator assets match.");
 }

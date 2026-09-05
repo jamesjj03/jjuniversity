@@ -32,6 +32,7 @@ export {
 } from "./resolvers";
 export {
   applyAtlasSceneToSearchParams,
+  enableAtlasCuratedOverlay,
   parseAtlasSceneSearchParams,
   serializeAtlasSceneSearchParams,
 } from "./shareState";

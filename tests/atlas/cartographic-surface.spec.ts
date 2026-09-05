@@ -11,7 +11,7 @@ const VIEWS = [
   ["religion", "Religion"],
   ["population", "Population"],
   ["gdp-per-capita", "GDP per capita"],
-  ["where-people-live", "Where people live"],
+  ["population-density", "Population density"],
 ] as const;
 
 type Rgba = [number, number, number, number];
@@ -75,7 +75,7 @@ async function openAtlas(page: Page, query: string) {
 }
 
 async function chooseCountry(page: Page, name: string) {
-  const search = page.getByRole("combobox", { name: "Find a country, city, river, or lake", exact: true });
+  const search = page.getByRole("combobox", { name: "Find a country, city, river, lake, sea, or drainage basin", exact: true });
   if (!await search.isVisible()) await page.getByRole("button", { name: "Find a place", exact: true }).click();
   await search.fill(name);
   await page.getByRole("option", { name: new RegExp(`^${name}(?:\\s|$)`) }).click();
@@ -195,7 +195,9 @@ test("country selection is matte ink and an outline, not glow or gradient paint"
   }
   await selected.hover({ force: true });
   expect((await paintEffects(selected)).ancestors.every((entry) => entry.filter === "none")).toBe(true);
-  const ocean = await paintEffects(page.locator('[data-atlas-map-group] > use[href$="#atlas-sphere"]'));
+  // The canonical scene is now nested beneath the wrapped-world compositor.
+  // Inspect its ocean paint rather than waiting for the former direct child.
+  const ocean = await paintEffects(page.locator('[data-atlas-world-scene] > use[href$="#atlas-sphere"]'));
   expect(ocean.fill).not.toMatch(/url\(|gradient/i);
   expect(ocean.ancestors.every((entry) => entry.filter === "none")).toBe(true);
   // Camera decluttering may hide an unselected label, but the browser must
@@ -286,7 +288,7 @@ for (const [id, name] of VIEWS) {
       image.src = href!;
     }), asset)).toBe(true);
     await expect(relief.locator("[data-atlas-raster-level]")).toHaveAttribute("data-atlas-raster-fallback", "false");
-    if (id === "where-people-live") {
+    if (id === "population-density") {
       const density = page.locator('[data-atlas-layer="population-density-2025"]');
       await expect(density).toHaveAttribute("data-atlas-layer-active", "true");
       await expect.poll(() => density.locator('[data-atlas-raster-tile][visibility="visible"]').count()).toBeGreaterThan(0);

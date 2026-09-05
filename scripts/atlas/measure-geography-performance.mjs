@@ -23,7 +23,7 @@ for (const [name, viewport] of [["desktop", { width: 1440, height: 900 }], ["pho
   await page.waitForTimeout(400);
   const initial = { totalRequests: requests.length, physicalOverview: requests.filter((url) => url.includes("physical-mercator-overview")).length,
     physicalDetail: requests.filter((url) => url.includes("physical-mercator-detail")).length, densityDetails: requests.filter((url) => /population-density-2025-mercator\//.test(url)).length };
-  await page.goto(`${base}/atlas?view=where-people-live&country=egy`);
+  await page.goto(`${base}/atlas?view=population-density&country=egy`);
   await page.getByRole("heading", { name: "Egypt", exact: true }).waitFor();
   await page.getByRole("button", { name: "Close Egypt", exact: true }).click();
   const measurements = [];

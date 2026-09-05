@@ -177,6 +177,30 @@
 .toolbarActions a:hover,
 .openAtlas:hover { background: rgba(224, 184, 95, 0.1); }
 
+.surfaceSwitch {
+  display:flex;
+  align-items:center;
+  padding:3px;
+  border:1px solid rgba(224,184,95,.28);
+  border-radius:8px;
+  background:#102630;
+}
+.surfaceSwitch a,
+.surfaceSwitch span {
+  display:grid;
+  place-items:center;
+  min-height:34px;
+  padding:7px 12px;
+  border:0;
+  border-radius:5px;
+  color:#aebfc3;
+  font-size:11px;
+  font-weight:750;
+  text-decoration:none;
+}
+.surfaceSwitch a:hover { background:#e0b85f12; }
+.surfaceSwitch span[aria-current="page"] { color:#172826; background:#e3c67f; }
+
 .experimentalBadge {
   padding: 5px 8px;
   border: 1px solid rgba(164, 190, 185, 0.25);
@@ -460,7 +484,7 @@
   .compass { font-size: 20px; }
   .search { grid-column: 1 / -1; grid-row: 2; }
   .toolbarActions { position: absolute; top: 7px; right: 7px; }
-  .toolbarActions a { min-height: 34px; padding: 8px 9px; font-size: 10px; }
+  .surfaceSwitch a,.surfaceSwitch span { min-height:32px; padding:6px 9px; font-size:10px; }
   .search input { height: 40px; }
   .hoverLabel { top: 126px; }
 

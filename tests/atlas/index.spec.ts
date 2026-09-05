@@ -49,7 +49,12 @@ test("Atlas Index covers the new evidence subjects without ambiguous term lookup
 test("Atlas Index is searchable, filterable, sourced, and usable at either viewport", async ({ page }) => {
   const browserErrors: string[] = [];
   page.on("console", (message) => {
-    if (message.type() === "error") browserErrors.push(message.text());
+    if (message.type() !== "error") return;
+    // Vercel injects these endpoints at the deployment edge; a local
+    // production server intentionally returns 404 for the two scripts.
+    if (/^http:\/\/(127\.0\.0\.1|localhost):/.test(message.location().url ?? "")
+      && /\/_vercel\/(insights|speed-insights)\/script\.js/.test(message.location().url ?? "")) return;
+    browserErrors.push(message.text());
   });
   page.on("pageerror", (error) => browserErrors.push(error.message));
   await page.goto("/atlas/index");

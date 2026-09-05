@@ -17,7 +17,7 @@
           "population-density-2025"
         ],
         "viewPresetIds": [
-          "where-people-live"
+          "population-density"
         ],
         "minimumZoom": 1.2,
         "maximumZoom": 5
@@ -115,7 +115,7 @@
           "population-density-2025"
         ],
         "viewPresetIds": [
-          "where-people-live"
+          "population-density"
         ],
         "minimumZoom": 1.4,
         "maximumZoom": 6
@@ -229,7 +229,7 @@
           "population-density-2025"
         ],
         "viewPresetIds": [
-          "where-people-live"
+          "population-density"
         ],
         "minimumZoom": 1.2,
         "maximumZoom": 5
@@ -365,7 +365,7 @@
           "population-density-2025"
         ],
         "viewPresetIds": [
-          "where-people-live"
+          "population-density"
         ],
         "minimumZoom": 1.2,
         "maximumZoom": 5

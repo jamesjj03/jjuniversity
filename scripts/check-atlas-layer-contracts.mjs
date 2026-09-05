@@ -133,7 +133,7 @@ for (const preset of catalog.viewPresets) {
   }
 }
 
-for (const requiredPreset of ["political", "government", "religion", "population", "gdp-per-capita", "where-people-live"]) {
+for (const requiredPreset of ["political", "government", "religion", "population", "gdp-per-capita", "population-density"]) {
   assert.ok(presets.has(requiredPreset), `Missing required Atlas view ${requiredPreset}.`);
 }
 
@@ -143,6 +143,8 @@ const geographyDatasetIds = [
   "major-lakes",
   "major-rivers",
   "major-cities",
+  "major-water-bodies",
+  "watershed-pilot",
 ];
 for (const datasetId of geographyDatasetIds) {
   const definition = datasets.get(datasetId);
@@ -181,6 +183,7 @@ const expectedGeographyLayerOrder = [
   "physical-relief",
   "population-density-2025",
   "admin0-political",
+  "major-water-bodies",
   "major-lakes",
   "modern-borders",
   "major-rivers",
@@ -188,7 +191,7 @@ const expectedGeographyLayerOrder = [
   "population-geography-annotations",
   "admin0-interaction",
 ];
-const peopleView = presets.get("where-people-live");
+const peopleView = presets.get("population-density");
 assert.deepEqual(
   peopleView.layerInstances.filter((instance) => instance.enabled).map((instance) => instance.layerId),
   expectedGeographyLayerOrder,
@@ -211,7 +214,7 @@ assert.equal(annotationLayer.renderer, "annotation");
 assert.ok(annotationLayer.compatibility.requiresLayerIds.includes("population-density-2025"));
 assert.equal(patternNotes.notes.length, 4, "Expected the four reviewed initial population explanations.");
 assert.ok(
-  patternNotes.notes.every((note) => note.triggers.viewPresetIds.includes("where-people-live")),
+  patternNotes.notes.every((note) => note.triggers.viewPresetIds.includes("population-density")),
   "Every initial population explanation should trigger in Where People Live.",
 );
 assert.ok(

@@ -9,7 +9,7 @@ async function waitForMap(page: Page) {
 }
 
 async function openSearch(page: Page) {
-  const search = page.getByRole("combobox", { name: "Find a country, city, river, or lake" });
+  const search = page.getByRole("combobox", { name: "Find a country, city, river, lake, sea, or drainage basin" });
   if (!await search.isVisible()) {
     await page.getByRole("button", { name: "Find a place", exact: true }).click();
   }
@@ -29,7 +29,7 @@ test("typed place search selects a city and a multipart river without losing the
   await expect(cityCard.getByRole("heading", { name: "Cairo", exact: true })).toBeVisible();
   await expect(cityCard).toBeFocused();
   await expect(page).toHaveURL(/city=cairo-egy/);
-  await expect(page).toHaveURL(/view=where-people-live/);
+  await expect(page).toHaveURL(/view=population-density/);
 
   await (await openSearch(page)).fill("nile");
   await page.getByRole("option", { name: /^Nile River · Egypt, Ethiopia, Sudan/ }).click();
@@ -53,7 +53,7 @@ test("friendly feature deep links are resolved on the server before hydration", 
   const response = await request.get("/atlas?view=where-people-live&feature=lake%3Alake-victoria");
   expect(response.status()).toBe(200);
   const html = await response.text();
-  expect(html).toContain('data-atlas-initial-view="where-people-live"');
+  expect(html).toContain('data-atlas-initial-view="population-density"');
   expect(html).toContain('data-atlas-initial-focus="feature"');
   expect(html).toContain("Lake Victoria");
 
@@ -61,7 +61,7 @@ test("friendly feature deep links are resolved on the server before hydration", 
   await waitForMap(page);
   await expect(page.locator('[data-atlas-place-card="lake"]')
     .getByRole("heading", { name: "Lake Victoria", exact: true })).toBeVisible();
-  await expect(page.locator("[data-atlas-root]")).toHaveAttribute("data-atlas-view", "where-people-live");
+  await expect(page.locator("[data-atlas-root]")).toHaveAttribute("data-atlas-view", "population-density");
 });
 
 test("progressive detail pins a selected close-zoom city and omits unnamed search placeholders", async ({ page }, testInfo) => {

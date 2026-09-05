@@ -37,6 +37,15 @@ function compactFact<T>(fact: AtlasObservation<T> | null): AtlasRuntimeFact<T> |
   };
 }
 
+function uniqueRuntimeSources(sources: AtlasRuntimeDataset["sources"]) {
+  const seen = new Set<string>();
+  return sources.filter((source) => {
+    if (seen.has(source.id)) return false;
+    seen.add(source.id);
+    return true;
+  });
+}
+
 export function getAtlasRuntimeDataset(): AtlasRuntimeDataset {
   if (countrySnapshot.snapshotId !== geometrySnapshot.snapshotId) {
     throw new Error("Atlas country and geometry snapshots do not match.");
@@ -131,7 +140,7 @@ export function getAtlasRuntimeDataset(): AtlasRuntimeDataset {
       },
       jjuLinks: getApprovedAtlasJjuLinksForEntity(country.id),
     })),
-    sources: [
+    sources: uniqueRuntimeSources([
       ...countrySnapshot.sources.map((source) => ({
         id: source.id,
         title: source.title,
@@ -156,7 +165,7 @@ export function getAtlasRuntimeDataset(): AtlasRuntimeDataset {
         checksumSha256: source.checksumSha256,
         notes: [`Pinned source version: ${source.version}.`],
       })),
-    ],
+    ]),
     geometry: {
       projectionId: geometrySnapshot.projection.id,
       viewBox: geometrySnapshot.projection.viewBox,

@@ -6,6 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SOURCE_ID = "natural-earth-admin-1-10m-repository-5.1.2";
+const CENSUS_SOURCE_ID = "us-census-population-estimates-2024-admin1";
 const SNAPSHOT_ID = "atlas-admin1-pilot-natural-earth-5.1.1";
 const GEOMETRY_SET_ID = "natural-earth-admin1-10m-default-view-5.1.1";
 const GENERATED_AT = process.env.ATLAS_GENERATED_AT || "2026-09-05T06:30:00Z";
@@ -25,7 +26,10 @@ const root = path.resolve(scriptDirectory, "..");
 const lock = JSON.parse(await readFile(path.join(root, "data/atlas/sources.lock.json"), "utf8"));
 const source = lock.sources.find((entry) => entry.id === SOURCE_ID);
 if (!source) throw new Error(`Atlas source lock is missing ${SOURCE_ID}.`);
+const censusSource = lock.sources.find((entry) => entry.id === CENSUS_SOURCE_ID);
+if (!censusSource) throw new Error(`Atlas source lock is missing ${CENSUS_SOURCE_ID}.`);
 const sourcePath = path.join(root, lock.cacheDirectory, source.target);
+const censusSourcePath = path.join(root, lock.cacheDirectory, censusSource.target);
 const output = {
   canonical: path.join(root, "data/atlas/derived/admin1-pilot-wgs84.v1.geojson"),
   manifest: path.join(root, "lib/atlas-world/data/admin1-pilot.v1.json"),
@@ -101,11 +105,25 @@ function aliasesFor(properties, name) {
   ))].sort((left, right) => left.localeCompare(right, "en"));
 }
 
-const sourceBytes = await readFile(sourcePath);
+function parseCsv(text) {
+  const lines = text.replace(/^\uFEFF/, "").trim().split(/\r?\n/);
+  const headers = lines.shift().split(",");
+  return lines.map((line) => {
+    const values = line.split(",");
+    return Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""]));
+  });
+}
+
+const [sourceBytes, censusBytes] = await Promise.all([readFile(sourcePath), readFile(censusSourcePath)]);
 assert(sourceBytes.byteLength === source.expectedBytes, "Admin-1 source byte length does not match the lock.");
 assert(sha256(sourceBytes) === source.checksumSha256, "Admin-1 source checksum does not match the lock.");
+assert(censusBytes.byteLength === censusSource.expectedBytes, "Census population source byte length does not match the lock.");
+assert(sha256(censusBytes) === censusSource.checksumSha256, "Census population source checksum does not match the lock.");
 const sourceGeoJson = JSON.parse(sourceBytes.toString("utf8"));
 assert(sourceGeoJson.type === "FeatureCollection", "Admin-1 source is not GeoJSON.");
+const censusPopulationByFips = new Map(parseCsv(censusBytes.toString("utf8"))
+  .filter((row) => row.SUMLEV === "040" && /^\d{2}$/.test(row.STATE) && Number.isFinite(Number(row.POPESTIMATE2024)))
+  .map((row) => [`US${row.STATE}`, { name: row.NAME, value: Number(row.POPESTIMATE2024) }]));
 
 const considered = sourceGeoJson.features.filter((feature) => PILOT_COUNTRIES.has(feature.properties?.adm0_a3));
 const eligible = (feature) => Number(feature.properties?.gadm_level) === 1
@@ -130,6 +148,10 @@ const records = considered.filter(eligible).map((rawFeature) => {
     ...(properties.wikidataid ? [{ scheme: "wikidata", value: String(properties.wikidataid) }] : []),
     ...(Number(properties.gn_id) > 0 ? [{ scheme: "geonames", value: String(properties.gn_id) }] : []),
   ];
+  const censusPopulation = parentCode === "USA" ? censusPopulationByFips.get(String(properties.fips)) ?? null : null;
+  if (parentCode === "USA") {
+    assert(censusPopulation, `${name}: no Census population matched Natural Earth FIPS ${String(properties.fips)}.`);
+  }
   const common = {
     atlasEntityId: entityId,
     atlasParentId: `country:${parentCode}`,
@@ -161,6 +183,20 @@ const records = considered.filter(eligible).map((rawFeature) => {
       labelMinimumZoom,
       label: { wgs84: labelWgs84, projected: project(labelWgs84) },
       temporal: { observedAt: null, validFrom: null, validTo: null, precision: "source_snapshot" },
+      observations: {
+        population: censusPopulation ? {
+          value: censusPopulation.value,
+          status: "estimated",
+          unit: "people",
+          temporal: { observedAt: "2024-07-01", validFrom: null, validTo: null, precision: "day" },
+          sourceIds: [CENSUS_SOURCE_ID],
+          sourceField: "POPESTIMATE2024",
+          notes: [
+            "U.S. Census Bureau Vintage 2024 estimate of resident population on July 1, 2024.",
+            `Joined to ${name} through the Census state FIPS code retained by the Natural Earth boundary source.`,
+          ],
+        } : null,
+      },
       geometry: {
         geometryId: `geometry:${featureId}:wgs84`, geometrySetId: GEOMETRY_SET_ID,
         geometryType: rawFeature.geometry.type.toLocaleLowerCase("en-US"), crs: "EPSG:4326",
@@ -221,6 +257,23 @@ const manifest = {
     checksumSha256: source.checksumSha256,
     sourcePerspective: "Natural Earth default de-facto cartographic view",
   },
+  observationSources: [{
+    id: censusSource.id, title: censusSource.title, publisher: censusSource.publisher,
+    version: censusSource.version, url: censusSource.url, retrievedAt: censusSource.retrievedAt,
+    license: censusSource.license, checksumSha256: censusSource.checksumSha256,
+  }],
+  observationDatasets: [{
+    id: "us-admin1-population-2024", name: "United States state population",
+    geographicResolution: "50 states and the District of Columbia in the bounded Admin-1 pilot",
+    temporal: { support: "snapshot", observedAt: "2024-07-01", precision: "day", selectionPolicy: "exact" },
+    sourceIds: [CENSUS_SOURCE_ID],
+    coverage: { populatedFeatures: 51, totalPilotFeatures: records.length, countryIds: ["country:USA"] },
+    caveats: [
+      "This first observation pilot covers only United States states and the District of Columbia; other pilot countries remain explicitly unavailable.",
+      "The values are Vintage 2024 estimates of resident population, not decennial census counts.",
+      "Puerto Rico is a separate present-day Admin-0 Atlas entity and is not included among the United States Admin-1 features.",
+    ],
+  }],
   dataset: {
     id: "admin1-pilot-geography", name: "Subnational boundaries pilot",
     geographicResolution: "Natural Earth 1:10m first-order units in six pilot countries",

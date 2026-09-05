@@ -1,0 +1,9 @@
+.switcher { display:flex; align-items:center; gap:2px; min-height:34px; margin:8px 0 8px 8px; padding:2px; border:1px solid rgba(188,207,220,.22); border-radius:5px; background:#0b1d2b; }
+.switcher span,.switcher a { display:grid; place-items:center; min-height:28px; padding:0 8px; border-radius:3px; color:#9eb0bc; font-size:9px; font-weight:750; text-decoration:none; }
+.switcher span { color:#182735; background:#dec17f; }
+.switcher a:hover { color:#f2dfb8; background:#ffffff0a; }
+.switcher a:focus-visible { outline:2px solid #edc779; outline-offset:2px; }
+@media(max-width:760px) {
+  .switcher { min-height:32px; margin:7px 1px; }
+  .switcher span,.switcher a { min-height:26px; padding:0 6px; font-size:8px; }
+}

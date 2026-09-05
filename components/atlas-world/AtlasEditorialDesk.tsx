@@ -8,6 +8,7 @@ import type {
 import type {
   AtlasJjuAssociationReviewState,
   AtlasJjuAssociationSalience,
+  AtlasJjuAssociationPlace,
   AtlasJjuRelationship,
 } from "@/lib/atlas-world/associations/types";
 import type {
@@ -67,6 +68,11 @@ function readableDate(value: string | null) {
 
 function humanize(value: string) {
   return value.replaceAll("_", " ").replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function atlasPlaceReviewHref(place: AtlasJjuAssociationPlace) {
+  const focus = place.featureId ? `feature:${place.featureId}` : `entity:${place.entityId}`;
+  return `/atlas?focus=${encodeURIComponent(focus)}`;
 }
 
 export default function AtlasEditorialDesk({ initialDrafts, initialAnnotations, initialAssociations }: Props) {
@@ -305,7 +311,7 @@ export default function AtlasEditorialDesk({ initialDrafts, initialAnnotations, 
                   <h3>{note.headline}</h3>
                   <p>{note.summary}</p>
                 </div>
-                <a href={`/atlas?view=${encodeURIComponent(note.triggers.viewPresetIds[0] || "where-people-live")}&focus=${encodeURIComponent(`feature:${note.id}`)}`} target="_blank" rel="noreferrer">Inspect on map ↗</a>
+                <a href={`/atlas?view=${encodeURIComponent(note.triggers.viewPresetIds[0] || "population-density")}&focus=${encodeURIComponent(`feature:${note.id}`)}`} target="_blank" rel="noreferrer">Inspect on map ↗</a>
               </header>
 
               <div className={styles.factStrip}>
@@ -380,7 +386,10 @@ export default function AtlasEditorialDesk({ initialDrafts, initialAnnotations, 
                   <h3>{association.subject.title} <span>→</span> {association.place.name}</h3>
                   <p>{association.proposal.rationale}</p>
                 </div>
-                <a href={association.subject.href} target="_blank" rel="noreferrer">Open JJU subject ↗</a>
+                <div className={styles.cardLinks}>
+                  <a href={association.subject.href} target="_blank" rel="noreferrer">Open JJU subject ↗</a>
+                  <a href={atlasPlaceReviewHref(association.place)} target="_blank" rel="noreferrer">Inspect place ↗</a>
+                </div>
               </header>
 
               <div className={styles.associationFields}>

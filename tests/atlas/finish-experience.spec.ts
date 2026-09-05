@@ -15,22 +15,33 @@ test("country framing keeps the main islands and both Malaysian regions on scree
     {slug:"mys",name:"Malaysia",places:[[101.69,3.14],[116.07,5.98]]},
   ];
   for(const example of examples) {
-    await page.goto(`/atlas?view=religion&country=${example.slug}`,{waitUntil:"networkidle"});
+    // Atlas intentionally loads place/detail evidence after the shell. Framing
+    // is ready when the selected country and camera transform are ready; a
+    // whole-page network-idle wait can be held open by unrelated telemetry.
+    await page.goto(`/atlas?view=religion&country=${example.slug}`,{waitUntil:"domcontentloaded"});
     await expect(page.getByRole("heading",{name:example.name,exact:true})).toBeVisible();
     const group=page.locator("[data-atlas-map-group]");
     await expect(group).toHaveAttribute("transform",/scale\(/);
-    const pixels=await group.evaluate((node,points)=>{
+    const pixelCopies=await group.evaluate((node,points)=>{
       const matrix=(node as SVGGraphicsElement).getScreenCTM()!;
-      return points.map(([x,y])=>({x:matrix.a*x+matrix.c*y+matrix.e,y:matrix.b*x+matrix.d*y+matrix.f}));
+      const svg=(node as SVGGraphicsElement).ownerSVGElement!;
+      const offsets=[0,...Array.from(svg.querySelectorAll<SVGUseElement>("[data-atlas-world-copy]"),
+        (copy)=>Number(copy.dataset.atlasWorldOffset))]
+        .filter((offset,index,all)=>Number.isFinite(offset)&&all.indexOf(offset)===index);
+      return points.map(([x,y])=>offsets.map((offset)=>({
+        x:matrix.a*(x+offset)+matrix.c*y+matrix.e,
+        y:matrix.b*(x+offset)+matrix.d*y+matrix.f,
+      })));
     },example.places.map(projectAtlasWgs84));
     const map=(await page.locator("[data-atlas-world-map]").boundingBox())!;
     const toolbar=(await page.locator("[data-atlas-root] > header").boundingBox())!;
     const panel=(await page.locator("[data-atlas-sheet]").boundingBox())!;
-    for(const point of pixels) {
-      expect(point.x,`${example.name}: primary geography stays inside the left map edge`).toBeGreaterThan(map.x+8);
-      expect(point.x,`${example.name}: primary geography is not behind the desktop cockpit`).toBeLessThan(isMobile?map.x+map.width-8:panel.x-8);
-      expect(point.y,`${example.name}: primary geography stays below the toolbar`).toBeGreaterThan(toolbar.y+toolbar.height+8);
-      expect(point.y,`${example.name}: primary geography stays above the phone sheet`).toBeLessThan(isMobile?panel.y-8:map.y+map.height-8);
+    const right=isMobile?map.x+map.width-8:panel.x-8;
+    const bottom=isMobile?panel.y-8:map.y+map.height-8;
+    for(const copies of pixelCopies) {
+      const visible=copies.find((point)=>point.x>map.x+8&&point.x<right
+        &&point.y>toolbar.y+toolbar.height+8&&point.y<bottom);
+      expect(visible,`${example.name}: an equivalent wrapped geography stays inside the usable map`).toBeDefined();
     }
   }
 });

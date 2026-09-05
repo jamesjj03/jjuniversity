@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useRef, type PointerEvent } from "react";
 import type { AtlasReligionCategory } from "@/lib/atlas-world/types";
 import type { AtlasRuntimeCountry, AtlasRuntimeSource } from "@/lib/atlas-world/runtime";
@@ -8,6 +9,7 @@ import type { AtlasCityPlaceSummary } from "@/lib/atlas-world/places";
 import { atlasLeadershipReviewDue, findAtlasLeadershipContext, findAtlasOfficeUpdate, findAtlasPortrait } from "@/lib/atlas-world/portraitPilot";
 import { getAtlasTerritorialStatus } from "@/lib/atlas-world/territorialStatus";
 import { ATLAS_LAYER_BY_ID } from "@/lib/atlas-world/layers";
+import type { AtlasComparableCountryFact, AtlasCountryInsight } from "@/lib/atlas-world/countryInsights";
 import AtlasTerm from "./AtlasTerm";
 import styles from "./AtlasCountryPanel.module.css";
 
@@ -22,6 +24,7 @@ type AtlasCountryPanelProps = {
   sheetDetent: AtlasSheetDetent;
   onSheetDetentChange: (detent: AtlasSheetDetent) => void;
   onShowView: (viewId: string) => void;
+  insights?: ReadonlyMap<AtlasComparableCountryFact, AtlasCountryInsight>;
   cities?: AtlasCityPlaceSummary[];
   onShowCity?: (placeId: string) => void;
   onClose: () => void;
@@ -49,13 +52,39 @@ const GOVERNMENT_LABELS = new Map([
 ]);
 const DETENT_ORDER: AtlasSheetDetent[] = ["peek", "half", "full"];
 const NO_CITIES: AtlasCityPlaceSummary[] = [];
+const ADMIN1_LABELS = new Map([
+  ["USA", "Explore states"],
+  ["DEU", "Explore Länder"],
+  ["IND", "Explore states & territories"],
+  ["CHN", "Explore provinces"],
+  ["CAN", "Explore provinces & territories"],
+  ["NGA", "Explore states"],
+]);
 function readableDate(value: string | null) {
   return value && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) ? dateFormatter.format(new Date(value)) : value ?? "date not recorded";
+}
+function readableYear(value: string | null) { return value?.match(/^\d{4}/)?.[0] ?? value; }
+function humanizeOfficeholder(value: string) {
+  return value.replace(/\p{L}[\p{L}'’.-]*/gu, (word) => {
+    if (word !== word.toLocaleUpperCase("en-US") || word === word.toLocaleLowerCase("en-US")) return word;
+    if (/^[IVXLCDM]+$/.test(word)) return word;
+    return `${word[0]}${word.slice(1).toLocaleLowerCase("en-US")}`;
+  });
 }
 function FactYear({ observedAt }: { observedAt: string | null }) { return observedAt ? <span className={styles.factYear}>{observedAt.match(/^\d{4}/)?.[0] ?? observedAt}</span> : null; }
 function populationLabel(value: number) { return value >= 1e9 ? `${populationScale.format(value / 1e9)} billion` : value >= 1e6 ? `${populationScale.format(value / 1e6)} million` : integer.format(value); }
 function LensAction({ children, onClick }: { children: string; onClick: () => void }) { return <button type="button" className={styles.showOnMap} onClick={onClick}>{children}<span aria-hidden="true">↗</span></button>; }
 function GovernmentName({ category }: { category: string }) { return <AtlasTerm term={category} context="government">{GOVERNMENT_LABELS.get(category) ?? "Other system"}</AtlasTerm>; }
+function RankNote({ insight }: { insight: AtlasCountryInsight | undefined }) {
+  if (!insight) return null;
+  const isNotable = insight.global.percentile >= 0.9 || insight.global.percentile <= 0.1;
+  const regionalLead = insight.regional?.rank === 1 && insight.regional.total >= 5;
+  if (!isNotable && !regionalLead) return null;
+  return <small className={styles.rankNote}>
+    {insight.comparisonNote}
+    {regionalLead ? ` Highest reported value in ${insight.region}.` : ""}
+  </small>;
+}
 
 function LeadershipRole({ countryId, role, label, leadership }: {
   countryId: string; role: "headOfState" | "headOfGovernment"; label: string; leadership: LeadershipFact;
@@ -64,8 +93,8 @@ function LeadershipRole({ countryId, role, label, leadership }: {
   if (update) return <div className={styles.leadershipRole} data-atlas-office-update={update.id}>
     <div className={styles.leaderText}><span>{label}</span><strong>{update.personName}</strong><b>{update.title}</b></div>
     <p className={styles.leaderContext}>{update.summary}</p>
-    <p className={styles.leadershipDate}>Checked {readableDate(update.observedAt)} · GOV.UK{atlasLeadershipReviewDue(update.observedAt) ? " · Recheck due" : ""}</p>
-    <details className={styles.sourceDetail}><summary>Updated officeholder · source & previous record</summary><p>This separately checked observation replaces the older name in this panel. It does not change the archived Factbook dataset.</p><p>The old record names {update.supersedes.exactSourceName} on {readableDate(update.supersedes.observedAt)}. GOV.UK records that term ending on {readableDate(update.supersedes.termEndedAt)}.</p><ul>{update.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.publisher}: {source.title}</a></li>)}</ul></details>
+    <p className={styles.leadershipDate}>{readableYear(update.observedAt)} check{atlasLeadershipReviewDue(update.observedAt) ? " · review due" : ""}</p>
+    <details className={styles.sourceDetail}><summary>Freshness, source & previous record</summary><p>This separately checked record replaces the older officeholder shown in the archived Factbook snapshot; it does not rewrite that source.</p><p>The archived record names {humanizeOfficeholder(update.supersedes.exactSourceName)} on {readableDate(update.supersedes.observedAt)}. GOV.UK records that term ending on {readableDate(update.supersedes.termEndedAt)}.</p><ul>{update.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.publisher}: {source.title}</a></li>)}</ul></details>
   </div>;
   const people = leadership.value.officeholders;
   return <div className={styles.leadershipRole}>
@@ -76,7 +105,7 @@ function LeadershipRole({ countryId, role, label, leadership }: {
         return <div className={styles.officeholder} key={`${officeholder.nameAndTitle}-${index}`} data-atlas-person={portrait?.person.id}>
           <div className={styles.leader}>
             {portrait && <Image className={styles.portrait} src={portrait.media.href} width={portrait.media.width} height={portrait.media.height} alt={portrait.person.name} sizes="112px" unoptimized />}
-            <div className={styles.leaderText}><span>{label}</span><strong>{portrait?.person.name ?? officeholder.nameAndTitle}</strong>{portrait && <b>{portrait.title}</b>}<small>{officeholder.relationship !== "principal" ? `${officeholder.relationship.replace(/_/g, " ")} · ` : ""}{officeholder.termStartedAt ? `Took office ${readableDate(officeholder.termStartedAt)}` : "Term date not recorded"}</small></div>
+            <div className={styles.leaderText}><span>{label}</span><strong>{portrait?.person.name ?? humanizeOfficeholder(officeholder.nameAndTitle)}</strong>{portrait && <b>{portrait.title}</b>}<small>{officeholder.relationship !== "principal" ? `${officeholder.relationship.replace(/_/g, " ")} · ` : ""}{officeholder.termStartedAt ? `${readableYear(officeholder.termStartedAt)}–` : "Term start unavailable"}</small></div>
           </div>
           {context && <p className={styles.leaderContext}>{context.summary}</p>}
           {(portrait || context) && <details className={styles.sourceDetail}><summary>{portrait ? "Sources & photo credit" : "Sources"}</summary>
@@ -84,8 +113,8 @@ function LeadershipRole({ countryId, role, label, leadership }: {
             {portrait && <div className={styles.portraitCredit}><strong>{portrait.media.author}</strong><p>Photographed {readableDate(portrait.media.photoDate)}. {portrait.media.changes}</p><a href={portrait.media.sourceUrl} target="_blank" rel="noreferrer">Image source</a>{" · "}<a href={portrait.media.licenseUrl} target="_blank" rel="noreferrer">{portrait.media.licenseName}</a>{portrait.media.attributionStatement && <p>{portrait.media.attributionStatement}</p>}</div>}
           </details>}
         </div>;
-      }) : <div className={styles.leaderText}><span>{label}</span><strong>{leadership.value.raw}</strong></div>}
-    <p className={styles.leadershipDate}>Recorded {readableDate(leadership.observedAt)}{atlasLeadershipReviewDue(leadership.observedAt) ? " · Not recently verified" : ""}</p>
+      }) : <div className={styles.leaderText}><span>{label}</span><strong>{humanizeOfficeholder(leadership.value.raw)}</strong></div>}
+    <p className={styles.leadershipDate}>{readableYear(leadership.observedAt) ?? "Undated"} snapshot{atlasLeadershipReviewDue(leadership.observedAt) ? " · review due" : ""}</p>
   </div>;
 }
 
@@ -95,9 +124,9 @@ function Leadership({ country }: { country: AtlasRuntimeCountry }) {
   if (!state && !government) return null;
   const same = state && government && state.value.raw === government.value.raw && state.observedAt === government.observedAt;
   return <section className={styles.leadership} aria-label="Leadership snapshot">
-    <div className={styles.sectionHeading}><h3>Leadership</h3><span className={styles.archiveLabel}>Dated records</span></div>
+    <div className={styles.sectionHeading}><h3>Leadership</h3><span className={styles.archiveLabel}>Source-dated</span></div>
     {same ? <LeadershipRole countryId={country.id} role="headOfState" label="Head of state & government" leadership={state} /> : <>{state && <LeadershipRole countryId={country.id} role="headOfState" label="Head of state" leadership={state} />}{government && <LeadershipRole countryId={country.id} role="headOfGovernment" label="Head of government" leadership={government} />}</>}
-    <p className={styles.snapshotNote}>Officeholders may have changed since these observations. This is not a live leadership service.</p>
+    <details className={styles.sourceDetail}><summary>About leadership freshness</summary><p>Leadership is shown from source-dated records, not a live officeholder service. A “review due” label means Atlas has not recently verified that record.</p></details>
   </section>;
 }
 
@@ -151,7 +180,7 @@ function ReligionComposition({ religion, countryName, active, onShowView }: { re
   </section>;
 }
 
-export default function AtlasCountryPanel({ country, sources, activeLens, sheetDetent, onSheetDetentChange, onShowView, cities = NO_CITIES, onShowCity, onClose }: AtlasCountryPanelProps) {
+export default function AtlasCountryPanel({ country, sources, activeLens, sheetDetent, onSheetDetentChange, onShowView, insights = new Map(), cities = NO_CITIES, onShowCity, onClose }: AtlasCountryPanelProps) {
   const dragStartRef = useRef<number | null>(null);
   const draggedRef = useRef(false);
   const {
@@ -190,21 +219,21 @@ export default function AtlasCountryPanel({ country, sources, activeLens, sheetD
       {government && activeLens.name !== "Government" && <div className={styles.governmentLine}><GovernmentName category={government.value.category} /><LensAction onClick={() => onShowView("government")}>Compare</LensAction></div>}
       <section className={styles.glance} aria-label="Country overview"><dl>
         {country.facts.capital && <div><dt>Capital</dt><dd>{country.facts.capital.value}</dd></div>}
-        {population && <div><dt>Population <FactYear observedAt={population.observedAt} /></dt><dd title={integer.format(population.value)}>{populationLabel(population.value)}</dd></div>}
+        {population && <div><dt>Population <FactYear observedAt={population.observedAt} /></dt><dd title={integer.format(population.value)}>{populationLabel(population.value)}</dd><RankNote insight={insights.get("population")} /></div>}
         {area && <div><dt>Area</dt><dd>{integer.format(area.value)} <span className={styles.unit}>km²</span></dd></div>}
-        {gdpPerCapita && <div><dt><AtlasTerm term="gdp-per-capita">GDP per person</AtlasTerm> <FactYear observedAt={gdpPerCapita.observedAt} /></dt><dd>${integer.format(gdpPerCapita.value)} <span className={styles.unit}>USD</span></dd></div>}
-      </dl>{population && <LensAction onClick={() => onShowView("where-people-live")}>See where people live</LensAction>}</section>
+        {gdpPerCapita && <div><dt><AtlasTerm term="gdp-per-capita">GDP per person</AtlasTerm> <FactYear observedAt={gdpPerCapita.observedAt} /></dt><dd>${integer.format(gdpPerCapita.value)} <span className={styles.unit}>USD</span></dd><RankNote insight={insights.get("gdpPerCapitaCurrentUsd")} /></div>}
+      </dl><div className={styles.glanceActions}>{population && <LensAction onClick={() => onShowView("population-density")}>See population density</LensAction>}{ADMIN1_LABELS.has(country.codes.naturalEarth) && <Link className={styles.exploreSubnational} href={`/atlas/subnational?country=${country.codes.naturalEarth}`}>{ADMIN1_LABELS.get(country.codes.naturalEarth)}<span aria-hidden="true">→</span></Link>}</div></section>
       {(urbanPopulationPercent || populationGrowthAnnualPercent || populationAges0To14Percent
         || populationAges65PlusPercent || fertilityRateBirthsPerWoman || lifeExpectancyYears) && (
         <details className={styles.overviewDisclosure} data-atlas-people-facts>
           <summary>How people live</summary>
           <dl className={styles.detailFacts}>
-            {urbanPopulationPercent && <div><dt>Urban population <FactYear observedAt={urbanPopulationPercent.observedAt} /></dt><dd>{oneDecimal.format(urbanPopulationPercent.value)}%</dd><LensAction onClick={() => onShowView("urbanization")}>Compare on map</LensAction></div>}
-            {populationGrowthAnnualPercent && <div><dt>Population growth <FactYear observedAt={populationGrowthAnnualPercent.observedAt} /></dt><dd>{populationGrowthAnnualPercent.value > 0 ? "+" : ""}{oneDecimal.format(populationGrowthAnnualPercent.value)}% <span className={styles.unit}>per year</span></dd><LensAction onClick={() => onShowView("population-growth")}>Compare on map</LensAction></div>}
-            {populationAges0To14Percent && <div><dt>Ages 0–14 <FactYear observedAt={populationAges0To14Percent.observedAt} /></dt><dd>{oneDecimal.format(populationAges0To14Percent.value)}%</dd><LensAction onClick={() => onShowView("children-share")}>Compare on map</LensAction></div>}
-            {populationAges65PlusPercent && <div><dt>Ages 65+ <FactYear observedAt={populationAges65PlusPercent.observedAt} /></dt><dd>{oneDecimal.format(populationAges65PlusPercent.value)}%</dd><LensAction onClick={() => onShowView("older-population")}>Compare on map</LensAction></div>}
-            {fertilityRateBirthsPerWoman && <div><dt><AtlasTerm term="total-fertility-rate">Fertility rate</AtlasTerm> <FactYear observedAt={fertilityRateBirthsPerWoman.observedAt} /></dt><dd>{oneDecimal.format(fertilityRateBirthsPerWoman.value)} <span className={styles.unit}>births per woman</span></dd><LensAction onClick={() => onShowView("fertility")}>Compare on map</LensAction></div>}
-            {lifeExpectancyYears && <div><dt><AtlasTerm term="life-expectancy">Life expectancy</AtlasTerm> <FactYear observedAt={lifeExpectancyYears.observedAt} /></dt><dd>{oneDecimal.format(lifeExpectancyYears.value)} <span className={styles.unit}>years</span></dd><LensAction onClick={() => onShowView("life-expectancy")}>Compare on map</LensAction></div>}
+            {urbanPopulationPercent && <div><dt>Urban population <FactYear observedAt={urbanPopulationPercent.observedAt} /></dt><dd>{oneDecimal.format(urbanPopulationPercent.value)}%</dd><RankNote insight={insights.get("urbanPopulationPercent")} /><LensAction onClick={() => onShowView("urbanization")}>Compare on map</LensAction></div>}
+            {populationGrowthAnnualPercent && <div><dt>Population growth <FactYear observedAt={populationGrowthAnnualPercent.observedAt} /></dt><dd>{populationGrowthAnnualPercent.value > 0 ? "+" : ""}{oneDecimal.format(populationGrowthAnnualPercent.value)}% <span className={styles.unit}>per year</span></dd><RankNote insight={insights.get("populationGrowthAnnualPercent")} /><LensAction onClick={() => onShowView("population-growth")}>Compare on map</LensAction></div>}
+            {populationAges0To14Percent && <div><dt>Ages 0–14 <FactYear observedAt={populationAges0To14Percent.observedAt} /></dt><dd>{oneDecimal.format(populationAges0To14Percent.value)}%</dd><RankNote insight={insights.get("populationAges0To14Percent")} /><LensAction onClick={() => onShowView("children-share")}>Compare on map</LensAction></div>}
+            {populationAges65PlusPercent && <div><dt>Ages 65+ <FactYear observedAt={populationAges65PlusPercent.observedAt} /></dt><dd>{oneDecimal.format(populationAges65PlusPercent.value)}%</dd><RankNote insight={insights.get("populationAges65PlusPercent")} /><LensAction onClick={() => onShowView("older-population")}>Compare on map</LensAction></div>}
+            {fertilityRateBirthsPerWoman && <div><dt><AtlasTerm term="total-fertility-rate">Fertility rate</AtlasTerm> <FactYear observedAt={fertilityRateBirthsPerWoman.observedAt} /></dt><dd>{oneDecimal.format(fertilityRateBirthsPerWoman.value)} <span className={styles.unit}>births per woman</span></dd><RankNote insight={insights.get("fertilityRateBirthsPerWoman")} /><LensAction onClick={() => onShowView("fertility")}>Compare on map</LensAction></div>}
+            {lifeExpectancyYears && <div><dt><AtlasTerm term="life-expectancy">Life expectancy</AtlasTerm> <FactYear observedAt={lifeExpectancyYears.observedAt} /></dt><dd>{oneDecimal.format(lifeExpectancyYears.value)} <span className={styles.unit}>years</span></dd><RankNote insight={insights.get("lifeExpectancyYears")} /><LensAction onClick={() => onShowView("life-expectancy")}>Compare on map</LensAction></div>}
           </dl>
           <p className={styles.contextCopy}>These are national observations. Definitions and measurement years remain attached to each value.</p>
         </details>

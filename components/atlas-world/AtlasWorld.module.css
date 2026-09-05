@@ -276,6 +276,16 @@
   cursor: grabbing;
 }
 
+.worldWrapCopy {
+  pointer-events: none;
+}
+
+.wrappedNoteHit {
+  fill: transparent;
+  cursor: pointer;
+  pointer-events: all;
+}
+
 .ocean {
   stroke: rgba(159, 194, 190, 0.2);
   stroke-width: 0.9;
@@ -988,9 +998,10 @@
   list-style: none;
 }
 
-.legendItems:focus-visible {
+.legendItems li:focus-visible {
   outline: 2px solid rgba(225, 182, 95, 0.72);
   outline-offset: 3px;
+  border-radius: 3px;
 }
 
 .legendItems li {
@@ -2334,6 +2345,68 @@
   pointer-events: all;
   cursor: pointer;
 }
+.waterLayer,
+.watershedLayer {
+  pointer-events: none;
+}
+.waterFeature,
+.watershedFeature {
+  pointer-events: none;
+  filter: none;
+}
+.waterHit,
+.watershedHit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 9;
+  pointer-events: all;
+  cursor: pointer;
+}
+.waterLabel,
+.watershedLabel {
+  pointer-events: none;
+  paint-order: stroke;
+  stroke-linejoin: round;
+  filter: none;
+}
+.waterLabel {
+  fill: #315d72;
+  stroke: #d7e3df;
+  stroke-width: 1.15;
+  font: italic 500 11px/1 Georgia, serif;
+  letter-spacing: .065em;
+}
+.watershedLabel {
+  fill: #614f24;
+  stroke: #eee7d1;
+  stroke-width: 1.1;
+  font: 700 9px/1 Arial, Helvetica, sans-serif;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+[data-atlas-place-hovered="true"] .waterFeature {
+  fill-opacity: .25 !important;
+  stroke: #d8e9ea !important;
+  stroke-opacity: .9 !important;
+  stroke-width: 1.05 !important;
+}
+[data-atlas-place-selected="true"] .waterFeature {
+  fill: #4f8799 !important;
+  fill-opacity: .34 !important;
+  stroke: #f4d27f !important;
+  stroke-opacity: 1 !important;
+  stroke-width: 1.45 !important;
+}
+[data-atlas-place-hovered="true"] .watershedFeature {
+  fill-opacity: .2 !important;
+  stroke-opacity: 1 !important;
+}
+[data-atlas-place-selected="true"] .watershedFeature {
+  fill-opacity: .24 !important;
+  stroke: #f4d27f !important;
+  stroke-opacity: 1 !important;
+  stroke-width: 1.65 !important;
+}
 [data-atlas-place-hovered="true"] .riverFeature {
   stroke: #e6d49b !important;
   stroke-width: 1.65 !important;
@@ -2440,4 +2513,50 @@
   .cityClose { width:44px; height:44px; }
   .atlas:has([data-atlas-place-card]) .mapControls,.atlas:has([data-atlas-place-card]) .legend { bottom:calc(var(--atlas-sheet-height,230px) + 18px); }
   .countryLabel { letter-spacing:.08em; }
+}
+
+/* Phase 4 map key: meaning first, provenance one level deeper. */
+.legendHeader {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px 14px;
+  align-items:end;
+  padding:0;
+}
+.legendHeader > div:first-child { display:grid; }
+.legendHeader > div:first-child > span {
+  display:block;
+  color:#8ea5ad;
+  font:700 9px/1 var(--v2-ui,Arial,sans-serif);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.legendHeader h2 { margin:4px 0 0; color:#f3ead5; font:650 22px/1.05 Georgia,serif; }
+.legendMeta { display:flex; flex-direction:column; align-items:flex-end; gap:3px; text-align:right; }
+.legendMeta b { color:#dcc68f; font:700 10px/1.2 var(--v2-ui,Arial,sans-serif); }
+.legendMeta span { display:block; color:#96aab1; font:500 9px/1.25 var(--v2-ui,Arial,sans-serif); letter-spacing:0; text-transform:none; }
+.legendDescription { margin:8px 0 11px; color:#bdcbd0; font-size:11px; line-height:1.42; }
+.legendInteractionHint { margin:10px 0 0; padding-top:9px; border-top:1px solid var(--atlas-line); color:#a8bbc2; font-size:10px; line-height:1.4; }
+.legendMeaning { margin-top:8px; }
+.legendMeaning > summary { width:max-content; min-height:30px; align-content:center; color:#e0c98f; cursor:pointer; font-size:11px; font-weight:700; }
+.legendMeaning > div { padding:7px 10px 9px; border-left:2px solid #c4a862; background:#d8e7e708; }
+.legendMeaning p { margin:0 0 6px; color:#d4dde0; font-size:11px; line-height:1.45; }
+.legendMeaning small { display:block; color:#91a7af; font-size:10px; line-height:1.4; }
+.mapAppearance { margin-top:10px; padding-top:9px; border-top:1px solid var(--atlas-line); }
+.mapAppearance > h3 { margin:0 0 5px; color:#d3c29c; font:700 10px/1.2 var(--v2-ui,Arial,sans-serif); letter-spacing:.04em; text-transform:uppercase; }
+.sourcePopover { margin-top:9px; padding-top:8px; border-top:1px solid var(--atlas-line); }
+.sourcePopover summary { position:static; padding:4px 0; color:#dfc78d; font-size:11px; list-style:none; }
+.sourcePopover[open] summary { background:none; }
+.sourcePopover > div { max-height:min(300px,42vh); margin:7px 0 1px; padding:11px; border-radius:5px; background:#102532; box-shadow:none; }
+.legendMethod { margin:0 0 12px; padding:0 0 10px; border-bottom:1px solid #d8e2e512; }
+.legendMethod > strong { color:#e7dac0; font-size:11px; }
+.legendMethod p { font-size:10px; line-height:1.45; }
+.legendMinimal { width:min(292px,calc(100% - 94px)); min-width:0; padding:12px 15px; }
+
+@media(max-width:760px) {
+  .legendHeader { grid-template-columns:1fr; }
+  .legendMeta { align-items:flex-start; text-align:left; }
+  .legendDisclosure[open] > summary { border-bottom:1px solid var(--atlas-line); }
+  .legendDisclosure[open] .legendBody { padding:12px 0 4px; }
+  .legendInteractionHint { font-size:11px; }
 }

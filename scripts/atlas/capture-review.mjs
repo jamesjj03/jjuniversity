@@ -8,7 +8,7 @@ const output = path.resolve(process.env.ATLAS_REVIEW_OUTPUT ?? 'output/atlas-pha
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch();
 const results = [];
-const views = ['political', 'government', 'religion', 'population', 'gdp-per-capita', 'where-people-live'];
+const views = ['political', 'government', 'religion', 'population', 'gdp-per-capita', 'population-density'];
 const scenes = [
   ...views.map((view) => ({ name: `world-${view}`, query: `view=${view}` })),
   { name: 'europe-luxembourg', query: 'view=political&country=lux' },
@@ -16,7 +16,7 @@ const scenes = [
   { name: 'uk-two-offices', query: 'view=government&country=gbr' },
   { name: 'japan-religion', query: 'view=religion&country=jpn' },
   ...['nile-valley', 'java', 'heihe-tengchong', 'indo-gangetic-plain'].map((place) => ({
-    name: `explanation-${place}`, query: `view=where-people-live&focus=${encodeURIComponent(`feature:pattern-note:population:${place}`)}`,
+    name: `explanation-${place}`, query: `view=population-density&focus=${encodeURIComponent(`feature:pattern-note:population:${place}`)}`,
   })),
 ];
 try {

@@ -1,5 +1,7 @@
 /** Screen-space cartography. Source geometry zooms; reading aids do not.
  * The server-rendered geographic tree is stable: index it once, not on every drag. */
+import { atlasRenderedWorldOffsets } from "./worldWrap";
+
 type Rect = { x: number; y: number; width: number; height: number };
 const indexes = new WeakMap<SVGSVGElement, ReturnType<typeof indexMap>>();
 
@@ -53,6 +55,30 @@ function display(element: SVGElement, visible: boolean) {
 const overlaps = (a: Rect, b: Rect) => a.x < b.x + b.width + 5 && a.x + a.width + 5 > b.x
   && a.y < b.y + b.height + 3 && a.y + a.height + 3 > b.y;
 
+function updateFixedScaleReadingAids(index: ReturnType<typeof indexMap>, scale: number) {
+  for (const marker of index.assistance) {
+    display(marker.element, marker.extent * scale < 12);
+    attribute(marker.element, "r", String(marker.radius / scale));
+  }
+  for (const symbol of index.symbols) {
+    attribute(symbol.element, "transform", `translate(${symbol.x} ${symbol.y}) scale(${1 / scale})`);
+  }
+}
+
+/**
+ * Keep fixed-size circles at screen scale in the same task as the camera
+ * transform. The full label/collision pass remains animation-frame batched.
+ */
+export function updateAtlasFixedScaleReadingAids(svg: SVGSVGElement) {
+  let index = indexes.get(svg);
+  if (!index) { index = indexMap(svg); indexes.set(svg, index); }
+  const matrix = index.group.getScreenCTM();
+  if (!matrix) return;
+  const scale = Math.hypot(matrix.a, matrix.b);
+  if (!scale) return;
+  updateFixedScaleReadingAids(index, scale);
+}
+
 export function updateAtlasCartography(svg: SVGSVGElement, zoom: number, selectedId: string | null) {
   let index = indexes.get(svg);
   if (!index) { index = indexMap(svg); indexes.set(svg, index); }
@@ -63,6 +89,7 @@ export function updateAtlasCartography(svg: SVGSVGElement, zoom: number, selecte
 
   // Finish layout reads before changing labels or assistance marks.
   const viewport = svg.getBoundingClientRect();
+  const worldOffsets = atlasRenderedWorldOffsets(svg);
   const occupied: Rect[] = [];
   svg.closest("[data-atlas-root]")?.querySelectorAll<HTMLElement>(
     "header, [data-atlas-sheet], [data-atlas-place-card], aside[aria-label$='map legend']",
@@ -71,23 +98,16 @@ export function updateAtlasCartography(svg: SVGSVGElement, zoom: number, selecte
     const rect = element.getBoundingClientRect();
     if (rect.width && rect.height) occupied.push({ x: rect.left, y: rect.top, width: rect.width, height: rect.height });
   });
-  for (const marker of index.assistance) {
-    display(marker.element, marker.extent * scale < 12);
-    attribute(marker.element, "r", String(marker.radius / scale));
-  }
+  updateFixedScaleReadingAids(index, scale);
   for (const feature of index.features) {
     const [x0, y0, x1, y1] = feature.bounds;
     feature.visible = zoom >= feature.minimum && zoom <= feature.maximum
-      && matrix.a * x1 + matrix.e >= viewport.left - 25 && matrix.a * x0 + matrix.e <= viewport.right + 25
+      && worldOffsets.some((offset) => matrix.a * (x1 + offset) + matrix.e >= viewport.left - 25
+        && matrix.a * (x0 + offset) + matrix.e <= viewport.right + 25)
       && matrix.d * y1 + matrix.f >= viewport.top - 25 && matrix.d * y0 + matrix.f <= viewport.bottom + 25;
     attribute(feature.element, "data-atlas-feature-visible", String(feature.visible));
     display(feature.element, feature.visible);
   }
-  for (const symbol of index.symbols) {
-    if (symbol.feature && !symbol.feature.visible) continue;
-    attribute(symbol.element, "transform", `translate(${symbol.x} ${symbol.y}) scale(${1 / scale})`);
-  }
-
   // Selected-place labels win without re-sorting thousands of static priorities.
   const labels = selectedId ? [
     ...index.labels.filter((label) => label.entityId === selectedId),
@@ -103,7 +123,11 @@ export function updateAtlasCartography(svg: SVGSVGElement, zoom: number, selecte
       && (!label.feature || label.feature.visible) && (selected || zoom >= label.minimum);
     attribute(element, "data-atlas-selected-label", String(selected));
     if (!eligible) { display(element, false); if (label.hit) attribute(label.hit, "r", "0"); continue; }
-    const screenX = matrix.a * x + matrix.c * y + matrix.e;
+    const screenCandidates = worldOffsets.map((offset) => matrix.a * (x + offset) + matrix.c * y + matrix.e);
+    const viewportCenterX = viewport.left + viewport.width / 2;
+    const screenX = screenCandidates.reduce((closest, candidate) =>
+      Math.abs(candidate - viewportCenterX) < Math.abs(closest - viewportCenterX) ? candidate : closest,
+    screenCandidates[0] ?? matrix.a * x + matrix.c * y + matrix.e);
     const screenY = matrix.b * x + matrix.d * y + matrix.f;
     if (screenX < viewport.left - 100 || screenX > viewport.right + 100 || screenY < viewport.top - 100 || screenY > viewport.bottom + 100) {
       display(element, false); if (label.hit) attribute(label.hit, "r", "0"); continue;

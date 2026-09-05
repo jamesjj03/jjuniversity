@@ -19,6 +19,8 @@ import {
   type PointerEvent,
   type WheelEvent,
 } from "react";
+import type { AtlasGlobeContextAsset, AtlasWgs84Geometry } from "@/lib/atlas-world/geographyTypes";
+import { atlasGlobeCoordinateIsVisible } from "@/lib/atlas-world/globeVisibility";
 import type { AtlasRuntimeCountrySummary, AtlasRuntimeSource } from "@/lib/atlas-world/runtime";
 import { atlasPoliticalColor } from "@/lib/atlas-world/politicalPalette";
 import styles from "./AtlasGlobeExperiment.module.css";
@@ -71,6 +73,7 @@ type DragState = {
 };
 
 const GEOMETRY_URL = "/atlas-world/geometry-wgs84.v1.json";
+const CONTEXT_URL = "/atlas-world/globe-context.v1.json";
 const DEFAULT_ROTATION: [number, number, number] = [-12, -12, 0];
 const MIN_ZOOM = 0.82;
 const MAX_ZOOM = 2.65;
@@ -147,6 +150,19 @@ function featureGeometry(feature: AtlasGlobeFeature) {
   return feature as unknown as GeoPermissibleObjects;
 }
 
+function contextGeometry(geometry: AtlasWgs84Geometry) {
+  return { type: "Feature", properties: {}, geometry } as unknown as GeoPermissibleObjects;
+}
+
+type LabelBounds = { left: number; right: number; top: number; bottom: number };
+
+function labelOverlaps(left: LabelBounds, right: LabelBounds) {
+  return left.left < right.right
+    && left.right > right.left
+    && left.top < right.bottom
+    && left.bottom > right.top;
+}
+
 function localPoint(canvas: HTMLCanvasElement, clientX: number, clientY: number) {
   const bounds = canvas.getBoundingClientRect();
   return {
@@ -176,6 +192,8 @@ export default function AtlasGlobeExperiment({
 
   const [geometry, setGeometry] = useState<AtlasGlobeGeometry | null>(null);
   const [geometryError, setGeometryError] = useState<string | null>(null);
+  const [globeContext, setGlobeContext] = useState<AtlasGlobeContextAsset | null>(null);
+  const [globeContextError, setGlobeContextError] = useState<string | null>(null);
   const [size, setSize] = useState({ width: 900, height: 680 });
   const [rotation, setRotation] = useState<[number, number, number]>(DEFAULT_ROTATION);
   const [zoom, setZoom] = useState(1);
@@ -184,6 +202,12 @@ export default function AtlasGlobeExperiment({
   const [query, setQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeResult, setActiveResult] = useState(0);
+
+  const cancelQueuedHover = useCallback(() => {
+    if (hoverFrameRef.current == null) return;
+    cancelAnimationFrame(hoverFrameRef.current);
+    hoverFrameRef.current = null;
+  }, []);
 
   const countryById = useMemo(() => new Map(countries.map((country) => [country.id, country])), [countries]);
   const featureById = useMemo(
@@ -212,6 +236,8 @@ export default function AtlasGlobeExperiment({
   useEffect(() => {
     zoomRef.current = zoom;
   }, [zoom]);
+
+  useEffect(() => () => cancelQueuedHover(), [cancelQueuedHover]);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -260,6 +286,30 @@ export default function AtlasGlobeExperiment({
       });
     return () => controller.abort();
   }, [countries.length, focusFeature, initialCountryId]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(CONTEXT_URL, { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload = await response.json() as AtlasGlobeContextAsset;
+        const hasExpectedShape = payload.schemaVersion === "1.0.0"
+          && payload.canonicalCrs === "EPSG:4326"
+          && Array.isArray(payload.sourceIds)
+          && Array.isArray(payload.rivers)
+          && Array.isArray(payload.cities)
+          && Array.isArray(payload.waterLabels);
+        if (!hasExpectedShape) {
+          throw new Error("The globe context does not match the current Atlas geography contract.");
+        }
+        setGlobeContext(payload);
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        setGlobeContextError(error instanceof Error ? error.message : "The globe context could not be loaded.");
+      });
+    return () => controller.abort();
+  }, []);
 
   const projection = useMemo(() => {
     const reservedWidth = size.width >= 980 && selectedCountry ? 380 : 0;
@@ -330,6 +380,103 @@ export default function AtlasGlobeExperiment({
       context.stroke();
     }
 
+    const projectionCenter = projection.invert?.(projection.translate());
+    const visiblePoint = (coordinates: [number, number], limbPadding?: number) => {
+      if (!projectionCenter || !atlasGlobeCoordinateIsVisible(projectionCenter, coordinates, limbPadding)) return null;
+      const point = projection(coordinates);
+      if (!point || point[0] < -40 || point[0] > size.width + 40 || point[1] < -30 || point[1] > size.height + 30) {
+        return null;
+      }
+      return point;
+    };
+
+    if (globeContext) {
+      if (zoom >= 0.92) {
+        context.save();
+        context.lineCap = "round";
+        context.lineJoin = "round";
+        context.strokeStyle = "rgba(52, 111, 126, 0.86)";
+        context.lineWidth = Math.min(1.15, Math.max(0.55, 0.55 + ((zoom - 1) * 0.34)));
+        for (const river of globeContext.rivers) {
+          context.beginPath();
+          path(contextGeometry(river.geometry));
+          context.stroke();
+        }
+        context.restore();
+      }
+
+      const cityRankLimit = zoom < 0.98 ? -1 : zoom < 1.16 ? 1 : zoom < 1.62 ? 3 : 8;
+      const visibleCities: Array<{ city: AtlasGlobeContextAsset["cities"][number]; point: [number, number] }> = [];
+      for (const city of globeContext.cities) {
+        if (city.sourceScaleRank > cityRankLimit) continue;
+        const point = visiblePoint(city.coordinates);
+        if (point) visibleCities.push({ city, point });
+      }
+
+      context.save();
+      for (const { city, point } of visibleCities) {
+        const radius = city.isNationalCapital ? 1.75 : 1.35;
+        context.beginPath();
+        context.arc(point[0], point[1], radius, 0, Math.PI * 2);
+        context.fillStyle = city.isNationalCapital ? "#efd38a" : "#d7ded4";
+        context.fill();
+        context.lineWidth = 0.75;
+        context.strokeStyle = "rgba(22, 49, 52, 0.92)";
+        context.stroke();
+      }
+
+      const occupiedLabels: LabelBounds[] = [];
+      const waterPriorityFloor = zoom < 1.18 ? 10 : zoom < 1.72 ? 8 : 6;
+      const waterLabels = [...globeContext.waterLabels]
+        .sort((left, right) => right.priority - left.priority || left.name.localeCompare(right.name));
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.font = 'italic 600 10px "Bitter", Georgia, serif';
+      for (const label of waterLabels) {
+        if (zoom < label.minimumZoom || label.priority < waterPriorityFloor) continue;
+        const point = visiblePoint(label.coordinates, 0.06);
+        if (!point) continue;
+        const width = context.measureText(label.name).width + 10;
+        const bounds: LabelBounds = {
+          left: point[0] - (width / 2),
+          right: point[0] + (width / 2),
+          top: point[1] - 8,
+          bottom: point[1] + 8,
+        };
+        if (occupiedLabels.some((entry) => labelOverlaps(entry, bounds))) continue;
+        occupiedLabels.push(bounds);
+        context.lineWidth = 2.6;
+        context.strokeStyle = "rgba(38, 69, 73, 0.76)";
+        context.strokeText(label.name, point[0], point[1]);
+        context.fillStyle = "rgba(220, 231, 224, 0.86)";
+        context.fillText(label.name, point[0], point[1]);
+      }
+
+      const cityLabelRankLimit = zoom < 1.3 ? -1 : zoom < 1.82 ? 0 : 1;
+      context.textAlign = "left";
+      context.textBaseline = "middle";
+      context.font = '600 9px "Atkinson Hyperlegible", system-ui, sans-serif';
+      for (const { city, point } of visibleCities) {
+        if (city.sourceScaleRank > cityLabelRankLimit) continue;
+        const labelX = point[0] + 4;
+        const width = context.measureText(city.name).width + 6;
+        const bounds: LabelBounds = {
+          left: labelX - 2,
+          right: labelX + width,
+          top: point[1] - 7,
+          bottom: point[1] + 7,
+        };
+        if (occupiedLabels.some((entry) => labelOverlaps(entry, bounds))) continue;
+        occupiedLabels.push(bounds);
+        context.lineWidth = 2.4;
+        context.strokeStyle = "rgba(31, 52, 51, 0.86)";
+        context.strokeText(city.name, labelX, point[1]);
+        context.fillStyle = "rgba(244, 239, 218, 0.94)";
+        context.fillText(city.name, labelX, point[1]);
+      }
+      context.restore();
+    }
+
     if (hoveredId && hoveredId !== selectedId) {
       const feature = featureById.get(hoveredId);
       if (feature) {
@@ -357,7 +504,7 @@ export default function AtlasGlobeExperiment({
       }
     }
     context.restore();
-  }, [featureById, geometry, hoveredId, projection, selectedId, size.height, size.width]);
+  }, [featureById, geometry, globeContext, hoveredId, projection, selectedId, size.height, size.width, zoom]);
 
   const hitFeature = useCallback((point: PointerPosition) => {
     const payload = geometryRef.current;
@@ -375,8 +522,10 @@ export default function AtlasGlobeExperiment({
     }
     let nearest: AtlasGlobeFeature | null = null;
     let nearestDistance = 14;
+    const projectionCenter = currentProjection.invert?.(currentProjection.translate());
     for (const feature of payload.features) {
       if (feature.properties.tinyRank == null || !feature.properties.labelWgs84) continue;
+      if (!projectionCenter || !atlasGlobeCoordinateIsVisible(projectionCenter, feature.properties.labelWgs84)) continue;
       const projected = currentProjection(feature.properties.labelWgs84);
       if (!projected) continue;
       const distance = Math.hypot(projected[0] - point.x, projected[1] - point.y);
@@ -445,6 +594,7 @@ export default function AtlasGlobeExperiment({
   };
 
   const onPointerDown = (event: PointerEvent<HTMLCanvasElement>) => {
+    cancelQueuedHover();
     const point = localPoint(event.currentTarget, event.clientX, event.clientY);
     pointersRef.current.set(event.pointerId, point);
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -476,7 +626,7 @@ export default function AtlasGlobeExperiment({
       return;
     }
     if (event.pointerType !== "mouse") return;
-    if (hoverFrameRef.current != null) cancelAnimationFrame(hoverFrameRef.current);
+    cancelQueuedHover();
     hoverFrameRef.current = requestAnimationFrame(() => {
       setHoveredId(hitFeature(point)?.properties.entityId ?? null);
       hoverFrameRef.current = null;
@@ -522,12 +672,16 @@ export default function AtlasGlobeExperiment({
 
   return (
     <section className={styles.globeLab} data-atlas-globe data-atlas-globe-loaded={geometry ? "true" : "false"}
+      data-atlas-globe-context-loaded={globeContext ? "true" : "false"}
+      data-atlas-globe-context-rivers={globeContext?.rivers.length ?? 0}
+      data-atlas-globe-context-cities={globeContext?.cities.length ?? 0}
+      data-atlas-globe-context-water-labels={globeContext?.waterLabels.length ?? 0}
       data-atlas-globe-selected={selectedId ?? "none"} data-atlas-globe-rotation={rotation.map((value) => value.toFixed(2)).join(",")}
       data-atlas-globe-zoom={zoom.toFixed(3)}>
       <header className={styles.toolbar}>
         <div className={styles.identity}>
           <span className={styles.compass} aria-hidden="true">✦</span>
-          <div><h1>Atlas Globe</h1><span>Experimental world view</span></div>
+          <div><h1>Atlas</h1><span>Globe view · present-day political geography</span></div>
         </div>
         <div className={styles.search}>
           <span aria-hidden="true">⌕</span>
@@ -558,8 +712,10 @@ export default function AtlasGlobeExperiment({
           )}
         </div>
         <div className={styles.toolbarActions}>
-          <span className={styles.experimentalBadge}>Experiment</span>
-          <Link href={flatCountryHref}>Return to flat Atlas</Link>
+          <nav className={styles.surfaceSwitch} aria-label="Atlas map surface">
+            <Link href={flatCountryHref}>Map</Link>
+            <span aria-current="page">Globe</span>
+          </nav>
         </div>
       </header>
 
@@ -568,12 +724,12 @@ export default function AtlasGlobeExperiment({
           ref={canvasRef}
           className={styles.canvas}
           role="img"
-          aria-label="Orthographic world globe showing 242 political map units. Use the country search to inspect a place, and use the zoom and reset buttons to adjust the view."
+          aria-label="Orthographic world globe showing 242 political map units with bounded river, city, and named-water context. Use the country search to inspect a place, and use the zoom and reset buttons to adjust the view."
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={(event) => finishPointer(event)}
           onPointerCancel={(event) => finishPointer(event, true)}
-          onPointerLeave={() => { if (!dragRef.current) setHoveredId(null); }}
+          onPointerLeave={() => { cancelQueuedHover(); if (!dragRef.current) setHoveredId(null); }}
           onWheel={onWheel}
         />
 
@@ -611,9 +767,11 @@ export default function AtlasGlobeExperiment({
         <div className={styles.instructions}><span>Drag to rotate</span><span>Pinch or scroll to zoom</span><span>Tap a place to inspect</span></div>
 
         <details className={styles.limitations}>
-          <summary>What this experiment can show</summary>
+          <summary>What the globe can show</summary>
           <p>This is the same 242-entity political geography as Atlas, projected live from canonical longitude and latitude.</p>
-          <p>Population density and relief are not shown: those assets were authored for the flat Mercator map and cannot be wrapped around a globe honestly.</p>
+          <p>Source-locked major rivers, selected cities, and named waters appear progressively as you zoom, adding geographic context without implying complete global coverage.</p>
+          <p>The globe is for shape, proximity, poles, and the antimeridian. The flat map remains the complete analytical surface; its thematic fills, population density, relief, and full feature tools are not wrapped here.</p>
+          {globeContextError && <p>The optional geographic context could not load. Political geography and country selection remain available.</p>}
         </details>
 
         {selectedCountry && (
@@ -637,8 +795,11 @@ export default function AtlasGlobeExperiment({
         )}
 
         <footer className={styles.sourceLine}>
-          <span>{geometry?.features.length ?? countries.length} map units · Orthographic projection</span>
-          <a href={geometry?.source.url ?? naturalEarthSource?.url ?? "https://www.naturalearthdata.com/"} target="_blank" rel="noreferrer">Natural Earth 1:50m · WGS84</a>
+          <span title={globeContext
+            ? `${globeContext.rivers.length} river geometries · ${globeContext.cities.length} cities · ${globeContext.waterLabels.length} water names · ${globeContext.sourceIds.join(" · ")}`
+            : globeContextError ?? undefined}
+          >{geometry?.features.length ?? countries.length} map units · Orthographic projection</span>
+          <a href={geometry?.source.url ?? naturalEarthSource?.url ?? "https://www.naturalearthdata.com/"} target="_blank" rel="noreferrer">Natural Earth · WGS84</a>
         </footer>
       </div>
     </section>

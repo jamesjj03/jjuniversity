@@ -11,6 +11,13 @@ test("Admin-1 pilot keeps entities, parentage, and geometry representations sepa
     name: "California",
     kind: "administrative-unit",
     entity: { parentId: "country:USA", countryId: "country:USA", adminLevel: 1 },
+    observations: {
+      population: {
+        status: "estimated",
+        temporal: { observedAt: "2024-07-01" },
+        sourceIds: ["us-census-population-estimates-2024-admin1"],
+      },
+    },
     geometry: {
       crs: "EPSG:4326",
       canonicalAsset: "data/atlas/derived/admin1-pilot-wgs84.v1.geojson",
@@ -20,6 +27,8 @@ test("Admin-1 pilot keeps entities, parentage, and geometry representations sepa
   expect(pilot.pilot.excludedSourceFeatures).toEqual([
     expect.objectContaining({ name: "Paracel Islands", sourceCode: "CN-X01~" }),
   ]);
+  expect(pilot.features.filter((feature) => feature.observations.population)).toHaveLength(51);
+  expect(resolveAtlasAdmin1Focus("admin1:DEU:DE-BY")?.observations.population).toBeNull();
 });
 
 test("subnational deep link opens the selected unit with explicitly inherited national context", async ({ page }, testInfo) => {
@@ -28,12 +37,18 @@ test("subnational deep link opens the selected unit with explicitly inherited na
     if (message.type() !== "error") return;
     // Existing root-layout prepaint script warning emitted by the Next dev client.
     if (message.text().includes("Encountered a script tag while rendering React component")) return;
+    // Vercel supplies these scripts only on its deployment edge. A local
+    // production server correctly has no matching endpoint.
+    if (/^http:\/\/(127\.0\.0\.1|localhost):/.test(message.location().url ?? "")
+      && /\/_vercel\/(insights|speed-insights)\/script\.js/.test(message.location().url ?? "")) return;
     errors.push(message.text());
   });
   await page.goto("/atlas/subnational?focus=admin1%3AUSA%3AUS-CA&country=usa");
   await expect(page.locator("[data-atlas-subnational]")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "California" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "California", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Inherited from United States" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Measured for California" })).toBeVisible();
+  await expect(page.getByText("39.4M")).toBeVisible();
   const inheritedContext = page.getByText("They are context—not measurements of California.");
   if (testInfo.project.name.startsWith("mobile")) {
     await expect(inheritedContext).toBeAttached();

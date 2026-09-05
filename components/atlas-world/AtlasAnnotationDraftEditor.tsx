@@ -59,7 +59,7 @@ function cleanEtag(value: string | null) {
 }
 
 function blankForm(snapshot: AtlasAnnotationDraftSnapshot): FormState {
-  const view = snapshot.references.views.find((candidate) => candidate.id === "where-people-live") ?? snapshot.references.views[0];
+  const view = snapshot.references.views.find((candidate) => candidate.id === "population-density") ?? snapshot.references.views[0];
   return {
     origin: "manual_editorial",
     headline: "",

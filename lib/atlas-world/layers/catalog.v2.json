@@ -477,7 +477,7 @@
     {
       "schemaVersion": "2.0.0",
       "id": "population-density-2025",
-      "name": "Where people live",
+      "name": "Population density",
       "description": "Modelled 2025 population density from the GHSL one-kilometre equal-area population grid.",
       "valueType": "number",
       "unit": "people_per_square_kilometre_approximately_after_display_resampling",
@@ -582,7 +582,9 @@
       "entityKey": "atlas_feature_id",
       "sourceIds": [
         "natural-earth-rivers-50m-5.1.2",
-        "natural-earth-rivers-10m-5.1.2"
+        "natural-earth-rivers-10m-5.1.2",
+        "wikidata-major-river-pilot-2026-09-05",
+        "wikidata-major-river-linked-labels-2026-09-05"
       ],
       "sourceField": "Natural Earth River features with min_zoom <= 3",
       "access": {
@@ -645,6 +647,90 @@
     },
     {
       "schemaVersion": "2.0.0",
+      "id": "major-water-bodies",
+      "name": "Oceans & seas",
+      "description": "A bounded cartographic selection of globally and regionally meaningful oceans, seas, gulfs, bays, straits, and channels.",
+      "valueType": "geometry",
+      "unit": null,
+      "geometryKind": "multipolygon",
+      "geographicResolution": {
+        "kind": "feature",
+        "featureType": "marine_water_body"
+      },
+      "conceptualResolution": {
+        "taxonomyId": "atlas-physical-geography",
+        "path": [
+          "hydrography",
+          "marine_water_body",
+          "major"
+        ],
+        "depth": 2
+      },
+      "entityKey": "atlas_feature_id",
+      "sourceIds": [
+        "natural-earth-marine-areas-10m-5.1.2"
+      ],
+      "sourceField": "Named marine polygons with source scale rank 4 or better",
+      "access": {
+        "kind": "bundled",
+        "resourceId": "atlas-geography-pack.v1",
+        "selector": "featureCollections.majorWaterBodies"
+      },
+      "temporal": {
+        "kind": "timeless",
+        "defaultSelection": {
+          "kind": "latest"
+        },
+        "selectionPolicy": "timeless",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "watershed-pilot",
+      "name": "Major drainage basins",
+      "description": "A five-basin learning pilot for the Amazon, Danube, Mississippi, Nile, and Yangtze river systems.",
+      "valueType": "geometry",
+      "unit": null,
+      "geometryKind": "multipolygon",
+      "geographicResolution": {
+        "kind": "feature",
+        "featureType": "drainage_basin"
+      },
+      "conceptualResolution": {
+        "taxonomyId": "atlas-physical-geography",
+        "path": [
+          "hydrography",
+          "drainage_basin",
+          "pilot"
+        ],
+        "depth": 2
+      },
+      "entityKey": "atlas_feature_id",
+      "sourceIds": [
+        "world-bank-major-river-basins-2019"
+      ],
+      "sourceField": "Major river basin polygons selected through reviewed pilot IDs",
+      "access": {
+        "kind": "bundled",
+        "resourceId": "atlas-geography-pack.v1",
+        "selector": "featureCollections.watershedPilot"
+      },
+      "temporal": {
+        "kind": "timeless",
+        "defaultSelection": {
+          "kind": "latest"
+        },
+        "selectionPolicy": "timeless",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
       "id": "population-geography-annotations",
       "name": "Contextual explanations",
       "description": "Source-reviewed explanations tied to conspicuous population patterns, geographic extents, evidence, and supporting layers.",
@@ -688,6 +774,133 @@
     }
   ],
   "layers": [
+    {
+      "schemaVersion": "2.0.0",
+      "id": "major-water-bodies",
+      "name": "Oceans & seas",
+      "description": "Named marine geography that gives the political map a readable physical frame.",
+      "datasetId": "major-water-bodies",
+      "resolverId": "feature-geometry-v1",
+      "renderer": "polygon-feature",
+      "channel": "feature-fill",
+      "slot": "base-area",
+      "zIndex": 150,
+      "defaultOpacity": 1,
+      "style": {
+        "fillColor": "#5c8999",
+        "fillOpacity": 0.16,
+        "strokeColor": "#477384",
+        "strokeOpacity": 0.3,
+        "strokeWidth": 0.45
+      },
+      "interactive": {
+        "hover": true,
+        "select": true,
+        "pointerEvents": "visual"
+      },
+      "legend": {
+        "kind": "none"
+      },
+      "missingData": {
+        "defaultStatus": "unavailable",
+        "styles": {
+          "unavailable": {
+            "label": "Marine geometry unavailable",
+            "color": "#000000",
+            "opacity": 0
+          }
+        }
+      },
+      "compatibility": {
+        "exclusiveGroup": null,
+        "requiresLayerIds": [],
+        "conflictsWithLayerIds": []
+      },
+      "provenance": {
+        "sourceIds": [
+          "natural-earth-marine-areas-10m-5.1.2"
+        ],
+        "methodology": "Natural Earth 1:10m marine-area polygons are bounded to globally and regionally meaningful named waters at source scale rank 4 or better. Coastline adjacency is derived from generalized geometry and never asserts ownership or jurisdiction.",
+        "authoredVisualChoices": [
+          "Marine areas use restrained transparent blue ink and a dedicated label hierarchy. The selection is deliberately bounded rather than an exhaustive gazetteer."
+        ]
+      },
+      "temporal": {
+        "kind": "timeless",
+        "defaultSelection": {
+          "kind": "latest"
+        },
+        "selectionPolicy": "timeless",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": true
+      }
+    },
+    {
+      "schemaVersion": "2.0.0",
+      "id": "watershed-pilot",
+      "name": "Drainage basins",
+      "description": "Generalized basin extents for five major river systems.",
+      "datasetId": "watershed-pilot",
+      "resolverId": "feature-geometry-v1",
+      "renderer": "polygon-feature",
+      "channel": "area-pattern",
+      "slot": "historical-area",
+      "zIndex": 430,
+      "defaultOpacity": 0.82,
+      "style": {
+        "fillColor": "#d7b764",
+        "fillOpacity": 0.13,
+        "strokeColor": "#e6ca79",
+        "strokeOpacity": 0.82,
+        "strokeWidth": 1.05,
+        "strokeDasharray": "4 2"
+      },
+      "interactive": {
+        "hover": true,
+        "select": true,
+        "pointerEvents": "visual"
+      },
+      "legend": {
+        "kind": "none"
+      },
+      "missingData": {
+        "defaultStatus": "unavailable",
+        "styles": {
+          "unavailable": {
+            "label": "Basin geometry unavailable",
+            "color": "#000000",
+            "opacity": 0
+          }
+        }
+      },
+      "compatibility": {
+        "exclusiveGroup": null,
+        "requiresLayerIds": [
+          "major-rivers"
+        ],
+        "conflictsWithLayerIds": []
+      },
+      "provenance": {
+        "sourceIds": [
+          "world-bank-major-river-basins-2019"
+        ],
+        "methodology": "Five reviewed World Bank major-river-basin polygons are rendered as generalized learning extents. They are not engineering, legal, or local watershed boundaries.",
+        "authoredVisualChoices": [
+          "A translucent amber wash and dashed boundary distinguish basin area from river centerlines without implying political ownership or control."
+        ]
+      },
+      "temporal": {
+        "kind": "timeless",
+        "defaultSelection": {
+          "kind": "latest"
+        },
+        "selectionPolicy": "timeless",
+        "fallback": "none",
+        "heterogeneousObservationDates": false,
+        "supportsArbitraryTime": true
+      }
+    },
     {
       "schemaVersion": "2.0.0",
       "id": "admin0-political",
@@ -1813,7 +2026,9 @@
       "provenance": {
         "sourceIds": [
           "natural-earth-rivers-50m-5.1.2",
-          "natural-earth-rivers-10m-5.1.2"
+          "natural-earth-rivers-10m-5.1.2",
+          "wikidata-major-river-pilot-2026-09-05",
+          "wikidata-major-river-linked-labels-2026-09-05"
         ],
         "methodology": "Natural Earth 1:50m geometry at overview scales, replaced with 1:10m geometry as you zoom. Geographic detail remains generalized; it is not a navigational survey.",
         "authoredVisualChoices": [
@@ -2012,6 +2227,16 @@
           }
         },
         {
+          "id": "political:water",
+          "layerId": "major-water-bodies",
+          "enabled": true,
+          "opacity": 1,
+          "time": null,
+          "parameters": {
+            "role": "context"
+          }
+        },
+        {
           "id": "political:major-lakes",
           "layerId": "major-lakes",
           "enabled": true,
@@ -2084,6 +2309,16 @@
           "layerId": "physical-relief",
           "enabled": true,
           "opacity": 0.18,
+          "time": null,
+          "parameters": {
+            "role": "context"
+          }
+        },
+        {
+          "id": "government:water",
+          "layerId": "major-water-bodies",
+          "enabled": true,
+          "opacity": 1,
           "time": null,
           "parameters": {
             "role": "context"
@@ -2168,6 +2403,16 @@
           }
         },
         {
+          "id": "religion:water",
+          "layerId": "major-water-bodies",
+          "enabled": true,
+          "opacity": 1,
+          "time": null,
+          "parameters": {
+            "role": "context"
+          }
+        },
+        {
           "id": "religion:major-lakes",
           "layerId": "major-lakes",
           "enabled": true,
@@ -2203,7 +2448,7 @@
       "schemaVersion": "2.0.0",
       "id": "population",
       "name": "Population",
-      "description": "Population by country. Use Where people live to see how people are distributed within those borders.",
+      "description": "Population by country. Use Population density to see how people are distributed within those borders.",
       "question": "Which countries contain the largest populations?",
       "legacyModeAliases": [
         "population",
@@ -2240,6 +2485,16 @@
           "layerId": "physical-relief",
           "enabled": true,
           "opacity": 0.18,
+          "time": null,
+          "parameters": {
+            "role": "context"
+          }
+        },
+        {
+          "id": "population:water",
+          "layerId": "major-water-bodies",
+          "enabled": true,
+          "opacity": 1,
           "time": null,
           "parameters": {
             "role": "context"
@@ -2325,6 +2580,16 @@
           }
         },
         {
+          "id": "gdp-per-capita:water",
+          "layerId": "major-water-bodies",
+          "enabled": true,
+          "opacity": 1,
+          "time": null,
+          "parameters": {
+            "role": "context"
+          }
+        },
+        {
           "id": "gdp-per-capita:major-lakes",
           "layerId": "major-lakes",
           "enabled": true,
@@ -2367,6 +2632,7 @@
       "layerInstances": [
         { "id": "urbanization:fill", "layerId": "admin0-urban-population-share", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "urbanization:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "urbanization:water", "layerId": "major-water-bodies", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "urbanization:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "urbanization:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "urbanization:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
@@ -2385,6 +2651,7 @@
       "layerInstances": [
         { "id": "population-growth:fill", "layerId": "admin0-population-growth-annual", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "population-growth:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "population-growth:water", "layerId": "major-water-bodies", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "population-growth:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "population-growth:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "population-growth:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
@@ -2403,6 +2670,7 @@
       "layerInstances": [
         { "id": "children-share:fill", "layerId": "admin0-population-ages-0-14", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "children-share:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "children-share:water", "layerId": "major-water-bodies", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "children-share:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "children-share:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "children-share:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
@@ -2421,6 +2689,7 @@
       "layerInstances": [
         { "id": "older-population:fill", "layerId": "admin0-population-ages-65-plus", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "older-population:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "older-population:water", "layerId": "major-water-bodies", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "older-population:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "older-population:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "older-population:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
@@ -2439,6 +2708,7 @@
       "layerInstances": [
         { "id": "fertility:fill", "layerId": "admin0-fertility-rate", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "fertility:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "fertility:water", "layerId": "major-water-bodies", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "fertility:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "fertility:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "fertility:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
@@ -2457,6 +2727,7 @@
       "layerInstances": [
         { "id": "life-expectancy:fill", "layerId": "admin0-life-expectancy", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "life-expectancy:relief", "layerId": "physical-relief", "enabled": true, "opacity": 0.18, "time": null, "parameters": { "role": "context" } },
+        { "id": "life-expectancy:water", "layerId": "major-water-bodies", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "life-expectancy:lakes", "layerId": "major-lakes", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
         { "id": "life-expectancy:borders", "layerId": "modern-borders", "enabled": true, "opacity": 1, "time": null, "parameters": {} },
         { "id": "life-expectancy:rivers", "layerId": "major-rivers", "enabled": true, "opacity": 1, "time": null, "parameters": { "role": "context" } },
@@ -2466,13 +2737,13 @@
     },
     {
       "schemaVersion": "2.0.0",
-      "id": "where-people-live",
-      "name": "Where people live",
+      "id": "population-density",
+      "name": "Population density",
       "description": "Modeled population density in 2025, shown with rivers, lakes, cities and relief.",
       "question": "Where do people concentrate, and what geographic patterns help explain it?",
       "legacyModeAliases": [
         "where-people-live",
-        "population-density",
+        "where_people_live",
         "settlement"
       ],
       "shareable": true,
@@ -2504,6 +2775,14 @@
           }
         },
         {
+          "id": "where-people-live:water",
+          "layerId": "major-water-bodies",
+          "enabled": true,
+          "opacity": 1,
+          "time": null,
+          "parameters": {}
+        },
+        {
           "id": "where-people-live:lakes",
           "layerId": "major-lakes",
           "enabled": true,
@@ -2524,6 +2803,14 @@
           "layerId": "major-rivers",
           "enabled": true,
           "opacity": 1,
+          "time": null,
+          "parameters": {}
+        },
+        {
+          "id": "where-people-live:basins",
+          "layerId": "watershed-pilot",
+          "enabled": false,
+          "opacity": 0.82,
           "time": null,
           "parameters": {}
         },

@@ -1,5 +1,20 @@
 import snapshotJson from "./data/admin1-pilot.v1.json";
 
+export type AtlasAdmin1Observation<T> = {
+  value: T;
+  status: "observed" | "estimated";
+  unit: string | null;
+  temporal: {
+    observedAt: string;
+    validFrom: string | null;
+    validTo: string | null;
+    precision: "day" | "year";
+  };
+  sourceIds: string[];
+  sourceField: string;
+  notes: string[];
+};
+
 export type AtlasAdmin1PilotFeature = {
   featureId: string;
   kind: "administrative-unit";
@@ -26,6 +41,9 @@ export type AtlasAdmin1PilotFeature = {
     validFrom: string | null;
     validTo: string | null;
     precision: "source_snapshot";
+  };
+  observations: {
+    population: AtlasAdmin1Observation<number> | null;
   };
   geometry: {
     geometryId: string;
@@ -80,6 +98,30 @@ export type AtlasAdmin1PilotSnapshot = {
     checksumSha256: string;
     sourcePerspective: string;
   };
+  observationSources: Array<{
+    id: string;
+    title: string;
+    publisher: string;
+    version: string;
+    url: string;
+    retrievedAt: string;
+    license: { name: string; url: string };
+    checksumSha256: string;
+  }>;
+  observationDatasets: Array<{
+    id: string;
+    name: string;
+    geographicResolution: string;
+    temporal: {
+      support: "snapshot";
+      observedAt: string;
+      precision: "day" | "year";
+      selectionPolicy: "exact";
+    };
+    sourceIds: string[];
+    coverage: { populatedFeatures: number; totalPilotFeatures: number; countryIds: string[] };
+    caveats: string[];
+  }>;
   dataset: {
     id: string;
     name: string;

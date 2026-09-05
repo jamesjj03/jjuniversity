@@ -58,9 +58,10 @@ test("field guide teaches first, supports related/back/search, and keeps modal f
   // entering its guide; mobile owns a separate outer disclosure.
   if (testInfo.project.name.startsWith("mobile")) {
     await legend.locator(":scope > details > summary").click();
-  } else {
-    await legend.getByText("Map key & sources", { exact: true }).click();
   }
+  // The Phase 4 key leads with interpretation; the complete field guide lives
+  // with methodology and provenance one level deeper.
+  await legend.getByText("Sources & methodology", { exact: true }).filter({ visible: true }).click();
   const trigger = page.getByRole("button", { name: "Field guide", exact: true }).filter({ visible: true });
   await trigger.click();
   const dialog = page.locator("dialog[data-atlas-glossary]");

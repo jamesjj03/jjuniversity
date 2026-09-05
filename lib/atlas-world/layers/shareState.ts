@@ -161,8 +161,37 @@ function parseLayerInstances(raw: string, issues: AtlasSceneParseIssue[]): Atlas
   return instances;
 }
 
+const CURATED_OVERLAY_LAYER_IDS = new Set(["watershed-pilot"]);
+
 function usesPresetLayerDefinitions(left: AtlasLayerInstance[], right: AtlasLayerInstance[]) {
-  return left.length === right.length && left.every((entry, index) => entry.layerId === right[index]?.layerId);
+  if (left.length < right.length || left.length > right.length + CURATED_OVERLAY_LAYER_IDS.size) return false;
+  if (!right.every((entry, index) => left[index]?.layerId === entry.layerId)) return false;
+  const extras = left.slice(right.length);
+  return new Set(extras.map((entry) => entry.layerId)).size === extras.length
+    && extras.every((entry) => CURATED_OVERLAY_LAYER_IDS.has(entry.layerId));
+}
+
+/** Enables one reviewed overlay without opening shared URLs to arbitrary stacks. */
+export function enableAtlasCuratedOverlay(scene: AtlasSceneState, layerId: string) {
+  if (!CURATED_OVERLAY_LAYER_IDS.has(layerId)) return scene;
+  const definition = ATLAS_LAYER_BY_ID.get(layerId);
+  if (!definition) return scene;
+  const existing = scene.layers.find((instance) => instance.layerId === layerId);
+  let layers = existing
+    ? scene.layers.map((instance) => instance.layerId === layerId ? { ...instance, enabled: true } : instance)
+    : [...scene.layers, {
+        id: `${scene.viewPresetId}:curated:${layerId}`,
+        layerId,
+        enabled: true,
+        opacity: definition.defaultOpacity,
+        time: null,
+        parameters: {},
+      }];
+  const required = new Set(definition.compatibility.requiresLayerIds);
+  layers = layers.map((instance) => required.has(instance.layerId)
+    ? { ...instance, enabled: true }
+    : instance);
+  return { ...scene, layers };
 }
 
 /** Parses both Phase 2 `view` state and the V1 `mode` alias. */
@@ -222,7 +251,12 @@ export function parseAtlasSceneSearchParams(input: URLSearchParams | string): At
     scene.layers = scene.layers.map((instance) => ({ ...instance, time: null }));
   }
 
-  return { scene, issues, usedLegacyModeAlias: rawView == null && rawMode != null };
+  return {
+    scene,
+    issues,
+    usedLegacyModeAlias: (rawView == null && rawMode != null)
+      || Boolean(rawView && preset && rawView.toLocaleLowerCase("en-US") !== preset.id),
+  };
 }
 
 function timeParam(time: AtlasTimeSelection) {

@@ -38,11 +38,20 @@ const nile = {
   featureIds: ["feature:river:nile:upper", "feature:river:nile:lower"],
 } as unknown as AtlasPlaceSummary;
 
+const nileBasin = {
+  placeId: "place:world-bank:watershed:nile",
+  kind: "watershed",
+  name: "Nile drainage basin",
+  aliases: ["Nile basin"],
+  shareKey: "watershed:nile-drainage-basin",
+  featureIds: ["feature:watershed:world-bank:nile"],
+} as unknown as AtlasPlaceSummary;
+
 const note = {
   id: "annotation:nile-valley",
 } as unknown as AtlasPatternNote;
 
-const places = [cairo, alexandria, nile];
+const places = [cairo, alexandria, nile, nileBasin];
 const notes = [note];
 
 test("valid canonical country focus wins over a contradictory city alias", () => {
@@ -109,4 +118,18 @@ test("matching readable alias remains a stable companion to canonical focus", ()
 
   expect(resolved.placeId).toBe(cairo.placeId);
   expect(resolved.needsCanonicalUrl).toBe(false);
+});
+
+test("a watershed deep link enables the reviewed basin overlay and its river dependency", () => {
+  const resolved = resolveAtlasInitialState(
+    new URLSearchParams("view=population-density&feature=watershed%3Anile-drainage-basin"),
+    countries,
+    places,
+    notes,
+  );
+
+  expect(resolved.placeId).toBe(nileBasin.placeId);
+  expect(resolved.scene.focus).toEqual({ kind: "feature", id: nileBasin.placeId });
+  expect(resolved.scene.layers.find((layer) => layer.layerId === "watershed-pilot")?.enabled).toBe(true);
+  expect(resolved.scene.layers.find((layer) => layer.layerId === "major-rivers")?.enabled).toBe(true);
 });

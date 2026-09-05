@@ -13,15 +13,14 @@ async function settleCamera(page: Page) {
 }
 
 async function openLayers(page: Page) {
-  const legend = page.getByLabel("Where people live map legend", { exact: true });
+  const legend = page.getByLabel("Population density map legend", { exact: true });
   const mobileDisclosure = legend.locator(":scope > details");
   if (await mobileDisclosure.isVisible() && !await mobileDisclosure.evaluate((node) => (node as HTMLDetailsElement).open)) {
     await mobileDisclosure.locator(":scope > summary").click();
   }
-  const layerOptions = legend.locator("summary").filter({ hasText: /^Map detail & layers$/ }).filter({ visible: true }).locator("..");
-  if (!await layerOptions.evaluate((node) => (node as HTMLDetailsElement).open)) {
-    await layerOptions.locator(":scope > summary").click();
-  }
+  // Phase 4 promotes layer controls out of a nested disclosure. The mobile
+  // legend itself still needs opening, but the controls should then be direct.
+  await expect(legend.getByRole("group", { name: "Visible map layers" })).toBeVisible();
 }
 
 async function toggleDensity(page: Page) {
@@ -45,6 +44,9 @@ async function assertOnlyViewportTiles(page: Page) {
     return {
       level: surface.getAttribute("data-atlas-raster-level"),
       bounds: [a.x, a.y, b.x, b.y],
+      worldOffsets: [0, ...Array.from(svg.querySelectorAll<SVGUseElement>("[data-atlas-world-copy]"),
+        (copy) => Number(copy.dataset.atlasWorldOffset))]
+        .filter((offset, index, all) => Number.isFinite(offset) && all.indexOf(offset) === index),
       tiles: Array.from(surface.querySelectorAll("[data-atlas-raster-tile]")).map((tile) => ({
         id: tile.getAttribute("data-atlas-raster-tile")!,
         href: tile.getAttribute("href")!,
@@ -57,7 +59,8 @@ async function assertOnlyViewportTiles(page: Page) {
   const [left, top, right, bottom] = state.bounds;
   const expected = pyramid.levels.find((level) => level.id === state.level)!.tiles.filter((tile) => {
     const [x, y, width, height] = tile.viewBox;
-    return x < right && x + width > left && y < bottom && y + height > top;
+    return y < bottom && y + height > top && state.worldOffsets.some((offset) =>
+      x + offset < right && x + width + offset > left);
   });
   expect(state.tiles.map((tile) => tile.id).sort()).toEqual(expected.map((tile) => tile.id).sort());
   for (const tile of state.tiles) {
@@ -83,7 +86,7 @@ test("world views do not fetch detail and zoom loads only registered visible sou
   await expect(page.locator(`${SURFACE} > image[mask]`)).not.toHaveAttribute("href");
   await page.getByRole("button", { name: /^Choose view:/ }).click();
   await page.getByRole("dialog", { name: "Explore the map", exact: true })
-    .getByRole("button", { name: "Where people live", exact: true }).click();
+    .getByLabel("Population density", { exact: true }).click();
   await expect(page.locator(DENSITY)).toHaveAttribute("data-atlas-layer-active", "true");
   await expect(page.locator(SURFACE)).toHaveAttribute("data-atlas-raster-level", "overview");
   await settleCamera(page);
@@ -91,7 +94,7 @@ test("world views do not fetch detail and zoom loads only registered visible sou
   expect(detailRequests).toEqual([]);
 
   await page.getByRole("button", { name: "Find a place", exact: true }).click();
-  await page.getByRole("combobox", { name: "Find a country, city, river, or lake", exact: true }).fill("Egypt");
+  await page.getByRole("combobox", { name: "Find a country, city, river, lake, sea, or drainage basin", exact: true }).fill("Egypt");
   await page.getByRole("option", { name: /^Egypt\s/ }).click();
   await expect(page.getByRole("heading", { name: "Egypt", exact: true })).toBeVisible();
   await expectDetailReady(page);

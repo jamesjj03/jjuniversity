@@ -1,3 +1,4 @@
 # Exact, intentionally small environment for source-checked vector-only refreshes.
 # Raster assets remain byte-for-byte unchanged in this path.
 shapely==2.1.2
+pyshp==2.3.1

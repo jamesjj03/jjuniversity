@@ -58,12 +58,12 @@
       "requirements": {
         "path": "scripts/atlas-geography-requirements.txt",
         "python": "3.11",
-        "normalizedTextChecksumSha256": "c00345c7ae4cf8f776d15a9c281fa20bd2a3f1bb3fc3ffa8caa2d9301610d379"
+        "normalizedTextChecksumSha256": "08f0a3dd4b313384e1370bc40fad1b50b076e57b4e7bedd21ba1c72cb8c712b5"
       },
       "vectorOnlyRequirements": {
         "path": "scripts/atlas-vector-requirements.txt",
         "python": "3.11-3.14",
-        "normalizedTextChecksumSha256": "9a23a0bfeb677ae3f93527a4e65ce31591c0144e29b2f355caa31d50909dca47"
+        "normalizedTextChecksumSha256": "27eb6205304c39a021fcd830ed2c5d7e8c44aae05358c6f999bb88da7d02afdc"
       },
       "sourceIds": [
         "ghsl-ghs-pop-2025-r2023a-1km",
@@ -73,7 +73,11 @@
         "natural-earth-rivers-10m-5.1.2",
         "natural-earth-lakes-10m-5.1.2",
         "natural-earth-populated-places-10m-5.1.2",
-        "natural-earth-admin-0-50m-5.1.2"
+        "natural-earth-admin-0-50m-5.1.2",
+        "natural-earth-marine-areas-10m-5.1.2",
+        "world-bank-major-river-basins-2019",
+        "wikidata-major-river-pilot-2026-09-05",
+        "wikidata-major-river-linked-labels-2026-09-05"
       ],
       "transformations": [
         "Area-average the original 1 km World Mollweide population-count grid independently into a 2400 x 1300 Mercator overview and tiled 19200 x 10400 / 38400 x 20800 / 76800 x 41600 detail levels, then apply the same recorded log1p palette and sphere mask. Never upscale the overview.",
@@ -81,7 +85,11 @@
         "Select and round-trip canonical WGS84 vectors, then derive 1200 x 650 Mercator SVG paths and points.",
         "Retain 50m world/regional rivers and lakes, add 10m close-scale rivers with min_zoom <= 7 and lakes with min_zoom <= 5 after removing empty/duplicate geometry, and all national capitals plus 10m cities with SCALERANK <= 4. Preserve source identities and add conservative logical place identities for named physical features.",
         "Derive river and lake relationships to current Atlas Admin-0 map units by WGS84 geometry intersection against the pinned Natural Earth Admin-0 source; these are map-intersection observations, not claims about complete drainage basins or political ownership.",
-        "Convert Natural Earth Populated Places POP2025 values from the source's thousands-of-people unit into integer people while retaining estimated status and the original field name in provenance."
+        "Convert Natural Earth Populated Places POP2025 values from the source's thousands-of-people unit into integer people while retaining estimated status and the original field name in provenance.",
+        "Select named Natural Earth marine polygons in globally and regionally meaningful ocean, sea, gulf, bay, strait, and channel classes at source scale rank 4 or better; group multipart waters by stable Wikidata identity when available, derive label anchors, and describe neighboring Admin-0 units only as coastline adjacency to mapped geometry.",
+        "Extract a five-basin pilot from the World Bank Major River Basins shapefile, union the two Amazon source polygons, preserve canonical WGS84 geometry and raw basin IDs, and derive Mercator display geometry without inferring ownership.",
+        "Attach a bounded five-river fact authority from pinned Wikidata CC0 entity statements, preserving selected statement IDs, value caveats, and source definitions; omit discharge because location and measurement qualifiers are not comparable across the pilot.",
+        "Emit a compact WGS84 globe-context asset containing only world-scale river lines, high-priority city points, and bounded major-water label points from the same locked geography sources."
       ],
       "outputs": [
         "lib/atlas-world/data/geography-pack.v1.json",
@@ -93,6 +101,9 @@
         "public/atlas-world/layers/population-density-2025-mercator/close/",
         "public/atlas-world/physical-mercator-overview.v1.svg",
         "public/atlas-world/physical-mercator-detail.v1.svg",
+        "public/atlas-world/water-mercator.v1.svg",
+        "public/atlas-world/watersheds-mercator.v1.svg",
+        "public/atlas-world/globe-context.v1.json",
         "lib/atlas-world/data/pattern-notes.v1.json"
       ]
     },
@@ -101,11 +112,13 @@
       "command": "npm run atlas:admin1:build",
       "code": "scripts/build-atlas-admin1-pilot.mjs",
       "sourceIds": [
-        "natural-earth-admin-1-10m-repository-5.1.2"
+        "natural-earth-admin-1-10m-repository-5.1.2",
+        "us-census-population-estimates-2024-admin1"
       ],
       "transformations": [
         "Select first-order units for Canada, China, Germany, India, Nigeria, and the United States using ADM0_A3 plus a standard-shaped ISO 3166-2 code and GADM_LEVEL 1.",
         "Preserve selected source geometry as canonical WGS84 GeoJSON and derive a separate 1200 x 650 Mercator SVG asset.",
+        "Join the official U.S. Census Bureau Vintage 2024 state population estimates to the 50 states and District of Columbia through Natural Earth FIPS codes; do not infer values for the other pilot countries.",
         "Exclude the Paracel Islands source feature because Natural Earth classifies it at GADM level 0 and supplies a non-standard provisional code."
       ],
       "outputs": [
@@ -123,6 +136,76 @@
     "Large raw inputs stay out of Git; bounded browser-ready derivatives are committed."
   ],
   "sources": [
+    {
+      "id": "natural-earth-marine-areas-10m-5.1.2",
+      "group": "phase4-geography",
+      "kind": "http",
+      "title": "Natural Earth 1:10m Geography Marine Polygons",
+      "publisher": "Natural Earth",
+      "version": "repository release 5.1.2",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_geography_marine_polys.geojson",
+      "target": "ne_10m_geography_marine_polys.v5.1.2.geojson",
+      "expectedBytes": 1692635,
+      "checksumSha256": "53f865e8ffa966cdd402145c82c5cd14ee7ce974cd0eb9a3f59f03a4cfd2d66c",
+      "retrievedAt": "2026-09-05",
+      "license": {
+        "name": "Public domain",
+        "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "world-bank-major-river-basins-2019",
+      "group": "phase4-geography",
+      "kind": "http",
+      "title": "Major River Basins of the World",
+      "publisher": "World Bank",
+      "version": "catalog update 2019-06-25",
+      "url": "https://datacatalogfiles.worldbank.org/ddh-published/0041426/1/DR0051689/major_basins_of_the_world_0_0_0.zip",
+      "target": "major_basins_of_the_world.world-bank-2019.zip",
+      "expectedBytes": 1271641,
+      "checksumSha256": "d1654ac8b3b15fe675500e119b9375efc531d684e2d7ea2e1c6f5bcdb39b0708",
+      "retrievedAt": "2026-09-05",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://datacatalog.worldbank.org/public-licenses"
+      }
+    },
+    {
+      "id": "wikidata-major-river-pilot-2026-09-05",
+      "group": "phase4-geography",
+      "kind": "http",
+      "title": "Wikidata bounded major-river entity statements",
+      "publisher": "Wikidata",
+      "version": "API snapshot 2026-09-05",
+      "url": "https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q3392%7CQ3783%7CQ1497%7CQ1653%7CQ5413&props=labels%7Caliases%7Cclaims&languages=en&languagefallback=1&format=json&formatversion=2",
+      "target": "wikidata-river-pilot-20260905.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/wikidata-river-pilot-20260905.json",
+      "expectedBytes": 544871,
+      "checksumSha256": "d91a631cce409dcc71f05db5eca110bd8e826c39da74a9af6fa55b26945c1540",
+      "retrievedAt": "2026-09-05",
+      "license": {
+        "name": "CC0 1.0",
+        "url": "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      }
+    },
+    {
+      "id": "wikidata-major-river-linked-labels-2026-09-05",
+      "group": "phase4-geography",
+      "kind": "http",
+      "title": "Wikidata labels for bounded major-river linked entities",
+      "publisher": "Wikidata",
+      "version": "API snapshot 2026-09-05",
+      "url": "https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q4814791%7CQ882739%7CQ5505%7CQ4918%7CQ2887548%7CQ200174%7CQ200952%7CQ97%7CQ244451%7CQ118251%7CQ752674%7CQ49544%7CQ118771%7CQ171840%7CQ877319%7CQ12630%7CQ2887546%7CQ5419%7CQ8319%7CQ4915%7CQ316393%7CQ316397%7CQ166%7CQ12046593%7CQ14369%7CQ14383%7CQ134350%7CQ171009%7CQ179842%7CQ15913751%7CQ45341%7CQ15758768%7CQ876857%7CQ729269%7CQ1045185&props=labels&languages=en&languagefallback=1&format=json&formatversion=2",
+      "target": "wikidata-river-linked-labels-20260905.json",
+      "embeddedSnapshot": "data/atlas/source-seeds/wikidata-river-linked-labels-20260905.json",
+      "expectedBytes": 3431,
+      "checksumSha256": "8cca93a1e80e73800057898f77956da23b9f592c494a29e7e4cfb5b6167397cd",
+      "retrievedAt": "2026-09-05",
+      "license": {
+        "name": "CC0 1.0",
+        "url": "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      }
+    },
     {
       "id": "natural-earth-rivers-10m-5.1.2",
       "group": "phase2-geography",
@@ -499,6 +582,23 @@
       "license": {
         "name": "Public domain",
         "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      }
+    },
+    {
+      "id": "us-census-population-estimates-2024-admin1",
+      "group": "phase4-admin1-pilot",
+      "kind": "http",
+      "title": "Vintage 2024 Annual Estimates of the Resident Population for the United States, Regions, States, District of Columbia, and Puerto Rico",
+      "publisher": "U.S. Census Bureau Population Estimates Program",
+      "version": "Vintage 2024 - July 1, 2024",
+      "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2024/state/totals/NST-EST2024-ALLDATA.csv",
+      "target": "census-nst-est2024-alldata.csv",
+      "expectedBytes": 41378,
+      "checksumSha256": "b8b50bd345d8a5f33d5c8a28c95aeaa0a50971356f000d9b48276a65fd9022a7",
+      "retrievedAt": "2026-09-05",
+      "license": {
+        "name": "U.S. government public data",
+        "url": "https://www.census.gov/about/policies/open-gov/open-data.html"
       }
     }
   ]

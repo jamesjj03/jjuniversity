@@ -1,12 +1,26 @@
 import type {
   AtlasCityFeature,
   AtlasGeographyPack,
+  AtlasPlaceRelationship,
   AtlasPhysicalFeature,
+  AtlasWaterFeature,
+  AtlasWatershedFeature,
 } from "./geographyTypes";
 import type { AtlasObservationStatus } from "./types";
 
-export type AtlasPlaceKind = "city" | "river" | "lake";
+export type AtlasPlaceKind = "city" | "river" | "lake" | "water" | "watershed";
 export type AtlasPlaceBounds = [[number, number], [number, number]];
+
+export type AtlasRelatedPlace = {
+  placeId: string;
+  name: string;
+  placeKind: AtlasPlaceKind;
+  relationship: "near_mapped_geometry" | "drainage_basin" | "river_system";
+  wording: string;
+  distanceKm: number | null;
+  sourceIds: string[];
+  caveat: string | null;
+};
 
 export type AtlasPlaceObservation<T> = {
   value: T;
@@ -31,6 +45,7 @@ type AtlasPlaceSummaryBase = {
   boundsProjected: AtlasPlaceBounds;
   focusPoint: [number, number];
   relatedCountryIds: string[];
+  relatedPlaces: AtlasRelatedPlace[];
   observedAt: string | null;
 };
 
@@ -55,11 +70,35 @@ export type AtlasPhysicalPlaceSummary = AtlasPlaceSummaryBase & {
   areaKm2: AtlasPlaceObservation<number> | null;
   maximumDepthMetres: AtlasPlaceObservation<number> | null;
   sourcePlace: AtlasPlaceObservation<string> | null;
+  headwaters: AtlasPlaceObservation<string[]> | null;
   mouthPlace: AtlasPlaceObservation<string> | null;
   basinName: AtlasPlaceObservation<string> | null;
+  basinAreaKm2: AtlasPlaceObservation<number> | null;
+  majorTributaries: AtlasPlaceObservation<string[]> | null;
 };
 
-export type AtlasPlaceSummary = AtlasCityPlaceSummary | AtlasPhysicalPlaceSummary;
+export type AtlasWaterPlaceSummary = AtlasPlaceSummaryBase & {
+  kind: "water";
+  waterKind: AtlasWaterFeature["waterKind"];
+  wikidataId: string | null;
+  /** Explicitly a cartographic coastline relation, never political ownership. */
+  countryRelationship: "coastline_adjacent_to_mapped_admin0" | null;
+  label: AtlasWaterFeature["label"];
+};
+
+export type AtlasWatershedPlaceSummary = AtlasPlaceSummaryBase & {
+  kind: "watershed";
+  linkedRiverPlaceId: string;
+  sourceFeatureIds: string[];
+  countryRelationship: "intersects_mapped_admin0" | null;
+  label: AtlasWatershedFeature["label"];
+};
+
+export type AtlasPlaceSummary =
+  | AtlasCityPlaceSummary
+  | AtlasPhysicalPlaceSummary
+  | AtlasWaterPlaceSummary
+  | AtlasWatershedPlaceSummary;
 
 type FuturePlaceFields = {
   elevationMetres?: AtlasPlaceObservation<number> | null;
@@ -68,7 +107,7 @@ type FuturePlaceFields = {
   names?: { common?: string; aliases?: string[] };
   facts?: Partial<Pick<
     AtlasPhysicalPlaceSummary,
-    "lengthKm" | "areaKm2" | "maximumDepthMetres" | "sourcePlace" | "mouthPlace" | "basinName"
+    "lengthKm" | "areaKm2" | "maximumDepthMetres" | "sourcePlace" | "headwaters" | "mouthPlace" | "basinName" | "basinAreaKm2" | "majorTributaries"
   >>;
 };
 
@@ -77,7 +116,7 @@ type CityInput = AtlasCityFeature & FuturePlaceFields;
 
 type AtlasPhysicalPlaceFacts = Pick<
   AtlasPhysicalPlaceSummary,
-  "lengthKm" | "areaKm2" | "maximumDepthMetres" | "sourcePlace" | "mouthPlace" | "basinName"
+  "lengthKm" | "areaKm2" | "maximumDepthMetres" | "sourcePlace" | "headwaters" | "mouthPlace" | "basinName" | "basinAreaKm2" | "majorTributaries"
 >;
 
 const EMPTY_PHYSICAL_FACTS: AtlasPhysicalPlaceFacts = {
@@ -85,8 +124,11 @@ const EMPTY_PHYSICAL_FACTS: AtlasPhysicalPlaceFacts = {
   areaKm2: null,
   maximumDepthMetres: null,
   sourcePlace: null,
+  headwaters: null,
   mouthPlace: null,
   basinName: null,
+  basinAreaKm2: null,
+  majorTributaries: null,
 };
 
 /** Search normalization is deliberately shared by names and URL keys. */
@@ -289,6 +331,7 @@ export function atlasCityPlaceSummaries(features: readonly AtlasCityFeature[]) {
       boundsProjected: feature.geometry.derived.bounds,
       focusPoint: point,
       relatedCountryIds: feature.entity.countryId ? [feature.entity.countryId] : [],
+      relatedPlaces: [],
       observedAt: feature.temporal.observedAt,
       entityId: feature.entity.entityId,
       countryId: feature.entity.countryId,
@@ -423,6 +466,7 @@ export function atlasPhysicalPlaceSummaries(features: readonly AtlasPhysicalFeat
       boundsProjected,
       focusPoint: boundsCenter(boundsProjected),
       relatedCountryIds,
+      relatedPlaces: [],
       countryRelationship: group.find((feature) => feature.countryRelationship)?.countryRelationship
         ?? (relatedCountryIds.length > 0
           ? kind === "river" ? "crosses_mapped_admin0" : "borders_mapped_admin0"
@@ -435,14 +479,142 @@ export function atlasPhysicalPlaceSummaries(features: readonly AtlasPhysicalFeat
     .sort((left, right) => left.name.localeCompare(right.name) || left.placeId.localeCompare(right.placeId));
 }
 
+export function atlasWaterPlaceSummaries(features: readonly AtlasWaterFeature[]) {
+  const grouped = new Map<string, AtlasWaterFeature[]>();
+  for (const feature of features) {
+    const group = grouped.get(feature.placeId) ?? [];
+    group.push(feature);
+    grouped.set(feature.placeId, group);
+  }
+  const places = [...grouped.values()].map((group): AtlasWaterPlaceSummary => {
+    const anchor = group.slice().sort((left, right) =>
+      left.sourceScaleRank - right.sourceScaleRank || left.featureId.localeCompare(right.featureId)
+    )[0];
+    const boundsWgs84 = unionBounds(group.map((feature) => feature.geometry.boundsWgs84));
+    const boundsProjected = unionBounds(group.map((feature) => feature.geometry.derived.bounds));
+    const relatedCountryIds = unique(group.flatMap((feature) => feature.adjacentEntityIds)).sort();
+    return {
+      placeId: anchor.placeId,
+      kind: "water",
+      waterKind: anchor.waterKind,
+      name: anchor.name,
+      aliases: unique(group.flatMap((feature) => [feature.name, ...feature.aliases]))
+        .filter((alias) => alias.toLocaleLowerCase("en-US") !== anchor.name.toLocaleLowerCase("en-US")),
+      shareKey: "",
+      featureIds: unique(group.map((feature) => feature.featureId)).sort(),
+      sourceIds: unique(group.flatMap((feature) => feature.sourceIds)).sort(),
+      boundsWgs84,
+      boundsProjected,
+      focusPoint: anchor.label.anchorProjected,
+      relatedCountryIds,
+      relatedPlaces: [],
+      observedAt: anchor.temporal.observedAt,
+      wikidataId: anchor.wikidataId,
+      countryRelationship: relatedCountryIds.length > 0 ? "coastline_adjacent_to_mapped_admin0" : null,
+      label: anchor.label,
+    };
+  });
+  return assignUniqueShareKeys(places, (place) => `water:${atlasPlaceSlug(place.name)}`)
+    .sort((left, right) => left.name.localeCompare(right.name) || left.placeId.localeCompare(right.placeId));
+}
+
+export function atlasWatershedPlaceSummaries(features: readonly AtlasWatershedFeature[]) {
+  const places: AtlasWatershedPlaceSummary[] = features.map((feature) => ({
+    placeId: feature.placeId,
+    kind: "watershed",
+    name: feature.name,
+    aliases: feature.aliases,
+    shareKey: `watershed:${atlasPlaceSlug(feature.name)}`,
+    featureIds: [feature.featureId],
+    sourceFeatureIds: feature.sourceFeatureIds,
+    sourceIds: feature.sourceIds,
+    boundsWgs84: feature.geometry.boundsWgs84,
+    boundsProjected: feature.geometry.derived.bounds,
+    focusPoint: feature.label.anchorProjected,
+    relatedCountryIds: feature.intersectingEntityIds,
+    relatedPlaces: [],
+    observedAt: feature.temporal.observedAt,
+    linkedRiverPlaceId: feature.linkedRiverPlaceId,
+    countryRelationship: feature.intersectingEntityIds.length > 0 ? "intersects_mapped_admin0" : null,
+    label: feature.label,
+  }));
+  return assignUniqueShareKeys(places, (place) => `watershed:${atlasPlaceSlug(place.name)}`)
+    .sort((left, right) => left.name.localeCompare(right.name) || left.placeId.localeCompare(right.placeId));
+}
+
+function connectAtlasPlaces(
+  places: AtlasPlaceSummary[],
+  relationships: readonly AtlasPlaceRelationship[],
+) {
+  const byId = new Map(places.map((place) => [place.placeId, place]));
+  const append = (fromId: string, relation: AtlasRelatedPlace) => {
+    const from = byId.get(fromId);
+    if (!from || from.relatedPlaces.some((entry) => entry.placeId === relation.placeId
+      && entry.relationship === relation.relationship)) return;
+    from.relatedPlaces.push(relation);
+  };
+
+  for (const relationship of relationships) {
+    const from = byId.get(relationship.fromPlaceId);
+    const to = byId.get(relationship.toPlaceId);
+    if (!from || !to) continue;
+    const shared = {
+      relationship: relationship.kind,
+      wording: relationship.wording,
+      distanceKm: relationship.distanceKm,
+      sourceIds: relationship.sourceIds,
+      caveat: relationship.evidence.caveat,
+    } as const;
+    append(from.placeId, { placeId: to.placeId, name: to.name, placeKind: to.kind, ...shared });
+    append(to.placeId, { placeId: from.placeId, name: from.name, placeKind: from.kind, ...shared });
+  }
+
+  for (const basin of places.filter((place): place is AtlasWatershedPlaceSummary => place.kind === "watershed")) {
+    const river = byId.get(basin.linkedRiverPlaceId);
+    if (!river || river.kind !== "river") continue;
+    append(river.placeId, {
+      placeId: basin.placeId,
+      name: basin.name,
+      placeKind: basin.kind,
+      relationship: "drainage_basin",
+      wording: `${basin.name} is the mapped pilot basin for ${river.name}.`,
+      distanceKm: null,
+      sourceIds: basin.sourceIds,
+      caveat: "The basin is generalized learning geometry, not an engineering or legal boundary.",
+    });
+    append(basin.placeId, {
+      placeId: river.placeId,
+      name: river.name,
+      placeKind: river.kind,
+      relationship: "river_system",
+      wording: `${river.name} is the river linked to this mapped basin.`,
+      distanceKm: null,
+      sourceIds: [...new Set([...basin.sourceIds, ...river.sourceIds])],
+      caveat: "The river centerline and basin polygon come from separate sourced cartographic records.",
+    });
+  }
+
+  for (const place of places) {
+    place.relatedPlaces.sort((left, right) => {
+      const priority = (value: AtlasRelatedPlace["relationship"]) => value === "drainage_basin" || value === "river_system" ? 0 : 1;
+      return priority(left.relationship) - priority(right.relationship) || left.name.localeCompare(right.name);
+    });
+  }
+  return places;
+}
+
 export function buildAtlasPlaceIndex(
   collections: AtlasGeographyPack["featureCollections"],
+  relationships: readonly AtlasPlaceRelationship[] = [],
 ): AtlasPlaceSummary[] {
-  return [
+  const places = [
     ...atlasCityPlaceSummaries(collections.majorCities.features),
     ...atlasPhysicalPlaceSummaries(collections.majorRivers.features),
     ...atlasPhysicalPlaceSummaries(collections.majorLakes.features),
+    ...atlasWaterPlaceSummaries(collections.majorWaterBodies.features),
+    ...atlasWatershedPlaceSummaries(collections.watershedPilot.features),
   ].filter((place) => place.name.trim().length > 0 && place.name !== "Unnamed feature");
+  return connectAtlasPlaces(places, relationships);
 }
 
 export function findAtlasPlaceByShareKey(

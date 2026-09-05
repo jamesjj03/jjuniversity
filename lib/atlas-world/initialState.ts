@@ -1,6 +1,6 @@
 import type { AtlasPatternNote } from "./geographyTypes";
 import type { AtlasSceneState } from "./layers";
-import { parseAtlasSceneSearchParams } from "./layers";
+import { enableAtlasCuratedOverlay, parseAtlasSceneSearchParams } from "./layers";
 import {
   atlasPlaceSlug,
   findAtlasPlaceByShareKey,
@@ -55,7 +55,7 @@ function placeFromFriendlyKey(
 
 function physicalPlaceFromKey(places: readonly AtlasPlaceSummary[], raw: string | null) {
   if (!raw) return null;
-  const match = raw.match(/^(river|lake):(.+)$/i);
+  const match = raw.match(/^(river|lake|water|watershed):(.+)$/i);
   if (!match) return null;
   return placeFromFriendlyKey(places, match[1].toLocaleLowerCase("en-US") as AtlasPlaceKind, raw);
 }
@@ -118,7 +118,10 @@ export function resolveAtlasInitialState(
           || (params.has("country") && friendlyCountry?.id !== focusedCountry.id)
         : false;
   let scene = parsed.scene;
-  if (place) scene = { ...scene, focus: { kind: "feature", id: place.placeId } };
+  if (place) {
+    if (place.kind === "watershed") scene = enableAtlasCuratedOverlay(scene, "watershed-pilot");
+    scene = { ...scene, focus: { kind: "feature", id: place.placeId } };
+  }
   else if (note) scene = { ...scene, focus: { kind: "feature", id: note.id } };
   else if (country) scene = { ...scene, focus: { kind: "entity", id: country.id } };
   else if (scene.focus?.kind !== "coordinate") scene = { ...scene, focus: null };

@@ -7,6 +7,7 @@ import type {
 } from "@/lib/atlas-world/layers";
 import { ATLAS_LAYER_BY_ID, continuousLegendPosition } from "@/lib/atlas-world/layers";
 import type { AtlasRuntimeSource } from "@/lib/atlas-world/runtime";
+import { ATLAS_VIEW_GUIDE_BY_ID } from "@/lib/atlas-world/viewGuides";
 import AtlasTerm, { AtlasGlossaryIndex } from "./AtlasTerm";
 import styles from "./AtlasWorld.module.css";
 
@@ -35,12 +36,36 @@ const EXPLORABLE_LAYER_IDS = new Set([
   "major-lakes",
   "major-rivers",
   "major-cities",
+  "major-water-bodies",
+  "watershed-pilot",
   "population-geography-annotations",
 ]);
 
 function layerSources(layer: AtlasRenderPlanLayer, sources: AtlasRuntimeSource[]) {
   const ids = new Set([...layer.dataset.sourceIds, ...layer.definition.provenance.sourceIds]);
   return sources.filter((source) => ids.has(source.id));
+}
+
+function yearFromDate(value: string | null | undefined) {
+  return value?.match(/^\d{4}/)?.[0] ?? null;
+}
+
+function observationPeriod(plan: AtlasRenderPlan, layerData: Record<string, AtlasLayerDataResponse>) {
+  const years = new Set<string>();
+  for (const layer of plan.layers) {
+    const payload = layerData[layer.instance.id];
+    for (const value of payload?.values ?? []) {
+      const year = yearFromDate(value.observedAt);
+      if (year) years.add(year);
+    }
+    if (layer.dataset.id === "population-density-2025") years.add("2025");
+  }
+  const sorted = [...years].sort();
+  if (sorted.length === 1) return sorted[0];
+  if (sorted.length > 1) return `${sorted[0]}–${sorted.at(-1)}`;
+  if (plan.layers.every((layer) => layer.dataset.temporal.kind === "timeless")) return "Timeless geography";
+  if (plan.scene.viewPresetId === "political") return "Present-day map";
+  return "Latest sourced values";
 }
 
 function LegendItems({ layer, count, onHighlightCategory }: { layer: AtlasRenderPlanLayer; count: LegendCount | undefined; onHighlightCategory?: (key: string | null) => void }) {
@@ -92,11 +117,11 @@ function LegendItems({ layer, count, onHighlightCategory }: { layer: AtlasRender
   }
 
   return (
-    <ul className={styles.legendItems} tabIndex={0} aria-label={`${layer.definition.name} legend`}>
+    <ul className={styles.legendItems} aria-label={`${layer.definition.name} legend`}>
       {items
         .filter((item) => !count || (count.counts.get(item.key) ?? 0) > 0)
         .map((item) => (
-          <li key={item.key} onPointerEnter={() => onHighlightCategory?.(item.key)} onPointerLeave={() => onHighlightCategory?.(null)}
+          <li key={item.key} tabIndex={0} onPointerEnter={() => onHighlightCategory?.(item.key)} onPointerLeave={() => onHighlightCategory?.(null)}
             onFocus={() => onHighlightCategory?.(item.key)} onBlur={() => onHighlightCategory?.(null)}>
             <i style={{ backgroundColor: item.color }} />
             <span><AtlasTerm term={item.key} context={layer.definition.id === "admin0-religion" ? "religion" : undefined}>{item.label}</AtlasTerm></span>
@@ -129,6 +154,7 @@ export default function AtlasLegend({
 }: AtlasLegendProps) {
   const informativeLayers = plan.layers.filter((layer) => layer.definition.legend.kind !== "none" && layer.instance.parameters.role !== "context");
   const sourceRecords = sources.filter((source) => plan.sources.includes(source.id));
+  const viewGuide = ATLAS_VIEW_GUIDE_BY_ID.get(plan.scene.viewPresetId);
   const layerControls = onToggleLayer
     ? plan.scene.layers.flatMap((instance) => {
         const definition = ATLAS_LAYER_BY_ID.get(instance.layerId);
@@ -141,22 +167,14 @@ export default function AtlasLegend({
   const renderLegendBody = () => (
     <div className={styles.legendBody}>
       <div className={styles.legendHeader}>
-        <div><span>Current view</span><h2>{viewName}</h2></div>
-      </div>
-      <details className={styles.sourcePopover}>
-        <summary>Sources</summary>
-        <div>
-          {sourceRecords.map((source) => (
-            <p key={source.id}>
-              <a href={source.url} target="_blank" rel="noreferrer">{source.publisher}</a>
-              <small>{source.title}</small>
-              <small>{source.sourceUpdatedAt ? `Source updated ${source.sourceUpdatedAt.slice(0, 10)}` : `Retrieved ${source.retrievedAt.slice(0, 10)}`}</small>
-            </p>
-          ))}
-          <span>Country facts snapshot {generatedAt.slice(0, 10)}</span>
-          <p>Mercator keeps local directions and shapes familiar, but exaggerates land area near the poles. Use area figures to compare country size.</p>
+        <div><span>Map key</span><h2>{viewName}</h2></div>
+        <div className={styles.legendMeta}>
+          <b>{observationPeriod(plan, layerData)}</b>
+          {informativeLayers.some((layer) => (counts.get(layer.instance.id)?.missing ?? 0) > 0) && (
+            <span>{Math.max(...informativeLayers.map((layer) => counts.get(layer.instance.id)?.missing ?? 0))} without comparable data</span>
+          )}
         </div>
-      </details>
+      </div>
       <p className={styles.legendDescription}>{viewDescription}</p>
       <div className={styles.legendLayers}>
         {informativeLayers.map((layer) => {
@@ -166,17 +184,20 @@ export default function AtlasLegend({
             <LegendItems layer={layer} count={counts.get(layer.instance.id)} onHighlightCategory={onHighlightCategory} />
             {loading && <p className={styles.legendDataStatus}>Loading current values…</p>}
             {error && <p className={`${styles.legendDataStatus} ${styles.legendDataError}`}>Layer data unavailable</p>}
-            <details className={styles.legendMethod}>
-              <summary>How to read this map</summary>
-              <p>{layer.definition.provenance.methodology}</p>
-              {layer.definition.provenance.authoredVisualChoices.map((choice) => <p key={choice}>{choice}</p>)}
-              {layerSources(layer, sources).map((source) => <small key={source.id}>{source.publisher}{source.sourceUpdatedAt ? ` · ${source.sourceUpdatedAt.slice(0, 4)}` : ""}</small>)}
-            </details>
           </section>;
         })}
       </div>
+      {informativeLayers.length > 0 && <p className={styles.legendInteractionHint}>
+        {informativeLayers.some((layer) => layer.definition.legend.kind === "categorical")
+          ? "Point at a key color to isolate it. Select a place for its sourced value."
+          : "Select a place to read its value and how it compares."}
+      </p>}
+      {viewGuide && <details className={styles.legendMeaning}>
+        <summary>What this means</summary>
+        <div><p>{viewGuide.plainMeaning}</p><p>{viewGuide.whyItMatters}</p><small>{viewGuide.caution}</small></div>
+      </details>}
       {layerControls.length > 0 && (
-        <details className={styles.mapAppearance}><summary>Map detail & layers</summary><div className={styles.layerToggles} role="group" aria-label="Visible map layers">
+        <section className={styles.mapAppearance} aria-label="Map detail and layers"><h3>Map detail</h3><div className={styles.layerToggles} role="group" aria-label="Visible map layers">
           {layerControls.map(({ instance, definition }) => (
             <button
               key={instance.id}
@@ -188,10 +209,30 @@ export default function AtlasLegend({
               <span>{definition.name}</span>
             </button>
           ))}
-        </div></details>
+        </div></section>
       )}
       <p className={styles.legendStatusKey}><i aria-hidden="true" />Dashed outline: <AtlasTerm term="disputed territory">inspect territorial status</AtlasTerm></p>
-      <AtlasGlossaryIndex />
+      <details className={styles.sourcePopover}>
+        <summary>Sources & methodology</summary>
+        <div>
+          {informativeLayers.map((layer) => <section key={layer.instance.id} className={styles.legendMethod}>
+            <strong>{layer.definition.name}</strong>
+            <p>{layer.definition.provenance.methodology}</p>
+            {layer.definition.provenance.authoredVisualChoices.map((choice) => <p key={choice}>{choice}</p>)}
+            {layerSources(layer, sources).map((source) => <small key={source.id}>{source.publisher}{source.sourceUpdatedAt ? ` · ${source.sourceUpdatedAt.slice(0, 4)}` : ""}</small>)}
+          </section>)}
+          {sourceRecords.map((source) => (
+            <p key={source.id}>
+              <a href={source.url} target="_blank" rel="noreferrer">{source.publisher}</a>
+              <small>{source.title}</small>
+              <small>{source.sourceUpdatedAt ? `Source updated ${source.sourceUpdatedAt.slice(0, 10)}` : `Retrieved ${source.retrievedAt.slice(0, 10)}`}</small>
+            </p>
+          ))}
+          <span>Atlas snapshot {generatedAt.slice(0, 10)}</span>
+          <p>Mercator keeps local directions and shapes familiar, but exaggerates land area near the poles. Use area figures to compare country size.</p>
+          <AtlasGlossaryIndex />
+        </div>
+      </details>
       {!plan.valid && <p className={`${styles.legendDataStatus} ${styles.legendDataError}`}>This layer combination could not be rendered safely.</p>}
     </div>
   );
@@ -204,7 +245,7 @@ export default function AtlasLegend({
       inert={inactive}
     >
       <div className={styles.desktopLegendBody}>
-        {plan.scene.viewPresetId === "political" ? <details className={styles.politicalMapKey}><summary>Map key & sources</summary>{renderLegendBody()}</details> : renderLegendBody()}
+        {renderLegendBody()}
       </div>
       <details className={styles.legendDisclosure}>
         <summary>

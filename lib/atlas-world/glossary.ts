@@ -147,6 +147,16 @@ const naturalEarthPhysical: AtlasGlossarySource = {
   publisher: "Natural Earth",
   url: "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
 };
+const worldBankBasins: AtlasGlossarySource = {
+  title: "Major River Basins of the World",
+  publisher: "World Bank",
+  url: "https://datacatalog.worldbank.org/search/dataset/0041426/major-river-basins-of-the-world",
+};
+const wikidataLicensing: AtlasGlossarySource = {
+  title: "Wikidata structured-data licensing",
+  publisher: "Wikidata",
+  url: "https://www.wikidata.org/wiki/Wikidata:Licensing",
+};
 const naturalEarthCultural: AtlasGlossarySource = {
   title: "Admin 0 map units and Admin 1 states and provinces",
   publisher: "Natural Earth",
@@ -218,6 +228,8 @@ const teaching: Record<string, { example?: string; related: string[] }> = {
   "drainage-basin": { example: "Rain falling on opposite sides of a ridge may enter different river systems even when the two locations are only a short distance apart.", related: ["river", "physical-relief", "population-density"] },
   lake: { example: "A reservoir is human-made but still behaves as a large inland water body on a small-scale world map.", related: ["river", "coastline", "physical-relief"] },
   coastline: { example: "A coastline becomes longer as it is measured with finer detail, so map scale always affects the line you see and any stated length.", related: ["lake", "political-geography", "physical-relief"] },
+  "marine-water-body": { example: "The Mediterranean is a shared sea beside many states. A map can show which coastlines touch it without saying any state owns the sea.", related: ["coastline", "strait", "river"] },
+  strait: { example: "The Strait of Gibraltar is a narrow connection between the Atlantic Ocean and Mediterranean Sea, beside more than one political jurisdiction.", related: ["marine-water-body", "coastline", "political-geography"] },
 };
 
 type TermInput = Omit<AtlasGlossaryTerm, "reviewedAt" | "example" | "relatedTerms">;
@@ -291,11 +303,11 @@ export const ATLAS_GLOSSARY: readonly AtlasGlossaryTerm[] = [
     caveat: "GDP is a flow of production, not a stock of wealth. Current-dollar values are not adjusted for inflation or differences in local purchasing power.", sources: [worldBankGdp] }),
   term({ id: "population", label: "Population", group: "Reading the map", aliases: ["National population", "Population total"],
     definition: "The total number of people estimated to live in a country or territory, not how closely together they live.",
-    inAtlas: "National totals come from the latest available World Bank observation, with GeoNames as a labeled fallback. Where People Live is a separate gridded model.",
+    inAtlas: "National totals come from the latest available World Bank observation, with GeoNames as a labeled fallback. Population density is a separate gridded model.",
     caveat: "The country total and the 2025 density grid can use different methods and years; they should not be treated as the same observation.", sources: [worldBankPopulation, ghsl] }),
   term({ id: "population-density", label: "Population density", group: "Reading the map", aliases: ["Density", "People/km²", "People per km²", "Gridded population density"],
     definition: "How many people live in a given area. Higher density means people are more concentrated; lower density means they are more spread out.",
-    inAtlas: "Where People Live uses the 2025 epoch of GHS-POP R2023A, based on a one-kilometre equal-area source grid. Display pixels aggregate source cells at world scale.",
+    inAtlas: "Population density uses the 2025 epoch of GHS-POP R2023A, based on a one-kilometre equal-area source grid. Display pixels aggregate source cells at world scale.",
     caveat: "It is a modeled distribution, not a census taken independently in each cell. The 2025 epoch is a projection; zooming does not create new source detail.", sources: [ghsl] }),
   term({ id: "modeled-estimate", label: "Modeled estimate", group: "Reading the map", aliases: ["Modelled estimate", "Modeled", "Modelled", "Estimated", "Projection", "2025 estimate"],
     definition: "An estimate made by combining observations with assumptions about how the world works. It fills gaps where measuring every place directly is not possible.",
@@ -418,12 +430,12 @@ export const ATLAS_GLOSSARY: readonly AtlasGlossaryTerm[] = [
     caveat: "A visible marker is not an urban boundary. Marker rank, city population and metropolitan population are different measures; not every settlement is included.", sources: [{ title: "Natural Earth · populated places", publisher: "Natural Earth", url: "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/" }] }),
   term({ id: "river", label: "River", group: "Geography", aliases: ["Rivers", "River line", "Drainage"],
     definition: "A natural channel through which water flows downhill toward another river, a lake, an inland basin, or the sea.",
-    inAtlas: "Atlas uses ranked Natural Earth river centerlines for geographic context. More rivers appear with closer zoom; the line is a cartographic centerline rather than a measured bank-to-bank width.",
-    caveat: "Coverage and positional detail depend on the source scale. Seasonal flow, distributaries, canals, and the exact riverbank are not completely described by one simplified line.", sources: [naturalEarthPhysical] }),
+    inAtlas: "Atlas uses ranked Natural Earth river centerlines for geographic context. A bounded five-river pilot also adds sourced length, headwater, mouth, basin, and tributary facts without treating the centerline as the basin.",
+    caveat: "Coverage and positional detail depend on the source scale. Seasonal flow, distributaries, canals, exact riverbanks, and competing source definitions are not completely described by one simplified line or fact snapshot.", sources: [naturalEarthPhysical, wikidataLicensing] }),
   term({ id: "drainage-basin", label: "Drainage basin", group: "Geography", aliases: ["River basin", "Watershed", "Catchment", "Drainage area"],
     definition: "The area of land where water drains toward the same river system, lake, or other outlet, usually separated from neighboring basins by higher ground.",
-    inAtlas: "Atlas can show rivers and physical relief, but it does not yet include global drainage-basin polygons. A future basin layer should be separate from the river centerlines it helps explain.",
-    caveat: "A watershed is an area, not just a river line. Human engineering, underground flow, seasonal changes, and differences in dataset scale can complicate its boundary.", sources: [naturalEarthPhysical] }),
+    inAtlas: "Atlas keeps drainage areas separate from river centerlines and includes a five-basin pilot for the Amazon, Danube, Mississippi, Nile, and Yangtze. It does not yet include a global basin hierarchy.",
+    caveat: "A watershed is an area, not just a river line. Human engineering, underground flow, seasonal changes, and differences in dataset scale can complicate its boundary; a shared basin is not political ownership.", sources: [worldBankBasins] }),
   term({ id: "lake", label: "Lake", group: "Geography", aliases: ["Lakes", "Reservoir", "Inland water"],
     definition: "A body of water surrounded by land. Map datasets commonly group natural lakes and human-made reservoirs in the same visual layer.",
     inAtlas: "Atlas uses Natural Earth lake and reservoir polygons, ranked so smaller features can appear as the user moves closer. Lake centerlines can also connect river paths through large water bodies.",
@@ -432,6 +444,14 @@ export const ATLAS_GLOSSARY: readonly AtlasGlossaryTerm[] = [
     definition: "The line where land meets the sea, simplified to the level of detail appropriate for a particular map scale.",
     inAtlas: "Atlas derives the world land edge from Natural Earth geometry and keeps it visually distinct from inland political borders. Detail is intentionally reduced at world scale.",
     caveat: "There is no single scale-independent coastline length or shape. Tides, erosion, sea level, and increasingly fine measurement all change the line that can be reported.", sources: [naturalEarthPhysical] }),
+  term({ id: "marine-water-body", label: "Ocean, sea, gulf, or bay", group: "Geography", aliases: ["Ocean", "Sea", "Gulf", "Bay", "Marine area", "Water body"],
+    definition: "A named part of the connected world ocean, described at different scales as an ocean, sea, gulf, or bay.",
+    inAtlas: "Atlas selects globally and regionally meaningful named marine polygons from Natural Earth, gives multipart waters one logical search identity where possible, and derives label anchors inside the mapped area.",
+    caveat: "The polygon is a generalized cartographic area, not a legal maritime boundary. A coastline-adjacency list does not mean that a country owns, controls, or exclusively uses the water.", sources: [naturalEarthPhysical] }),
+  term({ id: "strait", label: "Strait or channel", group: "Geography", aliases: ["Strait", "Channel", "Passage"],
+    definition: "A relatively narrow body of water that connects larger waters and separates nearby land areas.",
+    inAtlas: "Atlas includes a bounded set of major named straits and channels where Natural Earth supplies a ranked marine polygon. They use the same searchable water identity and water-label grammar as seas and oceans.",
+    caveat: "Cartographic width and coastline detail are generalized. Adjacency does not establish a maritime boundary, navigation right, sovereignty claim, or control of the passage.", sources: [naturalEarthPhysical] }),
   term({ id: "income-classification", label: "Income classification", group: "Reading the map", aliases: ["Income level", "Low income", "Lower middle income", "Upper middle income", "High income"],
     definition: "The World Bank sorts economies into low-, middle- and high-income groups using national income per person. This gives a broad comparison, not a description of every resident’s circumstances.",
     inAtlas: "Country details retain the income group supplied by the World Bank country-metadata snapshot. It is not calculated from the displayed GDP-per-capita layer.",

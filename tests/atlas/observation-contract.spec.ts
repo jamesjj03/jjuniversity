@@ -33,9 +33,9 @@ test("observation quality survives layer resolution without discarding usable va
     expect(resolved.color).not.toBe(gdpLayer.missingData.styles.unavailable?.color);
   }
 
-  expect(resolveAtlasLayerDatum(gdpLayer, datum("estimated")).tooltip).toContain("2024 estimate");
-  expect(resolveAtlasLayerDatum(gdpLayer, datum("inherited")).tooltip).toContain("inherited value");
-  expect(resolveAtlasLayerDatum(gdpLayer, datum("carried_forward")).tooltip).toContain("carried-forward value");
+  expect(resolveAtlasLayerDatum(gdpLayer, datum("estimated")).tooltip).toContain("est. 2024");
+  expect(resolveAtlasLayerDatum(gdpLayer, datum("inherited")).tooltip).toContain("parent value 2024");
+  expect(resolveAtlasLayerDatum(gdpLayer, datum("carried_forward")).tooltip).toContain("carried forward 2024");
 });
 
 test("non-displayable observation statuses remain explicit missing-data states", () => {

@@ -10,5 +10,6 @@ cligj==0.7.2
 numpy==2.4.6
 Pillow==11.1.0
 pyparsing==3.3.2
+pyshp==2.3.1
 rasterio==1.4.3
 shapely==2.1.2

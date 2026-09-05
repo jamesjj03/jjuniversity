@@ -64,6 +64,10 @@
 .glance dt { color: var(--panel-muted); font-size: 12px; }
 .glance dd { margin: 4px 0 0; font-size: 22px; font-weight: 600; line-height: 1.15; letter-spacing: -.02em; overflow-wrap: anywhere; }
 .glance dd .unit { color: #bccbd4; font-size: 12px; font-weight: 400; letter-spacing: 0; white-space: nowrap; }
+.glanceActions { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 14px; }
+.rankNote { display: block; margin-top: 5px; color: #d7c48e; font-size: 10px; font-weight: 500; line-height: 1.35; }
+.exploreSubnational { display: inline-flex; align-items: center; gap: 7px; min-height: 38px; color: #efe0b8; font-size: 12px; font-weight: 650; text-decoration: none; }
+.exploreSubnational:hover { color: #fff6df; }
 .factYear { display: inline-block; margin-left: 3px; font-size: 10px; font-weight: 400; color: #a3b7c5; }
 .showOnMap { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 4px 0; border: 0; background: transparent; color: var(--panel-gold); font-size: 12px; font-weight: 500; text-align: left; }
 .showOnMap:hover { color: #fff2d5; text-decoration: underline; text-underline-offset: 3px; }
@@ -147,6 +151,14 @@
   .leaderText > strong { font-size: 22px; }
   .showOnMap { min-height: 40px; }
   .sourceDetail summary, .sourceFooter summary, .overviewDisclosure > summary, .statusNote summary { min-height: 40px; align-content: center; }
+}
+
+@media (min-width: 761px) {
+  .glance { padding-top: 15px; }
+  .glance dl { gap: 13px 12px; }
+  .glance dd { font-size: 17px; }
+  .detailFacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 14px; }
+  .detailFacts > div { min-width: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) { .countryPanel { transition: none; } }

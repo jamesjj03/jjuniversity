@@ -67,6 +67,8 @@ export default function AtlasSubnationalExperience({
   const svgRef = useRef<SVGSVGElement>(null);
   const groupRef = useRef<SVGGElement>(null);
   const zoomRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  const focusIdRef = useRef(initialFocusId);
+  const countryCodeRef = useRef(initialCountryCode);
   const [focusId, setFocusId] = useState(initialFocusId);
   const [countryCode, setCountryCode] = useState(initialCountryCode);
   const [query, setQuery] = useState("");
@@ -166,6 +168,9 @@ export default function AtlasSubnationalExperience({
     }
   }, [activeResult, activeResultId, results, searchOpen, selectFeature, showResults]);
 
+  useEffect(() => { focusIdRef.current = focusId; }, [focusId]);
+  useEffect(() => { countryCodeRef.current = countryCode; }, [countryCode]);
+
   const updateLabels = useCallback((scale: number) => {
     const svg = svgRef.current;
     const group = groupRef.current;
@@ -175,8 +180,8 @@ export default function AtlasSubnationalExperience({
     const viewport = svg.getBoundingClientRect();
     const occupied: Array<{ x: number; y: number; width: number; height: number }> = [];
     const labels = [...svg.querySelectorAll<SVGTextElement>("[data-admin1-label]")].sort((left, right) => {
-      const a = left.dataset.admin1Entity === focusId ? -1 : Number(left.dataset.admin1Priority);
-      const b = right.dataset.admin1Entity === focusId ? -1 : Number(right.dataset.admin1Priority);
+      const a = left.dataset.admin1Entity === focusIdRef.current ? -1 : Number(left.dataset.admin1Priority);
+      const b = right.dataset.admin1Entity === focusIdRef.current ? -1 : Number(right.dataset.admin1Priority);
       return a - b;
     });
     labels.forEach((label) => {
@@ -184,7 +189,7 @@ export default function AtlasSubnationalExperience({
       const parent = label.dataset.admin1Country;
       const x = Number(label.dataset.admin1X);
       const y = Number(label.dataset.admin1Y);
-      const isSelected = label.dataset.admin1Entity === focusId;
+      const isSelected = label.dataset.admin1Entity === focusIdRef.current;
       const screenX = matrix.a * x + matrix.c * y + matrix.e;
       const screenY = matrix.b * x + matrix.d * y + matrix.f;
       const width = (label.textContent?.length ?? 0) * 6.4;
@@ -192,7 +197,7 @@ export default function AtlasSubnationalExperience({
       const overlaps = occupied.some((rect) => rectangle.x < rect.x + rect.width + 5
         && rectangle.x + rectangle.width + 5 > rect.x && rectangle.y < rect.y + rect.height + 3
         && rectangle.y + rectangle.height + 3 > rect.y);
-      const visible = parent === `country:${countryCode}` && (isSelected || scale >= minimum)
+      const visible = parent === `country:${countryCodeRef.current}` && (isSelected || scale >= minimum)
         && screenX > viewport.left && screenX < viewport.right
         && screenY > viewport.top && screenY < viewport.bottom && (isSelected || !overlaps);
       label.style.display = visible ? "" : "none";
@@ -201,7 +206,7 @@ export default function AtlasSubnationalExperience({
         occupied.push(rectangle);
       }
     });
-  }, [countryCode, focusId]);
+  }, []);
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -219,11 +224,20 @@ export default function AtlasSubnationalExperience({
       });
     select(svg).call(behavior).on("dblclick.zoom", null);
     zoomRef.current = behavior;
-    const initial = selected?.geometry.derived.bounds
-      ?? countryById.get(`country:${countryCode}`)?.bounds;
-    if (initial) focusBounds(initial, selected ? 8 : 2.1);
+    const initialFeature = initialFocusId ? featureById.get(initialFocusId) ?? null : null;
+    const initial = initialFeature?.geometry.derived.bounds
+      ?? countryById.get(`country:${initialCountryCode}`)?.bounds;
+    if (initial) focusBounds(initial, initialFeature ? 8 : 2.1);
     return () => { if (frame) cancelAnimationFrame(frame); select(svg).on(".zoom", null); zoomRef.current = null; };
-  }, [countryById, countryCode, focusBounds, selected, updateLabels]);
+  }, [countryById, featureById, focusBounds, initialCountryCode, initialFocusId, updateLabels]);
+
+  useEffect(() => {
+    const group = groupRef.current;
+    if (!group) return;
+    const scale = Number(group.getAttribute("transform")?.match(/scale\(([^)]+)\)/)?.[1] ?? 1);
+    const frame = requestAnimationFrame(() => updateLabels(scale));
+    return () => cancelAnimationFrame(frame);
+  }, [countryCode, focusId, updateLabels]);
 
   useEffect(() => {
     const onPopState = () => {
@@ -246,6 +260,15 @@ export default function AtlasSubnationalExperience({
   }, [countryById, featureById, focusBounds]);
 
   const selectedCountry = selected ? countryById.get(selected.entity.countryId) ?? null : null;
+  const activeCountry = countryById.get(`country:${countryCode}`) ?? null;
+  const subdivisionPopulation = selected?.observations.population ?? null;
+  const populationPeers = selected ? snapshot.features
+    .filter((feature) => feature.entity.countryId === selected.entity.countryId && feature.observations.population)
+    .sort((left, right) => (right.observations.population?.value ?? 0) - (left.observations.population?.value ?? 0)) : [];
+  const populationRank = selected ? populationPeers.findIndex((feature) => feature.entity.entityId === selected.entity.entityId) + 1 : 0;
+  const populationSource = subdivisionPopulation
+    ? snapshot.observationSources.find((source) => subdivisionPopulation.sourceIds.includes(source.id)) ?? null
+    : null;
   const inheritedFacts = selectedCountry ? [
     factLine("Population", selectedCountry.facts.population, number.format(selectedCountry.facts.population?.value ?? 0)),
     factLine("GDP per person", selectedCountry.facts.gdpPerCapitaCurrentUsd, money.format(selectedCountry.facts.gdpPerCapitaCurrentUsd?.value ?? 0)),
@@ -255,8 +278,8 @@ export default function AtlasSubnationalExperience({
 
   return <div ref={rootRef} className={styles.root} data-atlas-subnational>
     <header className={styles.toolbar}>
-      <Link href="/atlas" className={styles.back}>← Atlas</Link>
-      <div className={styles.title}><strong>Subnational Atlas</strong><span>Bounded pilot · 6 countries</span></div>
+      <Link href={activeCountry ? `/atlas?country=${activeCountry.code.toLocaleLowerCase("en-US")}` : "/atlas"} className={styles.back}>← {activeCountry?.name ?? "Atlas"}</Link>
+      <div className={styles.title}><strong>{activeCountry ? `${activeCountry.name} · subdivisions` : "Subnational Atlas"}</strong><span>First-order geography · 6-country pilot</span></div>
       <div className={styles.search}>
         <span id={searchInstructionsId} className={styles.srOnly}>
           All {snapshot.features.length} pilot subdivisions can be found by name, alias, or code. Use the up and down arrow keys to review matches, Enter to select, and Escape to close the results.
@@ -346,6 +369,15 @@ export default function AtlasSubnationalExperience({
           <div><span>Parent place</span><strong>{selectedCountry.name}</strong></div>
           <div><span>Geometry</span><strong>{selected.geometry.geometryType === "multipolygon" ? "Multipart area" : "Area"}</strong></div>
         </section>
+        {subdivisionPopulation && <section className={styles.subdivisionFacts} aria-label={`${selected.name} facts`}>
+          <div className={styles.sectionHeading}>
+            <div><span>Subdivision fact</span><h2>Measured for {selected.name}</h2></div>
+            <b>{subdivisionPopulation.temporal.observedAt.slice(0, 4)}</b>
+          </div>
+          <dl><div><dt>Resident population</dt><dd>{number.format(subdivisionPopulation.value)}<small>July 1 estimate</small></dd></div>
+            {populationRank > 0 && <div><dt>Within {selectedCountry.name}</dt><dd>#{populationRank} of {populationPeers.length}<small>among mapped units with this source</small></dd></div>}</dl>
+          {populationSource && <p>{populationSource.publisher} · {populationSource.version}</p>}
+        </section>}
         <section className={styles.inherited}>
           <div className={styles.sectionHeading}>
             <div><span>National context</span><h2>Inherited from {selectedCountry.name}</h2></div>
@@ -362,12 +394,13 @@ export default function AtlasSubnationalExperience({
           <span>Boundary source</span><strong>{snapshot.source.publisher} · {snapshot.source.version}</strong>
           <p>{snapshot.source.sourcePerspective}. Administrative types are retained source wording, not a new Atlas legal classification.</p>
           <a href={snapshot.source.url} target="_blank" rel="noreferrer">Inspect source ↗</a>
+          {populationSource && <a href={populationSource.url} target="_blank" rel="noreferrer">Inspect population source ↗</a>}
         </section>
       </> : <div className={styles.emptyPanel}>
         <span>Geographic resolution</span><h1>Countries become containers.</h1>
         <p>Select a state, province, territory, Land, municipality, or region inside one of the six pilot countries.</p>
         <div><strong>184</strong><small>first-order units</small></div>
-        <p className={styles.scope}>{snapshot.pilot.coverageStatement}</p>
+        <p className={styles.scope}>{snapshot.pilot.coverageStatement} Official subdivision population is currently available for the United States pilot only.</p>
       </div>}
     </aside>
   </div>;

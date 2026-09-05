@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import type { AtlasRasterAsset, AtlasRasterPyramid } from "@/lib/atlas-world/geographyTypes";
 import { recordAtlasEvent } from "@/lib/atlas-world/telemetry";
+import { atlasRenderedWorldOffsets } from "@/lib/atlas-world/worldWrap";
 
 type Tile = AtlasRasterAsset & { id: string };
 /** One source-derived detail level at a time, only for the visible viewport.
@@ -49,13 +50,18 @@ export default function AtlasRasterSurface({ overview, pyramid }: { overview: At
       const level = pyramid.levels.filter((candidate) => zoom >= candidate.minimumZoom).at(-1);
       setLevelId(level?.id ?? "overview");
       if (!level) { reconcileTiles([]); return; }
-      const inverse = matrix.inverse();
       const rect = svg.getBoundingClientRect();
-      const a = new DOMPoint(rect.left, rect.top).matrixTransform(inverse);
-      const b = new DOMPoint(rect.right, rect.bottom).matrixTransform(inverse);
+      const worldOffsets = atlasRenderedWorldOffsets(svg);
       const next = level.tiles.filter((tile) => {
         const [x, y, width, height] = tile.viewBox;
-        return x < b.x && x + width > a.x && y < b.y && y + height > a.y;
+        const top = matrix.d * y + matrix.f;
+        const bottom = matrix.d * (y + height) + matrix.f;
+        if (Math.max(top, bottom) <= rect.top || Math.min(top, bottom) >= rect.bottom) return false;
+        return worldOffsets.some((offset) => {
+          const left = matrix.a * (x + offset) + matrix.e;
+          const right = matrix.a * (x + width + offset) + matrix.e;
+          return Math.max(left, right) > rect.left && Math.min(left, right) < rect.right;
+        });
       });
       reconcileTiles(next);
     };

@@ -2,9 +2,11 @@ import type {
   AtlasCityFeature,
   AtlasGeographyPack,
   AtlasPhysicalFeature,
+  AtlasWaterFeature,
+  AtlasWatershedFeature,
 } from "./geographyTypes";
 
-export type AtlasFeatureSurfaceKind = "city" | "river" | "lake";
+export type AtlasFeatureSurfaceKind = "city" | "river" | "lake" | "water" | "watershed";
 
 export type AtlasFeatureSurfaceRecord = {
   featureId: string;
@@ -20,9 +22,16 @@ export type AtlasFeatureSurfaceRecord = {
   geometryHref: string | null;
   countryId: string | null;
   isNationalCapital: boolean;
+  label: {
+    text: string;
+    anchor: [number, number];
+    priority: number;
+    minimumZoom: number;
+    maximumZoom: number | null;
+  } | null;
 };
 
-type AtlasSurfaceFeature = AtlasPhysicalFeature | AtlasCityFeature;
+type AtlasSurfaceFeature = AtlasPhysicalFeature | AtlasCityFeature | AtlasWaterFeature | AtlasWatershedFeature;
 
 function geometryAssetId(featureId: string) {
   return featureId.replace(/[^A-Za-z0-9_-]/g, "-");
@@ -47,23 +56,37 @@ function toSurfaceRecord(feature: AtlasSurfaceFeature): AtlasFeatureSurfaceRecor
   const fallback = boundsCenter(bounds);
   const placeId = feature.kind === "city" ? feature.entity.entityId : feature.placeId;
   const detail = feature.sourceIds.some((sourceId) => sourceId.includes("10m"));
+  const explicitLabel = feature.kind === "water" || feature.kind === "watershed" ? feature.label : null;
+  const geometryHref = feature.kind === "city"
+    ? null
+    : feature.kind === "water"
+      ? `/atlas-world/water-mercator.v1.svg#${geometryAssetId(feature.featureId)}`
+      : feature.kind === "watershed"
+        ? `/atlas-world/watersheds-mercator.v1.svg#${geometryAssetId(feature.featureId)}`
+        : `/atlas-world/physical-mercator-${detail ? "detail" : "overview"}.v1.svg#${geometryAssetId(feature.featureId)}`;
   return {
     featureId: feature.featureId,
     placeId,
     kind: feature.kind,
     name: feature.name,
     bounds: [bounds[0][0], bounds[0][1], bounds[1][0], bounds[1][1]],
-    point: feature.geometry.derived.point
+    point: explicitLabel?.anchorProjected
+      ?? feature.geometry.derived.point
       ?? pathLabelPoint(feature.geometry.derived.path, fallback),
-    minimumZoom: feature.displayMinimumZoom ?? 1,
-    maximumZoom: feature.displayMaximumZoom ?? null,
-    sourceScaleRank: feature.sourceScaleRank,
-    displayLod: feature.displayLod,
-    geometryHref: feature.kind === "city"
-      ? null
-      : `/atlas-world/physical-mercator-${detail ? "detail" : "overview"}.v1.svg#${geometryAssetId(feature.featureId)}`,
+    minimumZoom: feature.kind === "watershed" ? feature.label.minimumZoom : feature.displayMinimumZoom ?? 1,
+    maximumZoom: "displayMaximumZoom" in feature ? feature.displayMaximumZoom ?? null : null,
+    sourceScaleRank: "sourceScaleRank" in feature ? feature.sourceScaleRank : null,
+    displayLod: "displayLod" in feature ? feature.displayLod : "regional",
+    geometryHref,
     countryId: feature.kind === "city" ? feature.entity.countryId : null,
     isNationalCapital: feature.kind === "city" && feature.isNationalCapital,
+    label: explicitLabel ? {
+      text: feature.name,
+      anchor: explicitLabel.anchorProjected,
+      priority: explicitLabel.priority,
+      minimumZoom: explicitLabel.minimumZoom,
+      maximumZoom: "maximumZoom" in explicitLabel ? explicitLabel.maximumZoom ?? null : null,
+    } : null,
   };
 }
 
@@ -74,6 +97,8 @@ export function buildAtlasFeatureSurfaceIndex(
     ...collections.majorRivers.features,
     ...collections.majorLakes.features,
     ...collections.majorCities.features,
+    ...collections.majorWaterBodies.features,
+    ...collections.watershedPilot.features,
   ].map(toSurfaceRecord);
 }
 

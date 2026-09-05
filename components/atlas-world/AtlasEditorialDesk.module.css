@@ -263,6 +263,24 @@
   text-decoration: none;
 }
 
+.cardLinks {
+  display: grid;
+  justify-items: end;
+  gap: 7px;
+}
+
+.cardLinks a {
+  color: #e8cf91;
+  font-size: 0.76rem;
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.cardLinks a:hover,
+.cardLinks a:focus-visible {
+  text-decoration: underline;
+}
+
 .badgeRow { display: flex; flex-wrap: wrap; gap: 6px; }
 
 .stateBadge,
@@ -445,7 +463,8 @@
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metrics div { min-height: 88px; }
   .queueIntro > span { text-align: left; }
-  .cardHeader > a { width: fit-content; }
+  .cardHeader > a,
+  .cardLinks { width: fit-content; justify-items: start; }
   .factStrip,
   .evidenceGrid,
   .associationFields,

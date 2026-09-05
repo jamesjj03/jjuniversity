@@ -82,11 +82,12 @@ function resolvedFact<T>(
 }
 
 function observationStatusSuffix(status: AtlasObservationStatus, observedAt: string | null) {
-  const date = observedAt ? ` · ${observedAt}` : "";
-  if (status === "observed") return observedAt ? `${date} observation` : "";
-  if (status === "estimated") return `${date} estimate`;
-  if (status === "inherited") return `${date} inherited value`;
-  if (status === "carried_forward") return `${date} carried-forward value`;
+  const year = observedAt?.match(/^\d{4}/)?.[0] ?? observedAt;
+  const date = year ? ` · ${year}` : "";
+  if (status === "observed") return date;
+  if (status === "estimated") return year ? ` · est. ${year}` : " · estimate";
+  if (status === "inherited") return year ? ` · parent value ${year}` : " · parent value";
+  if (status === "carried_forward") return year ? ` · carried forward ${year}` : " · carried forward";
   if (status === "suppressed") return " · Suppressed";
   if (status === "not_applicable") return " · Not applicable";
   return " · Unavailable";

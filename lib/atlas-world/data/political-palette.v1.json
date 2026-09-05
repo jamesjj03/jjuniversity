@@ -1,6 +1,40 @@
 {
-  "version": "jju-political-geographic-2026-09",
+  "schemaVersion": "1.0.0",
+  "version": "jju-political-geographic-2026-09-phase4",
+  "authorityStatus": "reviewed-editorial-palette",
+  "reviewedAt": "2026-09-05",
   "meaning": "Authored navigation pigments with restrained saturation; colors do not encode measurements, alliances, recognition or regimes. Physical relief is separately sourced, not inferred from these colors.",
+  "assignmentPolicy": {
+    "base": "Stable muted cartographic colors chosen for adjacent-country legibility and physical-relief compatibility.",
+    "manualOverrides": "A bounded set of familiar country-color associations is held stable as JJU editorial cartography. These are visual-memory aids, not objective national attributes.",
+    "neighborRule": "Manual associations may be adjusted within their color family when needed to keep neighboring map units distinguishable.",
+    "microstates": "No claim is made that every territory or microstate has a conventional color identity. Unreviewed units retain their stable base assignment."
+  },
+  "references": [
+    {
+      "title": "Equal Earth Wall Map — data sources",
+      "publisher": "Equal Earth / Shaded Relief",
+      "url": "https://www.equalearth.shadedrelief.com/data-sources.html",
+      "use": "Reference for an integrated small-scale physical/political cartographic hierarchy; not copied color values."
+    },
+    {
+      "title": "Natural Earth vector map data and MAPCOLOR adjacency fields",
+      "publisher": "Natural Earth",
+      "url": "https://www.naturalearthdata.com/",
+      "use": "Reference for stable small-scale map-unit geometry and neighbor-legibility practice; JJU colors remain independently authored."
+    }
+  ],
+  "manualOverrides": {
+    "CHN": { "color": "#b46754", "association": "red family", "rationale": "Familiar political-map association retained with muted saturation." },
+    "DEU": { "color": "#8c9291", "association": "neutral gray family", "rationale": "Reviewed JJU visual-memory association; separated from neighboring fills." },
+    "FRA": { "color": "#527d9f", "association": "blue family", "rationale": "Familiar political-map association retained with muted saturation." },
+    "GBR": { "color": "#b26a78", "association": "red/rose family", "rationale": "Familiar political-map association retained with muted saturation." },
+    "IRL": { "color": "#8daa85", "association": "green family", "rationale": "Familiar political-map association retained with muted saturation." },
+    "MEX": { "color": "#73906d", "association": "green family", "rationale": "Familiar political-map association retained with muted saturation." },
+    "POL": { "color": "#b2747d", "association": "red/rose family", "rationale": "Reviewed JJU visual-memory association; separated from neighboring fills." },
+    "SWE": { "color": "#7698b2", "association": "blue family", "rationale": "Familiar political-map association retained with muted saturation." },
+    "USA": { "color": "#668da9", "association": "blue family", "rationale": "Familiar political-map association retained with muted saturation." }
+  },
   "colors": {
     "ABW": "#7d9cb1",
     "AFG": "#a697af",
@@ -59,7 +93,7 @@
     "CYN": "#a4a181",
     "CYP": "#bfa877",
     "CZE": "#889eaf",
-    "DEU": "#b6a882",
+    "DEU": "#8c9291",
     "DJI": "#98aab4",
     "DMA": "#7d9cb1",
     "DNK": "#b5847f",
@@ -176,7 +210,7 @@
     "PHL": "#9fa0bc",
     "PLW": "#9b9cb5",
     "PNG": "#a7927d",
-    "POL": "#99a185",
+    "POL": "#b2747d",
     "PRI": "#7d9cb1",
     "PRK": "#9b87a4",
     "PRT": "#98aa8c",

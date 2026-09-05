@@ -46,9 +46,28 @@ function TextFact({ label, observation }: {
   );
 }
 
+function ListFact({ label, observation }: {
+  label: string;
+  observation: AtlasPlaceObservation<string[]>;
+}) {
+  return (
+    <div>
+      <dt>{label}</dt>
+      <dd>{observation.value.join(" · ")}</dd>
+      {observationQualifier(observation) && <small>{observationQualifier(observation)}</small>}
+    </div>
+  );
+}
+
 function placeKindLabel(place: AtlasPlaceSummary) {
   if (place.kind === "city") return place.isNationalCapital ? "National capital" : "City";
-  return place.kind === "river" ? "River" : "Lake";
+  if (place.kind === "river") return "River";
+  if (place.kind === "lake") return "Lake";
+  if (place.kind === "watershed") return "Drainage basin";
+  if (place.kind === "water") {
+    return place.waterKind[0].toLocaleUpperCase("en-US") + place.waterKind.slice(1);
+  }
+  return "Place";
 }
 
 function coordinatesLabel([longitude, latitude]: [number, number]) {
@@ -62,12 +81,14 @@ export default function AtlasPlaceCard({
   countries,
   sources,
   onCountry,
+  onPlace,
   onClose,
 }: {
   place: AtlasPlaceSummary;
   countries: readonly AtlasRuntimeCountrySummary[];
   sources: readonly AtlasRuntimeSource[];
   onCountry: (countryId: string) => void;
+  onPlace?: (placeId: string) => void;
   onClose: () => void;
 }) {
   const countryById = new Map(countries.map((country) => [country.id, country]));
@@ -79,7 +100,11 @@ export default function AtlasPlaceCard({
     ? "Crosses mapped countries"
     : place.kind === "lake"
       ? "Borders mapped countries"
-      : "Country";
+      : place.kind === "water"
+        ? "Coastline adjacency"
+        : place.kind === "watershed"
+          ? "Basin intersects mapped countries"
+          : "Country";
   const describedBy = `${place.placeId.replace(/[^A-Za-z0-9_-]/g, "-")}-type`;
 
   return (
@@ -101,6 +126,22 @@ export default function AtlasPlaceCard({
         {place.aliases.length > 0 && <p className={styles.aliases}>Also known as {place.aliases.slice(0, 3).join(" · ")}</p>}
       </header>
 
+      {place.relatedPlaces.length > 0 && (
+        <section className={`${styles.relationships} ${styles.connectedPlaces}`} aria-label="Connected geography">
+          <h3>Connected geography</h3>
+          <div>
+            {place.relatedPlaces.slice(0, 8).map((related) => (
+              <button key={`${related.relationship}:${related.placeId}`} type="button"
+                onClick={() => onPlace?.(related.placeId)} disabled={!onPlace}>
+                <span><strong>{related.name}</strong><small>{related.wording}</small></span>
+                <span aria-hidden="true">→</span>
+              </button>
+            ))}
+          </div>
+          <p>Connections describe sourced or geometry-derived relationships—not causation, ownership, or complete hydrological topology.</p>
+        </section>
+      )}
+
       {relatedCountries.length > 0 && (
         <section className={styles.relationships} aria-label={relationHeading}>
           <h3>{relationHeading}</h3>
@@ -111,8 +152,14 @@ export default function AtlasPlaceCard({
               </button>
             ))}
           </div>
-          {place.kind !== "city" && (
+          {(place.kind === "river" || place.kind === "lake") && (
             <p>This relationship follows the mapped feature geometry; it does not describe the entire drainage basin.</p>
+          )}
+          {place.kind === "water" && (
+            <p>Adjacency follows the generalized mapped coastline. It is not a claim of ownership, jurisdiction, or a settled maritime boundary.</p>
+          )}
+          {place.kind === "watershed" && (
+            <p>Intersection follows the mapped drainage-basin geometry. A basin is shared physical geography, not political ownership.</p>
           )}
         </section>
       )}
@@ -130,14 +177,23 @@ export default function AtlasPlaceCard({
         </dl>
       )}
 
-      {place.kind !== "city" && (
+      {(place.kind === "river" || place.kind === "lake") && (
         <dl className={styles.facts}>
           {place.lengthKm && <NumberFact label="Length" observation={place.lengthKm} format={(value) => `${wholeNumber.format(value)} km`} />}
           {place.areaKm2 && <NumberFact label="Area" observation={place.areaKm2} format={(value) => `${wholeNumber.format(value)} km²`} />}
           {place.maximumDepthMetres && <NumberFact label="Maximum depth" observation={place.maximumDepthMetres} format={(value) => `${wholeNumber.format(value)} m`} />}
           {place.sourcePlace && <TextFact label="Source" observation={place.sourcePlace} />}
+          {place.headwaters && <ListFact label="Headwaters" observation={place.headwaters} />}
           {place.mouthPlace && <TextFact label="Mouth" observation={place.mouthPlace} />}
           {place.basinName && <TextFact label="Basin" observation={place.basinName} />}
+          {place.basinAreaKm2 && <NumberFact label="Basin area" observation={place.basinAreaKm2} format={(value) => `${wholeNumber.format(value)} km²`} />}
+          {place.majorTributaries && <ListFact label="Major tributaries" observation={place.majorTributaries} />}
+        </dl>
+      )}
+
+      {place.kind === "watershed" && (
+        <dl className={styles.facts}>
+          <div><dt>River system</dt><dd>{place.linkedRiverPlaceId.split(":").at(-1)?.replaceAll("-", " ")}</dd></div>
         </dl>
       )}
 

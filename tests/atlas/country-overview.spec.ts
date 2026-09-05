@@ -24,7 +24,7 @@ test("Gabon has one readable overview and a higher-resolution credited portrait"
   expect((await portrait.boundingBox())!.width).toBeGreaterThanOrEqual(100);
   expect((await panel.getByRole("img", { name: "Gabon flag" }).boundingBox())!.width).toBeGreaterThanOrEqual(48);
   await expect(panel.getByText(/ended the military transition/)).toBeVisible();
-  await expect(panel.getByText(/Recorded 1 Oct 2025/)).toBeVisible();
+  await expect(panel.getByText("2025 snapshot · review due", { exact: true })).toBeVisible();
   await panel.getByText("Sources & photo credit", { exact: true }).click();
   await expect(panel.getByRole("link", { name: "CC BY 4.0", exact: true })).toBeVisible();
   await expect(panel.getByText(/Lukasz Kobus \/ European Communities/)).toBeVisible();
@@ -36,9 +36,9 @@ test("UK separates a reviewed office update from its unchanged archived predeces
   await expect(panel.getByRole("img", { name: "Keir Starmer", exact: true })).toHaveCount(0);
   const update = panel.locator("[data-atlas-office-update]");
   await expect(update.getByText("Andy Burnham", { exact: true })).toBeVisible();
-  await expect(update.getByText(/Checked 5 Sept 2026/)).toBeVisible();
-  await update.getByText("Updated officeholder · source & previous record", { exact: true }).click();
-  await expect(update.getByText(/The old record names Prime Minister Keir STARMER/)).toBeVisible();
+  await expect(update.getByText("2026 check", { exact: true })).toBeVisible();
+  await update.getByText("Freshness, source & previous record", { exact: true }).click();
+  await expect(update.getByText(/archived record names Prime Minister Keir Starmer on 1 Oct 2025/)).toBeVisible();
   await expect(update.getByRole("link", { name: /current role holder and responsibilities/ })).toHaveAttribute("href", "https://www.gov.uk/government/ministers/prime-minister");
 });
 

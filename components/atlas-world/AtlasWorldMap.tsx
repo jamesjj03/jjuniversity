@@ -25,6 +25,8 @@ import styles from "./AtlasWorld.module.css";
 import { atlasLabelPlacement } from "@/lib/atlas-world/labelPlacements";
 import AtlasRasterSurface from "./AtlasRasterSurface";
 import AtlasFeatureSurface from "./AtlasFeatureSurface";
+import { ATLAS_WORLD_WIDTH, ATLAS_WORLD_WRAP_SLOTS } from "@/lib/atlas-world/worldWrap";
+import AtlasWorldWrapCountryHits from "./AtlasWorldWrapCountryHits";
 
 type AtlasWorldMapProps = {
   data: AtlasRuntimeDataset;
@@ -182,15 +184,25 @@ function renderPolygonFeatureLayer(
   dataset: AtlasDatasetDefinition,
   context: AtlasSvgRendererContext,
 ) {
+  const featureKind = dataset.id === "major-water-bodies"
+    ? "water"
+    : dataset.id === "watershed-pilot"
+      ? "watershed"
+      : "lake";
+  const surfaceClass = featureKind === "water"
+    ? styles.waterLayer
+    : featureKind === "watershed"
+      ? styles.watershedLayer
+      : styles.lakeLayer;
   return (
     <g
       key={definition.id}
       {...surfaceMetadata(definition, dataset)}
-      className={styles.lakeLayer}
+      className={surfaceClass}
       style={layerSurfaceStyle(definition, context)}
     >
-      <AtlasFeatureSurface kind="lake"
-        initialFeatures={context.initialFeatureRecords.filter((feature) => feature.kind === "lake")}
+      <AtlasFeatureSurface kind={featureKind}
+        initialFeatures={context.initialFeatureRecords.filter((feature) => feature.kind === featureKind)}
         style={definition.style} />
     </g>
   );
@@ -499,6 +511,28 @@ export default function AtlasWorldMap({ data, initialScene }: AtlasWorldMapProps
         </clipPath>
       </defs>
       <g data-atlas-map-group data-atlas-zoom-level="world" data-atlas-zoom-scale="1">
+        {/* Paint repeated geography first so the direct interaction surfaces
+            below remain the browser's hit target rather than the shadow tree
+            of an SVG use element. Forward fragment references are valid SVG. */}
+        {ATLAS_WORLD_WRAP_SLOTS.map((relativeSlot, slot) => {
+          const offset = relativeSlot * ATLAS_WORLD_WIDTH;
+          return <use key={`wrap-visual-${relativeSlot}`} href="#atlas-world-scene"
+            data-atlas-world-copy data-atlas-world-wrap-slot={slot} data-atlas-world-offset={offset}
+            transform={`translate(${offset} 0)`} style={{ display: offset === 0 ? "none" : undefined }}
+            className={styles.worldWrapCopy} />;
+        })}
+        {/* Direct country targets keep the on-screen repeated worlds fully
+            interactive without multiplying the full hit tree five times. */}
+        <AtlasWorldWrapCountryHits hits={data.geometry.features.map((feature) => ({
+          entityId: feature.entityId,
+          geometryHref: `${geometryAssetHref}#${geometryAssetId(feature.entityId)}`,
+          bounds: feature.bounds,
+          assistance: feature.tinyRank == null ? undefined : {
+            point: feature.labelPoint ?? feature.centroid,
+            extent: assistanceExtent(feature),
+          },
+        }))} />
+        <g id="atlas-world-scene" data-atlas-world-scene>
         <use href={`${geometryAssetHref}#atlas-sphere`} className={styles.ocean} />
         <use href={`${geometryAssetHref}#atlas-graticule`} className={styles.graticule} />
         <g data-atlas-base-geography="land" className={styles.baseLand}>
@@ -511,6 +545,20 @@ export default function AtlasWorldMap({ data, initialScene }: AtlasWorldMapProps
             ? renderSharedAdmin0Fill(definition, data, geometryAssetHref)
             : renderCatalogLayer(definition, context),
         )}
+
+        {ATLAS_WORLD_WRAP_SLOTS.map((relativeSlot, slot) => {
+          const offset = relativeSlot * ATLAS_WORLD_WIDTH;
+          return <g key={`wrap-note-hit-${relativeSlot}`}
+            data-atlas-world-wrap-slot={slot} data-atlas-world-offset={offset}
+            transform={`translate(${offset} 0)`} style={{ display: offset === 0 ? "none" : undefined }}>
+            {patternNotes.map((note) => <g key={note.id} data-atlas-wrapped-note={note.id}
+              data-atlas-screen-symbol="note-hit" data-atlas-x={note.spatial.focus.projected[0]}
+              data-atlas-y={note.spatial.focus.projected[1]}
+              transform={`translate(${note.spatial.focus.projected.join(" ")})`}>
+              <circle r={10} className={styles.wrappedNoteHit} />
+            </g>)}
+          </g>;
+        })}
 
         {interactionSurfaces.map((definition) => renderCatalogLayer(definition, context))}
         <g className={styles.boundaryLayer} data-atlas-status-outlines>
@@ -548,13 +596,15 @@ export default function AtlasWorldMap({ data, initialScene }: AtlasWorldMapProps
             const minZoom = area > 2600 ? 1 : area > 600 ? 1.8 : area > 120 ? 2.8 : area > 20 ? 4 : 6;
             return <text key={country.id} data-atlas-label="country" data-atlas-label-entity={country.id}
               data-atlas-x={anchor[0]} data-atlas-y={anchor[1]}
-              data-atlas-label-min-zoom={placement?.priority != null || planned?.worldScale ? 1 : minZoom}
+              data-atlas-label-min-zoom={placement?.minimumZoom
+                ?? (placement?.priority != null || planned?.worldScale ? 1 : minZoom)}
               data-atlas-label-priority={placement?.priority ?? planned?.priority ?? 99}
               data-atlas-label-angle={placement?.angle ?? 0}
               data-atlas-label-major={placement?.priority != null ? "true" : "false"}
               transform={`translate(${anchor.join(" ")})`} textAnchor="middle"
               className={styles.countryLabel} style={{ display: "none" }}>{placement?.name ?? country.name}</text>;
           })}
+        </g>
         </g>
       </g>
     </svg>

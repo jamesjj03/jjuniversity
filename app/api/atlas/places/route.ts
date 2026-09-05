@@ -9,7 +9,7 @@ export async function GET() {
     {
       schemaVersion: "1.0.0",
       snapshotId: geography.snapshotId,
-      places: buildAtlasPlaceIndex(geography.featureCollections),
+      places: buildAtlasPlaceIndex(geography.featureCollections, geography.placeRelationships),
     },
     {
       headers: {

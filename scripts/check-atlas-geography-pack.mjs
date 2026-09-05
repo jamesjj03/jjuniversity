@@ -47,6 +47,8 @@ const EXPECTED_DATASET_COUNTS = {
   "major-rivers": 1311,
   "major-lakes": 511,
   "major-cities": 1140,
+  "major-water-bodies": 112,
+  "watershed-pilot": 5,
 };
 const EXPECTED_DATASET_IDS = new Set([
   "population-density-2025",
@@ -54,7 +56,16 @@ const EXPECTED_DATASET_IDS = new Set([
   "major-rivers",
   "major-lakes",
   "major-cities",
+  "major-water-bodies",
+  "watershed-pilot",
 ]);
+const EXPECTED_FEATURE_KINDS = {
+  "major-rivers": "river",
+  "major-lakes": "lake",
+  "major-cities": "city",
+  "major-water-bodies": "water",
+  "watershed-pilot": "watershed",
+};
 const EXPECTED_NOTE_IDS = new Set([
   "pattern-note:population:nile-valley",
   "pattern-note:population:java",
@@ -186,6 +197,23 @@ async function checkAsset(asset, datasetId) {
   if (extendsBeyondSphere) assert(metadata.hasAlpha === true, `${datasetId} asset must retain alpha outside the Mercator sphere.`);
 }
 
+async function checkRegisteredFile(asset, label) {
+  const assetPath = assetPathFromHref(asset.href);
+  let bytes;
+  try {
+    bytes = await readFile(assetPath);
+  } catch {
+    failures.push(`${label} does not exist: ${asset.href}`);
+    return null;
+  }
+  assert(bytes.byteLength === asset.bytes, `${label} byte count does not match its manifest.`);
+  assert(
+    createHash("sha256").update(bytes).digest("hex") === asset.checksumSha256,
+    `${label} checksum does not match its manifest.`,
+  );
+  return bytes;
+}
+
 async function checkPyramid(pyramid, datasetId) {
   const relief = datasetId === "physical-relief";
   assert(pyramid.projectionId === "mercator", `${datasetId} pyramid is not aligned to Mercator.`);
@@ -315,7 +343,7 @@ const normalizedRequirements = requirementsBytes.toString("utf8").replaceAll("\r
 const requirementsDigest = createHash("sha256").update(normalizedRequirements).digest("hex");
 assert(
   geographyBuild?.requirements?.normalizedTextChecksumSha256 === requirementsDigest,
-  "Geography Python requirements no longer match the source-lock build recipe.",
+  `Geography Python requirements no longer match the source-lock build recipe (lock ${geographyBuild?.requirements?.normalizedTextChecksumSha256 ?? "missing"}; file ${requirementsDigest}).`,
 );
 const vectorRequirementsBytes = await readFile(VECTOR_REQUIREMENTS_PATH);
 const normalizedVectorRequirements = vectorRequirementsBytes.toString("utf8").replaceAll("\r\n", "\n");
@@ -400,7 +428,7 @@ for (const collection of Object.values(geographyPack.featureCollections)) {
   for (const feature of collection.features) {
     const label = `${collection.datasetId} feature ${feature.featureId ?? "<missing>"}`;
     featureIds.push(feature.featureId);
-    assert(feature.kind === dataset.dataType.replace("line", "river").replace("polygon", "lake").replace("point", "city"), `${label} has an unexpected kind.`);
+    assert(feature.kind === EXPECTED_FEATURE_KINDS[collection.datasetId], `${label} has an unexpected kind.`);
     assert(Array.isArray(feature.sourceIds) && feature.sourceIds.length > 0, `${label} has no source IDs.`);
     for (const sourceId of feature.sourceIds ?? []) {
       assert(dataset.sourceIds.includes(sourceId), `${label} source ${sourceId} is not owned by its dataset.`);
@@ -443,6 +471,63 @@ for (const [name, minimumZoom] of [["Ivindo", 16], ["Ogooué", 20], ["Ngounie", 
   assert(records.every((feature) => feature.displayMinimumZoom === minimumZoom && feature.sourceIds.includes("natural-earth-rivers-10m-5.1.2")), `${name} must retain its real source and close-scale visibility.`);
 }
 
+const waterFeatures = collectionByDatasetId.get("major-water-bodies")?.features ?? [];
+const waterPlaceIds = new Set(waterFeatures.map((feature) => feature.placeId));
+assert(waterPlaceIds.size < waterFeatures.length, "Major-water pack should preserve multipart logical identities.");
+for (const feature of waterFeatures) {
+  const label = `water feature ${feature.featureId}`;
+  assert(["ocean", "sea", "gulf", "bay", "strait", "channel"].includes(feature.waterKind), `${label} has an unsupported class.`);
+  assert(feature.sourceScaleRank <= 4, `${label} exceeds the bounded source rank.`);
+  assert(feature.entityRelation?.kind === "coastline_adjacent_to_mapped_admin0_geometry", `${label} does not use explicit coastline-adjacency wording.`);
+  assert(/not ownership/i.test(feature.entityRelation?.caveat ?? ""), `${label} does not explicitly reject ownership inference.`);
+  assert(feature.label?.method === "representative-point-within-source-polygon", `${label} has no reproducible label-anchor method.`);
+  assert(Number.isFinite(feature.label?.priority) && Number.isFinite(feature.label?.minimumZoom), `${label} lacks label priority/zoom metadata.`);
+  for (const entityId of feature.adjacentEntityIds ?? []) assert(countryIds.has(entityId), `${label} has unknown adjacent entity ${entityId}.`);
+}
+for (const name of ["Atlantic Ocean", "Pacific Ocean", "Mediterranean Sea", "Gulf of Mexico", "Strait of Gibraltar", "English Channel"]) {
+  assert(waterFeatures.some((feature) => feature.name === name), `Major-water pack is missing ${name}.`);
+}
+
+const watershedFeatures = collectionByDatasetId.get("watershed-pilot")?.features ?? [];
+assert(
+  JSON.stringify(watershedFeatures.map((feature) => feature.name).sort()) === JSON.stringify([
+    "Amazon drainage basin",
+    "Danube drainage basin",
+    "Mississippi drainage basin",
+    "Nile drainage basin",
+    "Yangtze drainage basin",
+  ]),
+  "Watershed pilot does not contain the exact five approved logical basins.",
+);
+for (const feature of watershedFeatures) {
+  assert(feature.entityRelation?.kind === "intersects_mapped_admin0_geometry", `${feature.name} has an unclear country relation.`);
+  assert(/not imply ownership/i.test(feature.entityRelation?.caveat ?? ""), `${feature.name} does not reject ownership inference.`);
+  assert(feature.linkedRiverPlaceId?.startsWith("place:natural-earth:river:"), `${feature.name} is not linked to a river place.`);
+  assert(feature.sourceFeatureIds?.every((id) => /^BASWC4_ID:\d+$/.test(id)), `${feature.name} lost World Bank source IDs.`);
+}
+
+const riverFactFeatures = collectionByDatasetId.get("major-rivers")?.features.filter((feature) => feature.facts) ?? [];
+assert(riverFactFeatures.length === 5, `Expected five River V2 fact anchors; found ${riverFactFeatures.length}.`);
+for (const feature of riverFactFeatures) {
+  const facts = feature.facts;
+  assert(facts.lengthKm?.value > 0 && facts.basinAreaKm2?.value > 0, `${feature.placeId} lacks sourced length or basin area.`);
+  assert(facts.mouthPlace?.value && facts.basinName?.value, `${feature.placeId} lacks sourced mouth or basin.`);
+  assert(facts.headwaters?.value?.length > 0 && facts.majorTributaries?.value?.length > 0, `${feature.placeId} lacks headwater or tributary context.`);
+  assert(!Object.hasOwn(facts, "discharge"), `${feature.placeId} publishes non-comparable discharge.`);
+  for (const fact of Object.values(facts)) {
+    if (!fact) continue;
+    assert(fact.sourceIds?.length > 0 && fact.sourceStatementIds?.length > 0, `${feature.placeId} fact lost statement provenance.`);
+  }
+}
+
+const relationshipIds = unique((geographyPack.placeRelationships ?? []).map((relationship) => relationship.id), "place relationship IDs");
+assert(relationshipIds.size === 6, `Expected six bounded city/geography proximity relationships; found ${relationshipIds.size}.`);
+for (const relationship of geographyPack.placeRelationships ?? []) {
+  assert(relationship.kind === "near_mapped_geometry", `${relationship.id} overstates its relationship semantics.`);
+  assert(relationship.distanceKm <= relationship.evidence?.thresholdKm, `${relationship.id} exceeds its reviewed distance threshold.`);
+  assert(/does not by itself assert/i.test(relationship.evidence?.caveat ?? ""), `${relationship.id} lacks an epistemic caveat.`);
+}
+
 for (const level of ["overview", "detail"]) {
   const asset = geographyPack.physicalGeometryAssets?.[level];
   assert(Boolean(asset), `Physical geography is missing its separately cached ${level} SVG.`);
@@ -457,6 +542,50 @@ for (const level of ["overview", "detail"]) {
   for (const feature of expected) {
     const id = feature.featureId.replace(/[^A-Za-z0-9_-]/g, "-");
     assert(svg.includes(`id="${id}" d="${feature.geometry.derived.path}"`), `${feature.featureId} differs from its cached SVG geometry.`);
+  }
+}
+
+for (const [manifestKey, collectionId, label] of [
+  ["waterGeometryAsset", "major-water-bodies", "Water geometry SVG"],
+  ["watershedGeometryAsset", "watershed-pilot", "Watershed geometry SVG"],
+]) {
+  const asset = geographyPack[manifestKey];
+  assert(Boolean(asset), `${label} is not registered.`);
+  if (!asset) continue;
+  const bytes = await checkRegisteredFile(asset, label);
+  const expected = collectionByDatasetId.get(collectionId)?.features ?? [];
+  assert(asset.featureCount === expected.length, `${label} feature count is incorrect.`);
+  const svg = bytes?.toString("utf8") ?? "";
+  for (const feature of expected) {
+    const id = feature.featureId.replace(/[^A-Za-z0-9_-]/g, "-");
+    assert(svg.includes(`id="${id}" d="${feature.geometry.derived.path}"`), `${feature.featureId} differs from ${label}.`);
+  }
+}
+
+const globeContextManifest = geographyPack.globeContextAsset;
+assert(Boolean(globeContextManifest), "Compact WGS84 globe context is not registered.");
+if (globeContextManifest) {
+  const bytes = await checkRegisteredFile(globeContextManifest, "WGS84 globe context");
+  let globeContext;
+  try {
+    globeContext = JSON.parse(bytes?.toString("utf8") ?? "");
+  } catch {
+    failures.push("WGS84 globe context is not valid JSON.");
+  }
+  if (globeContext) {
+    assert(globeContext.canonicalCrs === "EPSG:4326", "Globe context is not canonical WGS84.");
+    assert(globeContext.sourceLockId === sourceLock.lockId, "Globe context does not identify the source lock.");
+    assert(globeContext.rivers.length === globeContextManifest.riverCount, "Globe river count differs from its manifest.");
+    assert(globeContext.cities.length === globeContextManifest.cityCount, "Globe city count differs from its manifest.");
+    assert(globeContext.waterLabels.length === globeContextManifest.waterLabelCount, "Globe water-label count differs from its manifest.");
+    assert(bytes.byteLength < 200_000, `Globe context exceeds the reviewed phone budget (${bytes.byteLength} bytes).`);
+    for (const river of globeContext.rivers) visitCoordinates(river.geometry.coordinates, ([longitude, latitude]) => {
+      assert(longitude >= -180 && longitude <= 180 && latitude >= -90 && latitude <= 90, `${river.featureId} has invalid globe coordinates.`);
+    });
+    for (const point of [...globeContext.cities, ...globeContext.waterLabels]) {
+      const coordinates = point.coordinates;
+      assert(Array.isArray(coordinates) && coordinates[0] >= -180 && coordinates[0] <= 180 && coordinates[1] >= -90 && coordinates[1] <= 90, `${point.placeId} has invalid globe coordinates.`);
+    }
   }
 }
 
