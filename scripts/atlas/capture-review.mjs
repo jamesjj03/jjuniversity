@@ -4,7 +4,7 @@ import path from 'node:path';
 
 // Read-only browser review. Outputs are ignored artifacts, never site content.
 const baseURL = process.env.ATLAS_TEST_BASE_URL ?? 'http://127.0.0.1:3212';
-const output = path.resolve('output/atlas-phase25/review');
+const output = path.resolve(process.env.ATLAS_REVIEW_OUTPUT ?? 'output/atlas-phase25/review');
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch();
 const results = [];
@@ -21,7 +21,7 @@ const scenes = [
 ];
 try {
   for (const size of [{ name: 'desktop', width: 1440, height: 960 }, { name: 'phone', width: 390, height: 844 }]) {
-    const context = await browser.newContext({ viewport: size });
+    const context = await browser.newContext({ viewport: size, storageState: process.env.ATLAS_TEST_STORAGE_STATE });
     const page = await context.newPage();
     let issues = [];
     page.on('pageerror', (error) => issues.push(error.message));

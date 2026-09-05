@@ -13,6 +13,12 @@ export default defineConfig({
   expect: { timeout: 8_000 },
   use: {
     baseURL: externalBaseURL ?? `http://127.0.0.1:${port}`,
+    storageState: process.env.ATLAS_TEST_STORAGE_STATE,
+    // Explicit automation opt-out for Vercel's preview-only feedback overlay.
+    // This does not alter deployment protection or project settings.
+    extraHTTPHeaders: process.env.ATLAS_SKIP_PREVIEW_TOOLBAR === "1"
+      ? { "x-vercel-skip-toolbar": "1" }
+      : undefined,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },

@@ -95,7 +95,7 @@ timeline, subdivisions, WebGL migration, or broad new-data ingestion was added.
   narrow desktop Egypt view used 15 tiles, about 8 MB compressed / 93.6 MB
   worst-case decoded; it did not fetch all 118 global tiles.
 - The optimized local site passed 38 applicable Playwright checks, with 18
-  intentional device-specific skips. Six additional pure geometry cases run
+  intentional device-specific skips, including six pure geometry cases run
   under each device project and protect concave/multipart/dateline anchors.
 - The complete local optimized build generated all 16,371 site routes/pages.
 - Desktop review at 1440px and phone review at 390×844 covered portrait-bearing
@@ -105,10 +105,11 @@ timeline, subdivisions, WebGL migration, or broad new-data ingestion was added.
 The local dependency folder is a junction to the unchanged Phase 2 dependency
 installation. Turbopack refuses that out-of-root junction, so the local optimized
 build uses the supported `npm run build -- --webpack` flag. This does not change
-the repository build command or production bundler. A normal fresh-install
-Vercel preview remains the check for the default build path.
+the repository build command or production bundler. The hosted Vercel preview
+also passed the default Turbopack build; see the deployment receipt below.
 
-Run locally with `npm run dev -- --port 3212`. To test an existing local or
+The verified local optimized server runs with `npm run start -- --port 3212`
+after `npm run build -- --webpack` in this junction-based worktree. To test an existing local or
 deployed build without starting another server, set `ATLAS_TEST_BASE_URL`, then
 run `npm run atlas:e2e`. The default automatic test-server port remains 3211;
 `ATLAS_TEST_PORT` can override it for isolated worktrees.
@@ -117,6 +118,48 @@ Suggested review: Political → Luxembourg/Belgium; Government → a definition;
 Religion → Zimbabwe or Japan; Gabon/UK → portraits and credits; Where People
 Live → the Nile, Java, eastern China and the Indo-Gangetic Plain. On a phone,
 try the view chooser with the half sheet open and then Peek/Full.
+
+## Preview deployment receipt — September 4, 2026 (New York)
+
+- Preview source: `250e2ee4ce11f6761f2899e074661e3912c8641f`, branch
+  `codex/atlas-phase25`. Deployment `dpl_BihZraTyafJEHsRrnhp82sEbX4q4` is READY.
+- Stable preview address:
+  https://jjuniversity-d6ioojwc1-jamesjj03s-projects.vercel.app/atlas
+  Vercel protects this address; a temporary sign-in-free share link was supplied
+  separately. Access cookies and share tokens are not repository content.
+- The normal remote Turbopack build and TypeScript check passed, generating
+  16,371 site routes/pages. No app source changed after this deployment;
+  subsequent changes concern verification and this record only.
+- Hosted tests: **38 passed, 18 intentional device-specific skips**, including
+  browser flows and pure geometry/observation/portrait contracts. The hosted
+  review captured **18 scenes, all HTTP 200, no unexpected console/page errors**.
+  All six views, portrait/no-portrait cases, explanations, and phone sheets
+  were covered. A fresh 390×844 unauthenticated browser opened the shared Gabon
+  link and loaded its portrait successfully.
+- Public JJU smoke checks passed on the preview: `/`, `/books`, `/books/1776`,
+  `/about`, and `/reader?book=what-people-actually-believe`. The last rendered
+  the actual reader and chapter content, not just a successful HTTP response.
+- Two platform-specific test adjustments were necessary, with no app workaround:
+  [Vercel consumes CDN-only cache directives](https://vercel.com/docs/caching/cache-control-headers),
+  so the API test checks the browser cache lifetime on Vercel and also checks
+  stale-while-revalidate directly at the local origin. Vercel's preview feedback
+  badge can overlap a phone control; automated interaction checks use the
+  [documented toolbar opt-out header](https://vercel.com/docs/vercel-toolbar/managing-toolbar).
+  No authentication, project toolbar setting, or production behavior was changed.
+  The badge may still appear when manually visiting a preview.
+- Reproduction against an accessible hosted preview: set `ATLAS_TEST_BASE_URL`,
+  optionally `ATLAS_TEST_STORAGE_STATE` to an ignored Playwright authentication
+  file, and `ATLAS_SKIP_PREVIEW_TOOLBAR=1`, then run `npm run atlas:e2e`.
+  `scripts/atlas/capture-review.mjs` accepts the same base URL/auth file and
+  `ATLAS_REVIEW_OUTPUT` for a separate screenshot directory. Never commit auth.
+- Directional local performance check: a 40-step pan produced no recorded JS
+  long tasks at desktop and 390px phone widths. This is not a formal FPS result
+  or evidence from a physical iPhone; raster decoding remains the largest
+  memory cost described above.
+- **Production was not changed.** `www.jjuniversity.com` still resolves to
+  Phase 2 `06afbadee1602e79127baaef6785fc887809a08c`, deployment
+  `dpl_8F8ypq97Jpjpe9E4oN4GbpBP45ZP`. That deployment and the V1 `b4d7d10`
+  recovery baseline remain available. No database or content migration ran.
 
 ## Remaining boundaries
 

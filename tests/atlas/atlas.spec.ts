@@ -206,7 +206,13 @@ test("GDP per capita API preserves observation and time-selection semantics", as
 
   const response = await request.get(GDP_LAYER_ENDPOINT);
   expect(response.status()).toBe(200);
-  expect(response.headers()["cache-control"]).toContain("stale-while-revalidate");
+  expect(response.headers()["cache-control"]).toContain("public");
+  expect(response.headers()["cache-control"]).toContain("max-age=3600");
+  // Vercel consumes CDN-only directives rather than forwarding them to the
+  // browser: https://vercel.com/docs/caching/cache-control-headers
+  if (!response.headers()["x-vercel-id"]) {
+    expect(response.headers()["cache-control"]).toContain("stale-while-revalidate");
+  }
   expect(response.headers().etag).toContain("latest");
   const payload = await response.json() as GdpLayerPayload;
 
