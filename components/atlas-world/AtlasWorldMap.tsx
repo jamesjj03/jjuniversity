@@ -136,6 +136,7 @@ function renderRasterLayer(
 
   if (packAsset && geographyDataset?.assetPyramid) {
     return <g key={definition.id} {...surfaceMetadata(definition, dataset)} className={rasterClass}
+      clipPath={definition.style?.blendMode === "multiply" ? "url(#atlas-physical-land-clip)" : undefined}
       style={layerSurfaceStyle(definition, context)}>
       <AtlasRasterSurface overview={packAsset} pyramid={geographyDataset.assetPyramid} />
     </g>;
@@ -153,6 +154,7 @@ function renderRasterLayer(
       height={viewBox[3]}
       preserveAspectRatio="none"
       className={rasterClass}
+      clipPath={definition.style?.blendMode === "multiply" ? "url(#atlas-physical-land-clip)" : undefined}
       style={{
         ...layerSurfaceStyle(definition, context),
         mixBlendMode: definition.style?.blendMode,
@@ -318,6 +320,7 @@ function renderPointSymbolLayer(
             </g>
             <text
               data-atlas-label="city"
+              data-atlas-label-country={feature.kind === "city" ? feature.entity.countryId ?? undefined : undefined}
               data-atlas-x={point[0]} data-atlas-y={point[1]}
               data-atlas-label-priority={20 + (feature.sourceScaleRank ?? 5)}
               data-atlas-label-min-zoom={feature.kind === "city" && feature.isNationalCapital ? 2.6 : 4}
@@ -584,13 +587,15 @@ export default function AtlasWorldMap({ data }: AtlasWorldMapProps) {
       aria-hidden="true"
     >
       <defs>
-        <radialGradient id="atlas-ocean-glow" cx="50%" cy="42%" r="62%">
-          <stop offset="0%" stopColor="#21475e" />
-          <stop offset="100%" stopColor="#112b41" />
-        </radialGradient>
+        {/* Relief is a land surface. Do not multiply its flat ocean pixels into
+            the water, where the finite raster extent would become a seam. */}
+        <clipPath id="atlas-physical-land-clip" clipPathUnits="userSpaceOnUse">
+          {data.geometry.features.map((feature) => <use key={feature.entityId}
+            href={`${geometryAssetHref}#${geometryAssetId(feature.entityId)}`} />)}
+        </clipPath>
       </defs>
       <g data-atlas-map-group data-atlas-zoom-level="world" data-atlas-zoom-scale="1">
-        <use href={`${geometryAssetHref}#atlas-sphere`} className={styles.ocean} fill="url(#atlas-ocean-glow)" />
+        <use href={`${geometryAssetHref}#atlas-sphere`} className={styles.ocean} />
         <use href={`${geometryAssetHref}#atlas-graticule`} className={styles.graticule} />
         <g data-atlas-base-geography="land" className={styles.baseLand}>
           {data.geometry.features.map((feature) => <use key={feature.entityId}

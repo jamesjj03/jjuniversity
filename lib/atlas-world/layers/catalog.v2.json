@@ -1080,14 +1080,14 @@
       "schemaVersion": "2.0.0",
       "id": "physical-relief",
       "name": "Physical relief",
-      "description": "Subtle generalized terrain relief beneath analytical layers.",
+      "description": "Source-derived terrain relief, with regional detail loaded as you zoom.",
       "datasetId": "physical-relief",
       "resolverId": "raster-asset-v1",
       "renderer": "raster-field",
       "channel": "raster",
       "slot": "raster",
       "zIndex": 350,
-      "defaultOpacity": 0.42,
+      "defaultOpacity": 0.34,
       "style": {
         "blendMode": "multiply",
         "clipToSphere": true
@@ -1119,9 +1119,10 @@
         "sourceIds": [
           "natural-earth-manual-shaded-relief-50m-3.3.0"
         ],
-        "methodology": "The Natural Earth relief raster is bilinearly reprojected from WGS84 to the shared Mercator viewBox, bounded at 85.0511 degrees north and south.",
+        "methodology": "Natural Earth manual shaded relief is bilinearly reprojected from its original 10800 × 5400 WGS84 image to the registered Mercator viewBox. A viewport-loaded detail level retains source structure instead of enlarging the world overview. Direct grayscale, with no contrast amplification or synthetic terrain.",
         "authoredVisualChoices": [
-          "Relief uses 42% opacity and multiply blend in the settlement view. It is a generalized physical context image, not measured elevation."
+          "34% multiply in Political and Where People Live; 18% in national analytical views to protect the thematic color hierarchy. Opacity is a authored visual choice, not an elevation measurement.",
+          "The original 1/30-degree pixels are approximately 3.7 km at the equator; projected display resolution is not additional geographic accuracy."
         ]
       },
       "temporal": {
@@ -1275,10 +1276,10 @@
       "zIndex": 630,
       "defaultOpacity": 0.86,
       "style": {
-        "fillColor": "#244f71",
+        "fillColor": "#7fabb9",
         "fillOpacity": 1,
-        "strokeColor": "#8bc9ec",
-        "strokeOpacity": 0.7,
+        "strokeColor": "#436a7a",
+        "strokeOpacity": 0.8,
         "strokeWidth": 0.55
       },
       "interactive": {
@@ -1338,7 +1339,7 @@
       "zIndex": 610,
       "defaultOpacity": 0.82,
       "style": {
-        "strokeColor": "#8bc9ec",
+        "strokeColor": "#396b7d",
         "strokeOpacity": 1,
         "strokeWidth": 1.05
       },
@@ -1372,7 +1373,7 @@
         ],
         "methodology": "Natural Earth 1:50m geometry at overview scales, replaced with 1:10m geometry as you zoom. Geographic detail remains generalized; it is not a navigational survey.",
         "authoredVisualChoices": [
-          "The world view shows a cartographic selection of rivers rather than a complete drainage network."
+          "World-scale river selection expands progressively with source 1:10m river branches at closer zoom. Blue screen-width ink stays independent of camera scale; this is not a complete drainage survey."
         ]
       },
       "temporal": {
@@ -1400,9 +1401,9 @@
       "defaultOpacity": 1,
       "style": {
         "symbolShape": "circle",
-        "symbolFill": "#f8f1dd",
-        "symbolStroke": "#d7e4ec",
-        "strokeWidth": 0.3,
+        "symbolFill": "#263d39",
+        "symbolStroke": "#e9e9da",
+        "strokeWidth": 0.65,
         "symbolMinRadius": 1.2,
         "symbolMaxRadius": 1.8,
         "sizeField": "sourceScaleRank"
@@ -1560,7 +1561,7 @@
           "id": "political:physical-relief",
           "layerId": "physical-relief",
           "enabled": true,
-          "opacity": 0.18,
+          "opacity": 0.34,
           "time": null,
           "parameters": {
             "role": "context"
@@ -1580,7 +1581,7 @@
           "id": "political:major-rivers",
           "layerId": "major-rivers",
           "enabled": true,
-          "opacity": 0.7,
+          "opacity": 1,
           "time": null,
           "parameters": {
             "role": "context"
@@ -1658,7 +1659,7 @@
           "id": "government:major-rivers",
           "layerId": "major-rivers",
           "enabled": true,
-          "opacity": 0.7,
+          "opacity": 1,
           "time": null,
           "parameters": {
             "role": "context"
@@ -1736,7 +1737,7 @@
           "id": "religion:major-rivers",
           "layerId": "major-rivers",
           "enabled": true,
-          "opacity": 0.7,
+          "opacity": 1,
           "time": null,
           "parameters": {
             "role": "context"
@@ -1814,7 +1815,7 @@
           "id": "population:major-rivers",
           "layerId": "major-rivers",
           "enabled": true,
-          "opacity": 0.7,
+          "opacity": 1,
           "time": null,
           "parameters": {
             "role": "context"
@@ -1893,7 +1894,7 @@
           "id": "gdp-per-capita:major-rivers",
           "layerId": "major-rivers",
           "enabled": true,
-          "opacity": 0.7,
+          "opacity": 1,
           "time": null,
           "parameters": {
             "role": "context"
@@ -1928,7 +1929,7 @@
           "id": "where-people-live:relief",
           "layerId": "physical-relief",
           "enabled": true,
-          "opacity": 0.42,
+          "opacity": 0.34,
           "time": null,
           "parameters": {}
         },

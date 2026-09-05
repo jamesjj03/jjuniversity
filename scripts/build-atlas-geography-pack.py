@@ -48,6 +48,12 @@ POPULATION_DETAIL_LEVELS = [
     {"id": "country", "width": 38400, "height": 20800, "columns": 32, "rows": 16, "minimumZoom": 10},
     {"id": "close", "width": 76800, "height": 41600, "columns": 64, "rows": 32, "minimumZoom": 20},
 ]
+RELIEF_DETAIL_LEVELS = [
+    {"id": "source-detail", "width": 19200, "height": 10400, "columns": 24, "rows": 16, "minimumZoom": 8},
+]
+RELIEF_TRANSFORMATION_ID = "natural-earth-relief-to-mercator-raster-v2"
+RELIEF_TRANSFORMATION_DESCRIPTION = "Bilinear-warp the original 10800 × 5400 public-domain grayscale relief from WGS84 independently into an overview and viewport-loaded 19200 × 10400 equivalent tiled Mercator level. Preserve the source grayscale without added contrast, sharpening, embossing or generated terrain. The detail level is approximately 4.02 km per projected pixel at the equator, not finer than the source's approximately 3.71 km equatorial pixel spacing."
+RIVER_SELECTION_RULE = "50m rivers with min_zoom <= 3 below zoom 6; 10m River/Lake Centerline geometry with min_zoom <= 7 revealed progressively at zoom 6, 10, 16 (including source rank 6) and 20 (source rank 6.5–7)."
 
 POP_SOURCE_ID = "ghsl-ghs-pop-2025-r2023a-1km"
 RELIEF_SOURCE_ID = "natural-earth-manual-shaded-relief-50m-3.3.0"
@@ -274,12 +280,11 @@ def warp_relief(source_path: Path, width: int, height: int) -> np.ndarray:
         )
     mask = sphere_mask(width, height)
     rgba = np.zeros((height, width, 4), dtype=np.uint8)
-    # Increase cartographic shadow separation without inventing elevation.
-    # The same global linear transfer is applied everywhere and recorded below.
-    shade = np.clip(255 - (255 - destination.astype(np.float32)) * 1.45, 0, 255).astype(np.uint8)
-    rgba[..., 0] = shade
-    rgba[..., 1] = shade
-    rgba[..., 2] = shade
+    # Source-authored shading only: display opacity belongs to the layer.
+    # Do not turn broad overview shading into faux terrain with extra contrast.
+    rgba[..., 0] = destination
+    rgba[..., 1] = destination
+    rgba[..., 2] = destination
     rgba[..., 3] = mask
     return rgba
 
@@ -378,6 +383,84 @@ def build_population_pyramid(source_path: Path, asset_output: Path) -> dict[str,
         "emptyTileBehavior": "transparent; no population estimate rendered",
         "levels": levels,
     }
+
+
+def build_relief_pyramid(source_path: Path, asset_output: Path) -> dict[str, Any]:
+    """Keep native-ish source detail without decoding a whole global raster.
+
+    The 800 × 650 tiles reuse the existing viewport/masked-fallback renderer.
+    One directly source-derived level starts at zoom 8; later zoom enlarges it
+    honestly rather than manufacturing local terrain detail.
+    """
+    levels = []
+    with rasterio.Env(GDAL_CACHEMAX=64 * 1024 * 1024), rasterio.open(source_path) as source:
+        source_resolution_metres = 2 * math.pi * EQUAL_EARTH_RADIUS / 360 * abs(source.transform.a)
+        source_pixel_degrees = [abs(source.transform.a), abs(source.transform.e)]
+        source_dimensions = [source.width, source.height]
+        for level in RELIEF_DETAIL_LEVELS:
+            width, height = level["width"], level["height"]
+            tile_width, tile_height = width // level["columns"], height // level["rows"]
+            folder = asset_output / "physical-relief-mercator" / level["id"]
+            folder.mkdir(parents=True, exist_ok=True)
+            tiles = []
+            with WarpedVRT(source, crs=RASTER_TARGET_CRS, transform=target_transform(width, height),
+                           width=width, height=height, nodata=0, dtype="uint8",
+                           resampling=Resampling.bilinear, warp_mem_limit=32) as warped:
+                for row in range(level["rows"]):
+                    for column in range(level["columns"]):
+                        window = Window(column * tile_width, row * tile_height, tile_width, tile_height)
+                        mask = sphere_window_mask(width, height, window)
+                        if not np.any(mask):
+                            continue
+                        values = warped.read(1, window=window)
+                        rgba = np.zeros((tile_height, tile_width, 4), dtype=np.uint8)
+                        rgba[..., :3] = values[..., None]
+                        rgba[..., 3] = mask
+                        asset = folder / f"{column}-{row}.webp"
+                        write_webp(rgba, asset, lossless=True)
+                        tiles.append({
+                            "id": f"relief:{level['id']}:{column}:{row}",
+                            "href": f"/atlas-world/layers/physical-relief-mercator/{level['id']}/{column}-{row}.webp",
+                            "mediaType": "image/webp", "width": tile_width, "height": tile_height,
+                            "viewBox": [round_number(window.col_off * VIEWBOX_WIDTH / width), round_number(window.row_off * VIEWBOX_HEIGHT / height), round_number(tile_width * VIEWBOX_WIDTH / width), round_number(tile_height * VIEWBOX_HEIGHT / height)],
+                            "checksumSha256": sha256_file(asset), "bytes": asset.stat().st_size,
+                        })
+                    print(f"Relief {level['id']}: row {row + 1}/{level['rows']}", flush=True)
+            levels.append({"id": level["id"], "minimumZoom": level["minimumZoom"], "width": width, "height": height,
+                           "displayMetresPerPixel": round_number(target_transform(width, height).a, 2),
+                           "tiles": tiles, "bytes": sum(tile["bytes"] for tile in tiles)})
+    total_bytes = sum(level["bytes"] for level in levels)
+    if total_bytes > 35_000_000:
+        raise ValueError(f"Relief payload exceeds the reviewed global 35 MB budget: {total_bytes}")
+    return {
+        "projectionId": "mercator", "sourceResolutionMetres": round_number(source_resolution_metres, 2),
+        "sourcePixelDegrees": source_pixel_degrees, "nativeSourceDimensions": source_dimensions,
+        "sourceCrs": "EPSG:4326", "resampling": "bilinear", "maximumDecodedTileBytes": 800 * 650 * 4,
+        "compositing": "replace-overview-inside-loaded-tile; never stack relief resolutions",
+        "emptyTileBehavior": "transparent outside the projected sphere",
+        "levels": levels,
+    }
+
+
+def refresh_relief_dataset(pack: dict[str, Any], source_path: Path, asset_output: Path, width: int, height: int) -> None:
+    asset = asset_output / "physical-relief.mercator.webp"
+    write_webp(warp_relief(source_path, width, height), asset, lossless=True)
+    relief = next(dataset for dataset in pack["datasets"] if dataset["id"] == "physical-relief")
+    relief["asset"] = {"href": "/atlas-world/layers/physical-relief.mercator.webp", "mediaType": "image/webp",
+                       "width": width, "height": height, "viewBox": [0, 0, VIEWBOX_WIDTH, VIEWBOX_HEIGHT],
+                       "checksumSha256": sha256_file(asset), "bytes": asset.stat().st_size}
+    relief["assetPyramid"] = build_relief_pyramid(source_path, asset_output)
+    relief["transformationId"] = RELIEF_TRANSFORMATION_ID
+    relief["geographicResolution"] = "1:50m cartographic source; 1/30 degree source pixels (~3.71 km at equator), ~4.02 km projected detail pixels"
+    relief["visualization"] = {"recommendedOpacity": 0.34, "recommendedBlendMode": "multiply", "shadowContrast": 1.0}
+    relief["caveats"] = [
+        "This is generalized manually authored cartographic relief, not a measured elevation surface or a DEM.",
+        "Source pixel spacing is 1/30 degree (~3.71 km at the equator), not a claim of spatial accuracy. Display pixel ground scale changes with latitude.",
+        "The overview and detail tiles are independently resampled from the same original source. Further zoom does not add topographic information.",
+        "Grayscale remains source-authored: no sharpening, embossed borders, generated hills, or synthetic texture is added.",
+    ]
+    transformation = next(item for item in pack["transformations"] if item["id"].startswith("natural-earth-relief-to-mercator-raster-"))
+    transformation.update({"id": RELIEF_TRANSFORMATION_ID, "description": RELIEF_TRANSFORMATION_DESCRIPTION})
 
 
 def geometry_coordinates(geometry: dict[str, Any]) -> list[list[float]]:
@@ -510,7 +593,7 @@ def vector_feature(
     }
 
 
-def load_vectors(source_cache: Path, lock_by_id: dict[str, Any]) -> tuple[list[Any], list[Any], list[Any]]:
+def load_vectors(source_cache: Path, lock_by_id: dict[str, Any], repository_root: Path | None = None) -> tuple[list[Any], list[Any], list[Any]]:
     river_payload = json.loads((source_cache / lock_by_id[RIVER_SOURCE_ID]["target"]).read_text("utf8"))
     lake_payload = json.loads((source_cache / lock_by_id[LAKE_SOURCE_ID]["target"]).read_text("utf8"))
     city_payload = json.loads((source_cache / lock_by_id[DETAIL_CITY_SOURCE_ID]["target"]).read_text("utf8"))
@@ -569,7 +652,7 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any]) -> tuple[list[A
         )
 
     countries = json.loads(
-        (Path(__file__).resolve().parents[1] / "lib" / "atlas-world" / "data" / "countries.v1.json").read_text("utf8")
+        ((repository_root or Path(__file__).resolve().parents[1]) / "lib" / "atlas-world" / "data" / "countries.v1.json").read_text("utf8")
     )
     country_ids = {country["id"] for country in countries["countries"]}
     cities = []
@@ -679,7 +762,7 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any]) -> tuple[list[A
                 # represent a selectable/drawable place and are excluded.
                 continue
             minimum = number_or_default(properties.get("min_zoom"), 99)
-            if minimum > 5 or (kind == "river" and properties.get("featurecla") not in ("River", "Lake Centerline")):
+            if minimum > (7 if kind == "river" else 5) or (kind == "river" and properties.get("featurecla") not in ("River", "Lake Centerline")):
                 continue
             name = properties.get("name_en") or properties.get("name") or properties.get("label") or "Unnamed feature"
             identity = f"10m:{feature_hash(name, raw_feature['geometry'])}"
@@ -688,7 +771,7 @@ def load_vectors(source_cache: Path, lock_by_id: dict[str, Any]) -> tuple[list[A
             seen.add(identity)
             feature = vector_feature(raw_feature, kind=kind, source_id=source_id, source_identity=properties.get("ne_id"), feature_identity=identity)
             feature["displayLod"] = "country"
-            feature["displayMinimumZoom"] = 6 if minimum <= 3 else (10 if minimum <= 4 else 16)
+            feature["displayMinimumZoom"] = 6 if minimum <= 3 else (10 if minimum <= 4 else (16 if minimum <= 6 else 20))
             feature["geometry"]["geometrySetId"] = "natural-earth-physical-10m-5.1.2"
             collection.append(feature)
     return rivers, lakes, cities
@@ -736,11 +819,13 @@ def main() -> None:
     parser.add_argument("--source-cache", type=Path)
     parser.add_argument("--data-output", type=Path)
     parser.add_argument("--asset-output", type=Path)
+    parser.add_argument("--repository-root", type=Path, help="Read source authority from this repository while writing only to explicitly supplied outputs.")
     parser.add_argument("--overview-only", action="store_true", help="Development review: publish current-projection overview/vector derivatives without advertising unfinished detail levels.")
     parser.add_argument("--vectors-only", action="store_true", help="Rebuild physical vectors against checked source locks while retaining unchanged registered raster assets.")
+    parser.add_argument("--relief-only", action="store_true", help="Rebuild source-derived relief overview/detail and physical vectors while retaining population assets and observations unchanged.")
     arguments = parser.parse_args()
 
-    repository_root = Path(__file__).resolve().parents[1]
+    repository_root = (arguments.repository_root or Path(__file__).resolve().parents[1]).resolve()
     lock_path = repository_root / "data" / "atlas" / "sources.lock.json"
     lock = json.loads(lock_path.read_text("utf8"))
     lock_by_id = {source["id"]: source for source in lock["sources"]}
@@ -761,14 +846,20 @@ def main() -> None:
         if actual_hash != source["checksumSha256"]:
             raise ValueError(f"Source checksum mismatch for {source_id}: {actual_hash}")
 
-    if arguments.vectors_only:
+    if arguments.vectors_only or arguments.relief_only:
         output_path = data_output / "geography-pack.v1.json"
         pack = json.loads(output_path.read_text("utf8"))
         if pack["projection"]["crs"] != RASTER_TARGET_CRS or pack["sourceLockId"] != lock["lockId"]:
             raise ValueError("Vector-only refresh requires an existing matching projection/source-lock pack.")
-        for collection_name, dataset_id, features in zip(["majorRivers", "majorLakes", "majorCities"], ["major-rivers", "major-lakes", "major-cities"], load_vectors(source_cache, lock_by_id)):
+        if arguments.relief_only:
+            with tempfile.TemporaryDirectory(prefix="jju-atlas-relief-") as temporary_directory:
+                relief_source = extract_member(source_cache / lock_by_id[RELIEF_SOURCE_ID]["target"], RELIEF_ZIP_MEMBER, Path(temporary_directory))
+                refresh_relief_dataset(pack, relief_source, asset_output, arguments.width, arguments.height)
+            pack["derivedRevision"] = "2026-09-05-source-relief-and-river-detail"
+        for collection_name, dataset_id, features in zip(["majorRivers", "majorLakes", "majorCities"], ["major-rivers", "major-lakes", "major-cities"], load_vectors(source_cache, lock_by_id, repository_root)):
             pack["featureCollections"][collection_name] = {"datasetId": dataset_id, "features": features}
             next(dataset for dataset in pack["datasets"] if dataset["id"] == dataset_id)["featureCount"] = len(features)
+        next(dataset for dataset in pack["datasets"] if dataset["id"] == "major-rivers")["selectionRule"] = RIVER_SELECTION_RULE
         # Activation thresholds are authored rendering choices, not source or
         # raster-pixel changes. Refresh them without an expensive resampling run.
         population = next(dataset for dataset in pack["datasets"] if dataset["id"] == "population-density-2025")
@@ -780,7 +871,7 @@ def main() -> None:
         pack["projection"].pop("displayPathSimplificationTolerance", None)
         write_physical_geometry_sprites(pack, asset_output.parent)
         output_path.write_text(json.dumps(pack, ensure_ascii=False, separators=(",", ":")) + "\n", "utf8")
-        print("Refreshed source-checked physical vectors; retained registered raster manifests unchanged.")
+        print("Refreshed source-checked physical geography; population raster manifests and observations retained unchanged.")
         return
 
     population_asset = asset_output / "population-density-2025.mercator.webp"
@@ -792,6 +883,7 @@ def main() -> None:
                     raise ValueError("Existing overview dimensions do not match this development review request.")
         population_statistics = {}
         population_pyramid = None
+        relief_pyramid = None
     else:
         with tempfile.TemporaryDirectory(prefix="jju-atlas-geography-") as temporary_directory:
             temporary_path = Path(temporary_directory)
@@ -806,10 +898,11 @@ def main() -> None:
             )
             relief_rgba = warp_relief(relief_source, arguments.width, arguments.height)
             write_webp(population_rgba, population_asset, lossless=True)
-            write_webp(relief_rgba, relief_asset, lossless=False)
+            write_webp(relief_rgba, relief_asset, lossless=True)
             population_pyramid = None if arguments.overview_only else build_population_pyramid(population_source, asset_output)
+            relief_pyramid = None if arguments.overview_only else build_relief_pyramid(relief_source, asset_output)
 
-    rivers, lakes, cities = load_vectors(source_cache, lock_by_id)
+    rivers, lakes, cities = load_vectors(source_cache, lock_by_id, repository_root)
     sources = [source_record(lock_by_id[source_id]) for source_id in required_source_ids]
     output_assets = {
         "populationDensity": {
@@ -836,6 +929,7 @@ def main() -> None:
         "schemaVersion": SCHEMA_VERSION,
         "snapshotId": SNAPSHOT_ID,
         "generatedAt": GENERATED_AT,
+        "derivedRevision": "2026-09-05-source-relief-and-river-detail",
         "sourceLockId": lock["lockId"],
         "projection": {
             "id": "mercator",
@@ -858,8 +952,8 @@ def main() -> None:
                 "code": "scripts/build-atlas-geography-pack.py",
             },
             {
-                "id": "natural-earth-relief-to-mercator-raster-v1",
-                "description": "Bilinear-warp the public-domain grayscale relief from WGS84 into Mercator and clip to the projected sphere. Apply global cartographic shadow contrast clamp(255 − (255 − gray) × 1.45). Styling opacity remains layer-owned.",
+                "id": RELIEF_TRANSFORMATION_ID,
+                "description": RELIEF_TRANSFORMATION_DESCRIPTION,
                 "inputCrs": "EPSG:4326",
                 "outputCrs": RASTER_TARGET_CRS,
                 "resampling": "bilinear",
@@ -916,16 +1010,19 @@ def main() -> None:
                 "dataType": "raster-field",
                 "measure": "cartographic grayscale terrain relief",
                 "unit": None,
-                "geographicResolution": "1:50m cartographic raster",
+                "geographicResolution": "1:50m cartographic source; 1/30 degree source pixels (~3.71 km at equator), ~4.02 km projected detail pixels",
                 "conceptualResolution": "terrain relief",
                 "temporal": {"support": "static", "observedAt": None, "validFrom": None, "validTo": None, "precision": "unknown", "selectionPolicy": "timeless"},
                 "sourceIds": [RELIEF_SOURCE_ID],
-                "transformationId": "natural-earth-relief-to-mercator-raster-v1",
+                "transformationId": RELIEF_TRANSFORMATION_ID,
                 "asset": output_assets["physicalRelief"],
-                "visualization": {"recommendedOpacity": 0.42, "recommendedBlendMode": "multiply", "shadowContrast": 1.45},
+                "assetPyramid": relief_pyramid,
+                "visualization": {"recommendedOpacity": 0.34, "recommendedBlendMode": "multiply", "shadowContrast": 1.0},
                 "caveats": [
-                    "This is generalized cartographic relief, not an elevation measurement surface.",
-                    "It should remain subtle beneath analytical layers and must not be used to read elevations.",
+                    "This is generalized manually authored cartographic relief, not a measured elevation surface or a DEM.",
+                    "Source pixel spacing is 1/30 degree (~3.71 km at the equator), not a claim of spatial accuracy. Display pixel ground scale changes with latitude.",
+                    "The overview and detail tiles are independently resampled from the same original source. Further zoom does not add topographic information.",
+                    "Grayscale remains source-authored: no sharpening, embossed borders, generated hills, or synthetic texture is added.",
                 ],
             },
             {
@@ -940,7 +1037,7 @@ def main() -> None:
                 "transformationId": "wgs84-to-mercator-svg-v1",
                 "geometrySetId": "natural-earth-physical-50m-5.1.2",
                 "featureCount": len(rivers),
-                "selectionRule": "50m rivers with min_zoom <= 3 below zoom 6; 10m River/Lake Centerline geometry with min_zoom <= 5 revealed progressively at zoom 6, 10 and 16.",
+                "selectionRule": RIVER_SELECTION_RULE,
                 "temporal": {"support": "static", "observedAt": None, "validFrom": None, "validTo": None, "precision": "unknown", "selectionPolicy": "timeless"},
                 "caveats": [
                     "This is a generalized cartographic selection, not a connected hydrological network.",

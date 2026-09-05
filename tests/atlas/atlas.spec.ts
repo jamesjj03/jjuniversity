@@ -382,7 +382,7 @@ test("Where people live composes physical layers, preserves toggles, and explain
   await expect(page.getByRole("heading", { name: "A country gathered around one river", exact: true })).toBeVisible();
   await expect(page.getByText(/Egypt’s bright population corridor follows the Nile Valley/)).toBeVisible();
   expect(searchParam(page, "focus")).toBe("feature:pattern-note:population:nile-valley");
-  await expect(page.locator('[data-atlas-raster-level]')).toHaveAttribute('data-atlas-raster-level', 'country');
+  await expect(page.locator('[data-atlas-layer="population-density-2025"] [data-atlas-raster-level]')).toHaveAttribute('data-atlas-raster-level', 'country');
   await expect(page.locator('[data-atlas-note-highlight="pattern-note:population:nile-valley"]')).toBeVisible();
 
   await page.getByText("Evidence & caveats", { exact: true }).click();

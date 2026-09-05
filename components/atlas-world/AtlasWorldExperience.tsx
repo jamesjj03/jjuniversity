@@ -39,6 +39,7 @@ import type {
 import type { AtlasPatternNote } from "@/lib/atlas-world/geographyTypes";
 import { atlasObservationStatusHasValue } from "@/lib/atlas-world/types";
 import { updateAtlasCartography } from "@/lib/atlas-world/cartography";
+import { atlasLabelInk } from "@/lib/atlas-world/labelInk";
 import AtlasViewBrowser from "./AtlasViewBrowser";
 import AtlasCityCard from "./AtlasCityCard";
 import type { AtlasCitySummary } from "@/lib/atlas-world/cities";
@@ -566,7 +567,7 @@ export default function AtlasWorldExperience({ data, patternNotes, cities, map }
     const drawReadingAids = () => {
       frame = 0;
       const scale = zoomScaleRef.current;
-      const detailBand = [1, 4, 6, 8, 10, 14, 16].filter((threshold) => scale >= threshold).length;
+      const detailBand = [1, 4, 6, 8, 10, 14, 16, 20, 24, 32].filter((threshold) => scale >= threshold).length;
       if (detailBand !== previousDetailBand) {
         applyAtlasZoomVisibility(group, scale);
         previousDetailBand = detailBand;
@@ -637,6 +638,7 @@ export default function AtlasWorldExperience({ data, patternNotes, cities, map }
     const host = mapHostRef.current;
     if (!host) return;
     selectedIdRef.current = selectedId;
+    const labelInks = new Map<string, ReturnType<typeof atlasLabelInk>>();
     host.querySelectorAll<SVGElement>("[data-atlas-visual]").forEach((visual) => {
       const countryId = visual.dataset.atlasVisual;
       if (!countryId) return;
@@ -652,6 +654,7 @@ export default function AtlasWorldExperience({ data, patternNotes, cities, map }
         );
         visual.style.fill = resolved?.color ?? "#28383b";
         visual.style.opacity = String(primaryFillLayer.effectiveOpacity);
+        labelInks.set(countryId, atlasLabelInk(resolved?.color ?? "#28383b", primaryFillLayer.effectiveOpacity));
       } else {
         visual.style.fill = "rgba(72, 91, 88, 0.28)";
         visual.style.opacity = "1";
@@ -660,6 +663,15 @@ export default function AtlasWorldExperience({ data, patternNotes, cities, map }
       const isMarker = visual.tagName.toLocaleLowerCase() === "circle";
       visual.classList.toggle(styles.selectedShape, selected && !isMarker);
       visual.classList.toggle(styles.selectedMarker, selected && isMarker);
+    });
+    const solidPolitical = primaryFillLayer?.definition.id === "admin0-political" && primaryFillLayer.effectiveOpacity > 0.5;
+    // Resolve text contrast when the lens changes, not on every pan frame.
+    host.querySelectorAll<SVGTextElement>("[data-atlas-label-entity], [data-atlas-label-country]").forEach((label) => {
+      const ink = labelInks.get(label.dataset.atlasLabelEntity ?? label.dataset.atlasLabelCountry ?? "");
+      label.style.fill = ink?.fill ?? "#152820";
+      const needsKeyline = !solidPolitical || ink?.needsKeyline;
+      label.style.stroke = needsKeyline ? ink?.keyline ?? "#f3f3e7" : "none";
+      label.style.strokeWidth = needsKeyline ? "1.05" : "0";
     });
     const svg = host.querySelector<SVGSVGElement>("[data-atlas-world-map]");
     if (svg) updateAtlasCartography(svg, zoomScaleRef.current, selectedId);

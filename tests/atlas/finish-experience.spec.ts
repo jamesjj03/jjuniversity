@@ -37,7 +37,7 @@ test("every retained entity has a fixed political identity, including the reques
     const code = country.id.split(":").at(-1)!;
     expect((palette.colors as Record<string,string>)[code]).toMatch(/^#[a-f0-9]{6}$/);
   }
-  for(const [code,color] of Object.entries({FRA:"#4d80b6",USA:"#719bc4",GBR:"#cb6e80",CHN:"#c96554",MEX:"#76a57c"})) {
+  for(const [code,color] of Object.entries({FRA:"#527d9f",USA:"#668da9",GBR:"#b26a78",CHN:"#b46754",MEX:"#73906d"})) {
     expect(atlasPoliticalColor(`country:${code}`)).toBe(color);
   }
 });

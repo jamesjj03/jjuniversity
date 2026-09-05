@@ -104,10 +104,10 @@ export function updateAtlasCartography(svg: SVGSVGElement, zoom: number, selecte
     if (screenX < viewport.left - 100 || screenX > viewport.right + 100 || screenY < viewport.top - 100 || screenY > viewport.bottom + 100) {
       display(element, false); if (label.hit) attribute(label.hit, "r", "0"); continue;
     }
-    const fontSize = kind === "country" ? (selected ? 16 : label.major ? 14 : 12) : kind === "city" ? 11 : 12;
+    const fontSize = kind === "country" ? (selected ? 16 : label.major ? 14 : 12) : 12;
     const angle = kind === "country" ? label.angle : 0;
     const radians = angle * Math.PI / 180;
-    const textWidth = label.length * fontSize * (kind === "country" ? 0.71 : 0.55);
+    const textWidth = label.length * fontSize * (kind === "country" ? 0.69 : 0.57);
     const width = Math.abs(Math.cos(radians)) * textWidth + Math.abs(Math.sin(radians)) * fontSize;
     const height = Math.abs(Math.sin(radians)) * textWidth + Math.abs(Math.cos(radians)) * fontSize + 4;
     let rectangle: Rect = { x: screenX - width / 2, y: screenY - height / 2, width, height };

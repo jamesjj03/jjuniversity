@@ -86,16 +86,18 @@ by byte count and SHA-256 in `data/atlas/sources.lock.json`:
 | 1:10m lakes | 1,355 | 5,043,554 | `2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9` |
 | 1:10m populated places | 7,342 | 19,359,003 | `9b8e3de09048ef00dfc70357dbb9fa324493f214b5e0ae4daf1aa79a8d10116b` |
 
-The bounded selection contains **582 river features, 511 lake features, and 1,140
+The bounded selection contains **1,311 river features, 511 lake features, and 1,140
 cities**. Original 1:50m rivers/lakes remain for world and regional views and for
 stable annotation references. At zoom 6, separately identified 1:10m physical
-features replace their display. More detailed systems enter at zoom 10 and 16,
-using source `min_zoom` ranking. Empty source geometries and exact duplicates are
+features replace their display. More detailed systems enter at zoom 10 and 16;
+the accepted physical-geography pass adds source ranks 6 at zoom 16 and 6.5–7 at
+zoom 20, including the Ivindo, Ogooué, and Ngounie. This follows source `min_zoom`
+ranking rather than increasing world-scale clutter. Empty geometries and duplicates are
 excluded rather than fabricating paths. Cities retain national capitals and
 `SCALERANK <= 4`, with progressive visibility and stable Natural Earth IDs.
 
 Physical paths live in two independently cached SVG resources: 171 coarse paths
-in a 250,341-byte overview and 922 detailed paths in a 3,188,300-byte close-scale
+in a 250,341-byte overview and 1,651 detailed paths in a 4,752,633-byte close-scale
 resource. This avoids repeating path strings in both server HTML and React's
 page data. The close resource is requested only when close geography is visible.
 Canonical and derived vertices remain intact; there is no additional simplification
@@ -122,7 +124,7 @@ it is not an elevation measurement or 3D terrain surface.
 Projection, label geometry, and raster budget tests pass all 26 desktop/mobile
 project combinations. Source verification confirms all 15 locked inputs.
 
-## Browser payload and pan measurements
+## Browser payload and pan measurements before the accepted C geography pass
 
 `scripts/atlas/measure-geography-performance.mjs` records the actual visible SVG
 footprint (including the phone's cropped `slice` view), loaded tile IDs, requests,
@@ -162,3 +164,61 @@ images, and 118 old density tiles. They remain recoverable from the pre-pass Git
 baseline. Country facts, canonical source inputs, and unrelated JJU files were
 not retired. The existing Equal Earth comparison formula remains available for
 future representation comparisons; it is no longer mislabeled as the active view.
+
+## Accepted C direction: actual source detail, without artificial relief effects
+
+The broad soft country appearance had two distinct causes: a selection shadow
+that expanded with SVG zoom, and enlargement of a very coarse global relief
+display image. The root visual pass removes the artificial glow/brightness;
+this geographic change addresses the source-detail bottleneck independently.
+
+The existing locked Natural Earth MSR 50m source is 10,800 × 5,400 pixels in
+WGS84, with 1/30-degree pixel spacing (approximately 3.71 km at the equator).
+It is manually authored cartographic shading, **not a DEM or a measured
+elevation surface**. No new terrain dataset was acquired.
+
+The relief overview is rebuilt with identity grayscale after interpolation:
+the former 1.45 shadow-contrast multiplier is removed. Its lossless WebP is
+376,802 bytes. A single independently source-derived `source-detail` level
+begins at zoom 8, using the existing viewport-loaded raster renderer:
+
+The approved C-based presentation uses **34% multiply opacity in Political and
+Where People Live**, with **18% beneath thematic country fills**. This is a
+layer-owned visual choice, not a modification to the source relief values.
+
+| Property | Value |
+|---|---:|
+| Equivalent global display raster | 19,200 × 10,400 |
+| Projected display pixel spacing | 4,022.33 m at the equator |
+| Visible-tile dimensions | 800 × 650 |
+| Maximum decoded RGBA per tile | 2.08 MB |
+| Tiles across the complete sphere | 224 |
+| Complete global compressed payload | 15,536,686 bytes |
+| Largest compressed tile | 161,634 bytes |
+| Desktop threshold ceiling | 16 tiles / 33.28 MB decoded |
+| Phone threshold ceiling | 8 tiles / 16.64 MB decoded |
+
+Only the tiles intersecting the actual visible viewport are requested. The
+global 15.54 MB collection is not an initial download. Failed/pending tiles
+retain the overview; successful tiles replace rather than stack its pixels.
+At deeper zoom, this same source-derived level is enlarged honestly: no
+sharpening, synthetic texture, extra hills, or new topographic observations
+are invented. Mercator ground scale still varies by latitude.
+
+The river expansion adds 729 records from the already locked 10m source, with
+all previously rendered feature identities and canonical geometry retained.
+The added display thresholds were verified against the phone's Gabon fit of
+approximately zoom 23.45: Ivindo enters at 16, and Ogooué/Ngounie at 20, so the
+selected country actually shows the approved river context on a phone. Source
+`min_zoom` values remain untouched; these are authored display thresholds.
+Lakes, city records, country identities, population observations, and all 556
+population tiles are unchanged. The static physical-detail SVG is now 4.75 MB
+uncompressed; it is still deferred until detailed geography is visible.
+
+To regenerate only the changed assets, run
+`python scripts/build-atlas-geography-pack.py --relief-only` using the pinned
+geography Python environment. This refreshes relief plus source-checked vectors
+without recomputing the much larger population pyramid. Full geography builds
+also generate the same source-detail relief contract. The relief transformation
+is explicitly versioned as `natural-earth-relief-to-mercator-raster-v2` and the
+pack records `derivedRevision: 2026-09-05-source-relief-and-river-detail`.

@@ -136,9 +136,12 @@ export type AtlasRasterAsset = {
 
 export type AtlasRasterPyramid = {
   projectionId: "mercator";
+  /** Source pixel spacing, not positional accuracy or measured elevation. */
   sourceResolutionMetres: number;
+  sourcePixelDegrees?: [number, number];
+  nativeSourceDimensions?: [number, number];
   sourceCrs: string;
-  resampling: "average";
+  resampling: "average" | "bilinear";
   maximumDecodedTileBytes: number;
   compositing: string;
   emptyTileBehavior: string;

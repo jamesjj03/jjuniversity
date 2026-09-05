@@ -39,7 +39,7 @@ const GEOGRAPHY_REQUIREMENTS_PATH = path.join(
 );
 
 const EXPECTED_DATASET_COUNTS = {
-  "major-rivers": 582,
+  "major-rivers": 1311,
   "major-lakes": 511,
   "major-cities": 1140,
 };
@@ -176,15 +176,28 @@ async function checkAsset(asset, datasetId) {
   const metadata = await sharp(bytes).metadata();
   assert(metadata.format === "webp", `${datasetId} asset is not WebP.`);
   assert(metadata.width === asset.width && metadata.height === asset.height, `${datasetId} asset dimensions do not match its manifest.`);
-  assert(metadata.hasAlpha === true, `${datasetId} asset must retain alpha outside the Mercator sphere.`);
+  const [x, y, width, height] = asset.viewBox;
+  const extendsBeyondSphere = x < 289 || y < 14 || x + width > 911 || y + height > 636;
+  if (extendsBeyondSphere) assert(metadata.hasAlpha === true, `${datasetId} asset must retain alpha outside the Mercator sphere.`);
 }
 
 async function checkPyramid(pyramid, datasetId) {
+  const relief = datasetId === "physical-relief";
   assert(pyramid.projectionId === "mercator", `${datasetId} pyramid is not aligned to Mercator.`);
-  assert(pyramid.sourceResolutionMetres === 1000, `${datasetId} lost its original one-kilometre source resolution.`);
-  assert(pyramid.resampling === "average", `${datasetId} pyramid must preserve area-average resampling.`);
-  assert(pyramid.levels?.length === 3, `${datasetId} must provide regional, country and close detail levels.`);
-  assert(JSON.stringify(pyramid.levels?.map((level) => level.minimumZoom)) === "[4,10,20]", `${datasetId} detail activation must retain the verified viewport memory budget.`);
+  if (relief) {
+    assert(Math.abs(pyramid.sourceResolutionMetres - 3706.5) < 0.1, "Relief must preserve its approximate source pixel spacing, not claim DEM accuracy.");
+    assert(JSON.stringify(pyramid.nativeSourceDimensions) === "[10800,5400]", "Relief lost its original source dimensions.");
+    assert(pyramid.sourcePixelDegrees?.every((value) => Math.abs(value - 1 / 30) < 0.000001), "Relief source angular resolution is incorrect.");
+    assert(pyramid.sourceCrs === "EPSG:4326" && pyramid.resampling === "bilinear", "Relief must be directly bilinearly resampled from the WGS84 source.");
+    assert(pyramid.levels?.length === 1 && pyramid.levels[0].id === "source-detail", "Relief must expose the single bounded source-detail level.");
+    assert(JSON.stringify(pyramid.levels?.map((level) => level.minimumZoom)) === "[8]", "Relief detail starts at the reviewed zoom-8 budget.");
+    assert(pyramid.maximumDecodedTileBytes === 2_080_000, "Relief tiles must retain their 800×650 decode ceiling.");
+  } else {
+    assert(pyramid.sourceResolutionMetres === 1000, `${datasetId} lost its original one-kilometre source resolution.`);
+    assert(pyramid.resampling === "average", `${datasetId} pyramid must preserve area-average resampling.`);
+    assert(pyramid.levels?.length === 3, `${datasetId} must provide regional, country and close detail levels.`);
+    assert(JSON.stringify(pyramid.levels?.map((level) => level.minimumZoom)) === "[4,10,20]", `${datasetId} detail activation must retain the verified viewport memory budget.`);
+  }
   let previousWidth = 2400;
   let previousMinimumZoom = 1;
   const tileIds = new Set();
@@ -192,7 +205,7 @@ async function checkPyramid(pyramid, datasetId) {
     assert(level.width > previousWidth, `${datasetId}/${level.id} does not improve source display resolution.`);
     assert(level.minimumZoom > previousMinimumZoom, `${datasetId}/${level.id} has an invalid activation threshold.`);
     assert(level.width / level.height === 1200 / 650, `${datasetId}/${level.id} has a mismatched projection aspect ratio.`);
-    assert(level.displayMetresPerPixel >= 1000, `${datasetId}/${level.id} implies more detail than the original source provides.`);
+    assert(level.displayMetresPerPixel >= pyramid.sourceResolutionMetres, `${datasetId}/${level.id} implies more detail than the original source provides.`);
     let levelBytes = 0;
     for (const tile of level.tiles ?? []) {
       assert(!tileIds.has(tile.id), `${datasetId} has duplicate tile ${tile.id}.`);
@@ -207,6 +220,23 @@ async function checkPyramid(pyramid, datasetId) {
       levelBytes += tile.bytes;
     }
     assert(levelBytes === level.bytes, `${datasetId}/${level.id} has a mismatched payload budget.`);
+    if (relief) {
+      assert(levelBytes <= 35_000_000, "Relief detail exceeds its reviewed 35 MB global compressed budget.");
+      assert(level.width === 19200 && level.height === 10400, "Relief source-detail dimensions changed without reviewing the source/decode budget.");
+      for (const [name, viewportWidth, viewportHeight, maximumTiles] of [["desktop meet", 1200, 750, 16], ["phone slice", 320, 650, 8]]) {
+        const width = viewportWidth / level.minimumZoom, height = viewportHeight / level.minimumZoom;
+        const startsX = [...new Set(level.tiles.flatMap((tile) => [tile.viewBox[0] - .01, tile.viewBox[0] + .01]))];
+        const startsY = [...new Set(level.tiles.flatMap((tile) => [tile.viewBox[1] - .01, tile.viewBox[1] + .01]))];
+        let maximumCount = 0;
+        for (const x of startsX) for (const y of startsY) {
+          maximumCount = Math.max(maximumCount, level.tiles.filter((tile) => {
+            const [left, top, tileWidth, tileHeight] = tile.viewBox;
+            return left < x + width && left + tileWidth > x && top < y + height && top + tileHeight > y;
+          }).length);
+        }
+        assert(maximumCount <= maximumTiles, `Relief ${name} exceeds the reviewed visible tile/decode budget: ${maximumCount}.`);
+      }
+    }
     previousWidth = level.width;
     previousMinimumZoom = level.minimumZoom;
   }
@@ -328,6 +358,8 @@ for (const dataset of geographyPack.datasets) {
   if (dataset.assetPyramid) detailTileCount += await checkPyramid(dataset.assetPyramid, dataset.id);
 }
 assert(datasets.get("population-density-2025")?.assetPyramid, "Population density has no genuine source-detail pyramid.");
+assert(datasets.get("physical-relief")?.assetPyramid, "Relief has no genuine source-detail pyramid.");
+assert(datasets.get("physical-relief")?.visualization?.shadowContrast === 1, "Relief must preserve source grayscale without added terrain-like contrast.");
 const populationColorStops = datasets.get("population-density-2025")?.visualization?.stops ?? [];
 const populationLegend = layerCatalog.layers.find((layer) => layer.id === "population-density-2025")?.legend;
 assert(
@@ -393,6 +425,11 @@ assert(
   "Paris POP2025 should verify the thousands-to-people conversion (10,031,000).",
 );
 const knownFeatureIds = unique(featureIds, "geography feature IDs");
+for (const [name, minimumZoom] of [["Ivindo", 16], ["Ogooué", 20], ["Ngounie", 20]]) {
+  const records = collectionByDatasetId.get("major-rivers")?.features.filter((feature) => feature.name === name) ?? [];
+  assert(records.length > 0, `Gabon source detail is missing ${name}.`);
+  assert(records.every((feature) => feature.displayMinimumZoom === minimumZoom && feature.sourceIds.includes("natural-earth-rivers-10m-5.1.2")), `${name} must retain its real source and close-scale visibility.`);
+}
 
 for (const level of ["overview", "detail"]) {
   const asset = geographyPack.physicalGeometryAssets?.[level];

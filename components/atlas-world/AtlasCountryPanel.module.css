@@ -15,7 +15,7 @@
   border-radius: 13px;
   color: #f5f3eb;
   background: #172b3a;
-  box-shadow: 0 12px 44px #05101e47;
+  box-shadow: none;
   font: 14px/1.5 var(--v2-ui, sans-serif);
 }
 .countryPanel button { font-family: inherit; cursor: pointer; }

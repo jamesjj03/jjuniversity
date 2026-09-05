@@ -15,11 +15,11 @@
   --atlas-panel: rgba(13, 29, 33, 0.92);
   --atlas-line: rgba(220, 231, 224, 0.14);
   --atlas-shadow: rgba(0, 6, 9, 0.52);
-  --atlas-ocean: #17394f;
-  --atlas-land: #9aacb5;
+  --atlas-ocean: #91aeb5;
+  --atlas-land: #b1b49a;
   --atlas-missing: #687780;
-  --atlas-selected: #fff1be;
-  --atlas-hover: #fff8e4;
+  --atlas-selected: #483f30;
+  --atlas-hover: #f4ecd3;
   --atlas-disputed: #fff0b9;
   --atlas-city: #f8f1dd;
   --atlas-river: #8bc9ec;
@@ -2195,7 +2195,7 @@
 
 /* Editorial navigation and cartographic hierarchy. */
 .atlas { --atlas-gold:#edc779; --atlas-panel:rgba(16,29,42,.97); --atlas-ink:#f4f1e9; --atlas-muted:#aebfcc; --atlas-line:rgba(188,207,220,.19); background:#102637; }
-.mapBackdrop { background:radial-gradient(ellipse at 50% 45%,#274a60,#102637 85%); }
+.mapBackdrop { background:var(--atlas-ocean); }
 .atlasToolbar { top:14px; left:18px; right:auto; display:flex; gap:0; padding:0; min-height:58px; border-color:var(--atlas-line); border-radius:9px; background:var(--atlas-panel); box-shadow:0 8px 28px #06111d40; }
 .atlasTitle { display:block; min-width:0; padding:8px 19px; border-right:1px solid var(--atlas-line); }
 .atlasTitle h1 { margin:0; font:500 22px/1.1 Georgia,serif; letter-spacing:.12em; }
@@ -2234,24 +2234,24 @@
 .clearSearch { top:10px; right:10px; width:40px; height:42px; }
 .searchResults,.noResults { top:100%; border-color:var(--atlas-line); background:#101e2c; }
 .mapStage { inset:50px 0 22px; }
-.ocean { stroke:#8fb1c733; stroke-width:.6; }
-.graticule { stroke:#aacce013; stroke-width:.6; }
+.ocean { fill:var(--atlas-ocean); stroke:none; }
+.graticule { stroke:#34515b; stroke-opacity:.12; stroke-width:.55; }
 .countryShape { transition:fill 160ms ease; }
-.hoveredShape { stroke:var(--atlas-hover); stroke-width:1.8; filter:brightness(1.13); }
-.selectedShape { stroke:var(--atlas-selected); stroke-width:2.5; filter:brightness(1.12) drop-shadow(0 0 2px #fff1bd99); }
-.hoveredMarker,.selectedMarker { stroke:white; stroke-width:1.5; }
+.countryShape:hover,.hoveredShape { stroke:var(--atlas-hover); stroke-width:1.8; filter:none; }
+.selectedShape { stroke:var(--atlas-selected); stroke-width:2.2; filter:none; }
+.hoveredMarker,.selectedMarker { stroke:var(--atlas-selected); stroke-width:1.5; filter:none; }
 .reliefLayer { filter:none; }
 .riverFeature { filter:none; }
-.modernBoundary { stroke:#183345bb; stroke-width:.65; }
+.modernBoundary { stroke:#34443c; stroke-opacity:.78; stroke-width:.7; }
 .disputedBoundary { fill:none; stroke:var(--atlas-disputed); stroke-width:1.5; stroke-dasharray:3 2; pointer-events:none; }
-.cityHalo { fill:#152b3bd9; }
+.cityHalo { fill:#e9e9da; }
 .cityPoint { filter:none; }
 .countryLabels { pointer-events:none; }
-.baseLand { fill:#657d81; pointer-events:none; }
-.annotationHighlights { fill:none; stroke:#ffe7a2; stroke-width:3; pointer-events:none; filter:drop-shadow(0 0 3px #b89d55); }
-.cityLabel,.countryLabel,.physicalLabel { fill:#f8f4e9; stroke:#183042e0; stroke-width:2.6; paint-order:stroke; stroke-linejoin:round; font-family:var(--v2-ui,sans-serif); font-weight:550; pointer-events:none; }
+.baseLand { fill:var(--atlas-land); pointer-events:none; }
+.annotationHighlights { fill:none; stroke:#f4dda0; stroke-width:2; pointer-events:none; filter:none; }
+.cityLabel,.countryLabel,.physicalLabel { fill:#253730; stroke:#e8e9d9; stroke-width:1.6; paint-order:stroke; stroke-linejoin:round; font-family:Arial,Helvetica,sans-serif; font-weight:500; pointer-events:none; filter:none; }
 .countryLabel { font-weight:650; letter-spacing:.03em; }
-.countryLabel[data-atlas-selected-label="true"] { fill:#fff3b9; font-weight:800; }
+.countryLabel[data-atlas-selected-label="true"] { fill:#1d3028; font-weight:700; }
 .physicalLabel { fill:#c2e5f6; font-style:italic; font-weight:400; }
 .noteMarker text { font-size:7px; }
 .noteMarker:hover .noteDot { fill:#ffe4a1; }
@@ -2317,9 +2317,13 @@
 .searchTrigger { width:44px; padding:0; margin:4px; }
 .searchTrigger > span,.searchTrigger kbd { display:none; }
 .mapStage { inset:0; }
-.countryLabel { font-family:Georgia,serif; font-weight:600; letter-spacing:.12em; fill:#233b46; stroke:#f4eee7b3; stroke-width:2; }
-.cityLabel { font-family:var(--v2-ui),sans-serif; font-weight:500; letter-spacing:0; fill:#fffaf0; stroke:#183042f0; stroke-width:2.5; }
-.physicalLabel { font-family:Georgia,serif; font-style:italic; fill:#d2edfa; stroke:#254f63; font-weight:400; }
+.countryLabel { font-family:Arial,Helvetica,sans-serif; font-weight:600; letter-spacing:.09em; fill:#253730; stroke:#e8e9d9; stroke-width:1.4; }
+.cityLabel { font-family:Arial,Helvetica,sans-serif; font-weight:500; letter-spacing:.015em; fill:#1f363b; stroke:#e8e9d9; stroke-width:1.7; }
+.physicalLabel { font-family:Georgia,serif; font-style:italic; fill:#244e61; stroke:#e8e9d9; stroke-width:.9; font-weight:400; }
+/* The surface gets depth from source geography, not cast shadows or bloom.
+   Text keylines are hard, screen-space ink knockouts, never blur filters. */
+.atlasToolbar,.legend,.mapControls,.countryPanel,.cityCard,.noteCard,.tooltip { box-shadow:none; backdrop-filter:none; }
+.countryShape,.tinyMarker,.noteMarker,.noteDot { filter:none; }
 .legend { max-height:min(48vh,440px); padding:13px 16px; }
 .legendHeader span { display:none; }
 .legendHeader h2 { margin:0 0 12px; font-size:24px; }
